@@ -1,8 +1,6 @@
 <script>
-    import SvelteMarkdown from "svelte-markdown";
+    import Text from "$lib/Text.svelte";
     const source = "# Header \n ## Header";
 </script>
 
-<article class="prose">
-    <SvelteMarkdown {source} />
-</article>
+<Text source={source}/>
