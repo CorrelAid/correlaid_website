@@ -1,5 +1,6 @@
 export default {
   de: {
+    "navbar.home": { "text": null, "url": "/" },
     "navbar.about": { "text": "Über uns", "url": null },
     // Subnav about
     "navbar.about.landing": { "text": "Was ist CorrelAid?", "url": "/ueber" },
@@ -49,6 +50,7 @@ export default {
     "navbar.donate": { "text": "Spenden", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
   },
   en: {
+    "navbar.home": { "text": null, "url": "/en/" },
     "navbar.about": { "text": "About", "url": null },
     // Subnav about
     "navbar.about.landing": { "text": "What is CorrelAid?", "url": "/en/about" },

@@ -12,7 +12,7 @@
 		<div class="navbar bg-base-200">
 			<div class="navbar-start">
 				<div class="flex-1 lg:flex-none px-2">
-					<a href="/"><CorrelAidLogo width="35" height="35" /></a>
+					<a href={$t("navbar.home").url}><CorrelAidLogo width="35" height="35" /></a>
 				</div>
 			</div>
 			<div class="navbar-center">
@@ -265,11 +265,12 @@
 						<a href={$t("navbar.donate").url} class="btn btn-primary">{$t("navbar.donate").text}</a>
 					</li>
 				</ul>
+				<form>
 				<select class="select max-w-xs ml-2" bind:value={$locale}>
-					{#each locales as l}
-						<option value={l}>{l}</option>
-					{/each}
+						<option selected value="de">de</option>
+						<option value="en">en</option>
 				</select>
+			</form>
 				<div class="flex-none lg:hidden">
 					<label for="my-drawer-3" class="btn btn-square btn-ghost">
 						<Dropdown_Icon />
