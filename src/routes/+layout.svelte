@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
-	import Header from '$lib/Header.svelte';
-	import Footer from '$lib/Footer.svelte';
+	import Header from '$lib/layout/Header.svelte';
+	import Footer from '$lib/layout/Footer.svelte';
 </script>
 
 <!-- Footer on bottom of page if page is too short -->

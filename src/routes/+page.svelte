@@ -1,5 +1,5 @@
 <script>
-    import Text from "$lib/Text.svelte";
+    import Text from "$lib/components/Text.svelte";
     const source = "# Header \n ## Header";
 </script>
 
