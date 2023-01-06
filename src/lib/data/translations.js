@@ -3,12 +3,12 @@ export default {
     "navbar.about": { "text": "Über uns", "url": null },
     // Subnav about
     "navbar.about.landing": { "text": "Was ist CorrelAid?", "url": "/ueber" },
-    "navbar.about.org_struct": { "text": "Organisationsstruktur", "url": "/ueber/org_struktur" },
+    "navbar.about.org_struct": { "text": "Organisationsstruktur", "url": "/ueber/organisationsstruktur" },
     // Sub sub nav org struct
-    "navbar.about.org_struct.board": { "text": "Vorstand", "url": "/vorstand" },
-    "navbar.about.org_struct.remote_office": { "text": "Remote Office", "url": "/ueber/remote_office" },
-    "navbar.about.org_struct.ethics_commission": { "text": "Ethikkomission", "url": "/ueber/ethik_kommission" },
-    "navbar.about.org_struct.data_privacy": { "text": "Datenschutz", "url": "/ueber/datenschutz" },
+    "navbar.about.org_struct.board": { "text": "Vorstand", "url": "/ueber/organisationsstruktur/vorstand" },
+    "navbar.about.org_struct.remote_office": { "text": "Remote Office", "url": "/ueber/organisationsstruktur/remote_office" },
+    "navbar.about.org_struct.ethics_commission": { "text": "Ethikkomission", "url": "/ueber/organisationsstruktur/ethikkommission" },
+    "navbar.about.org_struct.data_privacy": { "text": "Datenschutz", "url": "/ueber/organisationsstruktur/datenschutz" },
     // 
     "navbar.about.partners": { "text": "Partner, Sponsoren und Preise", "url": "/ueber/partner_sponsoren_preise" },
     "navbar.about.coc": { "text": "Code of Conduct", "url": "/ueber/coc" },
@@ -27,26 +27,26 @@ export default {
     // 
     "navbar.education": { "text": "Bildung", "url": null },
     // Subnav education
-    "navbar.education.data_literacy": { "text": "Data Literacy", "url": "/education" },
-    "navbar.education.nonprofits": { "text": "Angebote für Nonprofits", "url": "/ecuation/nonprofits" },
+    "navbar.education.data_literacy": { "text": "Data Literacy", "url": "/bildung" },
+    "navbar.education.nonprofits": { "text": "Angebote für Nonprofits", "url": "/bildung/nonprofits" },
     // Sub sub nav offers for non profits
-    "navbar.education.nonprofits.workshops": { "text": "Workshops", "url": "/education/noprofits/workshops" },
-    "navbar.education.nonprofits.learning_r": { "text": "R Lernen", "url": "/education/noprofits/r_lernen" },
-    "navbar.education.nonprofits.experts": { "text": "Expert:innen", "url": "/education/noprofits/experts" },
+    "navbar.education.nonprofits.workshops": { "text": "Workshops", "url": "/bildung/nonprofits/workshops" },
+    "navbar.education.nonprofits.learning_r": { "text": "R Lernen", "url": "/bildung/nonprofits/r_lernen" },
+    "navbar.education.nonprofits.experts": { "text": "Expert:innen", "url": "/bildung/nonprofits/expertinnen" },
     // 
     // 
     "navbar.community": { "text": "Community", "url": null },
     // Subnav community
     "navbar.community.landing": { "text": "Volunteering bei CorrelAid", "url": "/community" },
     "navbar.community.local_chapter": { "text": "Local Chapter", "url": "/community/local_chapter" },
-    "navbar.community.founding_lc": { "text": "Ein Local Chapter gründen", "url": "/community/lc_gründen" },
+    "navbar.community.founding_lc": { "text": "Ein Local Chapter gründen", "url": "/community/lc_gruenden" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/community/volunteer_journeys" },
     //
-    "navbar.events": { "text": "Events", "url": "/en/events" },
-    "navbar.blog": { "text": "Blog", "url": "/en/blog" },
-    "navbar.podcast": { "text": "Podcast", "url": "/en/podcast" },
-    "navbar.newsletter": { "text": "Newsletter", "url": "/en/newsletter" },
-    "navbar.donate": { "text": "Spenden", "url": "/en/donate" },
+    "navbar.events": { "text": "Veranstaltungen", "url": "/veranstaltungen" },
+    "navbar.blog": { "text": "Blog", "url": "/blog" },
+    "navbar.podcast": { "text": "Podcast", "url": "/podcast" },
+    "navbar.newsletter": { "text": "Newsletter", "url": "/newsletter" },
+    "navbar.donate": { "text": "Spenden", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
   },
   en: {
     "navbar.about": { "text": "About", "url": null },
@@ -54,10 +54,10 @@ export default {
     "navbar.about.landing": { "text": "What is CorrelAid?", "url": "/en/about" },
     "navbar.about.org_struct": { "text": "Organisation Structure", "url": "/en/about/org_struct" },
     // Sub sub nav org struct
-    "navbar.about.org_struct.board": { "text": "Board", "url": "/vorstand" },
-    "navbar.about.org_struct.remote_office": { "text": "Remote Office", "url": "/en/about/remote_office" },
-    "navbar.about.org_struct.ethics_commission": { "text": "Ethics Commission", "url": "/en/about/ethics_commission" },
-    "navbar.about.org_struct.data_privacy": { "text": "Data Privacy", "url": "/en/about/data_privacy" },
+    "navbar.about.org_struct.board": { "text": "Board", "url": "/en/about/org_struct/board" },
+    "navbar.about.org_struct.remote_office": { "text": "Remote Office", "url": "/en/about/org_struct/remote_office" },
+    "navbar.about.org_struct.ethics_commission": { "text": "Ethics Commission", "url": "/en/about/org_struct/ethics_commission" },
+    "navbar.about.org_struct.data_privacy": { "text": "Data Privacy", "url": "/en/about/org_struct/data_privacy" },
     // 
     "navbar.about.partners": { "text": "Partners, Sponsors and Awards", "url": "/en/about/partners_sponsors_awards" },
     "navbar.about.coc": { "text": "Code of Conduct", "url": "/en/about/coc" },
@@ -77,11 +77,11 @@ export default {
     "navbar.education": { "text": "Education", "url": null },
     // Subnav education
     "navbar.education.data_literacy": { "text": "Data Literacy", "url": "/en/education" },
-    "navbar.education.nonprofits": { "text": "Offers for Nonprofits", "url": "/en/ecuation/nonprofits" },
+    "navbar.education.nonprofits": { "text": "Offers for Nonprofits", "url": "/en/education/nonprofits" },
     // Sub sub nav offers for non profits
-    "navbar.education.nonprofits.workshops": { "text": "Workshops", "url": "/en/education/noprofits/workshops" },
-    "navbar.education.nonprofits.learning_r": { "text": "R Lernen", "url": "/en/education/noprofits/r_lernen" },
-    "navbar.education.nonprofits.experts": { "text": "Experts", "url": "/en/education/noprofits/experts" },
+    "navbar.education.nonprofits.workshops": { "text": "Workshops", "url": "/en/education/nonprofits/workshops" },
+    "navbar.education.nonprofits.learning_r": { "text": "R Lernen", "url": "/en/education/nonprofits/learning_r" },
+    "navbar.education.nonprofits.experts": { "text": "Experts", "url": "/en/education/nonprofits/experts" },
     // 
     // 
     "navbar.community": { "text": "Community", "url": null },
@@ -95,6 +95,6 @@ export default {
     "navbar.blog": { "text": "Blog", "url": "/en/blog" },
     "navbar.podcast": { "text": "Podcast", "url": "/en/podcast" },
     "navbar.newsletter": { "text": "Newsletter", "url": "/en/newsletter" },
-    "navbar.donate": { "text": "Donate", "url": "/en/donate" },
+    "navbar.donate": { "text": "Donate", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
   },
 };
