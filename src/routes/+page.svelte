@@ -1,6 +1,10 @@
 <script>
-    import Text from "$lib/components/Text.svelte";
-    const source = "# Header \n ## Header";
+    import Hero from "$lib/components/Hero.svelte";
+
+    /** @type {import('./$types').PageData} */  
+    export let data;
+    $: console.log(data)
+
 </script>
 
-<Text source={source}/>
+<Hero text = {data.hero.text} url = {data.hero.url}/>

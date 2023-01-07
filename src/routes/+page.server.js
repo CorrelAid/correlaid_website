@@ -6,13 +6,19 @@ const query = "homepage"
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ setHeaders }) {
-  // const home = await handle("home",false);
-  const data = await strapi_fetch("/homepage");
- 
-// Doesnt seem to work
- setHeaders({
-    'cache-control': "max-age=20000"
-  });
-  // return {home: home.data, about: about.data}
-  console.log(data)
+
+  const { response, err } = await strapi_fetch("/homepage");
+
+  if (err) {
+    console.log(err)
+
+    throw error(404, {
+      message: err
+    });
+  }
+
+  const data = await response.data
+
+  return { hero : {text: data.attributes.hero.text, url: data.attributes.hero.image.data.attributes.formats.large.url} };
+
 }
