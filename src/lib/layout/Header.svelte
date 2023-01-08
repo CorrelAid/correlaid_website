@@ -14,6 +14,13 @@
 		});
 	}
 
+	function btnLocale(lc) {
+		$locale = lc
+		closeDrawer()
+		changeLocale()
+	}
+	
+
 	let drawer = false;
 	let about_collapse = false;
 	let data4good_collapse = false;
@@ -27,7 +34,6 @@
 		education_collapse = false;
 		community_collapse = false;
 	}
-
 </script>
 
 <div class="drawer">
@@ -333,20 +339,18 @@
 	<div class="drawer-side">
 		<label for="my-drawer-3" class="drawer-overlay" />
 
-		<ul class="menu p-4 w-80 bg-base-100">
-			<div class="collapse">
+		<ul class="menu p-3 w-80 bg-base-100">
+			<div class="collapse collapse-plus">
 				<input
 					type="checkbox"
 					class="peer"
 					bind:checked={about_collapse}
 				/>
-				<div class="collapse-title">
-					<button class="text-xl"
-							>{$t("navbar.about").text} <Dropdown_Icon />
-						</button>
+				<div class="collapse-title text-xl font-medium">
+					{$t("navbar.about").text}
 				</div>
 				<div class="collapse-content">
-					<ul class="menu p-4 w-80 bg-base-100">
+					<ul class="menu w-80 bg-base-100">
 						<li>
 							<a
 								href={$t("navbar.about.landing").url}
@@ -361,32 +365,42 @@
 								>{$t("navbar.about.org_struct").text}</a
 							>
 						</li>
-						<li>
+						<!-- sub sub org struct -->
+						<li class="pl-4">
 							<a
 								href={$t("navbar.about.org_struct.board").url}
 								on:click={closeDrawer}
 								>{$t("navbar.about.org_struct.board").text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.about.org_struct.remote_office").url}
+								href={$t(
+									"navbar.about.org_struct.remote_office"
+								).url}
 								on:click={closeDrawer}
-								>{$t("navbar.about.org_struct.remote_office").text}</a
+								>{$t("navbar.about.org_struct.remote_office")
+									.text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.about.org_struct.ethics_commission").url}
+								href={$t(
+									"navbar.about.org_struct.ethics_commission"
+								).url}
 								on:click={closeDrawer}
-								>{$t("navbar.about.org_struct.ethics_commission").text}</a
+								>{$t(
+									"navbar.about.org_struct.ethics_commission"
+								).text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.about.org_struct.data_privacy").url}
+								href={$t("navbar.about.org_struct.data_privacy")
+									.url}
 								on:click={closeDrawer}
-								>{$t("navbar.about.org_struct.data_privacy").text}</a
+								>{$t("navbar.about.org_struct.data_privacy")
+									.text}</a
 							>
 						</li>
 						<li>
@@ -406,17 +420,17 @@
 					</ul>
 				</div>
 			</div>
-			<div class="collapse">
+			<div class="collapse collapse-plus">
 				<input
 					type="checkbox"
 					class="peer"
 					bind:checked={data4good_collapse}
 				/>
-				<div class="collapse-title">
-					{$t("navbar.data4good").text} 
+				<div class="collapse-title text-xl font-medium">
+					{$t("navbar.data4good").text}
 				</div>
 				<div class="collapse-content">
-					<ul class="menu p-4 w-80 bg-base-100">
+					<ul class="menu w-80 bg-base-100">
 						<li>
 							<a
 								href={$t("navbar.data4good.landing").url}
@@ -438,48 +452,61 @@
 								>{$t("navbar.data4good.nonprofits").text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.data4good.nonprofits.comission").url}
+								href={$t(
+									"navbar.data4good.nonprofits.comission"
+								).url}
 								on:click={closeDrawer}
-								>{$t("navbar.data4good.nonprofits.comission").text}</a
+								>{$t("navbar.data4good.nonprofits.comission")
+									.text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.data4good.nonprofits.data_hour").url}
+								href={$t(
+									"navbar.data4good.nonprofits.data_hour"
+								).url}
 								on:click={closeDrawer}
-								>{$t("navbar.data4good.nonprofits.data_hour").text}</a
+								>{$t("navbar.data4good.nonprofits.data_hour")
+									.text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.data4good.nonprofits.data_dialogues").url}
+								href={$t(
+									"navbar.data4good.nonprofits.data_dialogues"
+								).url}
 								on:click={closeDrawer}
-								>{$t("navbar.data4good.nonprofits.data_dialogues").text}</a
+								>{$t(
+									"navbar.data4good.nonprofits.data_dialogues"
+								).text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.data4good.nonprofits.hackathons").url}
+								href={$t(
+									"navbar.data4good.nonprofits.hackathons"
+								).url}
 								on:click={closeDrawer}
-								>{$t("navbar.data4good.nonprofits.hackathons").text}</a
+								>{$t("navbar.data4good.nonprofits.hackathons")
+									.text}</a
 							>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="collapse">
+			<div class="collapse collapse-plus">
 				<input
 					type="checkbox"
 					class="peer"
 					bind:checked={education_collapse}
 				/>
-				<div class="collapse-title">
+				<div class="collapse-title text-xl font-medium">
 					{$t("navbar.education").text}
 				</div>
 				<div class="collapse-content">
-					<ul class="menu p-4 w-80 bg-base-100">
+					<ul class="menu w-80 bg-base-100">
 						<li>
 							<a
 								href={$t("navbar.education.landing").url}
@@ -494,41 +521,49 @@
 								>{$t("navbar.education.nonprofits").text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.education.nonprofits.workshops").url}
+								href={$t(
+									"navbar.education.nonprofits.workshops"
+								).url}
 								on:click={closeDrawer}
-								>{$t("navbar.education.nonprofits.workshops").text}</a
+								>{$t("navbar.education.nonprofits.workshops")
+									.text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.education.nonprofits.learning_r").url}
+								href={$t(
+									"navbar.education.nonprofits.learning_r"
+								).url}
 								on:click={closeDrawer}
-								>{$t("navbar.education.nonprofits.learning_r").text}</a
+								>{$t("navbar.education.nonprofits.learning_r")
+									.text}</a
 							>
 						</li>
-						<li>
+						<li class="pl-4">
 							<a
-								href={$t("navbar.education.nonprofits.experts").url}
+								href={$t("navbar.education.nonprofits.experts")
+									.url}
 								on:click={closeDrawer}
-								>{$t("navbar.education.nonprofits.experts").text}</a
+								>{$t("navbar.education.nonprofits.experts")
+									.text}</a
 							>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="collapse">
+			<div class="collapse collapse-plus">
 				<input
 					type="checkbox"
 					class="peer"
 					bind:checked={community_collapse}
 				/>
-				<div class="collapse-title">
+				<div class="collapse-title text-xl font-medium">
 					{$t("navbar.community").text}
 				</div>
 				<div class="collapse-content">
-					<ul class="menu p-4 w-80 bg-base-100">
+					<ul class="menu w-80 bg-base-100">
 						<li>
 							<a
 								href={$t("navbar.community.landing").url}
@@ -552,42 +587,42 @@
 						</li>
 						<li>
 							<a
-								href={$t("navbar.community.volunteer_journeys").url}
+								href={$t("navbar.community.volunteer_journeys")
+									.url}
 								on:click={closeDrawer}
-								>{$t("navbar.community.volunteer_journeys").text}</a
+								>{$t("navbar.community.volunteer_journeys")
+									.text}</a
 							>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<li>
-				<a
-					href={$t("navbar.events").url}
-					on:click={closeDrawer}
+				<a href={$t("navbar.events").url} on:click={closeDrawer}
 					>{$t("navbar.events").text}</a
 				>
 			</li>
 			<li>
-				<a
-					href={$t("navbar.blog").url}
-					on:click={closeDrawer}
+				<a href={$t("navbar.blog").url} on:click={closeDrawer}
 					>{$t("navbar.blog").text}</a
 				>
 			</li>
 			<li>
-				<a
-					href={$t("navbar.podcast").url}
-					on:click={closeDrawer}
+				<a href={$t("navbar.podcast").url} on:click={closeDrawer}
 					>{$t("navbar.podcast").text}</a
 				>
 			</li>
 			<li>
-				<a
-					href={$t("navbar.newsletter").url}
-					on:click={closeDrawer}
+				<a href={$t("navbar.newsletter").url} on:click={closeDrawer}
 					>{$t("navbar.newsletter").text}</a
 				>
 			</li>
+
+			<div class="flex w-full p-4">
+				<button class="" on:click={() => btnLocale("de")}> de </button>
+				<div class="divider divider-horizontal mx-1" />
+				<button class="" on:click={() => btnLocale("en")}> en </button>
+			</div>
 		</ul>
 	</div>
 </div>

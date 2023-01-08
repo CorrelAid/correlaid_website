@@ -39,8 +39,8 @@ export default {
     "navbar.community": { "text": "Community", "url": null },
     // Subnav community
     "navbar.community.landing": { "text": "Volunteering bei CorrelAid", "url": "/community" },
-    "navbar.community.local_chapters": { "text": "Local chapters", "url": "/community/local_chapters" },
-    "navbar.community.founding_lc": { "text": "Ein Local chapters gründen", "url": "/community/lc_gruenden" },
+    "navbar.community.local_chapters": { "text": "Local Chapters", "url": "/community/local_chapters" },
+    "navbar.community.founding_lc": { "text": "Ein Local Chapter gründen", "url": "/community/lc_gruenden" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/community/volunteer_journeys" },
     //
     "navbar.events": { "text": "Veranstaltungen", "url": "/veranstaltungen" },
@@ -89,7 +89,7 @@ export default {
     "navbar.community": { "text": "Community", "url": null },
     // Subnav community
     "navbar.community.landing": { "text": "Volunteering with CorrelAid", "url": "/en/community" },
-    "navbar.community.local_chapters": { "text": "Local chapters", "url": "/en/community/local_chapters" },
+    "navbar.community.local_chapters": { "text": "Local Chapters", "url": "/en/community/local_chapters" },
     "navbar.community.founding_lc": { "text": "Founding a Local chapters", "url": "/en/community/founding_lc" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/en/community/volunteer_journeys" },
     //
