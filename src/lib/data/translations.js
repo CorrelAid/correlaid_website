@@ -28,7 +28,7 @@ export default {
     // 
     "navbar.education": { "text": "Bildung", "url": null },
     // Subnav education
-    "navbar.education.data_literacy": { "text": "Data Literacy", "url": "/bildung" },
+    "navbar.education.landing": { "text": "Data Literacy", "url": "/bildung" },
     "navbar.education.nonprofits": { "text": "Angebote für Nonprofits", "url": "/bildung/nonprofits" },
     // Sub sub nav offers for non profits
     "navbar.education.nonprofits.workshops": { "text": "Workshops", "url": "/bildung/nonprofits/workshops" },
@@ -78,7 +78,7 @@ export default {
     // 
     "navbar.education": { "text": "Education", "url": null },
     // Subnav education
-    "navbar.education.data_literacy": { "text": "Data Literacy", "url": "/en/education" },
+    "navbar.education.landing": { "text": "Data Literacy", "url": "/en/education" },
     "navbar.education.nonprofits": { "text": "Offers for Nonprofits", "url": "/en/education/nonprofits" },
     // Sub sub nav offers for non profits
     "navbar.education.nonprofits.workshops": { "text": "Workshops", "url": "/en/education/nonprofits/workshops" },

@@ -2,7 +2,6 @@
 	import Dropdown_Icon from "$lib/svg/Dropdown_Icon.svelte";
 	import CorrelAidLogo from "$lib/svg/CorrelAidLogo.svelte";
 	import { t, locale, locales } from "$lib/stores/i18n.js";
-	const topnav = [{}];
 </script>
 
 <div class="drawer">
@@ -164,8 +163,8 @@
 						</button>
 						<ul class="p-2 bg-base-200 z-10">
 							<li>
-								<a href={$t("navbar.education.data_literacy").url}
-									>{$t("navbar.education.data_literacy").text}</a
+								<a href={$t("navbar.education.landing").url}
+									>{$t("navbar.education.landing").text}</a
 								>
 							</li>
 							<li>
