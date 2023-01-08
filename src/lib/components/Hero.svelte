@@ -2,8 +2,6 @@
     import Text from "$lib/components/Text.svelte"
     export let text;
     export let url;
-
-    console.log(text)
 </script>
 
 <div

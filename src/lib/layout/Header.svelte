@@ -1,7 +1,19 @@
 <script>
 	import Dropdown_Icon from "$lib/svg/Dropdown_Icon.svelte";
 	import CorrelAidLogo from "$lib/svg/CorrelAidLogo.svelte";
-	import { t, locale, locales } from "$lib/stores/i18n.js";
+	import { t, locale } from "$lib/stores/i18n.js";
+
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	function changeLocale() {
+		dispatch('message', {
+			locale: $locale
+		});
+	}
+
+	
 </script>
 
 <div class="drawer">
@@ -11,7 +23,9 @@
 		<div class="navbar bg-base-200">
 			<div class="navbar-start">
 				<div class="flex-1 lg:flex-none px-2">
-					<a href={$t("navbar.home").url}><CorrelAidLogo width="35" height="35" /></a>
+					<a href={$t("navbar.home").url}
+						><CorrelAidLogo width="35" height="35" /></a
+					>
 				</div>
 			</div>
 			<div class="navbar-center">
@@ -220,18 +234,26 @@
 								>
 							</li>
 							<li>
-								<a href={$t("navbar.community.local_chapter").url}
-									>{$t("navbar.community.local_chapter").text}</a
+								<a
+									href={$t("navbar.community.local_chapters")
+										.url}
+									>{$t("navbar.community.local_chapters")
+										.text}</a
 								>
 							</li>
 							<li>
 								<a href={$t("navbar.community.founding_lc").url}
-									>{$t("navbar.community.founding_lc").text}</a
+									>{$t("navbar.community.founding_lc")
+										.text}</a
 								>
 							</li>
 							<li>
-								<a href={$t("navbar.community.volunteer_journeys").url}
-									>{$t("navbar.community.volunteer_journeys").text}</a
+								<a
+									href={$t(
+										"navbar.community.volunteer_journeys"
+									).url}
+									>{$t("navbar.community.volunteer_journeys")
+										.text}</a
 								>
 							</li>
 						</ul>
@@ -261,15 +283,19 @@
 						>
 					</li>
 					<li>
-						<a href={$t("navbar.donate").url} class="btn btn-primary">{$t("navbar.donate").text}</a>
+						<a
+							href={$t("navbar.donate").url}
+							class="btn btn-primary"
+							>{$t("navbar.donate").text}</a
+						>
 					</li>
 				</ul>
 				<form>
-				<select class="select max-w-xs ml-2" bind:value={$locale}>
-						<option selected value="de">de</option>
+					<select class="select max-w-xs ml-2" bind:value={$locale} on:change={changeLocale}>
+						<option value="de">de</option>
 						<option value="en">en</option>
-				</select>
-			</form>
+					</select>
+				</form>
 				<div class="flex-none lg:hidden">
 					<label for="my-drawer-3" class="btn btn-square btn-ghost">
 						<Dropdown_Icon />

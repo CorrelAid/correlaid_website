@@ -4,7 +4,7 @@
     import Text from "$lib/components/Text.svelte";
 
     onMount( () => {
-		$page_key = 'navbar.data4good.nonprofits.comission';
+		$page_key = 'navbar.community.local_chapters';
 	});
     
     
