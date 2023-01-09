@@ -1,14 +1,17 @@
 ## Dev Setup
 1. Clone Repo
+
 2. Install packages
-```
-npm install
-```
-3. Create .env
-```
-STRAPI_ACCESS_TOKEN=token
-STRAPI_URL=https://correlaidstrapi.azurewebsites.net
-```
+
+    ```
+    npm install
+    ```
+3. Create .env file with following contents:
+    ```
+    STRAPI_ACCESS_TOKEN=token
+    STRAPI_URL=https://correlaidstrapi.azurewebsites.net
+    ```
+Ask for token.
 
 ### Sources
 - Creating a sveltekit project: https://kit.svelte.dev/docs/creating-a-project
