@@ -1,4 +1,4 @@
-<footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+<footer class="footer footer-center p-10 bg-neutral text-base-content rounded">
     <div class="grid grid-flow-col gap-4">
       <a class="link link-hover">Impressum</a> 
       <a class="link link-hover">Kontakt</a> 

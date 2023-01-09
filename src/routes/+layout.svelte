@@ -25,7 +25,7 @@
 <!-- Footer on bottom of page if page is too short -->
 <div class="flex flex-col items-center min-h-screen">
 	<Header on:message={handleLocaleChange}>
-	<div id="grow" class="w-screen pt-2 px-5">
+	<div id="grow" class="w-screen">
 		<slot/>
 	</div>
 	<Footer />

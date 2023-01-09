@@ -19,6 +19,8 @@ export async function load({ setHeaders }) {
 
   const data = await response.data
 
-  return { hero : {text: data.attributes.hero.text, url: data.attributes.hero.image.data.attributes.formats.large.url} };
+  console.log(data.attributes.hero.image)
+
+  return { hero : {text: data.attributes.hero.text, url: data.attributes.hero.image.data.attributes.formats.hero.url} };
 
 }

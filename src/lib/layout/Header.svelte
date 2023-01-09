@@ -45,7 +45,7 @@
 	/>
 	<div class="drawer-content flex flex-col">
 		<!-- Main Navbar -->
-		<div class="navbar bg-base-200">
+		<div class="navbar bg-neutral">
 			<div class="navbar-start">
 				<div class="flex-1 lg:flex-none px-2">
 					<a href={$t("navbar.home").url}
@@ -310,14 +310,14 @@
 					<li>
 						<a
 							href={$t("navbar.donate").url}
-							class="btn btn-primary"
+							class="btn-secondary"
 							>{$t("navbar.donate").text}</a
 						>
 					</li>
 				</ul>
 				<form>
 					<select
-						class="select max-w-xs ml-2 hidden lg:block"
+						class="select max-w-xs ml-2 hidden lg:block bg-neutral"
 						bind:value={$locale}
 						on:change={changeLocale}
 					>
@@ -339,7 +339,7 @@
 	<div class="drawer-side">
 		<label for="my-drawer-3" class="drawer-overlay" />
 
-		<ul class="menu p-3 w-80 bg-base-100">
+		<ul class="menu p-3 w-80 bg-neutral">
 			<div class="collapse collapse-plus">
 				<input
 					type="checkbox"
