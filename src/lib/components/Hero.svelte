@@ -2,9 +2,11 @@
     import Text from "$lib/components/Text.svelte";
     export let text;
     export let url;
+    import {header_height} from '$lib/stores/dims.js'
+
 </script>
 
-<div class="hero min-h-screen" style="background-image: url({url});">
+<div class="hero" style="background-image: url({url}); height: calc(100vh - {$header_height}px)">
     <div class="hero-overlay bg-opacity-60" />
     <div class="hero-content">
         <div class="max-w-md hero-text">
@@ -26,4 +28,5 @@
     .hero-text :global(h1) {
         color: white;
     }
+
 </style>

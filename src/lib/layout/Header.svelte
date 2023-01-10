@@ -3,6 +3,7 @@
 	import Menu_Icon from "$lib/svg/Menu_Icon.svelte";
 	import CorrelAidLogo from "$lib/svg/CorrelAidLogo.svelte";
 	import { t, locale } from "$lib/stores/i18n.js";
+	import {header_height} from '$lib/stores/dims.js'
 
 	import { createEventDispatcher } from "svelte";
 
@@ -45,7 +46,7 @@
 	/>
 	<div class="drawer-content flex flex-col">
 		<!-- Main Navbar -->
-		<div class="navbar bg-neutral">
+		<div class="navbar bg-neutral sticky top-0 z-10" bind:clientHeight={$header_height}>
 			<div class="navbar-start">
 				<div class="flex-1 lg:flex-none px-2">
 					<a href={$t("navbar.home").url}
