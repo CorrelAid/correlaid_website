@@ -11,7 +11,7 @@ export default {
     "navbar.about.org_struct.ethics_commission": { "text": "Ethikkomission", "url": "/ueber/organisationsstruktur/ethikkommission" },
     "navbar.about.org_struct.data_privacy": { "text": "Datenschutz", "url": "/ueber/organisationsstruktur/datenschutz" },
     // 
-    "navbar.about.partners": { "text": "Partner, Sponsoren und Preise", "url": "/ueber/partner_sponsoren_preise" },
+    "navbar.about.partners": { "text": "Partner und Sponsoren", "url": "/ueber/partner_sponsoren" },
     "navbar.about.coc": { "text": "Code of Conduct", "url": "/ueber/coc" },
     // 
     "navbar.data4good": { "text": "Data4Good", "url": null },
@@ -64,7 +64,7 @@ export default {
     "navbar.about.org_struct.ethics_commission": { "text": "Ethics Commission", "url": "/en/about/org_struct/ethics_commission" },
     "navbar.about.org_struct.data_privacy": { "text": "Data Privacy", "url": "/en/about/org_struct/data_privacy" },
     // 
-    "navbar.about.partners": { "text": "Partners, Sponsors and Awards", "url": "/en/about/partners_sponsors_awards" },
+    "navbar.about.partners": { "text": "Partners and Sponsors", "url": "/en/about/partners_sponsors" },
     "navbar.about.coc": { "text": "Code of Conduct", "url": "/en/about/coc" },
     // 
     "navbar.data4good": { "text": "Data4Good", "url": null },
