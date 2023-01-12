@@ -3,7 +3,13 @@ import { STRAPI_ACCESS_TOKEN } from '$env/static/private';
 import { STRAPI_URL } from '$env/static/private';
 import { error } from '@sveltejs/kit'
 
-const strapi_fetch = async (query, locale, filter) => {
+const strapi_fetch = async (query, filter, params) => {
+  let locale = "de";
+  if (params.locale != undefined) {
+    locale = params.locale
+  }
+
+
   const url = STRAPI_URL + "/api" + query + `?locale=${locale}` + "&populate=deep" + "&" + filter
 
   try {
@@ -33,15 +39,15 @@ const strapi_fetch = async (query, locale, filter) => {
 
   }
 
-    const data = res.data.data
+  const data = res.data.data
 
-    if(data.length == 0){
-      throw error(400, {
-        message: "No data received by CMS API"
-      })
-    }
+  if (data.length == 0) {
+    throw error(400, {
+      message: "No data received by CMS API"
+    })
+  }
 
-    return data
+  return data
 
 
 }
