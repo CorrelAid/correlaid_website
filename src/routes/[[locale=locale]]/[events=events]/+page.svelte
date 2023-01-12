@@ -7,6 +7,8 @@
 		$page_key = 'navbar.events';
 	});
     
+    /** @type {import('./$types').PageData} */  
+    export let data;
     
     const source = "# WIP";
 </script>
