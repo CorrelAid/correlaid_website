@@ -6,8 +6,12 @@ import strapi_fetch from '$lib/js/strapi_fetch'
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
     const slug = params.slug;
+    let locale="de";
+    if(params.locale != undefined){
+        locale = params.locale
+    }
 
-    let data = await strapi_fetch("/posts", "de", `filters[slug][$eq]=${slug}`);
+    let data = await strapi_fetch("/posts", locale, `filters[slug][$eq]=${slug}`);
 
     data = data[0]
 

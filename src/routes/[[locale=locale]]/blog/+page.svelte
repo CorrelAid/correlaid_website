@@ -8,7 +8,6 @@
     });
     export let data;
     let posts = data.posts;
-    console.log(posts);
 
     const source = "# WIP";
 </script>

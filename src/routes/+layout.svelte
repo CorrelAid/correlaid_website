@@ -15,8 +15,14 @@
 	}
 
 	function handleLocaleChange(event) {
-		const url = $t($page_key).url
-		goto(url)
+		if($page.params.slug){
+			const url = $t($page_key).url + "/" + $page.params.slug
+			goto(url)
+		}else{
+			const url = $t($page_key).url
+			goto(url)
+		}
+		
 	}
 
   	
