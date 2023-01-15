@@ -12,8 +12,6 @@ const strapi_fetch = async (query, filter, params) => {
 
   const url = STRAPI_URL + "/api" + query + `?locale=${lc}` + "&populate=deep" + "&" + filter
 
-  console.log(url)
-
   try {
     var res = await axios.get(url, {
       headers: { "Authorization": "bearer " + STRAPI_ACCESS_TOKEN },

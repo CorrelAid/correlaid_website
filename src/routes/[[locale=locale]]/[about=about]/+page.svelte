@@ -10,5 +10,4 @@
     
     const source = "# WIP";
 </script>
-
 <Text text={source} size={"base"}/>
