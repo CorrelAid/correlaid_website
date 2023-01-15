@@ -56,7 +56,7 @@
 					>
 						<li>
 							<a
-								class="hover:text-primary hover:bg-neutral py-2 text-sm "
+								class="hover:text-primary hover:bg-neutral py-2 "
 								href={$t("navbar.events").url}
 								>{$t("navbar.events").text}</a
 							>
@@ -64,28 +64,28 @@
 						<li>
 							<a
 								href={$t("navbar.blog").url}
-								class="py-2 text-sm hover:text-primary hover:bg-neutral"
+								class="py-2 hover:text-primary hover:bg-neutral"
 								>{$t("navbar.blog").text}</a
 							>
 						</li>
 						<li>
 							<a
 								href={$t("navbar.podcast").url}
-								class="py-2 text-sm hover:text-primary hover:bg-neutral"
+								class="py-2 hover:text-primary hover:bg-neutral"
 								>{$t("navbar.podcast").text}</a
 							>
 						</li>
 						<li>
 							<a
 								href={$t("navbar.newsletter").url}
-								class="py-2 text-sm hover:text-primary hover:bg-neutral"
+								class="py-2 hover:text-primary hover:bg-neutral"
 								>{$t("navbar.newsletter").text}</a
 							>
 						</li>
 						<li>
 							<a
 								href={$t("navbar.donate").url}
-								class="py-2 text-sm hover:text-primary hover:bg-neutral"
+								class="py-2 hover:text-primary hover:bg-neutral"
 								>{$t("navbar.donate").text}</a
 							>
 						</li>
@@ -94,7 +94,7 @@
 				<div class="navbar-center" />
 				<div class="navbar-end ">
 					<select
-						class="text-sm bg-neutral font-medium hover:text-primary hover:outline-none focus:outline-none active:outline-none mr-2"
+						class="bg-neutral font-medium hover:text-primary hover:outline-none focus:outline-none active:outline-none mr-2"
 						bind:value={$locale}
 						on:change={changeLocale}
 					>

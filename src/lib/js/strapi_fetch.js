@@ -4,13 +4,15 @@ import { STRAPI_URL } from '$env/static/private';
 import { error } from '@sveltejs/kit'
 
 const strapi_fetch = async (query, filter, params) => {
-  let locale = "de";
-  if (params.locale != undefined) {
-    locale = params.locale
+  let lc = "de";
+  
+  if (params.locale) {
+    lc = params.locale
   }
 
+  const url = STRAPI_URL + "/api" + query + `?locale=${lc}` + "&populate=deep" + "&" + filter
 
-  const url = STRAPI_URL + "/api" + query + `?locale=${locale}` + "&populate=deep" + "&" + filter
+  console.log(url)
 
   try {
     var res = await axios.get(url, {
