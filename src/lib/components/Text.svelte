@@ -4,7 +4,7 @@
 	export let size; 
 </script>
 
-<article class="prose prose-{size}">
+<article class="prose prose-{size} w-full max-w-none">
 	<SvelteMarkdown source={text} />
 </article>
 

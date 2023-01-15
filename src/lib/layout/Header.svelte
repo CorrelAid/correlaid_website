@@ -52,7 +52,7 @@
 			<div class="navbar min-h-0 h-12 hidden lg:flex bg-neutral">
 				<div class="navbar-start w-4/6">
 					<ul
-						class="menu menu-horizontal px-1 hidden lg:flex space-x-4"
+						class="menu menu-horizontal px-1 hidden lg:flex space-x-4 text-neutral-content"
 					>
 						<li>
 							<a
@@ -111,7 +111,7 @@
 						>
 					</div>
 					<ul
-						class="menu menu-horizontal space-x-2 ml-2 hidden lg:flex "
+						class="menu menu-horizontal space-x-2 ml-2 hidden lg:flex text-neutral-content"
 					>
 						<li class="">
 							<button
