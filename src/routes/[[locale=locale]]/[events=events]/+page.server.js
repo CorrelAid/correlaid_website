@@ -7,7 +7,6 @@ export async function load({ params }) {
 
   const data = await strapi_fetch("/events", "", params);
 
-  console.log(data)
 
   return { events: data };
 

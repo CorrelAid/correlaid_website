@@ -2,7 +2,9 @@
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
-    extend: {}
+    extend: {fontFamily: {
+      'sans': ['Roboto-Light'],
+    },}
   },
   plugins: [require('daisyui'), require('@tailwindcss/typography')],
   daisyui: {
