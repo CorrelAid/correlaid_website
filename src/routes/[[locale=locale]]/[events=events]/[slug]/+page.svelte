@@ -12,9 +12,9 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  $: console.log(data);
+  
 </script>
 
 <Content>
-  <Text text={data.description} size={"base"} />
+  <Text text={data.translations[0].description} size={"base"} />
 </Content>

@@ -25,9 +25,6 @@ export async function load({ params }) {
 
   const data = await directus_fetch(query)
 
-  console.log(data.Events[0].translations)
-
-
   return { events: data.Events }
 
 }
