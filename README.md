@@ -8,8 +8,7 @@
     ```
 3. Create .env file with following contents:
     ```
-    STRAPI_ACCESS_TOKEN=token
-    STRAPI_URL=https://correlaidstrapi.azurewebsites.net
+    API_URL=https://6xdv3yb3.directus.app
     ```
 Ask for token.
 

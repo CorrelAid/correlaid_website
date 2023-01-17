@@ -9,8 +9,6 @@
     });
     export let data;
     let events = data.events;
-
-    $:console.log(events)
 </script>
 
 <ul />

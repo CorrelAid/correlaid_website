@@ -4,7 +4,7 @@ import { error } from '@sveltejs/kit'
 
 const directus = await getDirectusClient();
 
-const directus_fetch = async (item) => {
+const directus_fetch = async (item, filter = {}) => {
     // let lc = "de";
 
     // if (params.locale) {
@@ -12,8 +12,9 @@ const directus_fetch = async (item) => {
     // }
 
     // const url = STRAPI_URL + "/api" + query + `?locale=${lc}` + "&populate=deep" + "&" + filter
+   
     try {
-        const response = await directus.items(item).readByQuery({ limit: -1 });
+        const response = await directus.items(item).readByQuery({ limit: -1, filter :  filter});
         const data = response.data
         return data
     } catch (err) {
