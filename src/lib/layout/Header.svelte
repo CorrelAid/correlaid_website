@@ -94,7 +94,7 @@
 				<div class="navbar-center" />
 				<div class="navbar-end ">
 					<select
-						class="bg-neutral font-medium hover:text-primary hover:outline-none focus:outline-none active:outline-none mr-2"
+						class="bg-neutral font-normal hover:text-primary hover:outline-none focus:outline-none active:outline-none mr-2"
 						bind:value={$locale}
 						on:change={changeLocale}
 					>
@@ -111,29 +111,29 @@
 						>
 					</div>
 					<ul
-						class="menu menu-horizontal space-x-2 ml-2 hidden lg:flex text-neutral-content"
+						class="menu menu-horizontal space-x-2 ml-2 hidden lg:flex text-neutral-content font-bold"
 					>
 						<li class="">
 							<button
-								class="text-xl font-semibold hover:text-primary hover:bg-neutral"
+								class="text-xl hover:text-primary hover:bg-neutral"
 								>{$t("navbar.about").text} <Dropdown_Icon />
 							</button>
-							<ul class="p-2 z-10 bg-neutral">
+							<ul class="p-2 z-10 bg-neutral font-bold">
 								<li>
 									<a
 										href={$t("navbar.about.landing").url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg  hover:text-primary hover:bg-neutral"
 										>{$t("navbar.about.landing").text}</a
 									>
 								</li>
 								<li>
 									<a
 										href={$t("navbar.about.org_struct").url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.about.org_struct").text}</a
 									>
 								</li>
-								<ul>
+								<ul class="font-normal">
 									<li>
 										<a
 											href={$t(
@@ -182,14 +182,14 @@
 								<li>
 									<a
 										href={$t("navbar.about.partners").url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.about.partners").text}</a
 									>
 								</li>
 								<li>
 									<a
 										href={$t("navbar.about.coc").url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.about.coc").text}</a
 									>
 								</li>
@@ -197,7 +197,7 @@
 						</li>
 						<li>
 							<button
-								class="text-lg font-semibold hover:text-primary hover:bg-neutral"
+								class="text-lg font-bold hover:text-primary hover:bg-neutral"
 								>{$t("navbar.data4good").text} <Dropdown_Icon />
 							</button>
 
@@ -206,7 +206,7 @@
 									<a
 										href={$t("navbar.data4good.landing")
 											.url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.data4good.landing")
 											.text}</a
 									>
@@ -215,7 +215,7 @@
 									<a
 										href={$t("navbar.data4good.projects")
 											.url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.data4good.projects")
 											.text}</a
 									>
@@ -224,12 +224,12 @@
 									<a
 										href={$t("navbar.data4good.nonprofits")
 											.url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg  hover:text-primary hover:bg-neutral"
 										>{$t("navbar.data4good.nonprofits")
 											.text}</a
 									>
 								</li>
-								<ul>
+								<ul class="font-medium">
 									<li>
 										<a
 											class="block ml-4 hover:text-primary hover:bg-neutral"
@@ -279,7 +279,7 @@
 						</li>
 						<li>
 							<button
-								class="text-lg font-semibold hover:text-primary hover:bg-neutral"
+								class="text-lg font-bold hover:text-primary hover:bg-neutral"
 								>{$t("navbar.education").text} <Dropdown_Icon />
 							</button>
 							<ul class="p-2 bg-neutral z-10">
@@ -287,7 +287,7 @@
 									<a
 										href={$t("navbar.education.landing")
 											.url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.education.landing")
 											.text}</a
 									>
@@ -296,12 +296,12 @@
 									<a
 										href={$t("navbar.education.nonprofits")
 											.url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.education.nonprofits")
 											.text}</a
 									>
 								</li>
-								<ul>
+								<ul class="font-normal">
 									<li>
 										<a
 											class="block ml-4 hover:text-primary hover:bg-neutral"
@@ -340,7 +340,7 @@
 						</li>
 						<li>
 							<button
-								class="text-lg font-semibold hover:text-primary hover:bg-neutral"
+								class="text-lg font-bold hover:text-primary hover:bg-neutral"
 								>{$t("navbar.community").text} <Dropdown_Icon />
 							</button>
 							<ul class="p-2 bg-neutral z-10">
@@ -348,7 +348,7 @@
 									<a
 										href={$t("navbar.community.landing")
 											.url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.community.landing")
 											.text}</a
 									>
@@ -358,7 +358,7 @@
 										href={$t(
 											"navbar.community.local_chapters"
 										).url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.community.local_chapters")
 											.text}</a
 									>
@@ -367,7 +367,7 @@
 									<a
 										href={$t("navbar.community.founding_lc")
 											.url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t("navbar.community.founding_lc")
 											.text}</a
 									>
@@ -377,7 +377,7 @@
 										href={$t(
 											"navbar.community.volunteer_journeys"
 										).url}
-										class="text-lg font-medium hover:text-primary hover:bg-neutral"
+										class="text-lg hover:text-primary hover:bg-neutral"
 										>{$t(
 											"navbar.community.volunteer_journeys"
 										).text}</a
@@ -393,7 +393,7 @@
 						<li>
 							<a
 								href={$t("navbar.local_chapters").url}
-								class="btn-secondary font-semibold"
+								class="btn-secondary font-bold"
 								>{$t("navbar.local_chapters").text}</a
 							>
 						</li>
@@ -425,7 +425,7 @@
 					bind:checked={about_collapse}
 				/>
 				<div
-					class="collapse-title text-xl font-semibold hover:text-primary hover:bg-neutral"
+					class="collapse-title text-xl font-bold hover:text-primary hover:bg-neutral"
 				>
 					{$t("navbar.about").text}
 				</div>
@@ -433,14 +433,14 @@
 					<ul class="menu w-80 ">
 						<li>
 							<a
-								href={$t("navbar.about.landing").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.about.landing").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.about.landing").text}</a
 							>
 						</li>
 						<li>
 							<a
-								href={$t("navbar.about.org_struct").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.about.org_struct").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.about.org_struct").text}</a
 							>
@@ -485,14 +485,14 @@
 						</li>
 						<li>
 							<a
-								href={$t("navbar.about.partners").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.about.partners").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.about.partners").text}</a
 							>
 						</li>
 						<li>
 							<a
-								href={$t("navbar.about.coc").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.about.coc").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.about.coc").text}</a
 							>
@@ -507,7 +507,7 @@
 					bind:checked={data4good_collapse}
 				/>
 				<div
-					class="collapse-title text-xl font-semibold hover:text-primary hover:bg-neutral"
+					class="collapse-title text-xl font-bold hover:text-primary hover:bg-neutral"
 				>
 					{$t("navbar.data4good").text}
 				</div>
@@ -515,21 +515,21 @@
 					<ul class="menu w-80 ">
 						<li>
 							<a
-								href={$t("navbar.data4good.landing").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.data4good.landing").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.data4good.landing").text}</a
 							>
 						</li>
 						<li>
 							<a
-								href={$t("navbar.data4good.projects").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.data4good.projects").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.data4good.projects").text}</a
 							>
 						</li>
 						<li>
 							<a
-								href={$t("navbar.data4good.nonprofits").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.data4good.nonprofits").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.data4good.nonprofits").text}</a
 							>
@@ -585,7 +585,7 @@
 					bind:checked={education_collapse}
 				/>
 				<div
-					class="collapse-title text-xl font-semibold hover:text-primary hover:bg-neutral"
+					class="collapse-title text-xl font-bold hover:text-primary hover:bg-neutral"
 				>
 					{$t("navbar.education").text}
 				</div>
@@ -593,14 +593,14 @@
 					<ul class="menu w-80 ">
 						<li>
 							<a
-								href={$t("navbar.education.landing").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.education.landing").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.education.landing").text}</a
 							>
 						</li>
 						<li>
 							<a
-								href={$t("navbar.education.nonprofits").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.education.nonprofits").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer} 
 								>{$t("navbar.education.nonprofits").text}</a
 							>
@@ -644,7 +644,7 @@
 					bind:checked={community_collapse}
 				/>
 				<div
-					class="collapse-title text-xl font-semibold hover:text-primary hover:bg-neutral"
+					class="collapse-title text-xl font-bold hover:text-primary hover:bg-neutral"
 				>
 					{$t("navbar.community").text}
 				</div>
@@ -652,21 +652,21 @@
 					<ul class="menu w-80 ">
 						<li>
 							<a
-								href={$t("navbar.community.landing").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.community.landing").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.community.landing").text}</a
 							>
 						</li>
 						<li>
 							<a
-								href={$t("navbar.community.local_chapters").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.community.local_chapters").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.community.local_chapters").text}</a
 							>
 						</li>
 						<li>
 							<a
-								href={$t("navbar.community.founding_lc").url} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								href={$t("navbar.community.founding_lc").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								on:click={closeDrawer}
 								>{$t("navbar.community.founding_lc").text}</a
 							>
@@ -675,7 +675,7 @@
 							<a
 								href={$t("navbar.community.volunteer_journeys") 
 									.url}
-								on:click={closeDrawer} class="text-lg font-medium hover:text-primary hover:bg-neutral"
+								on:click={closeDrawer} class="text-lg font-normal hover:text-primary hover:bg-neutral"
 								>{$t("navbar.community.volunteer_journeys")
 									.text}</a
 							>
@@ -711,7 +711,7 @@
 			<li class="pl-2 mt-6">
 				<a
 					href={$t("navbar.local_chapters").url}
-					class="btn-secondary font-semibold w-4/5"
+					class="btn-secondary font-bold w-4/5"
 					>{$t("navbar.local_chapters").text}</a
 				>
 			</li>

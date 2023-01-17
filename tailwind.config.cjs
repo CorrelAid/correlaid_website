@@ -3,7 +3,7 @@ module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {fontFamily: {
-      'sans': ['Roboto-Light'],
+      'sans': ["Roboto"],
     },}
   },
   plugins: [require('daisyui'), require('@tailwindcss/typography')],

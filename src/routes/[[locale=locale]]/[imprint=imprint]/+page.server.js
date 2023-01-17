@@ -5,9 +5,6 @@ import strapi_fetch from '$lib/js/strapi_fetch'
 export async function load({ params }) {
 
 
-  const data = await strapi_fetch("/imprint", "", params);
-  
-
-  return { text : data.attributes.text };
+ 
 
 }

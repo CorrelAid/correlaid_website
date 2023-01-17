@@ -10,8 +10,7 @@
     
     export let data;
     
+    const source = "# WIP";
 </script>
 
-<Content>
-<Text text={data.text} size={"base"}/>
-</Content>
+<Text text={source} size={"base"}/>
