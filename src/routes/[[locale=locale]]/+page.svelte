@@ -1,5 +1,6 @@
 <script>
     import Hero from "$lib/components/Hero.svelte";
+    import Text from "$lib/components/Text.svelte";
     import { page_key } from "$lib/stores/page_key.js";
     import { onMount } from "svelte";
 
@@ -9,6 +10,8 @@
 
     /** @type {import('./$types').PageData} */
     export let data;
+    
+    const source = "# WIP";
 </script>
 
-<Hero text={data.hero.text} url={data.hero.url} />
+<Text text={source} size={"base"}/>

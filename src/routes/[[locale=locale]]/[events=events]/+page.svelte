@@ -10,7 +10,7 @@
     export let data;
     let events = data.events;
 
-    const source = "# WIP";
+    $:console.log(events)
 </script>
 
 <ul />
@@ -23,7 +23,7 @@
                     <th>Date</th>
                     <th>Title</th>
                     <th>Tags</th>
-                    <th>Languages</th>
+                    <th>Language</th>
                     <th />
                 </tr>
             </thead>
@@ -31,23 +31,23 @@
                 {#each events as event}
                     <tr>
                         <td>
-                            {event.attributes.date[0].date}
+                            {event.date}
                         </td>
                         <td>
                             <div class="flex items-center space-x-3">
                                 <div>
                                     <div class="font-bold">
                                         <a href={`${$t("navbar.events").url}/${
-                                            event.attributes.slug
-                                        }`}>{event.attributes.title}</a>
+                                            event.slug
+                                        }`}>{event.title}</a>
                                     </div>
                                 </div>
                             </div>
                         </td>
                         <td>
-                           
+                            {event.tags}
                         </td>
-                        <td style="text-transform: capitalize;">{event.attributes.language}</td>
+                        <td style="text-transform: capitalize;">{event.language}</td>
                         
                     </tr>
                 {/each}

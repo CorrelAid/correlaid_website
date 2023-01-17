@@ -19,7 +19,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"axios": "^1.2.2",
+		"@directus/sdk": "^10.3.1",
 		"daisyui": "^2.45.0",
 		"i18n": "^0.15.1",
 		"svelte-markdown": "^0.2.3"
