@@ -4,23 +4,18 @@ import { error } from '@sveltejs/kit'
 
 const directus = await getDirectusClient();
 
-const directus_fetch = async (item, filter = {}) => {
-    // let lc = "de";
-
-    // if (params.locale) {
-    //   lc = params.locale
-    // }
-
-    // const url = STRAPI_URL + "/api" + query + `?locale=${lc}` + "&populate=deep" + "&" + filter
+const directus_fetch = async (query) => {
    
+
+
     try {
-        const response = await directus.items(item).readByQuery({ limit: -1, filter :  filter});
+        const response = await directus.graphql.items(query);
         const data = response.data
         return data
     } catch (err) {
         throw error(500, {
-                  message: err.message
-                })
+            message: err.message
+        })
     }
 
     // try {

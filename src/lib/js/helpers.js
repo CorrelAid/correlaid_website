@@ -36,3 +36,14 @@ export function constructRe(key) {
 
     return re
   }
+
+  export function get_lang(params){
+    let lang;
+    if (params.locale) {
+      lang = "en-US"
+    }
+    else {
+      lang = "de-DE"
+    }
+    return lang
+  }
