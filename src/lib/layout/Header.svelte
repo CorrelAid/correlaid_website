@@ -1,11 +1,14 @@
 <script>
 	import Dropdown_Icon from "$lib/svg/Dropdown_Icon.svelte";
 	import Menu_Icon from "$lib/svg/Menu_Icon.svelte";
-	import CorrelAidLogo from "$lib/svg/CorrelAidLogo.svelte";
+	import CorrelAid_Logo_1 from "$lib/svg/CorrelAid_Logo_1.svelte";
 	import { t, locale } from "$lib/stores/i18n.js";
 	import { header_height } from "$lib/stores/dims.js";
 
 	import { createEventDispatcher } from "svelte";
+	import CorrelAidLogo from "../svg/CorrelAid_Logo.svelte";
+	import DropdownIcon from "../svg/Dropdown_Icon.svelte";
+	import ArrowRight from "../svg/Arrow_Right.svelte";
 
 	const dispatch = createEventDispatcher();
 
@@ -17,6 +20,8 @@
 
 	function btnLocale(lc) {
 		$locale = lc;
+		active_language = lc;
+		language_toggle = false;
 		closeDrawer();
 		changeLocale();
 	}
@@ -34,693 +39,555 @@
 		education_collapse = false;
 		community_collapse = false;
 	}
+
+	let language_toggle = false;
+	let about_toggle = false;
+	let data4good_toggle = false;
+	let education_toggle = false;
+	let community_toggle = false;
+
+	function subnav(btn) {
+		function closeall() {
+			about_toggle = false;
+			data4good_toggle = false;
+			education_toggle = false;
+			community_toggle = false;
+		}
+		if (btn === "about") {
+			if (about_toggle == true) {
+				closeall();
+			} else {
+				about_toggle = true;
+				data4good_toggle = false;
+				education_toggle = false;
+				community_toggle = false;
+			}
+		}
+		if (btn === "data4good") {
+			if (data4good_toggle == true) {
+				closeall();
+			} else {
+				about_toggle = false;
+				data4good_toggle = true;
+				education_toggle = false;
+				community_toggle = false;
+			}
+		}
+		if (btn === "education") {
+			if (education_toggle == true) {
+				closeall();
+			} else {
+				about_toggle = false;
+				data4good_toggle = false;
+				education_toggle = true;
+				community_toggle = false;
+			}
+		}
+		if (btn === "community") {
+			if (community_toggle == true) {
+				closeall();
+			} else {
+				about_toggle = false;
+				data4good_toggle = false;
+				education_toggle = false;
+				community_toggle = true;
+			}
+		}
+	}
+
+	let active_language = "de";
+	$: active_language = $locale;
 </script>
 
-<div class="drawer">
-	<input
-		id="my-drawer-3"
-		type="checkbox"
-		class="drawer-toggle"
-		bind:checked={drawer}
-	/>
-	<div class="drawer-content flex flex-col">
-		<!-- Main Navbar -->
-		<div
-			class="z-10 lg:divide-y divide-base-100"
-			bind:clientHeight={$header_height}
-		>
-			<div class="navbar min-h-0 h-12 hidden lg:flex bg-neutral">
-				<div class="navbar-start w-4/6">
-					<ul
-						class="menu menu-horizontal px-1 hidden lg:flex space-x-4 text-neutral-content"
-					>
-						<li>
-							<a
-								class="hover:text-primary hover:bg-neutral py-2 "
-								href={$t("navbar.events").url}
-								>{$t("navbar.events").text}</a
+<header
+	aria-label="Site Header"
+	class="w-screen  border-b-2 border-neutral-25"
+	bind:clientHeight={$header_height}
+>
+	<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+		<div class="flex items-center justify-between">
+			<div class="md:flex md:items-center md:gap-12">
+				<a class="block text-teal-600" href={$t("navbar.home").url}>
+					<span class="sr-only">Home</span>
+					<CorrelAid_Logo_1 width={100} height={100} />
+				</a>
+			</div>
+			<div class="flex flex-col">
+				<div class="flex mb-3 mt-1">
+					<div class="hidden md:block mx-auto">
+						<nav aria-label="Site Nav">
+							<ul
+								class="flex items-center gap-6 font-light text-base-content tracking-wide"
 							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.blog").url}
-								class="py-2 hover:text-primary hover:bg-neutral"
-								>{$t("navbar.blog").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.podcast").url}
-								class="py-2 hover:text-primary hover:bg-neutral"
-								>{$t("navbar.podcast").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.newsletter").url}
-								class="py-2 hover:text-primary hover:bg-neutral"
-								>{$t("navbar.newsletter").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.donate").url}
-								class="py-2 hover:text-primary hover:bg-neutral"
-								>{$t("navbar.donate").text}</a
-							>
-						</li>
-					</ul>
+								<li>
+									<a
+										class="hover:text-primary transition"
+										href={$t("navbar.events").url}
+										>{$t("navbar.events").text}</a
+									>
+								</li>
+
+								<li>
+									<a
+										class="hover:text-primary transition"
+										href={$t("navbar.blog").url}
+										>{$t("navbar.blog").text}</a
+									>
+								</li>
+
+								<li>
+									<a
+										class="hover:text-primary transition"
+										href={$t("navbar.podcast").url}
+										>{$t("navbar.podcast").text}</a
+									>
+								</li>
+
+								<li>
+									<a
+										class="hover:text-primary transition"
+										href={$t("navbar.newsletter").url}
+										>{$t("navbar.newsletter").text}</a
+									>
+								</li>
+							</ul>
+						</nav>
+					</div>
 				</div>
-				<div class="navbar-center" />
-				<div class="navbar-end ">
-					<select
-						class="bg-neutral font-normal hover:text-primary hover:outline-none focus:outline-none active:outline-none mr-2"
-						bind:value={$locale}
-						on:change={changeLocale}
-					>
-						<option value="de">Deutsch</option>
-						<option value="en">English</option>
-					</select>
+
+				<div class="md:flex md:items-center md:gap-12">
+					<div class="hidden md:block">
+						<nav aria-label="Site Nav">
+							<div
+								class="flex items-center gap-6 text-xl text-base-content "
+							>
+								<div class="relative">
+									<button
+										class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+										on:click={() => subnav("about")}
+									>
+										{$t("navbar.about").text}
+										<DropdownIcon height={20} width={20} />
+									</button>
+								</div>
+
+								<div class="relative">
+									<button
+										class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+										on:click={() => subnav("data4good")}
+									>
+										{$t("navbar.data4good").text}
+										<DropdownIcon height={20} width={20} />
+									</button>
+								</div>
+
+								<div class="relative">
+									<button
+										class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+										on:click={() => subnav("education")}
+									>
+										{$t("navbar.education").text}
+										<DropdownIcon height={20} width={20} />
+									</button>
+								</div>
+
+								<div class="relative">
+									<button
+										class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+										on:click={() => subnav("community")}
+									>
+										{$t("navbar.community").text}
+										<DropdownIcon height={20} width={20} />
+									</button>
+								</div>
+							</div>
+						</nav>
+					</div>
 				</div>
 			</div>
-			<div class="navbar bg-neutral py-3">
-				<div class="navbar-start w-5/6">
-					<div class="flex-1 lg:flex-none pl-4 pr-4 py-1">
-						<a href={$t("navbar.home").url}
-							><CorrelAidLogo width="30" height="30" /></a
-						>
-					</div>
-					<ul
-						class="menu menu-horizontal space-x-2 ml-2 hidden lg:flex text-neutral-content font-bold"
+			<div class="flex items-center gap-4">
+				<div class="sm:flex sm:gap-4">
+					<a
+						class="rounded-md bg-secondary px-4 py-2  text-white shadow"
+						href={$t("navbar.donate").url}
 					>
-						<li class="">
-							<button
-								class="text-xl hover:text-primary hover:bg-neutral"
-								>{$t("navbar.about").text} <Dropdown_Icon />
-							</button>
-							<ul class="p-2 z-10 bg-neutral font-bold">
-								<li>
-									<a
-										href={$t("navbar.about.landing").url}
-										class="text-lg  hover:text-primary hover:bg-neutral"
-										>{$t("navbar.about.landing").text}</a
-									>
-								</li>
-								<li>
-									<a
-										href={$t("navbar.about.org_struct").url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.about.org_struct").text}</a
-									>
-								</li>
-								<ul class="font-normal">
-									<li>
-										<a
-											href={$t(
-												"navbar.about.org_struct.board"
-											).url}
-											class="block ml-6 hover:text-primary hover:bg-neutral"
-											>{$t(
-												"navbar.about.org_struct.board"
-											).text}</a
-										>
-									</li>
-									<li>
-										<a
-											href={$t(
-												"navbar.about.org_struct.remote_office"
-											).url}
-											class="block ml-6 hover:text-primary hover:bg-neutral"
-											>{$t(
-												"navbar.about.org_struct.remote_office"
-											).text}</a
-										>
-									</li>
-									<li>
-										<a
-											href={$t(
-												"navbar.about.org_struct.ethics_commission"
-											).url}
-											class="block ml-6 hover:text-primary hover:bg-neutral"
-											>{$t(
-												"navbar.about.org_struct.ethics_commission"
-											).text}</a
-										>
-									</li>
-									<li>
-										<a
-											href={$t(
-												"navbar.about.org_struct.data_privacy"
-											).url}
-											class="block ml-6 hover:text-primary hover:bg-neutral"
-											>{$t(
-												"navbar.about.org_struct.data_privacy"
-											).text}</a
-										>
-									</li>
-								</ul>
-								<li>
-									<a
-										href={$t("navbar.about.partners").url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.about.partners").text}</a
-									>
-								</li>
-								<li>
-									<a
-										href={$t("navbar.about.coc").url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.about.coc").text}</a
-									>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<button
-								class="text-lg font-bold hover:text-primary hover:bg-neutral"
-								>{$t("navbar.data4good").text} <Dropdown_Icon />
-							</button>
-
-							<ul class="p-2 bg-neutral z-10 ">
-								<li>
-									<a
-										href={$t("navbar.data4good.landing")
-											.url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.data4good.landing")
-											.text}</a
-									>
-								</li>
-								<li>
-									<a
-										href={$t("navbar.data4good.projects")
-											.url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.data4good.projects")
-											.text}</a
-									>
-								</li>
-								<li>
-									<a
-										href={$t("navbar.data4good.nonprofits")
-											.url}
-										class="text-lg  hover:text-primary hover:bg-neutral"
-										>{$t("navbar.data4good.nonprofits")
-											.text}</a
-									>
-								</li>
-								<ul class="font-medium">
-									<li>
-										<a
-											class="block ml-4 hover:text-primary hover:bg-neutral"
-											href={$t(
-												"navbar.data4good.nonprofits.comission"
-											).url}
-											>{$t(
-												"navbar.data4good.nonprofits.comission"
-											).text}</a
-										>
-									</li>
-									<li>
-										<a
-											class="block ml-4 hover:text-primary hover:bg-neutral"
-											href={$t(
-												"navbar.data4good.nonprofits.data_hour"
-											).url}
-											>{$t(
-												"navbar.data4good.nonprofits.data_hour"
-											).text}</a
-										>
-									</li>
-									<li>
-										<a
-											class="block ml-4 hover:text-primary hover:bg-neutral"
-											href={$t(
-												"navbar.data4good.nonprofits.data_dialogues"
-											).url}
-											>{$t(
-												"navbar.data4good.nonprofits.data_dialogues"
-											).text}</a
-										>
-									</li>
-									<li>
-										<a
-											class="block ml-4 hover:text-primary hover:bg-neutral"
-											href={$t(
-												"navbar.data4good.nonprofits.hackathons"
-											).url}
-											>{$t(
-												"navbar.data4good.nonprofits.hackathons"
-											).text}</a
-										>
-									</li>
-								</ul>
-							</ul>
-						</li>
-						<li>
-							<button
-								class="text-lg font-bold hover:text-primary hover:bg-neutral"
-								>{$t("navbar.education").text} <Dropdown_Icon />
-							</button>
-							<ul class="p-2 bg-neutral z-10">
-								<li>
-									<a
-										href={$t("navbar.education.landing")
-											.url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.education.landing")
-											.text}</a
-									>
-								</li>
-								<li>
-									<a
-										href={$t("navbar.education.nonprofits")
-											.url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.education.nonprofits")
-											.text}</a
-									>
-								</li>
-								<ul class="font-normal">
-									<li>
-										<a
-											class="block ml-4 hover:text-primary hover:bg-neutral"
-											href={$t(
-												"navbar.education.nonprofits.workshops"
-											).url}
-											>{$t(
-												"navbar.education.nonprofits.workshops"
-											).text}</a
-										>
-									</li>
-									<li>
-										<a
-											class="block ml-4 hover:text-primary hover:bg-neutral"
-											href={$t(
-												"navbar.education.nonprofits.learning_r"
-											).url}
-											>{$t(
-												"navbar.education.nonprofits.learning_r"
-											).text}</a
-										>
-									</li>
-									<li>
-										<a
-											class="block ml-4 hover:text-primary hover:bg-neutral"
-											href={$t(
-												"navbar.education.nonprofits.experts"
-											).url}
-											>{$t(
-												"navbar.education.nonprofits.experts"
-											).text}</a
-										>
-									</li>
-								</ul>
-							</ul>
-						</li>
-						<li>
-							<button
-								class="text-lg font-bold hover:text-primary hover:bg-neutral"
-								>{$t("navbar.community").text} <Dropdown_Icon />
-							</button>
-							<ul class="p-2 bg-neutral z-10">
-								<li>
-									<a
-										href={$t("navbar.community.landing")
-											.url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.community.landing")
-											.text}</a
-									>
-								</li>
-								<li>
-									<a
-										href={$t(
-											"navbar.community.local_chapters"
-										).url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.community.local_chapters")
-											.text}</a
-									>
-								</li>
-								<li>
-									<a
-										href={$t("navbar.community.founding_lc")
-											.url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t("navbar.community.founding_lc")
-											.text}</a
-									>
-								</li>
-								<li>
-									<a
-										href={$t(
-											"navbar.community.volunteer_journeys"
-										).url}
-										class="text-lg hover:text-primary hover:bg-neutral"
-										>{$t(
-											"navbar.community.volunteer_journeys"
-										).text}</a
-									>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<div class="navbar-center" />
-				<div class="navbar-end ">
-					<ul class="menu menu-horizontal px-1 mr-4 hidden lg:flex">
-						<li>
-							<a
-								href={$t("navbar.local_chapters").url}
-								class="btn-secondary font-bold"
-								>{$t("navbar.local_chapters").text}</a
-							>
-						</li>
-					</ul>
-
-					<div class="flex-none lg:hidden">
-						<label
-							for="my-drawer-3"
-							class="btn btn-square btn-ghost"
+						{$t("navbar.donate").text}
+					</a>
+					<div
+						class="inline-flex items-stretch rounded-md border-neutral-25 border "
+					>
+						<span
+							href="/edit"
+							class="rounded-l-md px-4 py-2 text-sm text-base-content"
 						>
-							<Menu_Icon />
-						</label>
+							{active_language}
+						</span>
+
+						<div class="relative">
+							<button
+								type="button"
+								class="inline-flex h-full items-center justify-center  rounded-r-md border-l border-neutral-25 px-2 hover:bg-neutral-25"
+								on:click={() =>
+									(language_toggle = !language_toggle)}
+							>
+								<span class="sr-only">Language</span>
+								<DropdownIcon height={20} width={20} />
+							</button>
+							{#if language_toggle}
+								<div
+									class="absolute right-0 z-10 mt-2 origin-top-right rounded-md border border-neutral-25 bg-white shadow-lg "
+									role="menu"
+								>
+									<div class="p-2">
+										<button
+											class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-neutral-25 text-base-content"
+											role="menuitem"
+											on:click={() => btnLocale("de")}
+										>
+											Deutsch
+										</button>
+										<button
+											class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-neutral-25 text-base-content"
+											role="menuitem"
+											on:click={() => btnLocale("en")}
+										>
+											English
+										</button>
+									</div>
+								</div>
+							{/if}
+						</div>
+					</div>
+					<div class="block md:hidden">
+						<button
+							class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-5 w-5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M4 6h16M4 12h16M4 18h16"
+								/>
+							</svg>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<slot />
 	</div>
-	<!---------------------------------------- Mobile Menu ------------------------------------->
-	<!-- ------------------------------------------------------------------------------------ -->
-	<div class="drawer-side ">
-		<label for="my-drawer-3" class="drawer-overlay" />
+</header>
+{#if about_toggle}
+	<div
+		class="absolute w-screen  border-b-2 border-neutral-25 bg-white mt-1"
+		style="top: {$header_height}px;"
+	>
+		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="mx-auto block">
+				<ul
+					class="flex items-center gap-6 font-light text-base-content tracking-wide mb-3 mt-4"
+				>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href="{$t('navbar.about.landing').url}</a"
+						>
+							{$t("navbar.about.landing").text}</a
+						>
+					</li>
+					<li>
+						<span class="border-l-2 border-neutral-25" />
+					</li>
 
-		<ul class="menu p-3 w-80 bg-neutral">
-			<div class="collapse collapse-plus">
-				<input
-					type="checkbox"
-					class="peer"
-					bind:checked={about_collapse}
-				/>
-				<div
-					class="collapse-title text-xl font-bold hover:text-primary hover:bg-neutral"
-				>
-					{$t("navbar.about").text}
-				</div>
-				<div class="collapse-content">
-					<ul class="menu w-80 ">
-						<li>
-							<a
-								href={$t("navbar.about.landing").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.about.landing").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.about.org_struct").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.about.org_struct").text}</a
-							>
-						</li>
-						<!-- sub sub org struct -->
-						<li class="pl-4">
-							<a
-								href={$t("navbar.about.org_struct.board").url} class="block ml-4 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.about.org_struct.board").text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t(
-									"navbar.about.org_struct.remote_office"
-								).url} class="block ml-5 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.about.org_struct.remote_office")
-									.text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t(
-									"navbar.about.org_struct.ethics_commission"
-								).url} class="block ml-5 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t(
-									"navbar.about.org_struct.ethics_commission"
-								).text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t("navbar.about.org_struct.data_privacy")
-									.url} class="block ml-5 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.about.org_struct.data_privacy")
-									.text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.about.partners").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.about.partners").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.about.coc").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.about.coc").text}</a
-							>
-						</li>
-					</ul>
-				</div>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.about.org_struct").url}
+						>
+							{$t("navbar.about.org_struct").text}</a
+						>
+					</li>
+					<li>
+						<ArrowRight
+							height={20}
+							width={20}
+							fill={"neutral-25"}
+						/>
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.about.org_struct.board").url}
+						>
+							{$t("navbar.about.org_struct.board").text}
+						</a>
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.about.org_struct.remote_office")
+								.url}
+						>
+							{$t("navbar.about.org_struct.remote_office").text}
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t(
+								"navbar.about.org_struct.ethics_commission"
+							).url}
+						>
+							{$t("navbar.about.org_struct.ethics_commission")
+								.text}
+						</a>
+					</li>
+					<li>
+						<span class="border-l-2 border-neutral-25" />
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.about.coc").url}
+						>
+							{$t("navbar.about.coc").text}
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.about.partners").url}
+						>
+							{$t("navbar.about.partners").text}
+						</a>
+					</li>
+				</ul>
 			</div>
-			<div class="collapse collapse-plus">
-				<input
-					type="checkbox"
-					class="peer"
-					bind:checked={data4good_collapse}
-				/>
-				<div
-					class="collapse-title text-xl font-bold hover:text-primary hover:bg-neutral"
-				>
-					{$t("navbar.data4good").text}
-				</div>
-				<div class="collapse-content">
-					<ul class="menu w-80 ">
-						<li>
-							<a
-								href={$t("navbar.data4good.landing").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.data4good.landing").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.data4good.projects").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.data4good.projects").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.data4good.nonprofits").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.data4good.nonprofits").text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t(
-									"navbar.data4good.nonprofits.comission"
-								).url} class="block ml-4 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.data4good.nonprofits.comission")
-									.text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t(
-									"navbar.data4good.nonprofits.data_hour"
-								).url} class="block ml-4 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.data4good.nonprofits.data_hour")
-									.text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t(
-									"navbar.data4good.nonprofits.data_dialogues"
-								).url} class="block ml-4 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t(
-									"navbar.data4good.nonprofits.data_dialogues"
-								).text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t(
-									"navbar.data4good.nonprofits.hackathons"
-								).url} class="block ml-4 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.data4good.nonprofits.hackathons")
-									.text}</a
-							>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="collapse collapse-plus">
-				<input
-					type="checkbox"
-					class="peer"
-					bind:checked={education_collapse}
-				/>
-				<div
-					class="collapse-title text-xl font-bold hover:text-primary hover:bg-neutral"
-				>
-					{$t("navbar.education").text}
-				</div>
-				<div class="collapse-content">
-					<ul class="menu w-80 ">
-						<li>
-							<a
-								href={$t("navbar.education.landing").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.education.landing").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.education.nonprofits").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer} 
-								>{$t("navbar.education.nonprofits").text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t(
-									"navbar.education.nonprofits.workshops"
-								).url} class="block ml-4 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.education.nonprofits.workshops")
-									.text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t(
-									"navbar.education.nonprofits.learning_r"
-								).url} class="block ml-4 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.education.nonprofits.learning_r")
-									.text}</a
-							>
-						</li>
-						<li class="pl-4">
-							<a
-								href={$t("navbar.education.nonprofits.experts")
-									.url} class="block ml-4 hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.education.nonprofits.experts")
-									.text}</a
-							>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="collapse collapse-plus">
-				<input
-					type="checkbox"
-					class="peer"
-					bind:checked={community_collapse}
-				/>
-				<div
-					class="collapse-title text-xl font-bold hover:text-primary hover:bg-neutral"
-				>
-					{$t("navbar.community").text}
-				</div>
-				<div class="collapse-content">
-					<ul class="menu w-80 ">
-						<li>
-							<a
-								href={$t("navbar.community.landing").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.community.landing").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.community.local_chapters").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.community.local_chapters").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.community.founding_lc").url} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								on:click={closeDrawer}
-								>{$t("navbar.community.founding_lc").text}</a
-							>
-						</li>
-						<li>
-							<a
-								href={$t("navbar.community.volunteer_journeys") 
-									.url}
-								on:click={closeDrawer} class="text-lg font-normal hover:text-primary hover:bg-neutral"
-								>{$t("navbar.community.volunteer_journeys")
-									.text}</a
-							>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<li>
-				<a href={$t("navbar.events").url} on:click={closeDrawer} class="hover:text-primary hover:bg-neutral"
-					>{$t("navbar.events").text}</a
-				>
-			</li>
-			<li> 
-				<a href={$t("navbar.blog").url} on:click={closeDrawer} class="hover:text-primary hover:bg-neutral"
-					>{$t("navbar.blog").text}</a
-				>
-			</li>
-			<li>
-				<a href={$t("navbar.podcast").url} on:click={closeDrawer} class="hover:text-primary hover:bg-neutral"
-					>{$t("navbar.podcast").text}</a
-				>
-			</li>
-			<li>
-				<a href={$t("navbar.newsletter").url} on:click={closeDrawer} class="hover:text-primary hover:bg-neutral"
-					>{$t("navbar.newsletter").text}</a
-				>
-			</li>
-			<li>
-				<a href={$t("navbar.donate").url} on:click={closeDrawer} class="hover:text-primary hover:bg-neutral"
-					>{$t("navbar.donate").text}</a
-				>
-			</li>
-			<li class="pl-2 mt-6">
-				<a
-					href={$t("navbar.local_chapters").url}
-					class="btn-secondary font-bold w-4/5"
-					>{$t("navbar.local_chapters").text}</a
-				>
-			</li>
-			<div class="flex w-full pl-4 my-6">
-				<button class="" on:click={() => btnLocale("de")}> de </button>
-				<div class="divider divider-horizontal mx-1" />
-				<button class="" on:click={() => btnLocale("en")}> en </button>
-			</div>
-		</ul>
-		
+		</div>
 	</div>
-</div>
+{/if}
+{#if data4good_toggle}
+	<div
+		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1"
+		style="top: {$header_height}px;"
+	>
+		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="mx-auto block">
+				<ul
+					class="flex items-center gap-6 font-light text-base-content tracking-wide mb-3 mt-4"
+				>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.data4good.landing").url}
+						>
+							{$t("navbar.data4good.landing").text}</a
+						>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.data4good.projects").url}
+						>
+							{$t("navbar.data4good.projects").text}</a
+						>
+					</li>
+					<li>
+						<span class="border-l-2 border-neutral-25" />
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.data4good.nonprofits").url}
+						>
+							{$t("navbar.data4good.nonprofits").text}
+						</a>
+					</li>
+
+					<li>
+						<ArrowRight
+							height={20}
+							width={20}
+							fill={"neutral-25"}
+						/>
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.data4good.nonprofits.comission")
+								.url}
+						>
+							{$t("navbar.data4good.nonprofits.comission").text}
+						</a>
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.data4good.nonprofits.data_hour")
+								.url}
+						>
+							{$t("navbar.data4good.nonprofits.data_hour").text}
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t(
+								"navbar.data4good.nonprofits.data_dialogues"
+							).url}
+						>
+							{$t("navbar.data4good.nonprofits.data_dialogues")
+								.text}
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.data4good.nonprofits.hackathons")
+								.url}
+						>
+							{$t("navbar.data4good.nonprofits.hackathons").text}
+						</a>
+					</li>
+					<li>
+						<span class="border-l-2 border-neutral-25" />
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{/if}
+{#if education_toggle}
+	<div
+		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1"
+		style="top: {$header_height}px;"
+	>
+		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+			<div class="mx-auto block">
+				<ul
+					class="flex items-center gap-6 font-light text-base-content tracking-wide mb-3 mt-4"
+				>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.education.landing").url}
+						>
+							{$t("navbar.education.landing").text}
+						</a>
+					</li>
+					<li>
+						<span class="border-l-2 border-neutral-25" />
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.education.nonprofits").url}
+						>
+							{$t("navbar.education.nonprofits").text}
+						</a>
+					</li>
+					<li>
+						<ArrowRight
+							height={20}
+							width={20}
+							fill={"neutral-25"}
+						/>
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.education.nonprofits.workshops")
+								.url}
+						>
+							{$t("navbar.education.nonprofits.workshops").text}
+						</a>
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.education.nonprofits.learning_r")
+								.url}
+						>
+							{$t("navbar.education.nonprofits.learning_r").text}
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.education.nonprofits.experts").url}
+						>
+							{$t("navbar.education.nonprofits.experts").text}
+						</a>
+					</li>
+					<li>
+						<span class="border-l-2 border-neutral-25" />
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{/if}
+{#if community_toggle}
+	<div
+		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1"
+		style="top: {$header_height}px;"
+	>
+		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+			<div class="mx-auto block">
+				<ul
+					class="flex items-center gap-6 font-light text-base-content tracking-wide mb-3 mt-4"
+				>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.community.landing").url}
+						>
+							{$t("navbar.community.landing").text}</a
+						>
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.community.local_chapters").url}
+						>
+							{$t("navbar.community.local_chapters").text}
+						</a>
+					</li>
+
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.community.founding_lc").url}
+						>
+							{$t("navbar.community.founding_lc").text}
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition"
+							href={$t("navbar.community.volunteer_journeys").url}
+						>
+							{$t("navbar.community.volunteer_journeys").text}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{/if}

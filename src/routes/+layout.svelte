@@ -13,8 +13,6 @@
 		$locale = "de";
 	}
 
-	
-
 	function handleLocaleChange(event) {
 		if ($page.params.slug != null) {
 			const url = $t($page_key).url + "/" + $page.params.slug;
@@ -28,8 +26,11 @@
 	// Dynamic page title
 	let title;
 	let title_content;
-	$: title_content = ($page.params.slug != null) ? `${$t($page_key).text + " - " + $page.params.slug}` : `${$t($page_key).text}`;
-	$: title = ($page_key === "navbar.home") ? "CorrelAid" : title_content;	
+	$: title_content =
+		$page.params.slug != null
+			? `${$t($page_key).text + " - " + $page.params.slug}`
+			: `${$t($page_key).text}`;
+	$: title = $page_key === "navbar.home" ? "CorrelAid" : title_content;
 </script>
 
 <svelte:head>
@@ -37,17 +38,15 @@
 </svelte:head>
 <!-- Footer on bottom of page if page is too short -->
 <div class="flex flex-col items-center min-h-screen">
-	<Header on:message={handleLocaleChange}>
-		<div id="grow" class="w-screen">
-			<slot />
-		</div>
-		<Footer />
-	</Header>
+	<Header on:message={handleLocaleChange} />
+	<div id="grow" class="w-screen">
+		<slot />
+	</div>
+	<Footer />
 </div>
 
 <style>
 	#grow {
 		flex: 1 1 auto; /*grow vertically*/
-		/* same padding as navbar */
 	}
 </style>
