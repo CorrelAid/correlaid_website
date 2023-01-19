@@ -1,11 +1,10 @@
-import strapi_fetch from '$lib/js/strapi_fetch'
+import directus_fetch from '$lib/js/directus_fetch'
 
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 
-  const data = await strapi_fetch("/posts", "", params);
 
-  return {posts: data};
+  
 
 }

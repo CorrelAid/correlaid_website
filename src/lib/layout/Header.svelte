@@ -1,23 +1,23 @@
 <script>
-	import Dropdown_Icon from "$lib/svg/Dropdown_Icon.svelte";
-	import Menu_Icon from "$lib/svg/Menu_Icon.svelte";
 	import CorrelAid_Logo_1 from "$lib/svg/CorrelAid_Logo_1.svelte";
 	import { t, locale } from "$lib/stores/i18n.js";
+	import { drawer } from "$lib/stores/drawer.js";
 	import { header_height } from "$lib/stores/dims.js";
-
 	import { createEventDispatcher } from "svelte";
-	import CorrelAidLogo from "../svg/CorrelAid_Logo.svelte";
 	import DropdownIcon from "../svg/Dropdown_Icon.svelte";
 	import ArrowRight from "../svg/Arrow_Right.svelte";
+	import MenuIcon from "../svg/Menu_Icon.svelte";
+	import MobileMenu from "./Mobile_Menu.svelte";
 
 	const dispatch = createEventDispatcher();
+
+	console.log($drawer)
 
 	function changeLocale() {
 		dispatch("message", {
 			locale: $locale,
 		});
 	}
-
 	function btnLocale(lc) {
 		$locale = lc;
 		active_language = lc;
@@ -26,25 +26,16 @@
 		changeLocale();
 	}
 
-	let drawer = false;
-	let about_collapse = false;
-	let data4good_collapse = false;
-	let education_collapse = false;
-	let community_collapse = false;
-
-	function closeDrawer() {
-		drawer = false;
-		about_collapse = false;
-		data4good_collapse = false;
-		education_collapse = false;
-		community_collapse = false;
-	}
-
 	let language_toggle = false;
 	let about_toggle = false;
 	let data4good_toggle = false;
 	let education_toggle = false;
 	let community_toggle = false;
+
+	function handle_drawer(){
+		$drawer = !$drawer
+	}
+
 
 	function subnav(btn) {
 		function closeall() {
@@ -101,7 +92,7 @@
 
 <header
 	aria-label="Site Header"
-	class="w-screen  border-b-2 border-neutral-25"
+	class="w-screen  border-b-2 border-neutral-25 z-10"
 	bind:clientHeight={$header_height}
 >
 	<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -112,7 +103,7 @@
 					<CorrelAid_Logo_1 width={100} height={100} />
 				</a>
 			</div>
-			<div class="flex flex-col">
+			<div class="lg:flex flex-col hidden">
 				<div class="flex mb-3 mt-1">
 					<div class="hidden md:block mx-auto">
 						<nav aria-label="Site Nav">
@@ -161,131 +152,105 @@
 							<div
 								class="flex items-center gap-6 text-xl text-base-content "
 							>
-								<div class="relative">
-									<button
-										class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
-										on:click={() => subnav("about")}
-									>
-										{$t("navbar.about").text}
-										<DropdownIcon height={20} width={20} />
-									</button>
-								</div>
+								<button
+									class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+									on:click={() => subnav("about")}
+								>
+									{$t("navbar.about").text}
+									<DropdownIcon height={20} width={20} />
+								</button>
 
-								<div class="relative">
-									<button
-										class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
-										on:click={() => subnav("data4good")}
-									>
-										{$t("navbar.data4good").text}
-										<DropdownIcon height={20} width={20} />
-									</button>
-								</div>
-
-								<div class="relative">
-									<button
-										class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
-										on:click={() => subnav("education")}
-									>
-										{$t("navbar.education").text}
-										<DropdownIcon height={20} width={20} />
-									</button>
-								</div>
-
-								<div class="relative">
-									<button
-										class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
-										on:click={() => subnav("community")}
-									>
-										{$t("navbar.community").text}
-										<DropdownIcon height={20} width={20} />
-									</button>
-								</div>
+								<button
+									class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+									on:click={() => subnav("data4good")}
+								>
+									{$t("navbar.data4good").text}
+									<DropdownIcon height={20} width={20} />
+								</button>
+								<button
+									class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+									on:click={() => subnav("education")}
+								>
+									{$t("navbar.education").text}
+									<DropdownIcon height={20} width={20} />
+								</button>
+								<button
+									class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+									on:click={() => subnav("community")}
+								>
+									{$t("navbar.community").text}
+									<DropdownIcon height={20} width={20} />
+								</button>
 							</div>
 						</nav>
 					</div>
 				</div>
 			</div>
-			<div class="flex items-center gap-4">
-				<div class="sm:flex sm:gap-4">
-					<a
-						class="rounded-md bg-secondary px-4 py-2  text-white shadow"
-						href={$t("navbar.donate").url}
+			<div class="lg:flex items-center hidden gap-4">
+				<a
+					class="rounded-md bg-secondary px-4 py-2  text-white shadow"
+					href={$t("navbar.donate").url}
+				>
+					{$t("navbar.donate").text}
+				</a>
+				<div
+					class="inline-flex items-stretch rounded-md border-neutral-25 border "
+				>
+					<span
+						href="/edit"
+						class="rounded-l-md px-4 py-2 text-sm text-base-content"
 					>
-						{$t("navbar.donate").text}
-					</a>
-					<div
-						class="inline-flex items-stretch rounded-md border-neutral-25 border "
-					>
-						<span
-							href="/edit"
-							class="rounded-l-md px-4 py-2 text-sm text-base-content"
-						>
-							{active_language}
-						</span>
+						{active_language}
+					</span>
 
-						<div class="relative">
-							<button
-								type="button"
-								class="inline-flex h-full items-center justify-center  rounded-r-md border-l border-neutral-25 px-2 hover:bg-neutral-25"
-								on:click={() =>
-									(language_toggle = !language_toggle)}
-							>
-								<span class="sr-only">Language</span>
-								<DropdownIcon height={20} width={20} />
-							</button>
-							{#if language_toggle}
-								<div
-									class="absolute right-0 z-10 mt-2 origin-top-right rounded-md border border-neutral-25 bg-white shadow-lg "
-									role="menu"
-								>
-									<div class="p-2">
-										<button
-											class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-neutral-25 text-base-content"
-											role="menuitem"
-											on:click={() => btnLocale("de")}
-										>
-											Deutsch
-										</button>
-										<button
-											class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-neutral-25 text-base-content"
-											role="menuitem"
-											on:click={() => btnLocale("en")}
-										>
-											English
-										</button>
-									</div>
-								</div>
-							{/if}
-						</div>
-					</div>
-					<div class="block md:hidden">
+					<div class="relative">
 						<button
-							class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+							type="button"
+							class="inline-flex h-full items-center justify-center  rounded-r-md border-l border-neutral-25 px-2 hover:bg-neutral-25"
+							on:click={() =>
+								(language_toggle = !language_toggle)}
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-5 w-5"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M4 6h16M4 12h16M4 18h16"
-								/>
-							</svg>
+							<span class="sr-only">Language</span>
+							<DropdownIcon height={20} width={20} />
 						</button>
+						{#if language_toggle}
+							<div
+								class="absolute right-0 z-10 mt-2 origin-top-right rounded-md border border-neutral-25 bg-white shadow-lg "
+								role="menu"
+							>
+								<div class="p-2">
+									<button
+										class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-neutral-25 text-base-content"
+										role="menuitem"
+										on:click={() => btnLocale("de")}
+									>
+										Deutsch
+									</button>
+									<button
+										class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-neutral-25 text-base-content"
+										role="menuitem"
+										on:click={() => btnLocale("en")}
+									>
+										English
+									</button>
+								</div>
+							</div>
+						{/if}
 					</div>
 				</div>
+			</div>
+			<div class="block lg:hidden">
+				<button class="p-2 transition" on:click={() =>
+					($drawer = !$drawer)}>
+					<MenuIcon height={32} width={32} fill={"neutral-25"} />
+				</button>
 			</div>
 		</div>
 	</div>
 </header>
 {#if about_toggle}
 	<div
-		class="absolute w-screen  border-b-2 border-neutral-25 bg-white mt-1"
+		class="absolute w-screen  border-b-2 border-neutral-25 bg-white mt-1 hidden lg:block"
 		style="top: {$header_height}px;"
 	>
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
@@ -377,7 +342,7 @@
 {/if}
 {#if data4good_toggle}
 	<div
-		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1"
+		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1 hidden lg:block"
 		style="top: {$header_height}px;"
 	>
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
@@ -471,7 +436,7 @@
 {/if}
 {#if education_toggle}
 	<div
-		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1"
+		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1 hidden lg:block"
 		style="top: {$header_height}px;"
 	>
 		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -544,7 +509,7 @@
 {/if}
 {#if community_toggle}
 	<div
-		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1"
+		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1 hidden lg:block"
 		style="top: {$header_height}px;"
 	>
 		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -591,3 +556,5 @@
 		</div>
 	</div>
 {/if}
+
+<MobileMenu />

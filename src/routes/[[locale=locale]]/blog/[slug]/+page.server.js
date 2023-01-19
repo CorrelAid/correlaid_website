@@ -1,16 +1,10 @@
-import { page } from '$app/stores';
-
-import strapi_fetch from '$lib/js/strapi_fetch'
+import directus_fetch from '$lib/js/directus_fetch'
 
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-    const slug = params.slug;
 
-    let data = await strapi_fetch("/posts", `filters[slug][$eq]=${slug}`, params);
 
-    data = data[0]
-
-    return { title: data.attributes.title, text: data.attributes.text };
+  
 
 }
