@@ -8,6 +8,8 @@
 	import ArrowRight from "../svg/Arrow_Right.svelte";
 	import MenuIcon from "../svg/Menu_Icon.svelte";
 	import MobileMenu from "./Mobile_Menu.svelte";
+	import External_Link from "$lib/svg/External_Link.svelte";
+    import ExternalLink from "../svg/External_Link.svelte";
 
 	const dispatch = createEventDispatcher();
 
@@ -488,6 +490,19 @@
 							{$t("navbar.education.nonprofits.experts").text}
 						</a>
 					</li>
+					<li>
+						<span class="border-l border-neutral-25" />
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition inline-flex items-center"
+							href={$t("navbar.education.mentoring")
+								.url}
+						>
+							{$t("navbar.education.mentoring").text} <ExternalLink height={20}
+							width={20}/>
+						</a>
+					</li>
 					
 				</ul>
 			</div>
@@ -535,6 +550,16 @@
 							href={$t("navbar.community.volunteer_journeys").url}
 						>
 							{$t("navbar.community.volunteer_journeys").text}
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition inline-flex items-center"
+							href={$t("navbar.community.tidy_tuesday")
+								.url}
+						>
+							{$t("navbar.community.tidy_tuesday").text} <ExternalLink height={20}
+							width={20}/>
 						</a>
 					</li>
 				</ul>

@@ -10,7 +10,7 @@
   const social_media_height = 23;
 </script>
 
-<footer class="w-screen border-t-2 border-neutral-25">
+<footer class="w-screen border-t border-neutral-25">
   <div class=" flex pt-4">
     <ul
       class="flex items-center gap-6 font-light text-base-content tracking-wide mx-auto"
