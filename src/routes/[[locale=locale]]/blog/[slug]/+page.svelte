@@ -1,6 +1,6 @@
 <script>
   import { page } from "$app/stores";
-  import CkEditor from "$lib/components/CKEditor.svelte";
+  import Html from "$lib/components/Html.svelte";
   import Content from "$lib/components/Content.svelte";
   import { onMount } from "svelte";
   import { page_key } from "$lib/stores/page_key.js";
@@ -15,5 +15,5 @@
 </script>
 
 <Content>
-<CkEditor source={data.text} />
+<Html source={data.translations[0].text} />
 </Content>
