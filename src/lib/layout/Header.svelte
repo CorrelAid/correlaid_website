@@ -263,7 +263,7 @@
 						>
 					</li>
 					<li>
-						<span class="border-l-2 border-neutral-25" />
+						<span class="border-l border-neutral-25" />
 					</li>
 
 					<li>
@@ -312,7 +312,7 @@
 						</a>
 					</li>
 					<li>
-						<span class="border-l-2 border-neutral-25" />
+						<span class="border-l border-neutral-25" />
 					</li>
 
 					<li>
@@ -361,7 +361,7 @@
 						>
 					</li>
 					<li>
-						<span class="border-l-2 border-neutral-25" />
+						<span class="border-l border-neutral-25" />
 					</li>
 
 					<li>
@@ -441,7 +441,7 @@
 						</a>
 					</li>
 					<li>
-						<span class="border-l-2 border-neutral-25" />
+						<span class="border-l border-neutral-25" />
 					</li>
 
 					<li>
