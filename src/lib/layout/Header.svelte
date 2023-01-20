@@ -11,8 +11,6 @@
 
 	const dispatch = createEventDispatcher();
 
-	console.log($drawer)
-
 	function changeLocale() {
 		dispatch("message", {
 			locale: $locale,
@@ -22,7 +20,7 @@
 		$locale = lc;
 		active_language = lc;
 		language_toggle = false;
-		closeDrawer();
+		handle_drawer();
 		changeLocale();
 	}
 
@@ -32,10 +30,9 @@
 	let education_toggle = false;
 	let community_toggle = false;
 
-	function handle_drawer(){
-		$drawer = !$drawer
+	function handle_drawer() {
+		$drawer = !$drawer;
 	}
-
 
 	function subnav(btn) {
 		function closeall() {
@@ -92,10 +89,10 @@
 
 <header
 	aria-label="Site Header"
-	class="w-screen  border-b-2 border-neutral-25 z-10"
+	class="w-screen   z-10 border-b border-neutral-25"
 	bind:clientHeight={$header_height}
 >
-	<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
 		<div class="flex items-center justify-between">
 			<div class="md:flex md:items-center md:gap-12">
 				<a class="block text-teal-600" href={$t("navbar.home").url}>
@@ -240,8 +237,10 @@
 				</div>
 			</div>
 			<div class="block lg:hidden">
-				<button class="p-2 transition" on:click={() =>
-					($drawer = !$drawer)}>
+				<button
+					class="p-2 transition"
+					on:click={() => ($drawer = !$drawer)}
+				>
 					<MenuIcon height={32} width={32} fill={"neutral-25"} />
 				</button>
 			</div>
@@ -249,14 +248,11 @@
 	</div>
 </header>
 {#if about_toggle}
-	<div
-		class="absolute w-screen  border-b-2 border-neutral-25 bg-white mt-1 hidden lg:block"
-		style="top: {$header_height}px;"
-	>
+	<div class="w-screen  border-b border-neutral-25 bg-white hidden lg:block">
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
-					class="flex items-center gap-6 font-light text-base-content tracking-wide mb-3 mt-4"
+					class="flex items-center xl:gap-6 gap-5 font-light text-base-content  mb-3 mt-4 text-sm"
 				>
 					<li>
 						<a
@@ -341,14 +337,11 @@
 	</div>
 {/if}
 {#if data4good_toggle}
-	<div
-		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1 hidden lg:block"
-		style="top: {$header_height}px;"
-	>
+	<div class="w-screen border-b border-neutral-25 bg-white hidden lg:block">
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
-					class="flex items-center gap-6 font-light text-base-content tracking-wide mb-3 mt-4"
+					class="flex items-center xl:gap-6 gap-5 font-light text-base-content mb-3 mt-4 text-sm"
 				>
 					<li>
 						<a
@@ -358,6 +351,7 @@
 							{$t("navbar.data4good.landing").text}</a
 						>
 					</li>
+					
 					<li>
 						<a
 							class="hover:text-primary transition"
@@ -426,23 +420,17 @@
 							{$t("navbar.data4good.nonprofits.hackathons").text}
 						</a>
 					</li>
-					<li>
-						<span class="border-l-2 border-neutral-25" />
-					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 {/if}
 {#if education_toggle}
-	<div
-		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1 hidden lg:block"
-		style="top: {$header_height}px;"
-	>
+	<div class="w-screen border-b border-neutral-25 bg-white hidden lg:block">
 		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
-					class="flex items-center gap-6 font-light text-base-content tracking-wide mb-3 mt-4"
+					class="flex items-center xl:gap-6 gap-5 font-light text-base-content  mb-3 mt-4 text-sm"
 				>
 					<li>
 						<a
@@ -491,6 +479,7 @@
 							{$t("navbar.education.nonprofits.learning_r").text}
 						</a>
 					</li>
+
 					<li>
 						<a
 							class="hover:text-primary transition"
@@ -499,23 +488,18 @@
 							{$t("navbar.education.nonprofits.experts").text}
 						</a>
 					</li>
-					<li>
-						<span class="border-l-2 border-neutral-25" />
-					</li>
+					
 				</ul>
 			</div>
 		</div>
 	</div>
 {/if}
 {#if community_toggle}
-	<div
-		class="absolute w-screen border-b-2 border-neutral-25 bg-white mt-1 hidden lg:block"
-		style="top: {$header_height}px;"
-	>
+	<div class="w-screen border-b border-neutral-25 bg-whitehidden lg:block">
 		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
-					class="flex items-center gap-6 font-light text-base-content tracking-wide mb-3 mt-4"
+					class="flex items-center font-light xl:gap-6 gap-5 text-base-content  mb-3 mt-4 text-sm"
 				>
 					<li>
 						<a
@@ -525,6 +509,7 @@
 							{$t("navbar.community.landing").text}</a
 						>
 					</li>
+					
 
 					<li>
 						<a
@@ -534,7 +519,7 @@
 							{$t("navbar.community.local_chapters").text}
 						</a>
 					</li>
-
+					
 					<li>
 						<a
 							class="hover:text-primary transition"
@@ -543,6 +528,7 @@
 							{$t("navbar.community.founding_lc").text}
 						</a>
 					</li>
+					
 					<li>
 						<a
 							class="hover:text-primary transition"

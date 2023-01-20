@@ -1,16 +1,21 @@
 <script>
-    import {page_key} from '$lib/stores/page_key.js';
-    import { onMount } from 'svelte';
-    import Text from "$lib/components/Text.svelte";
-    import Content from '$lib/components/Content.svelte';
+    import { page_key } from "$lib/stores/page_key.js";
+    import { onMount } from "svelte";
+    import Html from "$lib/components/Html.svelte";
+    import Content from "$lib/components/Content.svelte";
 
-    onMount( () => {
-		$page_key = 'footer.imprint';
-	});
-    
+    onMount(() => {
+        $page_key = "footer.imprint";
+    });
+
     export let data;
-    
+
+    let page;
+    $: page = data.page
+
     const source = "# WIP";
 </script>
 
-<Text text={source} size={"base"}/>
+<Content>
+    <Html source={page} />
+</Content>

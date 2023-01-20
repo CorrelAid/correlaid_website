@@ -7,7 +7,7 @@
   import Linkedin from "../svg/Linkedin.svelte";
   import Mastodon from "../svg/Mastodon.svelte";
 
-  const social_media_height = 30;
+  const social_media_height = 23;
 </script>
 
 <footer class="w-screen border-t-2 border-neutral-25">
