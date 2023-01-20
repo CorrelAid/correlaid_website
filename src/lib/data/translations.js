@@ -93,7 +93,7 @@ export default {
     // Subnav community
     "navbar.community.landing": { "text": "Volunteering with CorrelAid", "url": "/en/community" },
     "navbar.community.local_chapters": { "text": "Local Chapters", "url": "/en/community/local_chapters" },
-    "navbar.community.founding_lc": { "text": "Founding a Local chapters", "url": "/en/community/founding_lc" },
+    "navbar.community.founding_lc": { "text": "Founding a Local Chapter", "url": "/en/community/founding_lc" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/en/community/volunteer_journeys" },
     //
     "navbar.events": { "text": "Events", "url": "/en/events" },

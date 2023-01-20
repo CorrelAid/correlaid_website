@@ -252,7 +252,7 @@
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
-					class="flex items-center xl:gap-6 gap-5 font-light text-base-content  mb-3 mt-4 text-sm"
+					class="flex items-center xl:gap-6 gap-5 font-light text-base-content  mb-3 mt-4 text-sm xl:text-base"
 				>
 					<li>
 						<a
@@ -341,7 +341,7 @@
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
-					class="flex items-center xl:gap-6 gap-5 font-light text-base-content mb-3 mt-4 text-sm"
+					class="flex items-center xl:gap-6 gap-5 font-light text-base-content mb-3 mt-4 text-sm xl:text-base"
 				>
 					<li>
 						<a
@@ -430,7 +430,7 @@
 		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
-					class="flex items-center xl:gap-6 gap-5 font-light text-base-content  mb-3 mt-4 text-sm"
+					class="flex items-center xl:gap-6 gap-5 font-light text-base-content  mb-3 mt-4 text-sm xl:text-base"
 				>
 					<li>
 						<a
@@ -499,7 +499,7 @@
 		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
-					class="flex items-center font-light xl:gap-6 gap-5 text-base-content  mb-3 mt-4 text-sm"
+					class="flex items-center font-light xl:gap-6 gap-5 text-base-content  mb-3 mt-4 text-sm xl:text-base"
 				>
 					<li>
 						<a

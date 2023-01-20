@@ -86,7 +86,7 @@
             id="drawer-sidenav" bind:clientWidth={sidenav_width} in:fly="{{ x: -sidenav_width, duration: 150 }}" out:fly="{{ x: -sidenav_width, duration: 150 }}"
         >
             <nav aria-label="Main Nav" class="flex flex-col pt-7 pl-7">
-                <ul class="text-base-content text-2xl space-y-2">
+                <ul class="text-base-content text-2xl space-y-3">
                     <li>
                         <button
                             class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
@@ -98,7 +98,7 @@
                     </li>
                     {#if about_toggle}
                         <ul
-                            class="font-light text-base-content tracking-wide text-base space-y-1"
+                            class="font-light text-base-content tracking-wide text-base space-y-2"
                         >
                             <li>
                                 <a
@@ -181,7 +181,7 @@
                     </li>
                     {#if data4good_toggle}
                         <ul
-                            class="font-light text-base-content tracking-wide text-base space-y-1"
+                            class="font-light text-base-content tracking-wide text-base space-y-2"
                         >
                             <li>
                                 <a
@@ -269,7 +269,7 @@
                     </li>
                     {#if education_toggle}
                         <ul
-                            class="font-light text-base-content tracking-wide text-base space-y-1"
+                            class="font-light text-base-content tracking-wide text-base space-y-2"
                         >
                             <li>
                                 <a
@@ -337,7 +337,7 @@
                     </li>
                     {#if community_toggle}
                         <ul
-                            class="font-light text-base-content tracking-wide text-base space-y-1"
+                            class="font-light text-base-content tracking-wide text-base space-y-2"
                         >
                             <li>
                                 <a
@@ -382,7 +382,7 @@
                     {/if}
                 </ul>
                 <ul
-                    class="font-light text-base-content tracking-wide text-lg space-y-2 pt-2"
+                    class="font-light text-base-content tracking-wide text-lg space-y-3 pt-3"
                 >
                     <li>
                         <a
