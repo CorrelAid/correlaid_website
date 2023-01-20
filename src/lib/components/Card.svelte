@@ -1,10 +1,8 @@
 <script>
-    import Text from "$lib/components/Text.svelte"
     export let href;
     export let title;
     export let teaser;
     export let image_url;
-    $: console.log(teaser)
 </script>
 
 <article
