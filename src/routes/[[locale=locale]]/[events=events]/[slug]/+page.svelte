@@ -16,5 +16,5 @@
 </script>
 
 <Content>
-  <Text text={data.translations[0].description} size={"base"} />
+  <Text source={data.translations[0].description} size={"base"} />
 </Content>

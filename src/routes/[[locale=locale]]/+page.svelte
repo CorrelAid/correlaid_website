@@ -16,5 +16,5 @@
 </script>
 
 <Content>
-    <Text text={source} size={"base"} />
+    <Text source={source} size={"base"} />
 </Content>
