@@ -33,6 +33,9 @@ module.exports = {
               height: '400px',
               margin: 'auto',
             },
+            h2: {
+              "margin-top": "0px",
+            }
           },
         }
       }

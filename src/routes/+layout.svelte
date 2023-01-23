@@ -40,6 +40,11 @@
 <div class="flex flex-col items-center min-h-screen">
 	<Header on:message={handleLocaleChange} />
 	<div id="grow" class="w-screen">
+		{#if $t($page_key).text}
+			<div class="container mx-auto pb-3 pt-6">
+				<h1 class="font-bold text-3xl">{$t($page_key).text}</h1>
+			</div>
+		{/if}
 		<slot />
 	</div>
 	<Footer />

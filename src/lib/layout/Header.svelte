@@ -196,7 +196,6 @@
 					class="inline-flex items-stretch rounded-md border-neutral-25 border "
 				>
 					<span
-						href="/edit"
 						class="rounded-l-md px-4 py-2 text-sm text-base-content"
 					>
 						{active_language}
@@ -259,7 +258,7 @@
 					<li>
 						<a
 							class="hover:text-primary transition"
-							href="{$t('navbar.about.landing').url}</a"
+							href="{$t('navbar.about.landing').url}"
 						>
 							{$t("navbar.about.landing").text}</a
 						>

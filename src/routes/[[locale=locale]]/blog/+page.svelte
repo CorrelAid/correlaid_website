@@ -17,10 +17,6 @@
 </script>
 
 <Content>
-    <h2 class="text-3xl pb-6 tracking-wide font-light">
-        {$t("navbar.blog").text}
-    </h2>
-
     <div class="grid grid-cols-3 gap-4">
         {#each posts as post, i}
             <Card
