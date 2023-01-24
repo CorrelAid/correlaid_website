@@ -3,9 +3,7 @@
     import { onMount } from 'svelte';
 
     onMount( () => {
-		$page_key = 'navbar.about.landing';
+		$page_key = 'navbar.education.mentoring';
 	});
-    
-    
-    const source = "# WIP";
+
 </script>

@@ -35,7 +35,8 @@ export default {
     "navbar.education.nonprofits.learning_r": { "text": "R Lernen", "url": "/bildung/nonprofits/r_lernen" },
     "navbar.education.nonprofits.experts": { "text": "Expert:innen", "url": "/bildung/nonprofits/expertinnen" },
     // 
-    "navbar.education.mentoring": { "text": "Mentoring", "url": "https://mentoring.correlaid.org/" },
+    "navbar.education.tidy_tuesday": { "text": "Tidy Tuesday", "url": "/education/tidy_tuesday" },
+    "navbar.education.mentoring": { "text": "Mentoring", "url": "/education/mentoring" },
     // 
     "navbar.community": { "text": "Community", "url": null },
     // Subnav community
@@ -43,7 +44,6 @@ export default {
     "navbar.community.local_chapters": { "text": "Local Chapters", "url": "/community/local_chapters" },
     "navbar.community.founding_lc": { "text": "Ein Local Chapter gründen", "url": "/community/lc_gruenden" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/community/volunteer_journeys" },
-    "navbar.community.tidy_tuesday": { "text": "Tidy Tuesday", "url": "https://tidytuesday.correlaid.org/" },
     //
     "navbar.events": { "text": "Veranstaltungen", "url": "/veranstaltungen" },
     "navbar.blog": { "text": "Blog", "url": "/blog" },
@@ -90,7 +90,8 @@ export default {
     "navbar.education.nonprofits.learning_r": { "text": "R Lernen", "url": "/en/education/nonprofits/learning_r" },
     "navbar.education.nonprofits.experts": { "text": "Experts", "url": "/en/education/nonprofits/experts" },
     // 
-    "navbar.education.mentoring": { "text": "Mentoring", "url": "https://mentoring.correlaid.org/" },
+    "navbar.education.tidy_tuesday": { "text": "Tidy Tuesday", "url": "/en/education/tidy_tuesday" },
+    "navbar.education.mentoring": { "text": "Mentoring", "url": "/en/education/mentoring" },
     // 
     "navbar.community": { "text": "Community", "url": null },
     // Subnav community
@@ -98,7 +99,6 @@ export default {
     "navbar.community.local_chapters": { "text": "Local Chapters", "url": "/en/community/local_chapters" },
     "navbar.community.founding_lc": { "text": "Founding a Local Chapter", "url": "/en/community/founding_lc" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/en/community/volunteer_journeys" },
-    "navbar.community.tidy_tuesday": { "text": "Tidy Tuesday", "url": "https://tidytuesday.correlaid.org/" },
     //
     "navbar.events": { "text": "Events", "url": "/en/events" },
     "navbar.blog": { "text": "Blog", "url": "/en/blog" },

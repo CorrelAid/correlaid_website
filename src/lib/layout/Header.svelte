@@ -1,7 +1,7 @@
 <script>
 	import CorrelAid_Logo_1 from "$lib/svg/CorrelAid_Logo_1.svelte";
 	import { t, locale } from "$lib/stores/i18n.js";
-	import { page } from "$app/stores"
+	import { page } from "$app/stores";
 	import { drawer } from "$lib/stores/drawer.js";
 	import { header_height } from "$lib/stores/dims.js";
 	import { createEventDispatcher } from "svelte";
@@ -43,7 +43,7 @@
 		community_toggle = false;
 	}
 
-	$: $page.url && (closeall());
+	$: $page.url && closeall();
 
 	function subnav(btn) {
 		if (btn === "about") {
@@ -192,10 +192,10 @@
 			</div>
 			<div class="lg:flex items-center hidden gap-4">
 				<a
-					class="rounded-md bg-secondary px-4 py-2  text-white shadow"
+					class="rounded-md bg-secondary px-4 py-2  text-white shadow transition inline-flex items-center"
 					href={$t("navbar.donate").url}
 				>
-					{$t("navbar.donate").text}
+					{$t("navbar.donate").text} <ExternalLink height={20} width={20} />
 				</a>
 				<div
 					class="inline-flex items-stretch rounded-md border-neutral-25 border "
@@ -500,10 +500,17 @@
 					<li>
 						<a
 							class="hover:text-primary transition inline-flex items-center"
+							href={$t("navbar.education.tidy_tuesday").url}
+						>
+							{$t("navbar.education.tidy_tuesday").text}
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-primary transition inline-flex items-center"
 							href={$t("navbar.education.mentoring").url}
 						>
 							{$t("navbar.education.mentoring").text}
-							<ExternalLink height={20} width={20} />
 						</a>
 					</li>
 				</ul>
@@ -551,15 +558,6 @@
 							href={$t("navbar.community.volunteer_journeys").url}
 						>
 							{$t("navbar.community.volunteer_journeys").text}
-						</a>
-					</li>
-					<li>
-						<a
-							class="hover:text-primary transition inline-flex items-center"
-							href={$t("navbar.community.tidy_tuesday").url}
-						>
-							{$t("navbar.community.tidy_tuesday").text}
-							<ExternalLink height={20} width={20} />
 						</a>
 					</li>
 				</ul>
