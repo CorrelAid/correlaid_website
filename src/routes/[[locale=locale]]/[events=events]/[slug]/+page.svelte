@@ -14,5 +14,5 @@
   
 </script>
 
-<div class="container mx-auto">  <Text source={data.translations[0].description} size={"base"} />
+<div class="container mx-auto">  <Text source={data.event.translations[0].description} size={"base"} />
 </div>

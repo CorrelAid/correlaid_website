@@ -29,8 +29,8 @@
 	let title;
 	let title_content;
 	$: title_content =
-		$page.params.slug != null
-			? `${$t($page_key).text + " - " + $page.params.slug}`
+		$page.data.title != null
+			? `${$t($page_key).text + " - " + $page.data.title}`
 			: `${$t($page_key).text}`;
 	$: title = $page_key === "navbar.home" ? "CorrelAid" : title_content;
 

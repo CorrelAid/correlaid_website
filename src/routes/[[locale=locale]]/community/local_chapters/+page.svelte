@@ -116,7 +116,7 @@
         }
     });
 
-    $: console.log($locale);
+   
 
     $: if (map) {
         if (map.isStyleLoaded()) {

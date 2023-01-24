@@ -23,6 +23,6 @@ export async function load({ params }) {
 
   const data = await directus_fetch(query)
 
-  return data.Posts[0] 
+  return {post: data.Posts[0], title:  data.Posts[0].translations[0].title}
 
 }

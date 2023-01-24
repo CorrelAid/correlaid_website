@@ -23,8 +23,7 @@ export async function load({ params }) {
 
 
   const data = await directus_fetch(query)
-  console.log(data)
 
-  return data.Events[0] 
+  return {event: data.Events[0], title:  data.Events[0].translations[0].title}
 
 }
