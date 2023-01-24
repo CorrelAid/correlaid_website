@@ -20,8 +20,8 @@ let data;
     }
 
     if(data[Object.keys(data)[0]].length == 0){
-        throw error(500, {
-            message: "No data returned"
+        throw error(404, {
+            message: "No CorrelContent"
         })
     }else{
         return data

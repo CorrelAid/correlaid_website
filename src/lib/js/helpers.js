@@ -47,3 +47,14 @@ export function constructRe(key) {
     }
     return lang
   }
+
+  export function get_locale(params){
+    let lang;
+    if (params.locale) {
+      return params.locale
+    }
+    else {
+      lang = "de-DE"
+    }
+    return "de"
+  }

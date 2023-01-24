@@ -16,8 +16,7 @@
 </script>
 
 <ul />
-<Content>
-    <div class="grid grid-cols-3 gap-4">
+<div class="container mx-auto">    <div class="grid grid-cols-3 gap-4">
     {#each events as event}
         <Card
             href={$t("navbar.events").url + "/" + event.translations[0].slug}
@@ -28,4 +27,4 @@
         />
     {/each}
 </div>
-</Content>
+</div>

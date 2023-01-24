@@ -4,8 +4,10 @@
 	import { goto } from "$app/navigation";
 	import Header from "$lib/layout/Header.svelte";
 	import Footer from "$lib/layout/Footer.svelte";
+	import Html from "$lib/components/Html.svelte";
 	import { t, locale, locales } from "$lib/stores/i18n.js";
 	import { page_key } from "$lib/stores/page_key.js";
+	export let data;
 
 	if ($page.params.locale) {
 		$locale = $page.params.locale;
@@ -31,6 +33,9 @@
 			? `${$t($page_key).text + " - " + $page.params.slug}`
 			: `${$t($page_key).text}`;
 	$: title = $page_key === "navbar.home" ? "CorrelAid" : title_content;
+
+	let content;
+	$: content = data.content;
 </script>
 
 <svelte:head>
@@ -43,6 +48,9 @@
 		{#if $t($page_key).text}
 			<div class="container mx-auto pb-3 pt-6">
 				<h1 class="font-bold text-3xl">{$t($page_key).text}</h1>
+				{#if content}
+					<Html source={content} />
+				{/if}
 			</div>
 		{/if}
 		<slot />

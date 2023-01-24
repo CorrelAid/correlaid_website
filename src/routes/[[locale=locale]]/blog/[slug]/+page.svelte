@@ -14,6 +14,5 @@
   export let data;
 </script>
 
-<Content>
-<Html source={data.translations[0].text} />
+<div class="container mx-auto"><Html source={data.translations[0].text} />
 </Content>

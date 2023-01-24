@@ -16,8 +16,7 @@
     $: posts = data.posts;
 </script>
 
-<Content>
-    <div class="grid grid-cols-3 gap-4">
+<div class="container mx-auto">    <div class="grid grid-cols-3 gap-4">
         {#each posts as post, i}
             <Card
                 href={$t("navbar.blog").url + "/" + post.translations[0].slug}

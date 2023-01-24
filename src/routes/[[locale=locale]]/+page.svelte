@@ -1,7 +1,6 @@
 <script>
     import Hero from "$lib/components/Hero.svelte";
     import Text from "$lib/components/Text.svelte";
-    import Content from "../../lib/components/Content.svelte";
     import { page_key } from "$lib/stores/page_key.js";
     import { onMount } from "svelte";
 
@@ -15,6 +14,6 @@
     const source = "# WIP";
 </script>
 
-<Content>
-    <Text source={source} size={"base"} />
-</Content>
+<div class="container mx-auto">
+    <Text {source} size={"base"} />
+</div>
