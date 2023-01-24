@@ -2,7 +2,6 @@
     import { page_key } from "$lib/stores/page_key.js";
     import { onMount } from "svelte";
     import { t, locale } from "$lib/stores/i18n.js";
-    import Content from "$lib/components/Content.svelte";
     import Card from "$lib/components/Card.svelte";
 
     onMount(() => {
@@ -16,7 +15,8 @@
     $: posts = data.posts;
 </script>
 
-<div class="container mx-auto">    <div class="grid grid-cols-3 gap-4">
+<div class="container mx-auto">
+    <div class="grid grid-cols-3 gap-4">
         {#each posts as post, i}
             <Card
                 href={$t("navbar.blog").url + "/" + post.translations[0].slug}
@@ -26,5 +26,6 @@
                     post.translations[0].title_image.id}
             />
         {/each}
-    </div></Content
->
+    </div>
+</div>
+

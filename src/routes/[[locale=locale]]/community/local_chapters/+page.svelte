@@ -4,7 +4,6 @@
     import { Map, Popup } from "maplibre-gl";
     import { t, locale, locales } from "$lib/stores/i18n.js";
     import lc_coords from "$lib/data/lc_coords.json";
-    import Content from "$lib/components/Content.svelte";
     import "maplibre-gl/dist/maplibre-gl.css";
 
     onMount(() => {

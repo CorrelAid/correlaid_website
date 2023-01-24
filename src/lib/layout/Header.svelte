@@ -1,6 +1,7 @@
 <script>
 	import CorrelAid_Logo_1 from "$lib/svg/CorrelAid_Logo_1.svelte";
 	import { t, locale } from "$lib/stores/i18n.js";
+	import { page } from "$app/stores"
 	import { drawer } from "$lib/stores/drawer.js";
 	import { header_height } from "$lib/stores/dims.js";
 	import { createEventDispatcher } from "svelte";
@@ -8,8 +9,7 @@
 	import ArrowRight from "../svg/Arrow_Right.svelte";
 	import MenuIcon from "../svg/Menu_Icon.svelte";
 	import MobileMenu from "./Mobile_Menu.svelte";
-	import External_Link from "$lib/svg/External_Link.svelte";
-    import ExternalLink from "../svg/External_Link.svelte";
+	import ExternalLink from "../svg/External_Link.svelte";
 
 	const dispatch = createEventDispatcher();
 
@@ -36,13 +36,16 @@
 		$drawer = !$drawer;
 	}
 
+	function closeall() {
+		about_toggle = false;
+		data4good_toggle = false;
+		education_toggle = false;
+		community_toggle = false;
+	}
+
+	$: $page.url && (closeall());
+
 	function subnav(btn) {
-		function closeall() {
-			about_toggle = false;
-			data4good_toggle = false;
-			education_toggle = false;
-			community_toggle = false;
-		}
 		if (btn === "about") {
 			if (about_toggle == true) {
 				closeall();
@@ -88,6 +91,8 @@
 	let active_language = "de";
 	$: active_language = $locale;
 </script>
+
+<svelte:window on:load={() => closeall} />
 
 <header
 	aria-label="Site Header"
@@ -258,7 +263,7 @@
 					<li>
 						<a
 							class="hover:text-primary transition"
-							href="{$t('navbar.about.landing').url}"
+							href={$t("navbar.about.landing").url}
 						>
 							{$t("navbar.about.landing").text}</a
 						>
@@ -352,7 +357,7 @@
 							{$t("navbar.data4good.landing").text}</a
 						>
 					</li>
-					
+
 					<li>
 						<a
 							class="hover:text-primary transition"
@@ -495,14 +500,12 @@
 					<li>
 						<a
 							class="hover:text-primary transition inline-flex items-center"
-							href={$t("navbar.education.mentoring")
-								.url}
+							href={$t("navbar.education.mentoring").url}
 						>
-							{$t("navbar.education.mentoring").text} <ExternalLink height={20}
-							width={20}/>
+							{$t("navbar.education.mentoring").text}
+							<ExternalLink height={20} width={20} />
 						</a>
 					</li>
-					
 				</ul>
 			</div>
 		</div>
@@ -523,7 +526,6 @@
 							{$t("navbar.community.landing").text}</a
 						>
 					</li>
-					
 
 					<li>
 						<a
@@ -533,7 +535,7 @@
 							{$t("navbar.community.local_chapters").text}
 						</a>
 					</li>
-					
+
 					<li>
 						<a
 							class="hover:text-primary transition"
@@ -542,7 +544,7 @@
 							{$t("navbar.community.founding_lc").text}
 						</a>
 					</li>
-					
+
 					<li>
 						<a
 							class="hover:text-primary transition"
@@ -554,11 +556,10 @@
 					<li>
 						<a
 							class="hover:text-primary transition inline-flex items-center"
-							href={$t("navbar.community.tidy_tuesday")
-								.url}
+							href={$t("navbar.community.tidy_tuesday").url}
 						>
-							{$t("navbar.community.tidy_tuesday").text} <ExternalLink height={20}
-							width={20}/>
+							{$t("navbar.community.tidy_tuesday").text}
+							<ExternalLink height={20} width={20} />
 						</a>
 					</li>
 				</ul>
