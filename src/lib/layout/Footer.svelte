@@ -13,7 +13,7 @@
 <footer class="w-screen border-t border-neutral-25">
   <div class=" flex pt-4">
     <ul
-      class="flex items-center gap-6 font-light text-base-content tracking-wide mx-auto"
+      class="flex items-center gap-6 font-light text-base-content  mx-auto"
     >
       <li>
         <a
@@ -21,6 +21,14 @@
           href={$t("footer.imprint").url}
         >
           {$t("footer.imprint").text}
+        </a>
+      </li>
+      <li>
+        <a
+          class="hover:text-primary transition"
+          href={$t("navbar.about.coc").url}
+        >
+          {$t("navbar.about.coc").text}
         </a>
       </li>
       <li>
