@@ -18,17 +18,17 @@ export async function load({ params, url, route, }) {
     let data = {};
 
     const query = `query {
-        Pages(filter: { page_key: {_eq: "navbar.home"}}){
+        Pages(filter: { page_key: {_eq: "${page_key}"}}){
             builder{
                 collection
                 item{
                     ... on buttons{
-                        translations(filter: { languages_code: { code: {_eq : "en-US"}}}){
+                        translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
                             text
                         }
                     }
                      ... on wysiwyg{
-                        translations(filter: { languages_code: { code: {_eq : "en-US"}}}){
+                        translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
                             content
                         }
                     }
@@ -40,12 +40,12 @@ export async function load({ params, url, route, }) {
                             collection
                             item{
                                 ... on buttons{
-                                    translations(filter: { languages_code: { code: {_eq : "en-US"}}}){
+                                    translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
                                         text
                                     }
                                 }
                                 ... on wysiwyg {
-                                    translations(filter: { languages_code: { code: {_eq : "en-US"}}}){
+                                    translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
                                         content
                                     }
                                 }
