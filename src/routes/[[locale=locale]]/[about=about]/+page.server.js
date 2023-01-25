@@ -7,6 +7,6 @@ export async function load({ params }) {
 
    
 
-      return { page_key: 'navbar.about.landing' }
+     
 
 }

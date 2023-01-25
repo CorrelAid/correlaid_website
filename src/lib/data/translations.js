@@ -50,12 +50,11 @@ export default {
     "navbar.podcast": { "text": "Podcast", "url": "/podcast" },
     "navbar.newsletter": { "text": "Newsletter", "url": "/newsletter" },
     "navbar.donate": { "text": "Spenden", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
-    "navbar.local_chapters": { "text": "Finde dein Local Chapter!", "url": "/community/local_chapters" },
     "footer.imprint": { "text": "Impressum", "url": "/impressum" },
     "footer.contact": { "text": "Kontakt", "url": "/contact" },
   },
   en: {
-    "navbar.home": { "text": null, "url": "/en/" },
+    "navbar.home": { "text": null, "url": "/en" },
     "navbar.about": { "text": "About", "url": null },
     // Subnav about
     "navbar.about.landing": { "text": "What is CorrelAid?", "url": "/en/about" },
@@ -105,7 +104,6 @@ export default {
     "navbar.podcast": { "text": "Podcast", "url": "/en/podcast" },
     "navbar.newsletter": { "text": "Newsletter", "url": "/en/newsletter" },
     "navbar.donate": { "text": "Donate", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
-    "navbar.local_chapters": { "text": "Find your local chapter!", "url": "/en/community/local_chapters" },
     "footer.imprint": { "text": "Imprint", "url": "/en/imprint" },
     "footer.contact": { "text": "Contact", "url": "/en/contact" },
   },

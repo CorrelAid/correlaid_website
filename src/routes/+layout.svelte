@@ -5,6 +5,7 @@
 	import Header from "$lib/layout/Header.svelte";
 	import Footer from "$lib/layout/Footer.svelte";
 	import Html from "$lib/components/Html.svelte";
+	import Hero from "$lib/components/Hero.svelte";
 	import { t, locale, locales } from "$lib/stores/i18n.js";
 	import { page_key } from "$lib/stores/page_key.js";
 	export let data;
@@ -35,7 +36,7 @@
 	$: title = $page_key === "navbar.home" ? "CorrelAid" : title_content;
 
 	let content;
-	$: content = data.content;
+	$: content = data.builder;
 </script>
 
 <svelte:head>
@@ -45,14 +46,20 @@
 <div class="flex flex-col items-center min-h-screen">
 	<Header on:message={handleLocaleChange} />
 	<div id="grow" class="w-screen">
-		{#if $t($page_key).text}
-			<div class="container mx-auto pb-3 pt-6">
-				<h1 class="font-bold text-3xl">{$t($page_key).text}</h1>
-				{#if content}
-					<Html source={content} />
+		{#if content}
+			{#each content as section}
+				{#if section.collection == "heros"}
+					<Hero text="test" image_id={section.item.image.id} />
+				{:else if section.collection == "buttons"}
+					<div class="container mx-auto ">
+						<button>test</button>
+					</div>
+				{:else if section.collection == "wysiwyg"}
+					<Html source={section.item.translations[0].content} />
 				{/if}
-			</div>
+			{/each}
 		{/if}
+
 		<slot />
 	</div>
 	<Footer />
