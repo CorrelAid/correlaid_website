@@ -18,17 +18,17 @@ export async function load({ params, url, route, }) {
     let data = {};
 
     const query = `query {
-        Pages(filter: { page_key: {_eq: "${page_key}"}}){
+        Pages(filter: { page_key: {_eq: "navbar.home"}}){
             builder{
                 collection
                 item{
                     ... on buttons{
-                        translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
+                        translations(filter: { languages_code: { code: {_eq : "en-US"}}}){
                             text
                         }
                     }
                      ... on wysiwyg{
-                        translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
+                        translations(filter: { languages_code: { code: {_eq : "en-US"}}}){
                             content
                         }
                     }
@@ -40,11 +40,13 @@ export async function load({ params, url, route, }) {
                             collection
                             item{
                                 ... on buttons{
-                                    translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
-                                        languages_code{
-                                            code
-                                        }
+                                    translations(filter: { languages_code: { code: {_eq : "en-US"}}}){
                                         text
+                                    }
+                                }
+                                ... on wysiwyg {
+                                    translations(filter: { languages_code: { code: {_eq : "en-US"}}}){
+                                        content
                                     }
                                 }
                             }
@@ -55,9 +57,8 @@ export async function load({ params, url, route, }) {
             }
         } 
         }
-      
-      `
 
+      `
 
     data = await directus_fetch(query)
 

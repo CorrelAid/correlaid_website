@@ -33,8 +33,12 @@ module.exports = {
               height: '400px',
               margin: 'auto',
             },
+            h1: {
+              "color": "inherit"
+              
+            },
             h2: {
-              "margin-top": "0px",
+              "color": "inherit"
             }
           },
         }

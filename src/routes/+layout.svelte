@@ -49,13 +49,15 @@
 		{#if content}
 			{#each content as section}
 				{#if section.collection == "heros"}
-					<Hero text="test" image_id={section.item.image.id} />
+					<Hero builder={section.item.builder} image_id={section.item.image.id} />
 				{:else if section.collection == "buttons"}
 					<div class="container mx-auto ">
 						<button>test</button>
 					</div>
 				{:else if section.collection == "wysiwyg"}
+				<div class="container mx-auto">
 					<Html source={section.item.translations[0].content} />
+				</div>
 				{/if}
 			{/each}
 		{/if}
