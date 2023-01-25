@@ -69,3 +69,7 @@
 
 
 }
+
+.mermaid svg {
+  max-width: none !important;
+ }

@@ -38,21 +38,4 @@
     </div>
 </section>
 
-<style>
-    .hero-overlay {
-        background: linear-gradient(
-            45deg,
-            rgba(56, 99, 162, 0.82),
-            rgba(146, 222, 63, 0.82)
-        );
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
 
-    .hero-text :global(h1) {
-        color: white;
-    }
-</style>
