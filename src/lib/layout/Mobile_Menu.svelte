@@ -103,18 +103,9 @@
                             <li>
                                 <a
                                     class="hover:text-primary transition"
-                                    href="{$t('navbar.about.landing').url}</a"
+                                    href="{$t('navbar.about').url}</a"
                                 >
-                                    {$t("navbar.about.landing").text}</a
-                                >
-                            </li>
-
-                            <li>
-                                <a
-                                    class="hover:text-primary transition"
-                                    href={$t("navbar.about.org_struct").url}
-                                >
-                                    {$t("navbar.about.org_struct").text}</a
+                                    {$t("navbar.about").text}</a
                                 >
                             </li>
 
@@ -149,15 +140,6 @@
                                     {$t(
                                         "navbar.about.org_struct.ethics_commission"
                                     ).text}
-                                </a>
-                            </li>
-
-                            <li>
-                                <a
-                                    class="hover:text-primary transition"
-                                    href={$t("navbar.about.coc").url}
-                                >
-                                    {$t("navbar.about.coc").text}
                                 </a>
                             </li>
                             <li>

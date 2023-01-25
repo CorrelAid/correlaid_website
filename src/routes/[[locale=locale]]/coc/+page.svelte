@@ -3,7 +3,7 @@
     import { onMount } from "svelte";
 
     onMount(() => {
-        $page_key = "navbar.about.coc";
+        $page_key = "footer.coc";
     });
 
 </script>

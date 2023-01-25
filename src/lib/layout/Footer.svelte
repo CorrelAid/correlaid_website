@@ -26,9 +26,9 @@
       <li>
         <a
           class="hover:text-primary transition"
-          href={$t("navbar.about.coc").url}
+          href={$t("footer.coc").url}
         >
-          {$t("navbar.about.coc").text}
+          {$t("footer.coc").text}
         </a>
       </li>
       <li>

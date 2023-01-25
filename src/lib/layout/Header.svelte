@@ -157,13 +157,13 @@
 							<div
 								class="flex items-center gap-6 text-xl text-base-content "
 							>
-								<button
+								<a
 									class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
-									on:click={() => subnav("about")}
+									href="{$t("navbar.about").url}"
 								>
 									{$t("navbar.about").text}
-									<DropdownIcon height={20} width={20} />
-								</button>
+									
+						</a>
 
 								<button
 									class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
@@ -249,7 +249,7 @@
 		</div>
 	</div>
 </header>
-{#if about_toggle}
+<!-- {#if about_toggle}
 	<div class="w-screen  border-b border-neutral-25 bg-white hidden lg:block">
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
@@ -264,26 +264,6 @@
 							{$t("navbar.about.landing").text}</a
 						>
 					</li>
-					<li>
-						<span class="border-l border-neutral-25" />
-					</li>
-
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.about.org_struct").url}
-						>
-							{$t("navbar.about.org_struct").text}</a
-						>
-					</li>
-					<li>
-						<ArrowRight
-							height={20}
-							width={20}
-							fill={"neutral-25"}
-						/>
-					</li>
-
 					<li>
 						<a
 							class="hover:text-primary transition"
@@ -314,18 +294,6 @@
 						</a>
 					</li>
 					<li>
-						<span class="border-l border-neutral-25" />
-					</li>
-
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.about.coc").url}
-						>
-							{$t("navbar.about.coc").text}
-						</a>
-					</li>
-					<li>
 						<a
 							class="hover:text-primary transition"
 							href={$t("navbar.about.partners").url}
@@ -337,7 +305,7 @@
 			</div>
 		</div>
 	</div>
-{/if}
+{/if} -->
 {#if data4good_toggle}
 	<div class="w-screen border-b border-neutral-25 bg-white hidden lg:block">
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">

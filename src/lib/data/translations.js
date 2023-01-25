@@ -1,9 +1,8 @@
 export default {
   de: {
     "navbar.home": { "text": null, "url": "/" },
-    "navbar.about": { "text": "Über uns", "url": null },
     // Subnav about
-    "navbar.about.landing": { "text": "Was ist CorrelAid?", "url": "/ueber" },
+    "navbar.about": { "text": "Über uns", "url": "/ueber" },
     "navbar.about.org_struct": { "text": "Organisationsstruktur", "url": "/ueber/organisationsstruktur" },
     // Sub sub nav org struct
     "navbar.about.org_struct.board": { "text": "Vorstand", "url": "/ueber/organisationsstruktur/vorstand" },
@@ -12,7 +11,6 @@ export default {
     "navbar.about.org_struct.data_privacy": { "text": "Datenschutz", "url": "/ueber/organisationsstruktur/datenschutz" },
     // 
     "navbar.about.partners": { "text": "Partner:innen und Förderungen", "url": "/ueber/partner_sponsoren" },
-    "navbar.about.coc": { "text": "Code of Conduct", "url": "/ueber/coc" },
     // 
     "navbar.data4good": { "text": "Data4Good", "url": null },
     // Subnav data4good
@@ -51,13 +49,13 @@ export default {
     "navbar.newsletter": { "text": "Newsletter", "url": "/newsletter" },
     "navbar.donate": { "text": "Spenden", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
     "footer.imprint": { "text": "Impressum", "url": "/impressum" },
+    "footer.coc": { "text": "Code of Conduct", "url": "/coc" },
     "footer.contact": { "text": "Kontakt", "url": "/contact" },
   },
   en: {
     "navbar.home": { "text": null, "url": "/en" },
-    "navbar.about": { "text": "About", "url": null },
     // Subnav about
-    "navbar.about.landing": { "text": "What is CorrelAid?", "url": "/en/about" },
+    "navbar.about": { "text": "About us", "url": "/en/about" },
     "navbar.about.org_struct": { "text": "Organisation Structure", "url": "/en/about/org_struct" },
     // Sub sub nav org struct
     "navbar.about.org_struct.board": { "text": "Board", "url": "/en/about/org_struct/board" },
@@ -66,7 +64,6 @@ export default {
     "navbar.about.org_struct.data_privacy": { "text": "Data Privacy", "url": "/en/about/org_struct/data_privacy" },
     // 
     "navbar.about.partners": { "text": "Partners and Sponsors", "url": "/en/about/partners_sponsors" },
-    "navbar.about.coc": { "text": "Code of Conduct", "url": "/en/about/coc" },
     // 
     "navbar.data4good": { "text": "Data4Good", "url": null },
     // Subnav data4good
@@ -105,6 +102,7 @@ export default {
     "navbar.newsletter": { "text": "Newsletter", "url": "/en/newsletter" },
     "navbar.donate": { "text": "Donate", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
     "footer.imprint": { "text": "Imprint", "url": "/en/imprint" },
+    "footer.coc": { "text": "Code of Conduct", "url": "/coc" },
     "footer.contact": { "text": "Contact", "url": "/en/contact" },
   },
 };
