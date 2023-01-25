@@ -17,7 +17,8 @@ export async function load({ params, url, route, }) {
 
     let data = {};
 
-    const query = `query {
+    if(!params.slug){
+      const query = `query {
         Pages(filter: { page_key: { _eq: "${page_key}" } }) {
           builder {
             collection
@@ -79,6 +80,9 @@ export async function load({ params, url, route, }) {
     data = await directus_fetch(query)
 
     return { builder: data.Pages[0].builder }
+    }
+
+    
 
 
 }

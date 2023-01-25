@@ -4,8 +4,6 @@
     export let builder;
     export let image_id;
     import { header_height } from "$lib/stores/dims.js";
-
-    $: console.log(builder[1].item.builder[0]);
 </script>
 
 <section
