@@ -56,7 +56,7 @@
 					</div>
 				{:else if section.collection == "wysiwyg"}
 				<div class="container mx-auto">
-					<Html source={section.item.translations[0].content} />
+					<Html source={section.item.translations[0].content} options={""}/>
 				</div>
 				{/if}
 			{/each}

@@ -18,46 +18,62 @@ export async function load({ params, url, route, }) {
     let data = {};
 
     const query = `query {
-        Pages(filter: { page_key: {_eq: "${page_key}"}}){
-            builder{
-                collection
-                item{
-                    ... on buttons{
-                        translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
-                            text
-                        }
-                    }
-                     ... on wysiwyg{
-                        translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
-                            content
-                        }
-                    }
-                    ... on heros{
-                        image{
-                            id
-                        }
-                        builder{
-                            collection
-                            item{
-                                ... on buttons{
-                                    translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
-                                        text
-                                    }
-                                }
-                                ... on wysiwyg {
-                                    translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
-                                        content
-                                    }
-                                }
-                            }
-                        }
-                        
-                    }
+        Pages(filter: { page_key: { _eq: "${page_key}" } }) {
+          builder {
+            collection
+            item {
+              ... on buttons {
+                translations(
+                  filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                ) {
+                  text
                 }
+              }
+              ... on wysiwyg {
+                translations(
+                  filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                ) {
+                  content
+                }
+              }
+              ... on heros {
+                image {
+                  id
+                }
+                builder {
+                  collection
+                  item {
+                    ... on button_groups {
+                      builder {
+                        collection
+                        item {
+                          ... on buttons {
+                            color
+                            translations(
+                              filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                            ) {
+                              text
+                            }
+                          }
+                        }
+                      }
+                    }
+                    ... on wysiwyg {
+                      translations(
+                        filter: {
+                          languages_code: { code: { _eq: "${get_lang(params)}" } }
+                        }
+                      ) {
+                        content
+                      }
+                    }
+                  }
+                }
+              }
             }
-        } 
+          }
         }
-
+      }
       `
 
     data = await directus_fetch(query)

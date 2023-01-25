@@ -10,6 +10,7 @@
 	import MenuIcon from "../svg/Menu_Icon.svelte";
 	import MobileMenu from "./Mobile_Menu.svelte";
 	import ExternalLink from "../svg/External_Link.svelte";
+	import LinkButton from "$lib/components/Link_Button.svelte";
 
 	const dispatch = createEventDispatcher();
 
@@ -191,12 +192,7 @@
 				</div>
 			</div>
 			<div class="lg:flex items-center hidden gap-4">
-				<a
-					class="rounded-md bg-secondary px-4 py-2  text-white shadow transition inline-flex items-center"
-					href={$t("navbar.donate").url}
-				>
-					{$t("navbar.donate").text} <ExternalLink height={20} width={20} />
-				</a>
+				<LinkButton text={$t("navbar.donate").text} href={$t("navbar.donate").url} type={"external"} color={"secondary"}/>
 				<div
 					class="inline-flex items-stretch rounded-md border-neutral-25 border "
 				>

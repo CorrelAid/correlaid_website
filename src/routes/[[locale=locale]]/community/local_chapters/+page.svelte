@@ -144,7 +144,7 @@
     }
 </script>
 
-<div class="container mx-auto">    <h1 class="text-2xl py-5">Local Chapters</h1>
+<div class="container mx-auto py-6">    
     <div class="border relative">
         <a href="https://www.maptiler.com" class="absolute left-4 bottom-4 z-10"
             ><img
