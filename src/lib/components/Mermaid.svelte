@@ -3,11 +3,20 @@
     import mermaid from "mermaid";
 
     let diagram;
+    const config = {
+      startOnLoad: true,
+      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'cardinal' },
+      securityLevel: 'loose',
+    };
+
     mermaid.initialize({
             startOnLoad: false,
 
             theme: "forest",
+            config
         });
+    
+
 
     onMount(() => {
 
