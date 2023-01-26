@@ -7,7 +7,7 @@
     import "maplibre-gl/dist/maplibre-gl.css";
 
     onMount(() => {
-        $page_key = "navbar.community.local_chapters";
+        $page_key = "navbar.community.";
     });
 
     let map;

@@ -249,63 +249,6 @@
 		</div>
 	</div>
 </header>
-<!-- {#if about_toggle}
-	<div class="w-screen  border-b border-neutral-25 bg-white hidden lg:block">
-		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="mx-auto block">
-				<ul
-					class="flex items-center xl:gap-6 gap-5 font-light text-base-content  mb-3 mt-4 text-sm xl:text-base"
-				>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.about.landing").url}
-						>
-							{$t("navbar.about.landing").text}</a
-						>
-					</li>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.about.org_struct.board").url}
-						>
-							{$t("navbar.about.org_struct.board").text}
-						</a>
-					</li>
-
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.about.org_struct.remote_office")
-								.url}
-						>
-							{$t("navbar.about.org_struct.remote_office").text}
-						</a>
-					</li>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t(
-								"navbar.about.org_struct.ethics_commission"
-							).url}
-						>
-							{$t("navbar.about.org_struct.ethics_commission")
-								.text}
-						</a>
-					</li>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.about.partners").url}
-						>
-							{$t("navbar.about.partners").text}
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-{/if} -->
 {#if data4good_toggle}
 	<div class="w-screen border-b border-neutral-25 bg-white hidden lg:block">
 		<div class=" flex mx-auto px-4 sm:px-6 lg:px-8">
@@ -313,14 +256,6 @@
 				<ul
 					class="flex items-center xl:gap-6 gap-5 font-light text-base-content mb-3 mt-4 text-sm xl:text-base"
 				>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.data4good.landing").url}
-						>
-							{$t("navbar.data4good.landing").text}</a
-						>
-					</li>
 
 					<li>
 						<a
@@ -330,9 +265,7 @@
 							{$t("navbar.data4good.projects").text}</a
 						>
 					</li>
-					<li>
-						<span class="border-l border-neutral-25" />
-					</li>
+					
 
 					<li>
 						<a
@@ -340,54 +273,6 @@
 							href={$t("navbar.data4good.nonprofits").url}
 						>
 							{$t("navbar.data4good.nonprofits").text}
-						</a>
-					</li>
-
-					<li>
-						<ArrowRight
-							height={20}
-							width={20}
-							fill={"neutral-25"}
-						/>
-					</li>
-
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.data4good.nonprofits.comission")
-								.url}
-						>
-							{$t("navbar.data4good.nonprofits.comission").text}
-						</a>
-					</li>
-
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.data4good.nonprofits.data_hour")
-								.url}
-						>
-							{$t("navbar.data4good.nonprofits.data_hour").text}
-						</a>
-					</li>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t(
-								"navbar.data4good.nonprofits.data_dialogues"
-							).url}
-						>
-							{$t("navbar.data4good.nonprofits.data_dialogues")
-								.text}
-						</a>
-					</li>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.data4good.nonprofits.hackathons")
-								.url}
-						>
-							{$t("navbar.data4good.nonprofits.hackathons").text}
 						</a>
 					</li>
 				</ul>
@@ -402,65 +287,36 @@
 				<ul
 					class="flex items-center xl:gap-6 gap-5 font-light text-base-content  mb-3 mt-4 text-sm xl:text-base"
 				>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.education.landing").url}
-						>
-							{$t("navbar.education.landing").text}
-						</a>
-					</li>
-					<li>
-						<span class="border-l border-neutral-25" />
-					</li>
 
 					<li>
 						<a
 							class="hover:text-primary transition"
-							href={$t("navbar.education.nonprofits").url}
-						>
-							{$t("navbar.education.nonprofits").text}
-						</a>
-					</li>
-					<li>
-						<ArrowRight
-							height={20}
-							width={20}
-							fill={"neutral-25"}
-						/>
-					</li>
-
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.education.nonprofits.workshops")
+							href={$t("navbar.education.workshops")
 								.url}
 						>
-							{$t("navbar.education.nonprofits.workshops").text}
+							{$t("navbar.education.workshops").text}
 						</a>
 					</li>
-
+					
 					<li>
 						<a
 							class="hover:text-primary transition"
-							href={$t("navbar.education.nonprofits.learning_r")
+							href={$t("navbar.education.learning_r")
 								.url}
 						>
-							{$t("navbar.education.nonprofits.learning_r").text}
+							{$t("navbar.education.learning_r").text}
 						</a>
 					</li>
-
+					
 					<li>
 						<a
 							class="hover:text-primary transition"
-							href={$t("navbar.education.nonprofits.experts").url}
+							href={$t("navbar.education.experts").url}
 						>
-							{$t("navbar.education.nonprofits.experts").text}
+							{$t("navbar.education.experts").text}
 						</a>
 					</li>
-					<li>
-						<span class="border-l border-neutral-25" />
-					</li>
+					
 					<li>
 						<a
 							class="hover:text-primary transition inline-flex items-center"
@@ -469,6 +325,7 @@
 							{$t("navbar.education.tidy_tuesday").text}
 						</a>
 					</li>
+					
 					<li>
 						<a
 							class="hover:text-primary transition inline-flex items-center"
@@ -477,33 +334,34 @@
 							{$t("navbar.education.mentoring").text}
 						</a>
 					</li>
+					
+					<li>
+						<a
+							class="hover:text-primary transition inline-flex items-center"
+							href={$t("navbar.education.knowledge_pool").url}
+						>
+							{$t("navbar.education.knowledge_pool").text}
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 {/if}
 {#if community_toggle}
-	<div class="w-screen border-b border-neutral-25 bg-whitehidden lg:block">
+	<div class="w-screen border-b border-neutral-25 bg-whitehidden lg:block min-w-screen-xl">
 		<div class=" flex mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 			<div class="mx-auto block">
 				<ul
 					class="flex items-center font-light xl:gap-6 gap-5 text-base-content  mb-3 mt-4 text-sm xl:text-base"
 				>
-					<li>
-						<a
-							class="hover:text-primary transition"
-							href={$t("navbar.community.landing").url}
-						>
-							{$t("navbar.community.landing").text}</a
-						>
-					</li>
 
 					<li>
 						<a
 							class="hover:text-primary transition"
-							href={$t("navbar.community.local_chapters").url}
+							href={$t("navbar.community.correlaidx").url}
 						>
-							{$t("navbar.community.local_chapters").text}
+							{$t("navbar.community.correlaidx").text}
 						</a>
 					</li>
 
