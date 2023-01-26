@@ -79,9 +79,9 @@
 	class="w-screen   z-10 border-b border-neutral-25"
 	bind:clientHeight={$header_height}
 >
-	<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
-		<div class="flex items-center justify-between lg:grid grid-cols-10">
-			<div class="md:flex md:items-center md:gap-12  col-span-2">
+	<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
+		<div class="flex items-center justify-between xl:grid grid-cols-10">
+			<div class="flex items-center gap-12  col-span-2">
 				<a
 					class="block text-teal-600 mx-auto"
 					href={$t("navbar.home").url}
@@ -90,9 +90,9 @@
 					<CorrelAid_Logo_1 width={100} height={100} />
 				</a>
 			</div>
-			<div class="lg:flex flex-col hidden col-span-6">
+			<div class="xl:block flex-col hidden col-span-6">
 				<div class="flex mb-3 mt-1">
-					<div class="hidden md:block mx-auto">
+					<div class="mx-auto">
 						<nav aria-label="Site Nav">
 							<ul
 								class="flex items-center gap-6 font-light text-base-content tracking-wide"
@@ -118,8 +118,8 @@
 					</div>
 				</div>
 
-				<div class="md:flex md:items-center md:gap-12 mx-auto">
-					<div class="hidden md:block">
+				<div class="flex items-center gap-12 mx-auto">
+					<div class="hidden xl:block mx-auto">
 						<nav aria-label="Site Nav">
 							<div
 								class="flex items-center gap-6 text-xl text-base-content "
@@ -151,7 +151,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="lg:flex items-center hidden gap-4 mx-auto col-span-2">
+			<div class="xl:flex items-center hidden gap-4 mx-auto col-span-2">
 				<LinkButton
 					text={$t("navbar.donate").text}
 					href={$t("navbar.donate").url}
@@ -203,7 +203,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="block lg:hidden">
+			<div class="block xl:hidden">
 				<button
 					class="p-2 transition"
 					on:click={() => ($drawer = !$drawer)}
@@ -216,13 +216,13 @@
 </header>
 {#if data4good_toggle}
 	<div
-		class="w-screen hidden absolute z-20 lg:block"
+		class="w-screen hidden absolute z-20 xl:block"
 		style="top: {$header_height + 1}px"
 		on:mouseleave={closeall}
 	>
-		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
+		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
 			<div
-				class="px-4 sm:px-6 lg:px-8 items-center justify-between grid grid-cols-10 "
+				class="px-4 sm:px-6 xl:px-8 items-center justify-between grid grid-cols-10 "
 			>
 				<div class="col-span-2" />
 				<div class=" col-span-6">
@@ -246,13 +246,13 @@
 {/if}
 {#if education_toggle}
 	<div
-		class="w-screen hidden absolute z-20 lg:block"
+		class="w-screen hidden absolute z-20 xl:block"
 		style="top: {$header_height + 1}px"
 		on:mouseleave={closeall}
 	>
-		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
+		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
 			<div
-				class="px-4 sm:px-6 lg:px-8 items-center justify-between grid grid-cols-10 "
+				class="px-4 sm:px-6 xl:px-8 items-center justify-between grid grid-cols-10 "
 			>
 				<div class="col-span-2" />
 				<div class=" col-span-6">
@@ -288,13 +288,13 @@
 {/if}
 {#if community_toggle}
 	<div
-		class="w-screen hidden absolute z-20 lg:block"
+		class="w-screen hidden absolute z-20 xl:block"
 		style="top: {$header_height + 1}px"
 		on:mouseleave={closeall}
 	>
-		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
+		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
 			<div
-				class="px-4 sm:px-6 lg:px-8 items-center justify-between grid grid-cols-10 "
+				class="px-4 sm:px-6 xl:px-8 items-center justify-between grid grid-cols-10 "
 			>
 				<div class="col-span-2" />
 				<div class=" col-span-6">

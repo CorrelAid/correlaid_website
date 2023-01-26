@@ -15,7 +15,7 @@
     />
 
     <div
-        class="absolute m-auto w-screen-sm left-0 top-1/4 lg:top-2/4 lg:left-1/4"
+        class="absolute m-auto w-screen-sm left-0 top-1/4 xl:top-2/4 xl:left-1/4"
     >
         <div class="">
             {#if builder}

@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
+    screens: {
+      'xl': '1281px',
+    },
     extend: {
       fontFamily: {
         'sans': ["Roboto"],
