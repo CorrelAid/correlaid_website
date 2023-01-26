@@ -4,7 +4,7 @@
     import Text from "$lib/components/Text.svelte";
 
     onMount( () => {
-		$page_key = 'navbar.data4good.landing';
+		$page_key = 'navbar.data4good';
 	});
     
     

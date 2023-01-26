@@ -21,7 +21,7 @@ export default {
     "navbar.education.tidy_tuesday": { "text": "Tidy Tuesday", "url": "/bildung/tidy_tuesday" },
     "navbar.education.mentoring": { "text": "Mentoring", "url": "/bildung/mentoring" },
     // 
-    "navbar.community": { "text": "Community", "url": null },
+    "navbar.community": { "text": "Community", "url": "/community" },
     // Subnav community
     "navbar.community.correlaidx": { "text": "CorrelAidX", "url": "/community/correlaidx" },
     "navbar.community.founding_lc": { "text": "Ein Local Chapter gründen", "url": "/community/lc_gruenden" },
