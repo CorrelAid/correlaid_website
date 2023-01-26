@@ -36,6 +36,7 @@ export async function load({ params, url, route, }) {
                 ) {
                   content
                 }
+                width
               }
               ... on heros {
                 image {
@@ -67,6 +68,7 @@ export async function load({ params, url, route, }) {
                       ) {
                         content
                       }
+                      width
                     }
                   }
                 }

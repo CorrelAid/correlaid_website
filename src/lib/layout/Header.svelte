@@ -18,7 +18,6 @@
 	let education_toggle = false;
 	let community_toggle = false;
 	let active_language = "de";
-	
 
 	const dispatch = createEventDispatcher();
 
@@ -125,10 +124,28 @@
 							<div
 								class="flex items-center gap-6 text-xl text-base-content "
 							>
-							<NavLink href={$t("navbar.about").url} text={$t("navbar.about").text}/>
-							<NavLinkButton href={$t("navbar.data4good").url} text={$t("navbar.data4good").text} category={"data4good"} on:message={handle_dropdown}/>
-							<NavLinkButton href={$t("navbar.education").url} text={$t("navbar.education").text} category={"education"} on:message={handle_dropdown}/>
-							<NavLinkButton href={$t("navbar.community").url} text={$t("navbar.community").text} category={"community"} on:message={handle_dropdown}/>								
+								<NavLink
+									href={$t("navbar.about").url}
+									text={$t("navbar.about").text}
+								/>
+								<NavLinkButton
+									href={$t("navbar.data4good").url}
+									text={$t("navbar.data4good").text}
+									category={"data4good"}
+									on:message={handle_dropdown}
+								/>
+								<NavLinkButton
+									href={$t("navbar.education").url}
+									text={$t("navbar.education").text}
+									category={"education"}
+									on:message={handle_dropdown}
+								/>
+								<NavLinkButton
+									href={$t("navbar.community").url}
+									text={$t("navbar.community").text}
+									category={"community"}
+									on:message={handle_dropdown}
+								/>
 							</div>
 						</nav>
 					</div>
@@ -210,7 +227,7 @@
 				<div class="col-span-2" />
 				<div class=" col-span-6">
 					<ul
-						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x border-neutral-25 rounded-b"
+						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x border-neutral-25 rounded-b  "
 					>
 						<SubnavLink
 							href={$t("navbar.data4good.projects").url}
@@ -240,7 +257,7 @@
 				<div class="col-span-2" />
 				<div class=" col-span-6">
 					<ul
-						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x border-neutral-25 rounded-b"
+						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x   border-neutral-25 rounded-b"
 					>
 						<SubnavLink
 							href={$t("navbar.education.workshops").url}

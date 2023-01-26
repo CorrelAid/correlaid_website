@@ -32,16 +32,16 @@ module.exports = {
         DEFAULT: {
           css: {
             img: {
-              width: '600px',
-              height: '400px',
-              margin: 'auto',
+              // width: '820px',
+              // "max-height": '460px',
+              // margin: 'auto',
             },
             h1: {
-              "color": "inherit"
+              // "color": "inherit"
               
             },
             h2: {
-              "color": "inherit"
+              // "color": "inherit"
             }
           },
         }
