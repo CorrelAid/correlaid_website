@@ -3,6 +3,7 @@
 	import { page } from "$app/stores";
 	import { goto } from "$app/navigation";
 	import Header from "$lib/layout/Header.svelte";
+	import { header_height } from "$lib/stores/dims.js";
 	import Footer from "$lib/layout/Footer.svelte";
 	import { drawer } from "$lib/stores/drawer.js";
 	import Html from "$lib/components/Html.svelte";
@@ -47,7 +48,8 @@
 <div class="flex flex-col items-center min-h-screen" style="{$drawer ? 'max-height: 100vh; overflow-y:hidden' : '' }" >
 	<Header on:message={handleLocaleChange} />
 	<div id="grow" class="w-screen">
-		{#if content}
+		{#if data}
+		{#if content && $header_height}
 			{#each content as section}
 				{#if section.collection == "heros"}
 					<Hero builder={section.item.builder} image_id={section.item.image.id} />
@@ -61,6 +63,7 @@
 				</div>
 				{/if}
 			{/each}
+		{/if}
 		{/if}
 
 		<slot />
