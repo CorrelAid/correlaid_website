@@ -4,7 +4,7 @@
     import Text from "$lib/components/Text.svelte";
 
     onMount( () => {
-		$page_key = 'navbar.education.nonprofits.experts';
+		$page_key = 'navbar.education.experts';
 	});
     
     

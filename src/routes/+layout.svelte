@@ -4,6 +4,7 @@
 	import { goto } from "$app/navigation";
 	import Header from "$lib/layout/Header.svelte";
 	import Footer from "$lib/layout/Footer.svelte";
+	import { drawer } from "$lib/stores/drawer.js";
 	import Html from "$lib/components/Html.svelte";
 	import Hero from "$lib/components/Hero.svelte";
 	import { t, locale, locales } from "$lib/stores/i18n.js";
@@ -43,7 +44,7 @@
 	<title>{title}</title>
 </svelte:head>
 <!-- Footer on bottom of page if page is too short -->
-<div class="flex flex-col items-center min-h-screen">
+<div class="flex flex-col items-center min-h-screen" style="{$drawer ? 'max-height: 100vh; overflow-y:hidden' : '' }" >
 	<Header on:message={handleLocaleChange} />
 	<div id="grow" class="w-screen">
 		{#if content}
