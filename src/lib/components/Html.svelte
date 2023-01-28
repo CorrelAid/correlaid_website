@@ -4,7 +4,7 @@
     export let width;
     let style = ""
     if (width == "text"){
-        style="max-width: 700px;"
+        style="max-width: 800px;"
     }
     
 </script>

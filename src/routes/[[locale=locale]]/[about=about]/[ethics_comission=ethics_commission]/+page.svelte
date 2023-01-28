@@ -4,7 +4,7 @@
     import Text from "$lib/components/Text.svelte";
 
     onMount( () => {
-		$page_key = 'navbar.about.org_struct.ethics_commission';
+		$page_key = 'navbar.about.ethics_commission';
 	});
     
     const source = "# WIP";

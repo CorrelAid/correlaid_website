@@ -1,12 +1,11 @@
-import { ACCESS_TOKEN } from '$env/static/private';
-import { API_URL } from '$env/static/private';
+import { PUBLIC_API_URL } from '$env/static/public';
 import { error } from '@sveltejs/kit'
 
 
 
 import { Directus } from '@directus/sdk';
 
-const directus = new Directus(API_URL);
+const directus = new Directus(PUBLIC_API_URL);
 
 async function getDirectusClient() {
 	if (directus.auth.token) return directus;
