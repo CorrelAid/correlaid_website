@@ -10,11 +10,9 @@ export async function load({ params, url, route, }) {
 
     const page_key = find(page_keys,url.pathname)[0]
 
-
-
     let data = {};
 
-    if(!params.slug){
+    if(!params.slug && !url.pathname.startsWith("/files")){
       const query = `query {
         Pages(filter: { page_key: { _eq: "${page_key}" } }) {
           builder {

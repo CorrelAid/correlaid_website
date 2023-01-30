@@ -10,7 +10,6 @@
         color = "bg-primary"
     }
 
-    $: console.log(color);
 </script>
 
 <a
