@@ -3,6 +3,8 @@ import { PUBLIC_API_URL } from '$env/static/public';
 
 export const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
 
+export const getGroup = thePath => thePath.substring(thePath.lastIndexOf('.') + 1)
+
 export function translate(locale, key, vars) {
   // Let's throw some errors if we're trying to use keys/locales that don't exist.
   // We could improve this by using Typescript and/or fallback values.
@@ -75,4 +77,8 @@ export function get_locale(params) {
 
 export function gen_img_url(id, transform="") {
   return `${PUBLIC_API_URL}/assets/${id}?${transform}`
+}
+
+export const find = (v,path) => {
+  return Object.keys(v).filter((k) => v[k].url == path)
 }

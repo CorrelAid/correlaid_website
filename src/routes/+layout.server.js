@@ -1,7 +1,6 @@
 import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang, get_locale } from '$lib/js/helpers'
+import { get_lang, get_locale, find } from '$lib/js/helpers'
 import translations from "$lib/data/translations.js";
-import { page } from '$app/stores';
 
 
 /** @type {import('./$types').PageServerLoad} */
@@ -9,11 +8,9 @@ export async function load({ params, url, route, }) {
 
     const page_keys = translations[`${get_locale(params)}`]
 
-    const find = (v) => {
-        return Object.keys(page_keys).filter((k) => page_keys[k].url == url.pathname)
-    }
+    const page_key = find(page_keys,url.pathname)[0]
 
-    const page_key = find(page_keys)[0]
+
 
     let data = {};
 
