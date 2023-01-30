@@ -1,5 +1,5 @@
 <script>
-	import CorrelAid_Logo_1 from "$lib/svg/CorrelAid_Logo_1.svelte";
+	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
 	import { t, locale } from "$lib/stores/i18n.js";
 	import { page } from "$app/stores";
 	import { drawer } from "$lib/stores/drawer.js";
@@ -30,16 +30,11 @@
 		$locale = lc;
 		active_language = lc;
 		language_toggle = false;
-		handle_drawer();
 		changeLocale();
 	}
 
 	function handle_dropdown(event) {
 		subnav(event.detail.category);
-	}
-
-	function handle_drawer() {
-		$drawer = !$drawer;
 	}
 
 	function closeall() {
@@ -87,7 +82,7 @@
 					href={$t("navbar.home").url}
 				>
 					<span class="sr-only">Home</span>
-					<CorrelAid_Logo_1 width={100} height={100} />
+					<CorrelAid_Logo width={100} height={100} />
 				</a>
 			</div>
 			<div class="xl:block flex-col hidden col-span-6">

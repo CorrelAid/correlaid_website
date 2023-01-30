@@ -1,7 +1,7 @@
 import translations from "$lib/data/translations.js";
 import { PUBLIC_API_URL } from '$env/static/public';
 
-const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
+export const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
 
 export function translate(locale, key, vars) {
   // Let's throw some errors if we're trying to use keys/locales that don't exist.
@@ -35,6 +35,19 @@ export function constructRe(key) {
 
   const re = new RegExp(`^${de}|${en}`);
 
+  return re
+}
+
+export function constructRes(keys) {
+  let str = "";
+  for (var i = 0; i < keys.length; i++) {
+    const en = getLastItem(translate("en", keys[i], {}).url);
+    const de = getLastItem(translate("de", keys[i], {}).url);
+
+    str = str + `${de}|${en}|`
+   }
+  
+  const re = new RegExp(`^${str}`);
   return re
 }
 

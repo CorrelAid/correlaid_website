@@ -48,7 +48,7 @@
 <div class="flex flex-col items-center min-h-screen" style="{$drawer ? 'max-height: 100vh; overflow-y:hidden' : '' }" >
 	<Header on:message={handleLocaleChange} />
 	<div id="grow" class="w-screen">
-		{#if data}
+		
 		{#if content && $header_height}
 			{#each content as section}
 				{#if section.collection == "heros"}
@@ -64,7 +64,7 @@
 				{/if}
 			{/each}
 		{/if}
-		{/if}
+		
 
 		<slot />
 	</div>

@@ -40,8 +40,8 @@ export default {
     "navbar.home": { "text": null, "url": "/en" },
     "navbar.about": { "text": "About us", "url": "/en/about" },
     // Sub nav about
-    "navbar.about.board": { "text": "Board", "url": "/en/about/org_struct/board" },
-    "navbar.about.remote_office": { "text": "Remote Office", "url": "/en/aboutremote_office" },
+    "navbar.about.board": { "text": "Board", "url": "/en/about/board" },
+    "navbar.about.remote_office": { "text": "Remote Office", "url": "/en/about/remote_office" },
     "navbar.about.ethics_commission": { "text": "Ethics Commission", "url": "/en/about/ethics_commission" },
     // 
     "navbar.data4good": { "text": "Data4Good", "url": "/en/data4good" },

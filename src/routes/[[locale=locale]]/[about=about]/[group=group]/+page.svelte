@@ -2,19 +2,22 @@
     import { page_key } from "$lib/stores/page_key.js";
     import { onMount } from "svelte";
     import Text from "$lib/components/Text.svelte";
+    import { page } from "$app/stores";
     import { gen_img_url } from "$lib/js/helpers";
 
     onMount(() => {
-        $page_key = "navbar.about.org_struct.remote_office";
+        $page_key = `navbar.about.${$page.params.group}`;
     });
 
     export let data;
-    let global_administrators;
-    $: global_administrators = data.global_administrators;
-    $: console.log(global_administrators);
+    let group;
+    $: group = data[$page.params.group];
+
 </script>
+
+
 <div class="container mx-auto">
-{#each global_administrators as person}
+{#each group as person}
     
         <img
         class="rounded-full w-20 shadow-lg"
