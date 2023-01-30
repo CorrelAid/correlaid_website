@@ -151,7 +151,7 @@
 					text={$t("navbar.donate").text}
 					href={$t("navbar.donate").url}
 					type={"external"}
-					color={"secondary"}
+					color={`bg-secondary`}
 				/>
 				<div
 					class="inline-flex items-stretch rounded-md border-neutral-25 border "

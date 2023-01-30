@@ -22,8 +22,8 @@
                 {#each builder as section}
                     {#if section.collection == "button_groups"}
                     <div class="fix space-x-2 px-4">
-                        {#each section.item.builder as buttons}
-                            <LinkButton text={buttons.item.translations[0].text} href= {""} color={buttons.item.color}/>
+                        {#each section.item.builder as button}
+                            <LinkButton text={button.item.translations[0].text} href= {""} color={`bg-${button.item.color}`}/>
                         {/each}
                     </div>
                     {:else if section.collection == "wysiwyg"}
