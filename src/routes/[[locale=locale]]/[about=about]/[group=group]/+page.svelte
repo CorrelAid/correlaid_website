@@ -6,6 +6,7 @@
     import { gen_img_url } from "$lib/js/helpers";
     import { t, locale } from "$lib/stores/i18n.js";
     import translations from "$lib/data/translations.js";
+    import Person from "$lib/components/Person.svelte";
 
     export let data;
     let group_name;
@@ -25,16 +26,19 @@
 </script>
 
 {#if group}
-    <div class="container mx-auto">
+    <div class="container mx-auto flex flex-col gap-y-3 py-8">
         {#each group as person}
-            <img
-                class="rounded-full w-20 shadow-lg"
-                src={gen_img_url(
+            <Person
+                name={person.person.name}
+                img={gen_img_url(
                     person.person.image.id,
                     "fit=cover&width=200&height=200&quality=80"
                 )}
-                alt={person.person.name}
+                position={person.translations[0].position}
+                description={person.translations[0].description}
             />
         {/each}
     </div>
 {/if}
+
+

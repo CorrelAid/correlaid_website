@@ -96,7 +96,7 @@
       href={$t("navbar.community.correlaidx").url}
     >
       <div class="p-4">
-        <div class="w-full flex justify-center">
+        <div class="w-full flex justify-center relative ">
           <CorrelAidXWhite height={100} width={100} />
         </div>
         <h2 class="text-lg">{$t("navbar.community.correlaidx").text}</h2>
@@ -108,3 +108,4 @@
     </a>
   </div>
 </div>
+
