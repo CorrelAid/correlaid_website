@@ -4,7 +4,7 @@
     export let text;
     export let type = null;
     export let color;
-    let button_type = "bg-primary";
+    let button_type = "bg-secondary";
     $: button_type = `bg-${color}`
 </script>
 <a
