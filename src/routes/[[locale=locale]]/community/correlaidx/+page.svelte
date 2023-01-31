@@ -6,12 +6,17 @@
     import lc_coords from "$lib/data/lc_coords.json";
     import "maplibre-gl/dist/maplibre-gl.css";
 
+
     onMount(() => {
         $page_key = "navbar.community";
     });
 
     let map;
     let mapContainer;
+
+    export let data;
+    let community_manager;
+    $: community_manager = data.community_manager;
 
     onMount(async () => {
         const apiKey = "cYwZssWUHS4exn283ZO4";
@@ -102,9 +107,7 @@
             const lcs = e.features[0];
 
             new Popup()
-                .setHTML(
-                    `<b>${lcs.properties.year}</b>`
-                )
+                .setHTML(`<b>${lcs.properties.year}</b>`)
 
                 .setLngLat(lcs.geometry.coordinates)
                 .addTo(map);
@@ -115,8 +118,6 @@
             map.remove();
         }
     });
-
-   
 
     $: if (map) {
         if (map.isStyleLoaded()) {
@@ -144,17 +145,22 @@
     }
 </script>
 
-<div class="container mx-auto py-6">    
-    <div class="border relative">
+<div class="container mx-auto py-6">
+    <div class=" relative">
         <a href="https://www.maptiler.com" class="absolute left-4 bottom-4 z-10"
             ><img
                 src="https://api.maptiler.com/resources/logo.svg"
                 alt="MapTiler logo"
             /></a
         >
-        <div class="w-full" id="map" bind:this={mapContainer} />
+        <div
+            class="w-full border border-neutral-25"
+            id="map"
+            bind:this={mapContainer}
+        />
     </div>
 </div>
+
 <style>
     #map {
         height: 600px;

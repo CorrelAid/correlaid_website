@@ -23,6 +23,8 @@
     $: if (group_name) {
         group = data[group_name];
     }
+
+    $: console.log(group)
 </script>
 
 {#if group}

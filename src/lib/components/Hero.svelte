@@ -21,21 +21,20 @@
             {#if builder}
                 {#each builder as section}
                     {#if section.collection == "button_groups"}
-                    <div class="fix space-x-2 px-4">
-                        {#each section.item.builder as button}
-                            <LinkButton text={button.item.translations[0].text} href= {""} color={`bg-${button.item.color}`}/>
-                        {/each}
-                    </div>
-                    {:else if section.collection == "wysiwyg"}
-                        <Html
-                            source={section.item.translations[0].content}
-                            options={"prose-h2:text-white prose-h2:text-4xl prose-p:text-white prose-p:text-lg"}
-                        />
+                        <div class="fix space-x-2 px-4">
+                            {#each section.item.builder as button}
+                                <LinkButton
+                                    text={button.item.translations[0].text}
+                                    href={""}
+                                    color={`bg-${button.item.color}`}
+                                />
+                            {/each}
+                        </div>
+                    {:else if section.collection == "text_fields"}
+                        <h2 class="px-4 pb-8 font-bold text-4xl text-white tracking-wide">{section.item.translations[0].text}</h2>
                     {/if}
                 {/each}
             {/if}
         </div>
     </div>
 </section>
-
-
