@@ -7,28 +7,28 @@
 
     const dispatch = createEventDispatcher();
 
+    let menuEnterTimer, menuLeaveTimer;
+
     function dropdown() {
         dispatch("message", {
             category: category,
         });
+    }
+
+    function delay() {
+        menuEnterTimer = setTimeout(function () {
+            dropdown();
+        }, 250);
     }
 </script>
 
 <a
     class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
     {href}
-    on:mouseover={dropdown}
+    on:mouseover={delay}
+    on:mouseleave={() => clearTimeout(menuEnterTimer)}
     on:focus={dropdown}
 >
     {text}
     <DropdownIcon height={20} width={20} />
 </a>
-
-<style>
-    a{
-        transition: 0s background-color;
-    }
-    a:hover { 
-        transition-delay: 1s 3s;
-    }
-</style>

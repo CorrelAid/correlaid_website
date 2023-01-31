@@ -48,7 +48,7 @@
 </svelte:head>
 <!-- Footer on bottom of page if page is too short -->
 <div
-	class="flex flex-col items-center min-h-screen"
+	class="flex flex-col items-center min-h-screen text-neutral"
 	style={$drawer ? "max-height: 100vh; overflow-y:hidden" : ""}
 >
 	<Header on:message={handleLocaleChange} />

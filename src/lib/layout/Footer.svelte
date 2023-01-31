@@ -11,7 +11,7 @@
 </script>
 
 <footer class="w-screen border-t border-neutral-25">
-  <div class=" flex pt-4">
+  <div class=" flex pt-14">
     <ul
       class="flex items-center gap-6 font-light text-base-content  mx-auto"
     >
@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <div class=" flex pb-4">
+  <div class=" flex pb-14">
     <ul
       class="flex items-center gap-6 font-light text-base-content tracking-wide mx-auto"
     >
