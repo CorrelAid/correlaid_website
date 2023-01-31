@@ -14,8 +14,6 @@
 	import { gen_img_url } from "$lib/js/helpers";
 	export let data;
 
-	export const prerender = true;
-
 	if ($page.params.locale) {
 		$locale = $page.params.locale;
 	} else {
