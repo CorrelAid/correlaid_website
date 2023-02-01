@@ -7,7 +7,8 @@ export async function load({ params }) {
 
 
   const query = `query {
-    Events {
+    Events (filter: {date: {
+      _gte: "$NOW"}}){
         date
         language
         type
@@ -23,6 +24,8 @@ export async function load({ params }) {
       }
     }
   }`
+
+  console.log(query)
 
 
   const data = await directus_fetch(query)
