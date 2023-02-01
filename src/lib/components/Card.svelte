@@ -1,29 +1,19 @@
 <script>
     export let image_url;
+    export let i;
 </script>
 
 <article
-    class="overflow-hidden rounded-lg border border-neutral-25 shadow-sm relative h-full"
+    class="overflow-hidden rounded-lg border border-neutral-25 shadow-sm relative"
+    style={i == 0 ? "" : "height:450px"}
 >
     <span
-        class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary"
+        class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
     />
-    <img
-        alt="Office"
-        src={image_url}
-        class="w-full object-cover"
-
-    />
-
-    <div class="p-4 sm:p-6">
+    <div class="aspect-w-16 aspect-h-9">
+        <img alt="Office" src={image_url} class="h-full" />
+    </div>
+    <div class="p-4 sm:p-6 ">
         <slot />
-        
     </div>
 </article>
-
-<style>
-    img {
-        height: 50%;
-        width: 100%;
-    }
-</style>

@@ -5,6 +5,9 @@ module.exports = {
     screens: {
       'xl': '1281px',
     },
+    corePlugins: {
+      aspectRatio: false,
+    },
     extend: {
       fontFamily: {
         'sans': ["Roboto"],
@@ -51,5 +54,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/line-clamp'), require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/line-clamp'), require('@tailwindcss/forms'), require('@tailwindcss/aspect-ratio')],
 };

@@ -17,36 +17,23 @@
     $:console.log(events)
 </script>
 
-<div class="container mx-auto px-4">
-    <div class="gap-6 grid xl:grid-flow-row-dense xl:grid-cols-6 xl:grid-rows-5">
+<div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">
+   
         {#each events as event, i}
-            {#if i == 0}
-            <div class="col-span-full xl:col-span-4 xl:row-span-2">
+           
+           
                 <CalendarCard
                     href={$t("navbar.events").url +
                         "/" +
                         event.translations[0].slug}
                     title={event.translations[0].title}
                     teaser={event.translations[0].teaser}
-                    image_url={gen_img_url(event.translations[0].title_image.id, "fit=cover&width=1000&height=800&quality=100")}
+                    image_url={gen_img_url(event.translations[0].title_image.id, "fit=inside&width=1200&height=675&format=png")}
                     date={event.date}
                     tags={event.translations[0].tags}
                 />
-            </div>
-            {:else}
-            <div class="col-span-full xl:col-span-2">
-                <CalendarCard
-                    href={$t("navbar.events").url +
-                        "/" +
-                        event.translations[0].slug}
-                    title={event.translations[0].title}
-                    teaser={event.translations[0].teaser}
-                    image_url={gen_img_url(event.translations[0].title_image.id, "fit=cover&width=1000&height=500&quality=100")}
-                    date={event.date}
-                    tags={event.translations[0].tags}
-                />
-            </div>
-            {/if}
+           
+            
         {/each}
-    </div>
+    
 </div>

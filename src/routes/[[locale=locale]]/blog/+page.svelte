@@ -2,7 +2,8 @@
     import { page_key } from "$lib/stores/page_key.js";
     import { onMount } from "svelte";
     import { t, locale } from "$lib/stores/i18n.js";
-    import Card from "$lib/components/Card.svelte";
+    import BlogCard from "$lib/components/Blog_Card.svelte";
+    import { gen_img_url } from "$lib/js/helpers";
 
     onMount(() => {
         $page_key = "navbar.blog";
@@ -15,17 +16,24 @@
     $: posts = data.posts;
 </script>
 
-<div class="container mx-auto">
-    <div class="grid grid-cols-3 gap-4">
+<div class="container mx-auto px-4 pb-8">
+    <div class="gap-6 grid xl:grid-cols-3">
         {#each posts as post, i}
-            <Card
-                href={$t("navbar.blog").url + "/" + post.translations[0].slug}
-                title={post.translations[0].title}
-                teaser={post.translations[0].teaser}
-                image_url={"https://6xdv3yb3.directus.app/assets/" +
-                    post.translations[0].title_image.id}
-            />
+            <div class={i == 0 ? "col-span-full" : "col-span-1"}>
+                <BlogCard
+                    {i}
+                    href={$t("navbar.blog").url +
+                        "/" +
+                        post.translations[0].slug}
+                    title={post.translations[0].title}
+                    teaser={post.translations[0].teaser}
+                    tags={post.translations[0].tags}
+                    image_url={gen_img_url(
+                        post.translations[0].title_image.id,
+                        "fit=inside&width=1200&height=675&format=png"
+                    )}
+                />
+            </div>
         {/each}
     </div>
 </div>
-

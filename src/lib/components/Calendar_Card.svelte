@@ -1,7 +1,6 @@
 <script>
-    import Card from "./Card.svelte";
     import Calendar from "$lib/svg/Calendar.svelte";
-    import { t, locale, locales } from "$lib/stores/i18n.js";
+    import { locale } from "$lib/stores/i18n.js";
     export let image_url;
     export let href;
     export let title;
@@ -10,7 +9,7 @@
     export let tags;
 
     const options = {
-        month: "numeric",
+        month: "long",
         day: "numeric",
     };
 
@@ -19,28 +18,60 @@
     $: date = new Date(Date.parse(date));
 </script>
 
-<Card {image_url}>
-    <a {href}>
-        <h3 class="text-lg font-bold text-base-content">
-            {title}
-        </h3>
-    </a>
+<div class="w-full border rounded relative offset" style="">
+    <div class="w-full h-full p-4 bg-white relative top-0 z-1 grid grid-cols-4">
+        <div class="col-span-3 ">
+            <div class=" flex space-x-2 align-center w-40 pb-2">
+                <span class="text-lg font-light"
+                    >{date.toLocaleString($locale, options)}</span
+                >
+                
+                
+            </div>
+            <a {href}>
+                <h3 class="text-xl font-bold text-base-content pb-4">
+                    {title}
+                </h3>
+            </a>
 
-    <div class="py-2 flex space-x-2 align-center w-40">
-        <Calendar height={25} width={25} />
-        <span class="text-md">{date.toLocaleString($locale, options)}</span>
-    </div>
+            <div class="flex gap-x-2 w-full pb-4">
+                {#each tags as tag}
+                    <span
+                        class="text-xs inline-flex items-center font-bold px-3 py-1 bg-secondary text-white rounded"
+                        >{tag}</span
+                    >
+                {/each}
+            </div>
 
-    <div class="flex gap-x-2 w-full">
-        {#each tags as tag}
-            <span
-                class="text-xs inline-flex items-center font-bold px-3 py-1 bg-secondary text-white rounded"
-                >{tag}</span
+            <p
+                class="text-base-content line-clamp-3 pr-4"
             >
-        {/each}
+                {teaser}
+            </p>
+        </div>
+        <div class="aspect-w-16 aspect-h-9 ">
+            <img alt="Office" src={image_url} class="h-full rounded" />
+        </div>
     </div>
+</div>
 
-    <p class="mt-2 text-sm leading-relaxed text-base-content line-clamp-3">
-        {teaser}
-    </p>
-</Card>
+<style>
+    .offset::after {
+        content: "";
+        border-radius: 4px;
+        border-right: 7px solid transparent;
+        background: linear-gradient(to top, #3863a2, #96c342) border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        top: 0px;
+        bottom: 0px;
+        right: -7px;
+        position: absolute;
+        opacity: 1;
+        width: calc(100% - 4px);
+        opacity: 0.8;
+    }
+</style>

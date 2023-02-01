@@ -12,6 +12,7 @@ export async function load({ params }) {
       translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
           title
           text
+          tags
           title_image{id}
           slug
           teaser
