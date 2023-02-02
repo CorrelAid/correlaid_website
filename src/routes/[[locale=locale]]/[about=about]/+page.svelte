@@ -26,7 +26,7 @@
 
 <div class="container mx-auto mb-12 px-4">
   <h2 class="py-4 text-xl font-bold">{organizational_structure.translations[0].title}</h2>
-  <div class="grid xl:grid-cols-3 gap-4">
+  <div class="grid xl:grid-cols-3 gap-8">
     <a
       class="col-span-2 border border-neutral-25 rounded hover:shadow hover:border-primary"
       href={$t("navbar.about.board").url}
