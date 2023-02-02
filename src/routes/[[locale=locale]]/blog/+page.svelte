@@ -32,6 +32,7 @@
                         post.translations[0].title_image.id,
                         "fit=inside&width=1200&height=675&format=png"
                     )}
+                    content_creators={post.content_creators}
                 />
             </div>
         {/each}

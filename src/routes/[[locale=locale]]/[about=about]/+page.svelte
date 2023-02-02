@@ -11,6 +11,8 @@
   });
   export let data;
 
+  
+
   let remote_office;
   $: remote_office = data.remote_office;
   let board;

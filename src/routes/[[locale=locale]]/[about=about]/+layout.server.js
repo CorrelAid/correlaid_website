@@ -45,8 +45,6 @@ export async function load({ params, url, route, }) {
 
   const data = await directus_fetch(query)
 
-
-
   const remote_office = data.Global_Administrators.filter(person => person.group === 'remote_office');
   const board = data.Global_Administrators.filter(person => person.group === 'board');
   const ethics_commission = data.Global_Administrators.filter(person => person.group === 'ethics_commission');

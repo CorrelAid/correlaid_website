@@ -8,7 +8,26 @@ export async function load({ params }) {
 
   const query = `query {
     Posts(filter: { translations: { slug: { _eq: "${params.slug}"}}}) {
-       
+       date_created
+       content_creators{
+        Content_Creators_id{
+            translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
+                position
+                description
+            }
+            person{
+                name
+                website
+                twitter
+                linkedin
+                mastodon
+                github
+                image{
+                    id
+                }
+            }
+        }
+    }
       translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
           title
           text
@@ -19,7 +38,6 @@ export async function load({ params }) {
       }
     }
   }`
-
 
   const data = await directus_fetch(query)
 

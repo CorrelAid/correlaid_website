@@ -1,6 +1,8 @@
 <script>
     export let width;
     export let height;
+
+   
 </script>
 
 <svg
@@ -9,7 +11,7 @@
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    class="ml-1.5 h-4 w-4"
+    class=""
 >
     <path
         stroke-linecap="round"
