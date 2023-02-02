@@ -8,7 +8,7 @@ export async function load({ params }) {
 
   const query = `query {
     Posts(filter: { translations: { slug: { _eq: "${params.slug}"}}}) {
-       
+       date_created
       translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
           title
           text

@@ -13,7 +13,8 @@
     let group;
 
     onMount(() => {
-        const page_keys = translations[`${get_locale($locale)}`];
+        
+        const page_keys = translations[`${get_locale($page.params)}`];
 
         $page_key = find(page_keys, $page.url.pathname)[0];
 
@@ -23,8 +24,6 @@
     $: if (group_name) {
         group = data[group_name];
     }
-
-  
 </script>
 
 {#if group}
@@ -42,5 +41,3 @@
         {/each}
     </div>
 {/if}
-
-

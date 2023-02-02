@@ -11,7 +11,7 @@
    
 </script>
 
-<Card image_url={image_url} i = {i}>
+<Card image_url={image_url} i = {i} href={href}>
     <a {href}>
         <h3 class="text-lg font-bold text-base-content">
             {title}

@@ -22,7 +22,7 @@
 
 <div class="container mx-auto pt-8 px-4">
   <Html source={`<h1>${event.translations[0].title}</h1>`} width={"text"} />
-  <div id="info" class="p-4 border border-neutral-25 rounded">
+  <div id="info" class="p-4 border border-neutral-25 rounded mt-8 mx-auto">
     <p class="flex pb-2">
       <span class="flex my-auto fill-neutral"
         ><Calendar width={20} height={20} /></span
@@ -47,7 +47,7 @@
       </p>
     {/if}
     {#if event.online}
-      <p class="flex pb-2">
+      <p class="flex">
         <span class="flex my-auto fill-neutral"
           ><Headset width={20} height={20} /></span
         > <span class="pl-4 my-auto">Online</span>
@@ -65,6 +65,5 @@
 <style>
   #info {
     max-width: 800px;
-    margin: auto;
   }
 </style>

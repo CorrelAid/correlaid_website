@@ -33,10 +33,10 @@
         -webkit-mask-composite: xor;
         mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
         mask-composite: exclude;
-        top: -10px;
-        right: 10px;
-        bottom: 10px;
-        left: -10px;
+        top: -12px;
+        right: 12px;
+        bottom: 12px;
+        left: -12px;
         position: absolute;
         z-index: 10;
         opacity: 0.8;

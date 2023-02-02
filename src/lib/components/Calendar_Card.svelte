@@ -1,32 +1,31 @@
 <script>
-    import Calendar from "$lib/svg/Calendar.svelte";
     import { locale } from "$lib/stores/i18n.js";
-    import {gen_date} from "$lib/js/helpers.js";
+    import { gen_date } from "$lib/js/helpers.js";
     export let image_url;
     export let href;
     export let title;
     export let teaser;
     export let date;
     export let tags;
-
-    $:date = gen_date(date, $locale)
-    
+    let proc_date;
+    $: proc_date = gen_date(date, $locale);
 </script>
 
 <div class="w-full border rounded relative offset" style="">
     <div class="w-full h-full p-4 bg-white relative top-0 z-1 grid grid-cols-4">
         <div class="col-span-full xl:col-span-3 ">
             <div class=" flex space-x-2 align-center w-40 pb-2">
-                <span class="text-lg font-light"
-                    >{date}</span
-                >
+                <span class="text-xl font-light">{proc_date}</span>
             </div>
 
             <div class="pb-4">
-            <a {href} class="text-xl font-bold text-base-content hover:text-primary transition">
-                {title}
-            </a>
-        </div>
+                <a
+                    {href}
+                    class="text-xl font-bold text-base-content hover:text-primary transition"
+                >
+                    {title}
+                </a>
+            </div>
 
             <div class="flex gap-x-2 w-full pb-4">
                 {#each tags as tag}
@@ -37,7 +36,7 @@
                 {/each}
             </div>
 
-            <p class="text-base-content line-clamp-3 xl:pr-4 pb-4 xl:pb-0">
+            <p class="text-base-content line-clamp-3 xl:pr-4 mb-4 xl:pb-0">
                 {teaser}
             </p>
         </div>
