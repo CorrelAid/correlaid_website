@@ -17,5 +17,5 @@
     {href}
 >
     {text}
-    {#if type == "external"}<ExternalLink height={20} width={20} />{/if}
+    {#if type == "external"}<span class="ml-1.5"><ExternalLink height={20} width={20} /></span>{/if}
 </a>

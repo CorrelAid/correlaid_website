@@ -8,6 +8,17 @@ export async function load({ params }) {
 
   const query = `query {
     Posts {
+      content_creators{
+        Content_Creators_id{
+            translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
+                position
+                description
+            }
+            person{
+                name
+            }
+        }
+    }
        
       translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
           title
@@ -16,6 +27,7 @@ export async function load({ params }) {
           title_image{id}
           slug
           teaser
+          
 
       }
     }

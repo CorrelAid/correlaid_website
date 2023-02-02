@@ -7,7 +7,7 @@
     export let title;
     export let teaser;
     export let tags;
-
+    export let content_creators;
    
 </script>
 
@@ -18,9 +18,13 @@
         </h3>
     </a>
 
-    <div class="py-2 flex space-x-2 align-center w-40">
-       
-    </div>
+    <p class="pt-2 pb-4">
+        {#each content_creators as person, i}
+        
+        {person.Content_Creators_id.person.name}{#if i < (content_creators.length-1)}{", "}  {/if}
+    
+      {/each}
+    </p>
 
     <div class="flex gap-x-2 w-full">
         {#each tags as tag}

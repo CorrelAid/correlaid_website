@@ -13,7 +13,6 @@
     let group;
 
     onMount(() => {
-        
         const page_keys = translations[`${get_locale($page.params)}`];
 
         $page_key = find(page_keys, $page.url.pathname)[0];
@@ -27,7 +26,7 @@
 </script>
 
 {#if group}
-    <div class="container mx-auto flex flex-col gap-y-3 py-8">
+    <div class="container mx-auto flex flex-col gap-y-3 py-8 space-y-8">
         {#each group as person}
             <Person
                 name={person.person.name}
