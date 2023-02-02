@@ -9,6 +9,7 @@ export async function load({ params }) {
   const query = `query {
     Events (filter: {date: {
       _gte: "$NOW"}}){
+        id
         date
         language
         type
@@ -16,7 +17,6 @@ export async function load({ params }) {
         online
       translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
           title
-          slug
           teaser
           location
           title_image{id}
@@ -25,7 +25,7 @@ export async function load({ params }) {
     }
   }`
 
-  console.log(query)
+
 
 
   const data = await directus_fetch(query)

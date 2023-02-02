@@ -53,42 +53,49 @@
 >
 	<Header on:message={handleLocaleChange} />
 	<div id="grow" class="w-screen">
-		{#if content && $header_height}
-			{#each content as section}
-				{#if section.collection == "heros"}
-					<Hero
-						builder={section.item.builder}
-						image_id={section.item.image.id}
-					/>
-				{:else if section.collection == "buttons"}
-					<div class="container mx-auto ">
-						<button>test</button>
-					</div>
-				{:else if section.collection == "wysiwyg"}
-					<div class="container mx-auto">
-						<Html
-							source={section.item.translations[0].content}
-							options={""}
-							width={section.item.width}
+		{#if $header_height}
+			{#if content}
+				{#each content as section}
+					{#if section.collection == "heros"}
+						<Hero
+							builder={section.item.builder}
+							image_id={section.item.image.id}
 						/>
-					</div>
-				{:else if section.collection == "contacts"}
-					<div class="container mx-auto">
-						<Person
-							name={section.item.person.name}
-							img={gen_img_url(
-								section.item.person.image.id,
-								"fit=cover&width=200&height=200&quality=80"
-							)}
-							position={section.item.translations[0].position}
-							description={section.item.translations[0]
-								.description}
-						/>
-					</div>
-				{:else if section.collection == "custom_sections"}
-					<slot />
-				{/if}
-			{/each}
+					{:else if section.collection == "buttons"}
+						<div class="container mx-auto ">
+							<button>test</button>
+						</div>
+					{:else if section.collection == "wysiwyg"}
+						<div class="container mx-auto">
+							<div class="py-10 px-4">
+								<Html
+									source={section.item.translations[0]
+										.content}
+									options={""}
+									width={section.item.width}
+								/>
+							</div>
+						</div>
+					{:else if section.collection == "contacts"}
+						<div class="container mx-auto">
+							<Person
+								name={section.item.person.name}
+								img={gen_img_url(
+									section.item.person.image.id,
+									"fit=cover&width=200&height=200&quality=80"
+								)}
+								position={section.item.translations[0].position}
+								description={section.item.translations[0]
+									.description}
+							/>
+						</div>
+					{:else if section.collection == "custom_sections"}
+						<slot />
+					{/if}
+				{/each}
+			{:else}
+				<slot />
+			{/if}
 		{/if}
 	</div>
 	<Footer />

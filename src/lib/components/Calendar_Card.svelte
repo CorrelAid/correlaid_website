@@ -1,6 +1,7 @@
 <script>
     import Calendar from "$lib/svg/Calendar.svelte";
     import { locale } from "$lib/stores/i18n.js";
+    import {gen_date} from "$lib/js/helpers.js";
     export let image_url;
     export let href;
     export let title;
@@ -8,14 +9,8 @@
     export let date;
     export let tags;
 
-    const options = {
-        month: "long",
-        day: "numeric",
-    };
-
-    $: console.log(tags);
-
-    $: date = new Date(Date.parse(date));
+    $:date = gen_date(date, $locale)
+    
 </script>
 
 <div class="w-full border rounded relative offset" style="">
@@ -23,16 +18,15 @@
         <div class="col-span-full xl:col-span-3 ">
             <div class=" flex space-x-2 align-center w-40 pb-2">
                 <span class="text-lg font-light"
-                    >{date.toLocaleString($locale, options)}</span
+                    >{date}</span
                 >
-                
-                
             </div>
-            <a {href}>
-                <h3 class="text-xl font-bold text-base-content pb-4">
-                    {title}
-                </h3>
+
+            <div class="pb-4">
+            <a {href} class="text-xl font-bold text-base-content hover:text-primary transition">
+                {title}
             </a>
+        </div>
 
             <div class="flex gap-x-2 w-full pb-4">
                 {#each tags as tag}
@@ -43,15 +37,13 @@
                 {/each}
             </div>
 
-            <p
-                class="text-base-content line-clamp-3 xl:pr-4 pb-4 xl:pb-0"
-            >
+            <p class="text-base-content line-clamp-3 xl:pr-4 pb-4 xl:pb-0">
                 {teaser}
             </p>
         </div>
-        <div class="aspect-w-16 aspect-h-9 xl:col-span-1 col-span-full">
+        <a {href} class="aspect-w-16 aspect-h-9 xl:col-span-1 col-span-full">
             <img alt="Office" src={image_url} class="h-full rounded" />
-        </div>
+        </a>
     </div>
 </div>
 
@@ -70,6 +62,7 @@
         bottom: 0px;
         right: -7px;
         position: absolute;
+        z-index: -1;
         opacity: 1;
         width: calc(100% - 4px);
         opacity: 0.8;

@@ -18,7 +18,7 @@
     function delay() {
         menuEnterTimer = setTimeout(function () {
             dropdown();
-        }, 250);
+        }, 110);
     }
 </script>
 

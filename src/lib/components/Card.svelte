@@ -5,7 +5,7 @@
 
 <article
     class="overflow-hidden rounded-lg border border-neutral-25 shadow-sm relative"
-    style={i == 0 ? "" : "height:450px"}
+    style={i == 0 ? "" : "min-height:450px"}
 >
     <span
         class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"

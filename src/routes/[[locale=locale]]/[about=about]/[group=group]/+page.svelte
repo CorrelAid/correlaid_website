@@ -24,7 +24,7 @@
         group = data[group_name];
     }
 
-    $: console.log(group)
+  
 </script>
 
 {#if group}

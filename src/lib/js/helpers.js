@@ -47,8 +47,8 @@ export function constructRes(keys) {
     const de = getLastItem(translate("de", keys[i], {}).url);
 
     str = str + `${de}|${en}|`
-   }
-  
+  }
+
   const re = new RegExp(`^${str}`);
   return re
 }
@@ -75,11 +75,32 @@ export function get_locale(params) {
   return "de"
 }
 
-export function gen_img_url(id, transform="") {
+export function gen_img_url(id, transform = "") {
   return `${PUBLIC_API_URL}/assets/${id}?${transform}`
 }
 
 
-export const find = (v,path) => {
+export const find = (v, path) => {
   return Object.keys(v).filter((k) => v[k].url == path)
+}
+
+export function gen_date(date, locale) {
+  const options = {
+    month: "long",
+    day: "numeric",
+  };
+
+  date = new Date(Date.parse(date));
+
+  return date.toLocaleString(locale, options)
+}
+
+export function gen_time(time, locale) {
+  const options = {
+    hour: "numeric",
+    minute: "numeric"
+  };
+  time = new Date(Date.parse('0000-01-01 ' + time));
+
+  return time.toLocaleTimeString(locale, options)
 }
