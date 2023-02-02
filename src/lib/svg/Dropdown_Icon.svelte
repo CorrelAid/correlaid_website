@@ -3,7 +3,7 @@
 	export let height;
 </script>
 
-<svg {width} {height}
+<svg {width} {height} class="z-0" style="z-index: -1;"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="#3c3c3b"
@@ -14,9 +14,3 @@
         clip-rule="evenodd"
     />
 </svg>
-
-<style>
-    svg:hover{
-        
-    }
-</style>

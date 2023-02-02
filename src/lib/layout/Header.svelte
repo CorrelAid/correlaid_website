@@ -33,6 +33,18 @@
 		changeLocale();
 	}
 
+	let menuEnterTimer, menuLeaveTimer;
+
+	function delay() {
+		menuEnterTimer = setTimeout(function () {
+			lang_dropdown();
+		}, 110);
+	}
+
+	function lang_dropdown() {
+		language_toggle ? (language_toggle = false) : (language_toggle = true);
+	}
+
 	function handle_dropdown(event) {
 		subnav(event.detail.category);
 	}
@@ -64,6 +76,7 @@
 			community_toggle = true;
 		}
 	}
+
 	$: active_language = $locale;
 </script>
 
@@ -165,28 +178,32 @@
 					<div class="relative">
 						<button
 							type="button"
-							class="inline-flex h-full items-center justify-center  rounded-r-md border-l border-neutral-25 px-2 hover:bg-neutral-25"
-							on:click={() =>
-								(language_toggle = !language_toggle)}
+							class="inline-flex h-full items-center justify-center  rounded-r-md border-l border-neutral-25 px-2 z-10"
+							on:mouseover={delay}
+							on:focus={lang_dropdown}
+							on:mouseleave={clearTimeout(menuEnterTimer)}
 						>
 							<span class="sr-only">Language</span>
+
 							<DropdownIcon height={20} width={20} />
 						</button>
 						{#if language_toggle}
 							<div
-								class="absolute right-0 z-10 mt-2 origin-top-right rounded-md border border-neutral-25 bg-white shadow-lg "
+								class="absolute right-0 z-10 mt-1 origin-top-right rounded-md border border-neutral-25 bg-white shadow-lg "
 								role="menu"
+								on:mouseleave={lang_dropdown}
 							>
 								<div class="p-2">
 									<button
-										class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-neutral-25 text-base-content"
+										class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:text-primary
+										primary text-base-content"
 										role="menuitem"
 										on:click={() => btnLocale("de")}
 									>
 										Deutsch
 									</button>
 									<button
-										class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-neutral-25 text-base-content"
+										class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:text-primary text-base-content"
 										role="menuitem"
 										on:click={() => btnLocale("en")}
 									>

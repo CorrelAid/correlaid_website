@@ -11,8 +11,8 @@
     $: proc_date = gen_date(date, $locale);
 </script>
 
-<div class="w-full border rounded relative offset" style="">
-    <div class="w-full h-full p-4 bg-white relative top-0 z-1 grid grid-cols-4">
+<div class="w-full  relative offset-right" style="">
+    <div class="w-full border border-neutral-25 rounded h-full p-4 bg-white relative top-0 z-1 grid grid-cols-4">
         <div class="col-span-full xl:col-span-3 ">
             <div class=" flex space-x-2 align-center w-40 pb-2">
                 <span class="text-xl font-light">{proc_date}</span>
@@ -46,24 +46,3 @@
     </div>
 </div>
 
-<style>
-    .offset::after {
-        content: "";
-        border-radius: 4px;
-        border-right: 7px solid transparent;
-        background: linear-gradient(to top, #3863a2, #96c342) border-box;
-        -webkit-mask: linear-gradient(#fff 0 0) padding-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        top: 0px;
-        bottom: 0px;
-        right: -7px;
-        position: absolute;
-        z-index: -1;
-        opacity: 1;
-        width: calc(100% - 4px);
-        opacity: 0.8;
-    }
-</style>
