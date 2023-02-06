@@ -4,7 +4,7 @@
     export let alt;
 </script>
 <img
-    class="rounded w-16 shadow-lg mx-1"
+    class="rounded w-16 shadow-lg m-1"
     {src}
     {alt}
 />

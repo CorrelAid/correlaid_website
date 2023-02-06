@@ -8,14 +8,14 @@ import _ from "lodash";
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, url, route, }) {
 
-    const page_keys = translations[`${get_locale(params)}`]
+  const page_keys = translations[`${get_locale(params)}`]
 
-    const page_key = find(page_keys,url.pathname)[0]
+  const page_key = find(page_keys, url.pathname)[0]
 
-    let data = {};
+  let data = {};
 
-    if(!params.slug && !url.pathname.startsWith("/files")){
-      const query = `query {
+  if (!params.slug && !url.pathname.startsWith("/files")) {
+    const query = `query {
         Pages(filter: { page_key: { _eq: "${page_key}" } }) {
           builder {
             collection
@@ -132,11 +132,11 @@ export async function load({ params, url, route, }) {
       }
       `
     data = await directus_fetch(query)
-
+    console.log(data)
     return { builder: _.orderBy(data.Pages[0].builder, item => item.item.sort, ["asc"]) }
-    }
+  }
 
-    
+
 
 
 }
