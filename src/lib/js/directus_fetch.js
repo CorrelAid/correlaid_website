@@ -19,7 +19,13 @@ let data;
         })
     }
 
-    
+    if(data[Object.keys(data)[0]].length == 0){
+        throw error(404, {
+            message: "No CorrelContent"
+        })
+    }else{
+        return data
+    }
 
 }
 

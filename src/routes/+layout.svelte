@@ -91,7 +91,7 @@
 							/>
 						</div>
 					{:else if section.collection == "carousel"}
-						<div class="container mx-auto pt-8" >
+						<div class="container mx-auto" >
 							<Carousel data={section.item.builder}/>
 						</div>
 					{:else if section.collection == "custom_sections"}

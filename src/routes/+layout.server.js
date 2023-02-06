@@ -131,8 +131,8 @@ export async function load({ params, url, route, }) {
         }
       }
       `
+      
     data = await directus_fetch(query)
-    console.log(data)
     return { builder: _.orderBy(data.Pages[0].builder, item => item.item.sort, ["asc"]) }
   }
 
