@@ -28,10 +28,31 @@ export async function load({ params, url, route, }) {
                   text
                 }
               }
-
+      
+              ... on carousel {
+                sort
+                builder {
+                  collection
+                  item {
+                    ... on carousel_element {
+                      id
+                      image{
+                        id
+                      }
+                      translations(
+                        filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                      ) {
+                        title
+                        text
+                      }
+                    }
+                  }
+                }
+              }
+      
               ... on custom_sections {
                 sort
-               id
+                id
               }
               ... on wysiwyg {
                 sort
@@ -42,7 +63,7 @@ export async function load({ params, url, route, }) {
                 }
                 width
               }
-
+      
               ... on contacts {
                 sort
                 translations(
@@ -62,7 +83,7 @@ export async function load({ params, url, route, }) {
                   }
                 }
               }
-             
+      
               ... on heros {
                 sort
                 image {
@@ -80,7 +101,11 @@ export async function load({ params, url, route, }) {
                             sort
                             color
                             translations(
-                              filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                              filter: {
+                                languages_code: {
+                                  code: { _eq: "${get_lang(params)}" }
+                                }
+                              }
                             ) {
                               text
                             }

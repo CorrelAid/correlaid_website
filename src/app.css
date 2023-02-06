@@ -72,7 +72,9 @@
 
 }
 
-
+.text_width{
+  margin: auto; max-width: 800px;
+}
 
  .offset-right::after {
   content: "";

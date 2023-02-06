@@ -9,6 +9,7 @@
 	import { drawer } from "$lib/stores/drawer.js";
 	import Html from "$lib/components/Html.svelte";
 	import Hero from "$lib/components/Hero.svelte";
+	import Carousel from "$lib/components/Carousel.svelte";
 	import { t, locale, locales } from "$lib/stores/i18n.js";
 	import { page_key } from "$lib/stores/page_key.js";
 	import { gen_img_url } from "$lib/js/helpers";
@@ -88,6 +89,10 @@
 								description={section.item.translations[0]
 									.description}
 							/>
+						</div>
+					{:else if section.collection == "carousel"}
+						<div class="text_width mx-auto pb-10">
+							<Carousel data={section.item.builder}/>
 						</div>
 					{:else if section.collection == "custom_sections"}
 						<slot />
