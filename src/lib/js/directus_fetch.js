@@ -1,4 +1,4 @@
-import { getDirectusClient } from '$lib/js/directus_client.js';
+import { getDirectusClient } from '$lib/js/directus_client';
 import { error } from '@sveltejs/kit'
 
 
