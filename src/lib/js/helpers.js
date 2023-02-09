@@ -36,8 +36,13 @@ export function constructRe(keys) {
   for (var i = 0; i < keys.length; i++) {
     const en = getLastItem(translate("en", keys[i], {}).url);
     const de = getLastItem(translate("de", keys[i], {}).url);
+    if (i = keys.length) {
+      str = str + `${de}|${en}`
+    }
+    else {
+      str = str + `${de}|${en}|`
+    }
 
-    str = str + `${de}|${en}|`
   }
 
   const re = new RegExp(`^${str}`);
