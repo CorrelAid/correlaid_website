@@ -67,23 +67,4 @@
     </div>
 </div>
 
-<style>
-    .offset::after {
-        content: "";
-        border-radius: 4px;
-        border: 7px solid transparent;
-        background: linear-gradient(to left, #3863a2, #96c342) border-box;
-        -webkit-mask: linear-gradient(#fff 0 0) padding-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        top: -12px;
-        right: 12px;
-        bottom: 12px;
-        left: -12px;
-        position: absolute;
-        z-index: 10;
-        opacity: 0.8;
-    }
-</style>
+

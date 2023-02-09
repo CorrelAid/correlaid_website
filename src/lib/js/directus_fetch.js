@@ -1,6 +1,5 @@
 import { getDirectusClient } from '$lib/js/directus_client.js';
 import { error } from '@sveltejs/kit'
-import { data } from 'autoprefixer';
 
 
 const directus = await getDirectusClient();

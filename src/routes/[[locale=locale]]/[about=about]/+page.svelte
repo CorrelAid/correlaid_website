@@ -2,16 +2,16 @@
   import { page_key } from "$lib/stores/page_key.js";
   import { onMount } from "svelte";
   import { gen_img_url } from "$lib/js/helpers";
-  import { t, locale } from "$lib/stores/i18n.js";
+  import { t} from "$lib/stores/i18n.js";
   import ThumbmailAvatar from "$lib/components/Thumbmail_Avatar.svelte";
   import CorrelAidXWhite from "$lib/svg/CorrelAid_X_White.svelte";
 
   onMount(() => {
     $page_key = "navbar.about";
   });
-  export let data;
-
   
+  /** @type {import('./$types').PageData} */
+  export let data;
 
   let remote_office;
   $: remote_office = data.remote_office;
@@ -23,9 +23,10 @@
   $: ethics_commission = data.ethics_commission;
 </script>
 
-
 <div class="container mx-auto mb-12 px-4">
-  <h2 class="py-4 text-xl font-bold">{organizational_structure.translations[0].title}</h2>
+  <h2 class="py-4 text-xl font-bold">
+    {organizational_structure.translations[0].title}
+  </h2>
   <div class="grid xl:grid-cols-3 gap-8">
     <a
       class="col-span-2 border border-neutral-25 rounded hover:shadow hover:border-primary"
@@ -105,9 +106,7 @@
         <p class="">
           {organizational_structure.translations[0].correlaidx}
         </p>
-        
       </div>
     </a>
   </div>
 </div>
-

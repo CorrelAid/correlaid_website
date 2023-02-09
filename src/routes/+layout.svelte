@@ -2,16 +2,18 @@
 	import "../app.css";
 	import { page } from "$app/stores";
 	import { goto } from "$app/navigation";
-	import Header from "$lib/layout/Header.svelte";
-	import Person from "$lib/components/Person.svelte";
-	import { header_height } from "$lib/stores/dims.js";
-	import Footer from "$lib/layout/Footer.svelte";
-	import { drawer } from "$lib/stores/drawer.js";
-	import Html from "$lib/components/Html.svelte";
-	import Hero from "$lib/components/Hero.svelte";
 	import { t, locale, locales } from "$lib/stores/i18n.js";
 	import { page_key } from "$lib/stores/page_key.js";
 	import { gen_img_url } from "$lib/js/helpers";
+	import { header_height } from "$lib/stores/dims.js";
+	import { drawer } from "$lib/stores/drawer.js";
+	import Header from "$lib/layout/Header.svelte";
+	import Person from "$lib/components/Person.svelte";
+	import Footer from "$lib/layout/Footer.svelte";
+	import Html from "$lib/components/Html.svelte";
+	import Hero from "$lib/components/Hero.svelte";
+	import Carousel from "$lib/components/Carousel.svelte";
+	
 	export let data;
 
 	if ($page.params.locale) {
@@ -20,17 +22,22 @@
 		$locale = "de";
 	}
 
+	// Forwarding the user to the equivalent of the current page in the language selected in the laguage dropdown in the header
 	function handleLocaleChange(event) {
+		// if the page contains a slug, get the root url and add the slug
 		if ($page.params.slug != null) {
 			const url = $t($page_key).url + "/" + $page.params.slug;
+
 			goto(url);
 		} else {
 			const url = $t($page_key).url;
+
 			goto(url);
 		}
 	}
 
-	// Dynamic page title
+	// Setting page title by retreiving translations from translations.js and conditionally taking into account dynamic pages by using the page title attribute from the page data, 
+	// assigned in the dynamic pages +page.server.js
 	let title;
 	let title_content;
 	$: title_content =
@@ -88,6 +95,10 @@
 								description={section.item.translations[0]
 									.description}
 							/>
+						</div>
+					{:else if section.collection == "carousel"}
+						<div class="container mx-auto">
+							<Carousel data={section.item.builder} />
 						</div>
 					{:else if section.collection == "custom_sections"}
 						<slot />

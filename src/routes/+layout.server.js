@@ -3,20 +3,18 @@ import { get_lang, get_locale, find } from '$lib/js/helpers'
 import translations from "$lib/data/translations.js";
 import _ from "lodash";
 
-
-
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, url, route, }) {
 
-    const page_keys = translations[`${get_locale(params)}`]
+  // retreive page key by using the url. you cant access stores in server files
+  const page_keys = translations[`${get_locale(params)}`]
+  const pk = find(page_keys, url.pathname)[0]
 
-    const page_key = find(page_keys,url.pathname)[0]
+  let data = {};
 
-    let data = {};
-
-    if(!params.slug && !url.pathname.startsWith("/files")){
-      const query = `query {
-        Pages(filter: { page_key: { _eq: "${page_key}" } }) {
+  if (!params.slug && !url.pathname.startsWith("/files")) {
+    const query = `query {
+        Pages(filter: { page_key: { _eq: "${pk}" } }) {
           builder {
             collection
             item {
@@ -28,10 +26,31 @@ export async function load({ params, url, route, }) {
                   text
                 }
               }
-
+      
+              ... on carousel {
+                sort
+                builder {
+                  collection
+                  item {
+                    ... on carousel_element {
+                      id
+                      image{
+                        id
+                      }
+                      translations(
+                        filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                      ) {
+                        title
+                        text
+                      }
+                    }
+                  }
+                }
+              }
+      
               ... on custom_sections {
                 sort
-               id
+                id
               }
               ... on wysiwyg {
                 sort
@@ -42,7 +61,7 @@ export async function load({ params, url, route, }) {
                 }
                 width
               }
-
+      
               ... on contacts {
                 sort
                 translations(
@@ -62,7 +81,7 @@ export async function load({ params, url, route, }) {
                   }
                 }
               }
-             
+      
               ... on heros {
                 sort
                 image {
@@ -80,7 +99,11 @@ export async function load({ params, url, route, }) {
                             sort
                             color
                             translations(
-                              filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                              filter: {
+                                languages_code: {
+                                  code: { _eq: "${get_lang(params)}" }
+                                }
+                              }
                             ) {
                               text
                             }
@@ -107,11 +130,10 @@ export async function load({ params, url, route, }) {
       }
       `
     data = await directus_fetch(query)
-
     return { builder: _.orderBy(data.Pages[0].builder, item => item.item.sort, ["asc"]) }
-    }
+  }
 
-    
+
 
 
 }

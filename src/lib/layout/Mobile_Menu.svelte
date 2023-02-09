@@ -3,10 +3,6 @@
     import { t, locale } from "$lib/stores/i18n.js";
     import { fly, fade } from "svelte/transition";
     import { page } from "$app/stores";
-    import NavLink from "$lib/components/Nav_Link.svelte";
-    import NavLinkButton from "$lib/components/Nav_Link_Button.svelte";
-    import SubnavLink from "$lib/components/Subnav_Link.svelte";
-    import MenuIcon from "../svg/Menu_Icon.svelte";
     import DropdownIcon from "../svg/Dropdown_Icon.svelte";
     import LinkButton from "$lib/components/Link_Button.svelte";
 
@@ -22,7 +18,7 @@
         language_toggle = false;
         changeLocale();
     }
-    let body;
+   
     let language_toggle = false;
     let about_toggle = false;
     let data4good_toggle = false;

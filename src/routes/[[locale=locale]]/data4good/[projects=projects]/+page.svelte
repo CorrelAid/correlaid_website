@@ -1,13 +1,10 @@
 <script>
-    import {page_key} from '$lib/stores/page_key.js';
-    import { onMount } from 'svelte';
-    
+    import { page_key } from "$lib/stores/page_key.js";
+    import { onMount } from "svelte";
 
-    onMount( () => {
-		$page_key = 'navbar.data4good.projects';
-	});
-    
-    
+    onMount(() => {
+        $page_key = "navbar.data4good.projects";
+    });
+
     const source = "# WIP";
 </script>
-

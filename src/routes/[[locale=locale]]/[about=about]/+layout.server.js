@@ -1,7 +1,5 @@
-import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang, get_locale } from '$lib/js/helpers'
-
-
+import directus_fetch from '$lib/js/directus_fetch';
+import { get_lang } from '$lib/js/helpers';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, url, route, }) {
@@ -48,7 +46,6 @@ export async function load({ params, url, route, }) {
   const remote_office = data.Global_Administrators.filter(person => person.group === 'remote_office');
   const board = data.Global_Administrators.filter(person => person.group === 'board');
   const ethics_commission = data.Global_Administrators.filter(person => person.group === 'ethics_commission');
-
 
   return { remote_office: remote_office, board: board, ethics_commission: ethics_commission, organizational_structure: data.Organizational_Structure }
 
