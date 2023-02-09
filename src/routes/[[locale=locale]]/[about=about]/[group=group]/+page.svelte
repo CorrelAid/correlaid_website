@@ -4,7 +4,6 @@
     import { get_locale, find, getGroup } from "$lib/js/helpers";
     import { page } from "$app/stores";
     import { gen_img_url } from "$lib/js/helpers";
-    import { t, locale } from "$lib/stores/i18n.js";
     import translations from "$lib/data/translations.js";
     import Person from "$lib/components/Person.svelte";
 
@@ -17,12 +16,13 @@
 
         $page_key = find(page_keys, $page.url.pathname)[0];
 
-        group_name = getGroup($page_key);
+        
     });
-
+    $: group_name = getGroup($page_key);
     $: if (group_name) {
         group = data[group_name];
     }
+    $: console.log(group)
 </script>
 
 {#if group}

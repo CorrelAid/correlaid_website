@@ -13,8 +13,6 @@ export async function load({ params, url, route, }) {
 
   const pk = find(page_keys, url.pathname)[0]
 
-  console.log("server_layout", pk)
-
   let data = {};
 
   if (!params.slug && !url.pathname.startsWith("/files")) {
@@ -135,7 +133,6 @@ export async function load({ params, url, route, }) {
       }
       `
     data = await directus_fetch(query)
-    console.log(data)
     return { builder: _.orderBy(data.Pages[0].builder, item => item.item.sort, ["asc"]) }
   }
 

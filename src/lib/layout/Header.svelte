@@ -24,7 +24,7 @@
 	function changeLocale() {
 		
 		dispatch("message", {
-			locale: $locale,
+			
 			
 		});
 	}

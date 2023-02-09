@@ -1,5 +1,5 @@
 import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang, get_locale } from '$lib/js/helpers'
+import { get_lang} from '$lib/js/helpers'
 
 
 

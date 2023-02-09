@@ -1,7 +1,5 @@
 import { gen_img_url } from "$lib/js/helpers";
 import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang, get_locale, find } from '$lib/js/helpers'
-import { redirect } from "@sveltejs/kit";
 
 export const GET = async ({ params }) => {
 
@@ -9,7 +7,7 @@ export const GET = async ({ params }) => {
   const query = `
     query {
       Documents(filter:{translations:{slug:{_eq: "${params.slug}"}}}){
-          translations{
+          translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}{
               document{
                   id
               }

@@ -11,7 +11,6 @@ let data;
     try {
         const response = await directus.graphql.items(query);
         data = response.data
-        console.log(data)
         
     } catch (err) {
         throw error(500, {

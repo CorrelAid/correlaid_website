@@ -21,22 +21,20 @@
 		$locale = "de";
 	}
 
-	$: console.log("layout1", $page_key)
-
 	function handleLocaleChange(event) {
 		if ($page.params.slug != null) {
 			const url = $t($page_key).url + "/" + $page.params.slug;
 
 			goto(url);
 		} else {
-			console.log("layout", $page_key, $locale);
 			const url = $t($page_key).url;
 
 			goto(url);
 		}
 	}
 
-	// Dynamic page title
+	// Setting page title by retreiving translations from translations.js and conditionally taking into account dynamic pages by using the page title attribute from the page data, 
+	// assigned in the dynamic pages +page.server.js
 	let title;
 	let title_content;
 	$: title_content =

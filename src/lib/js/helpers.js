@@ -36,24 +36,26 @@ export function constructRe(keys) {
   for (var i = 0; i < keys.length; i++) {
     const en = getLastItem(translate("en", keys[i], {}).url);
     const de = getLastItem(translate("de", keys[i], {}).url);
-    if (i = keys.length) {
-      str = str + `${de}|${en}`
+    // or at end ofregex only for last item (if list is doesnt consist of 1 item)
+    if (i != keys.length && keys.length != 1) {
+      str = str + `${de}|${en}|`
+      
     }
     else {
-      str = str + `${de}|${en}|`
+      str = str + `${de}|${en}`
     }
-
   }
-
+  
   const re = new RegExp(`^${str}`);
   return re
 }
 
-// 
+// finds a page key given a valid url
 export const find = (v, path) => {
   return Object.keys(v).filter((k) => v[k].url == path)
 }
 
+// returns the name of the language in directus format given the path parameters object
 export function get_lang(params) {
   let lang;
   if (params.locale) {
@@ -65,6 +67,7 @@ export function get_lang(params) {
   return lang
 }
 
+// gets the locale name (its undefined when german and taken from params.locale, because locale is optional parameter)
 export function get_locale(params) {
   if (params.locale == "en") {
     return params.locale
@@ -76,7 +79,7 @@ export function gen_img_url(id, transform = "") {
   return `${PUBLIC_API_URL}/assets/${id}?${transform}`
 }
 
-
+// generates a custom date string given a date string taken from directus and a locale. if year is true, it also return the year
 export function gen_date(date, locale, year = false) {
   let options = {
     month: "long",
@@ -94,6 +97,7 @@ export function gen_date(date, locale, year = false) {
   return date.toLocaleString(locale, options)
 }
 
+// generates a custom time string given a time string taken from directus and a locale
 export function gen_time(time, locale) {
   const options = {
     hour: "numeric",
