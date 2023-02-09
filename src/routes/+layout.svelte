@@ -13,7 +13,7 @@
 	import Html from "$lib/components/Html.svelte";
 	import Hero from "$lib/components/Hero.svelte";
 	import Carousel from "$lib/components/Carousel.svelte";
-	
+
 	export let data;
 
 	if ($page.params.locale) {
@@ -22,8 +22,11 @@
 		$locale = "de";
 	}
 
+	$: console.log($page_key);
+
 	// Forwarding the user to the equivalent of the current page in the language selected in the laguage dropdown in the header
 	function handleLocaleChange(event) {
+		console.log($page_key)
 		// if the page contains a slug, get the root url and add the slug
 		if ($page.params.slug != null) {
 			const url = $t($page_key).url + "/" + $page.params.slug;
@@ -36,7 +39,7 @@
 		}
 	}
 
-	// Setting page title by retreiving translations from translations and conditionally taking into account dynamic pages by using the page title attribute from the page data, 
+	// Setting page title by retreiving translations from translations and conditionally taking into account dynamic pages by using the page title attribute from the page data,
 	// assigned in the dynamic pages +page.server
 	let title;
 	let title_content;
@@ -104,6 +107,10 @@
 						<slot />
 					{/if}
 				{/each}
+				<!-- if collection doesnt contain a custom section, load page anyways (but must be empty in this case) to write page key to store -->
+				{#if !content.find((e) => e.collection === "custom_sections")}
+					<slot />
+				{/if}
 			{:else}
 				<slot />
 			{/if}

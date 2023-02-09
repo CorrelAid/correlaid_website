@@ -7,7 +7,7 @@
     import "maplibre-gl/dist/maplibre-gl.css";
 
     onMount(() => {
-        $page_key = "navbar.community";
+        $page_key = "navbar.community.correlaidx";
     });
 
     let map;
@@ -26,7 +26,7 @@
         map = new Map({
             container: mapContainer,
             // retreiving base map from maptiler
-            style: `https://api.maptiler.com/maps/stage-light/styleon?key=${apiKey}`,
+            style: `https://api.maptiler.com/maps/stage-light/style.json?key=${apiKey}`,
             center: [initialState.lng, initialState.lat],
             zoom: initialState.zoom,
             // restricting zoom values
@@ -50,7 +50,7 @@
             }
             map.addSource("statesData", {
                 type: "vector",
-                url: `https://api.maptiler.com/tiles/countries/tileson?key=${apiKey}`,
+                url: `https://api.maptiler.com/tiles/countries/tiles.json?key=${apiKey}`,
             });
             map.addSource("lcs", {
                 type: "geojson",
