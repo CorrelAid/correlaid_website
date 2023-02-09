@@ -1,11 +1,10 @@
 <script>
-  import { page } from "$app/stores";
   import Person from "$lib/components/Person.svelte";
   import Html from "$lib/components/Html.svelte";
   import { onMount } from "svelte";
   import { page_key } from "$lib/stores/page_key.js";
   import { gen_date } from "$lib/js/helpers.js";
-  import { t, locale } from "$lib/stores/i18n.js";
+  import { locale } from "$lib/stores/i18n.js";
   import { gen_img_url } from "$lib/js/helpers";
 
   onMount(() => {
@@ -72,9 +71,9 @@
         twitter={person.Content_Creators_id.person.twitter
           ? person.Content_Creators_id.person.twitter
           : ""}
-          github={person.Content_Creators_id.person.github
-            ? person.Content_Creators_id.person.github
-            : ""}
+        github={person.Content_Creators_id.person.github
+          ? person.Content_Creators_id.person.github
+          : ""}
       />
     {/each}
   </div>

@@ -2,10 +2,9 @@
     import { page_key } from "$lib/stores/page_key.js";
     import { onMount, onDestroy } from "svelte";
     import { Map, Popup } from "maplibre-gl";
-    import { t, locale, locales } from "$lib/stores/i18n.js";
+    import { locale } from "$lib/stores/i18n.js";
     import lc_coords from "$lib/data/lc_coords.json";
     import "maplibre-gl/dist/maplibre-gl.css";
-
 
     onMount(() => {
         $page_key = "navbar.community";
@@ -21,15 +20,19 @@
     onMount(async () => {
         const apiKey = "cYwZssWUHS4exn283ZO4";
 
+        // initial map position and zoom
         const initialState = { lng: 5.5, lat: 49, zoom: 4.2 };
 
         map = new Map({
             container: mapContainer,
+            // retreiving base map from maptiler
             style: `https://api.maptiler.com/maps/stage-light/style.json?key=${apiKey}`,
             center: [initialState.lng, initialState.lat],
             zoom: initialState.zoom,
+            // restricting zoom values
             maxZoom: 11,
             minZoom: 4,
+            // setting map boundaries
             maxBounds: [
                 [-20, 32],
                 [40, 65],
@@ -54,6 +57,7 @@
                 data: lc_coords,
             });
 
+            // first symbol layer contains chapter markers
             map.addLayer(
                 {
                     id: "lcs",
@@ -78,7 +82,7 @@
                 },
                 firstSymbolId
             );
-
+            // colouring countries
             map.addLayer({
                 id: "countries",
                 source: "statesData",
@@ -103,6 +107,7 @@
             });
         });
 
+        // clickable markers
         map.on("click", "lcs", (e) => {
             const lcs = e.features[0];
 
@@ -119,6 +124,7 @@
         }
     });
 
+    // reactive map language
     $: if (map) {
         if (map.isStyleLoaded()) {
             map.setLayoutProperty("continent", "text-field", [

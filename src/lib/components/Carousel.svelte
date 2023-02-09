@@ -1,17 +1,12 @@
 <script>
     import Carousel from "svelte-carousel";
     import MediaQuery from "svelte-media-queries";
+    import Html from "$lib/components/Html.svelte";
     import { browser } from "$app/environment";
     import { gen_img_url } from "$lib/js/helpers";
-    import Html from "$lib/components/Html.svelte";
-    import { header_height } from "$lib/stores/dims.js";
     export let data;
 
-    let carousel; // for calling methods of the carousel instance
-
-    const handleNextClick = () => {
-        carousel.goToNext();
-    };
+    let carousel; 
 
     function goTo(x) {
         carousel.goTo(x, { animated: true });

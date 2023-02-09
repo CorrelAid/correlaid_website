@@ -2,7 +2,7 @@
   import { page_key } from "$lib/stores/page_key.js";
   import { onMount } from "svelte";
   import { gen_img_url } from "$lib/js/helpers";
-  import { t, locale } from "$lib/stores/i18n.js";
+  import { t} from "$lib/stores/i18n.js";
   import ThumbmailAvatar from "$lib/components/Thumbmail_Avatar.svelte";
   import CorrelAidXWhite from "$lib/svg/CorrelAid_X_White.svelte";
 
@@ -10,6 +10,7 @@
     $page_key = "navbar.about";
   });
   
+  /** @type {import('./$types').PageData} */
   export let data;
 
   let remote_office;

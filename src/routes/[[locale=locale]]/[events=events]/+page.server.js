@@ -5,7 +5,6 @@ import { get_lang } from '$lib/js/helpers'
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 
-
   const query = `query {
     Events (filter: {date: {
       _gte: "$NOW"}}){
@@ -24,9 +23,6 @@ export async function load({ params }) {
       }
     }
   }`
-
-
-
 
   const data = await directus_fetch(query)
 

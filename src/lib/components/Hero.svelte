@@ -1,9 +1,9 @@
 <script>
-    import Html from "$lib/components/Html.svelte";
     import LinkButton from "./Link_Button.svelte";
+    import { header_height } from "$lib/stores/dims.js";
     export let builder;
     export let image_id;
-    import { header_height } from "$lib/stores/dims.js";
+    
 </script>
 
 <section

@@ -19,9 +19,9 @@ export const GET = async ({ params }) => {
   const data = await directus_fetch(query)
 
   const file_id = data.Documents[0].translations[0].document.id
-
   const file_name = gen_img_url(file_id)
 
+  // redirecting the user to the desired file hosted on directus
   return new Response('Redirect', {status: 303, headers: { Location: file_name }})
 
 }

@@ -1,9 +1,9 @@
 <script>
     import { page_key } from "$lib/stores/page_key.js";
     import { onMount } from "svelte";
-    import { t, locale } from "$lib/stores/i18n.js";
-    import BlogCard from "$lib/components/Blog_Card.svelte";
+    import { t } from "$lib/stores/i18n.js";
     import { gen_img_url } from "$lib/js/helpers";
+    import BlogCard from "$lib/components/Blog_Card.svelte";
 
     onMount(() => {
         $page_key = "navbar.blog";

@@ -1,10 +1,9 @@
 <script>
-  import { page } from "$app/stores";
   import { page_key } from "$lib/stores/page_key.js";
-  import Html from "$lib/components/Html.svelte";
   import { gen_date, gen_time } from "$lib/js/helpers.js";
-  import { t, locale } from "$lib/stores/i18n.js";
+  import { locale } from "$lib/stores/i18n.js";
   import { onMount } from "svelte";
+  import Html from "$lib/components/Html.svelte";
   import Time from "$lib/svg/Time.svelte";
   import Calendar from "$lib/svg/Calendar.svelte";
   import Location from "$lib/svg/Location.svelte";

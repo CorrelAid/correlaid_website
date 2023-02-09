@@ -1,10 +1,10 @@
 <script>
-	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
 	import { t, locale } from "$lib/stores/i18n.js";
 	import { page } from "$app/stores";
 	import { drawer } from "$lib/stores/drawer.js";
 	import { header_height } from "$lib/stores/dims.js";
 	import { createEventDispatcher } from "svelte";
+	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
 	import NavLink from "$lib/components/Nav_Link.svelte";
 	import NavLinkButton from "$lib/components/Nav_Link_Button.svelte";
 	import SubnavLink from "$lib/components/Subnav_Link.svelte";
@@ -22,25 +22,14 @@
 	const dispatch = createEventDispatcher();
 
 	function changeLocale() {
-		
-		dispatch("message", {
-			
-			
-		});
+		dispatch("message", {});
 	}
+	
 	function btnLocale(lc) {
 		$locale = lc;
 		active_language = lc;
 		language_toggle = false;
 		changeLocale();
-	}
-
-	let menuEnterTimer, menuLeaveTimer;
-
-	function delay() {
-		menuEnterTimer = setTimeout(function () {
-			lang_dropdown();
-		}, 110);
 	}
 
 	function lang_dropdown() {
@@ -181,9 +170,7 @@
 						<button
 							type="button"
 							class="inline-flex h-full items-center justify-center  rounded-r-md border-l border-neutral-25 px-2 z-10"
-							on:mouseover={delay}
-							on:focus={lang_dropdown}
-							on:mouseleave={clearTimeout(menuEnterTimer)}
+							on:click={lang_dropdown}
 						>
 							<span class="sr-only">Language</span>
 

@@ -2,15 +2,12 @@ import directus_fetch from '$lib/js/directus_fetch'
 import { get_lang, get_locale, find } from '$lib/js/helpers'
 import translations from "$lib/data/translations.js";
 import _ from "lodash";
-import { page } from '$app/stores';
-
-
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, url, route, }) {
 
+  // retreive page key by using the url. you cant access stores in server files
   const page_keys = translations[`${get_locale(params)}`]
-
   const pk = find(page_keys, url.pathname)[0]
 
   let data = {};
