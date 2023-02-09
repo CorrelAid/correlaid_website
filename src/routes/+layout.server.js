@@ -2,6 +2,7 @@ import directus_fetch from '$lib/js/directus_fetch'
 import { get_lang, get_locale, find } from '$lib/js/helpers'
 import translations from "$lib/data/translations.js";
 import _ from "lodash";
+import { page } from '$app/stores';
 
 
 
@@ -10,13 +11,15 @@ export async function load({ params, url, route, }) {
 
   const page_keys = translations[`${get_locale(params)}`]
 
-  const page_key = find(page_keys, url.pathname)[0]
+  const pk = find(page_keys, url.pathname)[0]
+
+  console.log("server_layout", pk)
 
   let data = {};
 
   if (!params.slug && !url.pathname.startsWith("/files")) {
     const query = `query {
-        Pages(filter: { page_key: { _eq: "${page_key}" } }) {
+        Pages(filter: { page_key: { _eq: "${pk}" } }) {
           builder {
             collection
             item {
@@ -131,8 +134,8 @@ export async function load({ params, url, route, }) {
         }
       }
       `
-      
     data = await directus_fetch(query)
+    console.log(data)
     return { builder: _.orderBy(data.Pages[0].builder, item => item.item.sort, ["asc"]) }
   }
 

@@ -21,12 +21,17 @@
 		$locale = "de";
 	}
 
+	$: console.log("layout1", $page_key)
+
 	function handleLocaleChange(event) {
 		if ($page.params.slug != null) {
 			const url = $t($page_key).url + "/" + $page.params.slug;
+
 			goto(url);
 		} else {
+			console.log("layout", $page_key, $locale);
 			const url = $t($page_key).url;
+
 			goto(url);
 		}
 	}
@@ -91,8 +96,8 @@
 							/>
 						</div>
 					{:else if section.collection == "carousel"}
-						<div class="container mx-auto" >
-							<Carousel data={section.item.builder}/>
+						<div class="container mx-auto">
+							<Carousel data={section.item.builder} />
 						</div>
 					{:else if section.collection == "custom_sections"}
 						<slot />

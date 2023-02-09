@@ -22,8 +22,10 @@
 	const dispatch = createEventDispatcher();
 
 	function changeLocale() {
+		
 		dispatch("message", {
 			locale: $locale,
+			
 		});
 	}
 	function btnLocale(lc) {

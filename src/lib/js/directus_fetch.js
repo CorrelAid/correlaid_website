@@ -1,6 +1,5 @@
 import { getDirectusClient } from '$lib/js/directus_client.js';
 import { error } from '@sveltejs/kit'
-import { data } from 'autoprefixer';
 
 
 const directus = await getDirectusClient();
@@ -12,6 +11,7 @@ let data;
     try {
         const response = await directus.graphql.items(query);
         data = response.data
+        console.log(data)
         
     } catch (err) {
         throw error(500, {
