@@ -4,7 +4,7 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		
+
 		// default options are shown
 		adapter: adapter({
 			// if true, will deploy the app using edge functions
