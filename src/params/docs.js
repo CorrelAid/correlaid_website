@@ -1,4 +1,4 @@
-import { constructRe } from "$lib/js/helpers.js";
+import { constructRe } from "$lib/js/helpers";
 
 const re = new RegExp("^documents/dokumente");
 /** @type {import('@sveltejs/kit').ParamMatcher} */

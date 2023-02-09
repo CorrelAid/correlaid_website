@@ -1,7 +1,7 @@
 <script>
-    import { page_key } from "$lib/stores/page_key.js";
+    import { page_key } from "$lib/stores/page_key";
     import { onMount } from "svelte";
-    import { t } from "$lib/stores/i18n.js";
+    import { t } from "$lib/stores/i18n";
     import { gen_img_url } from "$lib/js/helpers";
     import BlogCard from "$lib/components/Blog_Card.svelte";
 

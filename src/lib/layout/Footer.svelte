@@ -1,5 +1,5 @@
 <script>
-  import { t } from "$lib/stores/i18n.js";
+  import { t } from "$lib/stores/i18n";
   import Facebook from "$lib/svg/Facebook.svelte";
   import Instagram from "../svg/Instagram.svelte";
   import Twitter from "../svg/Twitter.svelte";

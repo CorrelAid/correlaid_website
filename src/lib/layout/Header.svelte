@@ -1,8 +1,8 @@
 <script>
-	import { t, locale } from "$lib/stores/i18n.js";
+	import { t, locale } from "$lib/stores/i18n";
 	import { page } from "$app/stores";
-	import { drawer } from "$lib/stores/drawer.js";
-	import { header_height } from "$lib/stores/dims.js";
+	import { drawer } from "$lib/stores/drawer";
+	import { header_height } from "$lib/stores/dims";
 	import { createEventDispatcher } from "svelte";
 	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
 	import NavLink from "$lib/components/Nav_Link.svelte";

@@ -1,6 +1,6 @@
 import directus_fetch from '$lib/js/directus_fetch'
 import { get_lang, get_locale, find } from '$lib/js/helpers'
-import translations from "$lib/data/translations.js";
+import translations from "$lib/data/translations";
 import _ from "lodash";
 
 /** @type {import('./$types').PageServerLoad} */

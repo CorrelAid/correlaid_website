@@ -1,5 +1,5 @@
 
-import { constructRe } from "$lib/js/helpers.js";
+import { constructRe } from "$lib/js/helpers";
 
 const re = constructRe(["navbar.data4good.projects"])
 

@@ -1,6 +1,6 @@
 <script>
-    import { locale } from "$lib/stores/i18n.js";
-    import { gen_date } from "$lib/js/helpers.js";
+    import { locale } from "$lib/stores/i18n";
+    import { gen_date } from "$lib/js/helpers";
     export let image_url;
     export let href;
     export let title;

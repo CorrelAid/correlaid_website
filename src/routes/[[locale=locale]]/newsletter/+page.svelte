@@ -1,5 +1,5 @@
 <script>
-    import { page_key } from "$lib/stores/page_key.js";
+    import { page_key } from "$lib/stores/page_key";
     import { onMount } from "svelte";
     import LinkButton from "$lib/components/Link_Button.svelte";
     import Html from "$lib/components/Html.svelte";

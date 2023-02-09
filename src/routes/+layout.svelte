@@ -2,11 +2,11 @@
 	import "../app.css";
 	import { page } from "$app/stores";
 	import { goto } from "$app/navigation";
-	import { t, locale, locales } from "$lib/stores/i18n.js";
-	import { page_key } from "$lib/stores/page_key.js";
+	import { t, locale, locales } from "$lib/stores/i18n";
+	import { page_key } from "$lib/stores/page_key";
 	import { gen_img_url } from "$lib/js/helpers";
-	import { header_height } from "$lib/stores/dims.js";
-	import { drawer } from "$lib/stores/drawer.js";
+	import { header_height } from "$lib/stores/dims";
+	import { drawer } from "$lib/stores/drawer";
 	import Header from "$lib/layout/Header.svelte";
 	import Person from "$lib/components/Person.svelte";
 	import Footer from "$lib/layout/Footer.svelte";
@@ -36,8 +36,8 @@
 		}
 	}
 
-	// Setting page title by retreiving translations from translations.js and conditionally taking into account dynamic pages by using the page title attribute from the page data, 
-	// assigned in the dynamic pages +page.server.js
+	// Setting page title by retreiving translations from translations and conditionally taking into account dynamic pages by using the page title attribute from the page data, 
+	// assigned in the dynamic pages +page.server
 	let title;
 	let title_content;
 	$: title_content =

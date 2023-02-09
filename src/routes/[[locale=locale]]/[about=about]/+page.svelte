@@ -1,8 +1,8 @@
 <script>
-  import { page_key } from "$lib/stores/page_key.js";
+  import { page_key } from "$lib/stores/page_key";
   import { onMount } from "svelte";
   import { gen_img_url } from "$lib/js/helpers";
-  import { t} from "$lib/stores/i18n.js";
+  import { t} from "$lib/stores/i18n";
   import ThumbmailAvatar from "$lib/components/Thumbmail_Avatar.svelte";
   import CorrelAidXWhite from "$lib/svg/CorrelAid_X_White.svelte";
 

@@ -1,9 +1,9 @@
 <script>
-    import { page_key } from "$lib/stores/page_key.js";
+    import { page_key } from "$lib/stores/page_key";
     import { onMount, onDestroy } from "svelte";
     import { Map, Popup } from "maplibre-gl";
-    import { locale } from "$lib/stores/i18n.js";
-    import lc_coords from "$lib/data/lc_coords.json";
+    import { locale } from "$lib/stores/i18n";
+    import lc_coords from "$lib/data/lc_coords";
     import "maplibre-gl/dist/maplibre-gl.css";
 
     onMount(() => {
@@ -26,7 +26,7 @@
         map = new Map({
             container: mapContainer,
             // retreiving base map from maptiler
-            style: `https://api.maptiler.com/maps/stage-light/style.json?key=${apiKey}`,
+            style: `https://api.maptiler.com/maps/stage-light/styleon?key=${apiKey}`,
             center: [initialState.lng, initialState.lat],
             zoom: initialState.zoom,
             // restricting zoom values
@@ -50,7 +50,7 @@
             }
             map.addSource("statesData", {
                 type: "vector",
-                url: `https://api.maptiler.com/tiles/countries/tiles.json?key=${apiKey}`,
+                url: `https://api.maptiler.com/tiles/countries/tileson?key=${apiKey}`,
             });
             map.addSource("lcs", {
                 type: "geojson",

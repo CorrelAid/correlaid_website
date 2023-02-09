@@ -1,6 +1,6 @@
 <script>
     import LinkButton from "./Link_Button.svelte";
-    import { header_height } from "$lib/stores/dims.js";
+    import { header_height } from "$lib/stores/dims";
     export let builder;
     export let image_id;
     

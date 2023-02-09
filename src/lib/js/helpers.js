@@ -1,4 +1,4 @@
-import translations from "$lib/data/translations.js";
+import translations from "$lib/data/translations";
 import { PUBLIC_API_URL } from '$env/static/public';
 
 // extracts the last substring after /
@@ -7,7 +7,7 @@ export const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/')
 // extracts the last substring after .
 export const getGroup = thePath => thePath.substring(thePath.lastIndexOf('.') + 1)
 
-// extracts a translation from translations.js, given a locale and a page key
+// extracts a translation from translations, given a locale and a page key
 export function translate(locale, key, vars) {
   // Let's throw some errors if we're trying to use keys/locales that don't exist.
   if (!key) throw new Error("no key provided to $t()");
@@ -30,7 +30,7 @@ export function translate(locale, key, vars) {
   return { text, url };
 }
 
-// contructs regex that matches valid url paramters by extracting them from translations.js given one or multiple page keys
+// contructs regex that matches valid url paramters by extracting them from translations given one or multiple page keys
 export function constructRe(keys) {
   let str = "";
   for (var i = 0; i < keys.length; i++) {

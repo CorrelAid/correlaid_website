@@ -2,9 +2,9 @@
   import Person from "$lib/components/Person.svelte";
   import Html from "$lib/components/Html.svelte";
   import { onMount } from "svelte";
-  import { page_key } from "$lib/stores/page_key.js";
-  import { gen_date } from "$lib/js/helpers.js";
-  import { locale } from "$lib/stores/i18n.js";
+  import { page_key } from "$lib/stores/page_key";
+  import { gen_date } from "$lib/js/helpers";
+  import { locale } from "$lib/stores/i18n";
   import { gen_img_url } from "$lib/js/helpers";
 
   onMount(() => {

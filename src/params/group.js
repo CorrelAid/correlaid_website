@@ -1,4 +1,4 @@
-import { constructRe } from "$lib/js/helpers.js";
+import { constructRe } from "$lib/js/helpers";
 
 const re = constructRe(["navbar.about.ethics_commission", "navbar.about.board"])
 

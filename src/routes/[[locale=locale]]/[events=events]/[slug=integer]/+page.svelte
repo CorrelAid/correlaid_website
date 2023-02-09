@@ -1,7 +1,7 @@
 <script>
-  import { page_key } from "$lib/stores/page_key.js";
-  import { gen_date, gen_time } from "$lib/js/helpers.js";
-  import { locale } from "$lib/stores/i18n.js";
+  import { page_key } from "$lib/stores/page_key";
+  import { gen_date, gen_time } from "$lib/js/helpers";
+  import { locale } from "$lib/stores/i18n";
   import { onMount } from "svelte";
   import Html from "$lib/components/Html.svelte";
   import Time from "$lib/svg/Time.svelte";

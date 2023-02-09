@@ -1,6 +1,6 @@
 <script>
-    import { drawer } from "$lib/stores/drawer.js";
-    import { t, locale } from "$lib/stores/i18n.js";
+    import { drawer } from "$lib/stores/drawer";
+    import { t, locale } from "$lib/stores/i18n";
     import { fly, fade } from "svelte/transition";
     import { page } from "$app/stores";
     import DropdownIcon from "../svg/Dropdown_Icon.svelte";

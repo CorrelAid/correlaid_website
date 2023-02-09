@@ -1,10 +1,10 @@
 <script>
-    import { page_key } from "$lib/stores/page_key.js";
+    import { page_key } from "$lib/stores/page_key";
     import { onMount } from "svelte";
     import { get_locale, find, getGroup } from "$lib/js/helpers";
     import { page } from "$app/stores";
     import { gen_img_url } from "$lib/js/helpers";
-    import translations from "$lib/data/translations.js";
+    import translations from "$lib/data/translations";
     import Person from "$lib/components/Person.svelte";
 
     export let data;
