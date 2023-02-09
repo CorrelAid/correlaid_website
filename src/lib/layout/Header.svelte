@@ -24,7 +24,7 @@
 	function changeLocale() {
 		dispatch("message", {});
 	}
-	
+
 	function btnLocale(lc) {
 		$locale = lc;
 		active_language = lc;
@@ -78,18 +78,15 @@
 	class="w-screen   z-10 border-b border-neutral-25"
 	bind:clientHeight={$header_height}
 >
-	<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
+	<div class="mx-auto  px-4 sm:px-6 xl:px-8 ">
 		<div class="flex items-center justify-between xl:grid grid-cols-10">
-			<div class="flex items-center gap-12  col-span-2">
-				<a
-					class="block text-teal-600 mx-auto"
-					href={$t("navbar.home").url}
-				>
+			<div class="flex items-center gap-12  3xl:col-span-3 col-span-2 justify-end">
+				<a class="block text-teal-600" href={$t("navbar.home").url}>
 					<span class="sr-only">Home</span>
 					<CorrelAid_Logo width={100} height={100} />
 				</a>
 			</div>
-			<div class="xl:block flex-col hidden col-span-6">
+			<div class="xl:block flex-col hidden 3xl:col-span-4 col-span-6">
 				<div class="flex mb-3 mt-1">
 					<div class="mx-auto">
 						<nav aria-label="Site Nav">
@@ -150,7 +147,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="xl:flex items-center hidden gap-4 mx-auto col-span-2">
+			<div
+				class="xl:flex items-center hidden gap-6  3xl:col-span-3 col-span-2 justify-start"
+			>
 				<LinkButton
 					text={$t("navbar.donate").text}
 					href={$t("navbar.donate").url}
@@ -169,7 +168,7 @@
 					<div class="relative">
 						<button
 							type="button"
-							class="inline-flex h-full items-center justify-center  rounded-r-md border-l border-neutral-25 px-2 z-10"
+							class="inline-flex h-full items-center justify-center  rounded-r-md border-l border-neutral-25 px-2 z-10 "
 							on:click={lang_dropdown}
 						>
 							<span class="sr-only">Language</span>

@@ -61,8 +61,8 @@ export default {
     "navbar.education.mentoring": { "text": "Mentoring", "url": "/en/education/mentoring" },
     // 
     "navbar.community": { "text": "Community", "url": "/en/community" },
-     // Subnav community
-     "navbar.community.correlaidx": { "text": "CorrelAidX", "url": "/en/community/correlaidx" },
+    // Subnav community
+    "navbar.community.correlaidx": { "text": "CorrelAidX", "url": "/en/community/correlaidx" },
     "navbar.community.founding_lc": { "text": "Founding a Local Chapter", "url": "/en/community/founding_lc" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/en/community/volunteer_journeys" },
     //
