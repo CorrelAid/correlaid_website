@@ -1,4 +1,6 @@
 <script>
+    import { page } from "$app/stores";
+    import { get_locale } from "$lib/js/helpers";
     import { page_key } from "$lib/stores/page_key";
     import { onMount, onDestroy } from "svelte";
     import { Map, Popup } from "maplibre-gl";
@@ -108,7 +110,7 @@
                 .setHTML(
                     `<div class="pt-2 px-2 pb-1 flex justify-center align-center">
                         ${external_svg}
-                    <a class="font-bold text-tertiary hover:underline text-sm font-sans text-base" href="/community/correlaidx/${lcs.properties.city}">${lcs.properties.name}</a>
+                    <a class="font-bold text-tertiary hover:underline text-sm font-sans text-base" href="/${get_locale($page.params)}/community/correlaidx/${lcs.properties.city}">${lcs.properties.name}</a>
                     </div>`
                 )
 
