@@ -3,6 +3,6 @@
   import { onMount } from "svelte";
 
   onMount(() => {
-    $page_key = "navbar.education.experts";
+    $page_key = "navbar.data4good.consulting";
   });
 </script>

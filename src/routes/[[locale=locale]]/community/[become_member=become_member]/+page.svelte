@@ -3,7 +3,7 @@
     import { onMount } from "svelte";
 
     onMount(() => {
-        $page_key = "navbar.data4good.nonprofits";
+        $page_key = "navbar.community.become_member";
     });
 
     const source = "# WIP";
