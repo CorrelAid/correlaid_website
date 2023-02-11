@@ -8,7 +8,7 @@
     ```
 3. Create .env file with following contents:
     ```
-    API_URL=https://6xdv3yb3.directus.app
+    API_URL=https://correlaid.directus.app
     ```
 
 ## Project explanation
