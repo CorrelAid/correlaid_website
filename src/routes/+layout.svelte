@@ -22,8 +22,6 @@
 		$locale = "de";
 	}
 
-	$: console.log($page_key);
-
 	// Forwarding the user to the equivalent of the current page in the language selected in the laguage dropdown in the header
 	function handleLocaleChange(event) {
 		console.log($page_key)

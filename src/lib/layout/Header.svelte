@@ -234,8 +234,12 @@
 							text={$t("navbar.data4good.projects").text}
 						/>
 						<SubnavLink
-							href={$t("navbar.data4good.nonprofits").url}
-							text={$t("navbar.data4good.nonprofits").text}
+							href={$t("navbar.data4good.consulting").url}
+							text={$t("navbar.data4good.consulting").text}
+						/>
+						<SubnavLink
+							href={$t("navbar.data4good.hackathons").url}
+							text={$t("navbar.data4good.hackathons").text}
 						/>
 					</ul>
 				</div>
@@ -268,16 +272,16 @@
 							text={$t("navbar.education.learning_r").text}
 						/>
 						<SubnavLink
-							href={$t("navbar.education.experts").url}
-							text={$t("navbar.education.experts").text}
-						/>
-						<SubnavLink
 							href={$t("navbar.education.tidy_tuesday").url}
 							text={$t("navbar.education.tidy_tuesday").text}
 						/>
 						<SubnavLink
-							href={$t("navbar.education.knowledge_pool").url}
-							text={$t("navbar.education.knowledge_pool").text}
+							href={$t("navbar.education.oer").url}
+							text={$t("navbar.education.oer").text}
+						/>
+						<SubnavLink
+							href={$t("navbar.education.mentoring").url}
+							text={$t("navbar.education.mentoring").text}
 						/>
 					</ul>
 				</div>
@@ -312,6 +316,11 @@
 						<SubnavLink
 							href={$t("navbar.community.volunteer_journeys").url}
 							text={$t("navbar.community.volunteer_journeys")
+								.text}
+						/>
+						<SubnavLink
+							href={$t("navbar.community.become_member").url}
+							text={$t("navbar.community.become_member")
 								.text}
 						/>
 					</ul>

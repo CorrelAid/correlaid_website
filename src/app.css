@@ -147,18 +147,14 @@
   opacity: 0.8;
 }
 
-/* .sc-carousel__carousel-container{
-  height: 100%;
+
+
+
+
+.maplibregl-popup-close-button {
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
-.sc-carousel__content-container{
-  height: 100%;
-}
-
-.sc-carousel__pages-window{
-  height: 100%;
-}
-
-.sc-carousel__pages-container{
-  height: 100%;
-} */

@@ -1,7 +1,7 @@
 
 import { constructRe } from "$lib/js/helpers";
 
-const re = constructRe(["navbar.education.experts"])
+const re = constructRe(["navbar.data4good.consulting"])
 
 /** @type {import('@sveltejs/kit').ParamMatcher} */
 export function match(param) {
