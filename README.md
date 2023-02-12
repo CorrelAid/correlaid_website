@@ -8,7 +8,11 @@
     ```
 3. Create .env file with following contents:
     ```
-    API_URL=https://correlaid.directus.app
+    PUBLIC_API_URL=https://correlaid.directus.app
+    ```
+4. Start project with:
+    ```
+    npm run dev
     ```
 
 ## Project explanation
@@ -33,6 +37,7 @@ The website currently supports two languages, german(default) and english. Most 
 1. Its given to a store (if its undefined, its set to "de") to make it easily available in +page.svelte files. In the Header and Footer component this store is used to call the translate function via a derived store that accesses the locale store (src/lib/stores/i18n.js), which extracts the translation from translations.js, to display navigation items in the desired language. 
 
 2. In +layout.server.js and +page.server.js the locale parameter is used directly and is a query parameter for requesting content from the API, causing only content in the desired language to be retreived
+
 
 The language toggle button writes to the locale store and sends an event to the root +layout.svelte. The function "handleLocaleChange" is called when this event is retreived and forwards the user to the equivalent of the current page in the selected language, while also handling possible slugs.
 
