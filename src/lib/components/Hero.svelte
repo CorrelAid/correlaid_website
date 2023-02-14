@@ -1,6 +1,7 @@
 <script>
     import LinkButton from "./Link_Button.svelte";
     import { header_height } from "$lib/stores/dims";
+    import { gen_img_url } from "$lib/js/helpers";
     export let builder;
     export let image_id;
     
@@ -8,7 +9,7 @@
 
 <section
     class="relative bg-cover bg-center bg-no-repeat"
-    style="background-image: url({`https://6xdv3yb3.directus.app/assets/${image_id}`}); height: calc(100vh - {$header_height}px)"
+    style="background-image: url({`${gen_img_url(image_id)}`}); height: calc(100vh - {$header_height}px)"
 >
     <div
         class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-primary/75"

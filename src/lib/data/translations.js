@@ -7,9 +7,9 @@ export default {
     "navbar.about.remote_office": { "text": "Remote Office", "url": "/ueber/remote_office" },
     "navbar.about.ethics_commission": { "text": "Ethikkomission", "url": "/ueber/ethikkommission" },
     // 
-    "navbar.data4good": { "text": "Data4Good", "url": "/data4good" },
+    "navbar.data4good": { "text": "Projekte und Beratung", "url": "/data4good" },
     // Subnav data4good
-    "navbar.data4good.projects": { "text": "Projekte", "url": "/data4good/projekte" },
+    "navbar.data4good.projects": { "text": "Projektübersicht", "url": "/data4good/projekte" },
     "navbar.data4good.consulting": { "text": "Beratung", "url": "/data4good/beratung" },
     "navbar.data4good.hackathons": { "text": "Hackathons und Datendialoge", "url": "/data4good/hackathons" },
     // 
