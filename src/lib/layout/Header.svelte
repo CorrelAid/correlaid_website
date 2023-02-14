@@ -272,16 +272,16 @@
 							text={$t("navbar.education.learning_r").text}
 						/>
 						<SubnavLink
-							href={$t("navbar.education.tidy_tuesday").url}
-							text={$t("navbar.education.tidy_tuesday").text}
-						/>
-						<SubnavLink
 							href={$t("navbar.education.oer").url}
 							text={$t("navbar.education.oer").text}
 						/>
 						<SubnavLink
 							href={$t("navbar.education.mentoring").url}
 							text={$t("navbar.education.mentoring").text}
+						/>
+						<SubnavLink
+							href={$t("navbar.education.tidy_tuesday").url}
+							text={$t("navbar.education.tidy_tuesday").text}
 						/>
 					</ul>
 				</div>

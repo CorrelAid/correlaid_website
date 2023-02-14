@@ -20,29 +20,25 @@
 </script>
 
 <div class="container mx-auto pt-8 px-4">
-  <Html source={`<h1>${event.translations[0].title}</h1>`} width={"text"} />
+  <Html source={`<h1>${event.title}</h1>`} width={"text"} />
   <div id="info" class="p-4 border border-neutral-25 rounded mt-8 mx-auto">
-    <p class="flex pb-2">
-      <span class="flex my-auto fill-neutral"
-        ><Calendar width={20} height={20} /></span
-      > <span class="pl-4 my-auto">{gen_date(event.date, $locale)}</span>
-    </p>
-    <p class="flex pb-2">
-      <span class="flex my-auto fill-neutral"
-        ><Time width={20} height={20} /></span
-      >
-      <span class="pl-4 my-auto"
-        >{gen_time(event.start_time, $locale)} - {gen_time(
-          event.end_time,
-          $locale
-        )} (CET)</span
-      >
-    </p>
-    {#if event.translations[0].location}
+    {#each event.dates as date}
+      <p class="flex pb-2">
+        <span class="flex my-auto fill-neutral"
+          ><Calendar width={20} height={20} /></span
+        >
+
+        <span class="pl-4 my-auto">{gen_date(date.date, $locale)}</span>
+        <span class="pl-10 flex my-auto fill-neutral"
+          ><Time width={20} height={20} /></span
+        ><span class="pl-4 my-auto">{gen_time(date.start_time, $locale)} - {gen_time(date.end_time, $locale)}</span
+        >
+    {/each}
+    {#if event.location}
       <p class="flex pb-2">
         <span class="flex my-auto fill-neutral"
           ><Location width={20} height={20} /></span
-        > <span class="pl-4 my-auto">{event.translations[0].location}</span>
+        > <span class="pl-4 my-auto">{event.location}</span>
       </p>
     {/if}
     {#if event.online}
@@ -54,10 +50,7 @@
     {/if}
   </div>
   <div class="mt-6">
-    <Html
-      source={`<h2>Details</h2>` + event.translations[0].description}
-      width={"text"}
-    />
+    <Html source={`<h2>Details</h2>` + event.description} width={"text"} />
   </div>
 </div>
 
