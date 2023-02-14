@@ -9,14 +9,12 @@ export async function load({ params }) {
   const query = `query {
     Events(filter:{slug:{_eq: "${params.slug}"}}) {
       id
-      occurance
       dates
       registration_link
-      target_audience
+      target_group
       language
       description
       type
-      scope
       online
       title
       location
@@ -37,6 +35,7 @@ export async function load({ params }) {
     }
   }
   `
+  console.log(query)
 
   const data = await directus_fetch(query)
 

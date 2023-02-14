@@ -13,10 +13,9 @@ export async function load({ params }) {
       title
       teaser
       registration_link
-      target_audience
+      target_group
       language
       type
-      scope
       slug
       tags
       title_image {
