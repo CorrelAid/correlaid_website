@@ -21,13 +21,13 @@
    
     let language_toggle = false;
     let about_toggle = false;
-    let data4good_toggle = false;
+    let projects_consulting_toggle = false;
     let education_toggle = false;
     let community_toggle = false;
 
     function closeall() {
         about_toggle = false;
-        data4good_toggle = false;
+        projects_consulting_toggle = false;
         education_toggle = false;
         community_toggle = false;
     }
@@ -38,17 +38,17 @@
                 closeall();
             } else {
                 about_toggle = true;
-                data4good_toggle = false;
+                projects_consulting_toggle = false;
                 education_toggle = false;
                 community_toggle = false;
             }
         }
-        if (btn === "data4good") {
-            if (data4good_toggle == true) {
+        if (btn === "projects_consulting") {
+            if (projects_consulting_toggle == true) {
                 closeall();
             } else {
                 about_toggle = false;
-                data4good_toggle = true;
+                projects_consulting_toggle = true;
                 education_toggle = false;
                 community_toggle = false;
             }
@@ -58,7 +58,7 @@
                 closeall();
             } else {
                 about_toggle = false;
-                data4good_toggle = false;
+                projects_consulting_toggle = false;
                 education_toggle = true;
                 community_toggle = false;
             }
@@ -68,7 +68,7 @@
                 closeall();
             } else {
                 about_toggle = false;
-                data4good_toggle = false;
+                projects_consulting_toggle = false;
                 education_toggle = false;
                 community_toggle = true;
             }
@@ -108,33 +108,33 @@
                         <div class="inline-flex items-center">
                             <a
                                 class="tracking-wide w-56"
-                                href={$t("navbar.data4good").url}
+                                href={$t("navbar.projects_consulting").url}
                             >
-                                {$t("navbar.data4good").text}
+                                {$t("navbar.projects_consulting").text}
                             </a>
-                            <button on:click={() => subnav("data4good")}>
+                            <button on:click={() => subnav("projects_consulting")}>
                                 <DropdownIcon height={30} width={30} />
                             </button>
                         </div>
                     </li>
-                    {#if data4good_toggle}
+                    {#if projects_consulting_toggle}
                         <ul
                             class="font-light text-base-content tracking-wide text-base space-y-3"
                         >
                             <li>
                                 <a
                                     class="hover:text-primary transition"
-                                    href={$t("navbar.data4good.projects").url}
+                                    href={$t("navbar.projects_consulting.projects").url}
                                 >
-                                    {$t("navbar.data4good.projects").text}
+                                    {$t("navbar.projects_consulting.projects").text}
                                 </a>
                             </li>
                             <li>
                                 <a
                                     class="hover:text-primary transition"
-                                    href={$t("navbar.data4good.nonprofits").url}
+                                    href={$t("navbar.projects_consulting.nonprofits").url}
                                 >
-                                    {$t("navbar.data4good.nonprofits").text}
+                                    {$t("navbar.projects_consulting.nonprofits").text}
                                 </a>
                             </li>
                         </ul>

@@ -7,11 +7,11 @@ export default {
     "navbar.about.remote_office": { "text": "Remote Office", "url": "/ueber/remote_office" },
     "navbar.about.ethics_commission": { "text": "Ethikkomission", "url": "/ueber/ethikkommission" },
     // 
-    "navbar.data4good": { "text": "Projekte und Beratung", "url": "/data4good" },
-    // Subnav data4good
-    "navbar.data4good.projects": { "text": "Projektübersicht", "url": "/data4good/projekte" },
-    "navbar.data4good.consulting": { "text": "Beratung", "url": "/data4good/beratung" },
-    "navbar.data4good.hackathons": { "text": "Hackathons und Datendialoge", "url": "/data4good/hackathons" },
+    "navbar.projects_consulting": { "text": "Projekte und Beratung", "url": "/projects_consulting" },
+    // Subnav projects_consulting
+    "navbar.projects_consulting.projects": { "text": "Projektübersicht", "url": "/projects_consulting/projekte" },
+    "navbar.projects_consulting.consulting": { "text": "Beratung", "url": "/projects_consulting/beratung" },
+    "navbar.projects_consulting.hackathons": { "text": "Hackathons und Datendialoge", "url": "/projects_consulting/hackathons" },
     // 
     "navbar.education": { "text": "Bildung", "url": "/bildung" },
     // Subnav education
@@ -45,11 +45,11 @@ export default {
     "navbar.about.remote_office": { "text": "Remote Office", "url": "/en/about/remote_office" },
     "navbar.about.ethics_commission": { "text": "Ethics Commission", "url": "/en/about/ethics_commission" },
     // 
-    "navbar.data4good": { "text": "Data4Good", "url": "/en/data4good" },
-    // Subnav data4good
-    "navbar.data4good.projects": { "text": "Projects", "url": "/en/data4good/projects" },
-    "navbar.data4good.consulting": { "text": "Consulting", "url": "/en/data4good/consulting" },
-    "navbar.data4good.hackathons": { "text": "Hackathons and Data Dialogues", "url": "/en/data4good/hackathons" },
+    "navbar.projects_consulting": { "text": "Projekte und Beratung", "url": "/en/projekte_beratung" },
+    // Subnav projects_consulting
+    "navbar.projects_consulting.projects": { "text": "Projects", "url": "/en/projekte_beratung/projects" },
+    "navbar.projects_consulting.consulting": { "text": "Consulting", "url": "/en/projekte_beratung/consulting" },
+    "navbar.projects_consulting.hackathons": { "text": "Hackathons and Data Dialogues", "url": "/en/projekte_beratung/hackathons" },
     // 
     "navbar.education": { "text": "Education", "url": "/en/education" },
     // Subnav education

@@ -14,7 +14,7 @@
 	import MobileMenu from "./Mobile_Menu.svelte";
 
 	let language_toggle = false;
-	let data4good_toggle = false;
+	let projects_consulting_toggle = false;
 	let education_toggle = false;
 	let community_toggle = false;
 	let active_language = "de";
@@ -41,7 +41,7 @@
 	}
 
 	function closeall() {
-		data4good_toggle = false;
+		projects_consulting_toggle = false;
 		education_toggle = false;
 		community_toggle = false;
 	}
@@ -49,20 +49,20 @@
 	$: $page.url && closeall();
 
 	function subnav(btn) {
-		if (btn === "data4good") {
-			data4good_toggle = true;
+		if (btn === "projects_consulting") {
+			projects_consulting_toggle = true;
 			education_toggle = false;
 			community_toggle = false;
 		}
 
 		if (btn === "education") {
-			data4good_toggle = false;
+			projects_consulting_toggle = false;
 			education_toggle = true;
 			community_toggle = false;
 		}
 
 		if (btn === "community") {
-			data4good_toggle = false;
+			projects_consulting_toggle = false;
 			education_toggle = false;
 			community_toggle = true;
 		}
@@ -125,9 +125,9 @@
 									text={$t("navbar.about").text}
 								/>
 								<NavLinkButton
-									href={$t("navbar.data4good").url}
-									text={$t("navbar.data4good").text}
-									category={"data4good"}
+									href={$t("navbar.projects_consulting").url}
+									text={$t("navbar.projects_consulting").text}
+									category={"projects_consulting"}
 									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
@@ -214,7 +214,7 @@
 		</div>
 	</div>
 </header>
-{#if data4good_toggle}
+{#if projects_consulting_toggle}
 	<div
 		class="w-screen hidden absolute z-20 xl:block"
 		style="top: {$header_height + 1}px"
@@ -230,16 +230,16 @@
 						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x border-neutral-25 rounded-b  "
 					>
 						<SubnavLink
-							href={$t("navbar.data4good.projects").url}
-							text={$t("navbar.data4good.projects").text}
+							href={$t("navbar.projects_consulting.projects").url}
+							text={$t("navbar.projects_consulting.projects").text}
 						/>
 						<SubnavLink
-							href={$t("navbar.data4good.consulting").url}
-							text={$t("navbar.data4good.consulting").text}
+							href={$t("navbar.projects_consulting.consulting").url}
+							text={$t("navbar.projects_consulting.consulting").text}
 						/>
 						<SubnavLink
-							href={$t("navbar.data4good.hackathons").url}
-							text={$t("navbar.data4good.hackathons").text}
+							href={$t("navbar.projects_consulting.hackathons").url}
+							text={$t("navbar.projects_consulting.hackathons").text}
 						/>
 					</ul>
 				</div>
