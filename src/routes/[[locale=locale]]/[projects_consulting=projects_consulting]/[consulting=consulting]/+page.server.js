@@ -7,27 +7,22 @@ import { unpack_events } from '$lib/js/data_processing'
 export async function load({ params }) {
 
   const query = `query{
-  Projects{
-    status
-    translations(
-    filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-  ){
-        title
-        description
-        summary
-    }
-    local_chapters{
-        id
-
-    }
-}}
+    Experts{
+      person{
+          name
+      }
+      translations{
+          area_of_expertise
+      }
+  }
+  }
   `
-
+console.log(query)
   const data = await directus_fetch(query)
 
-  const projects = data.Projects
+  const experts = data.Experts
 
 
-  return { projects: projects }
+  return { experts: experts }
 
 }
