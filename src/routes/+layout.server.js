@@ -25,7 +25,7 @@ export async function load({ params, url, route, }) {
                   filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
                 ) {
                   text
-                }
+                } 
               }
       
               ... on carousel {
@@ -133,6 +133,7 @@ export async function load({ params, url, route, }) {
       }
       `
     data = await directus_fetch(query)
+    // sorting page builder items by sort field
     return { builder: _.orderBy(data.Pages[0].builder, item => item.sort, ["asc"]) }
   }
 
