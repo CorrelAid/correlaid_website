@@ -3,7 +3,7 @@
     import { onMount } from "svelte";
 
     onMount(() => {
-        $page_key = "navbar.data4good.projects";
+        $page_key = "navbar.projects_consulting.hackathons";
     });
 
     const source = "# WIP";

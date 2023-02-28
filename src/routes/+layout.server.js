@@ -16,10 +16,11 @@ export async function load({ params, url, route, }) {
     const query = `query {
         Pages(filter: { page_key: { _eq: "${pk}" } }) {
           builder {
+            sort
             collection
             item {
               ... on buttons {
-                sort
+                
                 translations(
                   filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
                 ) {
@@ -28,8 +29,9 @@ export async function load({ params, url, route, }) {
               }
       
               ... on carousel {
-                sort
+                
                 builder {
+                  sort
                   collection
                   item {
                     ... on carousel_element {
@@ -49,11 +51,11 @@ export async function load({ params, url, route, }) {
               }
       
               ... on custom_sections {
-                sort
+                
                 id
               }
               ... on wysiwyg {
-                sort
+                
                 translations(
                   filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
                 ) {
@@ -63,7 +65,7 @@ export async function load({ params, url, route, }) {
               }
       
               ... on contacts {
-                sort
+                
                 translations(
                   filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
                 ) {
@@ -83,7 +85,7 @@ export async function load({ params, url, route, }) {
               }
       
               ... on heros {
-                sort
+                
                 image {
                   id
                 }
@@ -91,12 +93,13 @@ export async function load({ params, url, route, }) {
                   collection
                   item {
                     ... on button_groups {
-                      sort
+                      
                       builder {
+                        sort
                         collection
                         item {
                           ... on buttons {
-                            sort
+                            
                             color
                             translations(
                               filter: {
@@ -112,7 +115,7 @@ export async function load({ params, url, route, }) {
                       }
                     }
                     ... on text_fields {
-                      sort
+                      
                       translations(
                         filter: {
                           languages_code: { code: { _eq: "${get_lang(params)}" } }
@@ -130,7 +133,7 @@ export async function load({ params, url, route, }) {
       }
       `
     data = await directus_fetch(query)
-    return { builder: _.orderBy(data.Pages[0].builder, item => item.item.sort, ["asc"]) }
+    return { builder: _.orderBy(data.Pages[0].builder, item => item.sort, ["asc"]) }
   }
 
 
