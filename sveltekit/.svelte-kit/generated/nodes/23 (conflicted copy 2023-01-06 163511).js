@@ -1,0 +1,1 @@
+export { default as component } from "../../../src/routes/ueber/organisationsstruktur/remote_office/+page.svelte";

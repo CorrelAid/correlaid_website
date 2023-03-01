@@ -1,19 +1,31 @@
 ## Dev Setup
-1. Clone Repo
+1. 
 
-2. Install packages
+2. Install packages (in the SvelteKit folder)
 
     ```
     npm install
     ```
-3. Create .env file with following contents:
+3. Create .env file with following contents (in the SvelteKit folder)
     ```
     PUBLIC_API_URL=https://correlaid.directus.app
     ```
-4. Start project with:
+4. Run the redis.yml docker compose file to start the cache 
+    ```
+    docker compose -f redis.yml down --volumes                               
+    docker compose -f redis.yml build --no-cache 
+    docker compose -f redis.yml  up --force-recreate
+    ```
+
+5. Start project with:
     ```
     npm run dev
     ```
+
+### Redis
+```
+redis-cli -u redis://:@127.0.0.1:6380 
+```
 
 ## Project explanation
 

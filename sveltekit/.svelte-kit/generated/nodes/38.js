@@ -1,0 +1,1 @@
+export { default as component } from "../../../src/routes/[[locale]]/en/data4good/nonprofits/hackathons/+page.svelte";

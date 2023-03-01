@@ -1,0 +1,1 @@
+import{S as r,i as p,s as i,M as u,o as l,N as c}from"../../../../chunks/index-22943c7f.js";import{p as o}from"../../../../chunks/page_key-e9a2d838.js";function m(s,t,a){let e;return u(s,o,n=>a(0,e=n)),l(()=>{c(o,e="footer.imprint",e)}),[]}class g extends r{constructor(t){super(),p(this,t,m,null,i,{})}}export{g as default};

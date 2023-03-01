@@ -1,0 +1,1 @@
+import{S as r,i as p,s as i,M as u,o as l,N as c}from"../../../../../chunks/index-22943c7f.js";import{p as t}from"../../../../../chunks/page_key-e9a2d838.js";function _(s,o,a){let e;return u(s,t,n=>a(0,e=n)),l(()=>{c(t,e="navbar.data4good.nonprofits",e)}),[]}class d extends r{constructor(o){super(),p(this,o,_,null,i,{})}}export{d as default};

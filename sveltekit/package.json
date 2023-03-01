@@ -1,0 +1,38 @@
+{
+	"name": "correlaid-org",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-static": "^2.0.1",
+		"@sveltejs/adapter-vercel": "^2.0.2",
+		"@sveltejs/kit": "^1.5.3",
+		"@tailwindcss/aspect-ratio": "^0.4.2",
+		"@tailwindcss/line-clamp": "^0.4.2",
+		"@tailwindcss/typography": "^0.5.9",
+		"autoprefixer": "^10.4.13",
+		"postcss": "^8.4.21",
+		"svelte": "^3.55.1",
+		"svelte-carousel": "^1.0.22",
+		"tailwindcss": "^3.2.6",
+		"vite": "^4.1.1"
+	},
+	"type": "module",
+	"dependencies": {
+		"@directus/sdk": "^10.3.1",
+		"@tailwindcss/forms": "^0.5.3",
+		"daisyui": "^2.50.0",
+		"i18n": "^0.15.1",
+		"ioredis": "^5.3.1",
+		"lodash": "^4.17.21",
+		"maplibre-gl": "^2.4.0",
+		"simply-reactive": "^4.1.0",
+		"svelte-markdown": "^0.2.3",
+		"svelte-media-queries": "^1.5.2"
+	}
+}

@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/[[locale=locale]]/community/correlaidx/[slug]/+page.svelte";

@@ -1,0 +1,1 @@
+export { default as component } from "../../../src/routes/[[locale]]/en/education/nonprofits/experts/+page.svelte";

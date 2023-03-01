@@ -1,0 +1,13 @@
+version: "3.9"
+services:  
+  redis:
+    container_name: correlaid-redis
+    image: correlaid-redis
+    build: ./redis/.
+    healthcheck:
+      test: ["CMD", "redis-cli","ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - '6380:6379'
