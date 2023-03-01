@@ -11,7 +11,7 @@ export async function load({ params }) {
   }}
   `
 
-  const data = await cache("experts", query)
+  const data = await cache("podcast_episodes", query)
 
   const podcast_episodes = data.Podcast_Episodes
 

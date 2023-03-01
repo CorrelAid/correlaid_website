@@ -41,7 +41,7 @@ export const dictionary = {
 	"/[[locale=locale]]/community": [23],
 	"/[[locale=locale]]/community/correlaidx": [~26],
 	"/[[locale=locale]]/community/correlaidx/[slug]": [~27],
-	"/[[locale=locale]]/community/volunteer_journeys": [28],
+	"/[[locale=locale]]/community/volunteer_journeys": [~28],
 	"/[[locale=locale]]/community/[founding_lc=founding_lc]": [25],
 	"/[[locale=locale]]/community/[become_member=become_member]": [24],
 	"/[[locale=locale]]/newsletter": [~29],
