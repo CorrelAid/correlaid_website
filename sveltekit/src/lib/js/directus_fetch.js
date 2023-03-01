@@ -5,26 +5,23 @@ import { error } from '@sveltejs/kit'
 const directus = await getDirectusClient();
 
 const directus_fetch = async (query) => {
-   
-let data;
+
+    let data;
 
     try {
         const response = await directus.graphql.items(query);
         data = response.data
-        
+
+
     } catch (err) {
         throw error(500, {
             message: err.message
         })
     }
 
-    if(data[Object.keys(data)[0]].length == 0){
-        throw error(404, {
-            message: "No CorrelContent"
-        })
-    }else{
-        return data
-    }
+
+    return data
+
 
 }
 

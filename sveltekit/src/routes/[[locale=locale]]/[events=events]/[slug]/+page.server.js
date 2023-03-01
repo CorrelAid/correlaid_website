@@ -35,7 +35,6 @@ export async function load({ params }) {
     }
   }
   `
-  console.log(query)
 
   const data = await cache(`events_${params.slug}`, query)
 

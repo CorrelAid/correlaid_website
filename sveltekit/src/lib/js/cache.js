@@ -1,11 +1,12 @@
 import Redis from 'ioredis';
 import directus_fetch from '$lib/js/directus_fetch'
 import { PUBLIC_REDIS_URL } from '$env/static/public';
+import { error } from '@sveltejs/kit'
 
 
 const redis = new Redis(PUBLIC_REDIS_URL);
 
-const expirationTime = 60; //second
+const expirationTime = 2; //second
 
 
 async function set(key, data) {
@@ -37,7 +38,11 @@ export async function cache(key,query) {
         return JSON.parse(data);
     }
     data = await get_api(query);
-    if (data !== null) {
+    if(data[Object.keys(data)[0]].length == 0){
+        throw error(404, {
+            message: "No CorrelContent"
+        })
+    }else{
         await set(key, JSON.stringify(data));
         return data;
     }

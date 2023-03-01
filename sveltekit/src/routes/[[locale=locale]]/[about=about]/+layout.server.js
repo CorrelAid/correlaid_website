@@ -42,7 +42,7 @@ export async function load({ params, url, route, }) {
   }
       `
 
-  const data = await cache(pk,query)
+  const data = await cache("groups",query)
 
   const remote_office = data.Global_Administrators.filter(person => person.group === 'remote_office');
   const board = data.Global_Administrators.filter(person => person.group === 'board');

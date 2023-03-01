@@ -11,7 +11,7 @@ export async function load({ params, url }) {
   const pk = find(page_keys, url.pathname)[0]
 
   let data = {};
-
+  console.log(params)
   if (!params.slug && !url.pathname.startsWith("/files")) {
     const query = `query {
         Pages(filter: { page_key: { _eq: "${pk}" } }) {
