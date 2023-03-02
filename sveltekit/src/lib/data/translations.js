@@ -2,10 +2,6 @@ export default {
   de: {
     "navbar.home": { "text": null, "url": "/" },
     "navbar.about": { "text": "Über uns", "url": "/ueber" },
-    // Subnav about
-    "navbar.about.board": { "text": "Vorstand", "url": "/ueber/vorstand" },
-    "navbar.about.remote_office": { "text": "Remote Office", "url": "/ueber/remote_office" },
-    "navbar.about.ethics_commission": { "text": "Ethikkomission", "url": "/ueber/ethikkommission" },
     // 
     "navbar.projects_consulting": { "text": "Projekte und Beratung", "url": "/projects_consulting" },
     // Subnav projects_consulting
@@ -36,14 +32,11 @@ export default {
     "footer.imprint": { "text": "Impressum", "url": "/impressum" },
     "footer.coc": { "text": "Code of Conduct", "url": "/coc" },
     "footer.contact": { "text": "Kontakt", "url": "/contact" },
+    "footer.team": { "text": "Team", "url": "/team" },
   },
   en: {
     "navbar.home": { "text": null, "url": "/en" },
     "navbar.about": { "text": "About us", "url": "/en/about" },
-    // Sub nav about
-    "navbar.about.board": { "text": "Board", "url": "/en/about/board" },
-    "navbar.about.remote_office": { "text": "Remote Office", "url": "/en/about/remote_office" },
-    "navbar.about.ethics_commission": { "text": "Ethics Commission", "url": "/en/about/ethics_commission" },
     // 
     "navbar.projects_consulting": { "text": "Projekte und Beratung", "url": "/en/projekte_beratung" },
     // Subnav projects_consulting
@@ -76,5 +69,6 @@ export default {
     "footer.imprint": { "text": "Imprint", "url": "/en/imprint" },
     "footer.coc": { "text": "Code of Conduct", "url": "/coc" },
     "footer.contact": { "text": "Contact", "url": "/en/contact" },
+    "footer.team": { "text": "Team", "url": "/team" },
   },
 };

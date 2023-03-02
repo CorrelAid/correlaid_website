@@ -23,7 +23,8 @@
   $: ethics_commission = data.ethics_commission;
 </script>
 
-<div class="container mx-auto mb-12 px-4">
+
+<!-- <div class="container mx-auto mb-12 px-4">
   <h2 class="py-4 text-xl font-bold">
     {organizational_structure.translations[0].title}
   </h2>
@@ -109,4 +110,4 @@
       </div>
     </a>
   </div>
-</div>
+</div> -->

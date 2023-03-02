@@ -66,8 +66,7 @@
 				{#each content as section}
 					{#if section.collection == "heros"}
 						<Hero
-							builder={section.item.builder}
-							image_id={section.item.image.id}
+							data={section.item}
 						/>
 					{:else if section.collection == "buttons"}
 						<div class="container mx-auto ">

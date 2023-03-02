@@ -30,7 +30,8 @@ export const nodes = [() => import('./nodes/0'),
 	() => import('./nodes/27'),
 	() => import('./nodes/28'),
 	() => import('./nodes/29'),
-	() => import('./nodes/30')];
+	() => import('./nodes/30'),
+	() => import('./nodes/31')];
 
 export const server_loads = [0,2];
 
@@ -46,6 +47,7 @@ export const dictionary = {
 	"/[[locale=locale]]/community/[become_member=become_member]": [24],
 	"/[[locale=locale]]/newsletter": [~29],
 	"/[[locale=locale]]/podcast": [~30],
+	"/[[locale=locale]]/team": [~31],
 	"/[[locale=locale]]/[projects_consulting=projects_consulting]": [16],
 	"/[[locale=locale]]/[imprint=imprint]": [15],
 	"/[[locale=locale]]/[events=events]": [~13],
@@ -60,8 +62,8 @@ export const dictionary = {
 	"/[[locale=locale]]/[projects_consulting=projects_consulting]/[hackathons=hackathons]": [18],
 	"/[[locale=locale]]/[projects_consulting=projects_consulting]/[consulting=consulting]": [~17],
 	"/[[locale=locale]]/[education=education]/[learning_r=learning_r]": [8],
-	"/[[locale=locale]]/[about=about]/[group=group]": [5,[2]],
 	"/[[locale=locale]]/[events=events]/[slug]": [~14],
+	"/[[locale=locale]]/[about=about]/[group]": [5,[2]],
 	"/[[locale=locale]]": [3]
 };
 
