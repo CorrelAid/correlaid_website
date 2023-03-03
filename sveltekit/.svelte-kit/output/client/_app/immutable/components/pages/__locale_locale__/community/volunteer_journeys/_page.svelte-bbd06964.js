@@ -1,1 +1,0 @@
-import{S as r,i as u,s as p,M as i,o as l,N as c}from"../../../../../chunks/index-22943c7f.js";import{p as o}from"../../../../../chunks/page_key-e9a2d838.js";function m(s,t,n){let e;return i(s,o,a=>n(0,e=a)),l(()=>{c(o,e="navbar.community.volunteer_journeys",e)}),[]}class v extends r{constructor(t){super(),u(this,t,m,null,p,{})}}export{v as default};

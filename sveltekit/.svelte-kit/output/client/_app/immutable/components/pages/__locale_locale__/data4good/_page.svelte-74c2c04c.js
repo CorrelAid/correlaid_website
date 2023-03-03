@@ -1,1 +1,0 @@
-import{S as r,i as p,s as u,M as i,o as l,N as c}from"../../../../chunks/index-22943c7f.js";import{p as t}from"../../../../chunks/page_key-e9a2d838.js";function _(s,a,o){let e;return i(s,t,n=>o(0,e=n)),l(()=>{c(t,e="navbar.data4good",e)}),[]}class d extends r{constructor(a){super(),p(this,a,_,null,u,{})}}export{d as default};

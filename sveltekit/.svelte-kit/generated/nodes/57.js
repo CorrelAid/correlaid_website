@@ -1,1 +1,0 @@
-export { default as component } from "../../../src/routes/[[locale]]/ueber/partner_sponsoren_preise/+page.svelte";

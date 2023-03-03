@@ -1,1 +1,0 @@
-import{S as r,i as p,s as u,M as c,o as i,N as l}from"../../../../chunks/index-22943c7f.js";import{p as t}from"../../../../chunks/page_key-e9a2d838.js";function _(s,o,a){let e;return c(s,t,n=>a(0,e=n)),i(()=>{l(t,e="footer.coc",e)}),[]}class g extends r{constructor(o){super(),p(this,o,_,null,u,{})}}export{g as default};

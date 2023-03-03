@@ -1,1 +1,0 @@
-export { default as component } from "../../../../src/routes/[[locale=locale]]/community/[founding_lc=founding_lc]/+page.svelte";

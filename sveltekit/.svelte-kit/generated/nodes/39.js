@@ -1,1 +1,0 @@
-export { default as component } from "../../../src/routes/[[locale]]/en/data4good/projects/+page.svelte";
