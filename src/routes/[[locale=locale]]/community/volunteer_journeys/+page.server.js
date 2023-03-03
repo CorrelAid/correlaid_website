@@ -17,7 +17,7 @@ export async function load({ params }) {
   }
   `
 
-  const data = await directus_fetch(query))
+  const data = await directus_fetch(query)
 
   const volunteer_journeys = data.Volunteer_Journeys
 
