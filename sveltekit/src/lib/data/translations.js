@@ -38,7 +38,7 @@ export default {
     "navbar.home": { "text": null, "url": "/en" },
     "navbar.about": { "text": "About us", "url": "/en/about" },
     // 
-    "navbar.projects_consulting": { "text": "Projekte und Beratung", "url": "/en/projekte_beratung" },
+    "navbar.projects_consulting": { "text": "Projects and Consulting", "url": "/en/projekte_beratung" },
     // Subnav projects_consulting
     "navbar.projects_consulting.projects": { "text": "Projects Overview", "url": "/en/projekte_beratung/projects" },
     "navbar.projects_consulting.consulting": { "text": "Consulting", "url": "/en/projekte_beratung/consulting" },

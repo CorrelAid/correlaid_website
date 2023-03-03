@@ -66,7 +66,11 @@
 				{#each content as section}
 					{#if section.collection == "heros"}
 						<Hero
-							data={section.item}
+							image={section.item.image}
+							text={section.item.translations[0].text}
+							height={section.item.height}
+							gradient_only={section.item.gradient_only}
+							buttons={section.item.buttons}
 						/>
 					{:else if section.collection == "buttons"}
 						<div class="container mx-auto ">
@@ -97,8 +101,8 @@
 							/>
 						</div>
 					{:else if section.collection == "carousel"}
-						<div class="container mx-auto">
-							<Carousel data={section.item.builder} />
+						<div class="mb-10">
+							<Carousel carousel_elements={section.item.carousel_elements}/>
 						</div>
 					{:else if section.collection == "custom_sections"}
 						<slot />
