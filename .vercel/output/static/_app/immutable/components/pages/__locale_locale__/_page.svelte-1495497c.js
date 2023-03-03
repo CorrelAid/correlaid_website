@@ -1,0 +1,1 @@
+import{S as r,i as p,s as u,L as i,o as l,M as c}from"../../../chunks/index-4dab16f7.js";import{p as a}from"../../../chunks/page_key-a6e4bd1f.js";function m(s,t,o){let e;return i(s,a,n=>o(0,e=n)),l(()=>{c(a,e="navbar.home",e)}),[]}class b extends r{constructor(t){super(),p(this,t,m,null,u,{})}}export{b as default};

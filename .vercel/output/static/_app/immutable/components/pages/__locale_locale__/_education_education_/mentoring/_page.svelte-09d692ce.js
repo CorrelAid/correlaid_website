@@ -1,0 +1,1 @@
+import{S as r,i,s as p,L as u,o as c,M as l}from"../../../../../chunks/index-4dab16f7.js";import{p as a}from"../../../../../chunks/page_key-a6e4bd1f.js";function m(s,t,n){let e;return u(s,a,o=>n(0,e=o)),c(()=>{l(a,e="navbar.education.mentoring",e)}),[]}class g extends r{constructor(t){super(),i(this,t,m,null,p,{})}}export{g as default};
