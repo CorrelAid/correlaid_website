@@ -22,7 +22,7 @@ export async function load({ params, url, route, }) {
 
       `
 
-  const data = await directus_fetch(query)
+      const data = await directus_fetch(query)
 
 
   return { newsletter_overview: data.Newsletter_Overview }

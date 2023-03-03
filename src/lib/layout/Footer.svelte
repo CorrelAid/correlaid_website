@@ -34,6 +34,14 @@
       <li>
         <a
           class="hover:text-primary transition"
+          href={$t("footer.team").url}
+        >
+          {$t("footer.team").text}
+        </a>
+      </li>
+      <li>
+        <a
+          class="hover:text-primary transition"
           href={$t("footer.contact").url}
         >
           {$t("footer.contact").text}

@@ -10,7 +10,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-static": "^2.0.1",
-		"@sveltejs/adapter-vercel": "^2.0.2",
+		"@sveltejs/adapter-vercel": "^2.2.1",
 		"@sveltejs/kit": "^1.5.3",
 		"@tailwindcss/aspect-ratio": "^0.4.2",
 		"@tailwindcss/line-clamp": "^0.4.2",
@@ -28,6 +28,7 @@
 		"@tailwindcss/forms": "^0.5.3",
 		"daisyui": "^2.50.0",
 		"i18n": "^0.15.1",
+		"ioredis": "^5.3.1",
 		"lodash": "^4.17.21",
 		"maplibre-gl": "^2.4.0",
 		"simply-reactive": "^4.1.0",

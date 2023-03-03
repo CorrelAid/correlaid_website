@@ -13,7 +13,6 @@
     export let data;
     let events;
     $: events = data.events;
-    $: console.log(events)
 </script>
 
 <div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">

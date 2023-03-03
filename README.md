@@ -1,19 +1,22 @@
 ## Dev Setup
-1. Clone Repo
+1. 
 
-2. Install packages
+2. Install packages (in the SvelteKit folder)
 
     ```
     npm install
     ```
-3. Create .env file with following contents:
+3. Create .env file with following contents (in the SvelteKit folder)
     ```
     PUBLIC_API_URL=https://correlaid.directus.app
+    BYPASS_TOKEN=REPLACE_ME_WITH_SECRET_VALUE
     ```
-4. Start project with:
+
+5. Start project with:
     ```
     npm run dev
     ```
+
 
 ## Project explanation
 

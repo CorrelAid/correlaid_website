@@ -19,7 +19,7 @@ export async function load({ params }) {
   }`
 
 
-    const data = await directus_fetch(query)
+  const data = await directus_fetch(query)
 
     const geo_json = {
         "type": "FeatureCollection",
