@@ -1,9 +1,0 @@
-{
-	"expiration": 60,
-	"bypassToken": "REPLACE_ME_WITH_SECRET_VALUE",
-	"allowQuery": [
-		"__pathname"
-	],
-	"group": 16,
-	"passQuery": true
-}

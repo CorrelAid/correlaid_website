@@ -1,1 +1,0 @@
-import{S as r,i as p,s as u,L as i,o as c,M as l}from"../../../../chunks/index-4dab16f7.js";import{p as o}from"../../../../chunks/page_key-a6e4bd1f.js";function _(s,t,a){let e;return i(s,o,n=>a(0,e=n)),c(()=>{l(o,e="navbar.projects_consulting",e)}),[]}class g extends r{constructor(t){super(),p(this,t,_,null,u,{})}}export{g as default};
