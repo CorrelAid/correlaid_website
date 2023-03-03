@@ -9,7 +9,7 @@ export const config = {
   isr: {
     expiration: 60,
     group: 1,
-    bypassToken: 'REPLACE_ME_WITH_SECRET_VALUE',
+    bypassToken: BYPASS_TOKEN,
   },
 };
 
