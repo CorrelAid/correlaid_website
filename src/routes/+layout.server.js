@@ -139,10 +139,14 @@ export async function load({ params, url }) {
       `
      
       const data = await directus_fetch(query)
-     
+
     
-    // sorting page builder items by sort field
-    return { builder: data.Pages[0].builder }
+    const builder = data.Pages[0].builder
+    
+    if (builder !== undefined){
+      return { builder:  builder}
+    }
+    
   }
 
 

@@ -1,11 +1,6 @@
 import { gen_img_url } from "$lib/js/helpers";
 import directus_fetch from '$lib/js/directus_fetch'
 
-/** @type {import('@sveltejs/adapter-vercel').Config} */
-export const config = {
-  runtime: 'edge'
-};
-
 export const GET = async ({ params }) => {
 
 

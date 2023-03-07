@@ -105,12 +105,16 @@
 							<Carousel carousel_elements={section.item.carousel_elements}/>
 						</div>
 					{:else if section.collection == "custom_sections"}
+					<div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">
 						<slot />
+					</div>
 					{/if}
 				{/each}
 				<!-- if collection doesnt contain a custom section, load page anyways (but must be empty in this case) to write page key to store -->
 				{#if !content.find((e) => e.collection === "custom_sections")}
+				<div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">
 					<slot />
+				</div>
 				{/if}
 			{:else}
 				<slot />
