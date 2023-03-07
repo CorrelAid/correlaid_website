@@ -1,8 +1,9 @@
-import { getDirectusClient } from '$lib/js/directus_client';
 import { error } from '@sveltejs/kit'
+import { PUBLIC_API_URL } from '$env/static/public';
 
+import { Directus } from '@directus/sdk';
+const directus = new Directus(PUBLIC_API_URL);
 
-const directus = await getDirectusClient();
 
 const directus_fetch = async (query) => {
 

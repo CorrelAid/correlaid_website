@@ -5,13 +5,17 @@ import _ from "lodash";
 
 import { BYPASS_TOKEN } from '$env/static/private';
 
+/** @type {import('@sveltejs/adapter-vercel').Config} */
 export const config = {
+  runtime: 'edge',
   isr: {
     expiration: 60,
     group: 1,
     bypassToken: BYPASS_TOKEN,
   },
 };
+
+
 
 
 /** @type {import('./$types').PageServerLoad} */
