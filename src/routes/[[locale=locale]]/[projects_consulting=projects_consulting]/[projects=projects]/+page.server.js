@@ -9,9 +9,19 @@ export async function load({ params }) {
   const query = `query{
   Projects{
     status
+    project_id
+    organizations{
+      Projects_Organization_id{
+          translations{
+              languages_code{code}
+              name
+          }
+      }
+    }
     translations(
     filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
   ){
+    
         title
         description
         summary
@@ -22,7 +32,7 @@ export async function load({ params }) {
     }
 }}
   `
-
+  
   const data = await directus_fetch(query)
 
   const projects = data.Projects

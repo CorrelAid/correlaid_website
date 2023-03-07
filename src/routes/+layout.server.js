@@ -5,13 +5,17 @@ import _ from "lodash";
 
 import { BYPASS_TOKEN } from '$env/static/private';
 
+/** @type {import('@sveltejs/adapter-vercel').Config} */
 export const config = {
+  runtime: 'edge',
   isr: {
     expiration: 60,
     group: 1,
     bypassToken: BYPASS_TOKEN,
   },
 };
+
+
 
 
 /** @type {import('./$types').PageServerLoad} */
@@ -22,7 +26,7 @@ export async function load({ params, url }) {
   const pk = find(page_keys, url.pathname)[0]
 
   let data = {};
-  if (!params.slug && !url.pathname.startsWith("/files")) {
+  if (!params.slug && !url.pathname.startsWith("/files") && !params.project_id) {
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
         builder {
@@ -135,10 +139,14 @@ export async function load({ params, url }) {
       `
      
       const data = await directus_fetch(query)
-     
+
     
-    // sorting page builder items by sort field
-    return { builder: data.Pages[0].builder }
+    const builder = data.Pages[0].builder
+    
+    if (builder !== undefined){
+      return { builder:  builder}
+    }
+    
   }
 
 

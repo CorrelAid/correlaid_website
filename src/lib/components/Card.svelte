@@ -1,28 +1,20 @@
 <script>
-    export let image_url;
-    export let i;
+    export let title;
+    export let organization;
     export let href;
+
 </script>
 
-<article
-    class="overflow-hidden rounded-lg border border-neutral-25 shadow-sm relative"
-    style={i == 0 ? "" : "min-height:450px"}
+<a
+    class="overflow-hidden rounded-lg border border-neutral-25 shadow-sm relative "
+    href={href}
 >
     <span
         class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
     />
-    <div class="aspect-w-16 aspect-h-9">
-        {#if image_url != null}
-        <a {href} class="">
-            <img alt="Office" src={image_url} class="h-full w-full" />
-        </a>
-        {:else}
-        <a {href} class="bg-neutral h-full w-full">
-            
-        </a>
-        {/if}
+    <div class="px-3 pt-4 pb-6">
+        <h3 class="pb-3 line-clamp-3 text-xl">{title}</h3>
+        <h4 class="text-lg">{organization.Projects_Organization_id.translations[0].name}</h4>
     </div>
-    <div class="p-4 sm:p-6 ">
-        <slot />
-    </div>
-</article>
+
+</a>

@@ -19,7 +19,7 @@
     $: posts = data.posts;
 </script>
 
-<div class="container mx-auto px-4 pb-8">
+
     <div class="gap-6 grid xl:grid-cols-3">
         {#each posts as post, i}
                 <div class={i == 0 ? "col-span-full" : "col-span-1"}>
@@ -56,4 +56,4 @@
                 </div>
         {/each}
     </div>
-</div>
+

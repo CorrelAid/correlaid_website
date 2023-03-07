@@ -1,5 +1,4 @@
 <script>
-    import Card from "./Card.svelte";
     export let i;
     export let langs;
     export let image_url;
@@ -10,7 +9,25 @@
     export let content_creators;
 </script>
 
-<Card {image_url} {i} {href}>
+<article
+    class="overflow-hidden rounded-lg border border-neutral-25 shadow-sm relative"
+    style={i == 0 ? "" : "min-height:450px"}
+>
+    <span
+        class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
+    />
+    <div class="aspect-w-16 aspect-h-9">
+        {#if image_url != null}
+        <a {href} class="">
+            <img alt="Office" src={image_url} class="h-full w-full" />
+        </a>
+        {:else}
+        <a {href} class="bg-neutral h-full w-full">
+            
+        </a>
+        {/if}
+    </div>
+    <div class="p-4 sm:p-6 ">
     <a {href}>
         <h3 class="text-lg font-bold text-base-content">
             {title}
@@ -45,4 +62,5 @@
             {teaser}
         </p>
     </div>
-</Card>
+</div>
+</article>

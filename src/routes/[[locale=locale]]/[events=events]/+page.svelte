@@ -3,7 +3,7 @@
     import { onMount } from "svelte";
     import { t } from "$lib/stores/i18n";
     import { gen_img_url } from "$lib/js/helpers";
-    import CalendarCard from "../../../lib/components/Calendar_Card.svelte";
+    import Events_Card from "../../../lib/components/Events_Card.svelte";
 
     onMount(() => {
         $page_key = "navbar.events";
@@ -15,9 +15,9 @@
     $: events = data.events;
 </script>
 
-<div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">
+
     {#each events as event, i}
-        <CalendarCard
+        <Events_Card
             href={$t("navbar.events").url + "/" + event.slug}
             title={event.title}
             teaser={event.teaser}
@@ -29,4 +29,4 @@
             tags={event.tags}
         />
     {/each}
-</div>
+
