@@ -5,13 +5,13 @@ import _ from "lodash";
 
 import { BYPASS_TOKEN } from '$env/static/private';
 
-export const config = {
-  isr: {
-    expiration: 60,
-    group: 1,
-    bypassToken: BYPASS_TOKEN,
-  },
-};
+// export const config = {
+//   isr: {
+//     expiration: 60,
+//     group: 1,
+//     bypassToken: BYPASS_TOKEN,
+//   },
+// };
 
 
 /** @type {import('./$types').PageServerLoad} */

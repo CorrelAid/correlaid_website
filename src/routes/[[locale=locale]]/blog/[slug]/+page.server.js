@@ -56,7 +56,7 @@ export async function load({ params }) {
   }`
 
   const data = await directus_fetch(query)
-
+// checking if post exists in current locale, if not using other language
   let lang_content = _.find(data.Posts[0].translations, el => el.languages_code.code === get_lang(params))
 
   if(lang_content === undefined){
