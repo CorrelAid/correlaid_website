@@ -26,7 +26,7 @@ export async function load({ params, url }) {
   const pk = find(page_keys, url.pathname)[0]
 
   let data = {};
-  if (!params.slug && !url.pathname.startsWith("/files") && !params.project_id) {
+  if (!params.slug && !params.project_id) {
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
         builder {
