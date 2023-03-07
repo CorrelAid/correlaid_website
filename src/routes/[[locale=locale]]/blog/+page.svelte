@@ -4,6 +4,9 @@
     import { t } from "$lib/stores/i18n";
     import { gen_img_url } from "$lib/js/helpers";
     import BlogCard from "$lib/components/Blog_Card.svelte";
+    import { get_lang } from "$lib/js/helpers";
+    import _ from "lodash";
+    import { page } from "$app/stores";
 
     onMount(() => {
         $page_key = "navbar.blog";
@@ -19,22 +22,38 @@
 <div class="container mx-auto px-4 pb-8">
     <div class="gap-6 grid xl:grid-cols-3">
         {#each posts as post, i}
-            <div class={i == 0 ? "col-span-full" : "col-span-1"}>
-                <BlogCard
-                    {i}
-                    href={$t("navbar.blog").url +
-                        "/" +
-                        post.translations[0].slug}
-                    title={post.translations[0].title}
-                    teaser={post.translations[0].teaser}
-                    tags={post.translations[0].tags}
-                    image_url={gen_img_url(
-                        post.translations[0].title_image.id,
-                        "fit=inside&width=1200&height=675&format=png"
-                    )}
-                    content_creators={post.content_creators}
-                />
-            </div>
+                <div class={i == 0 ? "col-span-full" : "col-span-1"}>
+                    {#if post.translations.title_image}
+                        <BlogCard
+                            {i}
+                            langs={post.langs}
+                            href={$t("navbar.blog").url +
+                                "/" +
+                                post.translations.slug}
+                            title={post.translations.title}
+                            teaser={post.translations.teaser}
+                            tags={post.translations.tags}
+                            image_url={gen_img_url(
+                                post.translations.title_image.id,
+                                "fit=inside&width=1200&height=675&format=png"
+                            )}
+                            content_creators={post.content_creators}
+                        />
+                    {:else}
+                    <BlogCard
+                            {i}
+                            langs={post.langs}
+                            href={$t("navbar.blog").url +
+                                "/" +
+                                post.translations.slug}
+                            title={post.translations.title}
+                            teaser={post.translations.teaser}
+                            tags={post.translations.tags}
+                            image_url={null}
+                            content_creators={post.content_creators}
+                        />
+                    {/if}
+                </div>
         {/each}
     </div>
 </div>

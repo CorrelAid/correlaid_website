@@ -138,7 +138,7 @@ export async function load({ params, url }) {
      
     
     // sorting page builder items by sort field
-    return { builder: _.orderBy(data.Pages[0].builder, item => item.sort, ["asc"]) }
+    return { builder: data.Pages[0].builder }
   }
 
 

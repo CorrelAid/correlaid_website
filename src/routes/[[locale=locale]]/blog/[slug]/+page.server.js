@@ -1,5 +1,16 @@
 import directus_fetch from '$lib/js/directus_fetch'
 import { get_lang } from '$lib/js/helpers'
+import _ from "lodash";
+
+import { BYPASS_TOKEN } from '$env/static/private';
+
+export const config = {
+  isr: {
+    expiration: 60,
+    group: 1,
+    bypassToken: BYPASS_TOKEN,
+  },
+};
 
 
 /** @type {import('./$types').PageServerLoad} */
@@ -8,10 +19,12 @@ export async function load({ params }) {
 
   const query = `query {
     Posts(filter: { translations: { slug: { _eq: "${params.slug}"}}}) {
-       date_created
+       pubdate
        content_creators{
         Content_Creators_id{
-            translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
+            translations(
+              filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+            ){
                 position
                 description
             }
@@ -28,7 +41,10 @@ export async function load({ params }) {
             }
         }
     }
-      translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
+      translations{
+        languages_code{
+          code
+      }
           title
           text
           title_image{id}
@@ -40,7 +56,14 @@ export async function load({ params }) {
   }`
 
   const data = await directus_fetch(query)
+// checking if post exists in current locale, if not using other language
+  let lang_content = _.find(data.Posts[0].translations, el => el.languages_code.code === get_lang(params))
 
-  return { post: data.Posts[0], title: data.Posts[0].translations[0].title }
+  if(lang_content === undefined){
+    lang_content = data.Posts[0].translations[0]
+  }
+    
+ 
+  return { pubdate: data.Posts[0].pubdate, lang_content: lang_content, content_creators: data.Posts[0].content_creators  }
 
 }

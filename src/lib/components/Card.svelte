@@ -12,9 +12,15 @@
         class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
     />
     <div class="aspect-w-16 aspect-h-9">
+        {#if image_url != null}
         <a {href} class="">
             <img alt="Office" src={image_url} class="h-full w-full" />
         </a>
+        {:else}
+        <a {href} class="bg-neutral h-full w-full">
+            
+        </a>
+        {/if}
     </div>
     <div class="p-4 sm:p-6 ">
         <slot />
