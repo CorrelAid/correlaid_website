@@ -1,5 +1,6 @@
 import directus_fetch from '$lib/js/directus_fetch'
 import { get_lang } from '$lib/js/helpers'
+import _ from "lodash";
 
 
 /** @type {import('./$types').PageServerLoad} */
@@ -8,19 +9,19 @@ export async function load({ params }) {
 
   const query = `query {
     Posts {
+      pubdate
       content_creators{
         Content_Creators_id{
-            translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
-                position
-                description
-            }
             person{
                 name
             }
         }
     }
        
-      translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
+      translations{
+        languages_code{
+          code
+      }
           title
           text
           tags
@@ -36,6 +37,8 @@ export async function load({ params }) {
 
   const data = await directus_fetch(query)
 
-  return { posts: data.Posts }
+  const posts = _.orderBy(data.Posts, item => item.pubdate, ['desc']);
+
+  return { posts: posts }
 
 }
