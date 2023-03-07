@@ -18,7 +18,7 @@
 		"autoprefixer": "^10.4.13",
 		"postcss": "^8.4.21",
 		"svelte": "^3.55.1",
-		"svelte-carousel": "^1.0.23",
+		"@wildfluss/svelte-carousel": "1.0.26",
 		"tailwindcss": "^3.2.7",
 		"vite": "^4.1.4"
 	},
@@ -26,9 +26,7 @@
 	"dependencies": {
 		"@directus/sdk": "^10.3.1",
 		"@tailwindcss/forms": "^0.5.3",
-		"daisyui": "^2.51.3",
 		"i18n": "^0.15.1",
-		"ioredis": "^5.3.1",
 		"lodash": "^4.17.21",
 		"maplibre-gl": "^2.4.0",
 		"simply-reactive": "^4.1.0",
