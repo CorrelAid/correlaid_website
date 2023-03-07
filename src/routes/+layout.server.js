@@ -7,7 +7,6 @@ import { BYPASS_TOKEN } from '$env/static/private';
 
 /** @type {import('@sveltejs/adapter-vercel').Config} */
 export const config = {
-  runtime: 'edge',
   isr: {
     expiration: 60,
     group: 1,
