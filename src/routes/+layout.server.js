@@ -5,13 +5,13 @@ import _ from "lodash";
 
 import { BYPASS_TOKEN } from '$env/static/private';
 
-// export const config = {
-//   isr: {
-//     expiration: 60,
-//     group: 1,
-//     bypassToken: BYPASS_TOKEN,
-//   },
-// };
+export const config = {
+  isr: {
+    expiration: 60,
+    group: 1,
+    bypassToken: BYPASS_TOKEN,
+  },
+};
 
 
 /** @type {import('./$types').PageServerLoad} */
@@ -135,10 +135,11 @@ export async function load({ params, url }) {
       `
      
       const data = await directus_fetch(query)
+      const builder = _.orderBy(data.Pages[0].builder, item => item.sort, ["asc"])
      
     
     // sorting page builder items by sort field
-    return { builder: _.orderBy(data.Pages[0].builder, item => item.sort, ["asc"]) }
+    return { builder: builder}
   }
 
 
