@@ -1,5 +1,6 @@
 <script>
     import { page_key } from "$lib/stores/page_key";
+    import { t } from "$lib/stores/i18n";
     import { onMount } from "svelte";
     import Card from "$lib/components/Card.svelte";
 
@@ -12,7 +13,13 @@
     $: projects = data.projects;
 </script>
 
+<div class="grid grid-cols-2 gap-6">
     {#each projects as project, i}
-     <Card/>
-    {/each}
+        <Card
+            href={$t("navbar.projects_consulting.projects").url + "/" + project.project_id}
+            title={project.translations[0].title}
+            organization={project.organizations[0]}
 
+        />
+    {/each}
+</div>

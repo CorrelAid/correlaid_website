@@ -13,7 +13,7 @@
     $: if (image != null) {
         image_id = image.id;
     }
-    $: console.log(buttons);
+
 </script>
 
 <section

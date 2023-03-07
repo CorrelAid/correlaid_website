@@ -19,7 +19,6 @@
     let organizational_structure;
     $: organizational_structure = data.organizational_structure;
 
-    $: console.log(organizational_structure);
 </script>
 
 <Html
