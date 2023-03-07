@@ -6,6 +6,8 @@
   import { gen_date } from "$lib/js/helpers";
   import { locale } from "$lib/stores/i18n";
   import { gen_img_url } from "$lib/js/helpers";
+  import _ from "lodash";
+  import { get_lang } from '$lib/js/helpers'
 
   onMount(() => {
     $page_key = "navbar.blog";
@@ -13,44 +15,54 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let post;
-  $: post = data.post;
+  let pubdate;
+  $: pubdate = data.pubdate;
+  let lang_content;
+  $: lang_content = data.lang_content;
+  let content_creators;
+  $: content_creators = data.content_creators;
   let proc_date;
-  $: proc_date = gen_date(post.date_created, $locale, true);
+  $: proc_date = gen_date(pubdate, $locale, true);
+  $: console.log(content_creators)
 </script>
 
 <div class="container mx-auto pt-12 pb-10">
   <div id="header" class="mx-auto pb-6">
-    <Html source={`<h1>${post.translations[0].title}</h1>`} width={"text"} />
-    <p class="mx-4 pt-12 text-lg">{post.translations[0].teaser}</p>
+    <Html source={`<h1>${lang_content.title}</h1>`} width={"text"} />
+    <p class="mx-4 pt-12 text-lg">{lang_content.teaser}</p>
 
     <p class="mx-4 py-4 font-light">
-      {proc_date} - {#each post.content_creators as person, i}
+      {proc_date} - {#each content_creators as person, i}
         {person.Content_Creators_id.person
-          .name}{#if i < post.content_creators.length - 1}{", "} {/if}
+          .name}{#if i < content_creators.length - 1}{", "} {/if}
       {/each}
     </p>
     <div class="aspect-w-16 aspect-h-9 offset my-8 mx-4">
+      {#if lang_content.title_image}
       <img
         alt="Office"
         src={gen_img_url(
-          post.translations[0].title_image.id,
+          lang_content.title_image.id,
           "fit=inside&width=1200&height=675&format=png"
         )}
         class="h-full w-full rounded border-4 border-neutral "
       />
+      {:else}
+          <div class="w-full h-full bg-primary"></div>
+      {/if}
     </div>
   </div>
   <div class="pb-10">
     <Html
-      source={post.translations[0].text}
+      source={lang_content.text}
       options={"prose-img:"}
       width={"text"}
     />
   </div>
+  {#if content_creators.length != 0}
   <hr />
   <div class="pt-12 space-y-8">
-    {#each post.content_creators as person}
+    {#each content_creators as person}
       <Person
         name={person.Content_Creators_id.person.name}
         img={gen_img_url(
@@ -77,6 +89,7 @@
       />
     {/each}
   </div>
+  {/if}
 </div>
 
 <style>

@@ -1,7 +1,7 @@
 <script>
     import Card from "./Card.svelte";
-
     export let i;
+    export let langs;
     export let image_url;
     export let href;
     export let title;
@@ -16,6 +16,12 @@
             {title}
         </h3>
     </a>
+
+    <p>
+        {#each langs as lang}
+            <span>{lang} </span>
+        {/each}
+    </p>
 
     <p class="pt-2 pb-4">
         {#each content_creators as person, i}
