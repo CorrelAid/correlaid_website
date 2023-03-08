@@ -22,8 +22,7 @@ export async function load({ params, url }) {
 
   // retreive page key by using the url. you cant access stores in server files
   const page_keys = translations[`${get_locale(params)}`]
-  const pk = find(page_keys, url.pathname)[0]
-  console.log(url)
+  const pk = find(page_keys, url.pathname.replace("//", "/"))[0]
 
   let data = {};
   if (params.slug === undefined || url.pathname.endsWith("blog")) 
@@ -144,8 +143,6 @@ export async function load({ params, url }) {
 
     const builder = data.Pages[0].builder
 
-    console.log(await data)
-    console.log(builder)
 
     if (builder === undefined) {
       
