@@ -5,7 +5,14 @@ import _ from "lodash";
 
 import { BYPASS_TOKEN } from '$env/static/private';
 
-
+/** @type {import('@sveltejs/adapter-vercel').Config} */
+export const config = {
+  isr: {
+    expiration: 60,
+    group: 1,
+    bypassToken: BYPASS_TOKEN,
+  },
+};
 
 
 
@@ -18,7 +25,7 @@ export async function load({ params, url }) {
   const pk = find(page_keys, url.pathname)[0]
 
   let data = {};
-  if (!params.slug && !params.project_id) {
+  if (!params.slug === undefined && !params.project_id === undefined) {
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
         builder {
@@ -134,6 +141,8 @@ export async function load({ params, url }) {
 
     
     const builder = data.Pages[0].builder
+
+    console.log("hu")
     
     if (builder !== undefined){
       return { builder:  builder}
