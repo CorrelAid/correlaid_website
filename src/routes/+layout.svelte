@@ -24,7 +24,7 @@
 
 	// Forwarding the user to the equivalent of the current page in the language selected in the laguage dropdown in the header
 	function handleLocaleChange(event) {
-		console.log($page_key)
+		
 		// if the page contains a slug, get the root url and add the slug
 		if ($page.params.slug != null) {
 			const url = $t($page_key).url + "/" + $page.params.slug;

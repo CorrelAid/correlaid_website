@@ -46,8 +46,6 @@ export async function load({ params, url, route, }) {
   const ethics_commission = data.Global_Administrators.filter(person => person.group === 'ethics_commission');
   const organizational_structure = data.Organizational_Structure;
 
-  console.log(organizational_structure)
-
   return { remote_office: remote_office, board: board, ethics_commission: ethics_commission, organizational_structure: organizational_structure}
 
 }

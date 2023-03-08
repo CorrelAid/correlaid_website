@@ -12,7 +12,9 @@ export async function load({ params }) {
     project_id
     organizations{
       Projects_Organization_id{
-          translations{
+          translations(
+            filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+          ){
               languages_code{code}
               name
           }

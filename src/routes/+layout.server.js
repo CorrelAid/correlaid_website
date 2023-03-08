@@ -23,10 +23,10 @@ export async function load({ params, url }) {
   // retreive page key by using the url. you cant access stores in server files
   const page_keys = translations[`${get_locale(params)}`]
   const pk = find(page_keys, url.pathname)[0]
-
+  console.error(params)
 
   let data = {};
-  if (params.slug === undefined && params.project_id === undefined) {
+  if (params.slug === undefined) {
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
         builder {
@@ -137,18 +137,18 @@ export async function load({ params, url }) {
       }
     }
       `
-     
-      const data = await directus_fetch(query)
 
-    
+    const data = await directus_fetch(query)
+
+
     const builder = data.Pages[0].builder
 
     console.log("hu")
-    
-    if (builder !== undefined){
-      return { builder:  builder}
+
+    if (builder !== undefined) {
+      return { builder: builder }
     }
-    
+
   }
 
 

@@ -8,7 +8,6 @@
   export let teaser;
   export let title;
   export let content_creators = false;
-  $:console.log(people)
 </script>
 
 <div class="mx-auto pb-6 text_width">
