@@ -24,8 +24,9 @@ export async function load({ params, url }) {
   const page_keys = translations[`${get_locale(params)}`]
   const pk = find(page_keys, url.pathname)[0]
 
+
   let data = {};
-  if (!params.slug === undefined && !params.project_id === undefined) {
+  if (params.slug === undefined && params.project_id === undefined) {
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
         builder {
