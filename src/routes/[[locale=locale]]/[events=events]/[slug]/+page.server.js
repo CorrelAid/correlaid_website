@@ -38,6 +38,6 @@ export async function load({ params }) {
 
   const data = await directus_fetch(query)
 
-  return { event: data.Events[0], title: data.Events[0].title }
+  return { event: data.Events[0] }
 
 }

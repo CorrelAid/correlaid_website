@@ -22,10 +22,13 @@ export async function load({ params, url }) {
 
   // retreive page key by using the url. you cant access stores in server files
   const page_keys = translations[`${get_locale(params)}`]
-  const pk = find(page_keys, url.pathname.replace("//", "/"))[0]
+  // vercels places / in front of path if optional param
+  const pk = find(page_keys, url.pathname.replace("//", "/"))[0] 
+  console.log(url.pathname)
+  console.log(params)
 
   let data = {};
-  if (params.slug === undefined || url.pathname.endsWith("blog")) 
+  if (params.slug === undefined) 
   {
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
