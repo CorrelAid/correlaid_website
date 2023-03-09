@@ -1,24 +1,20 @@
 import directus_fetch from '$lib/js/directus_fetch'
 
 
-/** @type {import('./$types').PageServerLoad} */
+/** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
 
   const query = `query{
-    OER{
-    kind
+    Podcast_Episodes{
+    title
     link
-    translations{
-        title
-    }
-  }
-  }
+  }}
   `
+
   const data = await directus_fetch(query)
-  
 
-  const oer = data.OER
+  const podcast_episodes = data.Podcast_Episodes
 
-  return { oer: oer }
+  return { podcast_episodes: podcast_episodes }
 
 }

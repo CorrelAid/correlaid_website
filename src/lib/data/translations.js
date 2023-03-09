@@ -3,11 +3,11 @@ export default {
     "navbar.home": { "text": null, "url": "/" },
     "navbar.about": { "text": "Über uns", "url": "/ueber" },
     // 
-    "navbar.projects_consulting": { "text": "Projekte und Beratung", "url": "/projects_consulting" },
+    "navbar.projects_consulting": { "text": "Projekte und Beratung", "url": "/projekte_beratung" },
     // Subnav projects_consulting
-    "navbar.projects_consulting.projects": { "text": "Projektübersicht", "url": "/projects_consulting/projekte" },
-    "navbar.projects_consulting.consulting": { "text": "Beratung", "url": "/projects_consulting/beratung" },
-    "navbar.projects_consulting.hackathons": { "text": "Hackathons und Datendialoge", "url": "/projects_consulting/hackathons" },
+    "navbar.projects_consulting.projects": { "text": "Projektübersicht", "url": "/projekte_beratung/projekte" },
+    "navbar.projects_consulting.consulting": { "text": "Beratung", "url": "/projekte_beratung/beratung" },
+    "navbar.projects_consulting.hackathons": { "text": "Hackathons und Datendialoge", "url": "/projekte_beratung/hackathons" },
     // 
     "navbar.education": { "text": "Bildung", "url": "/bildung" },
     // Subnav education
@@ -38,11 +38,11 @@ export default {
     "navbar.home": { "text": null, "url": "/en" },
     "navbar.about": { "text": "About us", "url": "/en/about" },
     // 
-    "navbar.projects_consulting": { "text": "Projects and Consulting", "url": "/en/projekte_beratung" },
+    "navbar.projects_consulting": { "text": "Projects and Consulting", "url": "/en/projects_consulting" },
     // Subnav projects_consulting
-    "navbar.projects_consulting.projects": { "text": "Projects Overview", "url": "/en/projekte_beratung/projects" },
-    "navbar.projects_consulting.consulting": { "text": "Consulting", "url": "/en/projekte_beratung/consulting" },
-    "navbar.projects_consulting.hackathons": { "text": "Hackathons and Data Dialogues", "url": "/en/projekte_beratung/hackathons" },
+    "navbar.projects_consulting.projects": { "text": "Projects Overview", "url": "/en/projects_consulting/projects" },
+    "navbar.projects_consulting.consulting": { "text": "Consulting", "url": "/en/projects_consulting/consulting" },
+    "navbar.projects_consulting.hackathons": { "text": "Hackathons and Data Dialogues", "url": "/en/projects_consulting/hackathons" },
     // 
     "navbar.education": { "text": "Education", "url": "/en/education" },
     // Subnav education

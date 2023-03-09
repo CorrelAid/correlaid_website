@@ -2,12 +2,13 @@ import directus_fetch from '$lib/js/directus_fetch'
 import { get_lang } from '$lib/js/helpers'
 
 
-/** @type {import('./$types').PageServerLoad} */
+
+/** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
 
 
   const query = `query {
-    Projects(filter:{project_id:{_eq: "${params.project_id}"}}) {
+    Projects(filter:{project_id:{_eq: "${params.slug}"}}) {
       People{
         People_id{
              name
@@ -23,7 +24,9 @@ export async function load({ params }) {
     }
       organizations{
         Projects_Organization_id{
-            translations{
+            translations(
+              filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+            ){
                 languages_code{code}
                 name
                 description
@@ -46,7 +49,6 @@ export async function load({ params }) {
   }
   }
   `
-  console.log(query)
   const data = await directus_fetch(query)
 
   return { project: data.Projects[0] }

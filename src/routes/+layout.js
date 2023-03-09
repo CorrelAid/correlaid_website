@@ -3,30 +3,22 @@ import { get_lang, get_locale, find } from '$lib/js/helpers'
 import translations from "$lib/data/translations";
 import _ from "lodash";
 
-import { BYPASS_TOKEN } from '$env/static/private';
-
-/** @type {import('@sveltejs/adapter-vercel').Config} */
-export const config = {
-  runtime: 'edge',
-  isr: {
-    expiration: 60,
-    group: 1,
-    bypassToken: BYPASS_TOKEN,
-  },
-};
 
 
 
 
-/** @type {import('./$types').PageServerLoad} */
+
+/** @type {import('./$types').PageLoad} */
 export async function load({ params, url }) {
 
   // retreive page key by using the url. you cant access stores in server files
   const page_keys = translations[`${get_locale(params)}`]
-  const pk = find(page_keys, url.pathname)[0]
+  // vercels places / in front of path if optional param
+  const pk = find(page_keys, url.pathname.replace("//", "/"))[0] 
 
   let data = {};
-  if (!params.slug && !url.pathname.startsWith("/files") && !params.project_id) {
+  if (params.slug === undefined) 
+  {
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
         builder {
@@ -137,16 +129,20 @@ export async function load({ params, url }) {
       }
     }
       `
-     
-      const data = await directus_fetch(query)
 
-    
+    const data = await directus_fetch(query)
+
+
     const builder = data.Pages[0].builder
-    
-    if (builder !== undefined){
-      return { builder:  builder}
+
+
+    if (builder === undefined) {
+      
     }
-    
+    else{
+      return { builder: builder }
+    }
+
   }
 
 

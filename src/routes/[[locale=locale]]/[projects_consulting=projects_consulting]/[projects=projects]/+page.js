@@ -3,7 +3,7 @@ import { get_lang } from '$lib/js/helpers'
 import { unpack_events } from '$lib/js/data_processing'
 
 
-/** @type {import('./$types').PageServerLoad} */
+/** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
 
   const query = `query{
@@ -12,7 +12,9 @@ export async function load({ params }) {
     project_id
     organizations{
       Projects_Organization_id{
-          translations{
+          translations(
+            filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+          ){
               languages_code{code}
               name
           }
