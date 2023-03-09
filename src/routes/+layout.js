@@ -3,21 +3,12 @@ import { get_lang, get_locale, find } from '$lib/js/helpers'
 import translations from "$lib/data/translations";
 import _ from "lodash";
 
-import { BYPASS_TOKEN } from '$env/static/private';
-
-/** @type {import('@sveltejs/adapter-vercel').Config} */
-export const config = {
-  isr: {
-    expiration: 60,
-    group: 1,
-    bypassToken: BYPASS_TOKEN,
-  },
-};
 
 
 
 
-/** @type {import('./$types').PageServerLoad} */
+
+/** @type {import('./$types').PageLoad} */
 export async function load({ params, url }) {
 
   // retreive page key by using the url. you cant access stores in server files
