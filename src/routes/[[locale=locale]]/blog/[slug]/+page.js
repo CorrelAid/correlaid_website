@@ -13,7 +13,7 @@ export const config = {
 };
 
 
-/** @type {import('./$types').PageServerLoad} */
+/** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
 
 

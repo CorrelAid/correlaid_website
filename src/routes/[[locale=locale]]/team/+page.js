@@ -1,7 +1,7 @@
 import { get_lang } from '$lib/js/helpers';
 import directus_fetch from '$lib/js/directus_fetch'
 
-/** @type {import('./$types').PageServerLoad} */
+/** @type {import('./$types').PageLoad} */
 export async function load({ params, url, route, }) {
 
   const query = `

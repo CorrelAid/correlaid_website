@@ -15,8 +15,6 @@ export async function load({ params, url }) {
   const page_keys = translations[`${get_locale(params)}`]
   // vercels places / in front of path if optional param
   const pk = find(page_keys, url.pathname.replace("//", "/"))[0] 
-  console.log(url.pathname)
-  console.log(params)
 
   let data = {};
   if (params.slug === undefined) 
