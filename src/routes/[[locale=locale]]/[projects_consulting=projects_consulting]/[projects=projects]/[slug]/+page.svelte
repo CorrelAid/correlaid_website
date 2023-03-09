@@ -15,7 +15,7 @@
   export let data;
   let project;
   $: project = data.project;
-  $:console.log(project.organizations[0].Projects_Organization_id)
+
 </script>
 
 <TextContainer

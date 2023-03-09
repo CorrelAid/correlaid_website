@@ -9,6 +9,7 @@
     export let linkedin = "";
     export let github = "";
     import Links from "$lib/components/Links.svelte";
+    $: console.log(github)
 </script>
 
 <div class="rounded grid grid-cols-4">
@@ -29,6 +30,6 @@
             <h3 class="text-lg pb-3">{position}</h3>
             <p class="pb-3">{description}</p>
         {/if}
-        <Links {website} {mastodon} {twitter} {linkedin} [github] />
+        <Links {website} {mastodon} {twitter} {linkedin} {github} />
     </div>
 </div>
