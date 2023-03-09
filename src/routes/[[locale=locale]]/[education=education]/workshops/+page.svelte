@@ -1,6 +1,7 @@
 <script>
     import { page_key } from "$lib/stores/page_key";
     import { onMount } from "svelte";
+    import Card from "$lib/components/Card.svelte";
 
     onMount(() => {
         $page_key = "navbar.education.workshops";
@@ -11,12 +12,11 @@
     $: workshops = data.workshops;
 </script>
 
-<div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">
-    <ul>
-      {#each workshops as workshop, i}
-        <li>
-          {workshop.name}
-        </li>
-      {/each}
-    </ul>
-  </div>
+  <div class="grid grid-cols-2 gap-6">
+    {#each workshops as workshop, i}
+        <Card
+            title={workshop.name}
+            subtitle={workshop.teaser}
+        />
+    {/each}
+</div>

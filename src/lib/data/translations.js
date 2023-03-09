@@ -50,7 +50,7 @@ export default {
     // Sub sub nav offers for non profits
     "navbar.education.workshops": { "text": "Workshops", "url": "/en/education/workshops" },
     "navbar.education.learning_r": { "text": "R Lernen", "url": "/en/education/learning_r" },
-    "navbar.education.oer": { "text": "Open Educational Resources", "url": "en/education/oer" },
+    "navbar.education.oer": { "text": "Open Educational Resources", "url": "/en/education/oer" },
     "navbar.education.tidy_tuesday": { "text": "Tidy Tuesday", "url": "/en/education/tidy_tuesday" },
     "navbar.education.mentoring": { "text": "Mentoring", "url": "/en/education/mentoring" },
     // 

@@ -65,6 +65,7 @@
 			{#if content}
 				{#each content as section}
 					{#if section.collection == "heros"}
+					<div class="{section.sort == content.length ? "" : "mb-10"}">
 						<Hero
 							image={section.item.image}
 							text={section.item.translations[0].text}
@@ -72,13 +73,15 @@
 							gradient_only={section.item.gradient_only}
 							buttons={section.item.buttons}
 						/>
+					</div>
 					{:else if section.collection == "buttons"}
-						<div class="container mx-auto ">
+						<div class="container mx-auto">
 							<button>test</button>
 						</div>
 					{:else if section.collection == "wysiwyg"}
 						<div class="container mx-auto">
-							<div class="py-10 px-4">
+							<!-- if first item add top margin -->
+							<div class="mb-10 px-4 {section.sort == 1 ? "mt-10" : ""}">
 								<Html
 									source={section.item.translations[0]
 										.content}
@@ -89,6 +92,7 @@
 						</div>
 					{:else if section.collection == "contacts"}
 						<div class="container mx-auto">
+							<hr class="mb-10">
 							<Person
 								name={section.item.person.name}
 								img={gen_img_url(

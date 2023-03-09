@@ -12,7 +12,7 @@
     $: console.log(github)
 </script>
 
-<div class="rounded grid grid-cols-4">
+<div class="rounded grid grid-cols-4 pb-6">
     {#if img}
         <div class="col-span-full xl:col-span-2  ">
             <div class="relative offset w-56 h-56 mx-auto">

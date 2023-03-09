@@ -3,6 +3,7 @@
 	import { page } from "$app/stores";
 	import { drawer } from "$lib/stores/drawer";
 	import { header_height } from "$lib/stores/dims";
+	import { page_key } from "$lib/stores/page_key";
 	import { createEventDispatcher } from "svelte";
 	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
 	import NavLink from "$lib/components/Nav_Link.svelte";
@@ -78,7 +79,7 @@
 	class="w-screen   z-10 border-b border-neutral-25"
 	bind:clientHeight={$header_height}
 >
-	<div class="mx-auto  px-4 sm:px-6 xl:px-8 ">
+	<div class="mx-auto  px-4 sm:px-6 xl:px-8">
 		<div class="flex items-center justify-between xl:grid grid-cols-10">
 			<div class="flex items-center gap-12  3xl:col-span-3 col-span-2 justify-end">
 				<a class="block text-teal-600" href={$t("navbar.home").url}>
@@ -123,23 +124,27 @@
 								<NavLink
 									href={$t("navbar.about").url}
 									text={$t("navbar.about").text}
+									options={$page_key == "navbar.about" ? "font-medium text-secondary" : ""}
 								/>
 								<NavLinkButton
 									href={$t("navbar.projects_consulting").url}
 									text={$t("navbar.projects_consulting").text}
 									category={"projects_consulting"}
+									options={$page_key == "navbar.projects_consulting" ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
 									href={$t("navbar.education").url}
 									text={$t("navbar.education").text}
 									category={"education"}
+									options={$page_key == "navbar.education" ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
 									href={$t("navbar.community").url}
 									text={$t("navbar.community").text}
 									category={"community"}
+									options={$page_key == "navbar.community" ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 							</div>

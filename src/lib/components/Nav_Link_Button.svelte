@@ -2,6 +2,7 @@
     export let href;
     export let text;
     export let category;
+    export let options = "";
     import DropdownIcon from "../svg/Dropdown_Icon.svelte";
     import { createEventDispatcher } from "svelte";
 
@@ -23,7 +24,7 @@
 </script>
 
 <a
-    class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide"
+    class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide {options}"
     {href}
     on:mouseover={delay}
     on:mouseleave={() => clearTimeout(menuEnterTimer)}

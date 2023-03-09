@@ -18,7 +18,7 @@
         <Card
             href={$t("navbar.projects_consulting.projects").url + "/" + project.project_id}
             title={project.translations[0].title}
-            organization={project.organizations[0]}
+            subtitle={project.organizations[0].Projects_Organization_id.translations[0].name}
 
         />
     {/each}
