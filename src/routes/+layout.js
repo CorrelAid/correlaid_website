@@ -84,7 +84,7 @@ export async function load({ params, url }) {
             }
     
             ... on contacts {
-              
+              hr
               translations(
                 filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
               ) {

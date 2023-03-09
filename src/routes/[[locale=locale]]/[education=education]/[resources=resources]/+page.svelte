@@ -4,7 +4,7 @@
     import Card from "$lib/components/Card.svelte";
 
     onMount(() => {
-        $page_key = "navbar.education.workshops";
+        $page_key = "navbar.education.resources";
     });
 
     export let data;

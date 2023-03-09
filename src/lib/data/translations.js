@@ -13,7 +13,7 @@ export default {
     // Subnav education
     "navbar.education.workshops": { "text": "Workshops", "url": "/bildung/workshops" },
     "navbar.education.learning_r": { "text": "R Lernen", "url": "/bildung/r_lernen" },
-    "navbar.education.oer": { "text": "Open Educational Resources", "url": "/bildung/oer" },
+    "navbar.education.resources": { "text": "Bildunsressourcen", "url": "/bildung/ressourcen" },
     "navbar.education.tidy_tuesday": { "text": "Tidy Tuesday", "url": "/bildung/tidy_tuesday" },
     "navbar.education.mentoring": { "text": "Mentoring", "url": "/bildung/mentoring" },
     // 
@@ -48,9 +48,8 @@ export default {
     // Subnav education
     "navbar.education.nonprofits": { "text": "Offers for Nonprofits", "url": "/en/education/nonprofits" },
     // Sub sub nav offers for non profits
-    "navbar.education.workshops": { "text": "Workshops", "url": "/en/education/workshops" },
+    "navbar.education.resources": { "text": "Educational Resources", "url": "/en/education/resources" },
     "navbar.education.learning_r": { "text": "R Lernen", "url": "/en/education/learning_r" },
-    "navbar.education.oer": { "text": "Open Educational Resources", "url": "/en/education/oer" },
     "navbar.education.tidy_tuesday": { "text": "Tidy Tuesday", "url": "/en/education/tidy_tuesday" },
     "navbar.education.mentoring": { "text": "Mentoring", "url": "/en/education/mentoring" },
     // 

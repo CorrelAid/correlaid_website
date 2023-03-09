@@ -124,27 +124,27 @@
 								<NavLink
 									href={$t("navbar.about").url}
 									text={$t("navbar.about").text}
-									options={$page_key == "navbar.about" ? "font-medium text-secondary" : ""}
+									options={$page_key.startsWith("navbar.about") ? "font-medium text-secondary" : ""}
 								/>
 								<NavLinkButton
 									href={$t("navbar.projects_consulting").url}
 									text={$t("navbar.projects_consulting").text}
 									category={"projects_consulting"}
-									options={$page_key == "navbar.projects_consulting" ? "font-medium text-secondary" : ""}
+									options={$page_key.startsWith("navbar.projects_consulting") ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
 									href={$t("navbar.education").url}
 									text={$t("navbar.education").text}
 									category={"education"}
-									options={$page_key == "navbar.education" ? "font-medium text-secondary" : ""}
+									options={$page_key.startsWith("navbar.education") ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
 									href={$t("navbar.community").url}
 									text={$t("navbar.community").text}
 									category={"community"}
-									options={$page_key == "navbar.community" ? "font-medium text-secondary" : ""}
+									options={$page_key.startsWith("navbar.community") ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 							</div>
@@ -269,16 +269,12 @@
 						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x   border-neutral-25 rounded-b"
 					>
 						<SubnavLink
-							href={$t("navbar.education.workshops").url}
-							text={$t("navbar.education.workshops").text}
+							href={$t("navbar.education.resources").url}
+							text={$t("navbar.education.resources").text}
 						/>
 						<SubnavLink
 							href={$t("navbar.education.learning_r").url}
 							text={$t("navbar.education.learning_r").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.education.oer").url}
-							text={$t("navbar.education.oer").text}
 						/>
 						<SubnavLink
 							href={$t("navbar.education.mentoring").url}

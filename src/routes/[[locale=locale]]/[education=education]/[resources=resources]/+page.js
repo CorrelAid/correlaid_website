@@ -14,6 +14,13 @@ export async function load({ params }) {
      series
      target_group
   }
+    OER{
+    kind
+    link
+    translations{
+        title
+    }
+  }
   }
   `
 

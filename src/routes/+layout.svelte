@@ -65,7 +65,7 @@
 			{#if content}
 				{#each content as section}
 					{#if section.collection == "heros"}
-					<div class="{section.sort == content.length ? "" : "mb-10"}">
+					<div class="{section.sort == content.length ? "" : "mb-12"}">
 						<Hero
 							image={section.item.image}
 							text={section.item.translations[0].text}
@@ -81,7 +81,7 @@
 					{:else if section.collection == "wysiwyg"}
 						<div class="container mx-auto">
 							<!-- if first item add top margin -->
-							<div class="mb-10 px-4 {section.sort == 1 ? "mt-10" : ""}">
+							<div class="mb-12 px-4 {section.sort == 1 ? "mt-10" : ""}">
 								<Html
 									source={section.item.translations[0]
 										.content}
@@ -91,8 +91,10 @@
 							</div>
 						</div>
 					{:else if section.collection == "contacts"}
-						<div class="container mx-auto">
-							<hr class="mb-10">
+						<div class="container mx-auto mb-12">
+							{#if section.item.hr === true}
+							<hr class="mb-12">
+							{/if}
 							<Person
 								name={section.item.person.name}
 								img={gen_img_url(
@@ -105,11 +107,11 @@
 							/>
 						</div>
 					{:else if section.collection == "carousel"}
-						<div class="mb-10">
+						<div class="mb-12">
 							<Carousel carousel_elements={section.item.carousel_elements}/>
 						</div>
 					{:else if section.collection == "custom_sections"}
-					<div class="container mx-auto py-8">
+					<div class="container mx-auto mb-12">
 						<slot />
 					</div>
 					{/if}
