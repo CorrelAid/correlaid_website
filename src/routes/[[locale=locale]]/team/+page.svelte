@@ -27,7 +27,7 @@
     width={"text"}
 />
 
-<div class="container mx-auto flex flex-col gap-y-3 py-8 space-y-8">
+<div class="container mx-auto flex flex-col gap-y-3 space-y-8 my-10">
     {#each remote_office as person}
         <Person
             name={person.person.name}
@@ -47,7 +47,7 @@
     width={"text"}
 />
 
-<div class="container mx-auto flex flex-col gap-y-3 py-8 space-y-8">
+<div class="container mx-auto flex flex-col gap-y-3 my-10 space-y-8">
     {#each board as person}
         <Person
             name={person.person.name}
@@ -67,7 +67,7 @@
     width={"text"}
 />
 
-<div class="container mx-auto flex flex-col gap-y-3 py-8 space-y-8">
+<div class="container mx-auto flex flex-col gap-y-3 my-10 space-y-8">
     {#each ethics_commission as person}
         <Person
             name={person.person.name}

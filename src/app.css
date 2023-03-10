@@ -83,6 +83,20 @@
 
 }
 
+@layer utilities {
+  .prose :where(iframe):not(:where([class~="not-prose"] *)) {
+    @apply video
+  }
+
+  .video {
+
+    aspect-ratio: 16 / 9;
+    width: 100%;
+
+
+  }
+}
+
 .text_width {
   margin: auto;
   max-width: 800px;
@@ -157,6 +171,3 @@
   padding-top: 1px;
   padding-bottom: 1px;
 }
-
-
-

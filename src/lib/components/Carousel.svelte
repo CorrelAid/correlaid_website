@@ -16,6 +16,8 @@
 </script>
 
 {#if browser}
+<!-- https://github.com/vadimkorr/svelte-carousel/issues/29 -->
+{#key carousel_elements}
     <Carousel bind:this={carousel} arrows={false} dots={false}>
         {#each carousel_elements as element}
         <Hero
@@ -71,6 +73,7 @@
             </div> -->
         {/each}
     </Carousel>
+    {/key}
     <div
         class="flex justify-center items-center space-x-4 bg-neutral rounded-b"
     >

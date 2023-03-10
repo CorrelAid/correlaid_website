@@ -3,6 +3,7 @@
 	import { page } from "$app/stores";
 	import { drawer } from "$lib/stores/drawer";
 	import { header_height } from "$lib/stores/dims";
+	import { page_key } from "$lib/stores/page_key";
 	import { createEventDispatcher } from "svelte";
 	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
 	import NavLink from "$lib/components/Nav_Link.svelte";
@@ -13,6 +14,7 @@
 	import LinkButton from "$lib/components/Link_Button.svelte";
 	import MobileMenu from "./Mobile_Menu.svelte";
 
+	let about_toggle = false;
 	let language_toggle = false;
 	let projects_consulting_toggle = false;
 	let education_toggle = false;
@@ -49,19 +51,28 @@
 	$: $page.url && closeall();
 
 	function subnav(btn) {
+		if (btn === "about") {
+			about_toggle = true;
+			projects_consulting_toggle = false;
+			education_toggle = false;
+			community_toggle = false;
+		}
 		if (btn === "projects_consulting") {
+			about_toggle = false;
 			projects_consulting_toggle = true;
 			education_toggle = false;
 			community_toggle = false;
 		}
 
 		if (btn === "education") {
+			about_toggle = false;
 			projects_consulting_toggle = false;
 			education_toggle = true;
 			community_toggle = false;
 		}
 
 		if (btn === "community") {
+			about_toggle = false;
 			projects_consulting_toggle = false;
 			education_toggle = false;
 			community_toggle = true;
@@ -71,14 +82,14 @@
 	$: active_language = $locale;
 </script>
 
-<svelte:window on:load={() => closeall} />
+<svelte:window on:load={closeall} />
 
 <header
 	aria-label="Site Header"
 	class="w-screen   z-10 border-b border-neutral-25"
 	bind:clientHeight={$header_height}
 >
-	<div class="mx-auto  px-4 sm:px-6 xl:px-8 ">
+	<div class="mx-auto  px-4 sm:px-6 xl:px-8">
 		<div class="flex items-center justify-between xl:grid grid-cols-10">
 			<div class="flex items-center gap-12  3xl:col-span-3 col-span-2 justify-end">
 				<a class="block text-teal-600" href={$t("navbar.home").url}>
@@ -123,23 +134,29 @@
 								<NavLink
 									href={$t("navbar.about").url}
 									text={$t("navbar.about").text}
+									category={"about"}
+									options={$page_key.startsWith("navbar.about") ? "font-medium text-secondary" : ""}
+									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
 									href={$t("navbar.projects_consulting").url}
 									text={$t("navbar.projects_consulting").text}
 									category={"projects_consulting"}
+									options={$page_key.startsWith("navbar.projects_consulting") ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
 									href={$t("navbar.education").url}
 									text={$t("navbar.education").text}
 									category={"education"}
+									options={$page_key.startsWith("navbar.education") ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
 									href={$t("navbar.community").url}
 									text={$t("navbar.community").text}
 									category={"community"}
+									options={$page_key.startsWith("navbar.community") ? "font-medium text-secondary" : ""}
 									on:message={handle_dropdown}
 								/>
 							</div>
@@ -248,6 +265,7 @@
 		</div>
 	</div>
 {/if}
+
 {#if education_toggle}
 	<div
 		class="w-screen hidden absolute z-20 xl:block"
@@ -264,16 +282,12 @@
 						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x   border-neutral-25 rounded-b"
 					>
 						<SubnavLink
-							href={$t("navbar.education.workshops").url}
-							text={$t("navbar.education.workshops").text}
+							href={$t("navbar.education.resources").url}
+							text={$t("navbar.education.resources").text}
 						/>
 						<SubnavLink
 							href={$t("navbar.education.learning_r").url}
 							text={$t("navbar.education.learning_r").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.education.oer").url}
-							text={$t("navbar.education.oer").text}
 						/>
 						<SubnavLink
 							href={$t("navbar.education.mentoring").url}

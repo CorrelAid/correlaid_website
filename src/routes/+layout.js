@@ -60,6 +60,7 @@ export async function load({ params, url }) {
                           filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
                         ) {
                           text
+                          link
                         }
                       }
                     }
@@ -83,7 +84,7 @@ export async function load({ params, url }) {
             }
     
             ... on contacts {
-              
+              hr
               translations(
                 filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
               ) {
@@ -101,6 +102,24 @@ export async function load({ params, url }) {
                 }
               }
             }
+
+            ... on quote_carousel{
+              quotes{
+                  
+                  quote_id{
+                      image{
+                        id
+                      }
+                      translations(
+                        filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                      ) {
+                          subtitle
+                          text
+                      }
+                  }
+                  
+              }
+          }
     
             ... on heros {
               height

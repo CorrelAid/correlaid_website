@@ -161,7 +161,6 @@
     }
 </script>
 
-<div class="container mx-auto py-6">
     <div class=" relative px-2">
         <a
             href="https://www.maptiler.com"
@@ -177,7 +176,6 @@
             bind:this={mapContainer}
         />
     </div>
-</div>
 
 <style>
     #map {

@@ -34,7 +34,7 @@
   teaser={lang_content.teaser}
   content_creators={content_creators}
 >
-  <Html source={lang_content.text} options={"prose-img:"} width={"text"} />
+  <Html source={lang_content.text} options={"prose-img:"} width={"text"} slot="main"/>
 </TextContainer>
 {#if content_creators.length != 0}
   <hr />

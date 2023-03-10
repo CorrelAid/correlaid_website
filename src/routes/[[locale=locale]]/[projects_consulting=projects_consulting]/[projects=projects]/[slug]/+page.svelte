@@ -6,6 +6,9 @@
   import TextContainer from "$lib/components/Text_Container.svelte";
   import Links from "$lib/components/Links.svelte";
   import Box from "$lib/components/Box.svelte";
+  import Podcast from "$lib/svg/Podcast.svelte";
+  import Blog from "$lib/svg/Blog.svelte";
+  import { t } from "$lib/stores/i18n";
 
   onMount(() => {
     $page_key = "navbar.projects_consulting.projects";
@@ -15,39 +18,51 @@
   export let data;
   let project;
   $: project = data.project;
-  $:console.log(project.organizations[0].Projects_Organization_id)
+  $: console.log(project);
 </script>
 
 <TextContainer
   title={project.translations[0].title}
   teaser={project.translations[0].summary}
-  box_content={project.organizations[0].Projects_Organization_id.translations[0]}
+  box_content={project.organizations[0].Projects_Organization_id
+    .translations[0]}
 >
-  <Html source={project.translations[0].description} width={"text"} />
+  <div slot="sub_subtitle">
+    {#if project.Podcast || project.Posts.length != 0}
+      <!-- <h3 class="px-4 text-lg pb-2 font-semibold">Links:</h3> -->
+      <div class="mb-6 flex items-center py-1">
+        {#if project.Podcast}
+          <a href={project.Podcast.link}><Podcast height={50} width={50} /></a>
+        {/if}
+        {#if project.Posts.length != 0}
+          <a
+            href={$t("navbar.blog").url +
+              "/" +
+              project.Posts[0].Posts_id.translations.slug}
+            ><Blog height={50} width={30} /></a
+          >
+        {/if}
+      </div>
+    {/if}
+  </div>
+  <Html
+    source={project.translations[0].description}
+    width={"text"}
+    slot="main"
+  />
 </TextContainer>
 <Box>
-      <h3 class="text-xl font-semibold pb-3">CorrelAid Team:</h3>
-      {#each project.People as person}
-        <div class="flex items-center">
-          <span class="mr-2">{person.People_id.name}</span>
-          <Links
-            website={person.People_id.website
-              ? person.People_id.website
-              : ""}
-            linkedin={person.People_id.linkedin
-              ? person.People_id.linkedin
-              : ""}
-            mastodon={person.People_id.mastodon
-              ? person.People_id.mastodon
-              : ""}
-            twitter={person.People_id.twitter
-              ? person.People_id.twitter
-              : ""}
-            github={person.People_id.github
-              ? person.People_id.github
-              : ""}
-          />
-        </div>
-      {/each}
-
- </Box>
+  <h3 class="text-xl font-semibold pb-3">CorrelAid Team:</h3>
+  {#each project.People as person}
+    <div class="flex items-center">
+      <span class="mr-2">{person.People_id.name}</span>
+      <Links
+        website={person.People_id.website ? person.People_id.website : ""}
+        linkedin={person.People_id.linkedin ? person.People_id.linkedin : ""}
+        mastodon={person.People_id.mastodon ? person.People_id.mastodon : ""}
+        twitter={person.People_id.twitter ? person.People_id.twitter : ""}
+        github={person.People_id.github ? person.People_id.github : ""}
+      />
+    </div>
+  {/each}
+</Box>

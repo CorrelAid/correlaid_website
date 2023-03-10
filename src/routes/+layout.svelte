@@ -13,6 +13,7 @@
 	import Html from "$lib/components/Html.svelte";
 	import Hero from "$lib/components/Hero.svelte";
 	import Carousel from "$lib/components/Carousel.svelte";
+	import QuoteCarousel from "$lib/components/Quote_Carousel.svelte";
 
 	export let data;
 
@@ -65,6 +66,7 @@
 			{#if content}
 				{#each content as section}
 					{#if section.collection == "heros"}
+					<div class="{section.sort == content.length ? "" : "mb-12"}">
 						<Hero
 							image={section.item.image}
 							text={section.item.translations[0].text}
@@ -72,13 +74,15 @@
 							gradient_only={section.item.gradient_only}
 							buttons={section.item.buttons}
 						/>
+					</div>
 					{:else if section.collection == "buttons"}
-						<div class="container mx-auto ">
+						<div class="container mx-auto">
 							<button>test</button>
 						</div>
 					{:else if section.collection == "wysiwyg"}
 						<div class="container mx-auto">
-							<div class="py-10 px-4">
+							<!-- if first item add top margin -->
+							<div class="mb-12 px-4 {section.sort == 1 ? "mt-10" : ""}">
 								<Html
 									source={section.item.translations[0]
 										.content}
@@ -88,7 +92,10 @@
 							</div>
 						</div>
 					{:else if section.collection == "contacts"}
-						<div class="container mx-auto">
+						<div class="container mx-auto mb-12">
+							{#if section.item.hr === true}
+							<hr class="mb-12">
+							{/if}
 							<Person
 								name={section.item.person.name}
 								img={gen_img_url(
@@ -101,11 +108,15 @@
 							/>
 						</div>
 					{:else if section.collection == "carousel"}
-						<div class="mb-10">
+						<div class="mb-12">
 							<Carousel carousel_elements={section.item.carousel_elements}/>
 						</div>
+					{:else if section.collection == "quote_carousel"}
+					<div class="mb-12">
+						<QuoteCarousel quotes={section.item.quotes}/>
+					</div>
 					{:else if section.collection == "custom_sections"}
-					<div class="container mx-auto py-8">
+					<div class="container mx-auto mb-12">
 						<slot />
 					</div>
 					{/if}

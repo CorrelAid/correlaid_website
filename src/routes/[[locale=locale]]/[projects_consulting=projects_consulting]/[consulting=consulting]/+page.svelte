@@ -1,6 +1,9 @@
 <script>
   import { page_key } from "$lib/stores/page_key";
   import { onMount } from "svelte";
+  import Person from "$lib/components/Person.svelte";
+  import { gen_img_url } from "$lib/js/helpers";
+  import Html from "$lib/components/Html.svelte";
 
   onMount(() => {
     $page_key = "navbar.projects_consulting.consulting";
@@ -9,14 +12,38 @@
   export let data;
   let experts;
   $: experts = data.experts;
+  let experts_description;
+  $: experts_description = data.experts_description;
+  $: console.log(experts)
+  
 </script>
 
-<div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">
-  <ul>
-    {#each experts as expert, i}
-      <li>
-        {expert.person.name}
-      </li>
-    {/each}
-  </ul>
+<Html source={experts_description} width={"text"} options={"prose-h2:mt-0"}/>
+<div class="container mx-auto flex flex-col gap-y-3 py-8 space-y-8">
+  {#each experts as person}
+      <Person
+          name={person.person.name}
+          img={gen_img_url(
+              person.person.image.id,
+              "fit=cover&width=200&height=200&quality=80"
+          )}
+          position={person.translations[0].area_of_expertise}
+          description={person.translations[0].description}
+          website={person.person.website
+            ? person.person.website
+            : ""}
+          linkedin={person.person.linkedin
+            ? person.person.linkedin
+            : ""}
+          mastodon={person.person.mastodon
+            ? person.person.mastodon
+            : ""}
+          twitter={person.person.twitter
+            ? person.person.twitter
+            : ""}
+          github={person.person.github
+            ? person.person.github
+            : ""}
+      />
+  {/each}
 </div>

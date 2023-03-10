@@ -40,7 +40,7 @@
                 {#each buttons as button}
                     <LinkButton
                         text={button.buttons_id.translations[0].text}
-                        href={""}
+                        href={button.buttons_id.translations[0].link}
                         color={`bg-${button.buttons_id.color}`}
                     />
                 {/each}
