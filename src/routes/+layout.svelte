@@ -13,6 +13,7 @@
 	import Html from "$lib/components/Html.svelte";
 	import Hero from "$lib/components/Hero.svelte";
 	import Carousel from "$lib/components/Carousel.svelte";
+	import QuoteCarousel from "$lib/components/Quote_Carousel.svelte";
 
 	export let data;
 
@@ -110,6 +111,10 @@
 						<div class="mb-12">
 							<Carousel carousel_elements={section.item.carousel_elements}/>
 						</div>
+					{:else if section.collection == "quote_carousel"}
+					<div class="mb-12">
+						<QuoteCarousel quotes={section.item.quotes}/>
+					</div>
 					{:else if section.collection == "custom_sections"}
 					<div class="container mx-auto mb-12">
 						<slot />
