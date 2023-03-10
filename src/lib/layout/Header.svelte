@@ -14,6 +14,7 @@
 	import LinkButton from "$lib/components/Link_Button.svelte";
 	import MobileMenu from "./Mobile_Menu.svelte";
 
+	let about_toggle = false;
 	let language_toggle = false;
 	let projects_consulting_toggle = false;
 	let education_toggle = false;
@@ -50,19 +51,28 @@
 	$: $page.url && closeall();
 
 	function subnav(btn) {
+		if (btn === "about") {
+			about_toggle = true;
+			projects_consulting_toggle = false;
+			education_toggle = false;
+			community_toggle = false;
+		}
 		if (btn === "projects_consulting") {
+			about_toggle = false;
 			projects_consulting_toggle = true;
 			education_toggle = false;
 			community_toggle = false;
 		}
 
 		if (btn === "education") {
+			about_toggle = false;
 			projects_consulting_toggle = false;
 			education_toggle = true;
 			community_toggle = false;
 		}
 
 		if (btn === "community") {
+			about_toggle = false;
 			projects_consulting_toggle = false;
 			education_toggle = false;
 			community_toggle = true;
@@ -72,7 +82,7 @@
 	$: active_language = $locale;
 </script>
 
-<svelte:window on:load={() => closeall} />
+<svelte:window on:load={closeall} />
 
 <header
 	aria-label="Site Header"
@@ -124,7 +134,9 @@
 								<NavLink
 									href={$t("navbar.about").url}
 									text={$t("navbar.about").text}
+									category={"about"}
 									options={$page_key.startsWith("navbar.about") ? "font-medium text-secondary" : ""}
+									on:message={handle_dropdown}
 								/>
 								<NavLinkButton
 									href={$t("navbar.projects_consulting").url}
@@ -253,6 +265,7 @@
 		</div>
 	</div>
 {/if}
+
 {#if education_toggle}
 	<div
 		class="w-screen hidden absolute z-20 xl:block"

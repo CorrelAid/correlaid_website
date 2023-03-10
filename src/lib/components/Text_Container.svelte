@@ -8,22 +8,23 @@
   export let title;
   export let content_creators = [];
   export let box_content = ""
-  $:console.log(box_content)
 </script>
 
-<div class="mx-auto pb-6 text_width">
+<div class="mx-auto pb-5 text_width">
+  <div class="mb-2">
   <Html source={`<h1>${title}</h1><p class="text-lg">${teaser}</p>`} width={"text"} />
+  </div>
   {#if date != ""}
-    <p class="mx-4 py-4 font-light">
+    <p class="mx-4 my-6 font-light">
       {date} - {#each content_creators as person, i}
         {person.Content_Creators_id.person
-          .name}{#if i < content_creators.length - 1}{", "} {/if}
-      {/each}
+          .name}{#if i < content_creators.length - 1}{", "} {/if}{/each}
     </p>
   {/if}
+  <slot name="sub_subtitle"/>
 
   {#if title_image != null}
-    <div class="aspect-w-16 aspect-h-9 offset my-8 mx-4">
+    <div class="aspect-w-16 aspect-h-9 offset mb-10 mx-4">
       <img
         alt="Office"
         src={gen_img_url(
@@ -41,6 +42,6 @@
   {/if}
 </div>
 <div class="pb-10">
-  <slot />
+  <slot name="main"/>
 </div>
 
