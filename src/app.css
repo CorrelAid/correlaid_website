@@ -163,6 +163,10 @@
 
 
 
+.map_height {
+  height: 600px;
+}
+
 
 
 .maplibregl-popup-close-button {
