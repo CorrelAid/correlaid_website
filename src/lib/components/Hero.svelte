@@ -6,7 +6,8 @@
     export let gradient_only;
     export let height;
     export let text;
-    export let buttons;
+    export let buttons = [];
+    export let correlaidx = false
     import _ from "lodash";
 
     let image_id;
@@ -19,14 +20,14 @@
 <section
     class="relative bg-cover bg-center bg-no-repeat"
     style="{gradient_only != true
-        ? `background-image: url(${gen_img_url(image_id)});`
+        ? `background-image: url(${gen_img_url(image_id, "fit=inside&format=png")});`
         : ''}
     {height == 'full'
         ? `height: calc(100vh - ${$header_height}px)`
         : `height: calc((100vh - ${$header_height}px)/2)`}"
 >
     <div
-        class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-primary/75"
+        class="absolute inset-0 bg-gradient-to-r {correlaidx == false ? "from-secondary/75 to-primary/75" : "from-tertiary/75 to-secondary/75"}"
     />
 
     <div

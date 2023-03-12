@@ -103,8 +103,8 @@
                 .setHTML(
                     `<div class="pt-2 px-2 pb-1 flex justify-center align-center">
                         ${external_svg}
-                    <a class="font-bold text-tertiary hover:underline text-sm font-sans text-base" href="/${
-                        get_locale($page.params) == "de" ? "" : "en"
+                    <a class="font-bold text-tertiary hover:underline text-sm font-sans text-base" href="${
+                        get_locale($page.params) == "de" ? "" : "/en"
                     }/community/correlaidx/${lcs.properties.city}">${
                         lcs.properties.name
                     }</a>

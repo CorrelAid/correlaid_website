@@ -26,6 +26,7 @@
   $: proc_date = gen_date(pubdate, $locale, true);
 </script>
 
+
 <TextContainer
   date={proc_date}
   title={lang_content.title}
