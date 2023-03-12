@@ -41,6 +41,6 @@ export async function load({ params }) {
         geo_json.features.push(obj)
     }
 
-    return { local_chapters: geo_json }
+    return { geo_json: geo_json, local_chapters: data.Local_Chapters }
 
 }

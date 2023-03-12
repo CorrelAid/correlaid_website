@@ -127,9 +127,9 @@
 				{/if}
 			{:else}
 			<!-- not part of pages collection -->
-			<div class="container mx-auto py-8">
+			
 				<slot />
-			</div>
+			
 			{/if}
 		{/if}
 	</div>
