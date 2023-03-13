@@ -20,7 +20,7 @@
 <section
     class="relative bg-cover bg-center bg-no-repeat"
     style="{gradient_only != true
-        ? `background-image: url(${gen_img_url(image_id, "fit=inside&format=png")});`
+        ? `background-image: url(${gen_img_url(image_id)});`
         : ''}
     {height == 'full'
         ? `height: calc(100vh - ${$header_height}px)`

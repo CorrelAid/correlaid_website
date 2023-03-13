@@ -93,10 +93,7 @@ export async function load({ params, url }) {
               }
               person {
                 name
-                website
-                twitter
-                linkedin
-                mastodon
+                email
                 image {
                   id
                 }

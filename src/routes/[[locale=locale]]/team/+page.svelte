@@ -21,16 +21,18 @@
 
 </script>
 
+<div class="mt-12">
 <Html
     source={organizational_structure.translations[0].remote_office}
-    options={""}
+    options={"pb-12"}
     width={"text"}
 />
 
-<div class="container mx-auto flex flex-col gap-y-3 space-y-8 my-10">
+<div class="container mx-auto flex flex-col gap-y-3 space-y-8 pb-12">
     {#each remote_office as person}
         <Person
             name={person.person.name}
+            email={person.person.email}
             img={gen_img_url(
                 person.person.image.id,
                 "fit=cover&width=200&height=200&quality=80"
@@ -43,14 +45,15 @@
 
 <Html
     source={organizational_structure.translations[0].board}
-    options={""}
+    options={"pb-12"}
     width={"text"}
 />
 
-<div class="container mx-auto flex flex-col gap-y-3 my-10 space-y-8">
+<div class="container mx-auto flex flex-col gap-y-3 pb-12 space-y-8">
     {#each board as person}
         <Person
             name={person.person.name}
+            email={person.person.email}
             img={gen_img_url(
                 person.person.image.id,
                 "fit=cover&width=200&height=200&quality=80"
@@ -63,11 +66,11 @@
 
 <Html
     source={organizational_structure.translations[0].ethics_commission}
-    options={""}
+    options={"pb-12"}
     width={"text"}
 />
 
-<div class="container mx-auto flex flex-col gap-y-3 my-10 space-y-8">
+<div class="container mx-auto flex flex-col gap-y-3 pb-12 space-y-8">
     {#each ethics_commission as person}
         <Person
             name={person.person.name}
@@ -75,8 +78,10 @@
                 person.person.image.id,
                 "fit=cover&width=200&height=200&quality=80"
             )}
+            email={person.person.email}
             position={person.translations[0].position}
             description={person.translations[0].description}
         />
     {/each}
+</div>
 </div>

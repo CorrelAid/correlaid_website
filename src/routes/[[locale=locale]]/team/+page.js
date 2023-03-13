@@ -15,6 +15,7 @@ export async function load({ params, url, route, }) {
       }
       group
       person {
+        email
         name
         website
         twitter

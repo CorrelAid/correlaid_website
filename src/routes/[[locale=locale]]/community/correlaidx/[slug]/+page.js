@@ -7,7 +7,47 @@ export async function load({ params }) {
 
 
   const query = `query{
+
+  
+  Events(filter: {local_chapters:{Local_Chapters_id: {translations:{ city:  {_eq : "${params.slug}"}}}}}){
+    dates
+    title
+    teaser
+    registration_link
+    target_group
+    language
+    type
+    slug
+    tags
+    title_image {
+      id
+    }
+  }
     Local_Chapters(filter: {translations:{ city:  {_eq : "${params.slug}"}}}){
+      projects{
+        Projects_id{
+          status
+          project_id
+          organizations{
+            Projects_Organization_id{
+                translations(
+                  filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                ){
+                    languages_code{code}
+                    name
+                }
+            }
+          }
+          translations(
+          filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+        ){
+          
+              title
+              description
+              summary
+          }
+        }
+    }
         location
         founded
         image{
@@ -24,11 +64,7 @@ export async function load({ params }) {
              
         person{
             name
-            website
-            twitter
-            linkedin
-            mastodon
-            github
+            email
             image{
               id
             }
@@ -41,10 +77,8 @@ export async function load({ params }) {
     }
   }`
 
-
-  console.log(query)
   const data = await directus_fetch(query)
 
-  return { local_chapter: data.Local_Chapters[0] }
+  return { local_chapter: data.Local_Chapters[0], events: data.Events, projects: data.Local_Chapters[0].projects}
 
 }
