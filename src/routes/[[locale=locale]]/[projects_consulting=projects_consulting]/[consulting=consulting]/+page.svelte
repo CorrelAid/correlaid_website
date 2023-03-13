@@ -14,7 +14,7 @@
   $: experts = data.experts;
   let experts_description;
   $: experts_description = data.experts_description;
-  $: console.log(experts)
+
   
 </script>
 

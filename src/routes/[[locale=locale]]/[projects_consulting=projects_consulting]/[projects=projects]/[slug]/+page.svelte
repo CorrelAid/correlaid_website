@@ -18,7 +18,7 @@
   export let data;
   let project;
   $: project = data.project;
-  $: console.log(project);
+
 </script>
 
 <TextContainer

@@ -102,6 +102,7 @@
 									section.item.person.image.id,
 									"fit=cover&width=200&height=200&quality=80"
 								)}
+								email={section.item.person.email}
 								position={section.item.translations[0].position}
 								description={section.item.translations[0]
 									.description}
