@@ -6,7 +6,7 @@
         $page_key = "navbar.community.founding_lc";
     });
 </script>
-
+<!-- https://tailwindcomponents.com/component/simple-vertical-timeline -->
 <div class="container mx-auto w-full h-full">
     <div class="relative wrap overflow-hidden p-10 h-full">
       <div class="border-2-2 absolute border-opacity-20 border-gray-700 h-full border" style="left: 50%"></div>
