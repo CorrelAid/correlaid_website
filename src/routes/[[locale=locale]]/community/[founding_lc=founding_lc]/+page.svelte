@@ -1,61 +1,94 @@
 <script>
-    import { page_key } from "$lib/stores/page_key";
-    import { onMount } from "svelte";
+  import { page_key } from "$lib/stores/page_key";
+  import { onMount } from "svelte";
 
-    onMount(() => {
-        $page_key = "navbar.community.founding_lc";
-    });
+  onMount(() => {
+    $page_key = "navbar.community.founding_lc";
+  });
 </script>
-<!-- https://tailwindcomponents.com/component/simple-vertical-timeline -->
-<div class="container mx-auto w-full h-full">
-    <div class="relative wrap overflow-hidden p-10 h-full">
-      <div class="border-2-2 absolute border-opacity-20 border-gray-700 h-full border" style="left: 50%"></div>
-      <!-- right timeline -->
-      <div class="mb-8 flex justify-between items-center w-full right-timeline">
-        <div class="order-1 w-5/12"></div>
-        <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full">
-          <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
-        </div>
-        <div class="order-1 bg-gray-400 rounded-lg shadow-xl w-5/12 px-6 py-4">
-          <h3 class="mb-3 font-bold text-gray-800 text-xl">Lorem Ipsum</h3>
-          <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        </div>
+
+<div class="text_width px-4">
+  <!-- First -->
+  <div class="w-full relative ">
+    <div
+      class="w-3/4  left-1/4 xl:w-2/3 xl:left-1/3 grid grid-cols-3 xl:grid-cols-2  h-full absolute"
+    >
+      <div
+        class="border-b-2 border-l-2 col-span-2 xl:col-span-1 border-neutral-25  relative py-12"
+      >
+        <span
+          class="text-lg font-semibold absolute left-0 -ml-5 bg-tertiary top-1/4 rounded-full flex items-center justify-center w-10 h-10"
+          >1</span
+        >
       </div>
-  
-      <!-- left timeline -->
-      <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
-        <div class="order-1 w-5/12"></div>
-        <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full">
-          <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
-        </div>
-        <div class="order-1 bg-red-400 rounded-lg shadow-xl w-5/12 px-6 py-4">
-          <h3 class="mb-3 font-bold text-white text-xl">Lorem Ipsum</h3>
-          <p class="text-sm font-medium leading-snug tracking-wide text-white text-opacity-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        </div>
-      </div>
-      
-      <!-- right timeline -->
-      <div class="mb-8 flex justify-between items-center w-full right-timeline">
-        <div class="order-1 w-5/12"></div>
-        <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full">
-          <h1 class="mx-auto font-semibold text-lg text-white">3</h1>
-        </div>
-        <div class="order-1 bg-gray-400 rounded-lg shadow-xl w-5/12 px-6 py-4">
-          <h3 class="mb-3 font-bold text-gray-800 text-xl">Lorem Ipsum</h3>
-          <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        </div>
-      </div>
-  
-      <!-- left timeline -->
-      <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
-        <div class="order-1 w-5/12"></div>
-        <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full">
-          <h1 class="mx-auto text-white font-semibold text-lg">4</h1>
-        </div>
-        <div class="order-1 bg-red-400 rounded-lg shadow-xl w-5/12 px-6 py-4">
-          <h3 class="mb-3 font-bold text-white text-xl">Lorem Ipsum</h3>
-          <p class="text-sm font-medium leading-snug tracking-wide text-white text-opacity-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        </div>
-      </div>
+      <div />
+    </div>
+    <div
+      class="w-3/4 left-1/4 xl:w-2/3 xl:left-1/3 h-full relative pl-10 py-8 xl:py-12 "
+    >
+      <h3 class="text-xl pb-3 font-semibold">Informieren</h3>
+      <p class="">
+        Ein Wasser-Quartier ist ein festgelegtes Gebiet in Eurer Kommune. Bisher
+        gibt es bereits 19 Wasser-Quartiere im bundesweiten Netzwerk. Falls Ihr
+        noch nicht unsere Wasser-Quartiere kennt, schaut Euch doch einmal in
+        unserer Galerie der Bestehenden um.
+      </p>
     </div>
   </div>
+  <!-- Second -->
+  <div class="w-full relative ">
+    <div
+      class="w-3/4 right-1/4 xl:w-2/3 xl:right-1/3 grid grid-cols-3 xl:grid-cols-2  h-full absolute "
+    >
+      <div />
+      <div
+        class="border-b-2 border-r-2 border-neutral-25  col-span-2 xl:col-span-1 relative py-12"
+      >
+        <span
+          class="text-lg font-semibold absolute right-0 -mr-5 bg-neutral top-1/4 rounded-full flex items-center justify-center w-10 h-10 text-white"
+          >2</span
+        >
+      </div>
+    </div>
+    <div class="w-3/4  xl:w-2/3  h-full pr-10 py-8 xl:py-12">
+      <h3 class="text-xl pb-3 font-semibold">Kontakt aufnehmen</h3>
+      <p class="">
+        Ihr habt Euch entschieden, Leitungswasser ins Rampenlicht zu rücken?
+        Dann schreibt uns eine Mail. Wir stehen Euch unterstützend und beratend
+        zur Seite. Kontaktiert unsere Community Managerin Isabel.
+      </p>
+    </div>
+  </div>
+  <!-- First -->
+  <div class="w-full relative ">
+    <div
+      class="w-3/4  left-1/4 xl:w-2/3 xl:left-1/3 grid grid-cols-3 xl:grid-cols-2  h-full absolute"
+    >
+      <div
+        class="border-l-2 col-span-2 xl:col-span-1 border-neutral-25  relative py-12"
+      >
+        <span
+          class="text-lg font-semibold absolute left-0 -ml-5 bg-tertiary top-1/4 rounded-full flex items-center justify-center w-10 h-10"
+          >3</span
+        >
+      </div>
+      <div />
+    </div>
+    <div
+      class="w-3/4 left-1/4 xl:w-2/3 xl:left-1/3 h-full relative pl-10 py-8 xl:py-12 "
+    >
+      <h3 class="text-xl pb-3 font-semibold">Wasser-Quartier starten!</h3>
+      <p class="">
+        Die Wasserwende ist eine Gemeinschaftsaufgabe, die Ihr mit einem
+        Netzwerk aus verschiedenen Partner*innen bei Euch im Wasser-Quartier
+        umsetzt. In einem angemessenen Rahmen (z.B. am Weltwassertag,
+        Weltumwelttag, Tag der Daseinsvorsorge) und mit einem
+        zielgruppenorientierten Kommunikationsplan startet Ihr Euer
+        Wasser-Quartier und sichert so von Beginn an eine erfolgreiche
+        Umsetzung. Weltumwelttag, Tag der Daseinsvorsorge) und mit einem
+        zielgruppenorientierten Kommunikationsplan startet Ihr Euer
+        Wasser-Quartier und sichert so von Beginn an eine erfolgreiche
+        Umsetzung. 
+    </div>
+  </div>
+</div>
