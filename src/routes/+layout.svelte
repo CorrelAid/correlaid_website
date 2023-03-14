@@ -13,6 +13,7 @@
 	import Html from "$lib/components/Html.svelte";
 	import Hero from "$lib/components/Hero.svelte";
 	import Carousel from "$lib/components/Carousel.svelte";
+	import Timeline from "$lib/components/Timeline.svelte";
 	import QuoteCarousel from "$lib/components/Quote_Carousel.svelte";
 
 	export let data;
@@ -79,6 +80,10 @@
 						<div class="container mx-auto">
 							<button>test</button>
 						</div>
+					{:else if section.collection == "timelines"}
+					<div class="text_width mx-auto pb-12">
+						<Timeline steps={section.item.steps}/>
+					</div>
 					{:else if section.collection == "wysiwyg"}
 						<div class="container mx-auto">
 							<!-- if first item add top margin -->
