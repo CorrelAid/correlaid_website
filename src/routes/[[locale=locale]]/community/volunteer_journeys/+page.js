@@ -1,6 +1,6 @@
 import directus_fetch from '$lib/js/directus_fetch'
 
-
+import { get_lang, get_locale, find } from '$lib/js/helpers'
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
 
@@ -8,8 +8,11 @@ export async function load({ params }) {
     Volunteer_Journeys{
      person{
          name
+         image{id}
      }
-     translations{
+     translations(
+      filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+    ){
          text
          subtitle
      }

@@ -1,24 +1,27 @@
 <script>
-    import { page_key } from "$lib/stores/page_key";
-    import { onMount } from "svelte";
+  import { page_key } from "$lib/stores/page_key";
+  import { onMount } from "svelte";
+  import VolunteerJourney from "$lib/components/Volunteer_Journey.svelte";
+  import Person from "$lib/components/Person.svelte";
 
-    onMount(() => {
-        $page_key = "navbar.community.volunteer_journeys";
-    });
+  onMount(() => {
+    $page_key = "navbar.community.volunteer_journeys";
+  });
 
-    export let data;
-    let volunteer_journeys;
-    $: volunteer_journeys = data.volunteer_journeys;
-
+  export let data;
+  let volunteer_journeys;
+  $: volunteer_journeys = data.volunteer_journeys;
 </script>
 
-<div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">
-    <ul>
-      {#each volunteer_journeys as journey, i}
-        <li>
-          {journey.person.name}
-        </li>
-      {/each}
-    </ul>
+<div class="container mx-auto pb-12">
+  <div class="grid grid-cols-6 gap-28">
+    {#each volunteer_journeys as journey, i}
+      <VolunteerJourney
+        name={journey.person.name}
+        subtitle={journey.translations[0].subtitle}
+        text={journey.translations[0].text}
+        image={journey.person.image}
+      />
+    {/each}
   </div>
-
+</div>

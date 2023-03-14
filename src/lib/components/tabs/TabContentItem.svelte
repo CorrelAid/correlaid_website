@@ -1,3 +1,4 @@
+<!-- https://blog.openreplay.com/creating-a-svelte-tabs-component-with-slot-props/ -->
 <script lang="ts">
     export let activeTabValue;
     export let id;
