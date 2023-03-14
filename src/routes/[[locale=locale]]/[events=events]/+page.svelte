@@ -15,7 +15,7 @@
     $: events = data.events;
 </script>
 
-
+<div class="space-y-5">
     {#each events as event, i}
         <Events_Card
             href={$t("navbar.events").url + "/" + event.slug}
@@ -29,4 +29,4 @@
             tags={event.tags}
         />
     {/each}
-
+</div>

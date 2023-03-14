@@ -1,5 +1,4 @@
 <script>
-  
   import Html from "$lib/components/Html.svelte";
   import { onMount } from "svelte";
   import { page_key } from "$lib/stores/page_key";
@@ -26,20 +25,24 @@
   $: proc_date = gen_date(pubdate, $locale, true);
 </script>
 
-
 <TextContainer
   date={proc_date}
   title={lang_content.title}
   people={content_creators}
   title_image={lang_content.title_image}
   teaser={lang_content.teaser}
-  content_creators={content_creators}
+  {content_creators}
 >
-  <Html source={lang_content.text} options={"prose-img:"} width={"text"} slot="main"/>
+  <Html
+    source={lang_content.text}
+    options={"prose-img:"}
+    width={"text"}
+    slot="main"
+  />
 </TextContainer>
 {#if content_creators.length != 0}
   <hr />
-  <div class="pt-12 space-y-8">
+  <div class="pt-12 space-y-8 container mx-auto">
     {#each content_creators as person}
       <Person
         name={person.Content_Creators_id.person.name}

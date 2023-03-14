@@ -4,10 +4,12 @@
   import { locale } from "$lib/stores/i18n";
   import { onMount } from "svelte";
   import Html from "$lib/components/Html.svelte";
+  import TextContainer from "$lib/components/Text_Container.svelte";
   import Time from "$lib/svg/Time.svelte";
   import Calendar from "$lib/svg/Calendar.svelte";
   import Location from "$lib/svg/Location.svelte";
   import Headset from "$lib/svg/Headset.svelte";
+  import SignUp from "$lib/svg/Sign_Up.svelte";
 
   onMount(() => {
     $page_key = "navbar.events";
@@ -17,42 +19,66 @@
   export let data;
   let event;
   $: event = data.event;
+
+
+  let dom;
+  $: dom = (new URL(event.registration_link));
+  let root;
+  $: root = dom.hostname.replace('www.','');
 </script>
 
-<div class="container mx-auto pt-8 px-4">
-  <Html source={`<h1>${event.title}</h1>`} width={"text"} />
-  <div id="info" class="p-4 border border-neutral-25 rounded mt-8 mx-auto">
-    {#each event.dates as date}
-      <p class="flex pb-2">
+<TextContainer title={event.title} teaser={event.teaser}>
+  <div
+    id="info"
+    class="p-4 border border-neutral-25 rounded mt-5 mx-auto"
+    slot="sub_subtitle"
+  >
+    <p class="flex space-x-4">
+      <span class="flex">
         <span class="flex my-auto fill-neutral"
-          ><Calendar width={20} height={20} /></span
+          ><Calendar width={19} height={19} /></span
         >
 
-        <span class="pl-4 my-auto">{gen_date(date.date, $locale)}</span>
-        <span class="pl-10 flex my-auto fill-neutral"
+        <span class="pl-2 y-auto">{gen_date(event.date, $locale)}</span>
+      </span>
+      <span class="flex">
+        <span class=" flex my-auto fill-neutral"
           ><Time width={20} height={20} /></span
-        ><span class="pl-4 my-auto">{gen_time(date.start_time, $locale)} - {gen_time(date.end_time, $locale)}</span
-        >
-    {/each}
-    {#if event.location}
-      <p class="flex pb-2">
-        <span class="flex my-auto fill-neutral"
-          ><Location width={20} height={20} /></span
-        > <span class="pl-4 my-auto">{event.location}</span>
-      </p>
-    {/if}
-    {#if event.online}
-      <p class="flex">
-        <span class="flex my-auto fill-neutral"
-          ><Headset width={20} height={20} /></span
-        > <span class="pl-4 my-auto">Online</span>
-      </p>
-    {/if}
+        ><span class="pl-2 my-auto"
+          >{gen_time(event.start_time, $locale)} - {gen_time(
+            event.end_time,
+            $locale
+          )}</span
+        ></span
+      >
+
+      {#if event.location}
+        <p class="flex">
+          <span class="flex my-auto fill-neutral"
+            ><Location width={20} height={20} /></span
+          > <span class="pl-2 my-auto">{event.location}</span>
+        </p>
+      {/if}
+      {#if event.online}
+        <p class="flex">
+          <span class="flex my-auto fill-neutral"
+            ><Headset width={20} height={20} /></span
+          > <span class="pl-2 my-auto">Online</span>
+        </p>
+      {/if}
+      {#if event.registration_link}
+        <a href="{event.registration_link}" class="flex">
+          <span class="flex my-auto fill-neutral"
+            ><SignUp width={20} height={20} /></span
+          > <span class="pl-2 my-auto">{root}</span>
+      </a>
+      {/if}
+    </p>
   </div>
-  <div class="mt-6">
+  <div slot="main">
     <Html source={`<h2>Details</h2>` + event.description} width={"text"} />
   </div>
-</div>
+</TextContainer>
 
 <style>
   #info {
