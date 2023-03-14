@@ -6,7 +6,7 @@
 	import { page_key } from "$lib/stores/page_key";
 	import { gen_img_url } from "$lib/js/helpers";
 	import { header_height } from "$lib/stores/dims";
-	import { drawer } from "$lib/stores/drawer";
+	import { no_scroll } from "$lib/stores/no_scroll";
 	import Header from "$lib/layout/Header.svelte";
 	import Person from "$lib/components/Person.svelte";
 	import Footer from "$lib/layout/Footer.svelte";
@@ -58,7 +58,7 @@
 <!-- Footer on bottom of page if page is too short -->
 <div
 	class="flex flex-col items-center min-h-screen text-neutral"
-	style={$drawer ? "max-height: 100vh; overflow-y:hidden" : ""}
+	style={$no_scroll ? "max-height: 100vh; overflow-y:hidden" : ""}
 >
 	<Header on:message={handleLocaleChange} />
 	<div id="grow" class="w-screen">

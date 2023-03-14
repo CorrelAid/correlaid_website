@@ -2,6 +2,7 @@
 	import { t, locale } from "$lib/stores/i18n";
 	import { page } from "$app/stores";
 	import { drawer } from "$lib/stores/drawer";
+	import { no_scroll } from "$lib/stores/no_scroll";
 	import { header_height } from "$lib/stores/dims";
 	import { page_key } from "$lib/stores/page_key";
 	import { createEventDispatcher } from "svelte";
@@ -20,6 +21,8 @@
 	let education_toggle = false;
 	let community_toggle = false;
 	let active_language = "de";
+
+	$: $no_scroll = $drawer;
 
 	const dispatch = createEventDispatcher();
 
