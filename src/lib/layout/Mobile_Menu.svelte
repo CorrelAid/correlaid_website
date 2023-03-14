@@ -1,10 +1,13 @@
 <script>
     import { drawer } from "$lib/stores/drawer";
     import { t, locale } from "$lib/stores/i18n";
+    import { no_scroll } from "$lib/stores/no_scroll";
     import { fly, fade } from "svelte/transition";
     import { page } from "$app/stores";
     import DropdownIcon from "../svg/Dropdown_Icon.svelte";
     import LinkButton from "$lib/components/Link_Button.svelte";
+
+    $: $no_scroll = $drawer;
 
     function changeLocale() {
         dispatch("message", {

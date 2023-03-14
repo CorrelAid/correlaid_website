@@ -1,9 +1,10 @@
 <script>
     export let src;
     export let alt;
+    export let w = 56
 </script>
 
-<div class="relative offset w-56 h-56 mx-auto" >
+<div class="relative offset w-{w} mx-auto" >
     <img class="w-56 h-56 border-4 border-neutral rounded" {src} {alt} />
 </div>
 

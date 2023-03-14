@@ -14,7 +14,7 @@
 </script>
 
 <div class="container mx-auto pb-12">
-  <div class="grid grid-cols-6 gap-28">
+  <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 lg:gap-28 gap-8 px-4">
     {#each volunteer_journeys as journey, i}
       <VolunteerJourney
         name={journey.person.name}

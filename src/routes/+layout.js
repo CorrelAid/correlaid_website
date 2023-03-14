@@ -4,10 +4,6 @@ import translations from "$lib/data/translations";
 import _ from "lodash";
 
 
-
-
-
-
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, url }) {
 

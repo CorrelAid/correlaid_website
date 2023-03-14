@@ -1,10 +1,12 @@
 <script>
     import Modal from "./Modal.svelte";
+    import { no_scroll } from "$lib/stores/no_scroll";
     import Html from "$lib/components/Html.svelte";
     import Avatar from "$lib/components/Avatar.svelte";
     import { gen_img_url } from "$lib/js/helpers";
 
     let showModal = false;
+    $: $no_scroll = showModal;
 
     export let name;
     export let subtitle;
@@ -12,7 +14,7 @@
     export let image;
 </script>
 
-<div class="" style="width: max-content;">
+<div class="mx-auto" style="width: max-content;">
     <div class="cursor-pointer"
         on:click={() => (showModal = true)}
         on:keydown={() => (showModal = true)}
