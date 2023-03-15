@@ -68,6 +68,6 @@ export default {
     "footer.imprint": { "text": "Imprint", "url": "/en/imprint" },
     "footer.coc": { "text": "Code of Conduct", "url": "/coc" },
     "footer.contact": { "text": "Contact", "url": "/en/contact" },
-    "footer.team": { "text": "Team", "url": "/team" },
+    "footer.team": { "text": "Team", "url": "/en/team" },
   },
 };
