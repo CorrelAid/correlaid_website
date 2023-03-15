@@ -31,7 +31,7 @@ export default {
     "navbar.donate": { "text": "Spenden", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
     "footer.imprint": { "text": "Impressum", "url": "/impressum" },
     "footer.coc": { "text": "Code of Conduct", "url": "/coc" },
-    "footer.contact": { "text": "Kontakt", "url": "/contact" },
+    "footer.coe": { "text": "Code of Ethics", "url": "/coe" },
     "footer.team": { "text": "Team", "url": "/team" },
   },
   en: {
@@ -66,8 +66,8 @@ export default {
     "navbar.newsletter": { "text": "Newsletter", "url": "/en/newsletter" },
     "navbar.donate": { "text": "Donate", "url": "https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good" },
     "footer.imprint": { "text": "Imprint", "url": "/en/imprint" },
-    "footer.coc": { "text": "Code of Conduct", "url": "/coc" },
-    "footer.contact": { "text": "Contact", "url": "/en/contact" },
+    "footer.coc": { "text": "Code of Conduct", "url": "/en/coc" },
+    "footer.coe": { "text": "Code of Ethics", "url": "/en/coe" },
     "footer.team": { "text": "Team", "url": "/en/team" },
   },
 };
