@@ -9,11 +9,14 @@ export async function load({ params }) {
   const query = `query {
     Events(filter:{slug:{_eq: "${params.slug}"}}) {
       id
-      dates
+      date
+      start_time
+      end_time
       registration_link
       target_group
       language
       description
+      teaser
       type
       online
       title

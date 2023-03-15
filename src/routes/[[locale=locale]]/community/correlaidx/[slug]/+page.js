@@ -10,7 +10,7 @@ export async function load({ params }) {
 
   
   Events(filter: {local_chapters:{Local_Chapters_id: {translations:{ city:  {_eq : "${params.slug}"}}}}}){
-    dates
+    date
     title
     teaser
     registration_link
@@ -76,7 +76,7 @@ export async function load({ params }) {
         }
     }
   }`
-
+  console.log(query)
   const data = await directus_fetch(query)
 
   return { local_chapter: data.Local_Chapters[0], events: data.Events, projects: data.Local_Chapters[0].projects}

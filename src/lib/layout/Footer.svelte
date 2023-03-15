@@ -34,17 +34,17 @@
       <li>
         <a
           class="hover:text-primary transition"
-          href={$t("footer.team").url}
+          href={$t("footer.coe").url}
         >
-          {$t("footer.team").text}
+          {$t("footer.coe").text}
         </a>
       </li>
       <li>
         <a
           class="hover:text-primary transition"
-          href={$t("footer.contact").url}
+          href={$t("footer.team").url}
         >
-          {$t("footer.contact").text}
+          {$t("footer.team").text}
         </a>
       </li>
     </ul>

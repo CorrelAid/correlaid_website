@@ -5,13 +5,15 @@
     export let href;
     export let title;
     export let teaser;
+    import De from "../svg/DE.svelte";
+    import En from "../svg/EN.svelte";
     export let tags;
     export let content_creators;
 </script>
 
 <article
-    class="overflow-hidden rounded-lg border border-neutral-25 shadow-sm relative"
-    style={i == 0 ? "" : "min-height:450px"}
+    class="overflow-hidden rounded-lg border border-neutral-25 shadow-sm relative min-h-full"
+    style={i == 0 ? "" : ""}
 >
     <span
         class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
@@ -28,17 +30,22 @@
         {/if}
     </div>
     <div class="p-4 sm:p-6 ">
-    <a {href}>
+    <a {href} >
         <h3 class="text-lg font-bold text-base-content">
             {title}
         </h3>
-    </a>
-
-    <p>
+         <p class="flex space-x-2 pt-2">
         {#each langs as lang}
-            <span>{lang} </span>
+            {#if lang == "de-DE"}
+            <De height={25} width={25}/>
+            {:else}
+            <En height={25} width={25}/>
+            {/if}
         {/each}
     </p>
+    </a>
+
+   
 
     <p class="pt-2 pb-4">
         {#each content_creators as person, i}
@@ -47,7 +54,7 @@
         {/each}
     </p>
 
-    <div class="flex gap-x-2 w-full">
+    <div class="flex flex-wrap gap-2 w-full">
         {#each tags as tag}
             <span
                 class="text-xs inline-flex items-center font-bold px-3 py-1 bg-secondary text-white rounded"
