@@ -68,7 +68,7 @@
     <div class="grid grid-cols-2 gap-6">
       {#each projects as project, i}
         <Card
-          href={$t("navbar.projects_consulting.projects").url +
+          href={$t("navbar.using_data.projects").url +
             "/" +
             project.Projects_id.project_id}
           title={project.Projects_id.translations[0].title}

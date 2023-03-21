@@ -4,7 +4,7 @@
 
 
   onMount(() => {
-    $page_key = "navbar.about";
+    $page_key = "navbar.about.values";
   });
   
 

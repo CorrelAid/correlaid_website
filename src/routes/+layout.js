@@ -3,6 +3,7 @@ import { get_lang, get_locale, find } from '$lib/js/helpers'
 import translations from "$lib/data/translations";
 import _ from "lodash";
 
+// export const prerender = true;
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, url }) {

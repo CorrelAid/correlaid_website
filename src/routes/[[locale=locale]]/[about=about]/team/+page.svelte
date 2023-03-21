@@ -6,7 +6,7 @@
     import Person from "$lib/components/Person.svelte";
 
     onMount(() => {
-        $page_key = "footer.team";
+        $page_key = "navbar.about.team";
     });
     export let data;
     let remote_office;

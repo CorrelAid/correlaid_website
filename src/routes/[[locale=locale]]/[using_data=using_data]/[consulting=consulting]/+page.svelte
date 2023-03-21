@@ -6,7 +6,7 @@
   import Html from "$lib/components/Html.svelte";
 
   onMount(() => {
-    $page_key = "navbar.projects_consulting.consulting";
+    $page_key = "navbar.using_data.consulting";
   });
 
   export let data;

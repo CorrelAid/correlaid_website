@@ -5,7 +5,7 @@
     import Card from "$lib/components/Card.svelte";
 
     onMount(() => {
-        $page_key = "navbar.projects_consulting.projects";
+        $page_key = "navbar.using_data.projects";
     });
 
     export let data;
@@ -16,7 +16,7 @@
 <div class="grid grid-cols-2 gap-6">
     {#each projects as project, i}
         <Card
-            href={$t("navbar.projects_consulting.projects").url + "/" + project.project_id}
+            href={$t("navbar.using_data.projects").url + "/" + project.project_id}
             title={project.translations[0].title}
             subtitle={project.organizations[0].Projects_Organization_id.translations[0].name}
 

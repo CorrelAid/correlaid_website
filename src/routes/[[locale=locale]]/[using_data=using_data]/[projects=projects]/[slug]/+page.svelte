@@ -11,7 +11,7 @@
   import { t } from "$lib/stores/i18n";
 
   onMount(() => {
-    $page_key = "navbar.projects_consulting.projects";
+    $page_key = "navbar.using_data.projects";
   });
 
   /** @type {import('./$types').PageData} */
