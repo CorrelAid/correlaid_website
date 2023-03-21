@@ -13,16 +13,19 @@
 	import MenuIcon from "../svg/Menu_Icon.svelte";
 	import DropdownIcon from "../svg/Dropdown_Icon.svelte";
 	import LinkButton from "$lib/components/Link_Button.svelte";
-	import MobileMenu from "./Mobile_Menu.svelte";
+	import { fly, fade } from "svelte/transition";
 
-	let about_toggle = false;
 	let language_toggle = false;
-	let projects_consulting_toggle = false;
-	let education_toggle = false;
-	let community_toggle = false;
 	let active_language = "de";
 
-	$: $no_scroll = $drawer;
+	let sidenav_width;
+
+	let toggles = {
+		about: false,
+		using_data: false,
+		education: false,
+		community: false,
+	};
 
 	const dispatch = createEventDispatcher();
 
@@ -45,44 +48,68 @@
 		subnav(event.detail.category);
 	}
 
-	function closeall() {
-		projects_consulting_toggle = false;
-		education_toggle = false;
-		community_toggle = false;
+	function subnav(button) {
+		closeall();
+		toggles[button] = true;
 	}
 
-	$: $page.url && closeall();
-
-	function subnav(btn) {
-		if (btn === "about") {
-			about_toggle = true;
-			projects_consulting_toggle = false;
-			education_toggle = false;
-			community_toggle = false;
-		}
-		if (btn === "projects_consulting") {
-			about_toggle = false;
-			projects_consulting_toggle = true;
-			education_toggle = false;
-			community_toggle = false;
-		}
-
-		if (btn === "education") {
-			about_toggle = false;
-			projects_consulting_toggle = false;
-			education_toggle = true;
-			community_toggle = false;
-		}
-
-		if (btn === "community") {
-			about_toggle = false;
-			projects_consulting_toggle = false;
-			education_toggle = false;
-			community_toggle = true;
-		}
+	function closeall() {
+		toggles.about = false;
+		toggles.using_data = false;
+		toggles.education = false;
+		toggles.community = false;
 	}
 
 	$: active_language = $locale;
+	$: $no_scroll = $drawer;
+	$: $page.url && closeall();
+
+	const top_nav = [
+		"navbar.events",
+		"navbar.blog",
+		"navbar.podcast",
+		"navbar.newsletter",
+	];
+	const bot_nav = [
+		{
+			key: "navbar.about",
+			category: "about",
+			children: [
+				"navbar.about.team",
+				"navbar.about.values",
+				"navbar.about.partners",
+			],
+		},
+		{
+			key: "navbar.using_data",
+			category: "using_data",
+			children: [
+				"navbar.using_data.projects",
+				"navbar.using_data.consulting",
+				"navbar.using_data.hackathons",
+			],
+		},
+		{
+			key: "navbar.education",
+			category: "education",
+			children: [
+				"navbar.education.resources",
+				"navbar.education.learning_r",
+				"navbar.education.tidy_tuesday",
+				"navbar.education.mentoring",
+			],
+		},
+		{
+			key: "navbar.community",
+			category: "community",
+			children: [
+				"navbar.community.correlaidx",
+				"navbar.community.founding_lc",
+				"navbar.community.volunteer_journeys",
+				"navbar.community.become_member",
+			],
+		},
+	];
 </script>
 
 <svelte:window on:load={closeall} />
@@ -94,79 +121,58 @@
 >
 	<div class="mx-auto  px-4 sm:px-6 xl:px-8">
 		<div class="flex items-center justify-between xl:grid grid-cols-10">
-			<div class="flex items-center gap-12  3xl:col-span-3 col-span-2 justify-end">
+			<!-- left part of navbar -->
+			<div
+				class="flex items-center gap-12  3xl:col-span-3 col-span-2 justify-end"
+			>
 				<a class="block text-teal-600" href={$t("navbar.home").url}>
 					<span class="sr-only">Home</span>
 					<CorrelAid_Logo width={100} height={100} />
 				</a>
 			</div>
+			<!-- middle part of navbar -->
 			<div class="xl:block flex-col hidden 3xl:col-span-4 col-span-6">
+				<!-- Top Nav -->
 				<div class="flex mb-3 mt-1">
 					<div class="mx-auto">
 						<nav aria-label="Site Nav">
 							<ul
 								class="flex items-center gap-6 font-light text-base-content tracking-wide"
 							>
-								<SubnavLink
-									href={$t("navbar.events").url}
-									text={$t("navbar.events").text}
-								/>
-								<SubnavLink
-									href={$t("navbar.blog").url}
-									text={$t("navbar.blog").text}
-								/>
-								<SubnavLink
-									href={$t("navbar.podcast").url}
-									text={$t("navbar.podcast").text}
-								/>
-								<SubnavLink
-									href={$t("navbar.newsletter").url}
-									text={$t("navbar.newsletter").text}
-								/>
+								{#each top_nav as key}
+									<SubnavLink
+										href={$t(key).url}
+										text={$t(key).text}
+									/>
+								{/each}
 							</ul>
 						</nav>
 					</div>
 				</div>
-
+				<!-- Bottom Nav -->
 				<div class="flex items-center gap-12 mx-auto">
 					<div class="hidden xl:block mx-auto">
 						<nav aria-label="Site Nav">
 							<div
 								class="flex items-center gap-6 text-xl text-base-content "
 							>
-								<NavLink
-									href={$t("navbar.about").url}
-									text={$t("navbar.about").text}
-									category={"about"}
-									options={$page_key.startsWith("navbar.about") ? "font-medium text-secondary" : ""}
-									on:message={handle_dropdown}
-								/>
-								<NavLinkButton
-									href={$t("navbar.projects_consulting").url}
-									text={$t("navbar.projects_consulting").text}
-									category={"projects_consulting"}
-									options={$page_key.startsWith("navbar.projects_consulting") ? "font-medium text-secondary" : ""}
-									on:message={handle_dropdown}
-								/>
-								<NavLinkButton
-									href={$t("navbar.education").url}
-									text={$t("navbar.education").text}
-									category={"education"}
-									options={$page_key.startsWith("navbar.education") ? "font-medium text-secondary" : ""}
-									on:message={handle_dropdown}
-								/>
-								<NavLinkButton
-									href={$t("navbar.community").url}
-									text={$t("navbar.community").text}
-									category={"community"}
-									options={$page_key.startsWith("navbar.community") ? "font-medium text-secondary" : ""}
-									on:message={handle_dropdown}
-								/>
+								{#each bot_nav as obj}
+									<NavLinkButton
+										href={$t(obj.key).url}
+										text={$t(obj.key).text}
+										category={obj.category}
+										options={$page_key.startsWith(obj.key)
+											? "font-medium text-secondary"
+											: ""}
+										on:message={handle_dropdown}
+									/>
+								{/each}
 							</div>
 						</nav>
 					</div>
 				</div>
 			</div>
+			<!-- right part of navbar -->
 			<div
 				class="xl:flex items-center hidden gap-6  3xl:col-span-3 col-span-2 justify-start"
 			>
@@ -223,6 +229,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- Mobile menu button -->
 			<div class="block xl:hidden">
 				<button
 					class="p-2 transition"
@@ -234,118 +241,131 @@
 		</div>
 	</div>
 </header>
-{#if projects_consulting_toggle}
-	<div
-		class="w-screen hidden absolute z-20 xl:block"
-		style="top: {$header_height + 1}px"
-		on:mouseleave={closeall}
-	>
-		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
-			<div
-				class="px-4 sm:px-6 xl:px-8 items-center justify-between grid grid-cols-10 "
-			>
-				<div class="col-span-2" />
-				<div class=" col-span-6">
-					<ul
-						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x border-neutral-25 rounded-b  "
-					>
-						<SubnavLink
-							href={$t("navbar.projects_consulting.projects").url}
-							text={$t("navbar.projects_consulting.projects").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.projects_consulting.consulting").url}
-							text={$t("navbar.projects_consulting.consulting").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.projects_consulting.hackathons").url}
-							text={$t("navbar.projects_consulting.hackathons").text}
-						/>
-					</ul>
+{#each bot_nav as obj}
+	{#if toggles[obj.category]}
+		<div
+			class="w-screen hidden absolute z-20 xl:block"
+			style="top: {$header_height + 1}px"
+			on:mouseleave={closeall}
+		>
+			<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
+				<div
+					class="px-4 sm:px-6 xl:px-8 items-center justify-between grid grid-cols-10 "
+				>
+					<div class="col-span-2" />
+					<div class=" col-span-6">
+						<ul
+							class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x border-neutral-25 rounded-b  "
+						>
+							{#each obj.children as subnav}
+								<SubnavLink
+									href={$t(subnav).url}
+									text={$t(subnav).text}
+								/>
+							{/each}
+						</ul>
+					</div>
+					<div class="col-span-2" />
 				</div>
-				<div class="col-span-2" />
 			</div>
 		</div>
-	</div>
-{/if}
+	{/if}
+{/each}
 
-{#if education_toggle}
-	<div
-		class="w-screen hidden absolute z-20 xl:block"
-		style="top: {$header_height + 1}px"
-		on:mouseleave={closeall}
-	>
-		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
-			<div
-				class="px-4 sm:px-6 xl:px-8 items-center justify-between grid grid-cols-10 "
-			>
-				<div class="col-span-2" />
-				<div class=" col-span-6">
-					<ul
-						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x   border-neutral-25 rounded-b"
-					>
-						<SubnavLink
-							href={$t("navbar.education.resources").url}
-							text={$t("navbar.education.resources").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.education.learning_r").url}
-							text={$t("navbar.education.learning_r").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.education.mentoring").url}
-							text={$t("navbar.education.mentoring").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.education.tidy_tuesday").url}
-							text={$t("navbar.education.tidy_tuesday").text}
-						/>
-					</ul>
-				</div>
-				<div class="col-span-2" />
-			</div>
-		</div>
-	</div>
-{/if}
-{#if community_toggle}
-	<div
-		class="w-screen hidden absolute z-20 xl:block"
-		style="top: {$header_height + 1}px"
-		on:mouseleave={closeall}
-	>
-		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
-			<div
-				class="px-4 sm:px-6 xl:px-8 items-center justify-between grid grid-cols-10 "
-			>
-				<div class="col-span-2" />
-				<div class=" col-span-6">
-					<ul
-						class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x border-neutral-25 rounded-b"
-					>
-						<SubnavLink
-							href={$t("navbar.community.correlaidx").url}
-							text={$t("navbar.community.correlaidx").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.community.founding_lc").url}
-							text={$t("navbar.community.founding_lc").text}
-						/>
-						<SubnavLink
-							href={$t("navbar.community.volunteer_journeys").url}
-							text={$t("navbar.community.volunteer_journeys")
-								.text}
-						/>
-						<SubnavLink
-							href={$t("navbar.community.become_member").url}
-							text={$t("navbar.community.become_member")
-								.text}
-						/>
-					</ul>
-				</div>
-				<div class="col-span-2" />
-			</div>
-		</div>
-	</div>
-{/if}
 
-<MobileMenu />
+<!-- Mobile Menu -->
+{#if $drawer}
+	<div class="z-30 absolute w-screen h-screen lg:hidden" id="drawer">
+		<div
+			class="flex flex-col justify-between w-5/6 h-screen bg-white border-r absolute left-0  z-30"
+			id="drawer-sidenav"
+			bind:clientWidth={sidenav_width}
+			in:fly={{ x: -sidenav_width, duration: 250 }}
+			out:fly={{ x: -sidenav_width, duration: 250 }}
+		>
+			<nav aria-label="Main Nav" class="flex flex-col pt-7 pl-7">
+				<ul class="text-base-content text-2xl space-y-3">
+					{#each bot_nav as obj}
+						<li>
+							<div class="inline-flex items-center">
+								<a
+									class="tracking-wide w-56"
+									href={$t(obj.key).url}
+								>
+									{$t(obj.key).text}
+								</a>
+								<button on:click={() => toggles[obj.category] ? toggles[obj.category] = false : subnav(obj.category)}>
+									<DropdownIcon height={30} width={30} />
+								</button>
+							</div>
+						</li>
+						{#if toggles[obj.category]}
+							<ul
+								class="font-light text-base-content tracking-wide text-base space-y-3"
+							>
+								{#each obj.children as subnav}
+									<li>
+										<a
+											class="hover:text-primary transition"
+											href={$t(subnav).url}
+										>
+											{$t(subnav).text}
+										</a>
+									</li>
+								{/each}
+							</ul>
+						{/if}
+					{/each}
+
+					<ul
+						class="font-light text-base-content tracking-wide text-lg space-y-3 pt-3"
+					>
+						{#each top_nav as key}
+							<li>
+								<a
+									class="hover:text-primary transition"
+									href={$t(key).url}>{$t(key).text}</a
+								>
+							</li>
+						{/each}
+					</ul>
+				</ul>
+			</nav>
+
+			<div class="">
+				<div class="flex items-center  pl-7 w-2/4 pb-7">
+					<div class="flex items-center gap-5 mx-auto">
+						<LinkButton
+							text={$t("navbar.donate").text}
+							href={$t("navbar.donate").url}
+							type={"external"}
+							color={"secondary"}
+						/>
+						<div class="flex">
+							<button
+								class="pr-5 text-xl font-light"
+								on:click={() => btnLocale("de")}
+							>
+								de
+							</button>
+							<span class="border-l-2 border-neutral-25 pr-5" />
+							<button
+								class="text-xl font-light"
+								on:click={() => btnLocale("en")}
+							>
+								en
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button
+			class="absolute h-screen w-screen bg-neutral z-20 opacity-80"
+			id="drawer-overlay"
+			on:click={() => ($drawer = !$drawer)}
+			in:fade={{ delay: 0 }}
+			out:fade={{ delay: 0 }}
+		/>
+	</div>
+{/if}

@@ -4,7 +4,7 @@
     
     onMount(() => {
         
-        $page_key = "navbar.projects_consulting";
+        $page_key = "navbar.using_data";
     });
 
 

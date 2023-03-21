@@ -2,12 +2,16 @@ export default {
   de: {
     "navbar.home": { "text": null, "url": "/" },
     "navbar.about": { "text": "Über uns", "url": "/ueber" },
-    // 
-    "navbar.projects_consulting": { "text": "Projekte und Beratung", "url": "/projekte_beratung" },
     // Subnav projects_consulting
-    "navbar.projects_consulting.projects": { "text": "Projektübersicht", "url": "/projekte_beratung/projekte" },
-    "navbar.projects_consulting.consulting": { "text": "Beratung", "url": "/projekte_beratung/beratung" },
-    "navbar.projects_consulting.hackathons": { "text": "Hackathons und Datendialoge", "url": "/projekte_beratung/hackathons" },
+    "navbar.about.team": { "text": "Team", "url": "/ueber/team" },
+    "navbar.about.values": { "text": "Werte", "url": "/ueber/werte" },
+    "navbar.about.partners": { "text": "Partner", "url": "/ueber/partner" },
+    // 
+    "navbar.using_data": { "text": "Daten nutzen", "url": "/daten_nutzen" },
+    // Subnav projects_consulting
+    "navbar.using_data.projects": { "text": "Projekte", "url": "/daten_nutzen/projekte" },
+    "navbar.using_data.consulting": { "text": "Beratung", "url": "/daten_nutzen/beratung" },
+    "navbar.using_data.hackathons": { "text": "Hackathons und Datendialoge", "url": "/daten_nutzen/hackathons" },
     // 
     "navbar.education": { "text": "Bildung", "url": "/bildung" },
     // Subnav education
@@ -32,22 +36,24 @@ export default {
     "footer.imprint": { "text": "Impressum", "url": "/impressum" },
     "footer.coc": { "text": "Code of Conduct", "url": "/coc" },
     "footer.coe": { "text": "Code of Ethics", "url": "/coe" },
-    "footer.team": { "text": "Team", "url": "/team" },
+    "footer.contact": { "text": "Kontakt", "url": "/contact" },
   },
   en: {
     "navbar.home": { "text": null, "url": "/en" },
-    "navbar.about": { "text": "About us", "url": "/en/about" },
-    // 
-    "navbar.projects_consulting": { "text": "Projects and Consulting", "url": "/en/projects_consulting" },
+    "navbar.about": { "text": "About Us", "url": "/en/about" },
     // Subnav projects_consulting
-    "navbar.projects_consulting.projects": { "text": "Projects Overview", "url": "/en/projects_consulting/projects" },
-    "navbar.projects_consulting.consulting": { "text": "Consulting", "url": "/en/projects_consulting/consulting" },
-    "navbar.projects_consulting.hackathons": { "text": "Hackathons and Data Dialogues", "url": "/en/projects_consulting/hackathons" },
+    "navbar.about.team": { "text": "Team", "url": "/about/team" },
+    "navbar.about.values": { "text": "Values", "url": "/about/values" },
+    "navbar.about.partners": { "text": "Partners", "url": "/about/partners" },
+    // 
+    "navbar.using_data": { "text": "Using Data", "url": "/en/using_data" },
+    // Subnav projects_consulting
+    "navbar.using_data.projects": { "text": "Projects", "url": "/en/using_data/projects" },
+    "navbar.using_data.consulting": { "text": "Consulting", "url": "/en/using_data/consulting" },
+    "navbar.using_data.hackathons": { "text": "Hackathons and Data Dialogues", "url": "/en/using_data/hackathons" },
     // 
     "navbar.education": { "text": "Education", "url": "/en/education" },
     // Subnav education
-    "navbar.education.nonprofits": { "text": "Offers for Nonprofits", "url": "/en/education/nonprofits" },
-    // Sub sub nav offers for non profits
     "navbar.education.resources": { "text": "Educational Resources", "url": "/en/education/resources" },
     "navbar.education.learning_r": { "text": "R Lernen", "url": "/en/education/learning_r" },
     "navbar.education.tidy_tuesday": { "text": "Tidy Tuesday", "url": "/en/education/tidy_tuesday" },
@@ -68,6 +74,6 @@ export default {
     "footer.imprint": { "text": "Imprint", "url": "/en/imprint" },
     "footer.coc": { "text": "Code of Conduct", "url": "/en/coc" },
     "footer.coe": { "text": "Code of Ethics", "url": "/en/coe" },
-    "footer.team": { "text": "Team", "url": "/en/team" },
+    "footer.contact": { "text": "Contact", "url": "/en/contact" },
   },
 };
