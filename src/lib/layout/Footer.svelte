@@ -7,7 +7,7 @@
   import Linkedin from "../svg/Linkedin.svelte";
   import Mastodon from "../svg/Mastodon.svelte";
 
-  const social_media_height = 23;
+  const social_media_height = 20;
 
   const links = [
     "footer.imprint",
@@ -18,8 +18,8 @@
 </script>
 
 <footer class="w-screen border-t border-neutral-25">
-  <div class=" flex pt-14">
-    <ul class="flex items-center gap-6 font-light text-base-content  mx-auto">
+  <div class=" flex pt-12">
+    <ul class="flex items-center gap-3 text-sm md:text-base font-light text-base-content  mx-auto">
       {#each links as link}
         <li>
           <a
@@ -70,9 +70,9 @@
     </div>
   </div>
 
-  <div class=" flex pb-14">
+  <div class=" flex pb-10">
     <ul
-      class="flex items-center gap-6 font-light text-base-content tracking-wide mx-auto"
+      class="flex items-center gap-6 font-light text-sm md:text-base text-base-content tracking-wide mx-auto"
     >
       <li>CorrelAid. © {new Date().getFullYear()}</li>
     </ul>

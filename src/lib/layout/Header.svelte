@@ -7,7 +7,6 @@
 	import { page_key } from "$lib/stores/page_key";
 	import { createEventDispatcher } from "svelte";
 	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
-	import NavLink from "$lib/components/Nav_Link.svelte";
 	import NavLinkButton from "$lib/components/Nav_Link_Button.svelte";
 	import SubnavLink from "$lib/components/Subnav_Link.svelte";
 	import MenuIcon from "../svg/Menu_Icon.svelte";
