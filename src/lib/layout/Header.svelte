@@ -8,7 +8,6 @@
 	import { createEventDispatcher } from "svelte";
 	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
 	import NavLinkButton from "$lib/components/Nav_Link_Button.svelte";
-	import SubnavLink from "$lib/components/Subnav_Link.svelte";
 	import MenuIcon from "../svg/Menu_Icon.svelte";
 	import DropdownIcon from "../svg/Dropdown_Icon.svelte";
 	import LinkButton from "$lib/components/Link_Button.svelte";
@@ -139,10 +138,15 @@
 								class="flex items-center gap-6 font-light text-base-content tracking-wide"
 							>
 								{#each top_nav as key}
-									<SubnavLink
+								<li>
+									<a
+										class="hover:text-primary transition"
 										href={$t(key).url}
-										text={$t(key).text}
-									/>
+									>
+										{$t(key).text}
+									</a>
+								</li>
+								
 								{/each}
 							</ul>
 						</nav>
@@ -156,15 +160,44 @@
 								class="flex items-center gap-6 text-xl text-base-content "
 							>
 								{#each bot_nav as obj}
-									<NavLinkButton
-										href={$t(obj.key).url}
-										text={$t(obj.key).text}
-										category={obj.category}
-										options={$page_key.startsWith(obj.key)
-											? "font-medium text-secondary"
-											: ""}
-										on:message={handle_dropdown}
-									/>
+									<div>
+										<NavLinkButton
+											href={$t(obj.key).url}
+											text={$t(obj.key).text}
+											category={obj.category}
+											options={$page_key.startsWith(
+												obj.key
+											)
+												? "font-medium text-secondary"
+												: ""}
+											on:message={handle_dropdown}
+										/>
+										{#if toggles[obj.category]}
+											<div
+												class="w-56 absolute z-30"
+												on:mouseleave={closeall}
+												style="top: {$header_height +
+													1}px"
+											>
+												<ul
+													class="font-light py-2 text-base-content text-base bg-white border-b border-x border-neutral-25 rounded-b"
+												>
+													{#each obj.children as subnav}
+														<li class="pb-2 px-4">
+															<a
+																class="hover:text-primary transition"
+																href={$t(subnav)
+																	.url}
+															>
+																{$t(subnav)
+																	.text}
+															</a>
+														</li>
+													{/each}
+												</ul>
+											</div>
+										{/if}
+									</div>
 								{/each}
 							</div>
 						</nav>
@@ -240,38 +273,6 @@
 		</div>
 	</div>
 </header>
-{#each bot_nav as obj}
-	{#if toggles[obj.category]}
-		<div
-			class="w-screen hidden absolute z-20 xl:block"
-			style="top: {$header_height + 1}px"
-			on:mouseleave={closeall}
-		>
-			<div class="mx-auto max-w-screen-xl px-4 sm:px-6 xl:px-8 ">
-				<div
-					class="px-4 sm:px-6 xl:px-8 items-center justify-between grid grid-cols-10 "
-				>
-					<div class="col-span-2" />
-					<div class=" col-span-6">
-						<ul
-							class="flex items-center justify-center xl:gap-6 gap-5 font-light  text-base-content py-3 text-base bg-white border-b border-x border-neutral-25 rounded-b  "
-						>
-							{#each obj.children as subnav}
-								<SubnavLink
-									href={$t(subnav).url}
-									text={$t(subnav).text}
-								/>
-							{/each}
-						</ul>
-					</div>
-					<div class="col-span-2" />
-				</div>
-			</div>
-		</div>
-	{/if}
-{/each}
-
-
 <!-- Mobile Menu -->
 {#if $drawer}
 	<div class="z-30 absolute w-screen h-screen lg:hidden" id="drawer">
@@ -293,7 +294,12 @@
 								>
 									{$t(obj.key).text}
 								</a>
-								<button on:click={() => toggles[obj.category] ? toggles[obj.category] = false : subnav(obj.category)}>
+								<button
+									on:click={() =>
+										toggles[obj.category]
+											? (toggles[obj.category] = false)
+											: subnav(obj.category)}
+								>
 									<DropdownIcon height={30} width={30} />
 								</button>
 							</div>
