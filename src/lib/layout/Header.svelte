@@ -7,6 +7,7 @@
 	import { page_key } from "$lib/stores/page_key";
 	import { createEventDispatcher } from "svelte";
 	import CorrelAid_Logo from "$lib/svg/CorrelAid_Logo.svelte";
+	import CorrelAid_Logo_min from "$lib/svg/CorrelAid_Logo_min.svelte";
 	import NavLinkButton from "$lib/components/Nav_Link_Button.svelte";
 	import MenuIcon from "../svg/Menu_Icon.svelte";
 	import DropdownIcon from "../svg/Dropdown_Icon.svelte";
@@ -61,6 +62,8 @@
 	$: active_language = $locale;
 	$: $no_scroll = $drawer;
 	$: $page.url && closeall();
+	$: $page.url && ($drawer = false);
+    $: $drawer && closeall();
 
 	const top_nav = [
 		"navbar.events",
@@ -114,7 +117,7 @@
 
 <header
 	aria-label="Site Header"
-	class="w-screen   z-10 border-b border-neutral-25"
+	class="w-screen  z-30 border-b border-neutral-25 xl:static fixed top-0 bg-white"
 	bind:clientHeight={$header_height}
 >
 	<div class="mx-auto  px-4 sm:px-6 xl:px-8">
@@ -123,9 +126,13 @@
 			<div
 				class="flex items-center gap-12  3xl:col-span-3 col-span-2 justify-end"
 			>
-				<a class="block text-teal-600" href={$t("navbar.home").url}>
+				<a class="hidden xl:block text-teal-600" href={$t("navbar.home").url}>
 					<span class="sr-only">Home</span>
 					<CorrelAid_Logo width={100} height={100} />
+				</a>
+				<a class="block xl:hidden text-teal-600" href={$t("navbar.home").url}>
+					<span class="sr-only">Home</span>
+					<CorrelAid_Logo_min width={60} height={60} />
 				</a>
 			</div>
 			<!-- middle part of navbar -->
