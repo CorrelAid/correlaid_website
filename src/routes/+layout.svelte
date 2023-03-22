@@ -51,6 +51,8 @@
 
 	let content;
 	$: content = data.builder;
+
+	$: console.log($header_height)
 </script>
 
 <svelte:head>
@@ -62,6 +64,7 @@
 	style={$no_scroll ? "max-height: 100vh; overflow-y:hidden" : ""}
 >
 	<Header on:message={handleLocaleChange} />
+	<div class="block xl:hidden" style="min-height: {$header_height}px;"></div>
 	<div id="grow" class="w-screen">
 		{#if $header_height}
 			{#if content}
