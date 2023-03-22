@@ -62,6 +62,8 @@
 	$: active_language = $locale;
 	$: $no_scroll = $drawer;
 	$: $page.url && closeall();
+	$: $page.url && ($drawer = false);
+    $: $drawer && closeall();
 
 	const top_nav = [
 		"navbar.events",
