@@ -119,7 +119,7 @@
 						</div>
 					{:else if section.collection == "quote_carousel"}
 					<div class="mb-12">
-						<QuoteCarousel quotes={section.item.quotes}/>
+						<QuoteCarousel quotes={section.item.quotes} text_only={section.item.text_only}/>
 					</div>
 					{:else if section.collection == "custom_sections"}
 					<div class="container mx-auto mb-12">

@@ -97,9 +97,11 @@ export async function load({ params, url }) {
             }
 
             ... on quote_carousel{
+              text_only
               quotes{
                   
                   quote_id{
+                   
                       image{
                         id
                       }

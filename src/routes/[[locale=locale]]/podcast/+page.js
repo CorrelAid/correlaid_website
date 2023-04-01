@@ -8,6 +8,7 @@ export async function load({ params }) {
     Podcast_Episodes{
     title
     link
+    description
   }}
   `
 
