@@ -84,7 +84,7 @@
 							<button>test</button>
 						</div>
 					{:else if section.collection == "timelines"}
-					<div class="text_width mx-auto pb-12">
+					<div class="container mx-auto pb-12">
 						<Timeline steps={section.item.steps}/>
 					</div>
 					{:else if section.collection == "wysiwyg"}
@@ -95,7 +95,6 @@
 									source={section.item.translations[0]
 										.content}
 									options={""}
-									width={section.item.width}
 								/>
 							</div>
 						</div>

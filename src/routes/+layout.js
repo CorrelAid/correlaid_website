@@ -77,7 +77,6 @@ export async function load({ params, url }) {
               ) {
                 content
               }
-              width
             }
     
             ... on contacts {
