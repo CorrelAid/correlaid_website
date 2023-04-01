@@ -40,12 +40,11 @@ export async function load({ params, url, route, }) {
 }
       `
 
-      const data = await directus_fetch(query)
+  const data = await directus_fetch(query)
 
-  const remote_office = data.Global_Administrators.filter(person => person.group === 'remote_office');
-  const board = data.Global_Administrators.filter(person => person.group === 'board');
+  const ethics_commission = data.Global_Administrators.filter(person => person.group === 'ethics_commission');
   const organizational_structure = data.Organizational_Structure;
-
-  return { remote_office: remote_office, board: board, organizational_structure: organizational_structure}
+   
+  return {ethics_commission: ethics_commission, organizational_structure: organizational_structure}
 
 }

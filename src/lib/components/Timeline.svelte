@@ -26,7 +26,6 @@
             return false;
         }
     }
-    console.log(steps.length)
 
 </script>
 

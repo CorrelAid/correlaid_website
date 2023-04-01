@@ -20,7 +20,7 @@
 </script>
 
 
-    <div class="gap-6 grid xl:grid-cols-3">
+    <div class="gap-6 grid xl:grid-cols-2">
         {#each posts as post, i}
                 <div class={i == 0 ? "col-span-full" : "col-span-1"}>
                     {#if post.translations.title_image}

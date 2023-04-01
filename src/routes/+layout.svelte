@@ -51,8 +51,6 @@
 
 	let content;
 	$: content = data.builder;
-
-	$: console.log($header_height)
 </script>
 
 <svelte:head>
@@ -99,7 +97,7 @@
 							</div>
 						</div>
 					{:else if section.collection == "contacts"}
-						<div class="container mx-auto mb-12 pt-8">
+						<div class="container mx-auto mb-12">
 							{#if section.item.hr === true}
 							<hr class="mb-12">
 							{/if}

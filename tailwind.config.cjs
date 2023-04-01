@@ -34,24 +34,6 @@ module.exports = {
       letterSpacing: {
         wide: '.125rem',
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            img: {
-              // width: '820px',
-              // "max-height": '460px',
-              // margin: 'auto',
-            },
-            h1: {
-              // "color": "inherit"
-              
-            },
-            h2: {
-              // "color": "inherit"
-            }
-          },
-        }
-      }
     }
   },
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/line-clamp'), require('@tailwindcss/forms'), require('@tailwindcss/aspect-ratio')],
