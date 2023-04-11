@@ -27,6 +27,7 @@ export default {
     "navbar.community.founding_lc": { "text": "Ein Local Chapter gründen", "url": "/community/lc_gruenden" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/community/volunteer_journeys" },
     "navbar.community.become_member": { "text": "Mitglied werden", "url": "/community/mitglied_werden" },
+    "navbar.community.become_member.membership_application": { "text": "Mitgliedsantrag", "url": "/community/mitglied_werden/mitgliedsantrag" },
     //
     "navbar.events": { "text": "Veranstaltungen", "url": "/veranstaltungen" },
     "navbar.blog": { "text": "Blog", "url": "/blog" },
@@ -65,6 +66,7 @@ export default {
     "navbar.community.founding_lc": { "text": "Founding a Local Chapter", "url": "/en/community/founding_lc" },
     "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/en/community/volunteer_journeys" },
     "navbar.community.become_member": { "text": "Become a member", "url": "/en/community/become_member" },
+    "navbar.community.become_member.membership_application": { "text": "Membership Application", "url": "/community/become_member/membership_application" },
     //
     "navbar.events": { "text": "Events", "url": "/en/events" },
     "navbar.blog": { "text": "Blog", "url": "/en/blog" },
