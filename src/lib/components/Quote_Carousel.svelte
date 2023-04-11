@@ -4,6 +4,7 @@
     import Hero from "$lib/components/Hero.svelte";
     import { browser } from "$app/environment";
     import { gen_img_url } from "$lib/js/helpers";
+    export let text_only = false;
     export let quotes;
 
     let carousel;
@@ -21,6 +22,7 @@
         <Carousel bind:this={carousel} arrows={true} dots={true}>
             {#each quotes as quote}
                 <div class="">
+                    {#if text_only === false}
                     <div class="grid xl:grid-cols-2">
                         <div class="flex flex-col items-center py-4 px-3">
                             {#if quote.quote_id.image}
@@ -42,6 +44,16 @@
                             </p>
                         </div>
                     </div>
+                    {:else}
+                    <div class=" px-3">
+                        <p class="line-clamp-7 text-lg drop-shadow-md pt-8">
+                            {quote.quote_id.translations[0].text}
+                        </p>
+                        <p class="line-clamp-7 text-lg drop-shadow-md text-right pt-6">
+                            {quote.quote_id.translations[0].subtitle}
+                        </p>
+                    </div>
+                    {/if}
                 </div>
             {/each}
         </Carousel>

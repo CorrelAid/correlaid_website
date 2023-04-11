@@ -51,8 +51,6 @@
 
 	let content;
 	$: content = data.builder;
-
-	$: console.log($header_height)
 </script>
 
 <svelte:head>
@@ -84,7 +82,7 @@
 							<button>test</button>
 						</div>
 					{:else if section.collection == "timelines"}
-					<div class="text_width mx-auto pb-12">
+					<div class="container mx-auto pb-12">
 						<Timeline steps={section.item.steps}/>
 					</div>
 					{:else if section.collection == "wysiwyg"}
@@ -95,7 +93,6 @@
 									source={section.item.translations[0]
 										.content}
 									options={""}
-									width={section.item.width}
 								/>
 							</div>
 						</div>
@@ -122,7 +119,7 @@
 						</div>
 					{:else if section.collection == "quote_carousel"}
 					<div class="mb-12">
-						<QuoteCarousel quotes={section.item.quotes}/>
+						<QuoteCarousel quotes={section.item.quotes} text_only={section.item.text_only}/>
 					</div>
 					{:else if section.collection == "custom_sections"}
 					<div class="container mx-auto mb-12">

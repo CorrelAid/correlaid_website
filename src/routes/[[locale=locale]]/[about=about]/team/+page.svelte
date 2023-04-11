@@ -11,17 +11,16 @@
     export let data;
     let remote_office;
     let board;
-    let ethics_commission;
     $: remote_office = data.remote_office;
     $: board = data.board;
-    $: ethics_commission = data.ethics_commission;
 
     let organizational_structure;
     $: organizational_structure = data.organizational_structure;
 
 </script>
-
+<hr>
 <div class="mt-12">
+    
 <Html
     source={organizational_structure.translations[0].remote_office}
     options={"pb-12"}
@@ -41,6 +40,7 @@
             description={person.translations[0].description}
         />
     {/each}
+    <hr>
 </div>
 
 <Html
@@ -62,26 +62,7 @@
             description={person.translations[0].description}
         />
     {/each}
-</div>
+    </div>
 
-<Html
-    source={organizational_structure.translations[0].ethics_commission}
-    options={"pb-12"}
-    width={"text"}
-/>
 
-<div class="container mx-auto flex flex-col gap-y-3 pb-12 space-y-8">
-    {#each ethics_commission as person}
-        <Person
-            name={person.person.name}
-            img={gen_img_url(
-                person.person.image.id,
-                "fit=cover&width=200&height=200&quality=80"
-            )}
-            email={person.person.email}
-            position={person.translations[0].position}
-            description={person.translations[0].description}
-        />
-    {/each}
-</div>
 </div>

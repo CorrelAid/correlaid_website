@@ -76,7 +76,6 @@ export async function load({ params }) {
         }
     }
   }`
-  console.log(query)
   const data = await directus_fetch(query)
 
   return { local_chapter: data.Local_Chapters[0], events: data.Events, projects: data.Local_Chapters[0].projects}

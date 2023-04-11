@@ -21,7 +21,7 @@
             <div class="pb-4">
                 <a
                     {href}
-                    class="text-xl font-bold text-base-content hover:text-primary transition"
+                    class="text-xl font-semibold text-base-content hover:text-primary transition"
                 >
                     {title}
                 </a>

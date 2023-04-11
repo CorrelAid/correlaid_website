@@ -15,7 +15,7 @@
     />
     <div class="px-3 pt-4 pb-6">
         <h3 class="pb-3 line-clamp-3 text-xl font-medium">{title}</h3>
-        <h4 class="text-md">{subtitle}</h4>
+        <h4 class="text-md line-clamp-4">{subtitle}</h4>
     </div>
 
 </a>

@@ -18,7 +18,7 @@
 </script>
 
 <section
-    class="relative bg-cover bg-center bg-no-repeat"
+    class="relative bg-cover bg-center bg-no-repeat w-screen"
     style="{gradient_only != true
         ? `background-image: url(${gen_img_url(image_id)});`
         : ''}
@@ -29,15 +29,16 @@
     <div
         class="absolute inset-0 bg-gradient-to-r {correlaidx == false ? "from-secondary/75 to-primary/75" : "from-tertiary/75 to-secondary/75"}"
     />
-
+        <div class="absolute w-full bottom-2/4">
     <div
-        class="absolute m-auto w-screen-sm left-0 top-1/4 xl:top-2/4 xl:left-1/4"
+        class="text_width"
     >
         <div class="">
-            <h2 class="px-4 pb-8 font-bold text-4xl text-white tracking-wide ">
+            <h2 class="mx-4 font-bold text-4xl text-white tracking-wide ">
                 {text}
             </h2>
-            <div class="fix space-x-2 px-4">
+            {#if buttons != []}
+            <div class="fix space-x-2 px-4 mt-8">
                 {#each buttons as button}
                     <LinkButton
                         text={button.buttons_id.translations[0].text}
@@ -46,6 +47,8 @@
                     />
                 {/each}
             </div>
+            {/if}
         </div>
     </div>
+</div>
 </section>

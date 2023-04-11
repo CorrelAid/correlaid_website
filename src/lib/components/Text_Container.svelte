@@ -10,7 +10,7 @@
   export let box_content = ""
 </script>
 
-<div class="mx-auto pt-12 pb-5 text_width">
+<div class="mx-auto pt-12 pb-5 container">
   <div class="mb-2">
   <Html source={`<h1>${title}</h1><p class="text-lg">${teaser}</p>`} width={"text"} />
   </div>
