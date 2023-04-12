@@ -19,7 +19,6 @@
     const MAX_FILE_SIZE = 1000000; //1mb
 
     const validFileExtensions = { document: ["pdf"] };
-
     function isValidFileType(fileName, fileType) {
         return (
             fileName &&
@@ -37,6 +36,7 @@
     let requiredAgreement;
     let schema = yup.object({});
 
+    // creating reusable validation functions in a reactive way (changes when data loads)
     $: if (validation) {
         requiredString = yup.string().required(validation.required);
         optionalString = yup.string();
@@ -82,10 +82,12 @@
         postcode: requiredNumber,
         city: requiredString,
         email: requiredEmail,
+        // these fields are only required when the corresponding radio button was selected
         contribution_amount_sponsor: _.find(membership_application, ["name", "membership_type"])
                     .value === "sponsor" ? requiredNumber : yup.mixed(),
         contribution_amount_participating: _.find(membership_application, ["name", "membership_type"])
                     .value === "participating" ? requiredMisc : yup.mixed(),
+        // 
         agreement: requiredAgreement,
         membership_type: requiredMisc,
         iban: requiredString,
@@ -113,6 +115,7 @@
         extend: reporter,
     });
 
+    // conditionally show the amount fields (based on selected membership type)
     function handle_hide(name) {
         if (
             (name === "contribution_amount_participating" &
