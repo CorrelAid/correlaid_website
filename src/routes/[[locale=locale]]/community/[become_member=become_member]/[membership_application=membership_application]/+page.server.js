@@ -11,10 +11,11 @@ import { SECRET_GOOGLE_PW } from '$env/static/private'
 /** @type {import('./$types').Actions} */
 export const actions = {
     default: async ({ request }) => {
+        console.log("received")
         const data = await request.formData();
 
         const name =  data.get("name")
-        console.log(name)
+        
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
