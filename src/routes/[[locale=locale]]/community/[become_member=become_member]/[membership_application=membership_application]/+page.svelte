@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import { createForm } from "felte";
     import { _ } from "lodash";
+    import { Turnstile } from "svelte-turnstile";
     import { reporter, ValidationMessage } from "@felte/reporter-svelte";
     import * as yup from "yup";
 
@@ -26,6 +27,9 @@
                 -1
         );
     }
+
+    let turnstileError;
+    let formSuccess = false;
 
     let requiredString;
     let optionalString;
@@ -83,17 +87,24 @@
         city: requiredString,
         email: requiredEmail,
         // these fields are only required when the corresponding radio button was selected
-        contribution_amount_sponsor: _.find(membership_application, ["name", "membership_type"])
-                    .value === "sponsor" ? requiredNumber : yup.mixed(),
-        contribution_amount_participating: _.find(membership_application, ["name", "membership_type"])
-                    .value === "participating" ? requiredMisc : yup.mixed(),
-        // 
+        contribution_amount_sponsor:
+            _.find(membership_application, ["name", "membership_type"])
+                .value === "sponsor"
+                ? requiredNumber
+                : yup.mixed(),
+        contribution_amount_participating:
+            _.find(membership_application, ["name", "membership_type"])
+                .value === "participating"
+                ? requiredMisc
+                : yup.mixed(),
+        //
         agreement: requiredAgreement,
         membership_type: requiredMisc,
         iban: requiredString,
         bic: requiredString,
         sepa: requiredDoc,
         application_form: requiredDoc,
+        turnstile: yup.mixed(),
     });
 
     const { form } = createForm({
@@ -108,22 +119,38 @@
                     }),
                     {}
                 );
-                console.log(errors)
                 return errors;
             }
         },
         extend: reporter,
+        async onSuccess(response) {
+        const res = await response.json();
+        console.log(res)
+        if(res.type === "failure" && res.status === 404){
+            turnstileError = JSON.parse(res.data)[1]
+
+        }
+        else{
+            turnstileError = null;
+        }
+        
+}
+    
     });
+
+   
 
     // conditionally show the amount fields (based on selected membership type)
     function handle_hide(name) {
         if (
-            (name === "contribution_amount_participating" &
-                _.find(membership_application, ["name", "membership_type"])
-                    .value === "sponsor") ||
-            (name === "contribution_amount_sponsor" &
-                _.find(membership_application, ["name", "membership_type"])
-                    .value === "participating")
+            (name === "contribution_amount_participating") &
+                (_.find(membership_application, ["name", "membership_type"])
+                    .value ===
+                    "sponsor") ||
+            (name === "contribution_amount_sponsor") &
+                (_.find(membership_application, ["name", "membership_type"])
+                    .value ===
+                    "participating")
         ) {
             return false;
         } else {
@@ -206,7 +233,15 @@
                     </div>
                 {/if}
             {/each}
-
+            <div class="mt-4">
+                <Turnstile
+                    formsField="turnstile"
+                    siteKey="0x4AAAAAAAD8yTOmVCP00Ur3"
+                />
+                {#if turnstileError}
+                <span class="my-2 text-sm text-red-500">{turnstileError}</span>
+                {/if}
+            </div>
             <button
                 type="submit"
                 class="rounded-md px-4 py-2 mt-12 text-white shadow transition bg-secondary w-24"

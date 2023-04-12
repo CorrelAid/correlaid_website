@@ -19,6 +19,7 @@
 		"autoprefixer": "^10.4.13",
 		"postcss": "^8.4.21",
 		"svelte": "^3.55.1",
+		"svelte-turnstile": "^0.3.1",
 		"tailwindcss": "^3.2.7",
 		"vite": "^4.1.4"
 	},
