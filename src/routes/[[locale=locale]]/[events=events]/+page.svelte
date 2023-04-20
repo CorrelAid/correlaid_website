@@ -21,10 +21,7 @@
             href={$t("navbar.events").url + "/" + event.slug}
             title={event.title}
             teaser={event.teaser}
-            image_url={gen_img_url(
-                event.title_image.id,
-                "fit=inside&width=1200&height=675&format=png"
-            )}
+           
             date={event.date}
             tags={event.tags}
         />

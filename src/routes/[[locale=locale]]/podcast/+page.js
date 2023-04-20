@@ -7,10 +7,12 @@ export async function load({ params }) {
   const query = `query{
     Podcast_Episodes{
     title
-    link
+    soundcloud_link
     description
   }}
   `
+
+  console.log(query)
 
   const data = await directus_fetch(query)
 
