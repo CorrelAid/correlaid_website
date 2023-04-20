@@ -161,6 +161,8 @@ export async function load({ params, url }) {
 
     const builder = data.Pages[0].builder
 
+    console.log(query)
+
 
     if (builder === undefined) {
       
