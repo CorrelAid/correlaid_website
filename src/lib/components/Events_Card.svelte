@@ -1,7 +1,7 @@
 <script>
     import { locale } from "$lib/stores/i18n";
     import { gen_date } from "$lib/js/helpers";
-    export let image_url;
+    // export let image_url;
     export let href;
     export let title;
     export let teaser;
@@ -41,7 +41,7 @@
             </p>
         </div>
         <a {href} class="aspect-w-16 aspect-h-9 xl:col-span-1 col-span-full">
-            <img alt="Office" src={image_url} class="h-full rounded" />
+            <!-- <img alt="Office" src={image_url} class="h-full rounded" /> -->
         </a>
     </div>
 </div>

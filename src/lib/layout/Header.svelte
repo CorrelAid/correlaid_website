@@ -106,7 +106,7 @@
 			children: [
 				"navbar.community.correlaidx",
 				"navbar.community.founding_lc",
-				"navbar.community.volunteer_journeys",
+				// "navbar.community.volunteer_journeys",
 				"navbar.community.become_member",
 			],
 		},

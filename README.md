@@ -8,8 +8,7 @@
     ```
 3. Create .env file with following contents (in the SvelteKit folder)
     ```
-    PUBLIC_API_URL=https://correlaid.directus.app
-    BYPASS_TOKEN=REPLACE_ME_WITH_SECRET_VALUE
+    PUBLIC_API_URL=https://cms.correlaid.org
     ```
 
 5. Start project with:

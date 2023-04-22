@@ -5,19 +5,16 @@ import directus_fetch from '$lib/js/directus_fetch'
 export async function load({ params }) {
 
   const query = `query{
-    Podcast_Episodes{
-    title
-    soundcloud_link
-    description
-  }}
+    membership_application{
+        object
+    }
+}
   `
-
-  console.log(query)
 
   const data = await directus_fetch(query)
 
-  const podcast_episodes = data.Podcast_Episodes
+  const membership_application = data.membership_application
 
-  return { podcast_episodes: podcast_episodes }
+  return { membership_application: membership_application }
 
 }

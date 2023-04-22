@@ -9,17 +9,17 @@ export async function load({ params, url, route, }) {
     Partner{
         name
         logo{id}
+        link
         translations(
             filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
           ){
-            title
             description
         }
         
     }
 }
       `
-    
+    // console.log(query)
     const data = await directus_fetch(query)
 
     return { partners: data.Partner }

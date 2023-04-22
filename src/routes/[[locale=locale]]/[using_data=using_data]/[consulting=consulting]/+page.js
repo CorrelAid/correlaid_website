@@ -24,13 +24,7 @@ export async function load({ params }) {
           description
       }
   }
-  Organizational_Structure{
-    translations(
-        filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-      ){
-        experts
-    }
-}
+  
   }
   `
 
@@ -39,6 +33,6 @@ export async function load({ params }) {
   const experts = data.Experts
 
 
-  return { experts: experts, experts_description: data.Organizational_Structure.translations[0].experts}
+  return { experts: experts}
 
 }

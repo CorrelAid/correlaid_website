@@ -8,11 +8,12 @@ import _ from "lodash";
 export async function load({ params }) {
 
 
-  const query = `query {
+  const query = `
+  query {
     Projects(filter:{project_id:{_eq: "${params.slug}"}}) {
       Podcast{
         language
-        link
+        soundcloud_link
         title
     }
     Posts{
@@ -44,8 +45,8 @@ export async function load({ params }) {
             }
         }
     }
-      organizations{
-        Projects_Organization_id{
+      Organizations{
+        Organizations_id{
             translations(
               filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
             ){
@@ -64,15 +65,18 @@ export async function load({ params }) {
           description
           summary
       }
-      local_chapters{
+      Local_Chapters{
           id
   
       }
   }
   }
+
   `
+
   const data = await directus_fetch(query)
   const Posts = data.Projects[0].Posts
+
   // checking if post exists in current locale, if not using other language. Getting languages the posts exists in.
   if (Posts.length != 0) {
     let translations = _.find(Posts[0].Posts_id.translations, (el) => el.languages_code.code === get_lang(params))

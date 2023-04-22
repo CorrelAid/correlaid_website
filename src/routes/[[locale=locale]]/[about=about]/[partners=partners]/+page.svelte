@@ -12,7 +12,7 @@
   let partners;
   $: partners = data.partners;
 
-  $: console.log(partners);
+  
 </script>
 
 <div class="mt-12">

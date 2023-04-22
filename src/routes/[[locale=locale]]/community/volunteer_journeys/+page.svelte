@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import { page_key } from "$lib/stores/page_key";
   import { onMount } from "svelte";
   import VolunteerJourney from "$lib/components/Volunteer_Journey.svelte";
@@ -24,4 +24,4 @@
       />
     {/each}
   </div>
-</div>
+</div> -->

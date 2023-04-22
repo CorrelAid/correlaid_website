@@ -20,9 +20,6 @@ export async function load({ params }) {
       type
       slug
       tags
-      title_image {
-        id
-      }
       local_chapters {
         Local_Chapters_id {
           translations(

@@ -154,12 +154,14 @@ export async function load({ params, url }) {
       }
     }
       `
-
+    // console.log(query)  
 
     const data = await directus_fetch(query)
 
 
     const builder = data.Pages[0].builder
+
+    
 
 
     if (builder === undefined) {

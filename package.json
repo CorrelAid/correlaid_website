@@ -15,22 +15,30 @@
 		"@tailwindcss/aspect-ratio": "^0.4.2",
 		"@tailwindcss/line-clamp": "^0.4.2",
 		"@tailwindcss/typography": "^0.5.9",
+		"@wildfluss/svelte-carousel": "1.0.26",
 		"autoprefixer": "^10.4.13",
 		"postcss": "^8.4.21",
 		"svelte": "^3.55.1",
-		"@wildfluss/svelte-carousel": "1.0.26",
+		"svelte-turnstile": "^0.3.1",
 		"tailwindcss": "^3.2.7",
 		"vite": "^4.1.4"
 	},
 	"type": "module",
 	"dependencies": {
 		"@directus/sdk": "^10.3.1",
+		"@felte/reporter-dom": "^1.1.5",
+		"@felte/reporter-svelte": "^1.1.5",
+		"@felte/validator-yup": "^1.0.11",
 		"@tailwindcss/forms": "^0.5.3",
+		"felte": "^1.2.7",
 		"i18n": "^0.15.1",
 		"lodash": "^4.17.21",
 		"maplibre-gl": "^2.4.0",
+		"nodemailer": "^6.9.1",
 		"simply-reactive": "^4.1.0",
+		"svelte-email": "^0.0.4",
 		"svelte-markdown": "^0.2.3",
-		"svelte-media-queries": "^1.5.4"
+		"svelte-media-queries": "^1.5.4",
+		"yup": "^0.32.11"
 	}
 }

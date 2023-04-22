@@ -13,7 +13,7 @@
     import Avatar from "$lib/components/Avatar.svelte";
     import Links from "$lib/components/Links.svelte";
 
-    $: console.log(description);
+    
 </script>
 
 <div class="rounded grid grid-cols-4 pb-6 gap-x-12 pt-8">

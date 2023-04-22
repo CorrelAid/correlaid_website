@@ -12,13 +12,9 @@
   export let data;
   let experts;
   $: experts = data.experts;
-  let experts_description;
-  $: experts_description = data.experts_description;
-
   
 </script>
 
-<Html source={experts_description} width={"text"} options={"prose-h2:mt-0"}/>
 <div class="container mx-auto flex flex-col gap-y-3 py-8 space-y-8">
   {#each experts as person}
       <Person

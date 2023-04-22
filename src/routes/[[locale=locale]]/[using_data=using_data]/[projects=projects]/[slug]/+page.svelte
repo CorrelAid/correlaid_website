@@ -18,21 +18,20 @@
   export let data;
   let project;
   $: project = data.project;
-
 </script>
 
 <TextContainer
   title={project.translations[0].title}
   teaser={project.translations[0].summary}
-  box_content={project.organizations[0].Projects_Organization_id
+  box_content={project.Organizations[0].Organizations_id
     .translations[0]}
 >
   <div slot="sub_subtitle">
     {#if project.Podcast || project.Posts.length != 0}
       <!-- <h3 class="px-4 text-lg pb-2 font-semibold">Links:</h3> -->
       <div class="mb-6 flex items-center py-1">
-        {#if project.Podcast}
-          <a href={project.Podcast.link}><Podcast height={50} width={50} /></a>
+        {#if project.Podcast.soundcloud_link}
+          <a href="{project.Podcast.soundcloud_link}"><Podcast height={50} width={50} /></a>
         {/if}
         {#if project.Posts.length != 0}
           <a
@@ -52,19 +51,19 @@
   />
 </TextContainer>
 <div class="container">
-<Box>
-  <h3 class="text-xl font-semibold pb-3">CorrelAid Team:</h3>
-  {#each project.People as person}
-    <div class="flex items-center">
-      <span class="mr-2">{person.People_id.name}</span>
-      <Links
-        website={person.People_id.website ? person.People_id.website : ""}
-        linkedin={person.People_id.linkedin ? person.People_id.linkedin : ""}
-        mastodon={person.People_id.mastodon ? person.People_id.mastodon : ""}
-        twitter={person.People_id.twitter ? person.People_id.twitter : ""}
-        github={person.People_id.github ? person.People_id.github : ""}
-      />
-    </div>
-  {/each}
-</Box>
+  <Box>
+    <h3 class="text-xl font-semibold pb-3">CorrelAid Team:</h3>
+    {#each project.People as person}
+      <div class="flex items-center">
+        <span class="mr-2">{person.People_id.name}</span>
+        <Links
+          website={person.People_id.website ? person.People_id.website : ""}
+          linkedin={person.People_id.linkedin ? person.People_id.linkedin : ""}
+          mastodon={person.People_id.mastodon ? person.People_id.mastodon : ""}
+          twitter={person.People_id.twitter ? person.People_id.twitter : ""}
+          github={person.People_id.github ? person.People_id.github : ""}
+        />
+      </div>
+    {/each}
+  </Box>
 </div>

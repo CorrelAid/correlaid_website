@@ -1,17 +1,17 @@
 import directus_fetch from '$lib/js/directus_fetch'
 import { get_lang } from '$lib/js/helpers'
-import { unpack_events } from '$lib/js/data_processing'
 
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
 
-  const query = `query{
+  const query = `
+query{
   Projects{
     status
     project_id
-    organizations{
-      Projects_Organization_id{
+    Organizations{
+      Organizations_id{
           translations(
             filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
           ){
@@ -28,7 +28,7 @@ export async function load({ params }) {
         description
         summary
     }
-    local_chapters{
+    Local_Chapters{
         id
 
     }
