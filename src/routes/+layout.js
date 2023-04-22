@@ -154,7 +154,7 @@ export async function load({ params, url }) {
       }
     }
       `
-      
+    // console.log(query)  
 
     const data = await directus_fetch(query)
 

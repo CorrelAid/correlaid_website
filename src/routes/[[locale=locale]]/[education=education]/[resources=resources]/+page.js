@@ -14,15 +14,9 @@ export async function load({ params }) {
      series
      target_group
   }
-    OER{
-    kind
-    link
-    translations{
-        title
-    }
-  }
   }
   `
+  console.log(query)
 
   const data = await directus_fetch(query)
 

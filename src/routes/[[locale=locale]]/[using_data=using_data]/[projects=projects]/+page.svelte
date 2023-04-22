@@ -11,15 +11,19 @@
     export let data;
     let projects;
     $: projects = data.projects;
+    $: console.log(projects)
 </script>
 
 <div class="grid grid-cols-2 gap-6">
     {#each projects as project, i}
+    {#if project.Organizations[0]}
         <Card
             href={$t("navbar.using_data.projects").url + "/" + project.project_id}
             title={project.translations[0].title}
-            subtitle={project.organizations[0].Projects_Organization_id.translations[0].name}
-
+            
+            subtitle={project.Organizations[0].Organizations_id.translations[0].name}
+       
         />
+        {/if}
     {/each}
 </div>
