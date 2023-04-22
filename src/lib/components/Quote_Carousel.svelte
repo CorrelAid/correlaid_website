@@ -1,5 +1,5 @@
 <script>
-    import Carousel from "@wildfluss/svelte-carousel";
+    import Carousel from "svelte-carousel";
     import Html from "$lib/components/Html.svelte";
     import Hero from "$lib/components/Hero.svelte";
     import { browser } from "$app/environment";
