@@ -1,11 +1,9 @@
-import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang } from '$lib/js/helpers'
-import { unpack_events } from '$lib/js/data_processing'
-
+import directus_fetch from '$lib/js/directus_fetch';
+import {get_lang} from '$lib/js/helpers';
+import {unpack_events} from '$lib/js/data_processing';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }) {
-
+export async function load({params}) {
   const query = `query {
     Events {
       id
@@ -32,13 +30,11 @@ export async function load({ params }) {
   
     }
   }
-  `
+  `;
 
-  const data = await directus_fetch(query)
+  const data = await directus_fetch(query);
 
-  const events = data.Events
+  const events = data.Events;
 
-
-  return { events: data.Events }
-
+  return {events: data.Events};
 }
