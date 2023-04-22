@@ -8,6 +8,7 @@ import _ from "lodash";
 export async function load({ params }) {
 
 
+  // prettier-ignore
   const query = `
   query {
     Projects(filter:{project_id:{_eq: "${params.slug}"}}) {

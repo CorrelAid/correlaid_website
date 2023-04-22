@@ -6,6 +6,7 @@ import { get_lang } from '$lib/js/helpers'
 export async function load({ params }) {
 
 
+  // prettier-ignore
   const query = `query{
 
   

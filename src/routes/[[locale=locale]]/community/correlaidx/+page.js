@@ -6,7 +6,8 @@ import { get_lang } from '$lib/js/helpers'
 export async function load({ params }) {
 
 
-    const query = `
+  // prettier-ignore
+  const query = `
   query {
     Local_Chapters{
         location

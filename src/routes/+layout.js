@@ -16,6 +16,7 @@ export async function load({ params, url }) {
   let data = {};
   if (params.slug === undefined) 
   {
+    // prettier-ignore
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
         builder {

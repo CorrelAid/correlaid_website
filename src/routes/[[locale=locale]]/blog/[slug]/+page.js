@@ -9,6 +9,7 @@ import _ from "lodash";
 export async function load({ params }) {
 
 
+  // prettier-ignore
   const query = `query {
     Posts(filter: { translations: { slug: { _eq: "${params.slug}"}}}) {
        pubdate
