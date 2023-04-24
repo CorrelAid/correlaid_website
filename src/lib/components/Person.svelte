@@ -9,7 +9,6 @@
   export let linkedin = '';
   export let github = '';
   export let email = '';
-  export let is_partner = false;
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
 </script>
@@ -17,15 +16,7 @@
 <div class="grid grid-cols-4 gap-x-12 rounded pb-6 pt-8">
   {#if img}
     <div class="col-span-full xl:col-span-1">
-      {#if is_partner === true}
-        <div
-          class="relative mx-auto flex h-36 w-56 items-center justify-center"
-        >
-          <img class="" src={img} alt={name} />
-        </div>
-      {:else}
-        <Avatar src={img} alt={name} />
-      {/if}
+      <Avatar src={img} alt={name} />
     </div>
   {/if}
   <div class="col-span-full px-4 pt-5 text-neutral xl:col-span-3 xl:pt-0">
