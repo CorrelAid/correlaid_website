@@ -1,4 +1,3 @@
-import {json} from '@sveltejs/kit';
 import {render} from 'svelte-email';
 import MembershipApp from '$lib/emails/MembershipApp.svelte';
 import nodemailer from 'nodemailer';

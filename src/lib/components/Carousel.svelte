@@ -1,10 +1,10 @@
 <script>
   import Carousel from '@wildfluss/svelte-carousel';
-  import MediaQuery from 'svelte-media-queries';
-  import Html from '$lib/components/Html.svelte';
+  // import MediaQuery from 'svelte-media-queries';
+  // import Html from '$lib/components/Html.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import {browser} from '$app/environment';
-  import {gen_img_url} from '$lib/js/helpers';
+  // import {gen_img_url} from '$lib/js/helpers';
   export let carousel_elements;
 
   let carousel;

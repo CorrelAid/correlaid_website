@@ -1,6 +1,5 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
-  import {locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Html from '$lib/components/Html.svelte';
   import TextContainer from '$lib/components/Text_Container.svelte';

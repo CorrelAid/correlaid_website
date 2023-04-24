@@ -22,4 +22,5 @@ jobs:
       - name: Run formatter and tests
         run: |
           npm run format_check
+          npm run lint
           npm run test

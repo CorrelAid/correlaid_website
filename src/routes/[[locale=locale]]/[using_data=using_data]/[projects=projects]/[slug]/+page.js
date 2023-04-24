@@ -76,7 +76,7 @@ export async function load({params}) {
 
   // checking if post exists in current locale, if not using other language. Getting languages the posts exists in.
   if (Posts.length != 0) {
-    let translations = _.find(
+    const translations = _.find(
       Posts[0].Posts_id.translations,
       (el) => el.languages_code.code === get_lang(params),
     );

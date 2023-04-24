@@ -8,7 +8,6 @@
   export let text;
   export let buttons = [];
   export let correlaidx = false;
-  import _ from 'lodash';
 
   let image_id;
   $: if (image != null) {

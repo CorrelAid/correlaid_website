@@ -1,15 +1,5 @@
 <script>
-  import {
-    Button,
-    Container,
-    Head,
-    Hr,
-    Html,
-    Img,
-    Preview,
-    Section,
-    Text,
-  } from 'svelte-email';
+  import {Container, Head, Html, Preview, Section, Text} from 'svelte-email';
 
   export let name = 'ddf';
 </script>

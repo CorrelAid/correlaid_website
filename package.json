@@ -10,7 +10,7 @@
     "format_check": "npx prettier --check .",
     "quick_format": "npx pretty-quick --staged",
     "lint": "npx eslint src/",
-    "precommit": "run-s quick_format",
+    "precommit": "run-s quick_format lint",
     "init_pre_commit": "husky install",
     "test": "npx vitest run"
   },

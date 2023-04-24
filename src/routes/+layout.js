@@ -1,7 +1,6 @@
 import directus_fetch from '$lib/js/directus_fetch';
 import {get_lang, get_locale, find} from '$lib/js/helpers';
 import translations from '$lib/data/translations';
-import _ from 'lodash';
 
 // export const prerender = true;
 
@@ -12,7 +11,6 @@ export async function load({params, url}) {
   // vercels places / in front of path if optional param
   const pk = find(page_keys, url.pathname.replace('//', '/'))[0];
 
-  let data = {};
   if (params.slug === undefined) {
     // prettier-ignore
     const query = `query {
@@ -153,7 +151,6 @@ export async function load({params, url}) {
       }
     }
       `
-    // console.log(query)
 
     const data = await directus_fetch(query);
 

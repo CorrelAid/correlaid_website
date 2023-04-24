@@ -1,8 +1,6 @@
 <script>
   import {onMount} from 'svelte';
   import {page_key} from '$lib/stores/page_key';
-  import {gen_date} from '$lib/js/helpers';
-  import {locale} from '$lib/stores/i18n';
   import {t} from '$lib/stores/i18n';
   import Card from '$lib/components/Card.svelte';
   import Hero from '$lib/components/Hero.svelte';

@@ -19,7 +19,7 @@
 
   let sidenav_width;
 
-  let toggles = {
+  const toggles = {
     about: false,
     using_data: false,
     education: false,
