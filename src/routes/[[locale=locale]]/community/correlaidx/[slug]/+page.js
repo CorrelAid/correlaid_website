@@ -1,11 +1,9 @@
-import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang } from '$lib/js/helpers'
-
+import directus_fetch from '$lib/js/directus_fetch';
+import {get_lang} from '$lib/js/helpers';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }) {
-
-
+export async function load({params}) {
+  // prettier-ignore
   const query = `query{
 
   
@@ -76,8 +74,11 @@ export async function load({ params }) {
         }
     }
   }`
-  const data = await directus_fetch(query)
+  const data = await directus_fetch(query);
 
-  return { local_chapter: data.Local_Chapters[0], events: data.Events, projects: data.Local_Chapters[0].projects}
-
+  return {
+    local_chapter: data.Local_Chapters[0],
+    events: data.Events,
+    projects: data.Local_Chapters[0].projects,
+  };
 }

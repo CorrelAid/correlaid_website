@@ -1,11 +1,8 @@
-import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang } from '$lib/js/helpers'
-
+import directus_fetch from '$lib/js/directus_fetch';
+import {get_lang} from '$lib/js/helpers';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
-
-
+export async function load({params}) {
   const query = `query {
     Events(filter:{slug:{_eq: "${params.slug}"}}) {
       id
@@ -34,10 +31,9 @@ export async function load({ params }) {
   
     }
   }
-  `
+  `;
 
-  const data = await directus_fetch(query)
+  const data = await directus_fetch(query);
 
-  return { event: data.Events[0] }
-
+  return {event: data.Events[0]};
 }

@@ -1,21 +1,20 @@
-import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang, get_locale, find } from '$lib/js/helpers'
-import translations from "$lib/data/translations";
-import _ from "lodash";
+import directus_fetch from '$lib/js/directus_fetch';
+import {get_lang, get_locale, find} from '$lib/js/helpers';
+import translations from '$lib/data/translations';
+import _ from 'lodash';
 
 // export const prerender = true;
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params, url }) {
-
+export async function load({params, url}) {
   // retreive page key by using the url. you cant access stores in server files
-  const page_keys = translations[`${get_locale(params)}`]
+  const page_keys = translations[`${get_locale(params)}`];
   // vercels places / in front of path if optional param
-  const pk = find(page_keys, url.pathname.replace("//", "/"))[0] 
+  const pk = find(page_keys, url.pathname.replace('//', '/'))[0];
 
   let data = {};
-  if (params.slug === undefined) 
-  {
+  if (params.slug === undefined) {
+    // prettier-ignore
     const query = `query {
       Pages(filter: { page_key: { _eq: "${pk}" } }) {
         builder {
@@ -154,26 +153,15 @@ export async function load({ params, url }) {
       }
     }
       `
-    // console.log(query)  
+    // console.log(query)
 
-    const data = await directus_fetch(query)
+    const data = await directus_fetch(query);
 
-
-    const builder = data.Pages[0].builder
-
-    
-
+    const builder = data.Pages[0].builder;
 
     if (builder === undefined) {
-      
+    } else {
+      return {builder: builder};
     }
-    else{
-      return { builder: builder }
-    }
-
   }
-
-
-
-
 }

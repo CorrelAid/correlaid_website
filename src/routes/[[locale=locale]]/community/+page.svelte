@@ -1,8 +1,8 @@
 <script>
-  import { page_key } from "$lib/stores/page_key";
-  import { onMount } from "svelte";
+  import {page_key} from '$lib/stores/page_key';
+  import {onMount} from 'svelte';
 
   onMount(() => {
-    $page_key = "navbar.community";
+    $page_key = 'navbar.community';
   });
 </script>

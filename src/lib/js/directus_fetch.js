@@ -1,29 +1,22 @@
-import { error } from '@sveltejs/kit'
-import { PUBLIC_API_URL } from '$env/static/public';
+import {error} from '@sveltejs/kit';
+import {PUBLIC_API_URL} from '$env/static/public';
 
-import { Directus } from '@directus/sdk';
+import {Directus} from '@directus/sdk';
 const directus = new Directus(PUBLIC_API_URL);
 
-
 const directus_fetch = async (query) => {
+  let data;
 
-    let data;
+  try {
+    const response = await directus.graphql.items(query);
+    data = response.data;
+  } catch (err) {
+    throw error(500, {
+      message: err.message,
+    });
+  }
 
-    try {
-        const response = await directus.graphql.items(query);
-        data = response.data
+  return data;
+};
 
-
-    } catch (err) {
-        throw error(500, {
-            message: err.message
-        })
-    }
-
-
-    return data
-
-
-}
-
-export default directus_fetch
+export default directus_fetch;

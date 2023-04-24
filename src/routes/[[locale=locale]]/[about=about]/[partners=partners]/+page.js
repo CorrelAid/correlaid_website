@@ -1,10 +1,9 @@
-import { get_lang } from '$lib/js/helpers';
-import directus_fetch from '$lib/js/directus_fetch'
+import {get_lang} from '$lib/js/helpers';
+import directus_fetch from '$lib/js/directus_fetch';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params, url, route, }) {
-
-    const query = `
+export async function load({params, url, route}) {
+  const query = `
   query {
     Partner{
         name
@@ -18,10 +17,9 @@ export async function load({ params, url, route, }) {
         
     }
 }
-      `
-    // console.log(query)
-    const data = await directus_fetch(query)
+      `;
+  // console.log(query)
+  const data = await directus_fetch(query);
 
-    return { partners: data.Partner }
-
+  return {partners: data.Partner};
 }

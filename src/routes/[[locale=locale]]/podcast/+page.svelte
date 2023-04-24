@@ -1,10 +1,10 @@
 <script>
-  import { page_key } from "$lib/stores/page_key";
-  import { onMount } from "svelte";
-  import Card from "$lib/components/Card.svelte";
+  import {page_key} from '$lib/stores/page_key';
+  import {onMount} from 'svelte';
+  import Card from '$lib/components/Card.svelte';
 
   onMount(() => {
-    $page_key = "navbar.podcast";
+    $page_key = 'navbar.podcast';
   });
 
   export let data;
@@ -12,7 +12,7 @@
   $: podcast_episodes = data.podcast_episodes;
 </script>
 
-<div class="container mx-auto pb-8 pl-4 pr-6 space-y-4">
+<div class="container mx-auto space-y-4 pb-8 pl-4 pr-6">
   <div class="grid grid-cols-2 gap-6">
     {#each podcast_episodes as podcast_episode, i}
       <Card
