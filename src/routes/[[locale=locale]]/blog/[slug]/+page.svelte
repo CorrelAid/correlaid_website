@@ -4,7 +4,6 @@
   import {page_key} from '$lib/stores/page_key';
   import {gen_date} from '$lib/js/helpers';
   import {locale} from '$lib/stores/i18n';
-  import _ from 'lodash';
   import TextContainer from '$lib/components/Text_Container.svelte';
   import Person from '$lib/components/Person.svelte';
   import {gen_img_url} from '$lib/js/helpers';

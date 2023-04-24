@@ -6,5 +6,5 @@
     $page_key = 'navbar.community.become_member';
   });
 
-  const source = '# WIP';
+  // const source = '# WIP';
 </script>

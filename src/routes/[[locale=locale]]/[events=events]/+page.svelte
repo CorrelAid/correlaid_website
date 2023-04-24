@@ -2,7 +2,6 @@
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import {t} from '$lib/stores/i18n';
-  import {gen_img_url} from '$lib/js/helpers';
   import Events_Card from '../../../lib/components/Events_Card.svelte';
 
   onMount(() => {

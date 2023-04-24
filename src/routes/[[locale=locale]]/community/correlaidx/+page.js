@@ -26,7 +26,7 @@ export async function load({params}) {
   const local_chapters = data.Local_Chapters;
 
   for (let i = 0; i < local_chapters.length; i++) {
-    var obj = {
+    const obj = {
       type: 'Feature',
       geometry: local_chapters[i].location,
       properties: {

@@ -1,17 +1,11 @@
 <script>
   import Carousel from '@wildfluss/svelte-carousel';
-  import Html from '$lib/components/Html.svelte';
-  import Hero from '$lib/components/Hero.svelte';
   import {browser} from '$app/environment';
   import {gen_img_url} from '$lib/js/helpers';
   export let text_only = false;
   export let quotes;
 
   let carousel;
-
-  function goTo(x) {
-    carousel.goTo(x, {animated: true});
-  }
 </script>
 
 <div class="border bg-gradient-to-r from-primary-75 to-secondary-75 text-white">

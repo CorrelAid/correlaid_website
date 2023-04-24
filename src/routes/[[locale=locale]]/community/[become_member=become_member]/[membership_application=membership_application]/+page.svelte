@@ -17,7 +17,7 @@
   $: membership_application = data.membership_application.object.fields;
   $: validation = data.membership_application.object.validation;
 
-  const MAX_FILE_SIZE = 1000000; //1mb
+  const MAX_FILE_SIZE = 1000000; // 1mb
 
   const validFileExtensions = {document: ['pdf']};
   function isValidFileType(fileName, fileType) {
@@ -28,7 +28,6 @@
   }
 
   let turnstileError;
-  let formSuccess = false;
 
   let requiredString;
   let optionalString;

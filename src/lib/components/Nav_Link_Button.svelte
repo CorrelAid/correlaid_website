@@ -8,7 +8,7 @@
 
   const dispatch = createEventDispatcher();
 
-  let menuEnterTimer, menuLeaveTimer;
+  let menuEnterTimer;
 
   function dropdown() {
     dispatch('message', {

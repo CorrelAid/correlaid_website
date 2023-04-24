@@ -4,9 +4,6 @@
   import {t} from '$lib/stores/i18n';
   import {gen_img_url} from '$lib/js/helpers';
   import BlogCard from '$lib/components/Blog_Card.svelte';
-  import {get_lang} from '$lib/js/helpers';
-  import _ from 'lodash';
-  import {page} from '$app/stores';
 
   onMount(() => {
     $page_key = 'navbar.blog';

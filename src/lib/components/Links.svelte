@@ -1,8 +1,5 @@
 <script>
-  import Facebook from '$lib/svg/Facebook.svelte';
-  import Instagram from '../svg/Instagram.svelte';
   import Twitter from '../svg/Twitter.svelte';
-  import Youtube from '../svg/Youtube.svelte';
   import Github from '../svg/Github.svelte';
   import Linkedin from '../svg/Linkedin.svelte';
   import Mastodon from '../svg/Mastodon.svelte';
