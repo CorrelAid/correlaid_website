@@ -13,7 +13,7 @@
     'footer.imprint',
     'footer.coc',
     'footer.coe',
-    'footer.contact',
+    'navbar.about.team',
   ];
 </script>
 
