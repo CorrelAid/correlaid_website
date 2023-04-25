@@ -113,12 +113,12 @@ export function gen_time(time, locale) {
 // checking if post exists in current locale, if not using other language. Getting languages the posts exists in.
 export function handle_lang(posts, params) {
   for (let i = 0; i < posts.length; i++) {
-    let langs = [];
+    const langs = [];
     for (let y = 0; y < posts[i].translations.length; y++) {
       langs.push(posts[i].translations[y].languages_code.code);
     }
     posts[i].langs = langs;
-    let translations = _.find(
+    const translations = _.find(
       posts[i].translations,
       (el) => el.languages_code.code === get_lang(params),
     );

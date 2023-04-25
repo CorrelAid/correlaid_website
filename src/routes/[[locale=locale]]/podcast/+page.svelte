@@ -1,7 +1,6 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
-  import Card from '$lib/components/Card.svelte';
   import BlogCard from '$lib/components/Blog_Card.svelte';
 
   onMount(() => {

@@ -24,7 +24,7 @@
         <img alt="Office" src={image_url} class="h-full w-full" />
       </a>
     {:else}
-      <a {href} class="h-full w-full bg-neutral" />
+      <a {href} class="h-full w-full bg-neutral"><div /></a>
     {/if}
   </div>
   <div class="p-4 sm:p-6">
