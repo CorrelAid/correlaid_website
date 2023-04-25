@@ -1,29 +1,28 @@
 <script>
-    import { page_key } from "$lib/stores/page_key";
-    import { t } from "$lib/stores/i18n";
-    import { onMount } from "svelte";
-    import Card from "$lib/components/Card.svelte";
+  import {page_key} from '$lib/stores/page_key';
+  import {t} from '$lib/stores/i18n';
+  import {onMount} from 'svelte';
+  import Card from '$lib/components/Card.svelte';
 
-    onMount(() => {
-        $page_key = "navbar.using_data.projects";
-    });
+  onMount(() => {
+    $page_key = 'navbar.using_data.projects';
+  });
 
-    export let data;
-    let projects;
-    $: projects = data.projects;
-    $: console.log(projects)
+  export let data;
+  let projects;
+  $: projects = data.projects;
+  $: console.log(projects);
 </script>
 
 <div class="grid grid-cols-2 gap-6">
-    {#each projects as project, i}
+  {#each projects as project, i}
     {#if project.Organizations[0]}
-        <Card
-            href={$t("navbar.using_data.projects").url + "/" + project.project_id}
-            title={project.translations[0].title}
-            
-            subtitle={project.Organizations[0].Organizations_id.translations[0].name}
-       
-        />
-        {/if}
-    {/each}
+      <Card
+        href={$t('navbar.using_data.projects').url + '/' + project.project_id}
+        title={project.translations[0].title}
+        subtitle={project.Organizations[0].Organizations_id.translations[0]
+          .name}
+      />
+    {/if}
+  {/each}
 </div>

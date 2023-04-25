@@ -1,10 +1,8 @@
-import directus_fetch from '$lib/js/directus_fetch'
-import { get_lang } from '$lib/js/helpers'
-
+import directus_fetch from '$lib/js/directus_fetch';
+import {get_lang} from '$lib/js/helpers';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }) {
-
+export async function load({params}) {
   const query = `
 query{
   Projects{
@@ -33,13 +31,11 @@ query{
 
     }
 }}
-  `
+  `;
 
-  const data = await directus_fetch(query)
+  const data = await directus_fetch(query);
 
-  const projects = data.Projects
+  const projects = data.Projects;
 
-
-  return { projects: projects }
-
+  return {projects: projects};
 }

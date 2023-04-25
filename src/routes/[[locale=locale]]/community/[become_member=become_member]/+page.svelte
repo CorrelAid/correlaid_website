@@ -1,10 +1,10 @@
 <script>
-    import { page_key } from "$lib/stores/page_key";
-    import { onMount } from "svelte";
+  import {page_key} from '$lib/stores/page_key';
+  import {onMount} from 'svelte';
 
-    onMount(() => {
-        $page_key = "navbar.community.become_member";
-    });
+  onMount(() => {
+    $page_key = 'navbar.community.become_member';
+  });
 
-    const source = "# WIP";
+  // const source = '# WIP';
 </script>

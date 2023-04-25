@@ -1,12 +1,12 @@
 <script>
-    export let href;
-    export let text;
-    export let options = "";
+  export let href;
+  export let text;
+  export let options = '';
 </script>
 
 <a
-    class="hover:text-secondary transition inline-flex items-center justify-center tracking-wide {options}"
-    {href}
+  class="inline-flex items-center justify-center tracking-wide transition hover:text-secondary {options}"
+  {href}
 >
-    {text}
+  {text}
 </a>

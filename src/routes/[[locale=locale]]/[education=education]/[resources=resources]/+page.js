@@ -1,9 +1,7 @@
-import directus_fetch from '$lib/js/directus_fetch'
-
+import directus_fetch from '$lib/js/directus_fetch';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }) {
-
+export async function load({params}) {
   const query = `query{
     Workshops{
      name
@@ -15,13 +13,12 @@ export async function load({ params }) {
      target_group
   }
   }
-  `
-  console.log(query)
+  `;
+  console.log(query);
 
-  const data = await directus_fetch(query)
+  const data = await directus_fetch(query);
 
-  const workshops = data.Workshops
+  const workshops = data.Workshops;
 
-  return { workshops: workshops }
-
+  return {workshops: workshops};
 }

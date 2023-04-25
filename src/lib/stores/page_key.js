@@ -1,3 +1,3 @@
-import { writable } from 'svelte/store';
+import {writable} from 'svelte/store';
 
-export const page_key = writable("navbar.home");
+export const page_key = writable('navbar.home');
