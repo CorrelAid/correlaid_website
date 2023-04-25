@@ -9,6 +9,9 @@
   $: if (color == 'bg-quaternary') {
     color = 'bg-quaternary';
   }
+  $: if (color == 'bg-primary') {
+    color = 'bg-primary';
+  }
 </script>
 
 <a
