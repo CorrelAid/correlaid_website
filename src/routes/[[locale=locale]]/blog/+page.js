@@ -36,6 +36,5 @@ export async function load({params}) {
 
   const posts = handle_lang(data.Posts, params);
 
-
   return {posts: posts};
 }
