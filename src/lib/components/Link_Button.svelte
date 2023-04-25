@@ -5,8 +5,6 @@
   export let color;
   import ExternalLink from '../svg/External_Link.svelte';
 
-  $: console.log(href);
-
   // dafuq
   $: if (color != 'bg-secondary') {
     color = 'bg-primary';
