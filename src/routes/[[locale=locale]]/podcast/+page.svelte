@@ -10,7 +10,6 @@
   export let data;
   let podcast_episodes;
   $: podcast_episodes = data.podcast_episodes;
-  $: console.log(podcast_episodes);
 </script>
 
 <div class="container mx-auto space-y-4 pb-8 pl-4 pr-6">

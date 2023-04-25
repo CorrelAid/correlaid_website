@@ -14,7 +14,6 @@
   $: events = data.events;
   let podcast_episodes;
   $: podcast_episodes = data.podcast_episodes;
-  $: console.log(podcast_episodes);
 
   onMount(() => {
     $page_key = 'navbar.home';
