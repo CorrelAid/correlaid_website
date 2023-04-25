@@ -20,8 +20,6 @@ export async function load({params}) {
   }}
   `;
 
-  console.log(query);
-
   const data = await directus_fetch(query);
 
   const podcast_episodes = data.Podcast_Episodes;

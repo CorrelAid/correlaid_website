@@ -18,7 +18,6 @@ export async function load({params, url, route}) {
     }
 }
       `;
-  // console.log(query)
   const data = await directus_fetch(query);
 
   return {partners: data.Partner};

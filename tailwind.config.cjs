@@ -6,7 +6,7 @@ module.exports = {
     //   'xl': '1281px',
     // },
     corePlugins: {
-      aspectRatio: false,
+      aspectRatio: true,
     },
     extend: {
       fontFamily: {
