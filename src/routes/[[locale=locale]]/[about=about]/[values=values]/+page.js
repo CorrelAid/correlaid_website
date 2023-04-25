@@ -27,15 +27,7 @@ export async function load({params, url, route}) {
     }
   
   
-  Organizational_Structure{
-    translations(
-        filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-      ){
-        remote_office
-        board
-        ethics_commission
-    }
-}
+
 }
       `;
 
@@ -48,6 +40,5 @@ export async function load({params, url, route}) {
 
   return {
     ethics_commission: ethics_commission,
-    organizational_structure: organizational_structure,
   };
 }

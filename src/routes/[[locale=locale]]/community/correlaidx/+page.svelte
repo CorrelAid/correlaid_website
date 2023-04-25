@@ -4,7 +4,7 @@
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import Box from '$lib/components/Box.svelte';
-  import Map from '$lib/components/Map.svelte';
+  import Map from '$lib/components/single_use/Map.svelte';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
   onMount(() => {

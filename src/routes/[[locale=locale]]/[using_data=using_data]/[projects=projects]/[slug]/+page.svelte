@@ -50,7 +50,7 @@
     slot="main"
   />
 </TextContainer>
-<div class="container">
+<div class="text_width mx-auto pb-12">
   <Box>
     <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>
     {#each project.People as person}

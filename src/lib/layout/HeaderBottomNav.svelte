@@ -3,7 +3,7 @@
   import {page_key} from '$lib/stores/page_key';
   import {drawer} from '$lib/stores/drawer';
   import {header_height} from '$lib/stores/dims';
-  import NavLinkButton from '$lib/components/Nav_Link_Button.svelte';
+  import HeaderBottomNavButton from '$lib/components/HeaderBottomNavButton.svelte';
 
   export let bot_nav;
 
@@ -40,7 +40,7 @@
       <div class="flex items-center gap-6 text-xl text-base-content">
         {#each bot_nav as navItem}
           <div>
-            <NavLinkButton
+            <HeaderBottomNavButton
               href={$t(navItem.key).url}
               text={$t(navItem.key).text}
               category={navItem.category}
