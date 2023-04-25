@@ -38,10 +38,12 @@
       />
     </div>
   {:else if box_content != ''}
-    <Box>
-      <h2 class="text-xl font-semibold">{box_content.name}</h2>
-      <p>{box_content.description}</p>
-    </Box>
+    <div class="text_width">
+      <Box>
+        <h2 class="text-xl font-semibold">{box_content.name}</h2>
+        <p>{box_content.description}</p>
+      </Box>
+    </div>
   {/if}
 </div>
 <div class="pb-10">
