@@ -31,6 +31,7 @@
       teaser={event.teaser}
       date={event.date}
       tags={event.tags}
+      language={event.language}
     />
   {/each}
 </div>
