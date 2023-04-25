@@ -174,6 +174,7 @@ export async function load({params, url}) {
                     filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
                   ) {
                     text
+                    link
                   }
                 }
               }
