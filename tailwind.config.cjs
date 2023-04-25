@@ -30,6 +30,10 @@ module.exports = {
         'tertiary-75': '#e58479',
         'tertiary-50': '#eca79d',
         'tertiary-25': '#f4d1c8',
+        quaternary: '#538794',
+        'tertiary-75': '#6d9aae',
+        'tertiary-50': '#8cb3c8',
+        'tertiary-25': '#adc2d8',
       },
       letterSpacing: {
         wide: '.125rem',

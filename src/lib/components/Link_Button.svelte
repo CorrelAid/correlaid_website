@@ -6,8 +6,8 @@
   import ExternalLink from '../svg/External_Link.svelte';
 
   // dafuq
-  $: if (color != 'bg-secondary') {
-    color = 'bg-primary';
+  $: if (color == 'bg-quaternary') {
+    color = 'bg-quaternary';
   }
 </script>
 
