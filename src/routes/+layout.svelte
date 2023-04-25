@@ -15,6 +15,7 @@
   import Carousel from '$lib/components/Carousel.svelte';
   import Timeline from '$lib/components/Timeline.svelte';
   import QuoteCarousel from '$lib/components/Quote_Carousel.svelte';
+  import Cta from '../lib/components/CTA.svelte';
 
   export let data;
 
@@ -76,9 +77,25 @@
                 buttons={section.item.buttons}
               />
             </div>
-          {:else if section.collection == 'buttons'}
+          {:else if section.collection == 'cta_group'}
+            <div class="container mx-auto grid grid-cols-2 gap-8 px-4 pb-10">
+              {#each section.item.ctas as cta}
+                <Cta
+                  button_link={cta.ctas_id.button.translations[0].link}
+                  button_color={cta.ctas_id.button.color}
+                  button_text={cta.ctas_id.button.translations[0].text}
+                  text={cta.ctas_id.translations[0].text}
+                />
+              {/each}
+            </div>
+          {:else if section.collection == 'ctas'}
             <div class="container mx-auto">
-              <button>test</button>
+              <Cta
+                button_link={section.item.button.translations[0].link}
+                button_text={section.item.button.translations[0].text}
+                button_color={section.item.button.color}
+                text={section.item.translations[0].text}
+              />
             </div>
           {:else if section.collection == 'timelines'}
             <div class="container mx-auto pb-12">
