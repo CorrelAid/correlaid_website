@@ -29,6 +29,9 @@
   on:mouseover={delay}
   on:mouseleave={() => clearTimeout(menuEnterTimer)}
   on:focus={dropdown}
+  on:click={() => {
+    dispatch('click', {});
+  }}
 >
   {text}
   <DropdownIcon height={20} width={20} />
