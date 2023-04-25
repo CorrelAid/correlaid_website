@@ -48,10 +48,6 @@
         href={$t('navbar.events').url + '/' + event.slug}
         title={event.title}
         teaser={event.teaser}
-        image_url={gen_img_url(
-          event.title_image.id,
-          'fit=inside&width=1200&height=675&format=png',
-        )}
         date={event.date}
         tags={event.tags}
       />
@@ -68,8 +64,8 @@
             '/' +
             project.Projects_id.project_id}
           title={project.Projects_id.translations[0].title}
-          subtitle={project.Projects_id.organizations[0]
-            .Projects_Organization_id.translations[0].name}
+          subtitle={project.Projects_id.Organizations[0].Organizations_id
+            .translations[0].name}
         />
       {/each}
     </div>
