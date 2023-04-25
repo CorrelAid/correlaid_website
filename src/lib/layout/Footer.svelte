@@ -34,7 +34,7 @@
 
   <div class=" mx-auto flex py-6">
     <div class="mx-auto grid grid-flow-col gap-6">
-      <a href="https://twitter.com/CorrelAid" class=""
+      <a href="https://www.instagram.com/correlaid" class=""
         ><Instagram
           width={social_media_height}
           height={social_media_height}

@@ -30,7 +30,7 @@
   }
 </script>
 
-<div class="absolute z-30 h-screen w-screen lg:hidden" id="drawer">
+<div class="absolute z-30 h-screen w-screen xl:hidden" id="drawer">
   <div
     class="absolute left-0 z-30 flex h-screen w-5/6 flex-col justify-between border-r bg-white"
     id="drawer-sidenav"
