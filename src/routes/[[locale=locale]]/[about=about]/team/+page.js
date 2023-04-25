@@ -33,7 +33,6 @@ export async function load({params, url, route}) {
       ){
         remote_office
         board
-        ethics_commission
     }
 }
 }
