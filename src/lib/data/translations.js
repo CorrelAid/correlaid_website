@@ -45,16 +45,16 @@ export default {
     'navbar.community': {text: 'Community', url: '/community'},
     // Subnav community
     'navbar.community.correlaidx': {
-      text: 'CorrelAidX',
+      text: 'Engagiere dich vor Ort',
       url: '/community/correlaidx',
     },
     'navbar.community.founding_lc': {
-      text: 'Ein Local Chapter gründen',
+      text: 'Gründe (d)eine Lokalgruppe',
       url: '/community/lc_gruenden',
     },
     // "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/community/volunteer_journeys" },
     'navbar.community.become_member': {
-      text: 'Mitglied werden',
+      text: 'Vereinsmitglied werden',
       url: '/community/mitglied_werden',
     },
     'navbar.community.become_member.membership_application': {
