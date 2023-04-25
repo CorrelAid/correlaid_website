@@ -12,6 +12,9 @@
   $: if (color == 'bg-primary') {
     color = 'bg-primary';
   }
+  $: if (color == 'bg-secondary') {
+    color = 'bg-secondary';
+  }
 </script>
 
 <a

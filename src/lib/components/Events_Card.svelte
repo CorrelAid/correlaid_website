@@ -1,14 +1,17 @@
 <script>
   import {locale} from '$lib/stores/i18n';
   import {gen_date} from '$lib/js/helpers';
-  // export let image_url;
   export let href;
   export let title;
   export let teaser;
   export let date;
   export let tags;
+  export let language;
+  import De from '../svg/DE.svelte';
+  import En from '../svg/EN.svelte';
   let proc_date;
   $: proc_date = gen_date(date, $locale);
+  $: console.log(language);
 </script>
 
 <div class="offset-right relative w-full" style="">
@@ -20,7 +23,7 @@
         <span class="text-xl font-light">{proc_date}</span>
       </div>
 
-      <div class="pb-4">
+      <div class="pb-2">
         <a
           {href}
           class="text-xl font-semibold text-base-content transition hover:text-primary"
@@ -28,7 +31,13 @@
           {title}
         </a>
       </div>
-
+      <div class="pb-2">
+        {#if language == 'de-DE'}
+          <De height={25} width={25} />
+        {:else if language == 'en-US'}
+          <En height={25} width={25} />
+        {/if}
+      </div>
       <div class="flex w-full gap-x-2 pb-4">
         {#each tags as tag}
           <span
@@ -42,8 +51,5 @@
         {teaser}
       </p>
     </div>
-    <a {href} class="aspect-w-16 aspect-h-9 col-span-full xl:col-span-1">
-      <!-- <img alt="Office" src={image_url} class="h-full rounded" /> -->
-    </a>
   </div>
 </div>

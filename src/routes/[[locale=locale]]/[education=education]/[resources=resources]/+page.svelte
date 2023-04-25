@@ -14,6 +14,11 @@
 
 <div class="grid grid-cols-2 gap-6">
   {#each workshops as workshop, i}
-    <Card title={workshop.name} subtitle={workshop.teaser} />
+    <Card
+      title={workshop.name}
+      subtitle={workshop.teaser}
+      language={workshop.language}
+      href={workshop.resource_link}
+    />
   {/each}
 </div>
