@@ -37,10 +37,10 @@
       attributionControl: false,
     });
     map.on('load', function () {
-      var layers = map.getStyle().layers;
+      const layers = map.getStyle().layers;
       // Find the index of the first symbol layer in the map style
-      var firstSymbolId;
-      for (var i = 0; i < layers.length; i++) {
+      let firstSymbolId;
+      for (let i = 0; i < layers.length; i++) {
         if (layers[i].type === 'symbol') {
           firstSymbolId = layers[i].id;
           break;
@@ -98,16 +98,38 @@
     map.on('click', 'lcs', (e) => {
       const lcs = e.features[0];
 
+      const lc_href = [
+        get_locale($page.params) == 'de' ? '' : '/en',
+        '/community/correlaidx/',
+        lcs.properties.city,
+      ].join('');
+      const a_class = [
+        'font-bold',
+        'text-tertiary',
+        'hover:underline',
+        'text-sm',
+        'font-sans',
+        'text-base',
+      ].join(' ');
+      const div_class = [
+        'pt-2',
+        'px-2',
+        'pb-1',
+        'flex',
+        'justify-center',
+        'align-center',
+      ].join(' ');
+
       new Popup({closeOnClick: true, offset: 10, closeButton: true})
         .setHTML(
-          `<div class="pt-2 px-2 pb-1 flex justify-center align-center">
-                        ${external_svg}
-                    <a class="font-bold text-tertiary hover:underline text-sm font-sans text-base" href="${
-                      get_locale($page.params) == 'de' ? '' : '/en'
-                    }/community/correlaidx/${lcs.properties.city}">${
-            lcs.properties.name
-          }</a>
-                    </div>`,
+          [
+            `<div class="${div_class}">`,
+            external_svg,
+            `<a class="${a_class}" href="${lc_href}">`,
+            lcs.properties.name,
+            '</a>',
+            '</div>',
+          ].join(''),
         )
 
         .setLngLat(lcs.geometry.coordinates)

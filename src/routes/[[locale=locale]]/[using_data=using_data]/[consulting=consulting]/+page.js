@@ -1,6 +1,4 @@
 import directus_fetch from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
-import {unpack_events} from '$lib/js/data_processing';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {

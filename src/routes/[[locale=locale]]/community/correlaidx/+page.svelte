@@ -2,28 +2,14 @@
   import {page} from '$app/stores';
   import {get_locale} from '$lib/js/helpers';
   import {page_key} from '$lib/stores/page_key';
-  import {onMount, onDestroy} from 'svelte';
-  import Location from '$lib/svg/Location.svelte';
-  import List from '$lib/svg/List.svelte';
+  import {onMount} from 'svelte';
   import Box from '$lib/components/Box.svelte';
   import Map from '$lib/components/Map.svelte';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
-  import {
-    TabWrapper,
-    TabHead,
-    TabHeadItem,
-    TabContentItem,
-  } from '$lib/components/tabs';
-
   onMount(() => {
     $page_key = 'navbar.community.correlaidx';
   });
-
-  let activeTabValue = 1;
-  const handleClick = (tabValue) => () => {
-    activeTabValue = tabValue;
-  };
 
   export let data;
 

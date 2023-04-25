@@ -2,7 +2,7 @@
   import '../app.css';
   import {page} from '$app/stores';
   import {goto} from '$app/navigation';
-  import {t, locale, locales} from '$lib/stores/i18n';
+  import {t, locale} from '$lib/stores/i18n';
   import {page_key} from '$lib/stores/page_key';
   import {gen_img_url} from '$lib/js/helpers';
   import {header_height} from '$lib/stores/dims';

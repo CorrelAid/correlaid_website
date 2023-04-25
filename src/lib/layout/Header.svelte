@@ -4,27 +4,20 @@
   import {drawer} from '$lib/stores/drawer';
   import {no_scroll} from '$lib/stores/no_scroll';
   import {header_height} from '$lib/stores/dims';
-  import {page_key} from '$lib/stores/page_key';
   import {createEventDispatcher} from 'svelte';
   import CorrelAid_Logo from '$lib/svg/CorrelAid_Logo.svelte';
   import CorrelAid_Logo_min from '$lib/svg/CorrelAid_Logo_min.svelte';
-  import NavLinkButton from '$lib/components/Nav_Link_Button.svelte';
   import MenuIcon from '../svg/Menu_Icon.svelte';
   import DropdownIcon from '../svg/Dropdown_Icon.svelte';
   import LinkButton from '$lib/components/Link_Button.svelte';
-  import {fly, fade} from 'svelte/transition';
+  import HeaderTopNav from './HeaderTopNav.svelte';
+  import HeaderBottomNav from './HeaderBottomNav.svelte';
+  import MobileDrawer from './MobileDrawer.svelte';
 
   let language_toggle = false;
   let active_language = 'de';
-
-  let sidenav_width;
-
-  let toggles = {
-    about: false,
-    using_data: false,
-    education: false,
-    community: false,
-  };
+  let drawerLocale = 'de';
+  let botNavCloseAll;
 
   const dispatch = createEventDispatcher();
 
@@ -43,27 +36,17 @@
     language_toggle ? (language_toggle = false) : (language_toggle = true);
   }
 
-  function handle_dropdown(event) {
-    subnav(event.detail.category);
-  }
-
-  function subnav(button) {
-    closeall();
-    toggles[button] = true;
-  }
-
   function closeall() {
-    toggles.about = false;
-    toggles.using_data = false;
-    toggles.education = false;
-    toggles.community = false;
+    if (typeof botNavCloseAll !== 'undefined') {
+      botNavCloseAll();
+    }
   }
 
   $: active_language = $locale;
   $: $no_scroll = $drawer;
   $: $page.url && closeall();
   $: $page.url && ($drawer = false);
-  $: $drawer && closeall();
+  $: btnLocale(drawerLocale);
 
   const top_nav = [
     'navbar.events',
@@ -113,8 +96,6 @@
   ];
 </script>
 
-<svelte:window on:load={closeall} />
-
 <header
   aria-label="Site Header"
   class="fixed top-0 z-30 w-screen border-b border-neutral-25 bg-white xl:static"
@@ -137,68 +118,8 @@
       </div>
       <!-- middle part of navbar -->
       <div class="3xl:col-span-4 col-span-6 hidden flex-col xl:block">
-        <!-- Top Nav -->
-        <div class="mb-3 mt-1 flex">
-          <div class="mx-auto">
-            <nav aria-label="Site Nav">
-              <ul
-                class="flex items-center gap-6 font-light tracking-wide text-base-content"
-              >
-                {#each top_nav as key}
-                  <li>
-                    <a class="transition hover:text-primary" href={$t(key).url}>
-                      {$t(key).text}
-                    </a>
-                  </li>
-                {/each}
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- Bottom Nav -->
-        <div class="mx-auto flex items-center gap-12">
-          <div class="mx-auto hidden xl:block">
-            <nav aria-label="Site Nav">
-              <div class="flex items-center gap-6 text-xl text-base-content">
-                {#each bot_nav as obj}
-                  <div>
-                    <NavLinkButton
-                      href={$t(obj.key).url}
-                      text={$t(obj.key).text}
-                      category={obj.category}
-                      options={$page_key.startsWith(obj.key)
-                        ? 'font-medium text-secondary'
-                        : ''}
-                      on:message={handle_dropdown}
-                    />
-                    {#if toggles[obj.category]}
-                      <div
-                        class="absolute z-30 w-56"
-                        on:mouseleave={closeall}
-                        style="top: {$header_height + 1}px"
-                      >
-                        <ul
-                          class="rounded-b border-x border-b border-neutral-25 bg-white py-2 text-base font-light text-base-content"
-                        >
-                          {#each obj.children as subnav}
-                            <li class="px-4 pb-2">
-                              <a
-                                class="transition hover:text-primary"
-                                href={$t(subnav).url}
-                              >
-                                {$t(subnav).text}
-                              </a>
-                            </li>
-                          {/each}
-                        </ul>
-                      </div>
-                    {/if}
-                  </div>
-                {/each}
-              </div>
-            </nav>
-          </div>
-        </div>
+        <HeaderTopNav {top_nav} />
+        <HeaderBottomNav {bot_nav} bind:closeall={botNavCloseAll} />
       </div>
       <!-- right part of navbar -->
       <div
@@ -266,98 +187,5 @@
 </header>
 <!-- Mobile Menu -->
 {#if $drawer}
-  <div class="absolute z-30 h-screen w-screen lg:hidden" id="drawer">
-    <div
-      class="absolute left-0 z-30 flex h-screen w-5/6 flex-col justify-between border-r bg-white"
-      id="drawer-sidenav"
-      bind:clientWidth={sidenav_width}
-      in:fly={{x: -sidenav_width, duration: 250}}
-      out:fly={{x: -sidenav_width, duration: 250}}
-    >
-      <nav aria-label="Main Nav" class="flex flex-col pt-7 pl-7">
-        <ul class="space-y-3 text-2xl text-base-content">
-          {#each bot_nav as obj}
-            <li>
-              <div class="inline-flex items-center">
-                <a class="w-56 tracking-wide" href={$t(obj.key).url}>
-                  {$t(obj.key).text}
-                </a>
-                <button
-                  on:click={() =>
-                    toggles[obj.category]
-                      ? (toggles[obj.category] = false)
-                      : subnav(obj.category)}
-                >
-                  <DropdownIcon height={30} width={30} />
-                </button>
-              </div>
-            </li>
-            {#if toggles[obj.category]}
-              <ul
-                class="space-y-3 text-base font-light tracking-wide text-base-content"
-              >
-                {#each obj.children as subnav}
-                  <li>
-                    <a
-                      class="transition hover:text-primary"
-                      href={$t(subnav).url}
-                    >
-                      {$t(subnav).text}
-                    </a>
-                  </li>
-                {/each}
-              </ul>
-            {/if}
-          {/each}
-
-          <ul
-            class="space-y-3 pt-3 text-lg font-light tracking-wide text-base-content"
-          >
-            {#each top_nav as key}
-              <li>
-                <a class="transition hover:text-primary" href={$t(key).url}
-                  >{$t(key).text}</a
-                >
-              </li>
-            {/each}
-          </ul>
-        </ul>
-      </nav>
-
-      <div class="">
-        <div class="flex w-2/4 items-center pl-7 pb-7">
-          <div class="mx-auto flex items-center gap-5">
-            <LinkButton
-              text={$t('navbar.donate').text}
-              href={$t('navbar.donate').url}
-              type={'external'}
-              color={'secondary'}
-            />
-            <div class="flex">
-              <button
-                class="pr-5 text-xl font-light"
-                on:click={() => btnLocale('de')}
-              >
-                de
-              </button>
-              <span class="border-l-2 border-neutral-25 pr-5" />
-              <button
-                class="text-xl font-light"
-                on:click={() => btnLocale('en')}
-              >
-                en
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button
-      class="absolute z-20 h-screen w-screen bg-neutral opacity-80"
-      id="drawer-overlay"
-      on:click={() => ($drawer = !$drawer)}
-      in:fade={{delay: 0}}
-      out:fade={{delay: 0}}
-    />
-  </div>
+  <MobileDrawer {top_nav} {bot_nav} bind:buttonLocale={drawerLocale} />
 {/if}

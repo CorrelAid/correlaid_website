@@ -17,13 +17,13 @@ export function translate(locale, key, vars) {
   if (!locale) throw new Error(`no translation for key "${key}"`);
 
   // Grab the translation from the translations object.
-  let translation = translations[locale][key];
+  const translation = translations[locale][key];
 
   if (!translation)
     throw new Error(`no translation found for ${locale}.${key}`);
 
   let text = translation.text;
-  let url = translation.url;
+  const url = translation.url;
 
   // Replace any passed in variables in the translation string.
   Object.keys(vars).map((k) => {
@@ -37,7 +37,7 @@ export function translate(locale, key, vars) {
 // contructs regex that matches valid url paramters by extracting them from translations given one or multiple page keys
 export function constructRe(keys) {
   let str = '';
-  for (var i = 0; i < keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     const en = getLastItem(translate('en', keys[i], {}).url);
     const de = getLastItem(translate('de', keys[i], {}).url);
     // or at end ofregex only for last item (if list is doesnt consist of 1 item)

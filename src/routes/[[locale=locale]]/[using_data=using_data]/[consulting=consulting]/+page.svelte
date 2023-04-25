@@ -3,7 +3,6 @@
   import {onMount} from 'svelte';
   import Person from '$lib/components/Person.svelte';
   import {gen_img_url} from '$lib/js/helpers';
-  import Html from '$lib/components/Html.svelte';
 
   onMount(() => {
     $page_key = 'navbar.using_data.consulting';

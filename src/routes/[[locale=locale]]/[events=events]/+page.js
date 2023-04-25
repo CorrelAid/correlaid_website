@@ -33,7 +33,5 @@ export async function load({params}) {
 
   const data = await directus_fetch(query);
 
-  const events = data.Events;
-
   return {events: data.Events};
 }
