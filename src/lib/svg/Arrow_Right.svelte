@@ -1,7 +1,6 @@
 <script>
   export let width;
   export let height;
-  export let fill;
 </script>
 
 <svg

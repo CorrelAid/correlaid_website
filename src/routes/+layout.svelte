@@ -118,10 +118,12 @@
               {/if}
               <Person
                 name={section.item.person.name}
-                img={gen_img_url(
-                  section.item.person.image.id,
-                  'fit=cover&width=200&height=200&quality=80',
-                )}
+                img={section.item.person.image
+                  ? gen_img_url(
+                      section.item.person.image.id,
+                      'fit=cover&width=200&height=200&quality=80',
+                    )
+                  : null}
                 email={section.item.person.email}
                 position={section.item.translations[0].position}
                 description={section.item.translations[0].description}
