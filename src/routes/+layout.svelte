@@ -19,7 +19,7 @@
 
   export let data;
 
-  if ($page.params.locale) {
+  $: if ($page.params.locale) {
     $locale = $page.params.locale;
   } else {
     $locale = 'de';
@@ -30,11 +30,11 @@
     // if the page contains a slug, get the root url and add the slug
     if ($page.params.slug != null) {
       const url = $t($page_key).url + '/' + $page.params.slug;
-
+      $locale = $page.params.locale;
       goto(url);
     } else {
       const url = $t($page_key).url;
-
+      $locale = $page.params.locale;
       goto(url);
     }
   }

@@ -15,8 +15,8 @@
   import MobileDrawer from './MobileDrawer.svelte';
 
   let language_toggle = false;
-  let active_language = 'de';
-  let drawerLocale = 'de';
+  let active_language = $locale;
+  let drawerLocale = $locale;
   let botNavCloseAll;
 
   const dispatch = createEventDispatcher();
@@ -42,7 +42,6 @@
     }
   }
 
-  $: active_language = $locale;
   $: $no_scroll = $drawer;
   $: $page.url && closeall();
   $: $page.url && ($drawer = false);
