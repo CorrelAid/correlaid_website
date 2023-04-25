@@ -19,13 +19,43 @@ export async function load({params, url}) {
           sort
           collection
           item {
-            ... on buttons {
+            ... on cta_group{
+							ctas{
+								ctas_id{
+									button{
+                  color
+                        translations(
+                          filter: { languages_code: { code: { _eq: "de-DE" } } }
+                        ) {
+                          text
+                          link
+                        }
+              }
+             
+                  translations(
+                    filter: { languages_code: { code: { _eq: "de-DE" } } }
+                  ){
+                      text
+                  }
+								}
+							}
+						}
+            ... on ctas {
               
+              button{
+                  color
+                        translations(
+                          filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                        ) {
+                          text
+                          link
+                        }
+              }
               translations(
                 filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-              ) {
-                text
-              } 
+              ){
+                  text
+              }
             }
     
             ... on carousel {
