@@ -4,7 +4,7 @@ import {get_lang} from '$lib/js/helpers';
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
   const query = `query {
-    Events {
+    Events(sort: [ "-date" ]) {
       id
       date
       start_time

@@ -1,11 +1,12 @@
 import directus_fetch from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
-import _ from 'lodash';
+import {handle_lang} from '$lib/js/helpers';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
   const query = `query {
-    Posts {
+    Posts (
+      sort: [ "-pubdate" ]
+  ){
       pubdate
       content_creators{
         Content_Creators_id{
@@ -33,26 +34,8 @@ export async function load({params}) {
 
   const data = await directus_fetch(query);
 
-  // ordering by publication date
-  const posts = _.orderBy(data.Posts, (item) => item.pubdate, ['desc']);
+  const posts = handle_lang(data.Posts, params);
 
-  // checking if post exists in current locale, if not using other language. Getting languages the posts exists in.
-  for (let i = 0; i < posts.length; i++) {
-    const langs = [];
-    for (let y = 0; y < posts[i].translations.length; y++) {
-      langs.push(posts[i].translations[y].languages_code.code);
-    }
-    posts[i].langs = langs;
-    const translations = _.find(
-      posts[i].translations,
-      (el) => el.languages_code.code === get_lang(params),
-    );
-    if (translations === undefined) {
-      posts[i].translations = posts[i].translations[0];
-    } else {
-      posts[i].translations = translations;
-    }
-  }
 
   return {posts: posts};
 }

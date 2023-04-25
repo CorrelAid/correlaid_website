@@ -1,4 +1,5 @@
 import translations from '$lib/data/translations';
+import _ from 'lodash';
 import {PUBLIC_API_URL} from '$env/static/public';
 
 // extracts the last substring after /
@@ -107,4 +108,25 @@ export function gen_time(time, locale) {
   time = new Date(Date.parse('0000-01-01 ' + time));
 
   return time.toLocaleTimeString(locale, options);
+}
+
+// checking if post exists in current locale, if not using other language. Getting languages the posts exists in.
+export function handle_lang(posts, params) {
+  for (let i = 0; i < posts.length; i++) {
+    let langs = [];
+    for (let y = 0; y < posts[i].translations.length; y++) {
+      langs.push(posts[i].translations[y].languages_code.code);
+    }
+    posts[i].langs = langs;
+    let translations = _.find(
+      posts[i].translations,
+      (el) => el.languages_code.code === get_lang(params),
+    );
+    if (translations === undefined) {
+      posts[i].translations = posts[i].translations[0];
+    } else {
+      posts[i].translations = translations;
+    }
+  }
+  return posts;
 }

@@ -19,32 +19,21 @@
 <div class="grid gap-6 xl:grid-cols-2">
   {#each posts as post, i}
     <div class={i == 0 ? 'col-span-full' : 'col-span-1'}>
-      {#if post.translations.title_image}
-        <BlogCard
-          {i}
-          langs={post.langs}
-          href={$t('navbar.blog').url + '/' + post.translations.slug}
-          title={post.translations.title}
-          teaser={post.translations.teaser}
-          tags={post.translations.tags}
-          image_url={gen_img_url(
-            post.translations.title_image.id,
-            'fit=inside&width=1200&height=675&format=png',
-          )}
-          content_creators={post.content_creators}
-        />
-      {:else}
-        <BlogCard
-          {i}
-          langs={post.langs}
-          href={$t('navbar.blog').url + '/' + post.translations.slug}
-          title={post.translations.title}
-          teaser={post.translations.teaser}
-          tags={post.translations.tags}
-          image_url={null}
-          content_creators={post.content_creators}
-        />
-      {/if}
+      <BlogCard
+        {i}
+        langs={post.langs}
+        href={$t('navbar.blog').url + '/' + post.translations.slug}
+        title={post.translations.title}
+        teaser={post.translations.teaser}
+        tags={post.translations.tags}
+        image_url={post.translations.title_image
+          ? gen_img_url(
+              post.translations.title_image.id,
+              'fit=inside&width=1200&height=675&format=png',
+            )
+          : null}
+        content_creators={post.content_creators}
+      />
     </div>
   {/each}
 </div>

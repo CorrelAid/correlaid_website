@@ -12,7 +12,7 @@
 </script>
 
 <a
-  class="inline-flex items-center rounded-md px-4 py-2 text-white shadow transition {String(
+  class="inline-flex items-center rounded-md px-4 py-2 font-medium text-white shadow transition {String(
     color,
   )}"
   {href}
