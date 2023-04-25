@@ -36,7 +36,6 @@ export async function load({params, url, route}) {
   const ethics_commission = data.Global_Administrators.filter(
     (person) => person.group === 'ethics_commission',
   );
-  const organizational_structure = data.Organizational_Structure;
 
   return {
     ethics_commission: ethics_commission,
