@@ -59,7 +59,7 @@
   class="flex min-h-screen flex-col items-center text-neutral"
   style={$no_scroll ? 'max-height: 100vh; overflow-y:hidden' : ''}
 >
-  <Header on:message={handleLocaleChange} />
+  <Header on:changeLanguage={handleLocaleChange} />
   <div class="block xl:hidden" style="min-height: {$header_height}px;" />
   <div id="grow" class="w-screen">
     {#if $header_height}

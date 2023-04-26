@@ -16,7 +16,7 @@ describe('Nav should have dropdown sub menus', () => {
     },
   ];
 
-  test('main navigations present present', () => {
+  test('main navigations present present', async () => {
     locale.set('de');
 
     render(HeaderBottomNav, {props: {bot_nav: navItems}});
@@ -24,6 +24,13 @@ describe('Nav should have dropdown sub menus', () => {
     // Relies on a lot of configuration wrt. translations, meaning
     // Language specific lookups. It would be nice if testing was more explict
     expect(screen.getByText('Über uns')).toBeInTheDocument();
-    expect(screen.getByText('Daten nutzen')).toBeInTheDocument();
+    const navLink = screen.getByText('Daten nutzen');
+    expect(navLink).toBeInTheDocument();
+
+    // TODO: Testing with fireEvent does not work if the on click is on a svelte
+    // component, because fireEvent triggers very specific dom events
+    // try using the user-event package for testing library instead.
+    // await fireEvent.click(navLink);
+    // expect(screen.getByText('Daten nutzen')).toHaveClass('text-secondary');
   });
 });

@@ -1,11 +1,12 @@
 <script>
   import {t} from '$lib/stores/i18n';
-  import {page_key} from '$lib/stores/page_key';
   import {drawer} from '$lib/stores/drawer';
   import {header_height} from '$lib/stores/dims';
-  import HeaderBottomNavButton from '$lib/components/HeaderBottomNavButton.svelte';
+  import HeaderBottomNavButton from './HeaderBottomNavButton.svelte';
 
   export let bot_nav;
+
+  export let lastClickedLink = '';
 
   const toggles = {};
   for (const navItem of bot_nav) {
@@ -40,16 +41,20 @@
       <div class="flex items-center gap-6 text-xl text-base-content">
         {#each bot_nav as navItem}
           <div>
-            <div class="pl-4">
+            <div
+              class="pl-4"
+              class:font-medium={lastClickedLink === navItem.key}
+              class:text-secondary={lastClickedLink === navItem.key}
+            >
               <HeaderBottomNavButton
                 href={$t(navItem.key).url}
                 text={$t(navItem.key).text}
                 category={navItem.category}
-                options={$page_key.startsWith(navItem.key)
-                  ? 'font-medium text-secondary'
-                  : ''}
                 on:message={handle_dropdown}
-                on:click={closeall}
+                on:click={() => {
+                  closeall();
+                  lastClickedLink = navItem.key;
+                }}
               />
             </div>
             {#if toggles[navItem.category]}
@@ -66,7 +71,10 @@
                       <a
                         class="transition hover:text-primary"
                         href={$t(subnavItem).url}
-                        on:click={() => closeall()}
+                        on:click={() => {
+                          closeall();
+                          lastClickedLink = navItem.key;
+                        }}
                       >
                         {$t(subnavItem).text}
                       </a>
