@@ -1,5 +1,6 @@
 import HeaderBottomNav from './HeaderBottomNav.svelte';
 import {render, screen} from '@testing-library/svelte';
+import {locale} from '$lib/stores/i18n';
 
 describe('Nav should have dropdown sub menus', () => {
   const navItems = [
@@ -15,7 +16,9 @@ describe('Nav should have dropdown sub menus', () => {
     },
   ];
 
-  test('toogles on message event', () => {
+  test('main navigations present present', () => {
+    locale.set('de');
+
     render(HeaderBottomNav, {props: {bot_nav: navItems}});
 
     // Relies on a lot of configuration wrt. translations, meaning
