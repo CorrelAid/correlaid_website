@@ -40,16 +40,18 @@
       <div class="flex items-center gap-6 text-xl text-base-content">
         {#each bot_nav as navItem}
           <div>
-            <HeaderBottomNavButton
-              href={$t(navItem.key).url}
-              text={$t(navItem.key).text}
-              category={navItem.category}
-              options={$page_key.startsWith(navItem.key)
-                ? 'font-medium text-secondary'
-                : ''}
-              on:message={handle_dropdown}
-              on:click={closeall}
-            />
+            <div class="pl-4">
+              <HeaderBottomNavButton
+                href={$t(navItem.key).url}
+                text={$t(navItem.key).text}
+                category={navItem.category}
+                options={$page_key.startsWith(navItem.key)
+                  ? 'font-medium text-secondary'
+                  : ''}
+                on:message={handle_dropdown}
+                on:click={closeall}
+              />
+            </div>
             {#if toggles[navItem.category]}
               <div
                 class="absolute z-30 w-56"
