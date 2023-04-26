@@ -1,7 +1,7 @@
 <script>
   import {t} from '$lib/stores/i18n';
   import {drawer} from '$lib/stores/drawer';
-  import DropdownIcon from '../svg/Dropdown_Icon.svelte';
+  import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
   import LinkButton from '$lib/components/Link_Button.svelte';
   import {fly, fade} from 'svelte/transition';
 
@@ -10,6 +10,7 @@
   export let top_nav;
   export let bot_nav;
   export let buttonLocale;
+  export let lastClickedLink = '';
 
   const toggles = {};
   for (const navItem of bot_nav) {
@@ -43,7 +44,13 @@
         {#each bot_nav as navItem}
           <li>
             <div class="inline-flex items-center">
-              <a class="w-56 tracking-wide" href={$t(navItem.key).url}>
+              <a
+                class="w-56 tracking-wide"
+                href={$t(navItem.key).url}
+                on:click={() => {
+                  lastClickedLink = navItem.key;
+                }}
+              >
                 {$t(navItem.key).text}
               </a>
               <button
@@ -65,6 +72,9 @@
                   <a
                     class="transition hover:text-primary"
                     href={$t(subnavItem).url}
+                    on:click={() => {
+                      lastClickedLink = navItem.key;
+                    }}
                   >
                     {$t(subnavItem).text}
                   </a>

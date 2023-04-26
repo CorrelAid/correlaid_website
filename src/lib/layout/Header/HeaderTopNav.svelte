@@ -3,7 +3,7 @@
 
   export let top_nav;
 
-  let lastClickedLink = '';
+  export let lastClickedLink = '';
 </script>
 
 <div class="mb-3 mt-1 flex">
