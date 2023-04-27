@@ -29,7 +29,9 @@
   </div>
   <div class="p-4 sm:p-6">
     <a {href}>
-      <h3 class="text-lg font-bold text-base-content">
+      <h3
+        class="text-xl font-semibold text-base-content transition hover:text-primary"
+      >
         {title}
       </h3>
       <p class="flex space-x-2 pt-2">
