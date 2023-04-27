@@ -57,6 +57,10 @@ export default {
       text: 'Vereinsmitglied werden',
       url: '/community/mitglied_werden',
     },
+    'navbar.community.volunteer_teams': {
+      text: 'Trete einem Team bei',
+      url: '/community/volunteer_teams',
+    },
     'navbar.community.become_member.membership_application': {
       text: 'Mitgliedsantrag',
       url: '/community/mitglied_werden/mitgliedsantrag',
@@ -126,6 +130,10 @@ export default {
     'navbar.community.founding_lc': {
       text: 'Founding a Local Chapter',
       url: '/en/community/founding_lc',
+    },
+    'navbar.community.volunteer_teams': {
+      text: 'Join a team',
+      url: '/en/community/volunteer_teams',
     },
     // "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/en/community/volunteer_journeys" },
     'navbar.community.become_member': {
