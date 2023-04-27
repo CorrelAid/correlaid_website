@@ -27,7 +27,12 @@
       <p class="pb-3 text-justify">{description}</p>
     {/if}
     {#if email && email != ''}
-      <p><a class="text-secondary" href="mailto:{email}">{email}</a></p>
+      <p>
+        <a
+          class="font-normal text-secondary no-underline hover:underline"
+          href="mailto:{email}">{email}</a
+        >
+      </p>
     {/if}
 
     <Links {website} {mastodon} {twitter} {linkedin} {github} />

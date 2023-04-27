@@ -36,7 +36,8 @@ Only the implementations of most important concepts are explained here in a gene
 #### Standards
 
 - Text should be justified: "text-justify"
-- Links should have the following classes: ""
+- Links should have the following classes: "text-secondary no-underline font-normal hover:underline"
+- Links that are also titles should have the following classes: "text-xl font-semibold text-base-content transition hover:text-primary" (exception: partners)
 
 ### Internationalization
 
