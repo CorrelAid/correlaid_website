@@ -44,6 +44,7 @@
       </div>
     {/if}
   </div>
+
   <Html
     source={project.translations[0].description}
     width={'text'}
@@ -51,19 +52,25 @@
   />
 </TextContainer>
 <div class="text_width mx-auto pb-12">
-  <Box>
-    <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>
-    {#each project.People as person}
-      <div class="flex items-center">
-        <span class="mr-2">{person.People_id.name}</span>
-        <Links
-          website={person.People_id.website ? person.People_id.website : ''}
-          linkedin={person.People_id.linkedin ? person.People_id.linkedin : ''}
-          mastodon={person.People_id.mastodon ? person.People_id.mastodon : ''}
-          twitter={person.People_id.twitter ? person.People_id.twitter : ''}
-          github={person.People_id.github ? person.People_id.github : ''}
-        />
-      </div>
-    {/each}
-  </Box>
+  <div class="px-4">
+    <Box>
+      <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>
+      {#each project.People as person}
+        <div class="flex items-center">
+          <span class="mr-2">{person.People_id.name}</span>
+          <Links
+            website={person.People_id.website ? person.People_id.website : ''}
+            linkedin={person.People_id.linkedin
+              ? person.People_id.linkedin
+              : ''}
+            mastodon={person.People_id.mastodon
+              ? person.People_id.mastodon
+              : ''}
+            twitter={person.People_id.twitter ? person.People_id.twitter : ''}
+            github={person.People_id.github ? person.People_id.github : ''}
+          />
+        </div>
+      {/each}
+    </Box>
+  </div>
 </div>

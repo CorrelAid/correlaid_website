@@ -38,7 +38,7 @@
       />
     </div>
   {:else if box_content != ''}
-    <div class="text_width">
+    <div class="text_width px-4">
       <Box>
         <h2 class="text-xl font-semibold">{box_content.name}</h2>
         <p>{box_content.description}</p>

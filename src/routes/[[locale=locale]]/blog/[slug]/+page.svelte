@@ -41,7 +41,7 @@
 </TextContainer>
 {#if content_creators.length != 0}
   <hr />
-  <div class="container mx-auto space-y-8 pt-12">
+  <div class="container mx-auto space-y-8 px-4 pt-12">
     {#each content_creators as person}
       <Person
         name={person.Content_Creators_id.person.name}

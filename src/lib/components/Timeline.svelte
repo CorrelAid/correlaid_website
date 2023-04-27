@@ -59,7 +59,7 @@
     <div
       class="w-3/4 xl:w-2/3 {check_odd(i)
         ? 'relative left-1/4 xl:left-1/3'
-        : ''} z-20 h-full px-8 py-8 xl:py-12"
+        : ''} z-20 h-full px-4 py-8 xl:py-12"
     >
       <Html source={step.timeline_steps_id.translations[0].text} options={''} />
     </div>

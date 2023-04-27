@@ -33,57 +33,60 @@
     />
   </div>
 </div>
-<div class="container mx-auto pb-12">
-  <Html
-    source={local_chapter.translations[0].description}
-    options={'prose-img:'}
-    width={'text'}
-  />
-</div>
-{#if events.length != 0}
-  <div class="container mx-auto mb-12 space-y-8">
-    <h2 class="px-4 text-xl font-semibold">Events</h2>
-    {#each events as event, i}
-      <Events_Card
-        href={$t('navbar.events').url + '/' + event.slug}
-        title={event.title}
-        teaser={event.teaser}
-        date={event.date}
-        tags={event.tags}
-      />
-    {/each}
+<div class="px-4">
+  <div class="container mx-auto pb-12">
+    <Html
+      source={local_chapter.translations[0].description}
+      options={'prose-img:'}
+      width={'text'}
+    />
   </div>
-{/if}
-{#if projects.length != 0}
-  <div class="container mx-auto mb-12 space-y-8">
-    <h2 class="px-4 text-xl font-semibold">Projects</h2>
-    <div class="grid grid-cols-2 gap-6">
-      {#each projects as project, i}
-        <Card
-          href={$t('navbar.using_data.projects').url +
-            '/' +
-            project.Projects_id.project_id}
-          title={project.Projects_id.translations[0].title}
-          subtitle={project.Projects_id.Organizations[0].Organizations_id
-            .translations[0].name}
+  {#if events.length != 0}
+    <div class="container mx-auto mb-12 space-y-8">
+      <h2 class="px-4 text-xl font-semibold">Events</h2>
+      {#each events as event, i}
+        <Events_Card
+          href={$t('navbar.events').url + '/' + event.slug}
+          title={event.title}
+          teaser={event.teaser}
+          date={event.date}
+          tags={event.tags}
         />
       {/each}
     </div>
-  </div>
-{/if}
-{#if local_chapter.local_administrators.length != 0}
-  <div class="container mx-auto mb-12 space-y-8">
-    {#each local_chapter.local_administrators as person}
-      <Person
-        name={person.Local_Administrators_id.person.name}
-        img={gen_img_url(
-          person.Local_Administrators_id.person.image.id,
-          'fit=cover&width=200&height=200&quality=80',
-        )}
-        position={person.Local_Administrators_id.translations[0].position}
-        description={person.Local_Administrators_id.translations[0].description}
-        email={person.Local_Administrators_id.person.email}
-      />
-    {/each}
-  </div>
-{/if}
+  {/if}
+  {#if projects.length != 0}
+    <div class="container mx-auto mb-12 space-y-8">
+      <h2 class="px-4 text-xl font-semibold">Projects</h2>
+      <div class="grid gap-6 lg:grid-cols-2">
+        {#each projects as project, i}
+          <Card
+            href={$t('navbar.using_data.projects').url +
+              '/' +
+              project.Projects_id.project_id}
+            title={project.Projects_id.translations[0].title}
+            subtitle={project.Projects_id.Organizations[0].Organizations_id
+              .translations[0].name}
+          />
+        {/each}
+      </div>
+    </div>
+  {/if}
+  {#if local_chapter.local_administrators.length != 0}
+    <div class="container mx-auto mb-12 space-y-8">
+      {#each local_chapter.local_administrators as person}
+        <Person
+          name={person.Local_Administrators_id.person.name}
+          img={gen_img_url(
+            person.Local_Administrators_id.person.image.id,
+            'fit=cover&width=200&height=200&quality=80',
+          )}
+          position={person.Local_Administrators_id.translations[0].position}
+          description={person.Local_Administrators_id.translations[0]
+            .description}
+          email={person.Local_Administrators_id.person.email}
+        />
+      {/each}
+    </div>
+  {/if}
+</div>

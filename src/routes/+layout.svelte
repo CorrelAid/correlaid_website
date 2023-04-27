@@ -110,7 +110,7 @@
               </div>
             </div>
           {:else if section.collection == 'contacts'}
-            <div class="container mx-auto mb-12">
+            <div class="container mx-auto mb-12 px-4">
               {#if section.item.hr === true}
                 <hr class="mb-12" />
               {/if}
