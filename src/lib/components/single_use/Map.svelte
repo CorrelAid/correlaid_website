@@ -1,6 +1,6 @@
 <script>
   import {page} from '$app/stores';
-  import {get_locale} from '$lib/js/helpers';
+  import {gen_lc_href} from '$lib/js/helpers';
   import {onMount, onDestroy} from 'svelte';
   import {Map, Popup, AttributionControl} from 'maplibre-gl';
   import {locale} from '$lib/stores/i18n';
@@ -104,11 +104,7 @@
     map.on('click', 'lcs', (e) => {
       const lcs = e.features[0];
 
-      const lc_href = [
-        get_locale($page.params) == 'de' ? '' : '/en',
-        '/community/correlaidx/',
-        lcs.properties.city,
-      ].join('');
+      const lc_href = gen_lc_href($page.params, lcs.properties.city);
       const a_class = [
         'font-bold',
         'text-tertiary',
