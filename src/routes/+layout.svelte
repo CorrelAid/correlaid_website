@@ -102,7 +102,7 @@
           {:else if section.collection == 'wysiwyg'}
             <div class="container mx-auto">
               <!-- if first item add top margin -->
-              <div class="mb-12 px-4 {section.sort == 1 ? 'mt-10' : ''}">
+              <div class="mb-12 {section.sort == 1 ? 'mt-10' : ''}">
                 <Html
                   source={section.item.translations[0].content}
                   options={''}
@@ -140,7 +140,9 @@
             </div>
           {:else if section.collection == 'custom_sections'}
             <div class="container mx-auto mb-12">
-              <slot />
+              <div class="mx-4">
+                <slot />
+              </div>
             </div>
           {/if}
         {/each}

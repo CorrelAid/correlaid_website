@@ -18,7 +18,6 @@
   $: organizational_structure = data.organizational_structure;
 </script>
 
-<hr />
 <div class="mt-12">
   <Html
     source={organizational_structure.translations[0].remote_office}
@@ -39,7 +38,6 @@
         description={person.translations[0].description}
       />
     {/each}
-    <hr />
   </div>
 
   <Html

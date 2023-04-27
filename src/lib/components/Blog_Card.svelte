@@ -59,7 +59,9 @@
       {/each}
     </div>
     <div class="py-4">
-      <p class="overflow-hidden leading-relaxed text-base-content line-clamp-3">
+      <p
+        class="overflow-hidden text-justify leading-relaxed text-base-content line-clamp-3"
+      >
         {teaser}
       </p>
     </div>
