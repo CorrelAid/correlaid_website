@@ -19,9 +19,9 @@
   $: local_chapters = data.local_chapters;
 </script>
 
-<div class="px-2">
+<div class="">
   <div class="">
-    <div class="mb-16 grid grid-cols-2 gap-7 px-7">
+    <div class="mb-16 grid grid-cols-2 gap-7">
       {#each local_chapters as local_chapter}
         <a
           href={`${

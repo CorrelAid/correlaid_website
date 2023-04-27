@@ -21,7 +21,7 @@
 <div class="mt-12">
   <Html
     source={organizational_structure.translations[0].remote_office}
-    options={'pb-12'}
+    options={'pb-12 px-0'}
     width={'text'}
   />
 

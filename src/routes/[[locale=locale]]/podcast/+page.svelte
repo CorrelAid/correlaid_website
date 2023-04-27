@@ -13,7 +13,7 @@
 </script>
 
 <div class="container mx-auto space-y-4 pb-8">
-  <div class="grid grid-cols-2 gap-6">
+  <div class="grid gap-6 lg:grid-cols-2">
     {#each podcast_episodes as episode, i}
       <BlogCard
         {i}

@@ -18,7 +18,7 @@
     <Avatar src={img} alt={name} />
   </div>
 
-  <div class="col-span-full px-4 pt-5 text-neutral xl:col-span-5 xl:pt-0">
+  <div class="col-span-full pt-5 text-neutral xl:col-span-5 xl:pt-0">
     <h2 class="pb-3 text-2xl text-primary">{name}</h2>
     {#if position != ''}
       <h3 class="pb-3 text-lg">{position}</h3>
