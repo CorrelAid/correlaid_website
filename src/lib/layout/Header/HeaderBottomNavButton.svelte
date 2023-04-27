@@ -3,7 +3,7 @@
   export let text;
   export let category;
   export let options = '';
-  import DropdownIcon from '../svg/Dropdown_Icon.svelte';
+  import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
   import {createEventDispatcher} from 'svelte';
 
   const dispatch = createEventDispatcher();
