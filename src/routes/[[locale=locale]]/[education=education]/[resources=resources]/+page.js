@@ -1,17 +1,28 @@
 import directus_fetch from '$lib/js/directus_fetch';
+import {get_lang} from '$lib/js/helpers';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const query = `query{
-    Workshops{
-     name
-     language
-     teaser
-     resource_link
-     topic
-     series
-     target_group
-  }
+  // prettier-ignore
+  const query = `
+  query {
+    Workshops {
+      name
+      language
+      teaser
+      resource_link
+      person {
+        name
+      }
+      responsible_unit
+      local_chapters {
+        Local_Chapters_id {
+          translations(filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }) {
+            city
+          }
+        }
+      }
+    }
   }
   `;
 

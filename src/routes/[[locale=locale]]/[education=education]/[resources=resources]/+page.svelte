@@ -19,6 +19,10 @@
       subtitle={workshop.teaser}
       language={workshop.language}
       href={workshop.resource_link}
+      resp_unit={workshop.responsible_unit}
+      correlaidx_city={workshop.local_chapters[0]
+        ? workshop.local_chapters[0].Local_Chapters_id.translations[0].city
+        : null}
     />
   {/each}
 </div>
