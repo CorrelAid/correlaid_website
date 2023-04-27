@@ -12,7 +12,7 @@
   $: workshops = data.workshops;
 </script>
 
-<div class="grid grid-cols-2 gap-6">
+<div class="grid gap-6 lg:grid-cols-2">
   {#each workshops as workshop, i}
     <Card
       title={workshop.name}

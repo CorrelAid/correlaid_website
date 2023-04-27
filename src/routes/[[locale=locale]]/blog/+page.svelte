@@ -16,7 +16,7 @@
   $: posts = data.posts;
 </script>
 
-<div class="mx-8 grid gap-6 xl:grid-cols-2">
+<div class="grid gap-6 xl:grid-cols-2">
   {#each posts as post, i}
     <div class={i == 0 ? 'col-span-full' : 'col-span-1'}>
       <BlogCard

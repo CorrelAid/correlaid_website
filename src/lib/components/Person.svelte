@@ -13,7 +13,7 @@
   import Links from '$lib/components/Links.svelte';
 </script>
 
-<div class="text_width grid grid-cols-8 gap-x-12 rounded pb-6 pt-8">
+<div class="grid grid-cols-8 gap-x-12 rounded pb-6 pt-8">
   <div class="col-span-full xl:col-span-3">
     <Avatar src={img} alt={name} />
   </div>
@@ -24,7 +24,7 @@
       <h3 class="pb-3 text-lg">{position}</h3>
     {/if}
     {#if description != ''}
-      <p class="pb-3">{description}</p>
+      <p class="pb-3 text-justify">{description}</p>
     {/if}
     {#if email && email != ''}
       <p><a class="text-secondary" href="mailto:{email}">{email}</a></p>

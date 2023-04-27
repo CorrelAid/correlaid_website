@@ -14,7 +14,7 @@
   $: console.log(projects);
 </script>
 
-<div class="grid grid-cols-2 gap-6">
+<div class="grid gap-6 lg:grid-cols-2">
   {#each projects as project, i}
     {#if project.Organizations[0]}
       <Card

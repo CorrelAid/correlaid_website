@@ -12,7 +12,7 @@
   $: podcast_episodes = data.podcast_episodes;
 </script>
 
-<div class="container mx-auto space-y-4 pb-8 pl-4 pr-6">
+<div class="container mx-auto space-y-4 pb-8">
   <div class="grid grid-cols-2 gap-6">
     {#each podcast_episodes as episode, i}
       <BlogCard

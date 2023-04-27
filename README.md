@@ -1,10 +1,10 @@
 ## Dev Setup
 
-1.  Install packages (in the SvelteKit folder)
+1.  Install packages
 
         npm install
 
-1.  Create .env file with the cms url env variable (in the SvelteKit folder)
+1.  Create .env file with the cms url env variable
 
         echo "PUBLIC_API_URL=https://cms.correlaid.org" > .env
 
@@ -32,6 +32,11 @@ Only the implementations of most important concepts are explained here in a gene
 - Colours are defined in tailwind.config.js based on the [CorrelAid Design Guide](https://docs.correlaid.org/wiki/design-guide)
 - Some custom styles, e.g. the gradient offset border, are defined in app.css
 - Fonts are self hosted and located in static/fonts/. They are specified in app.css and tailwind.config.js
+
+#### Standards
+
+- Text should be justified: "text-justify"
+- Links should have the following classes: ""
 
 ### Internationalization
 
@@ -69,7 +74,7 @@ in the selected language, while also handling possible slugs.
 ### CMS
 
 The website gets its content from the API of a directus cloud project. This
-project contains a collection called Pages. This collection contains of a
+project contains a collection called Pages. This collection contains a
 builder field that allows adding various components to a page including filling
 the components with content and also to define their order. All pages defined
 in the SvelteKit project correspond to one entry in pages collection. This is
@@ -80,8 +85,7 @@ directus collection. The components exists in the form of entries in a list
 that is ordered with the sort field and then retrieved in layout.svelte. There,
 a loop over the list items is declared and the components are rendered based on
 which type of component they are. A special type of component is the "custom
-section" that will define call the svelte "slot" tag if its part of the list.
-This allows adding components to the page that exist only once, e.g. a list of
+section". It calls the svelte "slot" tag. This allows adding components to the page that exist only once, e.g. a list of
 blog posts. The slot tag is filled with the contents of the +page.svelte file
 corresponding to the currently used route.
 
@@ -99,12 +103,6 @@ If a user goes to a blog posts by using a link in the blog post overview, the
 slug route parameter is given to the query defined in
 "blog/\[slug]/+page.server.js". This retrieves the blog post that corresponds
 to the slug.
-
-### Pdfs etc.
-
-The route docs/\[slug] allows the retrieval of pdfs etc. and doesn't correspond
-to a page key. It just forwards the user to calling the directus API with the
-right parameters to retrieve the desired document.
 
 ### Special components and pages
 
