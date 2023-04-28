@@ -38,7 +38,7 @@
 <div class="mx-auto flex items-center gap-12">
   <div class="mx-auto hidden xl:block">
     <nav aria-label="Site Nav">
-      <div class="flex items-center gap-6 text-xl text-base-content">
+      <div class="flex items-center gap-6 text-xl">
         {#each bot_nav as navItem}
           <div>
             <div
@@ -64,7 +64,7 @@
                 style="top: {$header_height + 1}px"
               >
                 <ul
-                  class="rounded-b border-x border-b border-neutral-25 bg-white py-2 text-base font-light text-base-content"
+                  class="rounded-b border-x border-b border-neutral-25 bg-white pt-2 pb-1 text-base font-light text-base-content"
                 >
                   {#each navItem.children as subnavItem}
                     <li class="px-4 pb-2">

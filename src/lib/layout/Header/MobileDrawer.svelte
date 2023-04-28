@@ -1,15 +1,27 @@
 <script>
   import {t} from '$lib/stores/i18n';
   import {drawer} from '$lib/stores/drawer';
+  import {locale} from '$lib/stores/i18n';
   import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
   import LinkButton from '$lib/components/Link_Button.svelte';
   import {fly, fade} from 'svelte/transition';
+  import {createEventDispatcher} from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
+  function changeLocale() {
+    dispatch('changeLanguage', {});
+  }
+
+  function btnLocale(lc) {
+    $locale = lc;
+    changeLocale();
+  }
 
   let sidenav_width;
 
   export let top_nav;
   export let bot_nav;
-  export let buttonLocale;
   export let lastClickedLink = '';
 
   const toggles = {};
@@ -110,15 +122,12 @@
           <div class="flex">
             <button
               class="pr-5 text-xl font-light"
-              on:click={() => (buttonLocale = 'de')}
+              on:click={() => btnLocale('de')}
             >
               de
             </button>
             <span class="border-l-2 border-neutral-25 pr-5" />
-            <button
-              class="text-xl font-light"
-              on:click={() => (buttonLocale = 'en')}
-            >
+            <button class="text-xl font-light" on:click={() => btnLocale('en')}>
               en
             </button>
           </div>

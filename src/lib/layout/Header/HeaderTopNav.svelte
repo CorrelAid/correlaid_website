@@ -9,9 +9,7 @@
 <div class="mb-3 mt-1 flex">
   <div class="mx-auto">
     <nav aria-label="Site Nav">
-      <ul
-        class="flex items-center gap-6 font-light tracking-wide text-base-content"
-      >
+      <ul class="flex items-center gap-6 font-light tracking-wide">
         {#each top_nav as key}
           <li>
             <a
