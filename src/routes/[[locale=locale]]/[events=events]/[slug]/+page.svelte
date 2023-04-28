@@ -78,9 +78,3 @@
     <Html source={`<h2>Details</h2>` + event.description} width={'text'} />
   </div>
 </TextContainer>
-
-<style>
-  #info {
-    max-width: 800px;
-  }
-</style>
