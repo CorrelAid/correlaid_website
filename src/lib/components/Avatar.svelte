@@ -5,7 +5,7 @@
   export let w = 56;
 </script>
 
-<div class="offset relative w-{w} mx-auto">
+<div class="offset relative w-{w} mx-auto mt-3 md:mx-4">
   {#if src}
     <img class="h-56 w-56 rounded border-4 border-neutral" {src} {alt} />
   {:else}

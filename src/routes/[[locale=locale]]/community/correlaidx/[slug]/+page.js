@@ -48,6 +48,7 @@ export async function load({params}) {
           }
           location
           founded
+          lc_email
           local_administrators{
             Local_Administrators_id{
             translations(
@@ -60,9 +61,15 @@ export async function load({params}) {
           person{
               name
               email
+              twitter
+              website
+              linkedin
+              mastodon
+              github
               image{
                 id
               }
+
             }
         }}
           translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
