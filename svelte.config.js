@@ -2,10 +2,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import adapter from '@sveltejs/adapter-auto';
+import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
 
 import mainRoutes from './src/lib/data/translations.js';
 import axios from 'axios';
+
+if (process.env.ADAPTER === 'STATIC' && process.env.PRERENDER !== 'ALL') {
+  throw Error('Env var ADAPTER=STATIC only allowed for PRERENDER=ALL');
+}
 
 function canBePrerendered(url) {
   return (
@@ -146,10 +151,21 @@ if (process.env.PRERENDER === 'ALL' || process.env.PRERENDER === 'AUTO') {
   prerenderRoutes.push('*');
 }
 
+const usedAdapter =
+  process.env.ADAPTER === 'STATIC'
+    ? adapterStatic({
+        pages: 'build',
+        assets: 'build',
+        fallback: null,
+        precompress: false,
+        strict: true,
+      })
+    : adapter({});
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter: adapter({}),
+    adapter: usedAdapter,
     prerender: {
       entries: prerenderRoutes,
     },
