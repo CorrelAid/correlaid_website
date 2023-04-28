@@ -61,9 +61,15 @@ export async function load({params}) {
           person{
               name
               email
+              twitter
+              website
+              linkedin
+              mastodon
+              github
               image{
                 id
               }
+
             }
         }}
           translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){

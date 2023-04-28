@@ -41,23 +41,13 @@
       width={'text'}
     />
   </div>
-  {#if events.length != 0}
-    <div class="container mx-auto mb-12 space-y-8">
-      <h2 class="px-4 text-xl font-semibold">Events</h2>
-      {#each events as event, i}
-        <Events_Card
-          href={$t('navbar.events').url + '/' + event.slug}
-          title={event.title}
-          teaser={event.teaser}
-          date={event.date}
-          tags={event.tags}
-        />
-      {/each}
-    </div>
-  {/if}
   {#if projects.length != 0}
     <div class="container mx-auto mb-12 space-y-8">
-      <h2 class="px-4 text-xl font-semibold">Projects</h2>
+      <div class="mb-12">
+        <h2 class="text-3xl font-bold text-base-content">
+          {$t('navbar.using_data.projects').text}
+        </h2>
+      </div>
       <div class="grid gap-6 lg:grid-cols-2">
         {#each projects as project, i}
           <Card
@@ -72,6 +62,25 @@
       </div>
     </div>
   {/if}
+  {#if events.length != 0}
+    <div class="container mx-auto mb-12 space-y-8">
+      <div class="mb-12">
+        <h2 class="text-3xl font-bold text-base-content">
+          {$t('navbar.events').text}
+        </h2>
+      </div>
+      {#each events as event, i}
+        <Events_Card
+          href={$t('navbar.events').url + '/' + event.slug}
+          title={event.title}
+          teaser={event.teaser}
+          date={event.date}
+          tags={event.tags}
+        />
+      {/each}
+    </div>
+  {/if}
+
   {#if local_chapter.local_administrators.length != 0}
     <div class="container mx-auto mb-12 space-y-8">
       {#each local_chapter.local_administrators as person}
@@ -87,6 +96,11 @@
           description={person.Local_Administrators_id.translations[0]
             .description}
           email={local_chapter.lc_email}
+          website={person.website ? person.person.website : ''}
+          linkedin={person.linkedin ? person.person.linkedin : ''}
+          mastodon={person.mastodon ? person.person.mastodon : ''}
+          twitter={person.twitter ? person.person.twitter : ''}
+          github={person.github ? person.person.github : ''}
         />
       {/each}
     </div>

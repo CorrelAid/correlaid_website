@@ -1,6 +1,6 @@
 <script>
   export let name;
-  export let position = '';
+  export let position;
   export let description;
   export let img;
   export let mastodon = '';
@@ -23,7 +23,7 @@
     {#if position != ''}
       <h3 class="pb-3 text-lg">{position}</h3>
     {/if}
-    {#if description != ''}
+    {#if description}
       <p class="pb-3 text-justify">{description}</p>
     {/if}
     {#if email && email != ''}

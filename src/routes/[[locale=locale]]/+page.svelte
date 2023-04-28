@@ -24,7 +24,7 @@
   <div class="mb-12">
     <a
       class="text-3xl font-bold text-base-content transition hover:text-primary"
-      href={$t('navbar.events').url}>Events</a
+      href={$t('navbar.events').url}>{$t('navbar.events').text}</a
     >
   </div>
   <div class="grid gap-6">
