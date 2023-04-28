@@ -48,6 +48,7 @@ export async function load({params}) {
           }
           location
           founded
+          lc_email
           local_administrators{
             Local_Administrators_id{
             translations(

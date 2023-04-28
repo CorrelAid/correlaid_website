@@ -77,14 +77,16 @@
       {#each local_chapter.local_administrators as person}
         <Person
           name={person.Local_Administrators_id.person.name}
-          img={gen_img_url(
-            person.Local_Administrators_id.person.image.id,
-            'fit=cover&width=200&height=200&quality=80',
-          )}
+          img={person.Local_Administrators_id.person.image
+            ? gen_img_url(
+                person.Local_Administrators_id.person.image.id,
+                'fit=cover&width=200&height=200&quality=80',
+              )
+            : null}
           position={person.Local_Administrators_id.translations[0].position}
           description={person.Local_Administrators_id.translations[0]
             .description}
-          email={person.Local_Administrators_id.person.email}
+          email={local_chapter.lc_email}
         />
       {/each}
     </div>
