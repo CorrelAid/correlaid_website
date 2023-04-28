@@ -130,6 +130,11 @@ we provide the environment variable `PRERENDER`, which is best set in a `.env` f
 Static builds will require `PRERENDER=ALL`. Even without making a static build, this option can therefore be used to check whether
 any routes cannot be prerendered and hence, would prevent a static build.
 
+### Static build
+
+In order to make a static build, the environment variable `ADAPTER=STATIC` has to be set. Static builds are only allowed if
+`PRERENDER=ALL`.
+
 ## Quality Assurance
 
 This section contains information about the employed quality assurance(QA)
