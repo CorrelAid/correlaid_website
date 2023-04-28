@@ -2,8 +2,6 @@ import directus_fetch from '$lib/js/directus_fetch';
 import {get_lang, get_locale, find} from '$lib/js/helpers';
 import translations from '$lib/data/translations';
 
-// export const prerender = true;
-
 /** @type {import('./$types').PageLoad} */
 export async function load({params, url}) {
   // retreive page key by using the url. you cant access stores in server files
@@ -185,6 +183,9 @@ export async function load({params, url}) {
 
     const data = await directus_fetch(query);
 
+    if (typeof data.Pages[0] === 'undefined') {
+      return;
+    }
     const builder = data.Pages[0].builder;
 
     if (builder === undefined) {

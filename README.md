@@ -112,6 +112,24 @@ to the slug.
 - The carousel component uses [this](https://github.com/vadimkorr/svelte-carousel) external component
 - The page /community/correlaidx contains a map made with [maplibre](https://maplibre.org/) and [maptiler](https://www.maptiler.com/)
 
+## Production build
+
+In line with standard svelte setups a production build can be created with
+
+> npm run build
+
+Due to the structure of our project the default build will not prerender any routes/pages. In order to change that behaviour
+we provide the environment variable `PRERENDER`, which is best set in a `.env` file. The options for `PRERENDER` are as follows.
+
+- `ALL`: Tries to prerender all routes and also requires prerendering for all routes. If any routes cannot be prerendered for
+  technical reasons, the build will fail.
+- `AUTO`: Tries to prerender all routes, but does not require routes to be prerendered. This will simply omit any routes from
+  prerendering that cannot be prerendered.
+- Missing or anything else: Does not require any prerendering which will lead to no prerendering in our site setup.
+
+Static builds will require `PRERENDER=ALL`. Even without making a static build, this option can therefore be used to check whether
+any routes cannot be prerendered and hence, would prevent a static build.
+
 ## Quality Assurance
 
 This section contains information about the employed quality assurance(QA)
