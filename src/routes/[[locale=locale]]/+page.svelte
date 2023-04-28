@@ -22,7 +22,10 @@
 
 <div class="">
   <div class="mb-12">
-    <a class="text-3xl font-bold" href={$t('navbar.events').url}>Events</a>
+    <a
+      class="text-3xl font-bold text-base-content transition hover:text-primary"
+      href={$t('navbar.events').url}>Events</a
+    >
   </div>
   <div class="grid gap-6">
     {#each events as event, i}
@@ -38,7 +41,10 @@
   </div>
 
   <div class="my-12">
-    <a class="text-3xl font-bold" href={$t('navbar.blog').url}>Blog</a>
+    <a
+      class="text-3xl font-bold text-base-content transition hover:text-primary"
+      href={$t('navbar.blog').url}>Blog</a
+    >
   </div>
   <div class="grid gap-6 xl:grid-cols-2">
     {#each posts as post, i}
@@ -63,7 +69,10 @@
   </div>
 
   <div class="my-12">
-    <a class="text-3xl font-bold" href={$t('navbar.podcast').url}>Podcast</a>
+    <a
+      class="text-3xl font-bold text-base-content transition hover:text-primary"
+      href={$t('navbar.podcast').url}>Podcast</a
+    >
   </div>
   <div class="grid gap-6 xl:grid-cols-2">
     {#each podcast_episodes as episode, i}
