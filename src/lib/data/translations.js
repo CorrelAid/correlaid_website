@@ -24,10 +24,10 @@ export default {
     //
     'navbar.education': {text: 'Bildung', url: '/bildung'},
     // Subnav education
-    'navbar.education.workshops': {
-      text: 'Workshops',
-      url: '/bildung/workshops',
-    },
+    // 'navbar.education.workshops': {
+    //  text: 'Workshops',
+    //  url: '/bildung/workshops',
+    // },
     'navbar.education.learning_r': {text: 'R Lernen', url: '/bildung/r_lernen'},
     'navbar.education.resources': {
       text: 'Bildunsressourcen',
@@ -52,7 +52,10 @@ export default {
       text: 'Gründe (d)eine Lokalgruppe',
       url: '/community/lc_gruenden',
     },
-    // "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/community/volunteer_journeys" },
+    'navbar.community.volunteer_journeys': {
+      text: 'Volunteer Journeys',
+      url: '/community/volunteer_journeys',
+    },
     'navbar.community.become_member': {
       text: 'Vereinsmitglied werden',
       url: '/community/mitglied_werden',
@@ -135,7 +138,10 @@ export default {
       text: 'Join a team',
       url: '/en/community/volunteer_teams',
     },
-    // "navbar.community.volunteer_journeys": { "text": "Volunteer Journeys", "url": "/en/community/volunteer_journeys" },
+    'navbar.community.volunteer_journeys': {
+      text: 'Volunteer Journeys',
+      url: '/en/community/volunteer_journeys',
+    },
     'navbar.community.become_member': {
       text: 'Become a member',
       url: '/en/community/become_member',
