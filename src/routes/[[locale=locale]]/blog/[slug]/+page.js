@@ -8,6 +8,7 @@ export async function load({params}) {
   const query = `query {
     Posts(filter: { translations: { slug: { _eq: "${params.slug}"}}}) {
        pubdate
+       title_image{id}
        content_creators{
         Content_Creators_id{
             translations(
@@ -34,7 +35,7 @@ export async function load({params}) {
       }
           title
           text
-          title_image{id}
+          
           slug
           teaser
 
@@ -57,5 +58,6 @@ export async function load({params}) {
     pubdate: data.Posts[0].pubdate,
     lang_content: lang_content,
     content_creators: data.Posts[0].content_creators,
+    post: data.Posts[0],
   };
 }

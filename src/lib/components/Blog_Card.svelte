@@ -9,6 +9,8 @@
   import En from '../svg/EN.svelte';
   export let tags;
   export let content_creators;
+
+  console.log(tags);
 </script>
 
 <article
@@ -54,14 +56,16 @@
       {/each}
     </p>
 
-    <div class="flex w-full flex-wrap gap-2">
-      {#each tags as tag}
-        <span
-          class="inline-flex items-center rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
-          >{tag}</span
-        >
-      {/each}
-    </div>
+    {#if tags}
+      <div class="flex w-full flex-wrap gap-2">
+        {#each tags as tag}
+          <span
+            class="inline-flex items-center rounded bg-secondary px-3 py-1 text-xs font-bold capitalize text-white"
+            >{tag}</span
+          >
+        {/each}
+      </div>
+    {/if}
     <div class="py-4">
       <p
         class="overflow-hidden text-justify leading-relaxed text-base-content line-clamp-3"

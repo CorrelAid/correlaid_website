@@ -8,6 +8,7 @@ export async function load({params}) {
       sort: [ "-pubdate" ]
   ){
       pubdate
+      title_image{id}
       content_creators{
         Content_Creators_id{
             person{
@@ -23,14 +24,13 @@ export async function load({params}) {
           title
           text
           tags
-          title_image{id}
           slug
           teaser
-          
-
       }
     }
   }`;
+
+  console.log(query);
 
   const data = await directus_fetch(query);
 

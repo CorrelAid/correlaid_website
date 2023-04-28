@@ -14,6 +14,8 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
+  let post;
+  $: post = data.post;
   let pubdate;
   $: pubdate = data.pubdate;
   let lang_content;
@@ -28,7 +30,7 @@
   date={proc_date}
   title={lang_content.title}
   people={content_creators}
-  title_image={lang_content.title_image}
+  title_image={post.title_image}
   teaser={lang_content.teaser}
   {content_creators}
 >

@@ -26,9 +26,9 @@
         title={post.translations.title}
         teaser={post.translations.teaser}
         tags={post.translations.tags}
-        image_url={post.translations.title_image
+        image_url={post.title_image
           ? gen_img_url(
-              post.translations.title_image.id,
+              post.title_image.id,
               'fit=inside&width=1200&height=675&format=png',
             )
           : null}
