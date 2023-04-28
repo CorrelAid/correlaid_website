@@ -18,7 +18,7 @@
 
 <div class="grid gap-6 xl:grid-cols-2">
   {#each posts as post, i}
-    <div class={i == 0 ? 'col-span-full' : 'col-span-1'}>
+    <div class={i == 0 ? 'col-span-full' : 'col-span-full'}>
       <BlogCard
         {i}
         langs={post.langs}

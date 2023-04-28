@@ -32,6 +32,15 @@
   teaser={lang_content.teaser}
   {content_creators}
 >
+  <div slot="sub_subtitle">
+    {#if proc_date}
+      <p class="mx-4 pb-4 text-lg font-light">
+        {proc_date} - {#each content_creators as person, i}
+          {person.Content_Creators_id.person
+            .name}{#if i < content_creators.length - 1}{', '} {/if}{/each}
+      </p>
+    {/if}
+  </div>
   <Html
     source={lang_content.text}
     options={'prose-img:'}
@@ -40,8 +49,8 @@
   />
 </TextContainer>
 {#if content_creators.length != 0}
-  <hr />
   <div class="container mx-auto space-y-8 px-4 pt-12">
+    <hr />
     {#each content_creators as person}
       <Person
         name={person.Content_Creators_id.person.name}

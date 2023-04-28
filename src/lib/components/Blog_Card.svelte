@@ -18,7 +18,9 @@
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
-  <div class="aspect-w-16 aspect-h-9">
+  <div
+    class="{i == 0 ? 'aspect-w-16 aspect-h-9' : 'aspect-w-16 aspect-h-9'} mb-2"
+  >
     {#if image_url != null}
       <a {href} class="">
         <img alt="Office" src={image_url} class="h-full w-full" />

@@ -22,12 +22,10 @@
 <TextContainer
   title={project.translations[0].title}
   teaser={project.translations[0].summary}
-  box_content={project.Organizations[0].Organizations_id.translations[0]}
 >
-  <div slot="sub_subtitle">
+  <div class="mx-4" slot="sub_subtitle">
     {#if project.Podcast || project.Posts.length != 0}
-      <!-- <h3 class="px-4 text-lg pb-2 font-semibold">Links:</h3> -->
-      <div class="mb-6 flex items-center py-1">
+      <div class="mb-4 flex items-center">
         {#if project.Podcast.soundcloud_link}
           <a href={project.Podcast.soundcloud_link}
             ><Podcast height={50} width={50} /></a
@@ -43,6 +41,14 @@
         {/if}
       </div>
     {/if}
+    <Box>
+      <h2 class="text-xl font-semibold">
+        {project.Organizations[0].Organizations_id.translations[0].name}
+      </h2>
+      <p>
+        {project.Organizations[0].Organizations_id.translations[0].description}
+      </p>
+    </Box>
   </div>
 
   <Html
