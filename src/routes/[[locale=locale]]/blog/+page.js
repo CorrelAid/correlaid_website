@@ -5,9 +5,9 @@ import {get_lang} from '$lib/js/helpers';
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
   // prettier-ignore
-  const query = `query {
+  const query = `
     query {
-      Posts(filter: { translations: { slug: { _eq: "${params.slug}" } } }) {
+      Posts(sort: "-pubdate") {
         pubdate
         title_image {
           id
@@ -51,8 +51,6 @@ export async function load({params}) {
     }
     
   `;
-
-  console.log(query);
 
   const data = await directus_fetch(query);
 

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import {createForm} from 'felte';
@@ -218,4 +218,4 @@
       >
     </form>
   </div>
-{/if}
+{/if} -->
