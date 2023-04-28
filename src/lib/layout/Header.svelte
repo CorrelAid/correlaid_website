@@ -16,7 +16,6 @@
   import {top_nav, bot_nav} from './Header/navConfig.js';
 
   let active_language = $locale;
-  let drawerLocale = $locale;
   let botNavCloseAll;
   let lastClickedLink = '';
 
@@ -83,10 +82,5 @@
 </header>
 <!-- Mobile Menu -->
 {#if $drawer}
-  <MobileDrawer
-    {top_nav}
-    {bot_nav}
-    bind:lastClickedLink
-    bind:buttonLocale={drawerLocale}
-  />
+  <MobileDrawer {top_nav} {bot_nav} bind:lastClickedLink on:changeLanguage />
 {/if}
