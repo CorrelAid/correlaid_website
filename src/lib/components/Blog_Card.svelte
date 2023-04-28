@@ -51,8 +51,11 @@
 
     <p class="pt-2 pb-4">
       {#each content_creators as person, i}
-        {person.Content_Creators_id.person
-          .name}{#if i < content_creators.length - 1}{', '} {/if}
+        {person.Content_Creators_id.person.name}
+        {person.Content_Creators_id.person.translations[0]
+          ? `(${person.Content_Creators_id.person.translations[0].pronouns})`
+          : ''}
+        {#if i < content_creators.length - 1}{', '} {/if}
       {/each}
     </p>
 

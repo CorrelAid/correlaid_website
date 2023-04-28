@@ -16,6 +16,10 @@ export async function load({params}) {
         Content_Creators_id{
             person{
                 name
+                translations(
+                  filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                ) {
+                  pronouns}
             }
         }
     }
@@ -69,6 +73,10 @@ export async function load({params}) {
         Content_Creators_id{
             person{
                 name
+                translations(
+                  filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                ) {
+                  pronouns}
             }
         }
     }
