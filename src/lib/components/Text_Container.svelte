@@ -4,8 +4,6 @@
   export let title_image = null;
   export let teaser;
   export let title;
-  export let content_creators = [];
-  export let box_content = '';
 </script>
 
 <div class="container mx-auto pt-12 pb-4">
