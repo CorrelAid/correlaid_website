@@ -11,9 +11,6 @@ export async function load({params}) {
       language
       teaser
       resource_link
-      person {
-        name
-      }
       responsible_unit
       local_chapters {
         Local_Chapters_id {

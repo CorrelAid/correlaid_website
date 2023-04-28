@@ -59,6 +59,10 @@ export async function load({params}) {
                 }
                
           person{
+            translations(
+              filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+            ) {
+              pronouns}
               name
               email
               twitter

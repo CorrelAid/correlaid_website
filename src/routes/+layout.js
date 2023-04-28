@@ -114,6 +114,11 @@ export async function load({params, url}) {
               }
               person {
                 name
+                translations(
+                  filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+                ){
+                  pronouns
+                }
                 email
                 image {
                   id

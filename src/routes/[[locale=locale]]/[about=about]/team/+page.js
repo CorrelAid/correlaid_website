@@ -14,6 +14,10 @@ export async function load({params, url, route}) {
       }
       group
       person {
+        translations(
+          filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+        ) {
+          pronouns}
         email
         name
         website

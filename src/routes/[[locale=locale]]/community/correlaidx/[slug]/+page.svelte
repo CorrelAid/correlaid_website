@@ -96,11 +96,24 @@
           description={person.Local_Administrators_id.translations[0]
             .description}
           email={local_chapter.lc_email}
-          website={person.website ? person.person.website : ''}
-          linkedin={person.linkedin ? person.person.linkedin : ''}
-          mastodon={person.mastodon ? person.person.mastodon : ''}
-          twitter={person.twitter ? person.person.twitter : ''}
-          github={person.github ? person.person.github : ''}
+          website={person.Local_Administrators_id.person.website
+            ? person.Local_Administrators_id.person.website
+            : ''}
+          linkedin={person.Local_Administrators_id.person.linkedin
+            ? person.Local_Administrators_id.person.linkedin
+            : ''}
+          mastodon={person.Local_Administrators_id.person.mastodon
+            ? person.Local_Administrators_id.person.mastodon
+            : ''}
+          twitter={person.Local_Administrators_id.person.twitter
+            ? person.Local_Administrators_id.person.twitter
+            : ''}
+          github={person.Local_Administrators_id.person.github
+            ? person.Local_Administrators_id.person.github
+            : ''}
+          pronouns={person.Local_Administrators_id.person.translations[0]
+            ? person.Local_Administrators_id.translations[0].pronouns
+            : null}
         />
       {/each}
     </div>

@@ -28,6 +28,9 @@
       mastodon={person.person.mastodon ? person.person.mastodon : ''}
       twitter={person.person.twitter ? person.person.twitter : ''}
       github={person.person.github ? person.person.github : ''}
+      pronouns={person.person.translations[0]
+        ? person.person.translations[0].pronouns
+        : null}
     />
   {/each}
 </div>

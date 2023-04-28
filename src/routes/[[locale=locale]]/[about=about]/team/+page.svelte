@@ -16,6 +16,8 @@
 
   let organizational_structure;
   $: organizational_structure = data.organizational_structure;
+
+  $: console.log(remote_office);
 </script>
 
 <div class="mt-12">
@@ -36,6 +38,9 @@
         )}
         position={person.translations[0].position}
         description={person.translations[0].description}
+        pronouns={person.person.translations[0]
+          ? person.person.translations[0].pronouns
+          : null}
       />
     {/each}
   </div>
