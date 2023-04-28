@@ -36,7 +36,9 @@
           {text}
         </h2>
         {#if buttons != []}
-          <div class="fix mt-12 space-x-5 px-4">
+          <div
+            class="mt-16 flex flex-col space-y-6 px-4 md:mt-12 md:flex-row md:space-x-5 md:space-y-0"
+          >
             {#each buttons as button}
               <LinkButton
                 text={button.buttons_id.translations[0].text}
