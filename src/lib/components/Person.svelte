@@ -1,7 +1,7 @@
 <script>
   export let name;
-  export let position;
-  export let description;
+  export let position = '';
+  export let description = '';
   export let img;
   export let mastodon = '';
   export let website = '';
@@ -12,7 +12,6 @@
   export let pronouns = '';
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
-  $: console.log(pronouns);
 </script>
 
 <div class="grid grid-cols-8 gap-x-12 rounded pb-6 pt-8">
@@ -25,7 +24,7 @@
       {name}
       {pronouns ? `(${pronouns})` : ''}
     </h2>
-    {#if position != ''}
+    {#if position}
       <h3 class="pb-3 text-lg">{position}</h3>
     {/if}
     {#if description}

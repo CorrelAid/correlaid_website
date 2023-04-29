@@ -11,7 +11,6 @@
   export let data;
   let projects;
   $: projects = data.projects;
-  $: console.log(projects);
 </script>
 
 <div class="grid gap-6 lg:grid-cols-2">

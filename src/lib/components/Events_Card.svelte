@@ -11,7 +11,6 @@
   import En from '../svg/EN.svelte';
   let proc_date;
   $: proc_date = gen_date(date, $locale);
-  $: console.log(language);
 </script>
 
 <div class="offset-right relative w-full" style="">

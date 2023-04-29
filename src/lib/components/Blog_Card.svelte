@@ -9,8 +9,6 @@
   import En from '../svg/EN.svelte';
   export let tags;
   export let content_creators;
-
-  console.log(tags);
 </script>
 
 <article

@@ -1,5 +1,5 @@
 <script>
-  import Carousel from '@wildfluss/svelte-carousel';
+  import Carousel from 'svelte-carousel';
   import {browser} from '$app/environment';
   import {gen_img_url} from '$lib/js/helpers';
   export let text_only = false;

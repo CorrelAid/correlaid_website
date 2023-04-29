@@ -16,8 +16,6 @@
 
   let organizational_structure;
   $: organizational_structure = data.organizational_structure;
-
-  $: console.log(remote_office);
 </script>
 
 <div class="mt-12">

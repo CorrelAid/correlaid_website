@@ -14,7 +14,6 @@
 
   let posts;
   $: posts = data.posts;
-  $: console.log(posts);
 </script>
 
 <div class="grid gap-6 xl:grid-cols-2">

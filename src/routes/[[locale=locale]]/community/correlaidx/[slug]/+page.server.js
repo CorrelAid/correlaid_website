@@ -85,7 +85,6 @@ export async function load({params}) {
   
   
   `
-
   const data = await directus_fetch(query);
 
   return {

@@ -92,9 +92,12 @@
                 'fit=cover&width=200&height=200&quality=80',
               )
             : null}
-          position={person.Local_Administrators_id.translations[0].position}
-          description={person.Local_Administrators_id.translations[0]
-            .description}
+          position={person.Local_Administrators_id.translations
+            ? person.Local_Administrators_id.translations[0].position
+            : null}
+          description={person.Local_Administrators_id.translations
+            ? person.Local_Administrators_id.translations[0].description
+            : null}
           email={local_chapter.lc_email}
           website={person.Local_Administrators_id.person.website
             ? person.Local_Administrators_id.person.website
@@ -112,7 +115,7 @@
             ? person.Local_Administrators_id.person.github
             : ''}
           pronouns={person.Local_Administrators_id.person.translations[0]
-            ? person.Local_Administrators_id.translations[0].pronouns
+            ? person.Local_Administrators_id.person.translations[0].pronouns
             : null}
         />
       {/each}

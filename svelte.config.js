@@ -8,6 +8,8 @@ import {vitePreprocess} from '@sveltejs/kit/vite';
 import mainRoutes from './src/lib/data/translations.js';
 import axios from 'axios';
 
+const URL = 'https://cms.correlaid.org/graphql';
+
 if (process.env.ADAPTER === 'STATIC' && process.env.PRERENDER !== 'ALL') {
   throw Error('Env var ADAPTER=STATIC only allowed for PRERENDER=ALL');
 }
@@ -60,7 +62,7 @@ const queries = {
 };
 
 async function addBlogRoutes(routes) {
-  const germanResults = await axios.post('https://cms.correlaid.org/graphql', {
+  const germanResults = await axios.post(URL, {
     query: queries['blogs'],
     vars: {language: 'de-DE'},
   });
@@ -70,7 +72,7 @@ async function addBlogRoutes(routes) {
     }
   }
 
-  const englishResults = await axios.post('https://cms.correlaid.org/graphql', {
+  const englishResults = await axios.post(URL, {
     query: queries['blogs'],
     vars: {language: 'en-US'},
   });
@@ -82,7 +84,7 @@ async function addBlogRoutes(routes) {
 }
 
 async function addLcRoutes(routes) {
-  const germanResults = await axios.post('https://cms.correlaid.org/graphql', {
+  const germanResults = await axios.post(URL, {
     query: queries['lcs'],
     vars: {language: 'de-DE'},
   });
@@ -91,7 +93,7 @@ async function addLcRoutes(routes) {
       routes.push(`/community/correlaidx/${t.slug}`);
     }
   }
-  const englishResults = await axios.post('https://cms.correlaid.org/graphql', {
+  const englishResults = await axios.post(URL, {
     query: queries['lcs'],
     vars: {language: 'en-US'},
   });
@@ -103,7 +105,7 @@ async function addLcRoutes(routes) {
 }
 
 async function addProjectRoutes(routes) {
-  const results = await axios.post('https://cms.correlaid.org/graphql', {
+  const results = await axios.post(URL, {
     query: queries['projects'],
   });
   for (const project of results.data['data']['Projects']) {
@@ -113,7 +115,7 @@ async function addProjectRoutes(routes) {
 }
 
 async function addEventRoutes(routes) {
-  const results = await axios.post('https://cms.correlaid.org/graphql', {
+  const results = await axios.post(URL, {
     query: queries['events'],
   });
   for (const event of results.data['data']['Events']) {
