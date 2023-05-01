@@ -52,9 +52,19 @@ export function constructRe(keys) {
   return re;
 }
 
+function normalizePath(path) {
+  if (path === '/') {
+    return '/';
+  } else if (path.slice(-1) === '/') {
+    return path.slice(0, -1);
+  } else {
+    return path;
+  }
+}
+
 // finds a page key given a valid url
 export const find = (v, path) => {
-  return Object.keys(v).filter((k) => v[k].url == path);
+  return Object.keys(v).filter((k) => v[k].url === normalizePath(path));
 };
 
 // returns the name of the language in directus format given the path parameters object
