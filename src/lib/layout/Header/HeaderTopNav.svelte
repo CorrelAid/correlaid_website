@@ -16,7 +16,6 @@
           <li>
             <a
               class="transition hover:text-primary"
-              on:click={() => (lastClickedLink = key)}
               class:text-primary={key === lastClickedLink}
               class:font-medium={key === lastClickedLink}
               href={$t(key).url}

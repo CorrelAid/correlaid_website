@@ -10,4 +10,3 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vercel/
 *.swp
-package-lock.json 
