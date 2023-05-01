@@ -1,6 +1,7 @@
 <script>
   import {t, locale} from '$lib/stores/i18n';
   import {page} from '$app/stores';
+  import {page_key} from '$lib/stores/page_key';
   import {drawer} from '$lib/stores/drawer';
   import {no_scroll} from '$lib/stores/no_scroll';
   import {header_height} from '$lib/stores/dims';
@@ -26,6 +27,7 @@
   }
 
   $: $no_scroll = $drawer;
+  $: lastClickedLink = $page_key;
   $: $page.url && closeall();
   $: $page.url && ($drawer = false);
 </script>
@@ -52,10 +54,10 @@
       </div>
       <!-- middle part of navbar -->
       <div class="3xl:col-span-4 col-span-6 hidden flex-col xl:block">
-        <HeaderTopNav {top_nav} bind:lastClickedLink />
+        <HeaderTopNav {top_nav} {lastClickedLink} />
         <HeaderBottomNav
           {bot_nav}
-          bind:lastClickedLink
+          {lastClickedLink}
           bind:closeall={botNavCloseAll}
         />
       </div>
@@ -82,5 +84,5 @@
 </header>
 <!-- Mobile Menu -->
 {#if $drawer}
-  <MobileDrawer {top_nav} {bot_nav} bind:lastClickedLink on:changeLanguage />
+  <MobileDrawer {top_nav} {bot_nav} on:changeLanguage />
 {/if}

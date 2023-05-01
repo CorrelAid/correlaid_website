@@ -30,6 +30,11 @@
     subnav(event.detail.category);
   }
 
+  function isSubPage(pagePath, subPageCandidatePath) {
+    const startIndex = subPageCandidatePath.indexOf(pagePath);
+    return startIndex === 0;
+  }
+
   $: $drawer && closeall();
 </script>
 
@@ -43,18 +48,15 @@
           <div>
             <div
               class="pl-4"
-              class:font-medium={lastClickedLink === navItem.key}
-              class:text-secondary={lastClickedLink === navItem.key}
+              class:font-medium={isSubPage(navItem.key, lastClickedLink)}
+              class:text-secondary={isSubPage(navItem.key, lastClickedLink)}
+              data-testid={'navColoringTest-' + navItem.key}
             >
               <HeaderBottomNavButton
                 href={$t(navItem.key).url}
                 text={$t(navItem.key).text}
                 category={navItem.category}
                 on:message={handle_dropdown}
-                on:click={() => {
-                  closeall();
-                  lastClickedLink = navItem.key;
-                }}
               />
             </div>
             {#if toggles[navItem.category]}
@@ -71,10 +73,6 @@
                       <a
                         class="transition hover:text-primary"
                         href={$t(subnavItem).url}
-                        on:click={() => {
-                          closeall();
-                          lastClickedLink = navItem.key;
-                        }}
                       >
                         {$t(subnavItem).text}
                       </a>
