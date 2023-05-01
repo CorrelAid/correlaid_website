@@ -24,9 +24,9 @@ function canBePrerendered(url) {
 
 const queries = {
   blogs: `
-  query BlogSlugs($language: String = "de-DE") {
+  query BlogSlugs {
     Posts(sort: ["-pubdate"]) {
-      translations(filter: { languages_code: { code: { _eq: $language } } }) {
+      translations {
         languages_code {
           code
         }
@@ -61,25 +61,19 @@ const queries = {
   `,
 };
 
-async function addBlogRoutes(routes) {
-  const germanResults = await axios.post(URL, {
-    query: queries['blogs'],
-    vars: {language: 'de-DE'},
-  });
-  for (const post of germanResults.data['data']['Posts']) {
-    for (const t of post['translations']) {
-      routes.push(`/blog/${t.slug}`);
-    }
+function addBlogRoutesWithLanguageFallback(routes, translations) {
+  for (const t of translations) {
+    routes.push(`/blog/${t.slug}`);
+    routes.push(`/en/blog/${t.slug}`);
   }
+}
 
-  const englishResults = await axios.post(URL, {
+async function addBlogRoutes(routes) {
+  const postsResult = await axios.post(URL, {
     query: queries['blogs'],
-    vars: {language: 'en-US'},
   });
-  for (const post of englishResults.data['data']['Posts']) {
-    for (const t of post['translations']) {
-      routes.push(`/en/blog/${t.slug}`);
-    }
+  for (const post of postsResult.data['data']['Posts']) {
+    addBlogRoutesWithLanguageFallback(routes, post['translations']);
   }
 }
 
