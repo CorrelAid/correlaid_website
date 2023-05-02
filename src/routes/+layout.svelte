@@ -4,7 +4,6 @@
   import {goto} from '$app/navigation';
   import {t, locale} from '$lib/stores/i18n';
   import {page_key} from '$lib/stores/page_key';
-  import {gen_img_url} from '$lib/js/helpers';
   import {header_height} from '$lib/stores/dims';
   import {no_scroll} from '$lib/stores/no_scroll';
   import Header from '$lib/layout/Header.svelte';
@@ -15,7 +14,9 @@
   import Carousel from '$lib/components/Carousel.svelte';
   import Timeline from '$lib/components/Timeline.svelte';
   import QuoteCarousel from '$lib/components/Quote_Carousel.svelte';
-  import Cta from '../lib/components/CTA.svelte';
+  import Cta from '$lib/components/CTA.svelte';
+  import CtaGroup from '$lib/components/CTA_group.svelte';
+  import {parse} from '$lib/js/parse_cms.js';
 
   export let data;
 
@@ -37,6 +38,39 @@
     }
   }
 
+  function parseContent(rawSections) {
+    if (!rawSections) {
+      return;
+    }
+
+    const parsedContent = [];
+    for (const rawSection of rawSections) {
+      try {
+        const section = {
+          collection: rawSection.collection,
+          props: parse[rawSection.collection](rawSection),
+        };
+        if (section.collection === 'heros') {
+          section.sort = rawSection.sort;
+        }
+        if (section.collection === 'contacts') {
+          section.item = {hr: rawSection.item.hr};
+        }
+        if (section.collection === 'wysiwyg') {
+          section.sort = rawSection.sort;
+        }
+        parsedContent.push(section);
+      } catch (err) {
+        console.log(
+          `Error parsing ${rawSection.collection} on page ${$page_key}`,
+        );
+        console.log(err.message);
+        console.log(rawSection);
+      }
+    }
+    return parsedContent;
+  }
+
   // Setting page title by retreiving translations from translations and conditionally taking into account dynamic pages by using the page title attribute from the page data,
   // assigned in the dynamic pages +page.server
   let title;
@@ -48,7 +82,7 @@
   $: title = $page_key === 'navbar.home' ? 'CorrelAid' : title_content;
 
   let content;
-  $: content = data.builder;
+  $: content = parseContent(data.builder);
 </script>
 
 <svelte:head>
@@ -65,80 +99,45 @@
     {#if $header_height}
       {#if content}
         {#each content as section}
-          {#if section.collection == 'heros'}
-            <div class={section.sort == content.length ? '' : 'mb-12'}>
-              <Hero
-                image={section.item.image}
-                text={section.item.translations[0].text}
-                height={section.item.height}
-                gradient_only={section.item.gradient_only}
-                buttons={section.item.buttons}
-              />
+          {#if section.collection === 'heros'}
+            <div class:mb-12={section.sort !== content.length}>
+              <Hero {...section.props} />
             </div>
-          {:else if section.collection == 'cta_group'}
+          {:else if section.collection === 'cta_group'}
             <div class="container mx-auto grid grid-cols-2 gap-8 px-4 pb-10">
-              {#each section.item.ctas as cta}
-                <Cta
-                  button_link={cta.ctas_id.button.translations[0].link}
-                  button_color={cta.ctas_id.button.color}
-                  button_text={cta.ctas_id.button.translations[0].text}
-                  text={cta.ctas_id.translations[0].text}
-                />
-              {/each}
+              <CtaGroup {...section.props} />
             </div>
-          {:else if section.collection == 'ctas'}
+          {:else if section.collection === 'ctas'}
             <div class="container mx-auto">
-              <Cta
-                button_link={section.item.button.translations[0].link}
-                button_text={section.item.button.translations[0].text}
-                button_color={section.item.button.color}
-                text={section.item.translations[0].text}
-              />
+              <Cta {...section.props} />
             </div>
-          {:else if section.collection == 'timelines'}
+          {:else if section.collection === 'timelines'}
             <div class="container mx-auto pb-12">
-              <Timeline steps={section.item.steps} />
+              <Timeline {...section.props} />
             </div>
-          {:else if section.collection == 'wysiwyg'}
+          {:else if section.collection === 'wysiwyg'}
             <div class="container mx-auto">
               <!-- if first item add top margin -->
-              <div class="mb-12 {section.sort == 1 ? 'mt-10' : ''}">
-                <Html
-                  source={section.item.translations[0].content}
-                  options={''}
-                />
+              <div class="mb-12" class:mt-10={section.sort === 1}>
+                <Html {...section.props} />
               </div>
             </div>
-          {:else if section.collection == 'contacts'}
+          {:else if section.collection === 'contacts'}
             <div class="container mx-auto mb-12 px-4">
               {#if section.item.hr === true}
                 <hr class="mb-12" />
               {/if}
-              <Person
-                name={section.item.person.name}
-                img={section.item.person.image
-                  ? gen_img_url(
-                      section.item.person.image.id,
-                      'fit=cover&width=200&height=200&quality=80',
-                    )
-                  : null}
-                email={section.item.person.email}
-                position={section.item.translations[0].position}
-                description={section.item.translations[0].description}
-              />
+              <Person {...section.props} />
             </div>
-          {:else if section.collection == 'carousel'}
+          {:else if section.collection === 'carousel'}
             <div class="mb-12">
-              <Carousel carousel_elements={section.item.carousel_elements} />
+              <Carousel {...section.props} />
             </div>
-          {:else if section.collection == 'quote_carousel'}
+          {:else if section.collection === 'quote_carousel'}
             <div class="mb-12">
-              <QuoteCarousel
-                quotes={section.item.quotes}
-                text_only={section.item.text_only}
-              />
+              <QuoteCarousel {...section.props} />
             </div>
-          {:else if section.collection == 'custom_sections'}
+          {:else if section.collection === 'custom_sections'}
             <div class="container mx-auto mb-12">
               <div class="mx-4">
                 <slot />
