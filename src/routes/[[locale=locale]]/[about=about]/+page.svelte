@@ -12,8 +12,6 @@
   $: awards = data.awards;
 </script>
 
-<hr />
-<h2>Preise und Förderungen</h2>
 <div class="container mx-auto flex flex-col gap-y-3 space-y-8 pb-12">
   {#each awards.Awards as award, index}
     <Awards
