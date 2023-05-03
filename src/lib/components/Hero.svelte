@@ -31,14 +31,20 @@
     <div class="text_width">
       <div class="">
         {#if correlaidx == true}
-          <div class="">
-            <CorrelAidXLogo width={200} height={200} />
+          <div class="flex justify-center">
+            <CorrelAidXLogo width={250} height={250} />
           </div>
         {/if}
-
-        <h2 class="mx-4 text-4xl font-bold tracking-wide text-white">
-          {text}
-        </h2>
+        <div class={correlaidx == true ? 'text-center' : ''}>
+          <h2
+            class="mx-4 text-4xl font-bold tracking-wide text-white {correlaidx ==
+            true
+              ? 'inline-block bg-tertiary px-2 py-1 font-light'
+              : ''}"
+          >
+            {text}
+          </h2>
+        </div>
         {#if buttons != []}
           <div
             class="mt-16 flex flex-col space-y-6 px-4 md:mt-12 md:flex-row md:space-x-5 md:space-y-0"

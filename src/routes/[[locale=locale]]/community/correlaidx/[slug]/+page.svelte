@@ -30,7 +30,7 @@
       image={local_chapter.hero_image ? local_chapter.hero_image : null}
       height={'half'}
       correlaidx={true}
-      text={`CorrelAidX ${local_chapter.translations[0].city}`}
+      text={`${local_chapter.translations[0].city}`}
     />
   </div>
 </div>
