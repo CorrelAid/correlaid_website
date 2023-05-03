@@ -75,6 +75,13 @@ export const parse = {
       text_only: section.item.text_only,
     };
   },
+  buttons: function (section) {
+    return {
+      href: section.item.translations[0].link,
+      text: section.item.translations[0].text,
+      color: `bg-${section.item.color}`,
+    };
+  },
   custom_sections: function (section) {
     return;
   },

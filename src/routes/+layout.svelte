@@ -17,6 +17,7 @@
   import Cta from '$lib/components/CTA.svelte';
   import CtaGroup from '$lib/components/CTA_group.svelte';
   import {parse} from '$lib/js/parse_cms.js';
+  import LinkButton from '../lib/components/Link_Button.svelte';
 
   export let data;
 
@@ -136,6 +137,12 @@
           {:else if section.collection === 'quote_carousel'}
             <div class="mb-12">
               <QuoteCarousel {...section.props} />
+            </div>
+          {:else if section.collection === 'buttons'}
+            <div class="text_width mb-12">
+              <div class="flex items-center justify-center">
+                <LinkButton {...section.props} />
+              </div>
             </div>
           {:else if section.collection === 'custom_sections'}
             <div class="container mx-auto mb-12">

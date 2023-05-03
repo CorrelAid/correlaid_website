@@ -3,6 +3,7 @@
   export let text;
   export let type = '';
   export let color;
+  export let options = '';
   import ExternalLink from '../svg/External_Link.svelte';
 
   // dafuq
@@ -19,9 +20,9 @@
 
 <div>
   <a
-    class="inline-flex w-36 items-center justify-center rounded-md px-4 py-2 font-semibold text-white shadow-md transition {String(
+    class="inline-flex min-w-36 items-center justify-center rounded-md px-4 py-2 font-semibold text-white shadow-md transition {String(
       color,
-    )}"
+    )} {options}"
     {href}
   >
     {text}

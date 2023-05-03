@@ -193,12 +193,22 @@ export async function load({params, url}) {
                 }
               }
             }
+            ... on buttons {
+             
+              color
+              translations(
+                filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
+              ) {
+                text
+                link
+              }
+            
+    }
           }
         }
       }
     }
       `
-
     const data = await directus_fetch(query);
 
     if (typeof data.Pages[0] === 'undefined') {

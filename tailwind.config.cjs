@@ -12,6 +12,11 @@ module.exports = {
       fontFamily: {
         sans: ['Roboto'],
       },
+
+      minWidth: {
+        36: '9rem',
+      },
+
       colors: {
         primary: '#96c342',
         'primary-75': '#a5d884',
