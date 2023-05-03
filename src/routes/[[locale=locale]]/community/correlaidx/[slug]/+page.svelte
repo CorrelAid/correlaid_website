@@ -26,10 +26,11 @@
 <div class="relative">
   <div class="w-screen pb-12">
     <Hero
-      gradient_only={true}
+      gradient_only={local_chapter.hero_image ? false : true}
+      image={local_chapter.hero_image ? local_chapter.hero_image : null}
       height={'half'}
       correlaidx={true}
-      text={`CorrelAidX ${local_chapter.translations[0].city}`}
+      text={`${local_chapter.translations[0].city}`}
     />
   </div>
 </div>
