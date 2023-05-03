@@ -1,6 +1,9 @@
 <script>
   export let steps;
   import Html from '$lib/components/Html.svelte';
+  import Inform from '$lib/svg/Inform.svelte';
+  import Infrastrucuture from '$lib/svg/Infrastrucuture.svelte';
+  import LikeMinded from '$lib/svg/LikeMinded.svelte';
   function check_x(i) {
     i = i + 1;
     if (i & 1) {
@@ -26,42 +29,98 @@
       return false;
     }
   }
+  const icon_mobile = 150;
+  const icon_lg = 200;
 </script>
 
-{#each steps as step, i}
-  <div class="relative w-full">
-    <div
-      class="w-3/4 {check_x(i)}-1/4 xl:w-2/3 xl:{check_x(
-        i,
-      )}-1/3 absolute grid h-full grid-cols-3 xl:grid-cols-2"
-    >
-      {#if check_odd(i) == false}
-        <div />
-      {/if}
+<div class="hidden lg:block">
+  {#each steps as step, i}
+    <div class="relative w-full">
       <div
-        class="{i + 1 === steps.length ? '' : 'border-b-2'} {check_border(
+        class="absolute flex h-full w-1/3 items-center justify-center {check_odd(
           i,
-        )} relative col-span-2 border-neutral-25 py-12 xl:col-span-1"
+        ) == true
+          ? 'left-0'
+          : 'right-0'}"
       >
-        <span
-          class="absolute text-lg font-semibold {check_x(i)}-0 {check_odd(i)
-            ? '-ml-5'
-            : '-mr-5'} {check_odd(i)
-            ? 'bg-tertiary'
-            : 'bg-neutral text-white'} top-1/4 flex h-10 w-10 items-center justify-center rounded-full"
-          >{i + 1}</span
-        >
+        <div class="px-4">
+          {#if step.timeline_steps_id.icon == 'inform'}
+            <Inform width={icon_lg} height={icon_lg} />
+          {:else if step.timeline_steps_id.icon == 'like_minded'}
+            <LikeMinded width={icon_lg} height={icon_lg} />
+          {:else if step.timeline_steps_id.icon == 'infrastructure'}
+            <Infrastrucuture width={icon_lg} height={icon_lg} />
+          {/if}
+        </div>
       </div>
-      {#if check_odd(i) == true}
-        <div />
-      {/if}
+      <div
+        class="w-3/4 {check_x(i)}-1/4 xl:w-2/3 xl:{check_x(
+          i,
+        )}-1/3 absolute grid h-full grid-cols-3 xl:grid-cols-2"
+      >
+        {#if check_odd(i) == false}
+          <div />
+        {/if}
+        <div
+          class="{i + 1 === steps.length ? '' : 'border-b-2'} {check_border(
+            i,
+          )} relative col-span-2 border-neutral-25 py-12 xl:col-span-1"
+        >
+          <span
+            class="absolute bg-gradient-to-r from-tertiary to-secondary text-lg font-semibold text-white shadow-md {check_x(
+              i,
+            )}-0 {check_odd(i)
+              ? '-ml-5'
+              : '-mr-5'}  top-1/4 flex h-10 w-10 items-center justify-center rounded-full"
+            >{i + 1}</span
+          >
+        </div>
+        {#if check_odd(i) == true}
+          <div />
+        {/if}
+      </div>
+      <div
+        class="w-3/4 xl:w-2/3 {check_odd(i)
+          ? 'relative left-1/4 pl-4 md:pl-7  xl:left-1/3'
+          : 'pr-4 md:pr-7'} z-20 h-full py-8 xl:py-12"
+      >
+        <Html
+          source={step.timeline_steps_id.translations[0].text}
+          options={''}
+        />
+      </div>
     </div>
+    <div />
+  {/each}
+</div>
+<div class="text_width lg:hidden">
+  {#each steps as step, i}
+    <div class=" w-full py-8" />
     <div
-      class="w-3/4 xl:w-2/3 {check_odd(i)
-        ? 'relative left-1/4 xl:left-1/3'
-        : ''} z-20 h-full px-4 py-8 xl:py-12"
+      class="relative mb-12 flex justify-center border-t-2 border-neutral-25"
     >
-      <Html source={step.timeline_steps_id.translations[0].text} options={''} />
+      <span
+        class="absolute top-0 -mt-5 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-tertiary to-secondary px-4 py-1 text-lg font-semibold text-white shadow-md"
+        >{i + 1}</span
+      >
+
+      <div class="">
+        <div class="my-6 mt-12 flex justify-center">
+          <div class="">
+            {#if step.timeline_steps_id.icon == 'inform'}
+              <Inform width={icon_mobile} height={icon_mobile} />
+            {:else if step.timeline_steps_id.icon == 'like_minded'}
+              <LikeMinded width={icon_mobile} height={icon_mobile} />
+            {:else if step.timeline_steps_id.icon == 'infrastructure'}
+              <Infrastrucuture width={icon_mobile} height={icon_mobile} />
+            {/if}
+          </div>
+        </div>
+        <Html
+          source={step.timeline_steps_id.translations[0].text}
+          options={''}
+        />
+      </div>
     </div>
-  </div>
-{/each}
+  {/each}
+</div>

@@ -161,6 +161,7 @@ export async function load({params, url}) {
           ... on timelines{
             steps{
                 timeline_steps_id{
+                    icon
                     translations(
                       filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
                     ){
