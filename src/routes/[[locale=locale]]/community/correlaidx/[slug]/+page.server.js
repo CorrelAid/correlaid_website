@@ -47,6 +47,9 @@ export async function load({params}) {
           }
           }
           location
+          hero_image{
+            id
+          }
           founded
           lc_email
           local_administrators{
