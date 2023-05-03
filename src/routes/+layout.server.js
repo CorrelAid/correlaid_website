@@ -204,7 +204,16 @@ export async function load({params, url}) {
                 link
               }
             
-    }
+              }
+              ... on icons {
+                icon_type
+                translations(
+                        filter: { languages_code: { code: { _eq: "de-DE" } } }
+                      ) {
+                        text
+    
+                      }
+            }
           }
         }
       }

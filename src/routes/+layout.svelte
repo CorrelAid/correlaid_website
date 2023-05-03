@@ -18,6 +18,7 @@
   import CtaGroup from '$lib/components/CTA_group.svelte';
   import {parse} from '$lib/js/parse_cms.js';
   import LinkButton from '../lib/components/Link_Button.svelte';
+  import Icon from '../lib/components/Icon.svelte';
 
   export let data;
 
@@ -143,6 +144,10 @@
               <div class="flex items-center justify-center">
                 <LinkButton {...section.props} />
               </div>
+            </div>
+          {:else if section.collection === 'icons'}
+            <div class="text_width mx-auto mb-12 px-4">
+              <Icon {...section.props} />
             </div>
           {:else if section.collection === 'custom_sections'}
             <div class="container mx-auto mb-12">

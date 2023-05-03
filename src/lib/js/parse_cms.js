@@ -82,6 +82,12 @@ export const parse = {
       color: `bg-${section.item.color}`,
     };
   },
+  icons: function (section) {
+    return {
+      icon_type: section.item.icon_type,
+      text: section.item.translations[0].text,
+    };
+  },
   custom_sections: function (section) {
     return;
   },
