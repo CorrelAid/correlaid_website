@@ -1,57 +1,14 @@
 import directus_fetch from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import _ from 'lodash';
+import {blogPostQuery} from './queries.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  // prettier-ignore
-  const query = `
-  query {
-    Posts(filter: { translations: { slug: { _eq: "${params.slug}" } } }) {
-      pubdate
-      title_image {
-        id
-      }
-      content_creators {
-        Content_Creators_id {
-          translations(
-            filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-          ) {
-            description
-          }
-          person {
-            name
-            translations(
-              filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-            ) {
-              pronouns
-            }
-            website
-            twitter
-            linkedin
-            mastodon
-            github
-            image {
-              id
-            }
-          }
-        }
-      }
-      translations {
-        languages_code {
-          code
-        }
-        title
-        text
-  
-        slug
-        teaser
-      }
-    }
-  }
-  `
-
-  const data = await directus_fetch(query);
+  const data = await directus_fetch(blogPostQuery, {
+    slug: params.slug,
+    language: get_lang(params),
+  });
   // checking if post exists in current locale, if not using other language
   let lang_content = _.find(
     data.Posts[0].translations,
