@@ -32,6 +32,7 @@ Only the implementations of most important concepts are explained here in a gene
 - Colours are defined in tailwind.config.js based on the [CorrelAid Design Guide](https://docs.correlaid.org/wiki/design-guide)
 - Some custom styles, e.g. the gradient offset border, are defined in app.css
 - Fonts are self hosted and located in static/fonts/. They are specified in app.css and tailwind.config.js
+- Icons: https://thenounproject.com/browse/collection-icon/redefining-women-95921/?p=1
 
 #### Standards
 
