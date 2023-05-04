@@ -25,9 +25,7 @@
       email={person.person.email}
       position={person.translations[0].position}
       description={person.translations[0].description}
-      pronouns={person.person.translations[0]
-        ? person.person.translations[0].pronouns
-        : null}
+      pronouns={person.translations[0] ? person.translations[0].pronouns : null}
     />
   {/each}
 </div>
