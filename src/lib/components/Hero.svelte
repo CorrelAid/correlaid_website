@@ -35,7 +35,7 @@
             <CorrelAidXLogo width={250} height={250} />
           </div>
         {/if}
-        <div class:text-center={correlaidx}>
+        <div class={correlaidx == true ? 'text-center' : ''}>
           <h2
             class="mx-4 text-4xl font-bold tracking-wide text-white {correlaidx
               ? 'inline-block bg-tertiary px-2 py-1 font-light'
