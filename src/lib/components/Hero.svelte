@@ -28,7 +28,7 @@
     : `height: calc((100vh - ${$header_height}px)/2)`}"
 >
   <div class="z-50 w-full">
-    <div class="text_width">
+    <div class="text_width mx-auto">
       <div class="">
         {#if correlaidx == true}
           <div class="flex justify-center">
