@@ -39,7 +39,11 @@
           {href}
           class="mb-3 inline-flex items-center text-xl font-semibold transition hover:text-primary"
           >{title}<span class="ml-1.5"
-            ><ExternalLink height={20} width={20} /></span
+            ><ExternalLink
+              height={20}
+              width={20}
+              color={'rgb(60, 60, 59)'}
+            /></span
           >
         </a>
       {:else}

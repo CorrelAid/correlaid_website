@@ -15,8 +15,9 @@
 <div class="flex gap-x-2">
   {#if website != ''}<a href={website} class=""
       ><ExternalLink
-        width={social_media_height}
-        height={social_media_height}
+        width={social_media_height + 3}
+        height={social_media_height + 3}
+        color={'rgb(60, 60, 59)'}
       /></a
     >{/if}
   {#if twitter != ''}<a href={twitter} class=""
