@@ -125,19 +125,31 @@ export function handle_lang(posts, params) {
   for (let i = 0; i < posts.length; i++) {
     const langs = [];
     for (let y = 0; y < posts[i].translations.length; y++) {
-      langs.push(posts[i].translations[y].languages_code.code);
+      if (posts[i].translations[y].text != null) {
+        langs.push(posts[i].translations[y].languages_code.code);
+      }
     }
     posts[i].langs = langs;
     const translations = _.find(
       posts[i].translations,
       (el) => el.languages_code.code === get_lang(params),
     );
+
     if (translations === undefined) {
       posts[i].translations = posts[i].translations[0];
     } else {
-      posts[i].translations = translations;
+      if ((translations.teaser == null) | (translations.teaser == '')) {
+        const translations = _.find(
+          posts[i].translations,
+          (el) => el.languages_code.code != get_lang(params),
+        );
+        posts[i].translations = translations;
+      } else {
+        posts[i].translations = translations;
+      }
     }
   }
+
   return posts;
 }
 
