@@ -1,77 +1,14 @@
 import directus_fetch from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import _ from 'lodash';
+import {projectDetailsQuery} from './queries.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  // prettier-ignore
-  const query = `
-  query {
-    Projects(filter:{project_id:{_eq: "${params.slug}"}}) {
-      Podcast{
-        language
-        soundcloud_link
-        title
-    }
-    Posts{
-        Posts_id{
-            id
-            translations{
-                languages_code{
-                    code
-                }
-                title
-                slug
-            }
-        }
-    }
-    Projects_Outputs{
-        url
-        output_type
-    }
-      People{
-        People_id{
-             name
-            website
-            twitter
-            linkedin
-            mastodon
-            github
-            image{
-                id
-            }
-        }
-    }
-      Organizations{
-        Organizations_id{
-            translations(
-              filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-            ){
-                languages_code{code}
-                name
-                description
-            }
-        }
-      }
-      
-      translations(
-      filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-    ){
-      
-          title
-          description
-          summary
-      }
-      Local_Chapters{
-          id
-  
-      }
-  }
-  }
-
-  `
-
-  const data = await directus_fetch(query);
+  const data = await directus_fetch(projectDetailsQuery, {
+    slug: params.slug,
+    language: get_lang(params),
+  });
   const Posts = data.Projects[0].Posts;
 
   // checking if post exists in current locale, if not using other language. Getting languages the posts exists in.
