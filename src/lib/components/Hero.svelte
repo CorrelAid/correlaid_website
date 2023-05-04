@@ -27,7 +27,6 @@
     ? `height: calc(100vh - ${$header_height}px)`
     : `height: calc((100vh - ${$header_height}px)/2)`}"
 >
-
   <div class="z-20 w-full">
     <div class="text_width max-auto">
       <div class="">
