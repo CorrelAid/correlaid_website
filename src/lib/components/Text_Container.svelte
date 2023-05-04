@@ -8,10 +8,13 @@
 
 <div class="container mx-auto pt-12 pb-4">
   <div class="">
-    <Html source={`<h1>${title}</h1><p class="text-md">${teaser}</p>`} />
+    <Html
+      source={`<h1>${title}</h1><p class="text-md">${teaser}</p>`}
+      options={'mx-auto'}
+    />
   </div>
 
-  <div class="text_width my-4">
+  <div class="text_width mx-auto my-4">
     <slot name="sub_subtitle" />
   </div>
   {#if title_image != null}

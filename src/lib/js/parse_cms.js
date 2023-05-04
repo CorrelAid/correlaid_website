@@ -55,12 +55,17 @@ export const parse = {
       );
     }
 
+    const pronouns = section.item.person.translations[0]
+      ? section.item.person.translations[0].pronouns
+      : null;
+
     const personParams = {
       name: section.item.person.name,
       img: imageUrl,
       email: section.item.person.email,
       position: section.item.translations[0].position,
       description: section.item.translations[0].description,
+      pronouns: pronouns,
     };
     return personParams;
   },

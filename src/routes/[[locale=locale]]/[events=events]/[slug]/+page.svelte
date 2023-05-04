@@ -75,6 +75,6 @@
   </div>
 
   <div slot="main">
-    <Html source={`<h2>Details</h2>` + event.description} width={'text'} />
+    <Html source={`<h2>Details</h2>` + event.description} options={'mx-auto'} />
   </div>
 </TextContainer>
