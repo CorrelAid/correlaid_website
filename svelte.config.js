@@ -53,7 +53,7 @@ const queries = {
   `,
   projects: `
   query ProjectSlugs {
-    Projects {
+    Projects (filter : {subpage : {_eq:true}}){
       slug: project_id
     }
   }

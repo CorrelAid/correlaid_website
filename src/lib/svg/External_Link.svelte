@@ -1,16 +1,10 @@
 <script>
   export let width;
   export let height;
+  export let color = 'white';
 </script>
 
-<svg
-  {width}
-  {height}
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke="currentColor"
-  class=""
->
+<svg {width} {height} fill="none" viewBox="0 0 24 24" stroke={color} class="">
   <path
     stroke-linecap="round"
     stroke-linejoin="round"

@@ -1,8 +1,29 @@
 export const projectOverviewQuery = `
 query ProjectOverview($language: String = "de-DE") {
 	Projects {
-		status
+		subpage
 		project_id
+		Podcast {
+			language
+			soundcloud_link
+			title
+		}
+		Posts {
+			Posts_id {
+				id
+				translations {
+					languages_code {
+						code
+					}
+					title
+					slug
+				}
+			}
+		}
+		Projects_Outputs {
+			url
+			output_type
+		}
 		Organizations {
 			Organizations_id {
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
@@ -19,8 +40,14 @@ query ProjectOverview($language: String = "de-DE") {
 			summary
 		}
 		Local_Chapters {
-			id
+			Local_Chapters_id{
+				translations(filter: { languages_code: { code: { _eq: $language }}}){
+					city
+				}
+			}
+			
 		}
 	}
 }
+
 `;

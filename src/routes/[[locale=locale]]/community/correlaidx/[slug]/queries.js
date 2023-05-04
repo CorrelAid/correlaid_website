@@ -20,26 +20,52 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE") {
 	Local_Chapters(filter: { translations: { city: { _eq: $slug } } }) {
 		Projects {
 			Projects_id {
-				status
-				project_id
-				Organizations {
-					Organizations_id {
-						translations(
-							filter: { languages_code: { code: { _eq: $language } } }
-						) {
-							languages_code {
-								code
-							}
-							name
-						}
+				subpage
+		project_id
+		Podcast {
+			language
+			soundcloud_link
+			title
+		}
+		Posts {
+			Posts_id {
+				id
+				translations {
+					languages_code {
+						code
 					}
-				}
-
-				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					title
-					description
-					summary
+					slug
 				}
+			}
+		}
+		Projects_Outputs {
+			url
+			output_type
+		}
+		Organizations {
+			Organizations_id {
+				translations(filter: { languages_code: { code: { _eq: $language } } }) {
+					languages_code {
+						code
+					}
+					name
+				}
+			}
+		}
+		translations(filter: { languages_code: { code: { _eq: $language } } }) {
+			title
+			description
+			summary
+		}
+		Local_Chapters {
+			Local_Chapters_id{
+				translations(filter: { languages_code: { code: { _eq: $language }}}){
+					city
+				}
+			}
+			
+		}
 			}
 		}
 		location

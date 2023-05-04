@@ -2,18 +2,14 @@ export const projectDetailsQuery = `
 query Project($slug: String, $language: String = "de-DE") {
 	Projects(filter: { project_id: { _eq: $slug } }) {
 		Podcast {
-			language
 			soundcloud_link
-			title
 		}
 		Posts {
 			Posts_id {
-				id
 				translations {
 					languages_code {
 						code
 					}
-					title
 					slug
 				}
 			}

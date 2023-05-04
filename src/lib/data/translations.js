@@ -81,6 +81,8 @@ export default {
     'footer.coc': {text: 'Code of Conduct', url: '/coc'},
     'footer.coe': {text: 'Code of Ethics', url: '/coe'},
     // 'footer.contact': {text: 'Kontakt', url: '/contact'},
+    'misc.output': {text: 'Projekt-Output'},
+    'misc.report': {text: 'Projektbericht'},
   },
   en: {
     'navbar.home': {text: null, url: '/en'},
@@ -163,5 +165,7 @@ export default {
     'footer.coc': {text: 'Code of Conduct', url: '/en/coc'},
     'footer.coe': {text: 'Code of Ethics', url: '/en/coe'},
     // 'footer.contact': {text: 'Contact', url: '/en/contact'},
+    'misc.output': {text: 'Project Output'},
+    'misc.report': {text: 'Project Report'},
   },
 };
