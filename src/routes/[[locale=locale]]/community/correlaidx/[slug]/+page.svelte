@@ -38,7 +38,7 @@
   <div class="container mx-auto pb-12">
     <Html
       source={local_chapter.translations[0].description}
-      options={'prose-img:'}
+      options={'mx-auto'}
       width={'text'}
     />
   </div>

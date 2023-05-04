@@ -1,48 +1,12 @@
 import {get_lang} from '$lib/js/helpers';
 import directus_fetch from '$lib/js/directus_fetch';
+import {adminsAndOpsStructQuery} from './queries.js';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({params, url, route}) {
-  const query = `
-  query {
-    Global_Administrators(sort: ["sort"]) {
-      translations(
-        filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-      ) {
-        position
-        description
-      }
-      group
-      person {
-        translations(
-          filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-        ) {
-          pronouns}
-        email
-        name
-        website
-        twitter
-        linkedin
-        mastodon
-        image {
-          id
-        }
-      }
-    }
-  
-  
-  Organizational_Structure{
-    translations(
-        filter: { languages_code: { code: { _eq: "${get_lang(params)}" } } }
-      ){
-        remote_office
-        board
-    }
-}
-}
-      `;
-
-  const data = await directus_fetch(query);
+export async function load({params}) {
+  const data = await directus_fetch(adminsAndOpsStructQuery, {
+    lanugage: get_lang(params),
+  });
 
   const remote_office = data.Global_Administrators.filter(
     (person) => person.group === 'remote_office',

@@ -18,17 +18,13 @@
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
-  <div
-    class="{i == 0 ? 'aspect-w-16 aspect-h-9' : 'aspect-w-16 aspect-h-9'} mb-2"
-  >
+  <a {href} class="aspect-video mb-2 w-full">
     {#if image_url != null}
-      <a {href} class="">
-        <img alt="Office" src={image_url} class="h-full w-full" />
-      </a>
+      <img alt="Office" src={image_url} />
     {:else}
-      <a {href} class="h-full w-full bg-neutral"><div /></a>
+      <div {href} class="h-full w-full bg-neutral" />
     {/if}
-  </div>
+  </a>
   <div class="p-4 sm:p-6">
     <a {href}>
       <h3
@@ -49,11 +45,15 @@
 
     <p class="pt-2 pb-4">
       {#each content_creators as person, i}
-        {person.Content_Creators_id.person.name}
-        {person.Content_Creators_id.person.translations[0]
-          ? `(${person.Content_Creators_id.person.translations[0].pronouns})`
-          : ''}
-        {#if i < content_creators.length - 1}{', '} {/if}
+        {#if person.Content_Creators_id.person}
+          {person.Content_Creators_id.person.name}
+          {person.Content_Creators_id.person.translations[0]
+            ? person.Content_Creators_id.person.translations[0].pronouns
+              ? `(${person.Content_Creators_id.person.translations[0].pronouns})`
+              : ''
+            : ''}
+          {#if i < content_creators.length - 1}{', '} {/if}
+        {/if}
       {/each}
     </p>
 

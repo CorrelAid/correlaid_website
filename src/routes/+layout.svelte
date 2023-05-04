@@ -106,7 +106,7 @@
               <Hero {...section.props} />
             </div>
           {:else if section.collection === 'cta_group'}
-            <div class="container mx-auto grid grid-cols-2 gap-8 px-4 pb-10">
+            <div class="container mx-auto space-y-8 px-4 pb-10">
               <CtaGroup {...section.props} />
             </div>
           {:else if section.collection === 'ctas'}
@@ -121,7 +121,7 @@
             <div class="container mx-auto">
               <!-- if first item add top margin -->
               <div class="mb-12" class:mt-10={section.sort === 1}>
-                <Html {...section.props} />
+                <Html {...section.props} options={'mx-auto'} />
               </div>
             </div>
           {:else if section.collection === 'contacts'}
@@ -140,7 +140,7 @@
               <QuoteCarousel {...section.props} />
             </div>
           {:else if section.collection === 'buttons'}
-            <div class="text_width mb-12">
+            <div class="text_width mx-auto mb-12">
               <div class="flex items-center justify-center">
                 <LinkButton {...section.props} />
               </div>

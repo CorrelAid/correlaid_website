@@ -48,7 +48,7 @@
   </div>
   <Html
     source={lang_content.text}
-    options={'prose-img:'}
+    options={'mx-auto'}
     width={'text'}
     slot="main"
   />

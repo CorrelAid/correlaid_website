@@ -27,18 +27,17 @@
     ? `height: calc(100vh - ${$header_height}px)`
     : `height: calc((100vh - ${$header_height}px)/2)`}"
 >
-  <div class="z-50 w-full">
-    <div class="text_width mx-auto">
+  <div class="z-20 w-full">
+    <div class="text_width max-auto">
       <div class="">
-        {#if correlaidx == true}
+        {#if correlaidx}
           <div class="flex justify-center">
             <CorrelAidXLogo width={250} height={250} />
           </div>
         {/if}
-        <div class={correlaidx == true ? 'text-center' : ''}>
+        <div class:text-center={correlaidx}>
           <h2
-            class="mx-4 text-4xl font-bold tracking-wide text-white {correlaidx ==
-            true
+            class="mx-4 text-4xl font-bold tracking-wide text-white {correlaidx
               ? 'inline-block bg-tertiary px-2 py-1 font-light'
               : ''}"
           >
@@ -62,7 +61,7 @@
     </div>
   </div>
   <div
-    class="absolute inset-0 bg-gradient-to-r {correlaidx == false
+    class="absolute inset-0 bg-gradient-to-r {!correlaidx
       ? 'from-secondary/75 to-primary/75'
       : 'from-tertiary/75 to-secondary/75'}"
   />
