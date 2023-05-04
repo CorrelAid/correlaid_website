@@ -1,22 +1,12 @@
 import directus_fetch from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
+import {localChapterQuery} from './queries.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {
-  // prettier-ignore
-  const query = `
-  query {
-    Local_Chapters{
-        location
-        founded
-        translations(filter: { languages_code: { code: {_eq : "${get_lang(params)}"}}}){
-            city
-            description
-        }
-    }
-  }`
-
-  const data = await directus_fetch(query);
+  const data = await directus_fetch(localChapterQuery, {
+    language: get_lang(params),
+  });
 
   const geo_json = {
     type: 'FeatureCollection',
