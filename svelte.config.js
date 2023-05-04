@@ -1,12 +1,18 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+import _ from 'lodash';
 import adapter from '@sveltejs/adapter-auto';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
 
-import mainRoutes from './src/lib/data/translations.js';
+import translations from './src/lib/data/translations.js';
 import axios from 'axios';
+
+const mainRoutes = {
+  de: _.omit(translations['de'], ['misc.report', 'misc.output']),
+  en: _.omit(translations['en'], ['misc.report', 'misc.output']),
+};
 
 const URL = 'https://cms.correlaid.org/graphql';
 
