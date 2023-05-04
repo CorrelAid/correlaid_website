@@ -25,6 +25,12 @@ query Project($slug: String, $language: String = "de-DE") {
 		People {
 			People_id {
 				name
+				translations {
+					languages_code {
+						code
+					}
+					pronouns
+				}
 				website
 				twitter
 				linkedin

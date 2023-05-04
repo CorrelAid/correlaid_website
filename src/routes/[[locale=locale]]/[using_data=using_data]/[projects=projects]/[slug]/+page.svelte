@@ -63,7 +63,14 @@
       <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>
       {#each project.People as person}
         <div class="flex items-center">
-          <span class="mr-2">{person.People_id.name}</span>
+          <span class="mr-2"
+            >{person.People_id.name}
+            {person.People_id.translations[0]
+              ? person.People_id.translations[0].pronouns
+                ? `(${person.People_id.translations[0].pronouns})`
+                : ''
+              : ''}</span
+          >
           <Links
             website={person.People_id.website ? person.People_id.website : ''}
             linkedin={person.People_id.linkedin

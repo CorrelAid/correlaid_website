@@ -40,7 +40,9 @@
         {proc_date} - {#each content_creators as person, i}
           {person.Content_Creators_id.person.name}
           {person.Content_Creators_id.person.translations[0]
-            ? `(${person.Content_Creators_id.person.translations[0].pronouns})`
+            ? person.Content_Creators_id.person.translations[0].pronouns
+              ? `(${person.Content_Creators_id.person.translations[0].pronouns})`
+              : ''
             : ''}
           {#if i < content_creators.length - 1}{', '} {/if}{/each}
       </p>
@@ -59,6 +61,9 @@
     {#each content_creators as person}
       <Person
         name={person.Content_Creators_id.person.name}
+        pronouns={person.Content_Creators_id.person.translations[0]
+          ? person.Content_Creators_id.person.translations[0].pronouns
+          : null}
         img={gen_img_url(
           person.Content_Creators_id.person.image.id,
           'fit=cover&width=200&height=200&quality=80',
