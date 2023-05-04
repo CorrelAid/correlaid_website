@@ -22,7 +22,7 @@
   <div class="col-span-full pt-5 text-neutral md:col-span-5 md:pt-0">
     <h2 class="pb-3 text-2xl text-primary">
       {name}
-      {pronouns ? `(${pronouns})` : ''}
+      {pronouns != null ? `(${pronouns})` : ''}
     </h2>
     {#if position}
       <h3 class="pb-3 text-lg">{position}</h3>

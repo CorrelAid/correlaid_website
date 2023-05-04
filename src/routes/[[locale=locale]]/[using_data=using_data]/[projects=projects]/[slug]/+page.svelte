@@ -53,7 +53,7 @@
 
   <Html
     source={project.translations[0].description}
-    width={'text'}
+    options={'mx-auto'}
     slot="main"
   />
 </TextContainer>
