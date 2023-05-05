@@ -18,6 +18,10 @@
 
 For details about the projects quality assurance [see below](#quality-assurance).
 
+## Git Policies
+
+Push to preview first!
+
 ## Project explanation
 
 SvelteKit is documented [here](https://kit.svelte.dev/docs/introduction)

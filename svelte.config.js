@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import _ from 'lodash';
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
 
@@ -32,7 +32,7 @@ const queries = {
   blogs: `
   query BlogSlugs {
     Posts(sort: ["-pubdate"]) {
-      translations {
+      translations(filter:{slug:{_neq:null}}) {
         languages_code {
           code
         }
@@ -156,8 +156,8 @@ if (process.env.PRERENDER === 'ALL' || process.env.PRERENDER === 'AUTO') {
 const usedAdapter =
   process.env.ADAPTER === 'STATIC'
     ? adapterStatic({
-        pages: 'build',
-        assets: 'build',
+        pages: '.svelte-kit/cloudflare',
+        assets: '.svelte-kit/cloudflare',
         fallback: null,
         precompress: false,
         strict: true,
