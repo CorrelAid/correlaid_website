@@ -13,7 +13,7 @@ const mainRoutes = {
 
 const URL = 'https://cms.correlaid.org/graphql';
 
-console.log('ADAPTER: '.process.env.PUBLIC_ADAPTER);
+console.log('ADAPTER: ', process.env.PUBLIC_ADAPTER);
 
 if (
   process.env.PUBLIC_ADAPTER === 'STATIC' &&
