@@ -13,8 +13,6 @@ const mainRoutes = {
 
 const URL = 'https://cms.correlaid.org/graphql';
 
-console.log('ADAPTER: ', process.env.PUBLIC_ADAPTER);
-
 if (
   process.env.PUBLIC_ADAPTER === 'STATIC' &&
   process.env.PUBLIC_PRERENDER !== 'ALL'
@@ -128,10 +126,7 @@ async function addEventRoutes(routes) {
 
 const prerenderRoutes = [];
 
-if (
-  process.env.PUBLIC_PRERENDER === 'ALL' ||
-  process.env.PUBLIC_PRERENDER === 'AUTO'
-) {
+if (process.env.PUBLIC_PRERENDER === 'ALL') {
   for (const routeName in mainRoutes['de']) {
     if (
       typeof routeName === 'string' &&
@@ -167,7 +162,12 @@ const usedAdapter =
         precompress: false,
         strict: true,
       })
-    : adapter({});
+    : adapter({
+        routes: {
+          include: ['/*'],
+          exclude: ['<all>'],
+        },
+      });
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
