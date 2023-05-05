@@ -156,8 +156,8 @@ if (process.env.PRERENDER === 'ALL' || process.env.PRERENDER === 'AUTO') {
 const usedAdapter =
   process.env.ADAPTER === 'STATIC'
     ? adapterStatic({
-        pages: 'build',
-        assets: 'build',
+        pages: '.svelte-kit/cloudflare',
+        assets: '.svelte-kit/cloudflare',
         fallback: null,
         precompress: false,
         strict: true,
