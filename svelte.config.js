@@ -1,8 +1,8 @@
+import 'dotenv/config';
 import _ from 'lodash';
 import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
-import 'dotenv/config';
 import translations from './src/lib/data/translations.js';
 import axios from 'axios';
 
@@ -66,6 +66,13 @@ const queries = {
 
   `,
 };
+
+console.log(
+  'ADAPTER: ',
+  process.env.PUBLIC_ADAPTER,
+  ' PRERENDER: ',
+  process.env.PUBLIC_PRERENDER,
+);
 
 function addBlogRoutesWithLanguageFallback(routes, translations) {
   for (const t of translations) {
@@ -153,28 +160,26 @@ if (process.env.PUBLIC_PRERENDER === 'ALL') {
   prerenderRoutes.push('*');
 }
 
-const usedAdapter =
-  process.env.PUBLIC_ADAPTER === 'STATIC'
-    ? adapterStatic({
-        pages: '.svelte-kit/cloudflare',
-        assets: '.svelte-kit/cloudflare',
-        fallback: null,
-        precompress: false,
-        strict: true,
-      })
-    : adapter({
-        routes: {
-          include: ['/*'],
-          exclude: ['<all>'],
-        },
-      });
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter: usedAdapter,
+    adapter:
+      process.env.PUBLIC_ADAPTER === 'STATIC'
+        ? adapterStatic({
+            pages: '.svelte-kit/cloudflare',
+            assets: '.svelte-kit/cloudflare',
+            fallback: null,
+            precompress: false,
+            strict: true,
+          })
+        : adapter({
+            routes: {
+              include: ['/*'],
+              exclude: ['<all>'],
+            },
+          }),
     prerender: {
-      entries: prerenderRoutes,
+      entries: process.env.PUBLIC_PRERENDER === 'ALL' ? prerenderRoutes : ['*'],
     },
   },
   preprocess: vitePreprocess(),
