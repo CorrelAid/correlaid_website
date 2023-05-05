@@ -1,11 +1,8 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import _ from 'lodash';
 import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
-
+import 'dotenv/config';
 import translations from './src/lib/data/translations.js';
 import axios from 'axios';
 
@@ -16,7 +13,12 @@ const mainRoutes = {
 
 const URL = 'https://cms.correlaid.org/graphql';
 
-if (process.env.ADAPTER === 'STATIC' && process.env.PRERENDER !== 'ALL') {
+console.log('ADAPTER: '.process.env.PUBLIC_ADAPTER);
+
+if (
+  process.env.PUBLIC_ADAPTER === 'STATIC' &&
+  process.env.PUBLIC_PRERENDER !== 'ALL'
+) {
   throw Error('Env var ADAPTER=STATIC only allowed for PRERENDER=ALL');
 }
 
@@ -126,7 +128,10 @@ async function addEventRoutes(routes) {
 
 const prerenderRoutes = [];
 
-if (process.env.PRERENDER === 'ALL' || process.env.PRERENDER === 'AUTO') {
+if (
+  process.env.PUBLIC_PRERENDER === 'ALL' ||
+  process.env.PUBLIC_PRERENDER === 'AUTO'
+) {
   for (const routeName in mainRoutes['de']) {
     if (
       typeof routeName === 'string' &&
@@ -154,7 +159,7 @@ if (process.env.PRERENDER === 'ALL' || process.env.PRERENDER === 'AUTO') {
 }
 
 const usedAdapter =
-  process.env.ADAPTER === 'STATIC'
+  process.env.PUBLIC_ADAPTER === 'STATIC'
     ? adapterStatic({
         pages: '.svelte-kit/cloudflare',
         assets: '.svelte-kit/cloudflare',
