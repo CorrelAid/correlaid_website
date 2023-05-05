@@ -1,8 +1,8 @@
+import 'dotenv/config';
 import _ from 'lodash';
 import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
-import 'dotenv/config';
 import translations from './src/lib/data/translations.js';
 import axios from 'axios';
 
@@ -66,6 +66,13 @@ const queries = {
 
   `,
 };
+
+console.log(
+  'ADAPTER: ',
+  process.env.PUBLIC_ADAPTER,
+  ' PRERENDER: ',
+  process.env.PUBLIC_PRERENDER,
+);
 
 function addBlogRoutesWithLanguageFallback(routes, translations) {
   for (const t of translations) {
@@ -172,8 +179,7 @@ const config = {
             },
           }),
     prerender: {
-      entries:
-        process.env.PUBLIC_ADAPTER === 'STATIC' ? prerenderRoutes : ['*'],
+      entries: process.env.PUBLIC_PRERENDER === 'ALL' ? prerenderRoutes : ['*'],
     },
   },
   preprocess: vitePreprocess(),
