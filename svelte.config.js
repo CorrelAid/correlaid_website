@@ -13,8 +13,6 @@ const mainRoutes = {
 
 const URL = 'https://cms.correlaid.org/graphql';
 
-console.log('ADAPTER: ', process.env.PUBLIC_ADAPTER);
-
 if (
   process.env.PUBLIC_ADAPTER === 'STATIC' &&
   process.env.PUBLIC_PRERENDER !== 'ALL'
@@ -128,10 +126,7 @@ async function addEventRoutes(routes) {
 
 const prerenderRoutes = [];
 
-if (
-  process.env.PUBLIC_PRERENDER === 'ALL' ||
-  process.env.PUBLIC_PRERENDER === 'AUTO'
-) {
+if (process.env.PUBLIC_PRERENDER === 'ALL') {
   for (const routeName in mainRoutes['de']) {
     if (
       typeof routeName === 'string' &&
@@ -158,23 +153,27 @@ if (
   prerenderRoutes.push('*');
 }
 
-const usedAdapter =
-  process.env.PUBLIC_ADAPTER === 'STATIC'
-    ? adapterStatic({
-        pages: '.svelte-kit/cloudflare',
-        assets: '.svelte-kit/cloudflare',
-        fallback: null,
-        precompress: false,
-        strict: true,
-      })
-    : adapter({});
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter: usedAdapter,
+    adapter:
+      process.env.PUBLIC_ADAPTER === 'STATIC'
+        ? adapterStatic({
+            pages: '.svelte-kit/cloudflare',
+            assets: '.svelte-kit/cloudflare',
+            fallback: null,
+            precompress: false,
+            strict: true,
+          })
+        : adapter({
+            routes: {
+              include: ['/*'],
+              exclude: ['<all>'],
+            },
+          }),
     prerender: {
-      entries: prerenderRoutes,
+      entries:
+        process.env.PUBLIC_ADAPTER === 'STATIC' ? prerenderRoutes : ['*'],
     },
   },
   preprocess: vitePreprocess(),
