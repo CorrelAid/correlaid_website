@@ -2,12 +2,10 @@ import directus_fetch from '$lib/js/directus_fetch';
 import {pageContentQuery} from './queries.js';
 import {get_lang, get_locale, find} from '$lib/js/helpers';
 import translations from '$lib/data/translations';
-import dotenv from 'dotenv';
-dotenv.config();
-
+import {PUBLIC_PRERENDER} from '$env/static/public';
 let pr;
 
-if (process.env.PRERENDER === 'ALL') {
+if (PUBLIC_PRERENDER === 'ALL') {
   pr = true;
 } else {
   pr = 'auto';
