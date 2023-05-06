@@ -1,22 +1,32 @@
 import {error} from '@sveltejs/kit';
 import {PUBLIC_API_URL} from '$env/static/public';
 
-import {Directus} from '@directus/sdk';
-const directus = new Directus(PUBLIC_API_URL);
+import fetch from 'node-fetch';
 
-const directus_fetch = async (query, vars) => {
-  let data;
+async function directus_fetch(query, vars) {
+  const payload = {query: query};
+  if (typeof vars !== 'undefined') {
+    payload['variables'] = vars;
+  }
 
-  try {
-    const response = await directus.graphql.items(query, vars);
-    data = response.data;
-  } catch (err) {
+  const response = await fetch(PUBLIC_API_URL + '/graphql', {
+    method: 'post',
+    body: JSON.stringify(payload),
+    headers: {'Content-Type': 'application/json'},
+  });
+  if (!response.ok) {
     throw error(500, {
-      message: err.message,
+      message: `Unexpected cms response ${response.statusText}`,
     });
   }
 
-  return data;
-};
+  const data = await response.json();
+
+  if ('errors' in data) {
+    throw error(500, `Cms errors ${data.errors}`);
+  }
+
+  return data.data;
+}
 
 export default directus_fetch;

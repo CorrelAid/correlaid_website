@@ -4,7 +4,6 @@ import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
 import translations from './src/lib/data/translations.js';
-import axios from 'axios';
 
 const mainRoutes = {
   de: _.omit(translations['de'], ['misc.report', 'misc.output']),
@@ -81,30 +80,51 @@ function addBlogRoutesWithLanguageFallback(routes, translations) {
   }
 }
 
-async function addBlogRoutes(routes) {
-  const postsResult = await axios.post(URL, {
-    query: queries['blogs'],
+async function queryCmsGraphQl(query, vars) {
+  const payload = {query: query};
+
+  if (typeof vars !== 'undefined') {
+    payload['variables'] = vars;
+  }
+
+  const response = await fetch(URL, {
+    method: 'post',
+    body: JSON.stringify(payload),
+    headers: {'Content-Type': 'application/json'},
   });
-  for (const post of postsResult.data['data']['Posts']) {
+  if (!response.ok) {
+    throw new Error(`unexpected cms response ${response.statusText}`);
+  }
+
+  const data = await response.json();
+
+  if ('errors' in data) {
+    throw new Error(`Cms errors ${data.errors}`);
+  }
+
+  return data;
+}
+
+async function addBlogRoutes(routes) {
+  const postsResult = await queryCmsGraphQl(queries['blogs']);
+  for (const post of postsResult['data']['Posts']) {
     addBlogRoutesWithLanguageFallback(routes, post['translations']);
   }
 }
 
 async function addLcRoutes(routes) {
-  const germanResults = await axios.post(URL, {
-    query: queries['lcs'],
-    vars: {language: 'de-DE'},
+  const germanResults = await queryCmsGraphQl(queries['lcs'], {
+    language: 'de-DE',
   });
-  for (const lc of germanResults.data['data']['Local_Chapters']) {
+  for (const lc of germanResults['data']['Local_Chapters']) {
     for (const t of lc['translations']) {
       routes.push(`/community/correlaidx/${t.slug}`);
     }
   }
-  const englishResults = await axios.post(URL, {
-    query: queries['lcs'],
-    vars: {language: 'en-US'},
+  const englishResults = await queryCmsGraphQl(queries['lcs'], {
+    language: 'en-US',
   });
-  for (const post of englishResults.data['data']['Local_Chapters']) {
+  for (const post of englishResults['data']['Local_Chapters']) {
     for (const t of post['translations']) {
       routes.push(`/en/community/correlaidx/${t.slug}`);
     }
@@ -112,20 +132,16 @@ async function addLcRoutes(routes) {
 }
 
 async function addProjectRoutes(routes) {
-  const results = await axios.post(URL, {
-    query: queries['projects'],
-  });
-  for (const project of results.data['data']['Projects']) {
+  const results = await queryCmsGraphQl(queries['projects']);
+  for (const project of results['data']['Projects']) {
     routes.push(`/daten_nutzen/projekte/${project.slug}`);
     routes.push(`/en/using_data/projects/${project.slug}`);
   }
 }
 
 async function addEventRoutes(routes) {
-  const results = await axios.post(URL, {
-    query: queries['events'],
-  });
-  for (const event of results.data['data']['Events']) {
+  const results = await queryCmsGraphQl(queries['events']);
+  for (const event of results['data']['Events']) {
     routes.push(`/veranstaltungen/${event.slug}`);
     routes.push(`/en/events/${event.slug}`);
   }
