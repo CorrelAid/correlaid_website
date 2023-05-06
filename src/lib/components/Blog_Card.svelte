@@ -1,8 +1,9 @@
 <script>
   export let i;
   export let langs;
+  export let href_pod = null;
   export let image_url;
-  export let href;
+  export let slug;
   import {gen_date} from '$lib/js/helpers';
   export let title;
   import {locale} from '$lib/stores/i18n';
@@ -14,6 +15,15 @@
   export let pubdate;
   let proc_date;
   $: proc_date = gen_date(pubdate, $locale, true);
+
+  console.log(slug);
+
+  let href = '';
+  $: if (href_pod) {
+    href = href_pod;
+  } else {
+    href = langs.includes('de-DE') ? '/blog/' + slug : '/en/blog/' + slug;
+  }
 </script>
 
 <article

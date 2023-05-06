@@ -1,7 +1,6 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
-  import {t} from '$lib/stores/i18n';
   import {gen_img_url} from '$lib/js/helpers';
   import BlogCard from '$lib/components/Blog_Card.svelte';
 
@@ -22,7 +21,7 @@
       <BlogCard
         {i}
         langs={post.langs}
-        href={$t('navbar.blog').url + '/' + post.translations.slug}
+        slug={post.translations.slug}
         title={post.translations.title}
         teaser={post.translations.teaser}
         tags={post.translations.tags}
