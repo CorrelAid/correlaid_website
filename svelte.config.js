@@ -179,7 +179,8 @@ const config = {
             },
           }),
     prerender: {
-      entries: process.env.PUBLIC_PRERENDER === 'ALL' ? prerenderRoutes : ['*'],
+      entries: 
+        process.env.PUBLIC_PRERENDER === 'ALL' ? prerenderRoutes : ['*'],
     },
   },
   preprocess: vitePreprocess(),
