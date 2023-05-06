@@ -53,18 +53,14 @@
           {/if}
         </div>
       </div>
-      <div
-        class="w-3/4 {check_x(i)}-1/4 xl:w-2/3 xl:{check_x(
-          i,
-        )}-1/3 absolute grid h-full grid-cols-3 xl:grid-cols-2"
-      >
+      <div class="w-2/3 {check_x(i)}-1/3 absolute grid h-full grid-cols-2">
         {#if check_odd(i) == false}
           <div />
         {/if}
         <div
           class="{i + 1 === steps.length ? '' : 'border-b-2'} {check_border(
             i,
-          )} relative col-span-2 border-neutral-25 py-12 xl:col-span-1"
+          )} relative col-span-1 border-neutral-25 py-12"
         >
           <span
             class="absolute bg-gradient-to-r from-tertiary to-secondary text-lg font-semibold text-white shadow-md {check_x(
@@ -80,9 +76,9 @@
         {/if}
       </div>
       <div
-        class="w-3/4 xl:w-2/3 {check_odd(i)
-          ? 'relative left-1/4 pl-4 md:pl-7  xl:left-1/3'
-          : 'pr-4 md:pr-7'} z-20 h-full py-8 xl:py-12"
+        class="w-2/3 {check_odd(i)
+          ? 'relative left-1/3  pl-7'
+          : 'pr-7'} z-20 h-full py-12"
       >
         <Html
           source={step.timeline_steps_id.translations[0].text}
