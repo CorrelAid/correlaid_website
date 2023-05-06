@@ -124,29 +124,23 @@ export function gen_time(time, locale) {
 export function handle_lang(posts, params) {
   for (let i = 0; i < posts.length; i++) {
     const langs = [];
+    const translations = [];
     for (let y = 0; y < posts[i].translations.length; y++) {
-      if (posts[i].translations[y].text != null) {
+      if (posts[i].translations[y].slug != null) {
         langs.push(posts[i].translations[y].languages_code.code);
+        translations.push(posts[i].translations[y]);
       }
     }
     posts[i].langs = langs;
-    const translations = _.find(
-      posts[i].translations,
+    const used_translation = _.find(
+      translations,
       (el) => el.languages_code.code === get_lang(params),
     );
 
-    if (translations === undefined) {
-      posts[i].translations = posts[i].translations[0];
+    if (used_translation) {
+      posts[i].translations = used_translation;
     } else {
-      if ((translations.teaser == null) | (translations.teaser == '')) {
-        const translations = _.find(
-          posts[i].translations,
-          (el) => el.languages_code.code != get_lang(params),
-        );
-        posts[i].translations = translations;
-      } else {
-        posts[i].translations = translations;
-      }
+      posts[i].translations = translations[0];
     }
   }
 

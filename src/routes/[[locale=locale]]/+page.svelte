@@ -52,10 +52,11 @@
         <BlogCard
           {i}
           langs={post.langs}
-          href={$t('navbar.blog').url + '/' + post.translations.slug}
+          slug={post.translations.slug}
           title={post.translations.title}
           teaser={post.translations.teaser}
           tags={post.translations.tags}
+          pubdate={post.pubdate}
           image_url={post.title_image
             ? gen_img_url(
                 post.title_image.id,
