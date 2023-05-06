@@ -32,6 +32,7 @@
               'fit=inside&width=1200&height=675&format=png',
             )
           : null}
+        pubdate={post.pubdate}
         content_creators={post.content_creators}
       />
     </div>

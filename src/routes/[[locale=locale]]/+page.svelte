@@ -56,6 +56,7 @@
           title={post.translations.title}
           teaser={post.translations.teaser}
           tags={post.translations.tags}
+          pubdate={post.pubdate}
           image_url={post.title_image
             ? gen_img_url(
                 post.title_image.id,
