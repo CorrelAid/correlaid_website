@@ -5,10 +5,11 @@ import {blogPostQuery} from './queries.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(blogPostQuery, {
+  const vars = {
     slug: params.slug,
     language: get_lang(params),
-  });
+  };
+  const data = await directus_fetch(blogPostQuery, vars);
   // checking if post exists in current locale, if not using other language
   let lang_content = _.find(
     data.Posts[0].translations,
