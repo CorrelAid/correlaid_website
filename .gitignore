@@ -10,3 +10,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vercel/
 *.swp
+test-results
+playwright-report
+tests-examples
+.github/workflows/playwright.yml
