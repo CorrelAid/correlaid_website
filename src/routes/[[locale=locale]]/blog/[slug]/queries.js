@@ -28,7 +28,7 @@ query BlogPostQuery($slug: String, $language: String = "de-DE") {
 				}
 			}
 		}
-		translations {
+		translations(filter: { slug: { _neq: null } }) {
 			languages_code {
 				code
 			}

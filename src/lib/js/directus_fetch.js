@@ -1,8 +1,6 @@
 import {error} from '@sveltejs/kit';
 import {PUBLIC_API_URL} from '$env/static/public';
 
-import fetch from 'node-fetch';
-
 async function directus_fetch(query, vars) {
   const payload = {query: query};
   if (typeof vars !== 'undefined') {

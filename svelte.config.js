@@ -4,7 +4,7 @@ import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
 import translations from './src/lib/data/translations.js';
-import fetch from 'node-fetch';
+import {fetch} from 'undici';
 
 const mainRoutes = {
   de: _.omit(translations['de'], ['misc.report', 'misc.output']),

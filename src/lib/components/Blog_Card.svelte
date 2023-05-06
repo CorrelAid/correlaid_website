@@ -1,14 +1,29 @@
 <script>
   export let i;
   export let langs;
+  export let href_pod = null;
   export let image_url;
-  export let href;
+  export let slug;
+  import {gen_date} from '$lib/js/helpers';
   export let title;
+  import {locale} from '$lib/stores/i18n';
   export let teaser;
   import De from '../svg/DE.svelte';
   import En from '../svg/EN.svelte';
   export let tags;
   export let content_creators;
+  export let pubdate;
+  let proc_date;
+  $: proc_date = gen_date(pubdate, $locale, true);
+
+  console.log(slug);
+
+  let href = '';
+  $: if (href_pod) {
+    href = href_pod;
+  } else {
+    href = langs.includes('de-DE') ? '/blog/' + slug : '/en/blog/' + slug;
+  }
 </script>
 
 <article
@@ -44,10 +59,10 @@
     </a>
 
     <p class="pt-2 pb-4">
-      {#each content_creators as person, i}
+      {proc_date} - {#each content_creators as person, i}
         {#if person.Content_Creators_id.person}
-          {person.Content_Creators_id.person.name}
-          {#if i < content_creators.length - 1}{', '} {/if}
+          {person.Content_Creators_id.person
+            .name}{#if i < content_creators.length - 1}{', '} {/if}
         {/if}
       {/each}
     </p>
