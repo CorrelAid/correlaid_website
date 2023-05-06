@@ -1,7 +1,7 @@
 name: Run CI
 on:
   pull_request:
-    branches: [main]
+    branches: [main, preview]
   workflow_dispatch:
 jobs:
   test:
