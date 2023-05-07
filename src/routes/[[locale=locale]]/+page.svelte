@@ -2,22 +2,23 @@
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import {t} from '$lib/stores/i18n';
-  import {gen_img_url} from '$lib/js/helpers';
   import BlogCard from '$lib/components/Blog_Card.svelte';
   import Events_Card from '$lib/components/Events_Card.svelte';
+  import {parseEntries} from '$lib/js/parse_cms.js';
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let posts;
-  $: posts = data.posts;
-  let events;
-  $: events = data.events;
-  let podcast_episodes;
-  $: podcast_episodes = data.podcast_episodes;
 
   onMount(() => {
     $page_key = 'navbar.home';
   });
+
+  const posts = parseEntries(data.posts, 'blog_posts');
+  const events = parseEntries(data.events, 'events');
+  const podcast_episodes = parseEntries(
+    data.podcast_episodes,
+    'podcast_episodes',
+  );
 </script>
 
 <div class="">
@@ -28,15 +29,8 @@
     >
   </div>
   <div class="grid gap-6">
-    {#each events as event, i}
-      <Events_Card
-        href={$t('navbar.events').url + '/' + event.slug}
-        title={event.title}
-        teaser={event.teaser}
-        date={event.date}
-        tags={event.tags}
-        language={event.language}
-      />
+    {#each events as event}
+      <Events_Card {...event} />
     {/each}
   </div>
 
@@ -47,24 +41,9 @@
     >
   </div>
   <div class="grid gap-6 xl:grid-cols-2">
-    {#each posts as post, i}
+    {#each posts as post}
       <div>
-        <BlogCard
-          {i}
-          langs={post.langs}
-          slug={post.translations.slug}
-          title={post.translations.title}
-          teaser={post.translations.teaser}
-          tags={post.translations.tags}
-          pubdate={post.pubdate}
-          image_url={post.title_image
-            ? gen_img_url(
-                post.title_image.id,
-                'fit=inside&width=1200&height=675&format=png',
-              )
-            : null}
-          content_creators={post.content_creators}
-        />
+        <BlogCard {...post} />
       </div>
     {/each}
   </div>
@@ -76,17 +55,8 @@
     >
   </div>
   <div class="grid gap-6 xl:grid-cols-2">
-    {#each podcast_episodes as episode, i}
-      <BlogCard
-        {i}
-        langs={[episode.language]}
-        href={episode.soundcloud_link}
-        title={episode.title}
-        teaser={episode.description}
-        tags={episode.tags}
-        image_url={null}
-        content_creators={episode.content_creators}
-      />
+    {#each podcast_episodes as episode}
+      <BlogCard {...episode} />
     {/each}
   </div>
 </div>

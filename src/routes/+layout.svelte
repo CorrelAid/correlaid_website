@@ -16,7 +16,7 @@
   import QuoteCarousel from '$lib/components/Quote_Carousel.svelte';
   import Cta from '$lib/components/CTA.svelte';
   import CtaGroup from '$lib/components/CTA_group.svelte';
-  import {parse} from '$lib/js/parse_cms.js';
+  import * as parseModel from '$lib/js/parse_cms_models';
   import LinkButton from '../lib/components/Link_Button.svelte';
   import Icon from '../lib/components/Icon.svelte';
 
@@ -28,7 +28,10 @@
     $locale = 'de';
   }
 
-  // Forwarding the user to the equivalent of the current page in the language selected in the laguage dropdown in the header
+  /**
+   * Forwarding the user to the equivalent of the current page in the language selected in
+   * the laguage dropdown in the header.
+   */
   function handleLocaleChange(event) {
     // if the page contains a slug, get the root url and add the slug
     if ($page.params.slug != null) {
@@ -50,7 +53,7 @@
       try {
         const section = {
           collection: rawSection.collection,
-          props: parse[rawSection.collection](rawSection),
+          props: parseModel[rawSection.collection](rawSection),
         };
         if (section.collection === 'heros') {
           section.sort = rawSection.sort;
@@ -63,11 +66,13 @@
         }
         parsedContent.push(section);
       } catch (err) {
+        console.group();
         console.log(
           `Error parsing ${rawSection.collection} on page ${$page_key}`,
         );
         console.log(err.message);
         console.log(rawSection);
+        console.groupEnd();
       }
     }
     return parsedContent;

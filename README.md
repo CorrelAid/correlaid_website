@@ -153,17 +153,17 @@ Overall QA relies on three components:
 1. formatting with prettier
 1. linting with eslint
 1. unit testing using multiple tools
+1. end to end testing using playwright
 
 These three components can be executed manually by the respective following commands
 
 1. `npm run format`
 1. `npm run lint`
 1. `npm run test`
+1. `npm run e2e`
 
-When a PR is submitted CI will essentially run these three commands to ensure
-that all three QA components are fine. Currently we do not have branch protection
-enabled in the repository, so PRs that fail the CI checks can still be merged,
-but it is strongly encouraged not to do this without a very good reason.
+When a PR is submitted CI will essentially run format, lint and test commands to ensure
+that these three QA components are fine. End to end testing is only run on demand currently.
 
 If the development setup is done as described [above](#dev-setup), pre-commit
 hooks are set up, which will then run formatting and linting on every commit.
@@ -214,3 +214,42 @@ interface between svelte and the core functionality of
 is crucial for providing dom specific assert statements that can then
 be run on components/content that is obtained with the help of @testin-library/svelte
 functionality together with the core API of testing-library.
+
+### End to End testing
+
+End to end testing is a good way to make systematic checks of the entire website.
+This is currently not integrated in automated workflows, because it has a lot of
+dependencies and because it requires a live internet connection to the CMS (unlike
+unit tests which work without internet connection and when the CMS is offline).
+
+#### Installation
+
+In order to setup playwright run (possibly with `sudo`) in addition to the initial
+[dev setup](#dev-setup)
+
+        npx playwright install --with-deps
+
+This will install the required browsers and system dependencies. Only afterwards
+can playwright be used.
+
+#### Usage
+
+To run already configured playwright test
+
+1.  Start a local dev server on port 5173 (default)
+
+        npm run dev
+
+1.  Run the e2e tests
+
+        npm run e2e
+
+This is the only playwright script shortcut defined currently in our project,
+but playwright offers many other commands to help with the creation of test cases
+and the analysis of failed test cases. Please refer to the
+[official documentation](https://playwright.dev/docs/intro) for details.
+Most notably `npx playwright test --ui` and `npx playwright codegen` are two very
+helpful commands that leverage the interactivity of the playwright framework.
+
+End to end test cases are stored in the `tests/` folder, so new tests should be
+added there.

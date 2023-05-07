@@ -6,7 +6,7 @@
   import {locale} from '$lib/stores/i18n';
   import TextContainer from '$lib/components/Text_Container.svelte';
   import Person from '$lib/components/Person.svelte';
-  import {gen_img_url} from '$lib/js/helpers';
+  import {parseEntries} from '$lib/js/parse_cms';
 
   onMount(() => {
     $page_key = 'navbar.blog';
@@ -14,36 +14,27 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let post;
-  $: post = data.post;
-  let pubdate;
-  $: pubdate = data.pubdate;
-  let lang_content;
-  $: lang_content = data.lang_content;
-  let content_creators;
-  $: content_creators = data.content_creators;
-  let proc_date;
-  $: proc_date = gen_date(pubdate, $locale, true);
+  const post = data.post;
+  const pubdate = data.pubdate;
+  const lang_content = data.lang_content;
+  const content_creators = parseEntries(
+    data.content_creators,
+    'content_creators',
+  );
+  const proc_date = gen_date(pubdate, $locale, true);
 </script>
 
 <TextContainer
-  date={proc_date}
   title={lang_content.title}
-  people={content_creators}
   title_image={post.title_image}
   teaser={lang_content.teaser}
-  {content_creators}
 >
   <div slot="sub_subtitle">
     {#if proc_date}
       <p class="mx-4 pb-4 text-lg font-light">
         {proc_date} - {#each content_creators as person, i}
-          {person.Content_Creators_id.person.name}
-          {person.Content_Creators_id.person.translations[0]
-            ? person.Content_Creators_id.person.translations[0].pronouns
-              ? `(${person.Content_Creators_id.person.translations[0].pronouns})`
-              : ''
-            : ''}
+          {person.name}
+          {person.pronouns ? `(${person.pronouns})` : ''}
           {#if i < content_creators.length - 1}{', '} {/if}{/each}
       </p>
     {/if}
@@ -59,33 +50,7 @@
   <div class="container mx-auto space-y-8 px-4 pt-12">
     <hr />
     {#each content_creators as person}
-      <Person
-        name={person.Content_Creators_id.person.name}
-        pronouns={person.Content_Creators_id.person.translations[0]
-          ? person.Content_Creators_id.person.translations[0].pronouns
-          : null}
-        img={gen_img_url(
-          person.Content_Creators_id.person.image.id,
-          'fit=cover&width=200&height=200&quality=80',
-        )}
-        position={person.Content_Creators_id.translations[0].position}
-        description={person.Content_Creators_id.translations[0].description}
-        website={person.Content_Creators_id.person.website
-          ? person.Content_Creators_id.person.website
-          : ''}
-        linkedin={person.Content_Creators_id.person.linkedin
-          ? person.Content_Creators_id.person.linkedin
-          : ''}
-        mastodon={person.Content_Creators_id.person.mastodon
-          ? person.Content_Creators_id.person.mastodon
-          : ''}
-        twitter={person.Content_Creators_id.person.twitter
-          ? person.Content_Creators_id.person.twitter
-          : ''}
-        github={person.Content_Creators_id.person.github
-          ? person.Content_Creators_id.person.github
-          : ''}
-      />
+      <Person {...person} />
     {/each}
   </div>
 {/if}

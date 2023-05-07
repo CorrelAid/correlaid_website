@@ -2,17 +2,12 @@
   export let name;
   export let position = '';
   export let description = '';
-  export let img;
-  export let mastodon = '';
-  export let website = '';
-  export let twitter = '';
-  export let linkedin = '';
-  export let github = '';
+  export let img = void 0;
+  export let links;
   export let email = '';
   export let pronouns = '';
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
-  $: console.log(pronouns);
 </script>
 
 <div class="grid grid-cols-8 gap-x-12 rounded pb-6 pt-8">
@@ -40,6 +35,6 @@
       </p>
     {/if}
 
-    <Links {website} {mastodon} {twitter} {linkedin} {github} />
+    <Links {...links} />
   </div>
 </div>
