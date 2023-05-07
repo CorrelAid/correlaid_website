@@ -1,5 +1,6 @@
 <script>
-  import {t, locale} from '$lib/stores/i18n';
+  import {t} from '$lib/stores/i18n';
+  import {get_locale} from '$lib/js/helpers.js';
   import {page} from '$app/stores';
   import {page_key} from '$lib/stores/page_key';
   import {drawer} from '$lib/stores/drawer';
@@ -16,7 +17,8 @@
   import LanguageSelect from './Header/LanguageSelect.svelte';
   import {top_nav, bot_nav} from './Header/navConfig.js';
 
-  let active_language = $locale;
+  let active_language;
+
   let botNavCloseAll;
   let lastClickedLink = '';
 
@@ -26,6 +28,7 @@
     }
   }
 
+  $: active_language = get_locale($page.params);
   $: $no_scroll = $drawer;
   $: lastClickedLink = $page_key;
   $: $page.url && closeall();
