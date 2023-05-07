@@ -13,16 +13,16 @@
     class="{imageOnRightSide ? 'md:hidden' : 'md:visible'} w-392 mx-auto pt-8"
   >
     <div class="offset w-392 relative mx-auto">
-      {#if image && image != ''}
+      {#if image && image !== ''}
         <img class="w-392 rounded border-4 border-neutral" src={image} {alt} />
       {/if}
     </div>
   </div>
   <div class="col-span-2 px-4 pt-5 text-neutral">
-    {#if year && year != ''}
+    {#if year && year !== ''}
       <h3 class="pb-3 text-2xl text-neutral">{year}</h3>
     {/if}
-    {#if title && title != ''}
+    {#if title && title !== ''}
       <h2 class="pb-3 text-3xl text-primary">{title}</h2>
     {/if}
   </div>
@@ -32,7 +32,7 @@
       : 'md:hidden'}"
   >
     <div class="offset w-392 relative mx-auto">
-      {#if image && image != ''}
+      {#if image && image !== ''}
         <img class="w-392 rounded border-4 border-neutral" src={image} {alt} />
       {/if}
     </div>

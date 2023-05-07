@@ -1,4 +1,4 @@
-import * as parseModel from './parse_cms_models.js';
+import * as parseModel from './parse_cms_models';
 
 export function parseEntries(rawEntries, type) {
   const parsedEntries = [];
@@ -7,8 +7,7 @@ export function parseEntries(rawEntries, type) {
       const entry = parseModel[type](rawEntry);
       parsedEntries.push(entry);
     } catch (err) {
-      console.group();
-      console.log(`Error parsing ${type}`);
+      console.group(`Error parsing ${type}`);
       console.log(err.message);
       console.log(rawEntry);
       console.groupEnd();

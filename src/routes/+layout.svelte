@@ -16,7 +16,7 @@
   import QuoteCarousel from '$lib/components/Quote_Carousel.svelte';
   import Cta from '$lib/components/CTA.svelte';
   import CtaGroup from '$lib/components/CTA_group.svelte';
-  import * as parseModel from '$lib/js/parse_cms_models.js';
+  import * as parseModel from '$lib/js/parse_cms_models';
   import LinkButton from '../lib/components/Link_Button.svelte';
   import Icon from '../lib/components/Icon.svelte';
 

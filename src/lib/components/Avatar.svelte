@@ -1,6 +1,6 @@
 <script>
   import PersonPlaceholder from '../svg/Person_Placeholder.svelte';
-  export let src;
+  export let src = void 0;
   export let alt;
   export let w = 56;
 </script>
