@@ -2,7 +2,7 @@
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import Person from '$lib/components/Person.svelte';
-  import {gen_img_url} from '$lib/js/helpers';
+  import {parseEntries} from '$lib/js/parse_cms.js';
 
   onMount(() => {
     $page_key = 'navbar.about.values';
@@ -10,22 +10,14 @@
 
   export let data;
 
-  let ethics_commission;
-  $: ethics_commission = data.ethics_commission;
+  const ethics_commission = parseEntries(
+    data.ethics_commission,
+    'global_administrators',
+  );
 </script>
 
 <div class="container mx-auto flex flex-col gap-y-3 space-y-8 pb-12">
   {#each ethics_commission as person}
-    <Person
-      name={person.person.name}
-      img={gen_img_url(
-        person.person.image.id,
-        'fit=cover&width=200&height=200&quality=80',
-      )}
-      email={person.person.email}
-      position={person.translations[0].position}
-      description={person.translations[0].description}
-      pronouns={person.translations[0] ? person.translations[0].pronouns : null}
-    />
+    <Person {...person} />
   {/each}
 </div>

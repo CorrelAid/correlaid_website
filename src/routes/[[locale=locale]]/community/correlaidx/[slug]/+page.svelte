@@ -5,8 +5,9 @@
   import ProjectsCard from '$lib/components/ProjectsCard.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import Html from '$lib/components/Html.svelte';
-  import {gen_img_url} from '$lib/js/helpers';
   import Events_Card from '$lib/components/Events_Card.svelte';
+  import Person from '$lib/components/Person.svelte';
+  import {parseEntries} from '$lib/js/parse_cms';
 
   onMount(() => {
     $page_key = 'navbar.community.correlaidx';
@@ -14,13 +15,13 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  import Person from '$lib/components/Person.svelte';
-  let local_chapter;
-  $: local_chapter = data.local_chapter;
-  let events;
-  $: events = data.events;
-  let projects;
-  $: projects = data.projects;
+  const local_chapter = data.local_chapter;
+  const events = data.events;
+  const projects = data.projects;
+  const local_admins = parseEntries(
+    local_chapter.local_administrators,
+    'local_administrators',
+  );
 </script>
 
 <div class="relative">
@@ -99,41 +100,8 @@
 
   {#if local_chapter.local_administrators.length != 0}
     <div class="container mx-auto mb-12 space-y-8">
-      {#each local_chapter.local_administrators as person}
-        <Person
-          name={person.Local_Administrators_id.person.name}
-          img={person.Local_Administrators_id.person.image
-            ? gen_img_url(
-                person.Local_Administrators_id.person.image.id,
-                'fit=cover&width=200&height=200&quality=80',
-              )
-            : null}
-          position={person.Local_Administrators_id.translations
-            ? person.Local_Administrators_id.translations[0].position
-            : null}
-          description={person.Local_Administrators_id.translations
-            ? person.Local_Administrators_id.translations[0].description
-            : null}
-          email={local_chapter.lc_email}
-          website={person.Local_Administrators_id.person.website
-            ? person.Local_Administrators_id.person.website
-            : ''}
-          linkedin={person.Local_Administrators_id.person.linkedin
-            ? person.Local_Administrators_id.person.linkedin
-            : ''}
-          mastodon={person.Local_Administrators_id.person.mastodon
-            ? person.Local_Administrators_id.person.mastodon
-            : ''}
-          twitter={person.Local_Administrators_id.person.twitter
-            ? person.Local_Administrators_id.person.twitter
-            : ''}
-          github={person.Local_Administrators_id.person.github
-            ? person.Local_Administrators_id.person.github
-            : ''}
-          pronouns={person.Local_Administrators_id.person.translations[0]
-            ? person.Local_Administrators_id.person.translations[0].pronouns
-            : null}
-        />
+      {#each local_admins as person}
+        <Person {...person} />
       {/each}
     </div>
   {/if}

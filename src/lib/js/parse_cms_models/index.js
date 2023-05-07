@@ -1,4 +1,5 @@
-import {gen_img_url} from './helpers.js';
+import {gen_img_url} from '../helpers.js';
+export * from './people';
 
 export function heros(section) {
   const heroParams = {
@@ -43,30 +44,6 @@ export function wysiwyg(section) {
     source: section.item.translations[0].content,
     options: '',
   };
-}
-export function contacts(section) {
-  let imageUrl;
-
-  if (section.item.person.image) {
-    imageUrl = gen_img_url(
-      section.item.person.image.id,
-      'fit=cover&width=200&height=200&quality=80',
-    );
-  }
-
-  const pronouns = section.item.person.translations[0]
-    ? section.item.person.translations[0].pronouns
-    : null;
-
-  const personParams = {
-    name: section.item.person.name,
-    img: imageUrl,
-    email: section.item.person.email,
-    position: section.item.translations[0].position,
-    description: section.item.translations[0].description,
-    pronouns: pronouns,
-  };
-  return personParams;
 }
 export function carousel(section) {
   return {
@@ -132,6 +109,29 @@ export function podcast_episodes(episode) {
     content_creators: episode.content_creators,
   };
 }
+
+export function awards(award) {
+  return {
+    year: award.year,
+    image: gen_img_url(
+      award.image.id,
+      'fit=cover&width=392&height=240&quality=80',
+    ),
+    alt: award.translations[0].image_alt,
+    title: award.translations[0].title,
+  };
+}
+
+export function partners(partner) {
+  const img = gen_img_url(partner.logo.id, 'fit=cover&quality=100');
+  return {
+    name: partner.name,
+    img: img,
+    description: partner.translations[0].description,
+    website: partner.link,
+  };
+}
+
 export function custom_sections(section) {
   return;
 }
