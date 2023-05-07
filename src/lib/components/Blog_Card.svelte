@@ -3,11 +3,12 @@
   export let langs;
   export let href_pod = null;
   export let image_url;
-  export let slug;
+  export let slug = null;
   import {gen_date} from '$lib/js/helpers';
   export let title;
   import {locale} from '$lib/stores/i18n';
   export let teaser;
+  import {t} from '$lib/stores/i18n';
   import De from '../svg/DE.svelte';
   import En from '../svg/EN.svelte';
   export let tags;
@@ -21,8 +22,8 @@
   let href = '';
   $: if (href_pod) {
     href = href_pod;
-  } else {
-    href = langs.includes('de-DE') ? '/blog/' + slug : '/en/blog/' + slug;
+  } else if (slug) {
+    href = $t('navbar.blog').url + '/' + slug;
   }
 </script>
 

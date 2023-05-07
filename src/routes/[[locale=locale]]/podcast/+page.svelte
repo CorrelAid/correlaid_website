@@ -19,7 +19,6 @@
         {i}
         langs={[episode.language]}
         href_pod={episode.soundcloud_link}
-        slug={null}
         title={episode.title}
         teaser={episode.description}
         tags={episode.tags}
