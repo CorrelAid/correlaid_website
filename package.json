@@ -15,9 +15,11 @@
     "lint": "npx eslint src/",
     "precommit": "run-s quick_format lint",
     "init_pre_commit": "husky install",
-    "test": "npx vitest run"
+    "test": "npx vitest run",
+    "e2e": "npx playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.33.0",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/adapter-static": "^2.0.2",
     "@sveltejs/adapter-vercel": "^2.3.0",
