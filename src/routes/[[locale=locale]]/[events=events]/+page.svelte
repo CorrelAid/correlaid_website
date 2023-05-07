@@ -1,7 +1,6 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
-  import {t} from '$lib/stores/i18n';
   import Events_Card from '../../../lib/components/Events_Card.svelte';
 
   onMount(() => {
@@ -17,7 +16,7 @@
 <div class="space-y-5">
   {#each events as event, i}
     <Events_Card
-      href={$t('navbar.events').url + '/' + event.slug}
+      slug={event.slug}
       title={event.title}
       teaser={event.teaser}
       date={event.date}
