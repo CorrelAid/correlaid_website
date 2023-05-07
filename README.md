@@ -20,7 +20,7 @@ For details about the projects quality assurance [see below](#quality-assurance)
 
 ## Git Policies
 
-Push to preview first!
+Merge with preview, then merge with master.
 
 ## Project explanation
 
