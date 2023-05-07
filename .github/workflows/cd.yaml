@@ -1,7 +1,10 @@
-name: Run CI
+name: Run CD
 on:
-  pull_request:
-    branches: [main, preview]
+  workflow_dispatch:
+  # Allows external webhook trigger
+  repository_dispatch:
+    types:
+      - webhook
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -23,3 +26,9 @@ jobs:
           npm run format_check
           npm run lint
           npm run test
+
+      - name: Deploy production on cloudflare
+        env: # Set the secret as an input
+          WEBHOOK: ${{ secrets.CLOUDFLARE_WEBHOOK }}
+        run: |
+          curl -X POST "$WEBHOOK"
