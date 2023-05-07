@@ -88,7 +88,7 @@
       </div>
       {#each events as event, i}
         <Events_Card
-          href={$t('navbar.events').url + '/' + event.slug}
+          slug={event.slug}
           title={event.title}
           teaser={event.teaser}
           date={event.date}
