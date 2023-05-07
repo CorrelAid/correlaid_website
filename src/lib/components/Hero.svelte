@@ -14,8 +14,6 @@
   $: if (image != null) {
     image_id = image.id;
   }
-
-  $: console.log(image);
 </script>
 
 <section
