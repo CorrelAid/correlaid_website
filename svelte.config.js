@@ -7,8 +7,8 @@ import translations from './src/lib/data/translations.js';
 import {fetch} from 'undici';
 
 const mainRoutes = {
-  de: _.omit(translations['de'], ['misc.report', 'misc.output']),
-  en: _.omit(translations['en'], ['misc.report', 'misc.output']),
+  de: _.omit(translations['de'], ['misc.read_more']),
+  en: _.omit(translations['en'], ['misc.read_more']),
 };
 
 const URL = 'https://cms.correlaid.org/graphql';
