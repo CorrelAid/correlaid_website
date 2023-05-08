@@ -11,8 +11,6 @@
   export let data;
   let projects;
   $: projects = data.projects;
-
-  $: console.log(projects[0].Posts[0]);
 </script>
 
 <div class="space-y-6">

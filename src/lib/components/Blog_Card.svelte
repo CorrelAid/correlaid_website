@@ -20,8 +20,6 @@
   }
 
   $: proc_date = gen_date(pubdate, $locale, true);
-
-  console.log(tags);
 </script>
 
 <article

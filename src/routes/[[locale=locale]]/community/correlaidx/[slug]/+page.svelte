@@ -8,6 +8,7 @@
   import Events_Card from '$lib/components/Events_Card.svelte';
   import Person from '$lib/components/Person.svelte';
   import {parseEntries} from '$lib/js/parse_cms';
+  import Icon from '$lib/components/Icon.svelte';
 
   onMount(() => {
     $page_key = 'navbar.community.correlaidx';
@@ -15,13 +16,19 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  const local_chapter = data.local_chapter;
-  const events = data.events;
-  const projects = data.projects;
-  const local_admins = parseEntries(
-    local_chapter.local_administrators,
-    'local_administrators',
-  );
+  let local_chapter;
+  $: local_chapter = data.local_chapter;
+  let events;
+  $: events = data.events;
+  let projects;
+  $: projects = data.projects;
+  let local_admins;
+  $: if (local_chapter) {
+    local_admins = parseEntries(
+      local_chapter.local_administrators,
+      'local_administrators',
+    );
+  }
 </script>
 
 <div class="relative">
@@ -43,6 +50,7 @@
       width={'text'}
     />
   </div>
+
   {#if projects.length != 0}
     <div class="container mx-auto mb-12 space-y-8">
       <div class="mb-12">
@@ -97,12 +105,19 @@
       {/each}
     </div>
   {/if}
-
   {#if local_chapter.local_administrators.length != 0}
-    <div class="container mx-auto mb-12 space-y-8">
+    <div class="container mx-auto mb-12">
       {#each local_admins as person}
-        <Person {...person} />
+        <Person {...person} email={local_chapter.lc_email} />
       {/each}
+    </div>
+  {/if}
+  {#if local_chapter.translations[0].how_to_get_in_touch}
+    <div class="container mx-auto mb-12">
+      <Icon
+        icon_type={'get_in_touch'}
+        text={local_chapter.translations[0].how_to_get_in_touch}
+      />
     </div>
   {/if}
 </div>
