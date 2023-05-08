@@ -13,12 +13,12 @@
     $page_key = 'navbar.home';
   });
 
-  const posts = parseEntries(data.posts, 'blog_posts');
-  const events = parseEntries(data.events, 'events');
-  const podcast_episodes = parseEntries(
-    data.podcast_episodes,
-    'podcast_episodes',
-  );
+  let posts;
+  $: posts = parseEntries(data.posts, 'blog_posts');
+  let events;
+  $: events = parseEntries(data.events, 'events');
+  let podcast_episodes;
+  $: podcast_episodes = parseEntries(data.podcast_episodes, 'podcast_episodes');
 </script>
 
 <div class="">
@@ -40,7 +40,7 @@
       href={$t('navbar.blog').url}>Blog</a
     >
   </div>
-  <div class="grid gap-6 xl:grid-cols-2">
+  <div class="space-y-8">
     {#each posts as post}
       <div>
         <BlogCard {...post} />
@@ -54,7 +54,7 @@
       href={$t('navbar.podcast').url}>Podcast</a
     >
   </div>
-  <div class="grid gap-6 xl:grid-cols-2">
+  <div class="space-y-8">
     {#each podcast_episodes as episode}
       <BlogCard {...episode} />
     {/each}

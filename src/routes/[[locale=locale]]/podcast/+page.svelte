@@ -15,7 +15,7 @@
 </script>
 
 <div class="container mx-auto space-y-4 pb-8">
-  <div class="grid gap-6 lg:grid-cols-2">
+  <div class="space-y-8">
     {#each podcast_episodes as episode}
       <BlogCard {...episode} />
     {/each}

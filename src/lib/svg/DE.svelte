@@ -21,3 +21,10 @@
     />
   </g>
 </svg>
+
+<style>
+  /* svg {
+  vertical-align: middle;
+  display: inline-block;
+} */
+</style>
