@@ -12,10 +12,11 @@
   export let data;
 
   let posts;
-  posts = parseEntries(data.posts, 'blog_posts');
+  $: posts = parseEntries(data.posts, 'blog_posts');
+  $: console.log(data);
 </script>
 
-<div class="grid gap-6 xl:grid-cols-2">
+<div class="space-y-8">
   {#each posts as post, i}
     <div class={i === 0 ? 'col-span-full' : 'col-span-1'}>
       <BlogCard {...post} />

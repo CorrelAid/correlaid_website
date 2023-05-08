@@ -11,7 +11,7 @@
 </script>
 
 <div class="grid grid-cols-8 gap-x-12 rounded pb-6 pt-8">
-  <div class="col-span-full md:col-span-3">
+  <div class="col-span-full flex items-center md:col-span-3">
     <Avatar src={img} alt={name} />
   </div>
 
@@ -24,10 +24,10 @@
       <h3 class="pb-3 text-lg">{position}</h3>
     {/if}
     {#if description}
-      <p class="pb-3 text-justify">{description}</p>
+      <p class="pb-2 text-justify">{description}</p>
     {/if}
     {#if email && email != ''}
-      <p class="pb-5">
+      <p class="pb-3">
         <a
           class="font-normal text-secondary no-underline hover:underline"
           href="mailto:{email}">{email}</a

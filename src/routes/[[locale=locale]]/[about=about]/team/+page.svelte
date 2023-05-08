@@ -23,7 +23,7 @@
 <div class="mt-12">
   <Html
     source={organizational_structure.translations[0].remote_office}
-    options={'pb-12 px-0'}
+    options={'pb-12 px-0 mx-auto'}
     width={'text'}
   />
 
@@ -35,7 +35,7 @@
 
   <Html
     source={organizational_structure.translations[0].board}
-    options={'pb-12'}
+    options={'pb-12 mx-auto'}
     width={'text'}
   />
 
