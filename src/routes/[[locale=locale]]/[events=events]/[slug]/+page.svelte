@@ -11,6 +11,9 @@
   import Headset from '$lib/svg/Headset.svelte';
   import SignUp from '$lib/svg/Sign_Up.svelte';
   import Box from '$lib/components/Box.svelte';
+  import De from '$lib/svg/DE.svelte';
+  import En from '$lib/svg/EN.svelte';
+  const icon_h = 22;
 
   onMount(() => {
     $page_key = 'navbar.events';
@@ -48,7 +51,19 @@
             )}</span
           ></span
         >
-
+        {#if event.lang == 'de-DE'}
+          <span
+            class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+          >
+            <De height={icon_h} width={icon_h} />
+          </span>
+        {:else}
+          <span
+            class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+          >
+            <En height={icon_h} width={icon_h} />
+          </span>
+        {/if}
         {#if event.location}
           <p class="flex">
             <span class="my-auto flex fill-neutral"

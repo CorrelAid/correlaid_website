@@ -13,7 +13,6 @@
 
   let posts;
   $: posts = parseEntries(data.posts, 'blog_posts');
-  $: console.log(data);
 </script>
 
 <div class="space-y-8">
