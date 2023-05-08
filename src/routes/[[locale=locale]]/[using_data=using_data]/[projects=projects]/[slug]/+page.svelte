@@ -13,7 +13,6 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let project;
   $: project = data.project;
 </script>
 

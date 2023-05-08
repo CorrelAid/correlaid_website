@@ -1,9 +1,10 @@
 <script>
-  export let href;
-  export let repo;
-  export let podcast_href;
-  export let post_slug;
   import {t} from '$lib/stores/i18n';
+
+  export let href = void 0;
+  export let repo = void 0;
+  export let podcast_href = void 0;
+  export let post_slug = void 0;
 </script>
 
 <div class="flex flex-wrap items-center">

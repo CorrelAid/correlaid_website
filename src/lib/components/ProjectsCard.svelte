@@ -1,16 +1,23 @@
 <script>
-  export let title;
-  export let organization;
-  export let correlaidx = [];
-  export let href;
-  export let summary;
-  export let repo;
-  export let post_slug;
-  export let podcast_href;
   import Nonprofit from '$lib/svg/Nonprofit.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import {page} from '$app/stores';
   import {gen_lc_href} from '$lib/js/helpers';
+  import {t} from '$lib/stores/i18n';
+
+  export let title;
+  export let organization;
+  export let subpage;
+  export let summary = 'tbd';
+  export let correlaidx = [];
+  export let project_id = void 0;
+  export let repo = void 0;
+  export let post_slug = void 0;
+  export let podcast_href = void 0;
+
+  $: href = subpage
+    ? $t('navbar.using_data.projects').url + '/' + project_id
+    : null;
 </script>
 
 <div
@@ -34,7 +41,7 @@
       {title}
     </h3>
 
-    {#if correlaidx != []}
+    {#if correlaidx !== []}
       {#each correlaidx as lc}
         <a
           class="text-medium mb-3 text-base-content transition line-clamp-3 hover:text-primary"

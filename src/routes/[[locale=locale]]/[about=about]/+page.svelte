@@ -8,7 +8,7 @@
     $page_key = 'navbar.about';
   });
   export let data;
-  const awards = parseEntries(data.Awards, 'awards');
+  $: awards = parseEntries(data.Awards, 'awards');
 
   function indexToImagePosition(award, index) {
     award.imageOnRightSide = index % 2 === 0;

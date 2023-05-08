@@ -16,13 +16,11 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let local_chapter;
-  $: local_chapter = data.local_chapter;
-  let events;
-  $: events = data.events;
-  let projects;
-  $: projects = data.projects;
   let local_admins;
+
+  $: local_chapter = data.local_chapter;
+  $: events = parseEntries(data.events, 'events');
+  $: projects = parseEntries(data.projects, 'lcProjects');
   $: if (local_chapter) {
     local_admins = parseEntries(
       local_chapter.local_administrators,
@@ -47,11 +45,9 @@
     <Html
       source={local_chapter.translations[0].description}
       options={'mx-auto'}
-      width={'text'}
     />
   </div>
-
-  {#if projects.length != 0}
+  {#if projects.length !== 0}
     <div class="container mx-auto mb-12 space-y-8">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-base-content">
@@ -59,49 +55,21 @@
         </h2>
       </div>
       <div class="space-y-6">
-        {#each projects as project, i}
-          <ProjectsCard
-            href={project.Projects_id.subpage == true
-              ? $t('navbar.using_data.projects').url +
-                '/' +
-                project.Projects_id.project_id
-              : null}
-            title={project.Projects_id.translations[0].title}
-            organization={project.Projects_id.Organizations[0].Organizations_id
-              .translations[0].name}
-            summary={project.Projects_id.translations[0].summary}
-            correlaidx={project.Projects_id.Local_Chapters != []
-              ? project.Projects_id.Local_Chapters
-              : null}
-            podcast_href={project.Projects_id.Podcast
-              ? project.Projects_id.Podcast.soundcloud_link
-              : null}
-            post_slug={project.Projects_id.Posts.length != 0
-              ? project.Projects_id.Posts[0].translations.slug
-              : null}
-            repo={project.Projects_id.Projects_Outputs.length != 0
-              ? project.Projects_id.Projects_Outputs[0].url
-              : null}
-          />
+        {#each projects as project}
+          <ProjectsCard {...project} />
         {/each}
       </div>
     </div>
   {/if}
-  {#if events.length != 0}
+  {#if events.length !== 0}
     <div class="container mx-auto mb-12 space-y-8">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-base-content">
           {$t('navbar.events').text}
         </h2>
       </div>
-      {#each events as event, i}
-        <Events_Card
-          slug={event.slug}
-          title={event.title}
-          teaser={event.teaser}
-          date={event.date}
-          tags={event.tags}
-        />
+      {#each events as event}
+        <Events_Card {...event} />
       {/each}
     </div>
   {/if}
