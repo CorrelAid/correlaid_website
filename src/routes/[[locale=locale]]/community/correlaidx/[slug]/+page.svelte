@@ -69,9 +69,9 @@
               ? project.Projects_id.Podcast.soundcloud_link
               : null}
             post_slug={project.Projects_id.Posts.length != 0
-              ? project.Projects_id.Posts[0].Posts_id.translations[0].slug
+              ? project.Projects_id.Posts[0].translations.slug
               : null}
-            external={project.Projects_id.Projects_Outputs.length
+            repo={project.Projects_id.Projects_Outputs.length != 0
               ? project.Projects_id.Projects_Outputs[0].url
               : null}
           />
