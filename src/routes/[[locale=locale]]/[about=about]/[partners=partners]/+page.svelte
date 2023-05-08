@@ -9,7 +9,7 @@
   });
 
   export let data;
-  const partners = parseEntries(data.partners, 'partners');
+  $: partners = parseEntries(data.partners, 'partners');
 </script>
 
 <div class="mt-12">

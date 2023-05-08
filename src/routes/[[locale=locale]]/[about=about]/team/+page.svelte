@@ -10,13 +10,8 @@
   });
   export let data;
 
-  const remote_office = parseEntries(
-    data.remote_office,
-    'global_administrators',
-  );
-  const board = parseEntries(data.board, 'global_administrators');
-
-  let organizational_structure;
+  $: remote_office = parseEntries(data.remote_office, 'global_administrators');
+  $: board = parseEntries(data.board, 'global_administrators');
   $: organizational_structure = data.organizational_structure;
 </script>
 
