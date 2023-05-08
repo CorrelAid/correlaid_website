@@ -5,10 +5,7 @@
   import TextContainer from '$lib/components/Text_Container.svelte';
   import Links from '$lib/components/Links.svelte';
   import Box from '$lib/components/Box.svelte';
-  import Podcast from '$lib/svg/Podcast.svelte';
-  import Blog from '$lib/svg/Blog.svelte';
-  import {t} from '$lib/stores/i18n';
-  import ExternalLink from '$lib/svg/External_Link.svelte';
+  import ProjectLinks from '$lib/components/ProjectLinks.svelte';
 
   onMount(() => {
     $page_key = 'navbar.using_data.projects';
@@ -18,6 +15,7 @@
   export let data;
   let project;
   $: project = data.project;
+  $: console.log(project);
 </script>
 
 <TextContainer
@@ -25,39 +23,17 @@
   teaser={project.translations[0].summary}
 >
   <div class="mx-4" slot="sub_subtitle">
-    {#if project.Projects_Outputs.length != 0}
-      <div class="mb-4 flex items-center">
-        <a
-          class=" text-secondary hover:underline"
-          href={project.Projects_Outputs[0].url}
-          >{$t('misc.output').text}
-        </a><span class="ml-1.5"
-          ><ExternalLink
-            height={20}
-            width={20}
-            color={'rgb(56, 99, 162)'}
-          /></span
-        >
-      </div>
-    {/if}
-    {#if project.Podcast || project.Posts.length != 0}
-      <div class="mb-5 flex items-center space-x-3">
-        {#if project.Podcast.soundcloud_link}
-          <a href={project.Podcast.soundcloud_link}
-            ><Podcast height={35} width={20} /></a
-          >
-        {/if}
-        {#if project.Posts.length != 0}
-          <a
-            href={$t('navbar.blog').url +
-              '/' +
-              project.Posts[0].Posts_id.translations.slug}
-            ><Blog height={35} width={35} /></a
-          >
-        {/if}
-      </div>
-    {/if}
-
+    <div class="mb-3">
+      <ProjectLinks
+        repo={project.Projects_Outputs.length != 0
+          ? project.Projects_Outputs[0].url
+          : null}
+        podcast_href={project.Podcast ? project.Podcast.soundcloud_link : null}
+        post_slug={project.Posts.length != 0
+          ? project.Posts[0].translations.slug
+          : null}
+      />
+    </div>
     <Box>
       <h2 class="text-xl font-semibold">
         {project.Organizations[0].Organizations_id.translations[0].name}

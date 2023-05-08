@@ -33,9 +33,9 @@
           : null}
         podcast_href={project.Podcast ? project.Podcast.soundcloud_link : null}
         post_slug={project.Posts.length != 0
-          ? project.Posts[0].Posts_id.translations[0].slug
+          ? project.Posts[0].translations.slug
           : null}
-        external={project.Projects_Outputs.length != 0
+        repo={project.Projects_Outputs.length != 0
           ? project.Projects_Outputs[0].url
           : null}
       />
