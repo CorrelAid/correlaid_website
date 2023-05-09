@@ -2,6 +2,7 @@
   import {locale} from '$lib/stores/i18n';
   import {createEventDispatcher} from 'svelte';
   import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
+  import {t} from '$lib/stores/i18n';
 
   let languageToggle = false;
 
@@ -35,9 +36,8 @@
       type="button"
       class="z-10 inline-flex h-full items-center justify-center rounded-r-md border-l border-neutral-25 px-2"
       on:click={langDropdown}
+      aria-label={$t('access.language').text}
     >
-      <span class="sr-only">Language</span>
-
       <DropdownIcon height={20} width={20} />
     </button>
     {#if languageToggle}

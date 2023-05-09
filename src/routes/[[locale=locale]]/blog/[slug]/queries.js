@@ -34,7 +34,7 @@ query BlogPostQuery($slug: String, $language: String = "de-DE") {
 			}
 			title
 			text
-
+			image_alt
 			slug
 			teaser
 		}

@@ -27,6 +27,7 @@
 <TextContainer
   title={lang_content.title}
   title_image={post.title_image}
+  image_alt={lang_content.image_alt}
   teaser={lang_content.teaser}
 >
   <div slot="sub_subtitle">

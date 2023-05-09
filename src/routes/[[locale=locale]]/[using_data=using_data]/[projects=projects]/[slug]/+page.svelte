@@ -22,7 +22,7 @@
   teaser={project.translations[0].summary}
 >
   <div class="mx-4" slot="sub_subtitle">
-    <div class="mb-3">
+    <div class="mb-5">
       <ProjectLinks
         repo={project.Projects_Outputs.length != 0
           ? project.Projects_Outputs[0].url
@@ -64,6 +64,7 @@
               : ''}</span
           >
           <Links
+            name={person.People_id.name}
             website={person.People_id.website ? person.People_id.website : ''}
             linkedin={person.People_id.linkedin
               ? person.People_id.linkedin

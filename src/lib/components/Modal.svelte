@@ -1,15 +1,15 @@
 <!-- https://svelte.dev/examples/modal -->
-<script>
+<!-- <script>
   import Close from '$lib/svg/Close.svelte';
   export let showModal; // boolean
 
   let dialog; // HTMLDialogElement
 
   $: if (dialog && showModal) dialog.showModal();
-</script>
+</script> -->
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<dialog
+<!-- <dialog
   class=" relative z-30 overflow-y-scroll"
   bind:this={dialog}
   on:close={() => (showModal = false)}
@@ -35,4 +35,4 @@
     left: 0%;
     transform: translateX(-0%);
   }
-</style>
+</style> -->

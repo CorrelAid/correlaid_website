@@ -42,10 +42,10 @@
 
 <div class="mx-auto flex items-center gap-12">
   <div class="mx-auto hidden xl:block">
-    <nav aria-label="Site Nav">
-      <div class="flex items-center gap-6 text-xl">
+    <nav aria-label="Site Nav Bottom">
+      <ul class="flex items-center gap-6 text-xl">
         {#each bot_nav as navItem}
-          <div>
+          <li>
             <div
               class="pl-4"
               class:font-medium={isSubPage(navItem.key, lastClickedLink)}
@@ -81,9 +81,9 @@
                 </ul>
               </div>
             {/if}
-          </div>
+          </li>
         {/each}
-      </div>
+      </ul>
     </nav>
   </div>
 </div>
