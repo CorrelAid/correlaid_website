@@ -2,11 +2,11 @@
   import {t, locale} from '$lib/stores/i18n';
   import {gen_date} from '$lib/js/helpers';
   import Langs from '$lib/components/Langs.svelte';
-
+  export let image_alt;
   export let langs;
   export let title;
   export let teaser;
-  export let tags;
+  // export let tags;
   export let content_creators;
   export let href;
   export let pubdate;
@@ -42,12 +42,16 @@
 
   <div class="flex">
     <div class="">
-      <a {href} class="aspect-video w-full">
+      <a
+        {href}
+        aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}"
+        class="aspect-video w-full"
+      >
         {#if typeof image_url !== 'undefined'}
-          <img class="rounded-tl" alt="Office" src={image_url} />
+          <img class="rounded-tl" alt={image_alt} src={image_url} />
         {:else}
           <!-- TODO: Do we need this image placeholder? -->
-          <div {href} class="h-[10em] w-full bg-neutral" />
+          <img class="rounded-tl" alt={image_alt} src="" />
         {/if}
       </a>
     </div>

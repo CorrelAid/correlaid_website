@@ -22,8 +22,8 @@ query LatestUpdates($language: String = "de-DE") {
 			languages_code {
 				code
 			}
+			image_alt
 			title
-			text
 			tags
 			slug
 			teaser
@@ -58,6 +58,7 @@ query LatestUpdates($language: String = "de-DE") {
 		language
 		publication_datetime
 		tags
+		image_alt
 		content_creators {
 			Content_Creators_id {
 				person {

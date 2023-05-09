@@ -37,6 +37,7 @@
       height={'half'}
       correlaidx={true}
       text={`${local_chapter.translations[0].city}`}
+      image_alt={local_chapter.translations[0].hero_image_alt}
     />
   </div>
 </div>

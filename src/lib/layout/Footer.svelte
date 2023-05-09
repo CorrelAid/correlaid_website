@@ -34,28 +34,34 @@
 
   <div class=" mx-auto flex py-6">
     <div class="mx-auto grid grid-flow-col gap-6">
-      <a href="https://www.instagram.com/correlaid" class=""
+      <a
+        href="https://www.instagram.com/correlaid"
+        aria-label="CorrelAid Instagram"
         ><Instagram
           width={social_media_height}
           height={social_media_height}
         /></a
       >
-      <a href="https://twitter.com/correlaid" class=""
+      <a href="https://twitter.com/correlaid" aria-label="CorrelAid Twitter"
         ><Twitter width={social_media_height} height={social_media_height} /></a
       >
-      <a href="https://masto.ai/@correlaid" class=""
+      <a href="https://masto.ai/@correlaid" aria-label="CorrelAid Mastodon"
         ><Mastodon
           width={social_media_height}
           height={social_media_height}
         /></a
       >
-      <a href="https://de.linkedin.com/company/correlaid" class=""
+      <a
+        href="https://de.linkedin.com/company/correlaid"
+        aria-label="CorrelAid LinkedIn"
         ><Linkedin
           width={social_media_height}
           height={social_media_height}
         /></a
       >
-      <a href="https://facebook.com/WeAreCorrelAid" class=""
+      <a
+        href="https://facebook.com/WeAreCorrelAid"
+        aria-label="CorrelAid Facebook"
         ><Facebook
           width={social_media_height}
           height={social_media_height}
@@ -63,7 +69,7 @@
       >
       <a
         href="https://www.youtube.com/channel/UCs_k9roCuWLy17xxpigrWbg"
-        class=""
+        aria-label="CorrelAid YouTube"
         ><Youtube width={social_media_height} height={social_media_height} /></a
       >
     </div>

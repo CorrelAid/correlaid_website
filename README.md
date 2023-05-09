@@ -38,11 +38,18 @@ Only the implementations of most important concepts are explained here in a gene
 - Fonts are self hosted and located in static/fonts/. They are specified in app.css and tailwind.config.js
 - Icons: https://thenounproject.com/browse/creator/Iconathon1/icon-collections/?p=1
 
+### Accessibility
+
+- Use this tool to verify accessibility: https://www.deque.com/axe/devtools/
+- Exceptions: - Elements must have sufficient color contrast -> CorrelAid green on white background: used text shadow to improve this
+- CSS background images: http://www.davidmacd.com/blog/alternate-text-for-css-background-images.html
+
 #### Standards
 
 - Text should be justified: "text-justify"
-- Links should have the following classes: "text-secondary no-underline font-normal hover:underline"
+- Links should have the following classes: "text-secondary font-normal drop-shadpw-sm"
 - Links that are also titles should have the following classes: "text-xl font-semibold text-base-content transition hover:text-primary" (exception: partners)
+- Titles that are no links should have following classes: "text-2xl text-primary drop-shadow-sm"
 
 ### Internationalization
 

@@ -9,7 +9,7 @@
   export let text;
   export let buttons = [];
   export let correlaidx = false;
-
+  export let image_alt;
   let image_id;
   $: if (image != null) {
     image_id = image.id;
@@ -17,14 +17,20 @@
 </script>
 
 <section
-  class="relative flex w-screen items-center justify-center bg-cover bg-center bg-no-repeat"
-  style="{gradient_only != true
-    ? `background-image: url(${gen_img_url(image_id)});`
-    : ''}
+  class="relative flex w-screen items-center justify-center"
+  style="
     {height == 'full'
     ? `height: calc(100vh - ${$header_height}px)`
     : `height: calc((100vh - ${$header_height}px)/2)`}"
 >
+  {#if gradient_only != true}
+    <span
+      class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
+      style={`background-image: url(${gen_img_url(image_id)})`}
+      role="img"
+      aria-label={image_alt}
+    />
+  {/if}
   <div class="z-20 w-full">
     <div class="text_width mx-auto">
       <div class="">
