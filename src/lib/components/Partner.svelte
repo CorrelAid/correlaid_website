@@ -14,7 +14,7 @@
             <img class="" src={img} alt="Logo: {name}" />
           </a>
         {:else}
-          <img class="" src={img} alt={name} />
+          <img class="" src={img} alt="Logo: {name}" />
         {/if}
       </div>
     </div>
