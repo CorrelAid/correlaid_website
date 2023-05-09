@@ -3,14 +3,17 @@
   import {header_height} from '$lib/stores/dims';
   import {gen_img_url} from '$lib/js/helpers';
   import CorrelAidXLogo from '$lib/svg/CorrelAidX_Logo.svelte';
-  export let image;
   export let gradient_only;
   export let height;
   export let text;
+  export let image_alt;
   export let buttons = [];
   export let correlaidx = false;
-  export let image_alt;
+  export let image = void 0;
   let image_id;
+  // TODO: Image ID remains undefined if image is undefined or null
+  // This will create an invalid URL below in gen_img_url which is hard
+  // to distinguish from incorrect urls through id errors for instance
   $: if (image != null) {
     image_id = image.id;
   }
@@ -23,7 +26,7 @@
     ? `height: calc(100vh - ${$header_height}px)`
     : `height: calc((100vh - ${$header_height}px)/2)`}"
 >
-  {#if gradient_only != true}
+  {#if gradient_only}
     <span
       class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
       style={`background-image: url(${gen_img_url(image_id)})`}
@@ -48,16 +51,12 @@
             {text}
           </h2>
         </div>
-        {#if buttons != []}
+        {#if Array.isArray(buttons) && buttons.length !== 0}
           <div
             class="mt-16 flex flex-col space-y-6 px-4 md:mt-12 md:flex-row md:space-x-5 md:space-y-0"
           >
             {#each buttons as button}
-              <LinkButton
-                text={button.buttons_id.translations[0].text}
-                href={button.buttons_id.translations[0].link}
-                color={`bg-${button.buttons_id.color}`}
-              />
+              <LinkButton {...button} />
             {/each}
           </div>
         {/if}
