@@ -10,6 +10,30 @@ module.exports = {
         sans: ['Roboto'],
       },
 
+      typography(theme) {
+        return {
+          DEFAULT: {
+            css: {
+              'code::before': {
+                content: 'none', // don’t generate the pseudo-element
+                //                content: '""', // this is an alternative: generate pseudo element using an empty string
+              },
+              'code::after': {
+                content: 'none',
+              },
+              code: {
+                backgroundColor: theme('colors.gray.100'),
+                borderRadius: theme('borderRadius.DEFAULT'),
+                paddingLeft: theme('spacing[1.5]'),
+                paddingRight: theme('spacing[1.5]'),
+                paddingTop: theme('spacing.1'),
+                paddingBottom: theme('spacing.1'),
+              },
+            },
+          },
+        };
+      },
+
       minWidth: {
         36: '9rem',
       },
