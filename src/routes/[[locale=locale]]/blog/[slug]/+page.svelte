@@ -14,19 +14,17 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  const post = data.post;
-  const pubdate = data.pubdate;
-  const lang_content = data.lang_content;
-  const content_creators = parseEntries(
-    data.content_creators,
-    'content_creators',
-  );
-  const proc_date = gen_date(pubdate, $locale, true);
+  $: post = data.post;
+  $: pubdate = data.pubdate;
+  $: lang_content = data.lang_content;
+  $: content_creators = parseEntries(data.content_creators, 'content_creators');
+  $: proc_date = gen_date(pubdate, $locale, true);
 </script>
 
 <TextContainer
   title={lang_content.title}
   title_image={post.title_image}
+  image_alt={lang_content.image_alt}
   teaser={lang_content.teaser}
 >
   <div slot="sub_subtitle">

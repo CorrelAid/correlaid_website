@@ -9,7 +9,7 @@
   });
 
   export let data;
-  const experts = parseEntries(data.experts, 'experts');
+  $: experts = parseEntries(data.experts, 'experts');
 </script>
 
 <div class="container mx-auto flex flex-col gap-y-3 space-y-8 py-8">

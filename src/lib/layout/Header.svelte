@@ -56,14 +56,17 @@
         </a>
       </div>
       <!-- middle part of navbar -->
-      <div class="3xl:col-span-4 col-span-6 hidden flex-col xl:block">
+      <nav
+        class="3xl:col-span-4 col-span-6 hidden flex-col xl:block"
+        aria-label="Navigation"
+      >
         <HeaderTopNav {top_nav} {lastClickedLink} />
         <HeaderBottomNav
           {bot_nav}
           {lastClickedLink}
           bind:closeall={botNavCloseAll}
         />
-      </div>
+      </nav>
       <!-- right part of navbar -->
       <div
         class="3xl:col-span-3 col-span-2 hidden items-center justify-start gap-6 xl:flex"
@@ -78,7 +81,11 @@
       </div>
       <!-- Mobile menu button -->
       <div class="block xl:hidden">
-        <button class="p-2 transition" on:click={() => ($drawer = !$drawer)}>
+        <button
+          class="p-2 transition"
+          aria-label={$t('access.open').text}
+          on:click={() => ($drawer = !$drawer)}
+        >
           <MenuIcon height={32} width={32} fill={'neutral-25'} />
         </button>
       </div>

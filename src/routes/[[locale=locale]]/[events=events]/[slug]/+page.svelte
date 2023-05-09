@@ -1,6 +1,7 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {gen_date, gen_time} from '$lib/js/helpers';
+  import {t} from '$lib/stores/i18n';
   import {locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Html from '$lib/components/Html.svelte';
@@ -54,33 +55,46 @@
         {#if event.lang == 'de-DE'}
           <span
             class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+            role="img"
+            aria-label="Event ist auf deutsch."
           >
             <De height={icon_h} width={icon_h} />
           </span>
         {:else}
           <span
             class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+            role="img"
+            aria-label="Event is in english."
           >
             <En height={icon_h} width={icon_h} />
           </span>
         {/if}
         {#if event.location}
           <p class="flex">
-            <span class="my-auto flex fill-neutral"
+            <span
+              class="my-auto flex fill-neutral"
+              role="img"
+              aria-label={$t('access.location').text}
               ><Location width={20} height={20} /></span
             > <span class="my-auto pl-2">{event.location}</span>
           </p>
         {/if}
         {#if event.online}
           <p class="flex">
-            <span class="my-auto flex fill-neutral"
+            <span
+              class="my-auto flex fill-neutral"
+              role="img"
+              aria-label={$t('access.online').text}
               ><Headset width={20} height={20} /></span
             > <span class="my-auto pl-2">Online</span>
           </p>
         {/if}
         {#if event.registration_link}
           <a href={event.registration_link} class="flex">
-            <span class="my-auto flex fill-neutral"
+            <span
+              class="my-auto flex fill-neutral"
+              role="img"
+              aria-label={$t('access.sign_up').text}
               ><SignUp width={20} height={20} /></span
             > <span class="my-auto pl-2">{root}</span>
           </a>

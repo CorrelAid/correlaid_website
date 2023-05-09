@@ -6,34 +6,44 @@
   export let imageOnRightSide = false;
 </script>
 
-<div
-  class="text_width grid grid-cols-1 rounded pb-6 pt-8 md:grid-cols-3 md:gap-x-12"
->
+<div class="container mx-auto grid grid-cols-8 rounded pb-6 pt-8">
   <div
-    class="{imageOnRightSide ? 'md:hidden' : 'md:visible'} w-392 mx-auto pt-8"
+    class="{imageOnRightSide
+      ? 'md:hidden'
+      : 'md:visible'} col-span-full mx-auto flex items-center justify-center md:col-span-4"
   >
-    <div class="offset w-392 relative mx-auto">
-      {#if image && image !== ''}
-        <img class="w-392 rounded border-4 border-neutral" src={image} {alt} />
+    <div class="offset relative mx-auto mb-4 md:mb-0">
+      {#if image}
+        <img
+          class="h-40 w-72 rounded border-4 border-neutral"
+          src={image}
+          {alt}
+        />
       {/if}
     </div>
   </div>
-  <div class="col-span-2 px-4 pt-5 text-neutral">
-    {#if year && year !== ''}
-      <h3 class="pb-3 text-2xl text-neutral">{year}</h3>
+  <div class="col-span-full px-4 pt-5 text-neutral md:col-span-4 md:pt-0">
+    {#if year}
+      <h3 class="pb-3 text-lg font-medium text-base-content">{year}</h3>
     {/if}
-    {#if title && title !== ''}
-      <h2 class="pb-3 text-3xl text-primary">{title}</h2>
+    {#if title}
+      <h2 class="pb-3 text-2xl font-semibold text-primary drop-shadow-sm">
+        {title}
+      </h2>
     {/if}
   </div>
   <div
-    class="w-392 h-240 hidden pt-8 {imageOnRightSide
+    class="col-span-full hidden pt-8 md:col-span-4 {imageOnRightSide
       ? 'md:visible md:flex'
       : 'md:hidden'}"
   >
-    <div class="offset w-392 relative mx-auto">
-      {#if image && image !== ''}
-        <img class="w-392 rounded border-4 border-neutral" src={image} {alt} />
+    <div class="offset relative mx-auto">
+      {#if image}
+        <img
+          class="h-40 w-72 rounded border-4 border-neutral"
+          src={image}
+          {alt}
+        />
       {/if}
     </div>
   </div>

@@ -101,9 +101,9 @@
   style={$no_scroll ? 'max-height: 100vh; overflow-y:hidden' : ''}
 >
   <Header on:changeLanguage={handleLocaleChange} />
-  <div class="block xl:hidden" style="min-height: {$header_height}px;" />
-  <div id="grow" class="w-screen">
-    {#if $header_height}
+  {#if $header_height}
+    <div class="block xl:hidden" style="min-height: {$header_height}px;" />
+    <div id="grow" class="w-screen">
       {#if content}
         {#each content as section}
           {#if section.collection === 'heros'}
@@ -171,9 +171,9 @@
 
         <slot />
       {/if}
-    {/if}
-  </div>
-  <Footer />
+    </div>
+    <Footer />
+  {/if}
 </div>
 
 <style>

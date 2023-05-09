@@ -10,7 +10,7 @@
 
   export let data;
 
-  const ethics_commission = parseEntries(
+  $: ethics_commission = parseEntries(
     data.ethics_commission,
     'global_administrators',
   );

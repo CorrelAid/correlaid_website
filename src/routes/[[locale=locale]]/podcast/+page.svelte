@@ -9,9 +9,8 @@
   });
 
   export let data;
-  let podcast_episodes;
 
-  podcast_episodes = parseEntries(data.podcast_episodes, 'podcast_episodes');
+  $: podcast_episodes = parseEntries(data.podcast_episodes, 'podcast_episodes');
 </script>
 
 <div class="container mx-auto space-y-4 pb-8">

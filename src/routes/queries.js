@@ -61,6 +61,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 									filter: { languages_code: { code: { _eq: $language } } }
 								) {
 									text
+									image_alt
 								}
 								buttons {
 									buttons_id {
@@ -150,6 +151,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 						filter: { languages_code: { code: { _eq: $language } } }
 					) {
 						text
+						image_alt
 					}
 					buttons {
 						buttons_id {
