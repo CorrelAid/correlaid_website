@@ -31,9 +31,5 @@
 </div>
 
 <Modal bind:showModal>
-  <Html
-    source={`<h2>${name}: ${subtitle}</h2>${text}`}
-    options={''}
-    width={'text'}
-  />
+  <Html source={`<h2>${name}: ${subtitle}</h2>${text}`} options={''} />
 </Modal>

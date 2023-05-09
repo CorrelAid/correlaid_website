@@ -19,7 +19,6 @@
   <Html
     source={organizational_structure.translations[0].remote_office}
     options={'pb-12 px-0 mx-auto'}
-    width={'text'}
   />
 
   <div class="container mx-auto flex flex-col gap-y-3 space-y-8 pb-12">
