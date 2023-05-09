@@ -41,7 +41,7 @@
       {title}
     </h3>
 
-    {#if correlaidx !== []}
+    {#if correlaidx.length !== 0}
       {#each correlaidx as lc}
         <a
           class="text-medium mb-3 text-base-content transition line-clamp-3 hover:text-primary"

@@ -19,13 +19,7 @@
   {#key carousel_elements}
     <Carousel bind:this={carousel} arrows={false} dots={false}>
       {#each carousel_elements as element}
-        <Hero
-          image={element.carousel_element_id.hero.image}
-          text={element.carousel_element_id.hero.translations[0].text}
-          height={element.carousel_element_id.hero.height}
-          gradient_only={element.carousel_element_id.hero.gradient_only}
-          buttons={element.carousel_element_id.hero.buttons}
-        />
+        <Hero {...element.hero} />
         <!-- <div
                 class="relative lg:aspect-w-16 lg:aspect-h-9 aspect-w-9 aspect-h-16"
             >

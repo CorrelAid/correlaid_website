@@ -2,6 +2,18 @@ import {gen_img_url} from '../helpers.js';
 export * from './people';
 export * from './cards';
 
+function parseHeroButtons(buttons) {
+  const parsedButtons = [];
+  for (const button of buttons) {
+    parsedButtons.push({
+      text: button.buttons_id.translations[0].text,
+      href: button.buttons_id.translations[0].link,
+      color: `bg-${button.buttons_id.color}`,
+    });
+  }
+  return parsedButtons;
+}
+
 export function heros(section) {
   const heroParams = {
     image: section.item.image,
@@ -9,10 +21,38 @@ export function heros(section) {
     image_alt: section.item.translations[0].image_alt,
     height: section.item.height,
     gradient_only: section.item.gradient_only,
-    buttons: section.item.buttons,
+    buttons: parseHeroButtons(section.item.buttons),
   };
   return heroParams;
 }
+
+export function lcHeros(local_chapter) {
+  const parsedHero = {
+    gradient_only: !local_chapter.hero_image,
+    height: 'half',
+    correlaidx: true,
+    text: `${local_chapter.translations[0].city}`,
+    image_alt: local_chapter.translations[0].hero_image_alt,
+  };
+
+  if (local_chapter.hero_image) {
+    parsedHero['image'] = local_chapter.hero_image;
+  }
+
+  return parsedHero;
+}
+
+function parseCarouselHero() {
+  const parsedHero = {
+    image: element.carousel_element_id.hero.image,
+    text: element.carousel_element_id.hero.translations[0].text,
+    height: element.carousel_element_id.hero.height,
+    gradient_only: element.carousel_element_id.hero.gradient_only,
+    buttons: element.carousel_element_id.hero.buttons,
+  };
+  return parsedHero;
+}
+
 export function ctas(section) {
   const ctaParams = {
     button_link: section.item.button.translations[0].link,
@@ -48,8 +88,12 @@ export function wysiwyg(section) {
   };
 }
 export function carousel(section) {
+  const elements = JSON.parse(JSON.stringify(section.item.carousel_elements));
+  for (const element of elements) {
+    element['hero'] = parseCarouselHero(element);
+  }
   return {
-    carousel_elements: section.item.carousel_elements,
+    carousel_elements: elements,
   };
 }
 export function quote_carousel(section) {
