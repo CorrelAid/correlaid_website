@@ -1,16 +1,16 @@
 <script>
+  import Langs from '$lib/components/Langs.svelte';
+  export let href = '';
+  import {t} from '$lib/stores/i18n';
+  import {page} from '$app/stores';
+  import {gen_lc_href} from '$lib/js/helpers';
+  import ExternalLink from '../svg/External_Link.svelte';
+
   export let title;
   export let subtitle;
   export let resp_unit = '';
   export let correlaidx_city = '';
-  import Langs from '$lib/components/Langs.svelte';
-  export let href = '';
   export let language = '';
-  import {t} from '$lib/stores/i18n';
-  import {page} from '$app/stores';
-  import {gen_lc_href} from '$lib/js/helpers';
-
-  import ExternalLink from '../svg/External_Link.svelte';
 
   let href_resp_unit = '';
 
