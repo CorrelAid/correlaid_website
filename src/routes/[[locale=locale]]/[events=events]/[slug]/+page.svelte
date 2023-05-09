@@ -23,11 +23,9 @@
   /** @type {import('./$types').PageData} */
   export let data;
   let event;
-  $: event = data.event;
 
-  let dom;
+  $: event = data.event;
   $: dom = new URL(event.registration_link);
-  let root;
   $: root = dom.hostname.replace('www.', '');
 </script>
 
