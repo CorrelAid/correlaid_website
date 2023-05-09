@@ -31,7 +31,7 @@ export function events(event) {
   };
 }
 export function podcast_episodes(episode) {
-  return {
+  const parsedEpisode = {
     langs: [episode.language],
     pubdate: episode.publication_datetime,
     href: episode.soundcloud_link,
@@ -41,6 +41,10 @@ export function podcast_episodes(episode) {
     content_creators: episode.content_creators,
     image_alt: episode.image_alt,
   };
+  if (episode.image) {
+    parsedEpisode['image_url'] = gen_img_url(episode.image.id);
+  }
+  return parsedEpisode;
 }
 
 export function projects(project) {
