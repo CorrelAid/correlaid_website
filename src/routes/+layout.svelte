@@ -78,7 +78,8 @@
     return parsedContent;
   }
 
-  // Setting page title by retreiving translations from translations and conditionally taking into account dynamic pages by using the page title attribute from the page data,
+  // Setting page title by retreiving translations from translations and conditionally taking
+  // into account dynamic pages by using the page title attribute from the page data,
   // assigned in the dynamic pages +page.server
   let title;
   let title_content;
@@ -104,7 +105,8 @@
   {#if $header_height}
     <div class="block xl:hidden" style="min-height: {$header_height}px;" />
     <div id="grow" class="w-screen">
-      {#if content}
+      <!-- page.error case is required for the static build which otherwise renders content -->
+      {#if content && $page.error == null}
         {#each content as section}
           {#if section.collection === 'heros'}
             <div class:mb-12={section.sort !== content.length}>
@@ -162,7 +164,8 @@
             </div>
           {/if}
         {/each}
-        <!-- if collection doesnt contain a custom section, load page anyways (but must be empty in this case) to write page key to store -->
+        <!-- if collection doesnt contain a custom section, load page anyways (but must be empty
+        in this case) to write page key to store -->
         {#if !content.find((e) => e.collection === 'custom_sections')}
           <slot />
         {/if}
