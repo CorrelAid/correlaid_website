@@ -185,6 +185,7 @@ if (process.env.PUBLIC_PRERENDER === 'ALL') {
   await addLcRoutes(prerenderRoutes);
   await addProjectRoutes(prerenderRoutes);
   await addEventRoutes(prerenderRoutes);
+  prerenderRoutes.push('*');
 } else {
   prerenderRoutes.push('*');
 }
@@ -199,7 +200,7 @@ const config = {
             assets: '.svelte-kit/cloudflare',
             fallback: null,
             precompress: false,
-            strict: true,
+            strict: false,
           })
         : adapter({
             routes: {
