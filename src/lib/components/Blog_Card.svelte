@@ -23,7 +23,7 @@
 </script>
 
 <article
-  class="relative grid-cols-2 rounded border-t border-r border-l border-neutral-25 shadow-sm md:grid md:h-56"
+  class="relative grid-cols-2 rounded border-t border-r border-l border-neutral-25 shadow-sm md:grid"
 >
   <!-- <div class="absolute top-0 -mt-6 space-x-2">
   {#if tags}
@@ -41,12 +41,8 @@
   <Langs {langs} />
 
   <div class="flex">
-    <div class="">
-      <a
-        {href}
-        aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}"
-        class="aspect-video w-full"
-      >
+    <div class="mx-auto">
+      <a {href} aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}">
         {#if typeof image_url !== 'undefined'}
           <img class="rounded-tl" alt={image_alt} src={image_url} />
         {:else}

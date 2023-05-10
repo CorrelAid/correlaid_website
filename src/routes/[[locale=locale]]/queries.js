@@ -58,6 +58,9 @@ query LatestUpdates($language: String = "de-DE") {
 		language
 		publication_datetime
 		tags
+    image {
+			id
+		}
 		image_alt
 		content_creators {
 			Content_Creators_id {

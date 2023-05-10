@@ -8,6 +8,7 @@
   import Events_Card from '$lib/components/Events_Card.svelte';
   import Person from '$lib/components/Person.svelte';
   import {parseEntries} from '$lib/js/parse_cms';
+  import {lcHeros as parseLcHero} from '$lib/js/parse_cms_models';
   import Icon from '$lib/components/Icon.svelte';
 
   onMount(() => {
@@ -19,6 +20,7 @@
   let local_admins;
 
   $: local_chapter = data.local_chapter;
+  $: hero = parseLcHero(data.local_chapter);
   $: events = parseEntries(data.events, 'events');
   $: projects = parseEntries(data.projects, 'lcProjects');
   $: if (local_chapter) {
@@ -31,14 +33,7 @@
 
 <div class="relative">
   <div class="w-screen pb-12">
-    <Hero
-      gradient_only={local_chapter.hero_image ? false : true}
-      image={local_chapter.hero_image ? local_chapter.hero_image : null}
-      height={'half'}
-      correlaidx={true}
-      text={`${local_chapter.translations[0].city}`}
-      image_alt={local_chapter.translations[0].hero_image_alt}
-    />
+    <Hero {...hero} />
   </div>
 </div>
 <div class="px-4">

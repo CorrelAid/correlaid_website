@@ -3,7 +3,7 @@ import {test, expect} from '@playwright/test';
 test.describe('test regular viewport', () => {
   test('test english button', async ({page}) => {
     await page.goto('http://localhost:5173/', {waitUntil: 'networkidle'});
-    await page.getByRole('button', {name: 'Language'}).click();
+    await page.getByRole('button', {name: 'Sprache wechseln'}).click();
     await page.getByRole('menuitem', {name: 'English'}).waitFor();
     await page.getByRole('menuitem', {name: 'English'}).click();
     await page.waitForNavigation({url: '**/en/'});

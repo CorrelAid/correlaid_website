@@ -1,5 +1,18 @@
 import {gen_img_url} from '../helpers.js';
 export * from './people';
+export * from './cards';
+
+function parseHeroButtons(buttons) {
+  const parsedButtons = [];
+  for (const button of buttons) {
+    parsedButtons.push({
+      text: button.buttons_id.translations[0].text,
+      href: button.buttons_id.translations[0].link,
+      color: `bg-${button.buttons_id.color}`,
+    });
+  }
+  return parsedButtons;
+}
 
 export function heros(section) {
   const heroParams = {
@@ -8,10 +21,38 @@ export function heros(section) {
     image_alt: section.item.translations[0].image_alt,
     height: section.item.height,
     gradient_only: section.item.gradient_only,
-    buttons: section.item.buttons,
+    buttons: parseHeroButtons(section.item.buttons),
   };
   return heroParams;
 }
+
+export function lcHeros(local_chapter) {
+  const parsedHero = {
+    gradient_only: !local_chapter.hero_image,
+    height: 'half',
+    correlaidx: true,
+    text: `${local_chapter.translations[0].city}`,
+    image_alt: local_chapter.translations[0].hero_image_alt,
+  };
+
+  if (local_chapter.hero_image) {
+    parsedHero['image'] = local_chapter.hero_image;
+  }
+
+  return parsedHero;
+}
+
+function parseCarouselHero() {
+  const parsedHero = {
+    image: element.carousel_element_id.hero.image,
+    text: element.carousel_element_id.hero.translations[0].text,
+    height: element.carousel_element_id.hero.height,
+    gradient_only: element.carousel_element_id.hero.gradient_only,
+    buttons: element.carousel_element_id.hero.buttons,
+  };
+  return parsedHero;
+}
+
 export function ctas(section) {
   const ctaParams = {
     button_link: section.item.button.translations[0].link,
@@ -47,8 +88,12 @@ export function wysiwyg(section) {
   };
 }
 export function carousel(section) {
+  const elements = JSON.parse(JSON.stringify(section.item.carousel_elements));
+  for (const element of elements) {
+    element['hero'] = parseCarouselHero(element);
+  }
   return {
-    carousel_elements: section.item.carousel_elements,
+    carousel_elements: elements,
   };
 }
 export function quote_carousel(section) {
@@ -69,120 +114,6 @@ export function icons(section) {
     icon_type: section.item.icon_type,
     text: section.item.translations[0].text,
   };
-}
-export function blog_posts(post) {
-  let imageUrl;
-  if (post.title_image) {
-    imageUrl = gen_img_url(
-      post.title_image.id,
-      'fit=inside&width=1200&height=675&format=png',
-    );
-  }
-  return {
-    langs: post.langs,
-    pubdate: post.pubdate,
-    slug: post.translations.slug,
-    image_alt: post.translations.image_alt,
-    title: post.translations.title,
-    teaser: post.translations.teaser,
-    tags: post.translations.tags,
-    image_url: imageUrl,
-    content_creators: post.content_creators,
-  };
-}
-export function events(event) {
-  return {
-    slug: event.slug,
-    title: event.title,
-    teaser: event.teaser,
-    date: event.date,
-    tags: event.tags,
-    language: event.language,
-  };
-}
-export function podcast_episodes(episode) {
-  return {
-    langs: [episode.language],
-    pubdate: episode.publication_datetime,
-    href: episode.soundcloud_link,
-    title: episode.title,
-    teaser: episode.description,
-    tags: episode.tags,
-    content_creators: episode.content_creators,
-    image_alt: episode.image_alt,
-  };
-}
-
-export function projects(project) {
-  const parsedProjectCard = {
-    title: project.translations[0].title,
-    organization:
-      project.Organizations[0].Organizations_id.translations[0].name,
-    subpage: project.subpage,
-  };
-
-  if (project.translations[0].summary !== null) {
-    parsedProjectCard['summary'] = project.translations[0].summary;
-  }
-
-  if (project.subpage) {
-    parsedProjectCard['project_id'] = project.project_id;
-  }
-
-  if (project.Local_Chapters.length > 0) {
-    parsedProjectCard['correlaidx'] = project.Local_Chapters;
-  }
-
-  if (project.Podcast) {
-    parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
-  }
-  for (const post of project.Posts) {
-    if (post.translations.slug) {
-      parsedProjectCard['post_slug'] = post.translations.slug;
-      break;
-    }
-  }
-
-  if (project.Projects_Outputs.length > 0) {
-    parsedProjectCard['repo'] = project.Projects_Outputs[0].url;
-  }
-
-  return parsedProjectCard;
-}
-
-export function lcProjects(lcProject) {
-  const project = lcProject.Projects_id;
-  const parsedProjectCard = {
-    title: project.translations[0].title,
-    organization:
-      project.Organizations[0].Organizations_id.translations[0].name,
-    subpage: project.subpage,
-  };
-
-  if (project.translations[0].summary !== null) {
-    parsedProjectCard['summary'] = project.translations[0].summary;
-  }
-
-  if (project.subpage) {
-    parsedProjectCard['project_id'] = project.project_id;
-  }
-
-  if (project.Local_Chapters.length > 0) {
-    parsedProjectCard['correlaidx'] = project.Local_Chapters;
-  }
-
-  if (project.Podcast) {
-    parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
-  }
-  if (project.Posts.length > 0) {
-    parsedProjectCard['post_slug'] =
-      project.Posts[0].Posts_id.translations[0].slug;
-  }
-  if (project.Projects_Outputs.length > 0) {
-    parsedProjectCard['repo'] = project.Projects_Outputs[0].url;
-  }
-
-  return parsedProjectCard;
 }
 
 export function awards(award) {

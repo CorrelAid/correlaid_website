@@ -37,12 +37,7 @@
       </p>
     {/if}
   </div>
-  <Html
-    source={lang_content.text}
-    options={'mx-auto'}
-    width={'text'}
-    slot="main"
-  />
+  <Html source={lang_content.text} options={'mx-auto'} slot="main" />
 </TextContainer>
 {#if content_creators.length != 0}
   <div class="container mx-auto space-y-8 px-4 pt-12">
