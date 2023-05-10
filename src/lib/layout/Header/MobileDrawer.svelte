@@ -24,6 +24,7 @@
   export let bot_nav;
 
   const toggles = {};
+
   for (const navItem of bot_nav) {
     toggles[navItem.category] = false;
   }
@@ -60,6 +61,9 @@
               </a>
               <button
                 aria-label="Dropdown: {$t(navItem.key).text}"
+                aria-expanded={toggles[navItem.category] === true
+                  ? 'true'
+                  : 'false'}
                 on:click={() =>
                   toggles[navItem.category]
                     ? (toggles[navItem.category] = false)

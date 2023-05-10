@@ -16,6 +16,8 @@ const excl = [
   'access.online',
   'access.sign_up',
   'access.language',
+  'access.date',
+  'access.time',
 ];
 
 const mainRoutes = {
