@@ -241,15 +241,27 @@ can playwright be used.
 
 #### Usage
 
-To run already configured playwright test
+To run already configured playwright test we suggests the following procedure that
+tests the static build which is used in production.
 
-1.  Start a local dev server on port 5173 (default)
+1.  Set the environment variables `ADAPTER='STATIC'` and `PRERENDER='ALL'`
 
-        npm run dev
+1.  Build the static page
 
-1.  Run the e2e tests
+        npm run build
 
-        npm run e2e
+1.  Serve the static page on port 3000.
+
+         npm run serve-static
+
+    We recommend not to use `vite preview`/`npm run preview` for the static page, because
+    sometimes it provides more functioality than the static page will
+    actually have.
+
+1.  Run the e2e tests. The tests don't actually care whether the page is static,
+    but they need it to run on port 3000
+
+         npm run e2e
 
 This is the only playwright script shortcut defined currently in our project,
 but playwright offers many other commands to help with the creation of test cases

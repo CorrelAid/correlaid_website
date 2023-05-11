@@ -21,7 +21,7 @@ async function directus_fetch(query, vars) {
   const data = await response.json();
 
   if ('errors' in data) {
-    throw error(500, `Cms errors ${data.errors}`);
+    throw error(500, `Cms errors ${data.errors[0].message}`);
   }
 
   return data.data;
