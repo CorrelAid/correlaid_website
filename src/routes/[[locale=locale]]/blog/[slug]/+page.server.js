@@ -1,6 +1,4 @@
 import directus_fetch from '$lib/js/directus_fetch';
-import {locale} from '$lib/stores/i18n';
-import {get} from 'svelte/store';
 import {get_lang} from '$lib/js/helpers';
 import _ from 'lodash';
 import {blogPostQuery} from './queries.js';
@@ -15,13 +13,7 @@ export async function load({params}) {
   const data = await directus_fetch(blogPostQuery, vars);
 
   if (data.Posts.length === 0) {
-    let errorMsg;
-    if (get(locale) === 'de') {
-      errorMsg = `Blogpost ${params.slug} nicht bekannt`;
-    } else {
-      errorMsg = `Blog post ${params.slug} not known.`;
-    }
-    throw error(404, errorMsg);
+    throw error(404);
   }
 
   // checking if post exists in current locale, if not using other language

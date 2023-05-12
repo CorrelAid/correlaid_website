@@ -185,7 +185,8 @@ if (process.env.PUBLIC_PRERENDER === 'ALL') {
   await addLcRoutes(prerenderRoutes);
   await addProjectRoutes(prerenderRoutes);
   await addEventRoutes(prerenderRoutes);
-  prerenderRoutes.push('*');
+  prerenderRoutes.push('/404/');
+  prerenderRoutes.push('/en/404/');
 } else {
   prerenderRoutes.push('*');
 }
@@ -200,7 +201,7 @@ const config = {
             assets: '.svelte-kit/cloudflare',
             fallback: null,
             precompress: false,
-            strict: false,
+            strict: true,
           })
         : adapter({
             routes: {

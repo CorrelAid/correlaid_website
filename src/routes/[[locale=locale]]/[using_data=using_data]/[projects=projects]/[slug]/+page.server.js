@@ -3,8 +3,6 @@ import {get_lang} from '$lib/js/helpers';
 import _ from 'lodash';
 import {projectDetailsQuery} from './queries.js';
 import {handle_lang} from '$lib/js/helpers';
-import {get} from 'svelte/store';
-import {locale} from '$lib/stores/i18n';
 import {error} from '@sveltejs/kit';
 
 /** @type {import('./$types').PageLoad} */
@@ -15,13 +13,7 @@ export async function load({params}) {
   });
 
   if (data.Projects.length === 0) {
-    let errorMsg;
-    if (get(locale) === 'de') {
-      errorMsg = `Projekt ${params.slug} nicht bekannt`;
-    } else {
-      errorMsg = `Project ${params.slug} not known.`;
-    }
-    throw error(404, errorMsg);
+    throw error(404);
   }
 
   const posts = handle_lang(

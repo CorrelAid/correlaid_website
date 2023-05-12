@@ -8,7 +8,7 @@ let pr;
 if (PUBLIC_PRERENDER === 'ALL') {
   pr = true;
 } else {
-  pr = 'auto';
+  pr = false;
 }
 
 export const prerender = pr;
@@ -19,12 +19,19 @@ export async function load({params, url}) {
   // retreive page key by using the url. you cant access stores in server files
   const page_keys = translations[`${get_locale(params)}`];
   // vercels places / in front of path if optional param
-  const pk = find(page_keys, url.pathname.replace('//', '/'))[0];
+  // the NOT_IN_DIRECTUS constant is used such that pk is not undefined which would
+  // trigger the query default paramter for pk
+  const pk =
+    find(page_keys, url.pathname.replace('//', '/'))[0] || 'NOT_IN_DIRECTUS';
 
   if (params.slug === undefined) {
     const vars = {page: pk, language: get_lang(params)};
 
     const data = await directus_fetch(pageContentQuery, vars);
+
+    if (data.Pages.length === 0) {
+      return;
+    }
 
     if (typeof data.Pages[0] === 'undefined') {
       return;

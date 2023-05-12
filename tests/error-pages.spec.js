@@ -1,110 +1,90 @@
 import {test, expect} from '@playwright/test';
 
+// Currently all tests are skipped because the functionality
+// is implemented with a service worker which only has
+// experimental support in playwright (and needs to be activated
+// with an env variable)
 test.describe('test error pages', () => {
-  test('test pages root', async ({page}) => {
-    await page.goto('http://localhost:5173/not-a-valid-path', {
+  test.skip('test pages root', async ({page}) => {
+    await page.goto('http://localhost:3000/not-a-valid-path', {
       waitUntil: 'networkidle',
     });
-    await expect(page.locator('#grow')).toHaveText(/.*Fehler.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto('http://localhost:5173/en/not-a-valid-path', {
+    await page.goto('http://localhost:3000/en/not-a-valid-path', {
       waitUntil: 'networkidle',
     });
-    await expect(page.locator('#grow')).toHaveText(/.*error.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
       ignoreCase: true,
     });
   });
 
-  test('test pages blog', async ({page}) => {
-    await page.goto('http://localhost:5173/blog/not-a-valid-post', {
+  test.skip('test pages blog', async ({page}) => {
+    await page.goto('http://localhost:3000/blog/not-a-valid-post', {
       waitUntil: 'networkidle',
     });
-    await expect(page.locator('#grow')).toHaveText(/.*Fehler.*/, {
-      ignoreCase: true,
-    });
-    await expect(page.locator('#grow')).toHaveText(/.*Blog.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto('http://localhost:5173/en/blog/not-a-valid-post', {
+    await page.goto('http://localhost:3000/en/blog/not-a-valid-post', {
       waitUntil: 'networkidle',
     });
-    await expect(page.locator('#grow')).toHaveText(/.*Blog.*/, {
-      ignoreCase: true,
-    });
-    await expect(page.locator('#grow')).toHaveText(/.*error.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
       ignoreCase: true,
     });
   });
 
-  test('test pages events', async ({page}) => {
-    await page.goto('http://localhost:5173/veranstaltungen/not-a-valid-event', {
+  test.skip('test pages events', async ({page}) => {
+    await page.goto('http://localhost:3000/veranstaltungen/not-a-valid-event', {
       waitUntil: 'networkidle',
     });
-    await expect(page.locator('#grow')).toHaveText(/.*Fehler.*/, {
-      ignoreCase: true,
-    });
-    await expect(page.locator('#grow')).toHaveText(/.*Veranstaltung.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto('http://localhost:5173/en/events/not-a-valid-event', {
+    await page.goto('http://localhost:3000/en/events/not-a-valid-event', {
       waitUntil: 'networkidle',
     });
-    await expect(page.locator('#grow')).toHaveText(/.*event.*/, {
-      ignoreCase: true,
-    });
-    await expect(page.locator('#grow')).toHaveText(/.*error.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
       ignoreCase: true,
     });
   });
 
-  test('test pages projects', async ({page}) => {
+  test.skip('test pages projects', async ({page}) => {
     await page.goto(
-      'http://localhost:5173/daten_nutzen/projekte/not-a-valid-project',
+      'http://localhost:3000/daten_nutzen/projekte/not-a-valid-project',
       {waitUntil: 'networkidle'},
     );
-    await expect(page.locator('#grow')).toHaveText(/.*Fehler.*/, {
-      ignoreCase: true,
-    });
-    await expect(page.locator('#grow')).toHaveText(/.*Projekt.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
     await page.goto(
-      'http://localhost:5173/en/using_data/projects/not-a-valid-project',
+      'http://localhost:3000/en/using_data/projects/not-a-valid-project',
       {waitUntil: 'networkidle'},
     );
-    await expect(page.locator('#grow')).toHaveText(/.*project.*/, {
-      ignoreCase: true,
-    });
-    await expect(page.locator('#grow')).toHaveText(/.*error.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
       ignoreCase: true,
     });
   });
 
-  test('test pages correlaidx', async ({page}) => {
+  test.skip('test pages correlaidx', async ({page}) => {
     await page.goto(
-      'http://localhost:5173/community/correlaidx/not-a-valid-lc',
+      'http://localhost:3000/community/correlaidx/not-a-valid-lc',
       {waitUntil: 'networkidle'},
     );
-    await expect(page.locator('#grow')).toHaveText(/.*local chapter.*/, {
-      ignoreCase: true,
-    });
-    await expect(page.locator('#grow')).toHaveText(/.*fehler.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
     await page.goto(
-      'http://localhost:5173/en/community/correlaidx/not-a-valid-lc',
+      'http://localhost:3000/en/community/correlaidx/not-a-valid-lc',
       {waitUntil: 'networkidle'},
     );
-    await expect(page.locator('#grow')).toHaveText(/.*local chapter.*/, {
-      ignoreCase: true,
-    });
-    await expect(page.locator('#grow')).toHaveText(/.*error.*/, {
+    await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
       ignoreCase: true,
     });
   });
