@@ -2,6 +2,7 @@ import directus_fetch from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import _ from 'lodash';
 import {blogPostQuery} from './queries.js';
+import {error} from '@sveltejs/kit';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
@@ -10,6 +11,11 @@ export async function load({params}) {
     language: get_lang(params),
   };
   const data = await directus_fetch(blogPostQuery, vars);
+
+  if (data.Posts.length === 0) {
+    throw error(404);
+  }
+
   // checking if post exists in current locale, if not using other language
   let lang_content = _.find(
     data.Posts[0].translations,

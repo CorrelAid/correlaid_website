@@ -5,10 +5,9 @@
   import TextContainer from '$lib/components/Text_Container.svelte';
   import Links from '$lib/components/Links.svelte';
   import Box from '$lib/components/Box.svelte';
-  import Podcast from '$lib/svg/Podcast.svelte';
-  import Blog from '$lib/svg/Blog.svelte';
-  import {t} from '$lib/stores/i18n';
-  import ExternalLink from '$lib/svg/External_Link.svelte';
+  import ProjectLinks from '$lib/components/ProjectLinks.svelte';
+
+  import {parseProject} from '$lib/js/parse_cms';
 
   onMount(() => {
     $page_key = 'navbar.using_data.projects';
@@ -16,89 +15,37 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let project;
-  $: project = data.project;
+  $: project = parseProject(data.project);
 </script>
 
-<TextContainer
-  title={project.translations[0].title}
-  teaser={project.translations[0].summary}
->
+<TextContainer title={project.title} teaser={project.teaser}>
   <div class="mx-4" slot="sub_subtitle">
-    {#if project.Projects_Outputs.length != 0}
-      <div class="mb-4 flex items-center">
-        <a
-          class=" text-secondary hover:underline"
-          href={project.Projects_Outputs[0].url}
-          >{$t('misc.output').text}
-        </a><span class="ml-1.5"
-          ><ExternalLink
-            height={20}
-            width={20}
-            color={'rgb(56, 99, 162)'}
-          /></span
-        >
-      </div>
-    {/if}
-    {#if project.Podcast || project.Posts.length != 0}
-      <div class="mb-5 flex items-center space-x-3">
-        {#if project.Podcast.soundcloud_link}
-          <a href={project.Podcast.soundcloud_link}
-            ><Podcast height={35} width={20} /></a
-          >
-        {/if}
-        {#if project.Posts.length != 0}
-          <a
-            href={$t('navbar.blog').url +
-              '/' +
-              project.Posts[0].Posts_id.translations.slug}
-            ><Blog height={35} width={35} /></a
-          >
-        {/if}
-      </div>
-    {/if}
-
+    <div class="mb-5">
+      <ProjectLinks {...project.projectLinks} />
+    </div>
     <Box>
       <h2 class="text-xl font-semibold">
-        {project.Organizations[0].Organizations_id.translations[0].name}
+        {project.organization_name}
       </h2>
       <p>
-        {project.Organizations[0].Organizations_id.translations[0].description}
+        {project.organization_description}
       </p>
     </Box>
   </div>
 
-  <Html
-    source={project.translations[0].description}
-    options={'mx-auto'}
-    slot="main"
-  />
+  <Html source={project.description} options={'mx-auto'} slot="main" />
 </TextContainer>
 <div class="text_width mx-auto pb-12">
   <div class="px-4">
     <Box>
       <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>
-      {#each project.People as person}
+      {#each project.projectContacts as person}
         <div class="flex items-center">
-          <span class="mr-2"
-            >{person.People_id.name}
-            {person.People_id.translations[0]
-              ? person.People_id.translations[0].pronouns
-                ? `(${person.People_id.translations[0].pronouns})`
-                : ''
-              : ''}</span
-          >
-          <Links
-            website={person.People_id.website ? person.People_id.website : ''}
-            linkedin={person.People_id.linkedin
-              ? person.People_id.linkedin
-              : ''}
-            mastodon={person.People_id.mastodon
-              ? person.People_id.mastodon
-              : ''}
-            twitter={person.People_id.twitter ? person.People_id.twitter : ''}
-            github={person.People_id.github ? person.People_id.github : ''}
-          />
+          <span class="mr-2">
+            {person.name}
+            {person.pronouns ? person.pronouns : ''}
+          </span>
+          <Links {...person.links} />
         </div>
       {/each}
     </Box>

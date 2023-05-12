@@ -16,7 +16,7 @@
   import QuoteCarousel from '$lib/components/Quote_Carousel.svelte';
   import Cta from '$lib/components/CTA.svelte';
   import CtaGroup from '$lib/components/CTA_group.svelte';
-  import {parse} from '$lib/js/parse_cms.js';
+  import * as parseModel from '$lib/js/parse_cms_models';
   import LinkButton from '../lib/components/Link_Button.svelte';
   import Icon from '../lib/components/Icon.svelte';
 
@@ -28,7 +28,10 @@
     $locale = 'de';
   }
 
-  // Forwarding the user to the equivalent of the current page in the language selected in the laguage dropdown in the header
+  /**
+   * Forwarding the user to the equivalent of the current page in the language selected in
+   * the laguage dropdown in the header.
+   */
   function handleLocaleChange(event) {
     // if the page contains a slug, get the root url and add the slug
     if ($page.params.slug != null) {
@@ -50,7 +53,7 @@
       try {
         const section = {
           collection: rawSection.collection,
-          props: parse[rawSection.collection](rawSection),
+          props: parseModel[rawSection.collection](rawSection),
         };
         if (section.collection === 'heros') {
           section.sort = rawSection.sort;
@@ -63,17 +66,20 @@
         }
         parsedContent.push(section);
       } catch (err) {
+        console.group();
         console.log(
           `Error parsing ${rawSection.collection} on page ${$page_key}`,
         );
         console.log(err.message);
         console.log(rawSection);
+        console.groupEnd();
       }
     }
     return parsedContent;
   }
 
-  // Setting page title by retreiving translations from translations and conditionally taking into account dynamic pages by using the page title attribute from the page data,
+  // Setting page title by retreiving translations from translations and conditionally taking
+  // into account dynamic pages by using the page title attribute from the page data,
   // assigned in the dynamic pages +page.server
   let title;
   let title_content;
@@ -96,10 +102,11 @@
   style={$no_scroll ? 'max-height: 100vh; overflow-y:hidden' : ''}
 >
   <Header on:changeLanguage={handleLocaleChange} />
-  <div class="block xl:hidden" style="min-height: {$header_height}px;" />
-  <div id="grow" class="w-screen">
-    {#if $header_height}
-      {#if content}
+  {#if $header_height}
+    <div class="block xl:hidden" style="min-height: {$header_height}px;" />
+    <div id="grow" class="w-screen">
+      <!-- page.error case is required for the static build which otherwise renders content -->
+      {#if content && $page.error == null}
         {#each content as section}
           {#if section.collection === 'heros'}
             <div class:mb-12={section.sort !== content.length}>
@@ -127,7 +134,7 @@
           {:else if section.collection === 'contacts'}
             <div class="container mx-auto mb-12 px-4">
               {#if section.item.hr === true}
-                <hr class="mb-12" />
+                <hr class="" />
               {/if}
               <Person {...section.props} />
             </div>
@@ -157,7 +164,8 @@
             </div>
           {/if}
         {/each}
-        <!-- if collection doesnt contain a custom section, load page anyways (but must be empty in this case) to write page key to store -->
+        <!-- if collection doesnt contain a custom section, load page anyways (but must be empty
+        in this case) to write page key to store -->
         {#if !content.find((e) => e.collection === 'custom_sections')}
           <slot />
         {/if}
@@ -166,9 +174,9 @@
 
         <slot />
       {/if}
-    {/if}
-  </div>
-  <Footer />
+    </div>
+    <Footer />
+  {/if}
 </div>
 
 <style>

@@ -11,7 +11,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 							button {
 								color
 								translations(
-									filter: { languages_code: { code: { _eq: "de-DE" } } }
+									filter: { languages_code: { code: { _eq: $language } } }
 								) {
 									text
 									link
@@ -19,7 +19,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 							}
 
 							translations(
-								filter: { languages_code: { code: { _eq: "de-DE" } } }
+								filter: { languages_code: { code: { _eq: $language } } }
 							) {
 								text
 							}
@@ -61,6 +61,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 									filter: { languages_code: { code: { _eq: $language } } }
 								) {
 									text
+									image_alt
 								}
 								buttons {
 									buttons_id {
@@ -150,6 +151,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 						filter: { languages_code: { code: { _eq: $language } } }
 					) {
 						text
+						image_alt
 					}
 					buttons {
 						buttons_id {
@@ -174,7 +176,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 				}
 				... on icons {
 					icon_type
-					translations(filter: { languages_code: { code: { _eq: "de-DE" } } }) {
+					translations(filter: { languages_code: { code: { _eq: $language } } }) {
 						text
 					}
 				}

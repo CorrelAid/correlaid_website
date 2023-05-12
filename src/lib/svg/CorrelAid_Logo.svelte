@@ -46,7 +46,7 @@
         letter-spacing: 0.15em;
       }
     </style></defs
-  ><title>CorrelAid_Dach-zentriert_2</title><g id="Ebene_2" data-name="Ebene 2"
+  ><title>CorrelAid_Dach-zentriert_2</title><g
     ><g id="_01-a_CorrelAid_Zentriert" data-name="01-a_CorrelAid_Zentriert"
       ><g id="C_-_nicht_verändern_" data-name="C - nicht verändern!"
         ><path

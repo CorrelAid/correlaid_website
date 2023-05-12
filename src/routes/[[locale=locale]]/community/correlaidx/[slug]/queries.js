@@ -88,7 +88,6 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE") {
 						pronouns
 					}
 					name
-					email
 					twitter
 					website
 					linkedin
@@ -103,6 +102,8 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE") {
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
 			city
 			description
+			hero_image_alt
+			how_to_get_in_touch
 		}
 	}
 }

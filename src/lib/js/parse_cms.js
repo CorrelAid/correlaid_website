@@ -1,99 +1,86 @@
-import {gen_img_url} from './helpers.js';
+import * as parseModel from './parse_cms_models';
 
-export const parse = {
-  heros: function (section) {
-    const heroParams = {
-      image: section.item.image,
-      text: section.item.translations[0].text,
-      height: section.item.height,
-      gradient_only: section.item.gradient_only,
-      buttons: section.item.buttons,
-    };
-    return heroParams;
-  },
-  ctas: function (section) {
-    const ctaParams = {
-      button_link: section.item.button.translations[0].link,
-      button_color: section.item.button.translations[0].text,
-      button_text: section.item.button.color,
-      text: section.item.translations[0].text,
-    };
-    return ctaParams;
-  },
-  cta_group: function (section) {
-    const ctas = [];
-    for (const ctaRaw of section.item.ctas) {
-      const cta = {
-        button_link: ctaRaw.ctas_id.button.translations[0].link,
-        button_text: ctaRaw.ctas_id.button.translations[0].text,
-        button_color: ctaRaw.ctas_id.button.color,
-        text: ctaRaw.ctas_id.translations[0].text,
+function reportParseError(err, description, rawInput) {
+  console.group('CMS PARSE ERROR: ' + description);
+  console.log(err.message);
+  console.log(err.stack);
+  console.log(rawInput);
+  console.groupEnd();
+}
+
+export function parseEntries(rawEntries, type) {
+  const parsedEntries = [];
+  for (const rawEntry of rawEntries) {
+    try {
+      const entry = parseModel[type](rawEntry);
+      parsedEntries.push(entry);
+    } catch (err) {
+      reportParseError(err, `For type ${type}`, rawEntry);
+    }
+  }
+  return parsedEntries;
+}
+
+export function parseProject(project) {
+  let parsedProject;
+  try {
+    const projectLinks = {};
+
+    if (project.Projects_Outputs.length !== 0) {
+      projectLinks['repo'] = project.Projects_Outputs[0].url;
+    }
+
+    if (project.Podcast) {
+      projectLinks['podcast_href'] = project.Podcast.soundcloud_link;
+    }
+    if (project.Posts.length !== 0) {
+      projectLinks['post_slug'] = project.Posts[0].translations.slug;
+    }
+
+    const projectContacts = [];
+    for (const person of project.People) {
+      const parsedPerson = {
+        name: person.People_id.name,
       };
-      ctas.push(cta);
+      if (
+        person.People_id.translations[0] &&
+        person.People_id.translations[0].pronouns
+      ) {
+        parsedPerson[
+          'pronouns'
+        ] = `(${person.People_id.translations[0].pronouns})`;
+      }
+      const parsedLinks = {name: person.People_id.name};
+
+      for (const link of [
+        'website',
+        'linkedin',
+        'mastodon',
+        'twitter',
+        'github',
+      ]) {
+        if (person.People_id[link]) {
+          parsedLinks[link] = person.People_id[link];
+        }
+      }
+
+      parsedPerson['links'] = parsedLinks;
+      projectContacts.push(parsedPerson);
     }
-    return {ctas: ctas};
-  },
-  timelines: function (section) {
-    const timelineParams = {
-      steps: section.item.steps,
-    };
-    return timelineParams;
-  },
-  wysiwyg: function (section) {
-    return {
-      source: section.item.translations[0].content,
-      options: '',
-    };
-  },
-  contacts: function (section) {
-    let imageUrl;
 
-    if (section.item.person.image) {
-      imageUrl = gen_img_url(
-        section.item.person.image.id,
-        'fit=cover&width=200&height=200&quality=80',
-      );
-    }
-
-    const pronouns = section.item.person.translations[0]
-      ? section.item.person.translations[0].pronouns
-      : null;
-
-    const personParams = {
-      name: section.item.person.name,
-      img: imageUrl,
-      email: section.item.person.email,
-      position: section.item.translations[0].position,
-      description: section.item.translations[0].description,
-      pronouns: pronouns,
+    parsedProject = {
+      title: project.translations[0].title,
+      teaser: project.translations[0].summary,
+      description: project.translations[0].description,
+      organization_name:
+        project.Organizations[0].Organizations_id.translations[0].name,
+      organization_description:
+        project.Organizations[0].Organizations_id.translations[0].description,
+      projectLinks: projectLinks,
+      projectContacts: projectContacts,
     };
-    return personParams;
-  },
-  carousel: function (section) {
-    return {
-      carousel_elements: section.item.carousel_elements,
-    };
-  },
-  quote_carousel: function (section) {
-    return {
-      quotes: section.item.quotes,
-      text_only: section.item.text_only,
-    };
-  },
-  buttons: function (section) {
-    return {
-      href: section.item.translations[0].link,
-      text: section.item.translations[0].text,
-      color: `bg-${section.item.color}`,
-    };
-  },
-  icons: function (section) {
-    return {
-      icon_type: section.item.icon_type,
-      text: section.item.translations[0].text,
-    };
-  },
-  custom_sections: function (section) {
-    return;
-  },
-};
+  } catch (err) {
+    reportParseError(err, 'For Project page', project);
+  }
+  return parsedProject;
+}

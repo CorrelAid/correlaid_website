@@ -1,16 +1,21 @@
 <script>
-  import {locale} from '$lib/stores/i18n';
+  import {t, locale} from '$lib/stores/i18n';
   import {gen_date} from '$lib/js/helpers';
+
   export let href;
+  export let slug;
   export let title;
   export let teaser;
   export let date;
   export let tags;
   export let language;
-  import De from '../svg/DE.svelte';
-  import En from '../svg/EN.svelte';
+  import Langs from '$lib/components/Langs.svelte';
   let proc_date;
   $: proc_date = gen_date(date, $locale);
+
+  if (typeof slug !== undefined) {
+    href = $t('navbar.events').url + '/' + slug;
+  }
 </script>
 
 <div class="offset-right relative w-full" style="">
@@ -30,13 +35,7 @@
           {title}
         </a>
       </div>
-      <div class="pb-2">
-        {#if language == 'de-DE'}
-          <De height={25} width={25} />
-        {:else if language == 'en-US'}
-          <En height={25} width={25} />
-        {/if}
-      </div>
+      <Langs langs={[language]} />
       <div class="flex w-full gap-x-2 pb-4">
         {#each tags as tag}
           <span

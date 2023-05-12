@@ -59,6 +59,7 @@
                 {$t(navItem.key).text}
               </a>
               <button
+                aria-label="Dropdown: {$t(navItem.key).text}"
                 on:click={() =>
                   toggles[navItem.category]
                     ? (toggles[navItem.category] = false)
@@ -85,18 +86,19 @@
             </ul>
           {/if}
         {/each}
-
-        <ul
-          class="space-y-3 pt-3 text-lg font-light tracking-wide text-base-content"
-        >
-          {#each top_nav as key}
-            <li>
-              <a class="transition hover:text-primary" href={$t(key).url}
-                >{$t(key).text}</a
-              >
-            </li>
-          {/each}
-        </ul>
+        <li>
+          <ul
+            class="space-y-3 pt-3 text-lg font-light tracking-wide text-base-content"
+          >
+            {#each top_nav as key}
+              <li>
+                <a class="transition hover:text-primary" href={$t(key).url}
+                  >{$t(key).text}</a
+                >
+              </li>
+            {/each}
+          </ul>
+        </li>
       </ul>
     </nav>
 
@@ -107,7 +109,7 @@
             text={$t('navbar.donate').text}
             href={$t('navbar.donate').url}
             type={'external'}
-            color={'secondary'}
+            color={'bg-secondary'}
           />
           <div class="flex">
             <button
@@ -128,6 +130,7 @@
   <button
     class="absolute z-20 h-screen w-screen bg-neutral opacity-80"
     id="drawer-overlay"
+    aria-label={$t('access.close').text}
     on:click={() => ($drawer = !$drawer)}
     in:fade={{delay: 0}}
     out:fade={{delay: 0}}

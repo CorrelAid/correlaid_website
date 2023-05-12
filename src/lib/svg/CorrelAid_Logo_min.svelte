@@ -34,7 +34,7 @@
         fill: #aaca48;
       }
     </style></defs
-  ><title>CorrelAid_Dach-Icon_white</title><g id="Ebene_2" data-name="Ebene 2"
+  ><title>CorrelAid_Dach-Icon_white</title><g
     ><g id="_01-c_CorrelAid_ICON" data-name="01-c_CorrelAid_ICON"
       ><g id="White"
         ><rect

@@ -3,7 +3,7 @@
   export let height;
 </script>
 
-<svg {width} {height} viewBox="0 0 1239.62 1239.62" version="1.1" id="svg45">
+<svg {width} {height} viewBox="0 0 1239.62 1239.62" version="1.1">
   <defs id="defs4">
     <style id="style2">
       .x-1 {
@@ -38,12 +38,12 @@
   <title id="title6">CorrelAid X-Icon_white</title>
   <g id="Ebene_2" data-name="Ebene 2">
     <g id="_02-c_CorrelAid_X_ICON" data-name="02-c_CorrelAid X_ICON">
-      <g id="White">
+      <g>
         <g id="Outline_X">
           <polygon
             class="x-1"
             points="1023.06 353.63 988.66 388.05 1023.06 422.45 1023.06 487.8 957.35 487.8 922.95 453.38 888.52 487.8 822.71 487.8 822.71 421.24 857.14 386.82 822.71 352.42 822.71 285.31 889.82 285.31 924.24 319.73 958.66 285.31 1023.06 285.31 1023.06 353.63"
-            id="polygon9"
+            id=""
           />
         </g>
         <path

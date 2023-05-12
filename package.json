@@ -15,9 +15,12 @@
     "lint": "npx eslint src/",
     "precommit": "run-s quick_format lint",
     "init_pre_commit": "husky install",
-    "test": "npx vitest run"
+    "test": "npx vitest run",
+    "e2e": "npx playwright test",
+    "serve-static": "npx serve .svelte-kit/cloudflare"
   },
   "devDependencies": {
+    "@playwright/test": "^1.33.0",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/adapter-static": "^2.0.2",
     "@sveltejs/adapter-vercel": "^2.3.0",
@@ -40,6 +43,7 @@
     "prettier-plugin-svelte": "^2.10.0",
     "prettier-plugin-tailwindcss": "^0.2.7",
     "pretty-quick": "^3.1.3",
+    "serve": "^14.2.0",
     "svelte": "^3.55.1",
     "svelte-carousel": "^1.0.25",
     "svelte-turnstile": "^0.3.1",

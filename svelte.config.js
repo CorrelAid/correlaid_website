@@ -6,9 +6,21 @@ import {vitePreprocess} from '@sveltejs/kit/vite';
 import translations from './src/lib/data/translations.js';
 import {fetch} from 'undici';
 
+const excl = [
+  'misc.read_more',
+  'access.close',
+  'access.open',
+  'access.next',
+  'access.previous',
+  'access.location',
+  'access.online',
+  'access.sign_up',
+  'access.language',
+];
+
 const mainRoutes = {
-  de: _.omit(translations['de'], ['misc.report', 'misc.output']),
-  en: _.omit(translations['en'], ['misc.report', 'misc.output']),
+  de: _.omit(translations['de'], excl),
+  en: _.omit(translations['en'], excl),
 };
 
 const URL = 'https://cms.correlaid.org/graphql';
@@ -173,6 +185,8 @@ if (process.env.PUBLIC_PRERENDER === 'ALL') {
   await addLcRoutes(prerenderRoutes);
   await addProjectRoutes(prerenderRoutes);
   await addEventRoutes(prerenderRoutes);
+  prerenderRoutes.push('/404/');
+  prerenderRoutes.push('/en/404/');
 } else {
   prerenderRoutes.push('*');
 }
