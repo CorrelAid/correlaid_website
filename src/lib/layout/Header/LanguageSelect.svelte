@@ -14,6 +14,7 @@
 
   function langDropdown() {
     languageToggle ? (languageToggle = false) : (languageToggle = true);
+    aria === true ? (aria = false) : (aria = true);
   }
 
   function btnLocale(lc) {
@@ -22,7 +23,7 @@
     languageToggle = false;
     changeLocale();
   }
-
+  let aria = false;
   export let active_language;
 </script>
 
@@ -36,6 +37,7 @@
       type="button"
       class="z-10 inline-flex h-full items-center justify-center rounded-r-md border-l border-neutral-25 px-2"
       on:click={langDropdown}
+      aria-expanded={aria}
       aria-label={$t('access.language').text}
     >
       <DropdownIcon height={20} width={20} />

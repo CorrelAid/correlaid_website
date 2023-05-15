@@ -10,7 +10,7 @@ export default {
     'navbar.using_data': {text: 'Daten nutzen', url: '/daten_nutzen'},
     // Subnav projects_consulting
     'navbar.using_data.projects': {
-      text: 'Projekte',
+      text: 'Data4Good Projekte',
       url: '/daten_nutzen/projekte',
     },
     'navbar.using_data.consulting': {
@@ -30,11 +30,11 @@ export default {
     // },
     'navbar.education.learning_r': {text: 'R Lernen', url: '/bildung/r_lernen'},
     'navbar.education.resources': {
-      text: 'Bildunsressourcen',
+      text: 'Bildungsressourcen',
       url: '/bildung/ressourcen',
     },
     'navbar.education.tidy_tuesday': {
-      text: 'Tidy Tuesday',
+      text: 'TidyTuesday',
       url: '/bildung/tidy_tuesday',
     },
     'navbar.education.mentoring': {
@@ -86,6 +86,8 @@ export default {
     'access.open': {text: 'Navigation öffnen'},
     'access.next': {text: 'Nächstes Element'},
     'access.previous': {text: 'Vorheriges Element'},
+    'access.date': {text: 'Datum'},
+    'access.time': {text: 'Uhrzeit'},
     'access.location': {text: 'Ort'},
     'access.online': {text: 'Dieses Event findet online statt.'},
     'access.sign_up': {text: 'Anmelden'},
@@ -102,7 +104,7 @@ export default {
     'navbar.using_data': {text: 'Using Data', url: '/en/using_data'},
     // Subnav projects_consulting
     'navbar.using_data.projects': {
-      text: 'Projects',
+      text: 'Data4Good Projects',
       url: '/en/using_data/projects',
     },
     'navbar.using_data.consulting': {
@@ -177,6 +179,8 @@ export default {
     'access.open': {text: 'Open Navigation'},
     'access.next': {text: 'Go to next item'},
     'access.previous': {text: 'Go to previous item'},
+    'access.date': {text: 'Date'},
+    'access.time': {text: 'Time'},
     'access.location': {text: 'Location'},
     'access.online': {text: 'This event is online'},
     'access.sign_up': {text: 'Sign Up'},
