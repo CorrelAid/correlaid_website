@@ -36,21 +36,28 @@
   {/if}
 </div> -->
   <span
-    class="absolute inset-x-0 bottom-0 h-2 rounded-b bg-gradient-to-r from-primary to-secondary opacity-75"
+    class="absolute inset-x-0 bottom-0 z-10 h-2 rounded-b bg-gradient-to-r from-primary to-secondary opacity-75"
   />
   <Langs {langs} />
 
   <div class="flex">
-    <div class="mx-auto">
-      <a {href} aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}">
-        {#if typeof image_url !== 'undefined'}
-          <img class="rounded-tl" alt={image_alt} src={image_url} />
-        {:else}
-          <!-- TODO: Do we need this image placeholder? -->
-          <img class="rounded-tl" alt={image_alt} src="" />
-        {/if}
-      </a>
-    </div>
+    <a
+      class="relative mx-auto w-full"
+      {href}
+      aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}"
+      style="padding-bottom: 56.25%;"
+    >
+      {#if typeof image_url !== 'undefined'}
+        <img
+          class="absolute top-0 left-0 z-0 h-full w-full rounded-tl"
+          alt={image_alt}
+          src={image_url}
+        />
+      {:else}
+        <!-- TODO: Do we need this image placeholder? -->
+        <div class="rounded-tl bg-gray-300" />
+      {/if}
+    </a>
   </div>
   <div class="">
     <div class="px-4 pb-4 pt-2 md:p-4">
