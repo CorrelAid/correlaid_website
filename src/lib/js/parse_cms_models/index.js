@@ -47,6 +47,7 @@ export function lcHeros(local_chapter) {
 function parseCarouselHero() {
   const parsedHero = {
     image: element.carousel_element_id.hero.image,
+    image_desc: element.carousel_element_id.hero.image.description,
     text: element.carousel_element_id.hero.translations[0].text,
     height: element.carousel_element_id.hero.height,
     gradient_only: element.carousel_element_id.hero.gradient_only,

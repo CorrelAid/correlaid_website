@@ -1,6 +1,7 @@
 <script>
   import Carousel from 'svelte-carousel';
   import {browser} from '$app/environment';
+  export let image_desc;
   import {gen_img_url} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
   export let text_only = false;
@@ -13,6 +14,7 @@
     carousel.goToPrev();
   };
   let carousel;
+  console.log(quotes);
 </script>
 
 <div
@@ -29,12 +31,22 @@
                 <div class="grid px-3 xl:grid-cols-2">
                   <div class="flex flex-col items-center pt-4">
                     {#if quote.quote_id.image}
-                      <img
-                        class="h-40 w-72 rounded object-cover"
-                        alt="Logo/Photo {quote.quote_id.translations[0]
-                          .subtitle}"
-                        src={gen_img_url(quote.quote_id.image.id)}
-                      />
+                      <div class="mb-4">
+                        <img
+                          class="h-40 w-72 rounded-t object-cover"
+                          alt="Logo/Photo {quote.quote_id.translations[0]
+                            .subtitle}"
+                          src={gen_img_url(quote.quote_id.image.id)}
+                        />
+                        {#if quote.quote_id.image.description}
+                          <div class="right-0 z-30 w-72 opacity-100">
+                            <span
+                              class="z-0 block rounded-b bg-white px-1 py-0.5 text-xs text-black opacity-100 line-clamp-1"
+                              >{quote.quote_id.image.description}</span
+                            >
+                          </div>
+                        {/if}
+                      </div>
                     {:else}
                       <div class="h-40 w-72 bg-neutral object-cover" />
                     {/if}
