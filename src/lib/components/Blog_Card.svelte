@@ -14,6 +14,7 @@
   export let image_url = void 0;
   export let slug = void 0;
   export let external = false;
+  export let image_desc = void 0;
 
   let proc_date;
 
@@ -54,6 +55,7 @@
           class="absolute top-0 left-0 z-0 h-full w-full rounded-tl"
           alt={image_alt}
           src={image_url}
+          title={image_desc}
         />
       {:else}
         <!-- TODO: Do we need this image placeholder? -->

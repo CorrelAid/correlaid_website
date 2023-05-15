@@ -9,6 +9,7 @@ query PodcastQuery($language: String = "de-DE") {
 		tags
     image {
 			id
+			description
 		}
 		image_alt
 		content_creators {

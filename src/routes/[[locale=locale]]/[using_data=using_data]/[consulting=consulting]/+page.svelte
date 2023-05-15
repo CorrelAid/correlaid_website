@@ -10,6 +10,7 @@
 
   export let data;
   $: experts = parseEntries(data.experts, 'experts');
+  $: console.log(data);
 </script>
 
 <div class="container mx-auto flex flex-col gap-y-3 space-y-8 py-8">

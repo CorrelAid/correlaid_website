@@ -13,6 +13,7 @@ query Experts($language: String = "de-DE") {
 			github
 			image {
 				id
+				description
 			}
 		}
 		translations {

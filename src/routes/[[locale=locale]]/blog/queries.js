@@ -4,6 +4,7 @@ query BlogQuery($language: String = "de-DE") {
 		pubdate
 		title_image {
 			id
+			description
 		}
 		content_creators {
 			Content_Creators_id {

@@ -4,6 +4,7 @@ query BlogPostQuery($slug: String, $language: String = "de-DE") {
 		pubdate
 		title_image {
 			id
+			description
 		}
 		content_creators {
 			Content_Creators_id {
@@ -24,6 +25,7 @@ query BlogPostQuery($slug: String, $language: String = "de-DE") {
 					github
 					image {
 						id
+						description
 					}
 				}
 			}

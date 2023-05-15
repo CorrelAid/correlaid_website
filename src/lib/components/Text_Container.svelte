@@ -20,15 +20,27 @@
   </div>
   {#if title_image != null}
     <div class="container mx-auto">
-      <div class="offset relative mx-4 mb-6">
-        <img
-          alt={image_alt}
-          src={gen_img_url(
-            title_image.id,
-            'fit=inside&width=1200&height=675&format=png',
-          )}
-          class="h-full w-full rounded border-4 border-neutral"
-        />
+      <div class=" mx-4 mb-4">
+        <figure class="h-full w-full">
+          <div class="offset relative h-full w-full">
+            <img
+              alt={image_alt}
+              src={gen_img_url(
+                title_image.id,
+                'fit=inside&width=1200&height=675&format=png',
+              )}
+              title={title_image.description}
+              class="h-full w-full rounded border-4 border-neutral"
+            />
+          </div>
+          {#if title_image.description}
+            <figcaption
+              class="text_width bottom-0 mx-auto rounded-tl pt-2 text-xs md:px-4"
+            >
+              {title_image.description}
+            </figcaption>
+          {/if}
+        </figure>
       </div>
     </div>
   {/if}

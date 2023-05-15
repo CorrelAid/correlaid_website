@@ -14,7 +14,7 @@
 <Box>
   <div class="grid grid-cols-8">
     <div
-      class="col-span-full flex justify-center pb-4 text-base-content md:col-span-2 md:pb-0"
+      class="col-span-full flex items-center justify-center pb-4 text-base-content md:col-span-2 md:pb-0"
     >
       {#if icon_type == 'volunteer'}
         <Volunteering width={icon_size} height={icon_size} />

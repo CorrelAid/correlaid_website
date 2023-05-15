@@ -71,6 +71,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE") {
 		location
 		hero_image {
 			id
+			description
 		}
 		founded
 		lc_email
@@ -95,6 +96,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE") {
 					github
 					image {
 						id
+						description
 					}
 				}
 			}
