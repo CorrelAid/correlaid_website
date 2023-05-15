@@ -3,10 +3,7 @@ import {gen_img_url} from '../helpers.js';
 export function blog_posts(post) {
   let imageUrl;
   if (post.title_image) {
-    imageUrl = gen_img_url(
-      post.title_image.id,
-      'fit=inside&width=1200&height=675&format=png',
-    );
+    imageUrl = gen_img_url(post.title_image.id);
   }
   return {
     langs: post.langs,
