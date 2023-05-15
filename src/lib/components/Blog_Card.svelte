@@ -4,6 +4,7 @@
   import Langs from '$lib/components/Langs.svelte';
   export let image_alt;
   export let langs;
+  import ExternalLink from '../svg/External_Link.svelte';
   export let title;
   export let teaser;
   // export let tags;
@@ -12,6 +13,7 @@
   export let pubdate;
   export let image_url = void 0;
   export let slug = void 0;
+  export let external = false;
 
   let proc_date;
 
@@ -61,15 +63,33 @@
   </div>
   <div class="">
     <div class="px-4 pb-4 pt-2 md:p-4">
-      <h3 class="line-clamp-2 md:pr-12">
-        <a
-          {href}
-          class="text-lg font-semibold leading-snug text-base-content transition hover:text-primary"
-        >
-          {title}
-        </a>
-      </h3>
+      <h3 class="line-clamp-3 md:pr-12 md:line-clamp-2">
+        {#if external === false}
+          <a
+            {href}
+            class="text-lg font-semibold leading-snug text-base-content transition hover:text-primary"
+          >
+            {title}
+          </a>
+        {:else}
+          <a
+            {href}
+            class="text-lg font-semibold leading-snug text-base-content transition hover:text-primary"
+          >
+            <span class="mr-1">
+              {title}
+            </span>
 
+            <span class="inline-block align-text-top"
+              ><ExternalLink
+                height={20}
+                width={20}
+                color={'rgb(60, 60, 59)'}
+              /></span
+            >
+          </a>
+        {/if}
+      </h3>
       <p class="pt-2 text-sm line-clamp-1">
         {proc_date} - {#each content_creators as person, i}
           {#if person.Content_Creators_id.person}
