@@ -78,6 +78,7 @@ export function cta_group(section) {
 export function timelines(section) {
   const timelineParams = {
     steps: section.item.steps,
+    color: section.item.color,
   };
   return timelineParams;
 }
