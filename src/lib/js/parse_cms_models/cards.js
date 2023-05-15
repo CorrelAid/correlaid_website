@@ -2,9 +2,12 @@ import {gen_img_url} from '../helpers.js';
 
 export function blog_posts(post) {
   let imageUrl;
+  let imageDesc;
   if (post.title_image) {
     imageUrl = gen_img_url(post.title_image.id);
+    imageDesc = post.title_image.description;
   }
+
   return {
     langs: post.langs,
     pubdate: post.pubdate,
@@ -12,8 +15,8 @@ export function blog_posts(post) {
     image_alt: post.translations.image_alt,
     title: post.translations.title,
     teaser: post.translations.teaser,
-    tags: post.translations.tags,
     image_url: imageUrl,
+    image_desc: imageDesc,
     content_creators: post.content_creators,
   };
 }
