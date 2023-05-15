@@ -1,7 +1,6 @@
 <script>
   import Carousel from 'svelte-carousel';
   import {browser} from '$app/environment';
-  export let image_desc;
   import {gen_img_url} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
   export let text_only = false;

@@ -26,6 +26,7 @@ export function contacts(section) {
       section.item.person.image.id,
       'fit=cover&width=200&height=200&quality=80',
     );
+    personParams['image_desc'] = section.item.person.image.description;
   }
 
   if (section.item.person.translations[0]) {
@@ -53,6 +54,7 @@ function persons(person) {
       person.person.image.id,
       'fit=cover&width=200&height=200&quality=80',
     );
+    parsedPerson['image_desc'] = person.person.image.description;
   }
 
   if (person.person.translations[0]) {
