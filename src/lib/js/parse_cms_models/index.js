@@ -127,6 +127,7 @@ export function awards(award) {
       award.image.id,
       'fit=cover&width=392&height=240&quality=80',
     ),
+    image_desc: award.image.description,
     alt: award.translations[0].image_alt,
     title: award.translations[0].title,
   };

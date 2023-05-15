@@ -18,6 +18,7 @@ query Admins($language: String = "de-DE") {
 			mastodon
 			image {
 				id
+				description
 			}
 		}
 	}
