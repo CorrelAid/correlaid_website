@@ -5,7 +5,6 @@
   export let teaser;
   export let image_alt;
   export let title;
-  console.log(title_image.description);
 </script>
 
 <div class="container mx-auto pt-12 pb-4">

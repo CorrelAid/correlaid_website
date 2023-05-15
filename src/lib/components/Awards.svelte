@@ -27,7 +27,7 @@
       <h3 class="pb-3 text-lg font-medium text-base-content">{year}</h3>
     {/if}
     {#if title}
-      <h2 class="pb-3 text-2xl font-semibold text-primary drop-shadow-sm">
+      <h2 class="pb-3 text-2xl font-medium text-primary drop-shadow-sm">
         {title}
       </h2>
     {/if}

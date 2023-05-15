@@ -19,6 +19,7 @@ export function heros(section) {
     image: section.item.image,
     text: section.item.translations[0].text,
     image_alt: section.item.translations[0].image_alt,
+    image_desc: section.item.image.description,
     height: section.item.height,
     gradient_only: section.item.gradient_only,
     buttons: parseHeroButtons(section.item.buttons),
@@ -37,6 +38,7 @@ export function lcHeros(local_chapter) {
 
   if (local_chapter.hero_image) {
     parsedHero['image'] = local_chapter.hero_image;
+    parsedHero['image_desc'] = local_chapter.hero_image.description;
   }
 
   return parsedHero;

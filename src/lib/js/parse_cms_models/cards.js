@@ -37,7 +37,6 @@ export function podcast_episodes(episode) {
     href: episode.soundcloud_link,
     title: episode.title,
     teaser: episode.description,
-    tags: episode.tags,
     content_creators: episode.content_creators,
     image_alt: episode.image_alt,
   };
