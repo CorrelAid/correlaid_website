@@ -5,7 +5,6 @@
   export let title;
   export let image_desc;
   export let imageOnRightSide = false;
-  $: console.log(image_desc);
 </script>
 
 <div class="container mx-auto grid grid-cols-8 rounded pb-6 pt-8">
