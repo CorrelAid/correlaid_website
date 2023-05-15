@@ -129,6 +129,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 					}
 				}
 				... on timelines {
+					color
 					steps {
 						timeline_steps_id {
 							icon

@@ -1,5 +1,6 @@
 <script>
   export let steps;
+  export let color;
   import Html from '$lib/components/Html.svelte';
   import Inform from '$lib/svg/Inform.svelte';
   import Infrastrucuture from '$lib/svg/Infrastrucuture.svelte';
@@ -63,7 +64,9 @@
           )} relative col-span-1 border-neutral-25 py-12"
         >
           <span
-            class="absolute bg-gradient-to-r from-tertiary to-secondary text-lg font-semibold text-white shadow-md {check_x(
+            class="absolute bg-gradient-to-r {color === 'correlaid'
+              ? 'from-secondary to-primary'
+              : 'from-tertiary to-secondary'} text-lg font-semibold text-white shadow-md {check_x(
               i,
             )}-0 {check_odd(i)
               ? '-ml-5'
