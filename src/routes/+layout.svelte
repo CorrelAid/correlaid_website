@@ -87,7 +87,8 @@
     $page.data.title != null
       ? `${$t($page_key).text + ' - ' + $page.data.title}`
       : `${$t($page_key).text}`;
-  $: title = $page_key === 'navbar.home' ? 'CorrelAid' : title_content;
+  $: title =
+    $page_key === 'navbar.home' ? 'CorrelAid - Data4Good' : title_content;
 
   let content;
   $: content = parseContent(data.builder);
