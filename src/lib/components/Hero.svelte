@@ -10,6 +10,7 @@
   export let buttons = [];
   export let correlaidx = false;
   export let image = void 0;
+  export let image_desc = void 0;
   let image_id;
   // TODO: Image ID remains undefined if image is undefined or null
   // This will create an invalid URL below in gen_img_url which is hard
@@ -17,6 +18,7 @@
   $: if (image != null) {
     image_id = image.id;
   }
+  $: console.log(image_desc);
 </script>
 
 <section
@@ -33,6 +35,14 @@
       role="img"
       aria-label={image_alt}
     />
+    {#if image_desc}
+      <div class="absolute bottom-0 right-0 z-30 opacity-100">
+        <span
+          class="z-0 block rounded-tl bg-white px-1 py-0.5 text-xs opacity-100"
+          >{image_desc}</span
+        >
+      </div>
+    {/if}
   {/if}
   <div class="z-20 w-full">
     <div class="text_width mx-auto">

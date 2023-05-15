@@ -56,7 +56,7 @@
   </div>
   <div class="space-y-8">
     {#each podcast_episodes as episode}
-      <BlogCard {...episode} />
+      <BlogCard {...episode} external={true} />
     {/each}
   </div>
 </div>

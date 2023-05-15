@@ -56,6 +56,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 								gradient_only
 								image {
 									id
+									description
 								}
 								translations(
 									filter: { languages_code: { code: { _eq: $language } } }
@@ -108,6 +109,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 						email
 						image {
 							id
+							description
 						}
 					}
 				}
@@ -118,6 +120,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 						quote_id {
 							image {
 								id
+								description
 							}
 							translations(
 								filter: { languages_code: { code: { _eq: $language } } }
@@ -147,6 +150,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 					gradient_only
 					image {
 						id
+						description
 					}
 					translations(
 						filter: { languages_code: { code: { _eq: $language } } }

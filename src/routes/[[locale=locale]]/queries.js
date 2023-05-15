@@ -4,6 +4,7 @@ query LatestUpdates($language: String = "de-DE") {
 		pubdate
 		title_image {
 			id
+			description
 		}
 		content_creators {
 			Content_Creators_id {
@@ -60,6 +61,7 @@ query LatestUpdates($language: String = "de-DE") {
 		tags
     image {
 			id
+			description
 		}
 		image_alt
 		content_creators {

@@ -18,6 +18,7 @@ query AdminsAndOpsStructure($language: String = "de-DE") {
 			mastodon
 			image {
 				id
+				description
 			}
 		}
 	}

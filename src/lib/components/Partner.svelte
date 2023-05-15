@@ -22,13 +22,13 @@
   <div class="col-span-full pt-5 text-neutral xl:col-span-5 xl:pt-0">
     {#if website !== ''}
       <a
-        class="block pb-3 text-2xl font-semibold text-primary drop-shadow-sm"
+        class="block pb-3 text-2xl font-medium text-primary drop-shadow-sm"
         href={website}
         target="_blank"
         rel="noreferrer">{name}</a
       >
     {:else}
-      <h2 class="pb-3 text-2xl font-semibold text-primary drop-shadow-sm">
+      <h2 class="pb-3 text-2xl font-medium text-primary drop-shadow-sm">
         {name}
       </h2>
     {/if}

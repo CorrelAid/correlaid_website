@@ -11,9 +11,20 @@
   // const li = "marker:prose-li:text-primary"
   const typography = `${h1} ${h2} ${a}`;
 
-  function foo(node) {
+  function post_process(node) {
     node.querySelectorAll('pre code').forEach((block) => {
       hljs.highlightElement(block);
+    });
+    node.querySelectorAll('img').forEach((block) => {
+      if (block.getAttribute('title')) {
+        const figure = document.createElement('figure');
+        const caption = document.createElement('figcaption');
+        caption.innerHTML = block.getAttribute('title');
+        caption.className = 'text-xs text-base-content mt-2';
+        figure.appendChild(block.cloneNode(true));
+        block.parentNode.replaceChild(figure, block);
+        figure.appendChild(caption);
+      }
     });
 
     return {
@@ -27,7 +38,7 @@
 <!-- see app.css for more prose adjustments -->
 <article
   class="text_width prose max-w-none px-4 text-neutral {typography} {options}"
-  use:foo
+  use:post_process
 >
   {@html source}
 </article>
