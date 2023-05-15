@@ -26,7 +26,7 @@
     ? `height: calc(100vh - ${$header_height}px)`
     : `height: calc((100vh - ${$header_height}px)/2)`}"
 >
-  {#if gradient_only}
+  {#if gradient_only === false}
     <span
       class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
       style={`background-image: url(${gen_img_url(image_id)})`}
