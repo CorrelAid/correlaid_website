@@ -4,7 +4,7 @@ import {podcastQuery} from './queries.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(podcastQuery, {lanugage: get_lang(params)});
+  const data = await directus_fetch(podcastQuery, {language: get_lang(params)});
 
   const podcast_episodes = data.Podcast_Episodes;
 

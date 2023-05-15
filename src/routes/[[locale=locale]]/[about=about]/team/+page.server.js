@@ -5,7 +5,7 @@ import {adminsAndOpsStructQuery} from './queries.js';
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
   const data = await directus_fetch(adminsAndOpsStructQuery, {
-    lanugage: get_lang(params),
+    language: get_lang(params),
   });
 
   const remote_office = data.Global_Administrators.filter(
