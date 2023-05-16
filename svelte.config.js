@@ -37,8 +37,8 @@ if (
 function canBePrerendered(url) {
   return (
     url[0] === '/' &&
-    url !== '/community/become_member/membership_application' &&
-    url !== '/community/mitglied_werden/mitgliedsantrag'
+    url !== '/community/become-member/membership-application' &&
+    url !== '/community/mitglied-werden/mitgliedsantrag'
   );
 }
 
@@ -149,8 +149,8 @@ async function addLcRoutes(routes) {
 async function addProjectRoutes(routes) {
   const results = await queryCmsGraphQl(queries['projects']);
   for (const project of results['data']['Projects']) {
-    routes.push(`/daten_nutzen/projekte/${project.slug}`);
-    routes.push(`/en/using_data/projects/${project.slug}`);
+    routes.push(`/daten-nutzen/projekte/${project.slug}`);
+    routes.push(`/en/using-data/projects/${project.slug}`);
   }
 }
 
