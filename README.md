@@ -6,7 +6,7 @@
 
 1.  Create .env file with the cms url env variable
 
-        echo "PUBLIC_API_URL=https://cms.correlaid.org" \nPUBLIC_PRERENDER="" \nPUBLIC_ADAPTER="" > .env
+        echo "PUBLIC_API_URL=https://cms.correlaid.org" \nPUBLIC_PRERENDER="" \nPUBLIC_ADAPTER="" \nPUBLIC_ON_CMS_ERROR="FAIL"=""> .env
 
 1.  Set up pre-commit hooks
 

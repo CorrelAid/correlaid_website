@@ -4,6 +4,7 @@ query Workshops($language: String = "de-DE") {
 		name
 		language
 		teaser
+		tags
 		resource_link
 		responsible_unit
 		local_chapters {
