@@ -18,17 +18,15 @@
   }
 </script>
 
-<div>
-  <a
-    class="block min-w-36 max-w-80 rounded-md px-4 py-2 text-center font-semibold text-white shadow-md transition md:max-w-none {String(
-      color,
-    )} {options}"
-    {href}
-    ><span>
-      {text}{#if type == 'external'}<span
-          class="ml-1 inline-block whitespace-nowrap align-text-top"
-          ><ExternalLink height={20} width={20} /></span
-        >{/if}
-    </span>
-  </a>
-</div>
+<a
+  class="block min-w-36 max-w-80 rounded-md px-4 py-2 text-center font-semibold text-white shadow-md transition {String(
+    color,
+  )} {options}"
+  {href}
+  ><span>
+    {text}{#if type == 'external'}<span
+        class="ml-1 inline-block whitespace-nowrap align-text-top"
+        ><ExternalLink height={20} width={20} /></span
+      >{/if}
+  </span>
+</a>
