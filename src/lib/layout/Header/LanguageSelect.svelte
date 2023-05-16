@@ -46,6 +46,7 @@
       <div
         class="absolute right-0 z-10 mt-1 origin-top-right rounded-md border border-neutral-25 bg-white shadow-lg"
         role="menu"
+        tabindex="0"
         on:mouseleave={langDropdown}
       >
         <div class="p-2">
@@ -53,7 +54,6 @@
             class="primary flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm
                                 text-base-content hover:text-primary"
             role="menuitem"
-            tabIndex="0"
             on:click={() => btnLocale('de')}
           >
             Deutsch
@@ -62,7 +62,6 @@
             class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-base-content hover:text-primary"
             role="menuitem"
             on:click={() => btnLocale('en')}
-            tabIndex="-1"
           >
             English
           </button>
