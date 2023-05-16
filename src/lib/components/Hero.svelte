@@ -18,7 +18,6 @@
   $: if (image != null) {
     image_id = image.id;
   }
-  $: console.log(image_desc);
 </script>
 
 <section
@@ -45,7 +44,7 @@
     {/if}
   {/if}
   <div class="z-20 w-full">
-    <div class="text_width mx-auto">
+    <div class="container mx-auto">
       <div class="">
         {#if correlaidx}
           <div class="flex justify-center">

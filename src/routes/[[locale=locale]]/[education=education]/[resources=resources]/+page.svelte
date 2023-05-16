@@ -12,7 +12,7 @@
   $: workshops = parseEntries(data.workshops, 'workshops');
 </script>
 
-<div class="space-y-6">
+<div class="space-y-6 px-4">
   {#each workshops as workshop}
     <WorkshopCard {...workshop} />
   {/each}

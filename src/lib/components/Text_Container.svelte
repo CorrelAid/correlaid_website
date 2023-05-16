@@ -15,7 +15,7 @@
     />
   </div>
 
-  <div class="text_width mx-auto my-4">
+  <div class="container mx-auto my-4">
     <slot name="sub_subtitle" />
   </div>
   {#if title_image != null}
@@ -35,7 +35,7 @@
           </div>
           {#if title_image.description}
             <figcaption
-              class="text_width bottom-0 mx-auto rounded-tl pt-2 text-xs md:px-4"
+              class="container bottom-0 mx-auto rounded-tl pt-2 text-xs md:px-4"
             >
               {title_image.description}
             </figcaption>

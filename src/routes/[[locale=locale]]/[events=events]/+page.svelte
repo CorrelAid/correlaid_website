@@ -13,7 +13,7 @@
   $: events = parseEntries(data.events, 'events');
 </script>
 
-<div class="space-y-5">
+<div class="space-y-8 px-4">
   {#each events as event}
     <Events_Card {...event} />
   {/each}
