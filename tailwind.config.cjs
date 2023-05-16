@@ -38,6 +38,10 @@ module.exports = {
         36: '9rem',
       },
 
+      maxWidth: {
+        80: '20rem',
+      },
+
       colors: {
         primary: '#96c342',
         'primary-75': '#a5d884',

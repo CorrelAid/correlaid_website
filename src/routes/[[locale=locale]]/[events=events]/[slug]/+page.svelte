@@ -32,7 +32,7 @@
 <TextContainer title={event.title} teaser={event.teaser}>
   <div class="mx-4" slot="sub_subtitle">
     <Box>
-      <p class="flex space-x-4">
+      <p class="flex flex-col space-y-2 md:flex-row md:space-x-4 md:space-y-0">
         <span class="flex">
           <span
             class="my-auto flex fill-neutral"
@@ -58,7 +58,7 @@
         >
         {#if event.lang == 'de-DE'}
           <span
-            class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+            class="inline-block rounded-full bg-white shadow-none"
             role="img"
             aria-label="Event ist auf deutsch."
           >
@@ -66,7 +66,7 @@
           </span>
         {:else}
           <span
-            class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+            class="inline-block rounded-full bg-white shadow-none"
             role="img"
             aria-label="Event is in english."
           >

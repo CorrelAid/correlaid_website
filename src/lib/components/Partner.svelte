@@ -5,7 +5,7 @@
   export let website = '';
 </script>
 
-<div class="text_width grid grid-cols-8 gap-x-12 rounded py-4">
+<div class="container grid grid-cols-8 gap-x-12 rounded py-4">
   {#if img}
     <div class="col-span-full flex items-center justify-center xl:col-span-3">
       <div class="relative mx-auto flex h-36 w-56 items-center justify-center">
@@ -19,7 +19,7 @@
       </div>
     </div>
   {/if}
-  <div class="col-span-full pt-5 text-neutral xl:col-span-5 xl:pt-0">
+  <div class="col-span-full px-4 pt-5 text-neutral xl:col-span-5 xl:pt-0">
     {#if website !== ''}
       <a
         class="block pb-3 text-2xl font-medium text-primary drop-shadow-sm"

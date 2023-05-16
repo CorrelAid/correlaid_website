@@ -36,15 +36,13 @@
     <Hero {...hero} />
   </div>
 </div>
-<div class="px-4">
-  <div class="container mx-auto pb-12">
-    <Html
-      source={local_chapter.translations[0].description}
-      options={'mx-auto'}
-    />
-  </div>
+<div class="container mx-auto">
+  <Html
+    source={local_chapter.translations[0].description}
+    options={'px-0 mb-12'}
+  />
   {#if projects.length !== 0}
-    <div class="container mx-auto mb-12 space-y-8">
+    <div class=" mb-12 space-y-8 px-4">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-base-content">
           {$t('navbar.using_data.projects').text}
@@ -58,7 +56,7 @@
     </div>
   {/if}
   {#if events.length !== 0}
-    <div class="container mx-auto mb-12 space-y-8">
+    <div class=" mb-12 space-y-8 px-4">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-base-content">
           {$t('navbar.events').text}
@@ -70,14 +68,14 @@
     </div>
   {/if}
   {#if local_chapter.local_administrators.length != 0}
-    <div class="container mx-auto mb-12">
+    <div class="flex flex-col gap-y-8 px-4 pb-12">
       {#each local_admins as person}
         <Person {...person} email={local_chapter.lc_email} />
       {/each}
     </div>
   {/if}
   {#if local_chapter.translations[0].how_to_get_in_touch}
-    <div class="container mx-auto mb-12">
+    <div class="mb-12 px-4">
       <Icon
         icon_type={'get_in_touch'}
         text={local_chapter.translations[0].how_to_get_in_touch}

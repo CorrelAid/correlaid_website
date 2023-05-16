@@ -12,7 +12,7 @@
   $: projects = parseEntries(data.projects, 'projects');
 </script>
 
-<div class="space-y-6">
+<div class="space-y-8 px-4">
   {#each projects as project}
     <ProjectsCard {...project} />
   {/each}

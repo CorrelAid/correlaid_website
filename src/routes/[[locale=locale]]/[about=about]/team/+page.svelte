@@ -18,10 +18,10 @@
 <div class="mt-12">
   <Html
     source={organizational_structure.translations[0].remote_office}
-    options={'pb-12 px-0 mx-auto'}
+    options={'pb-12  mx-auto'}
   />
 
-  <div class="container mx-auto flex flex-col gap-y-3 space-y-8 pb-12">
+  <div class="container mx-auto flex flex-col gap-y-8 px-4 pb-12">
     {#each remote_office as person}
       <Person {...person} />
     {/each}
@@ -29,11 +29,11 @@
 
   <Html
     source={organizational_structure.translations[0].board}
-    options={'pb-12 mx-auto'}
+    options={'mx-auto pb-12'}
     width={'text'}
   />
 
-  <div class="container mx-auto flex flex-col gap-y-3 space-y-8 pb-12">
+  <div class="container mx-auto flex flex-col gap-y-8 px-4 pb-12">
     {#each board as person}
       <Person {...person} />
     {/each}

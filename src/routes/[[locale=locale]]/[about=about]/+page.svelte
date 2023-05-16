@@ -16,7 +16,7 @@
   }
 </script>
 
-<div class="container mx-auto flex flex-col gap-y-3 space-y-8 pb-12">
+<div class="container mx-auto flex flex-col gap-y-8 space-y-20 pb-12">
   {#each awards as award, index}
     <Awards {...indexToImagePosition(award, index)} />
   {/each}

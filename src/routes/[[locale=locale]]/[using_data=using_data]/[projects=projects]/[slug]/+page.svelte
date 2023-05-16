@@ -35,7 +35,7 @@
 
   <Html source={project.description} options={'mx-auto'} slot="main" />
 </TextContainer>
-<div class="text_width mx-auto pb-12">
+<div class="container mx-auto pb-12">
   <div class="px-4">
     <Box>
       <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>

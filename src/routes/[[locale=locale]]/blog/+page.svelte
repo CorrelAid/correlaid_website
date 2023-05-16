@@ -15,7 +15,7 @@
   $: posts = parseEntries(data.posts, 'blog_posts');
 </script>
 
-<div class="space-y-8">
+<div class="space-y-8 px-4">
   {#each posts as post, i}
     <div class={i === 0 ? 'col-span-full' : 'col-span-1'}>
       <BlogCard {...post} />

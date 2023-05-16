@@ -13,7 +13,7 @@
   $: podcast_episodes = parseEntries(data.podcast_episodes, 'podcast_episodes');
 </script>
 
-<div class="container mx-auto space-y-4 pb-8">
+<div class="container mx-auto px-4 pb-8">
   <div class="space-y-8">
     {#each podcast_episodes as episode}
       <BlogCard {...episode} external={true} />
