@@ -35,7 +35,6 @@ query BlogQuery($language: String = "de-DE") {
 			}
 			title
 			text
-			tags
 			image_alt
 			slug
 			teaser
