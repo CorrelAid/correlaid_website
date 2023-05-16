@@ -1,4 +1,5 @@
 import * as parseModel from './parse_cms_models';
+import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 
 function reportParseError(err, description, rawInput) {
   console.group('CMS PARSE ERROR: ' + description);
@@ -6,6 +7,43 @@ function reportParseError(err, description, rawInput) {
   console.log(err.stack);
   console.log(rawInput);
   console.groupEnd();
+  console.log(PUBLIC_ON_CMS_ERROR);
+  if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
+    throw Error('Error while parsing CMS content');
+  }
+}
+
+export function parseContent(rawSections, page) {
+  if (!rawSections) {
+    return;
+  }
+
+  const parsedContent = [];
+  for (const rawSection of rawSections) {
+    try {
+      const section = {
+        collection: rawSection.collection,
+        props: parseModel[rawSection.collection](rawSection),
+      };
+      if (section.collection === 'heros') {
+        section.sort = rawSection.sort;
+      }
+      if (section.collection === 'contacts') {
+        section.item = {hr: rawSection.item.hr};
+      }
+      if (section.collection === 'wysiwyg') {
+        section.sort = rawSection.sort;
+      }
+      parsedContent.push(section);
+    } catch (err) {
+      reportParseError(
+        err,
+        `Error parsing ${rawSection.collection} on page ${page}`,
+        rawSection,
+      );
+    }
+  }
+  return parsedContent;
 }
 
 export function parseEntries(rawEntries, type) {
