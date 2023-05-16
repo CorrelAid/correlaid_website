@@ -63,7 +63,7 @@ test.describe('test error pages', () => {
     });
 
     await page.goto(
-      'http://localhost:3000/en/using_data/projects/not-a-valid-project',
+      'http://localhost:3000/en/using-data/projects/not-a-valid-project',
       {waitUntil: 'networkidle'},
     );
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
