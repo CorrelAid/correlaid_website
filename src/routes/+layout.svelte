@@ -11,7 +11,6 @@
   import Footer from '$lib/layout/Footer.svelte';
   import Html from '$lib/components/Html.svelte';
   import Hero from '$lib/components/Hero.svelte';
-  import Carousel from '$lib/components/Carousel.svelte';
   import Timeline from '$lib/components/Timeline.svelte';
   import QuoteCarousel from '$lib/components/Quote_Carousel.svelte';
   import Cta from '$lib/components/CTA.svelte';
@@ -138,10 +137,6 @@
                 <hr class="" />
               {/if}
               <Person {...section.props} />
-            </div>
-          {:else if section.collection === 'carousel'}
-            <div class="mb-12">
-              <Carousel {...section.props} />
             </div>
           {:else if section.collection === 'quote_carousel'}
             <div class="mb-12">

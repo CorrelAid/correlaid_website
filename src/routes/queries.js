@@ -43,43 +43,6 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 					}
 				}
 
-				... on carousel {
-					carousel_elements {
-						carousel_element_id {
-							translations(
-								filter: { languages_code: { code: { _eq: $language } } }
-							) {
-								title
-							}
-							hero {
-								height
-								gradient_only
-								image {
-									id
-									description
-								}
-								translations(
-									filter: { languages_code: { code: { _eq: $language } } }
-								) {
-									text
-									image_alt
-								}
-								buttons {
-									buttons_id {
-										color
-										translations(
-											filter: { languages_code: { code: { _eq: $language } } }
-										) {
-											text
-											link
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-
 				... on custom_sections {
 					id
 				}

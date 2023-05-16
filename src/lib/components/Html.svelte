@@ -8,8 +8,8 @@
   const h1 = 'prose-h1:text-3xl prose-h1:text-base-content';
   const h2 = 'prose-h2:text-2xl prose-h2:text-base-content';
   const a = 'prose-a:text-secondary  prose-a:font-normal ';
-  // const li = "marker:prose-li:text-primary"
-  const typography = `${h1} ${h2} ${a}`;
+  const li = 'marker:prose-li:text-secondary';
+  const typography = `${h1} ${h2} ${a} ${li}`;
 
   function post_process(node) {
     node.querySelectorAll('pre code').forEach((block) => {
