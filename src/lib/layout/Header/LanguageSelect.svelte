@@ -53,6 +53,7 @@
             class="primary flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm
                                 text-base-content hover:text-primary"
             role="menuitem"
+            tabIndex="0"
             on:click={() => btnLocale('de')}
           >
             Deutsch
@@ -61,6 +62,7 @@
             class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-base-content hover:text-primary"
             role="menuitem"
             on:click={() => btnLocale('en')}
+            tabIndex="-1"
           >
             English
           </button>
