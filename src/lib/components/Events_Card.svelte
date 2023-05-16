@@ -46,7 +46,7 @@
       </div>
 
       <p
-        class="mb-4 text-justify text-base-content line-clamp-3 xl:pr-4 xl:pb-0"
+        class="mb-4 text-justify text-base-content line-clamp-3 xl:pb-0 xl:pr-4"
       >
         {teaser}
       </p>

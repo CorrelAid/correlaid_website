@@ -27,7 +27,7 @@
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
 
-  <div class="px-4 pt-6 pb-6">
+  <div class="px-4 pb-6 pt-6">
     <div class="mb-2 flex items-center pb-2">
       <Nonprofit width={25} height={25} />
       <h4 class="text-md ml-2 font-semibold text-primary line-clamp-3">
@@ -36,7 +36,7 @@
     </div>
 
     <h3
-      class="mt-2 mb-3 block text-xl font-semibold text-base-content transition line-clamp-3"
+      class="mb-3 mt-2 block text-xl font-semibold text-base-content transition line-clamp-3"
     >
       {title}
     </h3>

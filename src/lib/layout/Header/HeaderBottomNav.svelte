@@ -66,7 +66,7 @@
                 style="top: {$header_height + 1}px"
               >
                 <ul
-                  class="rounded-b border-x border-b border-neutral-25 bg-white pt-2 pb-1 text-base font-light text-base-content"
+                  class="rounded-b border-x border-b border-neutral-25 bg-white pb-1 pt-2 text-base font-light text-base-content"
                 >
                   {#each navItem.children as subnavItem}
                     <li class="px-4 pb-2">

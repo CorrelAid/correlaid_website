@@ -26,7 +26,7 @@
 </script>
 
 <article
-  class="relative grid-cols-2 rounded border-t border-r border-l border-neutral-25 shadow-sm md:grid"
+  class="relative grid-cols-2 rounded border-l border-r border-t border-neutral-25 shadow-sm md:grid"
 >
   <!-- <div class="absolute top-0 -mt-6 space-x-2">
   {#if tags}
@@ -52,7 +52,7 @@
     >
       {#if typeof image_url !== 'undefined'}
         <img
-          class="absolute top-0 left-0 z-0 h-full w-full rounded-tl"
+          class="absolute left-0 top-0 z-0 h-full w-full rounded-tl"
           alt={image_alt}
           src={image_url}
           title={image_desc}
@@ -101,7 +101,7 @@
         {/each}
       </p>
 
-      <div class="pt-2 pb-1">
+      <div class="pb-1 pt-2">
         <p class="overflow-hidden text-justify text-base-content line-clamp-4">
           {teaser}
         </p>
