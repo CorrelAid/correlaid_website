@@ -35,7 +35,7 @@
       aria-label={image_alt}
     />
     {#if image_desc}
-      <div class="absolute bottom-0 right-0 z-30 opacity-100">
+      <div class="absolute bottom-0 right-0 z-20 opacity-100">
         <span
           class="z-0 block rounded-tl bg-white px-1 py-0.5 text-xs opacity-100"
           >{image_desc}</span
@@ -62,7 +62,7 @@
         </div>
         {#if Array.isArray(buttons) && buttons.length !== 0}
           <div
-            class="mt-16 flex flex-col space-y-6 px-4 md:mt-12 md:flex-row md:space-x-5 md:space-y-0"
+            class="mt-16 inline-block space-y-6 px-4 md:mt-12 md:flex md:flex-row md:space-x-5 md:space-y-0"
           >
             {#each buttons as button}
               <LinkButton {...button} />
