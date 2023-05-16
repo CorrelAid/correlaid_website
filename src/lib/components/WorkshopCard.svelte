@@ -68,10 +68,10 @@
         {title}
       </h3>
     {/if}
-    <div class="flex w-full gap-x-2 pb-4">
+    <div class="mb-2">
       {#each tags as tag}
         <span
-          class="inline-flex items-center rounded bg-secondary px-3 py-1 text-xs font-bold text-white line-clamp-1"
+          class="mr-2 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white line-clamp-1"
           >{tag}</span
         >
       {/each}
