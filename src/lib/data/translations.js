@@ -7,19 +7,19 @@ export default {
     'navbar.about.values': {text: 'Werte', url: '/ueber/werte'},
     'navbar.about.partners': {text: 'Partner', url: '/ueber/partner'},
     //
-    'navbar.using_data': {text: 'Daten nutzen', url: '/daten_nutzen'},
+    'navbar.using_data': {text: 'Daten nutzen', url: '/daten-nutzen'},
     // Subnav projects_consulting
     'navbar.using_data.projects': {
       text: 'Data4Good Projekte',
-      url: '/daten_nutzen/projekte',
+      url: '/daten-nutzen/projekte',
     },
     'navbar.using_data.consulting': {
       text: 'Beratung',
-      url: '/daten_nutzen/beratung',
+      url: '/daten-nutzen/beratung',
     },
     'navbar.using_data.hackathons': {
       text: 'Hackathons & Datendialoge',
-      url: '/daten_nutzen/hackathons',
+      url: '/daten-nutzen/hackathons',
     },
     //
     'navbar.education': {text: 'Bildung', url: '/bildung'},
@@ -28,14 +28,14 @@ export default {
     //  text: 'Workshops',
     //  url: '/bildung/workshops',
     // },
-    'navbar.education.learning_r': {text: 'R Lernen', url: '/bildung/r_lernen'},
+    'navbar.education.learning_r': {text: 'R Lernen', url: '/bildung/r-lernen'},
     'navbar.education.resources': {
       text: 'Bildungsressourcen',
       url: '/bildung/ressourcen',
     },
     'navbar.education.tidy_tuesday': {
       text: 'TidyTuesday',
-      url: '/bildung/tidy_tuesday',
+      url: '/bildung/tidy-tuesday',
     },
     'navbar.education.mentoring': {
       text: 'Mentoring',
@@ -50,23 +50,23 @@ export default {
     },
     'navbar.community.founding_lc': {
       text: 'Gründe (d)eine Lokalgruppe',
-      url: '/community/lc_gruenden',
+      url: '/community/lc-gruenden',
     },
-    'navbar.community.volunteer_journeys': {
-      text: 'Volunteer Journeys',
-      url: '/community/volunteer_journeys',
-    },
+    // 'navbar.community.volunteer_journeys': {
+    //  text: 'Volunteer Journeys',
+    //  url: '/community/volunteer-journeys',
+    // },
     'navbar.community.become_member': {
       text: 'Vereinsmitglied werden',
-      url: '/community/mitglied_werden',
+      url: '/community/mitglied-werden',
     },
     'navbar.community.volunteer_teams': {
       text: 'Trete einem Team bei',
-      url: '/community/volunteer_teams',
+      url: '/community/volunteer-teams',
     },
     'navbar.community.become_member.membership_application': {
       text: 'Mitgliedsantrag',
-      url: '/community/mitglied_werden/mitgliedsantrag',
+      url: '/community/mitglied-werden/mitgliedsantrag',
     },
     //
     'navbar.events': {text: 'Veranstaltungen', url: '/veranstaltungen'},
@@ -77,9 +77,9 @@ export default {
       text: 'Spenden',
       url: 'https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good',
     },
-    'footer.imprint': {text: 'Impressum', url: '/impressum'},
-    'footer.coc': {text: 'Code of Conduct', url: '/coc'},
-    'footer.coe': {text: 'Code of Ethics', url: '/coe'},
+    'footer.imprint': {text: 'Impressum & Datenschutz', url: '/impressum'},
+    'footer.coc': {text: 'Code of Conduct', url: '/codeofconduct'},
+    'footer.coe': {text: 'Code of Ethics', url: '/codeofethics'},
     // 'footer.contact': {text: 'Kontakt', url: '/contact'},
     'misc.read_more': {text: 'Mehr lesen'},
     'access.close': {text: 'Navigation schließen'},
@@ -101,19 +101,19 @@ export default {
     'navbar.about.values': {text: 'Values', url: '/en/about/values'},
     'navbar.about.partners': {text: 'Partners', url: '/en/about/partners'},
     //
-    'navbar.using_data': {text: 'Using Data', url: '/en/using_data'},
+    'navbar.using_data': {text: 'Using Data', url: '/en/using-data'},
     // Subnav projects_consulting
     'navbar.using_data.projects': {
       text: 'Data4Good Projects',
-      url: '/en/using_data/projects',
+      url: '/en/using-data/projects',
     },
     'navbar.using_data.consulting': {
       text: 'Consulting',
-      url: '/en/using_data/consulting',
+      url: '/en/using-data/consulting',
     },
     'navbar.using_data.hackathons': {
       text: 'Hackathons & Data Dialogues',
-      url: '/en/using_data/hackathons',
+      url: '/en/using-data/hackathons',
     },
     //
     'navbar.education': {text: 'Education', url: '/en/education'},
@@ -124,11 +124,11 @@ export default {
     },
     'navbar.education.learning_r': {
       text: 'R Lernen',
-      url: '/en/education/learning_r',
+      url: '/en/education/learning-r',
     },
     'navbar.education.tidy_tuesday': {
       text: 'Tidy Tuesday',
-      url: '/en/education/tidy_tuesday',
+      url: '/en/education/tidy-tuesday',
     },
     'navbar.education.mentoring': {
       text: 'Mentoring',
@@ -143,23 +143,23 @@ export default {
     },
     'navbar.community.founding_lc': {
       text: 'Founding a Local Chapter',
-      url: '/en/community/founding_lc',
+      url: '/en/community/founding-lc',
     },
     'navbar.community.volunteer_teams': {
       text: 'Join a team',
-      url: '/en/community/volunteer_teams',
+      url: '/en/community/volunteer-teams',
     },
-    'navbar.community.volunteer_journeys': {
-      text: 'Volunteer Journeys',
-      url: '/en/community/volunteer_journeys',
-    },
+    // 'navbar.community.volunteer_journeys': {
+    //  text: 'Volunteer Journeys',
+    //  url: '/en/community/volunteer-journeys',
+    // },
     'navbar.community.become_member': {
       text: 'Become a member',
-      url: '/en/community/become_member',
+      url: '/en/community/become-member',
     },
     'navbar.community.become_member.membership_application': {
       text: 'Membership Application',
-      url: '/community/become_member/membership_application',
+      url: '/community/become-member/membership-application',
     },
     //
     'navbar.events': {text: 'Events', url: '/en/events'},
@@ -170,9 +170,9 @@ export default {
       text: 'Donate',
       url: 'https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good',
     },
-    'footer.imprint': {text: 'Imprint', url: '/en/imprint'},
-    'footer.coc': {text: 'Code of Conduct', url: '/en/coc'},
-    'footer.coe': {text: 'Code of Ethics', url: '/en/coe'},
+    'footer.imprint': {text: 'Imprint & Data Protection', url: '/en/imprint'},
+    'footer.coc': {text: 'Code of Conduct', url: '/en/codeofconduct'},
+    'footer.coe': {text: 'Code of Ethics', url: '/en/codeofethics'},
     // 'footer.contact': {text: 'Contact', url: '/en/contact'},
     'misc.read_more': {text: 'Read more'},
     'access.close': {text: 'Close Navigation'},

@@ -46,6 +46,7 @@
       <div
         class="absolute right-0 z-10 mt-1 origin-top-right rounded-md border border-neutral-25 bg-white shadow-lg"
         role="menu"
+        tabindex="-1"
         on:mouseleave={langDropdown}
       >
         <div class="p-2">

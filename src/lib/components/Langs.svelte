@@ -6,7 +6,7 @@
   const icon_h = 22;
 </script>
 
-<div class="absolute top-0 right-0 p-4">
+<div class="absolute right-0 top-0 p-4">
   {#if langs.length !== 2}
     {#each langs as lang}
       {#if lang == 'de-DE'}

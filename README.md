@@ -131,7 +131,7 @@ In line with standard svelte setups a production build can be created with
 > npm run build
 
 Due to the structure of our project the default build will not prerender any routes/pages. In order to change that behaviour
-we provide the environment variable `PRERENDER`, which is best set in a `.env` file. The options for `PRERENDER` are as follows.
+we provide the environment variable `PUBLIC_PRERENDER`, which is best set in a `.env` file. The options for `PUBLIC_PRERENDER` are as follows.
 
 - `ALL`: Tries to prerender all routes and also requires prerendering for all routes. If any routes cannot be prerendered for
   technical reasons, the build will fail.
@@ -139,13 +139,30 @@ we provide the environment variable `PRERENDER`, which is best set in a `.env` f
   prerendering that cannot be prerendered.
 - Missing or anything else: Does not require any prerendering which will lead to no prerendering in our site setup.
 
-Static builds will require `PRERENDER=ALL`. Even without making a static build, this option can therefore be used to check whether
+Static builds will require `PUBLIC_PRERENDER=ALL`. Even without making a static build, this option can therefore be used to check whether
 any routes cannot be prerendered and hence, would prevent a static build.
 
 ### Static build
 
-In order to make a static build, the environment variable `ADAPTER=STATIC` has to be set. Static builds are only allowed if
-`PRERENDER=ALL`.
+In order to make a static build, the environment variable `PUBLIC_ADAPTER=STATIC` has to be set. Static builds are only allowed if
+`PUBLIC_PRERENDER=ALL`.
+
+### PUBLIC_ON_CMS_ERROR
+
+We also provide a configuration option to control what happens on a CMS parsing
+error. By default (`PUBLIC_ON_CMS_ERROR=''`) the parsing problem is logged and
+the corresponding CMS entries ignored (if possible). Alternatively one can set
+the configuration to `PUBLIC_ON_CMS_ERROR='FAIL'`. This cases the program to
+fail in case any content from the CMS cannot be parsed.
+
+It is recommended to use the `FAIL` configuration for static builds. That way
+the static site cannot be rebuild unless all CMS content is parsed
+successfully. That way any CMS configuration errors cannot propagate to a
+static deployment via CD pipeline.
+
+For dynamic deployments that have a live connection with the CMS, the default
+setting is recommended, otherwise the page will return 500 http responses every
+time there is an issue, which might not be desirable.
 
 ## Quality Assurance
 
