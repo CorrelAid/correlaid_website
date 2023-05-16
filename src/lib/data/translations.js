@@ -52,10 +52,10 @@ export default {
       text: 'Gründe (d)eine Lokalgruppe',
       url: '/community/lc-gruenden',
     },
-    'navbar.community.volunteer_journeys': {
-      text: 'Volunteer Journeys',
-      url: '/community/volunteer-journeys',
-    },
+    // 'navbar.community.volunteer_journeys': {
+    //  text: 'Volunteer Journeys',
+    //  url: '/community/volunteer-journeys',
+    // },
     'navbar.community.become_member': {
       text: 'Vereinsmitglied werden',
       url: '/community/mitglied-werden',
@@ -149,10 +149,10 @@ export default {
       text: 'Join a team',
       url: '/en/community/volunteer-teams',
     },
-    'navbar.community.volunteer_journeys': {
-      text: 'Volunteer Journeys',
-      url: '/en/community/volunteer-journeys',
-    },
+    // 'navbar.community.volunteer_journeys': {
+    //  text: 'Volunteer Journeys',
+    //  url: '/en/community/volunteer-journeys',
+    // },
     'navbar.community.become_member': {
       text: 'Become a member',
       url: '/en/community/become-member',
