@@ -10,10 +10,9 @@
 
   export let data;
   $: experts = parseEntries(data.experts, 'experts');
-  $: console.log(data);
 </script>
 
-<div class="container mx-auto flex flex-col gap-y-3 space-y-8 py-8">
+<div class="container mx-auto flex flex-col gap-y-8 px-4 pb-12">
   {#each experts as person}
     <Person {...person} />
   {/each}

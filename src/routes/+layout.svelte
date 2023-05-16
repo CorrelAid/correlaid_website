@@ -113,15 +113,15 @@
               <Hero {...section.props} />
             </div>
           {:else if section.collection === 'cta_group'}
-            <div class="container mx-auto space-y-8 px-4 pb-10">
+            <div class="container mx-auto mb-12 space-y-8 px-4">
               <CtaGroup {...section.props} />
             </div>
           {:else if section.collection === 'ctas'}
-            <div class="container mx-auto">
+            <div class="container mx-auto mb-12 px-4">
               <Cta {...section.props} />
             </div>
           {:else if section.collection === 'timelines'}
-            <div class="container mx-auto pb-12">
+            <div class="wider_container mx-auto pb-12">
               <Timeline {...section.props} />
             </div>
           {:else if section.collection === 'wysiwyg'}
@@ -132,10 +132,7 @@
               </div>
             </div>
           {:else if section.collection === 'contacts'}
-            <div class="container mx-auto mb-12 px-4">
-              {#if section.item.hr === true}
-                <hr class="" />
-              {/if}
+            <div class="container mx-auto mb-12 mt-8 px-4 md:mt-0">
               <Person {...section.props} />
             </div>
           {:else if section.collection === 'quote_carousel'}
@@ -143,20 +140,18 @@
               <QuoteCarousel {...section.props} />
             </div>
           {:else if section.collection === 'buttons'}
-            <div class="text_width mx-auto mb-12">
+            <div class="container mx-auto mb-12">
               <div class="flex items-center justify-center">
                 <LinkButton {...section.props} />
               </div>
             </div>
           {:else if section.collection === 'icons'}
-            <div class="text_width mx-auto mb-12 px-4">
+            <div class="container mx-auto mb-12 px-4">
               <Icon {...section.props} />
             </div>
           {:else if section.collection === 'custom_sections'}
             <div class="container mx-auto mb-12">
-              <div class="mx-4">
-                <slot />
-              </div>
+              <slot />
             </div>
           {/if}
         {/each}

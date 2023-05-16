@@ -37,7 +37,7 @@
 
 <!-- see app.css for more prose adjustments -->
 <article
-  class="text_width prose max-w-none px-4 text-neutral {typography} {options}"
+  class="container prose max-w-none px-4 text-neutral {typography} {options}"
   use:post_process
 >
   {@html source}

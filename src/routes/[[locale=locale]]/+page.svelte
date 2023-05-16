@@ -21,7 +21,7 @@
   $: podcast_episodes = parseEntries(data.podcast_episodes, 'podcast_episodes');
 </script>
 
-<div class="">
+<div class="px-4">
   <div class="mb-12">
     <a
       class="text-3xl font-bold text-base-content transition hover:text-primary"

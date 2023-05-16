@@ -13,7 +13,7 @@
 </script>
 
 <div class="mt-12">
-  <div class="container mx-auto flex flex-col gap-y-3 space-y-4">
+  <div class="container mx-auto flex flex-col space-y-8">
     {#each partners as partner}
       <Partner {...partner} />
     {/each}

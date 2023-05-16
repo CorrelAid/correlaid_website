@@ -87,11 +87,11 @@
   }
 }
 
-.container {
-  max-width: 800px;
+.wider_container {
+  max-width: 1000px;
 }
 
-.text_width {
+.container {
   max-width: 700px;
 }
 

@@ -7,13 +7,13 @@
   export let email = '';
   export let pronouns = '';
   export let image_desc = void 0;
-  $: console.log(image_desc);
+
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
 </script>
 
-<div class="grid grid-cols-8 gap-x-12 rounded pb-6 pt-8">
-  <div class="col-span-full flex items-center md:col-span-3">
+<div class="grid grid-cols-8 gap-x-9 rounded pb-6 pt-2">
+  <div class="col-span-full flex items-center justify-center md:col-span-3">
     <Avatar src={img} alt={name} {image_desc} />
   </div>
 

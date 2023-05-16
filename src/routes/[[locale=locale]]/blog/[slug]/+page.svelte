@@ -40,8 +40,7 @@
   <Html source={lang_content.text} options={'mx-auto'} slot="main" />
 </TextContainer>
 {#if content_creators.length != 0}
-  <div class="container mx-auto space-y-8 px-4 pt-12">
-    <hr />
+  <div class="container mx-auto space-y-8 px-4 py-12">
     {#each content_creators as person}
       <Person {...person} />
     {/each}

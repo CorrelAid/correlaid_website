@@ -16,7 +16,7 @@
   );
 </script>
 
-<div class="container mx-auto flex flex-col gap-y-3 space-y-8 pb-12">
+<div class="container mx-auto flex flex-col gap-y-8 px-4 pb-12">
   {#each ethics_commission as person}
     <Person {...person} />
   {/each}

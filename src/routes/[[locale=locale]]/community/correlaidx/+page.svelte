@@ -19,7 +19,7 @@
   $: local_chapters = data.local_chapters;
 </script>
 
-<div class="">
+<div class="px-4">
   <div class="">
     <div class="mb-16 grid grid-cols-2 gap-7">
       {#each local_chapters as local_chapter}
@@ -29,7 +29,7 @@
           }/community/correlaidx/${local_chapter.translations[0].city}`}
         >
           <Box type={'correlaidx'}>
-            <h2>{local_chapter.translations[0].city}</h2>
+            <h2 class="">{local_chapter.translations[0].city}</h2>
           </Box>
         </a>
       {/each}

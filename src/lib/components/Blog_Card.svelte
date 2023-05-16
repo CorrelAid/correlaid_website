@@ -64,8 +64,8 @@
     </a>
   </div>
   <div class="">
-    <div class="px-4 pb-4 pt-2 md:p-4">
-      <h3 class="line-clamp-3 md:pr-12 md:line-clamp-2">
+    <div class="px-4 pb-4 pt-3 md:p-4 md:pt-2">
+      <h3 class="line-clamp-2 md:pr-7">
         {#if external === false}
           <a
             {href}
@@ -92,7 +92,7 @@
           </a>
         {/if}
       </h3>
-      <p class="pt-2 text-sm line-clamp-1">
+      <p class="pt-1.5 text-sm line-clamp-1">
         {proc_date} - {#each content_creators as person, i}
           {#if person.Content_Creators_id.person}
             {person.Content_Creators_id.person
@@ -101,8 +101,8 @@
         {/each}
       </p>
 
-      <div class="pb-1 pt-2">
-        <p class="overflow-hidden text-justify text-base-content line-clamp-4">
+      <div class="pb-1 pt-1.5">
+        <p class="overflow-hidden text-justify text-base-content line-clamp-3">
           {teaser}
         </p>
       </div>

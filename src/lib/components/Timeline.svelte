@@ -85,16 +85,16 @@
       >
         <Html
           source={step.timeline_steps_id.translations[0].text}
-          options={''}
+          options={'container mx-auto'}
         />
       </div>
     </div>
     <div />
   {/each}
 </div>
-<div class="text_width lg:hidden">
+<div class="container lg:hidden">
   {#each steps as step, i}
-    <div class=" w-full py-8" />
+    <div class=" w-full" />
     <div
       class="relative mb-12 flex justify-center border-t-2 border-neutral-25"
     >
@@ -115,10 +115,7 @@
             {/if}
           </div>
         </div>
-        <Html
-          source={step.timeline_steps_id.translations[0].text}
-          options={''}
-        />
+        <Html source={step.timeline_steps_id.translations[0].text} />
       </div>
     </div>
   {/each}
