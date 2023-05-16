@@ -15,7 +15,6 @@ export function contacts(section) {
 
   const personParams = {
     name: section.item.person.name,
-    email: section.item.person.email,
     position: section.item.translations[0].position,
     description: section.item.translations[0].description,
     links: links,
@@ -31,6 +30,12 @@ export function contacts(section) {
 
   if (section.item.person.translations[0]) {
     personParams['pronouns'] = section.item.person.translations[0].pronouns;
+  }
+
+  if (section.item.email) {
+    personParams['email'] = section.item.email;
+  } else {
+    personParams['email'] = section.item.person.email;
   }
 
   return personParams;
