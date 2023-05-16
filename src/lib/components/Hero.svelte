@@ -53,13 +53,13 @@
           </div>
         {/if}
         <div class={correlaidx == true ? 'text-center' : ''}>
-          <h2
+          <h1
             class="mx-4 text-4xl font-bold tracking-wide text-white {correlaidx
               ? 'inline-block bg-tertiary px-2 py-1 font-light'
               : ''}"
           >
             {text}
-          </h2>
+          </h1>
         </div>
         {#if Array.isArray(buttons) && buttons.length !== 0}
           <div
