@@ -7,6 +7,7 @@
   import ExternalLink from '../svg/External_Link.svelte';
 
   export let title;
+  export let tags;
   export let subtitle;
   export let resp_unit = '';
   export let correlaidx_city = '';
@@ -67,6 +68,14 @@
         {title}
       </h3>
     {/if}
+    <div class="flex w-full gap-x-2 pb-4">
+      {#each tags as tag}
+        <span
+          class="inline-flex items-center rounded bg-secondary px-3 py-1 text-xs font-bold text-white line-clamp-1"
+          >{tag}</span
+        >
+      {/each}
+    </div>
 
     <h4 class="text-md line-clamp-3">{subtitle}</h4>
     {#if resp_unit != ''}

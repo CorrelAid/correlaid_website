@@ -39,7 +39,7 @@
       <div class="flex w-full gap-x-2 pb-4">
         {#each tags as tag}
           <span
-            class="inline-flex items-center rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+            class="inline-flex items-center rounded bg-secondary px-3 py-1 text-xs font-bold text-white line-clamp-1"
             >{tag}</span
           >
         {/each}
