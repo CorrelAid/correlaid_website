@@ -7,7 +7,7 @@
   export let title;
 </script>
 
-<div class="container mx-auto pt-12 pb-4">
+<div class="container mx-auto pb-4 pt-12">
   <div class="">
     <Html
       source={`<h1>${title}</h1><p class="text-md">${teaser}</p>`}

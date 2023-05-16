@@ -51,7 +51,7 @@
     in:fly={{x: -sidenav_width, duration: 250}}
     out:fly={{x: -sidenav_width, duration: 250}}
   >
-    <nav aria-label="Main Nav" class="flex flex-col pt-7 pl-7">
+    <nav aria-label="Main Nav" class="flex flex-col pl-7 pt-7">
       <ul class="space-y-3 text-2xl text-base-content">
         {#each bot_nav as navItem}
           <li>
@@ -107,7 +107,7 @@
     </nav>
 
     <div class="">
-      <div class="flex w-2/4 items-center pl-7 pb-7">
+      <div class="flex w-2/4 items-center pb-7 pl-7">
         <div class="mx-auto flex items-center gap-5">
           <LinkButton
             text={$t('navbar.donate').text}

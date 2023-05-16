@@ -33,9 +33,9 @@
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
-  <div class="px-3 pt-4 pb-6">
+  <div class="px-3 pb-6 pt-4">
     {#if href != ''}
-      <div class="mr-10 mb-3">
+      <div class="mb-3 mr-10">
         {#if href.includes('https://')}
           <a
             {href}
