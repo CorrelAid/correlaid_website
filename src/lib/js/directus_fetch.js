@@ -45,14 +45,21 @@ async function directus_fetch(query, vars, allowAllVarNames = false) {
   });
   if (!response.ok) {
     throw error(500, {
-      message: `Unexpected cms response ${response.statusText}`,
+      message: `Unexpected cms response ${response.statusText} for query ${
+        query.split(/\r?\n/)[0]
+      }`,
     });
   }
 
   const data = await response.json();
 
   if ('errors' in data) {
-    throw error(500, `Cms errors ${data.errors[0].message}`);
+    throw error(
+      500,
+      `Cms errors ${data.errors[0].message} for query ${
+        query.split(/\r?\n/)[0]
+      }`,
+    );
   }
 
   return data.data;

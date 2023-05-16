@@ -108,7 +108,11 @@ async function queryCmsGraphQl(query, vars) {
     headers: {'Content-Type': 'application/json'},
   });
   if (!response.ok) {
-    throw new Error(`unexpected cms response ${response.statusText}`);
+    throw new Error(
+      `unexpected cms response ${response.statusText} for query ${
+        query.split(/\r?\n/)[0]
+      }`,
+    );
   }
 
   const data = await response.json();
