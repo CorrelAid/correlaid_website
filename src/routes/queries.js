@@ -55,6 +55,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 				}
 
 				... on contacts {
+					email
 					translations(
 						filter: { languages_code: { code: { _eq: $language } } }
 					) {

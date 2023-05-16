@@ -25,7 +25,6 @@ query LatestUpdates($language: String = "de-DE") {
 			}
 			image_alt
 			title
-			tags
 			slug
 			teaser
 		}

@@ -125,6 +125,7 @@ export function workshops(workshop) {
     language: workshop.language,
     href: workshop.resource_link,
     resp_unit: workshop.responsible_unit,
+    tags: workshop.tags,
   };
   if (workshop.local_chapters[0]) {
     // TODO: This is used inside the WorkshopCard component to define the href to the workshop.
