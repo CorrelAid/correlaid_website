@@ -105,7 +105,7 @@
   <Header on:changeLanguage={handleLocaleChange} />
   {#if $header_height}
     <div class="block xl:hidden" style="min-height: {$header_height}px;" />
-    <div id="grow" class="w-screen">
+    <main id="grow" class="w-screen">
       <!-- page.error case is required for the static build which otherwise renders content -->
       {#if content && $page.error == null}
         {#each content as section}
@@ -175,7 +175,7 @@
 
         <slot />
       {/if}
-    </div>
+    </main>
     <Footer />
   {/if}
 </div>
