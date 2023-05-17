@@ -29,7 +29,6 @@
       : (c_hidden = 'inline-block');
     aria === 'false' ? (aria = 'true') : (aria = 'false');
   }
-  $: console.log(c_hidden);
 </script>
 
 <section
