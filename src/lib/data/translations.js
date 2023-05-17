@@ -127,7 +127,7 @@ export default {
       url: '/en/education/learning-r',
     },
     'navbar.education.tidy_tuesday': {
-      text: 'Tidy Tuesday',
+      text: 'TidyTuesday',
       url: '/en/education/tidy-tuesday',
     },
     'navbar.education.mentoring': {

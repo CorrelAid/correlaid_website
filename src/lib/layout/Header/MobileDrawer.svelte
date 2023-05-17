@@ -51,7 +51,7 @@
     in:fly={{x: -sidenav_width, duration: 250}}
     out:fly={{x: -sidenav_width, duration: 250}}
   >
-    <nav aria-label="Main Nav" class="flex flex-col pl-7 pt-7">
+    <nav aria-label="Main Nav" class="z-30 flex flex-col pl-7 pt-7">
       <ul class="space-y-3 text-2xl text-base-content">
         {#each bot_nav as navItem}
           <li>
