@@ -1,10 +1,11 @@
 export const lcDetailsQuery = `
 query LocalChapterDetails($slug: String, $language: String = "de-DE") {
-	Events(
+	Events(sort: ["date"], 
 		filter: {
 			local_chapters: {
 				Local_Chapters_id: { translations: { city: { _eq: $slug } } }
-			}
+			},
+            date: {_gte: "$NOW"}
 		}
 	) {
 		date
