@@ -16,12 +16,16 @@
   $: if (color == 'bg-secondary') {
     color = 'bg-secondary';
   }
+
+  $: target = type == 'external' ? '_blank' : '_self';
+
 </script>
 
 <a
   class="block min-w-36 max-w-80 rounded-md px-4 py-2 text-center font-semibold text-white shadow-md transition {String(
     color,
   )} {options}"
+  target={target}
   {href}
   ><span>
     {text}{#if type == 'external'}<span
