@@ -4,7 +4,6 @@
   export let alt;
   export let image_desc = void 0;
   export let w = 56;
-  // $: console.log(image_desc);
 </script>
 
 <div class="relative">
