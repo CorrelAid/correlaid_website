@@ -1,6 +1,7 @@
 <script>
   import LinkButton from './Link_Button.svelte';
   import {header_height} from '$lib/stores/dims';
+  import Info from '$lib/svg/Info.svelte';
   import {gen_img_url} from '$lib/js/helpers';
   import CorrelAidXLogo from '$lib/svg/CorrelAidX_Logo.svelte';
   export let gradient_only;
@@ -18,6 +19,17 @@
   $: if (image != null) {
     image_id = image.id;
   }
+
+  let c_hidden = 'hidden';
+  let aria = 'false';
+
+  function handle_hide() {
+    c_hidden === 'inline-block'
+      ? (c_hidden = 'hidden')
+      : (c_hidden = 'inline-block');
+    aria === 'false' ? (aria = 'true') : (aria = 'false');
+  }
+  $: console.log(c_hidden);
 </script>
 
 <section
@@ -35,11 +47,27 @@
       aria-label={image_alt}
     />
     {#if image_desc}
-      <div class="absolute bottom-0 right-0 z-20 opacity-100">
+      <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 md:block">
         <span
-          class="z-0 block rounded-tl bg-white px-1 py-0.5 text-xs opacity-100"
+          class="z-0 block rounded-tl px-1 py-1 text-xs text-white opacity-100"
           >{image_desc}</span
         >
+      </div>
+      <div class="absolute bottom-0 left-0 z-20 pb-2.5 pl-2 md:hidden">
+        <p class="inline text-xs text-white {c_hidden}" id="credit">
+          {image_desc}
+        </p>
+      </div>
+      <div class="absolute bottom-0 right-0 z-20 md:hidden">
+        <button
+          class="z-20 m-1 my-2 rounded-full bg-white p-0.5 text-sm md:hidden"
+          on:click={handle_hide}
+          aria-label="Credit"
+          aria-expanded={aria}
+          aria-controls="credit"
+        >
+          <Info height={23} width={23} />
+        </button>
       </div>
     {/if}
   {/if}
@@ -47,14 +75,21 @@
     <div class="container mx-auto">
       <div class="">
         {#if correlaidx}
-          <div class="flex justify-center">
+          <div
+            class="flex justify-center md:landscape:hidden lg:landscape:flex"
+          >
             <CorrelAidXLogo width={250} height={250} />
+          </div>
+          <div
+            class="hidden justify-center md:landscape:flex lg:landscape:hidden"
+          >
+            <CorrelAidXLogo width={100} height={100} />
           </div>
         {/if}
         <div class={correlaidx == true ? 'text-center' : ''}>
           <h1
             class="mx-4 text-4xl font-bold tracking-wide text-white {correlaidx
-              ? 'inline-block bg-tertiary px-2 py-1 font-light'
+              ? 'inline-block bg-tertiary px-2 py-1 font-light landscape:md:text-sm landscape:lg:text-4xl'
               : ''}"
           >
             {text}
