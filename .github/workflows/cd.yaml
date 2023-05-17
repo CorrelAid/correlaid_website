@@ -28,8 +28,8 @@ jobs:
           npm run lint
           npm run test
 
-      - name: Deploy production on cloudflare
+      - name: Deploy production on Vercel
         env: # Set the secret as an input
-          WEBHOOK: ${{ secrets.CLOUDFLARE_WEBHOOK }}
+          WEBHOOK: ${{ secrets.VERCEL_WEBHOOK }}
         run: |
           curl -X POST "$WEBHOOK"
