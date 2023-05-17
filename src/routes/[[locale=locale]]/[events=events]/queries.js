@@ -1,6 +1,6 @@
 export const eventQuery = `
 query Events($language: String = "de-DE") {
-	Events(sort: ["-date"]) {
+	Events(sort: ["date"], filter: {date: {_gte: "$NOW"}}) {
 		id
 		date
 		start_time
