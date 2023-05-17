@@ -29,7 +29,7 @@ query LatestUpdates($language: String = "de-DE") {
 			teaser
 		}
 	}
-	Events(sort: ["-date"]) {
+	Events(sort: ["date"], filter: {date: {_gte: "$NOW"}}) {
 		id
 		date
 		start_time
