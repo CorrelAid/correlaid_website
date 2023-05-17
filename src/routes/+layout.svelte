@@ -86,7 +86,7 @@
               <Cta {...section.props} />
             </div>
           {:else if section.collection === 'timelines'}
-            <div class="wider_container mx-auto pb-12">
+            <div class="container mx-auto pb-12">
               <Timeline {...section.props} />
             </div>
           {:else if section.collection === 'wysiwyg'}
