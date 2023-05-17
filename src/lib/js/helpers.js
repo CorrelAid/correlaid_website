@@ -91,6 +91,18 @@ export function get_lang(params) {
   return lang;
 }
 
+export function localeToLang(locale) {
+  let lang;
+  if (locale === 'de') {
+    lang = 'de-DE';
+  } else if (locale === 'en') {
+    lang = 'en-US';
+  } else {
+    throw new Error('Unknonw locale');
+  }
+  return lang;
+}
+
 /* Gets the locale name (its undefined when german and taken from params.locale,
  * because locale is optional parameter).
  */

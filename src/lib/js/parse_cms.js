@@ -7,7 +7,6 @@ function reportParseError(err, description, rawInput) {
   console.log(err.stack);
   console.log(rawInput);
   console.groupEnd();
-  console.log(PUBLIC_ON_CMS_ERROR);
   if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
     throw Error('Error while parsing CMS content');
   }
@@ -121,4 +120,83 @@ export function parseProject(project) {
     reportParseError(err, 'For Project page', project);
   }
   return parsedProject;
+}
+
+export function parseLocalChapterPage(localChapterPage) {
+  let parsedLcPage;
+  try {
+    parsedLcPage = {
+      local_chapter: localChapterPage.Local_Chapters[0],
+      events: parseEntries(localChapterPage.Events, 'events'),
+      projects: parseEntries(
+        localChapterPage.Local_Chapters[0].Projects,
+        'lcProjects',
+      ),
+    };
+
+    parsedLcPage['hero'] = parseModel.lcHeros(parsedLcPage['local_chapter']);
+    parsedLcPage['local_admins'] = parseEntries(
+      parsedLcPage['local_chapter'].local_administrators,
+      'local_administrators',
+    );
+    parsedLcPage['lcEmail'] = parsedLcPage['local_chapter'].lcEmail;
+    parsedLcPage['description'] =
+      parsedLcPage['local_chapter'].translations[0].description;
+    parsedLcPage['howToGetInTouch'] =
+      parsedLcPage['local_chapter'].translations[0].how_to_get_in_touch;
+  } catch (err) {
+    reportParseError(err, 'For local chapter page', localChapterPage);
+  }
+
+  return parsedLcPage;
+}
+
+/*
+ * Parses all the elements from an event page that could cause an error.
+ * This means that elements that will show up with invalid values or will be missing
+ * are not considered at this point. In particular missing elements might be undefined
+ * and will be rendered as empty text and incorrect dates will yield the string representation
+ * 'Invalid Date' (as per default js Date functionality).
+ */
+export function parseEventPage(eventPage) {
+  let parsedEventPage;
+  try {
+    parsedEventPage = eventPage.Events[0];
+    parsedEventPage['root'] = new URL(
+      parsedEventPage['registration_link'],
+    ).hostname.replace('www.', '');
+  } catch (err) {
+    reportParseError(err, 'For event page', eventPage);
+  }
+
+  return parsedEventPage;
+}
+
+/*
+ * Parses all the elements from a blog post page that could cause an error.
+ * This means that elements that will show up with invalid values or will be missing
+ * are not considered at this point. In particular missing elements might be undefined
+ * and will be rendered as empty text and incorrect dates will yield the string representation
+ * 'Invalid Date' (as per default js Date functionality).
+ */
+export function parseBlogPostPage(blogPostPage) {
+  let parsedBlogPostPage;
+
+  try {
+    parsedBlogPostPage = {
+      pubDate: blogPostPage.Posts[0].pubdate,
+      contentAllLanguages: blogPostPage.Posts[0].translations,
+      content_creators: parseEntries(
+        blogPostPage.Posts[0].content_creators,
+        'content_creators',
+      ),
+      post: blogPostPage.Posts[0],
+    };
+    if (typeof parsedBlogPostPage.contentAllLanguages === 'undefined') {
+      throw new Error('Blog post does not contain content in any language');
+    }
+  } catch (err) {
+    reportParseError(err, 'For blog post page', blogPostPage);
+  }
+  return parsedBlogPostPage;
 }
