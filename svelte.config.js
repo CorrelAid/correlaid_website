@@ -197,27 +197,32 @@ if (process.env.PUBLIC_PRERENDER === 'ALL') {
   prerenderRoutes.push('*');
 }
 
+let configuredAdapter;
+
+if (process.env.PUBLIC_ADAPTER === 'STATIC') {
+  const staticBuildDir = process.env.BUILD_DIR || '.svelte-kit/cloudflare';
+
+  configuredAdapter = adapterStatic({
+    pages: staticBuildDir,
+    assets: staticBuildDir,
+    fallback: null,
+    precompress: false,
+    strict: true,
+  });
+} else {
+  configuredAdapter = adapter({
+    routes: {
+      include: ['/*'],
+      exclude: ['<all>'],
+    },
+  });
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter:
-      process.env.PUBLIC_ADAPTER === 'STATIC'
-        ? adapterStatic({
-            pages: '.svelte-kit/cloudflare',
-            assets: '.svelte-kit/cloudflare',
-            fallback: null,
-            precompress: false,
-            strict: true,
-          })
-        : adapter({
-            routes: {
-              include: ['/*'],
-              exclude: ['<all>'],
-            },
-          }),
-    prerender: {
-      entries: process.env.PUBLIC_PRERENDER === 'ALL' ? prerenderRoutes : ['*'],
-    },
+    adapter: configuredAdapter,
+    prerender: {entries: prerenderRoutes},
   },
   preprocess: vitePreprocess(),
 };

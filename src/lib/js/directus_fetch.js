@@ -22,6 +22,20 @@ export function validateVars(vars) {
 }
 
 /*
+ * Creates an error message for a graphql query indicating which query
+ * failed with which variables.
+ * This function assumes the very specific query format used throughout the project.
+ * Queries start on the second line of a multiline String and start with a line
+ * indicating their name.
+ */
+function queryErrorMsg(query, vars) {
+  const firstQueryLine = query.split(/\r?\n/)[1];
+  const queryNameAndVars = firstQueryLine.slice(0, firstQueryLine.indexOf('{'));
+
+  return `${queryNameAndVars} with vars ${JSON.stringify(vars)}`;
+}
+
+/*
  * Fetches data from the cms via a graphql query with optional
  * variables passed to the query.
  * By default the variables are validated and only allow a small
@@ -45,9 +59,9 @@ async function directus_fetch(query, vars, allowAllVarNames = false) {
   });
   if (!response.ok) {
     throw error(500, {
-      message: `Unexpected cms response ${response.statusText} for query ${
-        query.split(/\r?\n/)[0]
-      }`,
+      message: `Unexpected cms response ${
+        response.statusText
+      } for ${queryErrorMsg(query, vars)}`,
     });
   }
 
@@ -56,9 +70,7 @@ async function directus_fetch(query, vars, allowAllVarNames = false) {
   if ('errors' in data) {
     throw error(
       500,
-      `Cms errors ${data.errors[0].message} for query ${
-        query.split(/\r?\n/)[0]
-      }`,
+      `Cms errors ${data.errors[0].message} for ${queryErrorMsg(query, vars)}`,
     );
   }
 
