@@ -3,7 +3,13 @@ import {render, screen} from '@testing-library/svelte';
 
 describe('Partner', () => {
   test('contains name and details', () => {
-    render(Partner, {props: {name: 'NPO A', description: 'a very cool NPO'}});
+    render(Partner, {
+      props: {
+        name: 'NPO A',
+        description: 'a very cool NPO',
+        img: 'expected.image.url',
+      },
+    });
 
     expect(screen.getByText('NPO A')).toBeInTheDocument();
     expect(screen.getByText('a very cool NPO')).toBeInTheDocument();

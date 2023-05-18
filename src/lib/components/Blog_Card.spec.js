@@ -8,18 +8,18 @@ describe('Blog Cards', () => {
     title: 'Test blog post',
     teaser: 'This eases the testing blog post',
     pubdate: '2023-04-28T00:20:00',
-    tags: [],
     content_creators: [],
     href: 'https://fakeurl.com',
+    image_alt: 'Not image for testing',
   };
   const blogPropsSlug = {
     langs: ['de-DE'],
     title: 'Test blog post',
     teaser: 'This eases the testing blog post',
     pubdate: '2023-04-28T00:20:00',
-    tags: [],
     content_creators: [],
     slug: 'blog-post-slug',
+    image_alt: 'Not image for testing',
   };
 
   test('Can be initialized with href', () => {

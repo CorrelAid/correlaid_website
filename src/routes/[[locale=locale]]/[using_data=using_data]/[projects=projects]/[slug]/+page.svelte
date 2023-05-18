@@ -7,15 +7,13 @@
   import Box from '$lib/components/Box.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
 
-  import {parseProject} from '$lib/js/parse_cms';
-
   onMount(() => {
     $page_key = 'navbar.using_data.projects';
   });
 
   /** @type {import('./$types').PageData} */
   export let data;
-  $: project = parseProject(data.project);
+  $: project = data;
 </script>
 
 <TextContainer title={project.title} teaser={project.teaser}>

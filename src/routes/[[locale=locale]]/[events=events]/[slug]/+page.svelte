@@ -22,11 +22,8 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let event;
 
-  $: event = data.event;
-  $: dom = new URL(event.registration_link);
-  $: root = dom.hostname.replace('www.', '');
+  $: event = data;
 </script>
 
 <TextContainer title={event.title} teaser={event.teaser}>
@@ -100,7 +97,7 @@
               role="img"
               aria-label={$t('access.sign_up').text}
               ><SignUp width={20} height={20} /></span
-            > <span class="my-auto pl-2">{root}</span>
+            > <span class="my-auto pl-2">{event['root']}</span>
           </a>
         {/if}
       </p>
