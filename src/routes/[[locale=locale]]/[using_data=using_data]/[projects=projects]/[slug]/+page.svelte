@@ -13,7 +13,7 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  $: project = data.project;
+  $: project = data;
 </script>
 
 <TextContainer title={project.title} teaser={project.teaser}>
