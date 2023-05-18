@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {projectDetailsQuery} from './queries.js';
 import {handle_lang} from '$lib/js/helpers';
 import {error} from '@sveltejs/kit';
+import {parseProject} from '$lib/js/parse_cms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
@@ -23,5 +24,5 @@ export async function load({params}) {
 
   data.Projects[0].Posts = posts;
 
-  return {project: data.Projects[0]};
+  return parseProject(data.Projects[0]);
 }

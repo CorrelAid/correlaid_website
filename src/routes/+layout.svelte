@@ -15,7 +15,6 @@
   import QuoteCarousel from '$lib/components/Quote_Carousel.svelte';
   import Cta from '$lib/components/CTA.svelte';
   import CtaGroup from '$lib/components/CTA_group.svelte';
-  import {parseContent} from '$lib/js/parse_cms';
   import LinkButton from '../lib/components/Link_Button.svelte';
   import Icon from '../lib/components/Icon.svelte';
 
@@ -55,7 +54,7 @@
     $page_key === 'navbar.home' ? 'CorrelAid - Data4Good' : title_content;
 
   let content;
-  $: content = parseContent(data.builder, $page_key);
+  $: content = data.content;
 </script>
 
 <svelte:head>
