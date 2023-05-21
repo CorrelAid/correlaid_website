@@ -187,7 +187,7 @@ export function gen_lc_href(params, city) {
   const lc_href = [
     get_locale(params) == 'de' ? '' : '/en',
     '/community/correlaidx/',
-    city,
+    city.toLowerCase(),
   ].join('');
   return lc_href;
 }
