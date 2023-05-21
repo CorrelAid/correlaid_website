@@ -16,7 +16,7 @@
     "precommit": "run-s quick_format lint",
     "init_pre_commit": "husky install",
     "test": "npx vitest run",
-    "e2e": "npx playwright test --trace=off",
+    "e2e": "npx playwright test",
     "serve-static": "npx serve .svelte-kit/cloudflare"
   },
   "devDependencies": {
