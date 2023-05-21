@@ -32,4 +32,13 @@ test.describe('test lc chapter pages', () => {
     });
     await expect(page.getByRole('heading', {name: 'Berlin'})).toHaveCount(1);
   });
+
+  test('lc links in projects', async ({page}) => {
+    await page.goto('/daten-nutzen/projekte/', {waitUntil: 'networkidle'});
+    await page.getByRole('link', {name: 'CorrelAidX Mannheim'}).click();
+    await page.waitForURL('**/community/correlaidx/mannheim/', {
+      waitUntil: 'networkidle',
+    });
+    await expect(page.getByRole('heading', {name: 'Mannheim'})).toHaveCount(1);
+  });
 });
