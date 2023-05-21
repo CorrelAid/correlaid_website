@@ -26,7 +26,7 @@
         {project.organization_name}
       </h2>
       <p>
-        {project.organization_description}
+        <Html source={project.organization_description} />
       </p>
     </Box>
   </div>

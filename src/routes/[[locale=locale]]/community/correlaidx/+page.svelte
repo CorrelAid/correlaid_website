@@ -26,7 +26,7 @@
         <a
           href={`${
             get_locale($page.params) == 'de' ? '' : '/en'
-          }/community/correlaidx/${local_chapter.translations[0].city}`}
+          }/community/correlaidx/${local_chapter.translations[0].city.toLowerCase()}`}
         >
           <Box type={'correlaidx'}>
             <h2 class="">{local_chapter.translations[0].city}</h2>
