@@ -145,7 +145,7 @@ async function addLcRoutes(routes) {
   });
   for (const post of englishResults['data']['Local_Chapters']) {
     for (const t of post['translations']) {
-      routes.push(`/en/community/correlaidx/${t.slug}`);
+      routes.push(`/en/community/correlaidx/${t.slug.toLowerCase()}`);
     }
   }
 }

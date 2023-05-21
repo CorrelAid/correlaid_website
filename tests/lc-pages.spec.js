@@ -24,5 +24,12 @@ test.describe('test lc chapter pages', () => {
     await expect(page.getByRole('heading', {name: 'Rhein-Main'})).toHaveCount(
       1,
     );
+
+    await page.goto('/en/community/correlaidx', {waitUntil: 'networkidle'});
+    await page.getByRole('link', {name: 'Berlin'}).click();
+    await page.waitForURL('**/en/community/correlaidx/berlin/', {
+      waitUntil: 'networkidle',
+    });
+    await expect(page.getByRole('heading', {name: 'Berlin'})).toHaveCount(1);
   });
 });
