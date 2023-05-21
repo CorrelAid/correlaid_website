@@ -137,7 +137,7 @@ async function addLcRoutes(routes) {
   });
   for (const lc of germanResults['data']['Local_Chapters']) {
     for (const t of lc['translations']) {
-      routes.push(`/community/correlaidx/${t.slug}`);
+      routes.push(`/community/correlaidx/${t.slug.toLowerCase()}`);
     }
   }
   const englishResults = await queryCmsGraphQl(queries['lcs'], {
