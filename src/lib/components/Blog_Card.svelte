@@ -28,16 +28,6 @@
 <article
   class="relative grid-cols-2 rounded border-l border-r border-t border-neutral-25 shadow-sm md:grid"
 >
-  <!-- <div class="absolute top-0 -mt-6 space-x-2">
-  {#if tags}
-    {#each tags as tag}
-      <span
-        class="inline-flex items-center rounded bg-secondary px-3 py-1 text-xs font-bold text-white "
-        >{tag}</span
-      >
-    {/each}
-  {/if}
-</div> -->
   <span
     class="absolute inset-x-0 bottom-0 z-10 h-2 rounded-b bg-gradient-to-r from-primary to-secondary opacity-75"
   />
@@ -76,6 +66,7 @@
         {:else}
           <a
             {href}
+            target="_blank"
             class="text-lg font-semibold leading-snug text-base-content transition hover:text-primary"
           >
             <span class="mr-1">
