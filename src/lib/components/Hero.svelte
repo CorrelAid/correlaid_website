@@ -46,20 +46,22 @@
       aria-label={image_alt}
     />
     {#if image_desc}
-      <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 md:block">
+      <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 lg:block">
         <span
           class="z-0 block rounded-tl px-1 py-1 text-xs text-white opacity-100"
           >{image_desc}</span
         >
       </div>
-      <div class="absolute bottom-0 left-0 z-20 pb-2.5 pl-2 md:hidden">
+      <div
+        class="absolute bottom-0 left-0 z-20 max-w-80 overflow-hidden whitespace-nowrap pb-0.5 pl-2 md:max-w-none lg:hidden"
+      >
         <p class="inline text-xs text-white {c_hidden}" id="credit">
           {image_desc}
         </p>
       </div>
-      <div class="absolute bottom-0 right-0 z-20 md:hidden">
+      <div class="absolute bottom-0 right-0 z-20 lg:hidden">
         <button
-          class="z-20 m-1 my-2 rounded-full bg-white p-0.5 text-sm md:hidden"
+          class="z-20 m-1 my-2 rounded-full bg-white p-0.5 text-sm lg:hidden"
           on:click={handle_hide}
           aria-label="Credit"
           aria-expanded={aria}
@@ -70,25 +72,26 @@
       </div>
     {/if}
   {/if}
-  <div class="z-20 w-full">
+  <div class="z-10 w-full">
     <div class="container mx-auto">
       <div class="">
         {#if correlaidx}
           <div
-            class="flex justify-center md:landscape:hidden lg:landscape:flex"
+            class="flex justify-center sm:landscape:hidden lg:landscape:flex"
           >
-            <CorrelAidXLogo width={250} height={250} />
+            <CorrelAidXLogo width={230} height={230} />
           </div>
           <div
-            class="hidden justify-center md:landscape:flex lg:landscape:hidden"
+            class="hidden justify-center sm:landscape:flex lg:landscape:hidden"
           >
             <CorrelAidXLogo width={100} height={100} />
           </div>
         {/if}
-        <div class={correlaidx == true ? 'text-center' : ''}>
+        <div class={correlaidx === true ? 'text-center' : ''}>
           <h1
-            class="mx-4 text-4xl font-bold tracking-wide text-white {correlaidx
-              ? 'inline-block bg-tertiary px-2 py-1 font-light landscape:md:text-sm landscape:lg:text-4xl'
+            class="mx-4 text-4xl font-bold tracking-wide text-white {correlaidx ===
+            true
+              ? 'mb-8 inline-block bg-tertiary px-2 py-1 text-2xl font-light sm:landscape:text-xl md:landscape:text-2xl lg:landscape:text-3xl'
               : ''}"
           >
             {text}

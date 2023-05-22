@@ -40,6 +40,7 @@ module.exports = {
 
       maxWidth: {
         80: '20rem',
+        48: '80rem',
       },
 
       colors: {
