@@ -15,12 +15,19 @@
   {/if}
 
   {#if repo}
-    <a class="pr-4 text-secondary underline" target="_blank" href={repo}>Repo</a
+    <a
+      class="pr-4 text-secondary underline"
+      target="_blank"
+      rel="noreferrer"
+      href={repo}>Repo</a
     >
   {/if}
   {#if podcast_href}
-    <a class="pr-4 text-secondary underline" target="_blank" href={podcast_href}
-      >Podcast</a
+    <a
+      class="pr-4 text-secondary underline"
+      target="_blank"
+      rel="noreferrer"
+      href={podcast_href}>Podcast</a
     >
   {/if}
   {#if post_slug}
