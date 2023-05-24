@@ -159,10 +159,9 @@ export function parseLocalChapterPage(localChapterPage) {
  * 'Invalid Date' (as per default js Date functionality).
  */
 export function parseEventPage(eventPage) {
-  let parsedEventPage;
+  const parsedEventPage = eventPage.Events[0];
   if (eventPage.Events[0]['registration_link']) {
     try {
-      parsedEventPage = eventPage.Events[0];
       parsedEventPage['root'] = new URL(
         parsedEventPage['registration_link'],
       ).hostname.replace('www.', '');
