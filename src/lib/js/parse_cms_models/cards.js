@@ -25,7 +25,7 @@ export function events(event) {
     slug: event.slug,
     title: event.title,
     teaser: event.teaser,
-    date: event.date,
+    date: new Date(event.date),
     tags: event.tags,
     language: event.language,
   };

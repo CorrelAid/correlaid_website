@@ -1,6 +1,6 @@
 <script>
   import {t, locale} from '$lib/stores/i18n';
-  import {gen_date} from '$lib/js/helpers';
+  import {toLocalDateString} from '$lib/js/helpers';
 
   export let href;
   export let slug;
@@ -11,7 +11,7 @@
   export let language;
   import Langs from '$lib/components/Langs.svelte';
   let proc_date;
-  $: proc_date = gen_date(date, $locale);
+  $: proc_date = toLocalDateString(date, $locale);
 
   if (typeof slug !== undefined) {
     href = $t('navbar.events').url + '/' + slug;

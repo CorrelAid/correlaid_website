@@ -2,19 +2,19 @@ import translations from '$lib/data/translations';
 import _ from 'lodash';
 import {PUBLIC_API_URL} from '$env/static/public';
 
-/*
+/**
  * Extracts the last substring after /
  */
 export const getLastItem = (thePath) =>
   thePath.substring(thePath.lastIndexOf('/') + 1);
 
-/*
+/**
  * Extracts the last substring after .
  */
 export const getGroup = (thePath) =>
   thePath.substring(thePath.lastIndexOf('.') + 1);
 
-/*
+/**
  * Extracts a translation from translations, given a locale and a page key.
  */
 export function translate(locale, key, vars) {
@@ -40,7 +40,7 @@ export function translate(locale, key, vars) {
   return {text, url};
 }
 
-/*
+/**
  * Contructs regex that matches valid url paramters by extracting
  * them from translations given one or multiple page keys.
  */
@@ -71,14 +71,14 @@ function normalizePath(path) {
   }
 }
 
-/*
+/**
  * Finds a page key given a valid url.
  */
 export const find = (v, path) => {
   return Object.keys(v).filter((k) => v[k].url === normalizePath(path));
 };
 
-/*
+/**
  * Returns the name of the language in directus format given the path parameters object.
  */
 export function get_lang(params) {
@@ -103,7 +103,8 @@ export function localeToLang(locale) {
   return lang;
 }
 
-/* Gets the locale name (its undefined when german and taken from params.locale,
+/**
+ * Gets the locale name (its undefined when german and taken from params.locale,
  * because locale is optional parameter).
  */
 export function get_locale(params) {
@@ -117,11 +118,15 @@ export function gen_img_url(id, transform = '') {
   return `${PUBLIC_API_URL}/assets/${id}?${transform}`;
 }
 
-/*
- * Generates a custom date string given a date string taken from directus and a locale.
- * If year is true, it also return the year
+/**
+ * Generates a custom date string given a Date object
+ *
+ * @param {Date} date
+ * @param {string} locale String representation of the locale
+ * @param {boolean} year A Flag whether the output should contain the year
+ * @return {string} Represents the date formatted according to the locale and the year flag
  */
-export function gen_date(date, locale, year = false) {
+export function toLocalDateString(date, locale, year = false) {
   let options = {
     month: 'long',
     day: 'numeric',
@@ -133,12 +138,25 @@ export function gen_date(date, locale, year = false) {
       year: 'numeric',
     };
   }
-  date = new Date(Date.parse(date));
 
   return date.toLocaleString(locale, options);
 }
 
-/*
+/**
+ * Generates a custom date string.
+ *
+ * @param {string} date String representation of a date
+ * @param {string} locale String representation of the locale
+ * @param {boolean} year A Flag whether the output should contain the year
+ * @return {string} Represents the date formatted according to the locale and the year flag
+ */
+export function gen_date(date, locale, year = false) {
+  date = new Date(Date.parse(date));
+
+  return toLocalDateString(date, locale, year);
+}
+
+/**
  * Generates a custom time string given a time string taken from
  * directus and a locale.
  */
@@ -153,7 +171,7 @@ export function gen_time(time, locale) {
   return time.toLocaleTimeString(locale, options);
 }
 
-/*
+/**
  * Checking if post exists in current locale, if not using other language.
  * Getting languages the posts exists in.
  */
