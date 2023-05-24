@@ -1732,12 +1732,12 @@
     },
     {
       "source": "/correlaidx/austria/",
-      "destination": "/community/correlaidx/Österreich/",
+      "destination": "/community/correlaidx/österreich/",
       "permanent": true
     },
     {
       "source": "/correlaidx/netherlands/",
-      "destination": "/community/correlaidx/Nederland/",
+      "destination": "/community/correlaidx/nederland/",
       "permanent": true
     },
     {
@@ -2382,122 +2382,122 @@
     },
     {
       "source": "/correlaidx/berlin/",
-      "destination": "/community/correlaidx/Berlin",
+      "destination": "/community/correlaidx/berlin",
       "permanent": true
     },
     {
       "source": "/correlaidx/bremen/",
-      "destination": "/community/correlaidx/Bremen",
+      "destination": "/community/correlaidx/bremen",
       "permanent": true
     },
     {
       "source": "/correlaidx/hamburg/",
-      "destination": "/community/correlaidx/Hamburg",
+      "destination": "/community/correlaidx/hamburg",
       "permanent": true
     },
     {
       "source": "/correlaidx/k%C3%B6ln/",
-      "destination": "/community/correlaidx/Köln",
+      "destination": "/community/correlaidx/köln",
       "permanent": true
     },
     {
       "source": "/correlaidx/konstanz/",
-      "destination": "/community/correlaidx/Konstanz",
+      "destination": "/community/correlaidx/konstanz",
       "permanent": true
     },
     {
       "source": "/correlaidx/m%C3%BCnchen/",
-      "destination": "/community/correlaidx/München",
+      "destination": "/community/correlaidx/münchen",
       "permanent": true
     },
     {
       "source": "/correlaidx/m%C3%BCnster/",
-      "destination": "/community/correlaidx/Münster",
+      "destination": "/community/correlaidx/münster",
       "permanent": true
     },
     {
       "source": "/correlaidx/mannheim/",
-      "destination": "/community/correlaidx/Mannheim",
+      "destination": "/community/correlaidx/mannheim",
       "permanent": true
     },
     {
       "source": "/correlaidx/paris/",
-      "destination": "/community/correlaidx/Paris",
+      "destination": "/community/correlaidx/paris",
       "permanent": true
     },
     {
       "source": "/correlaidx/rhein-main/",
-      "destination": "/community/correlaidx/Rhein-Main",
+      "destination": "/community/correlaidx/rhein-main",
       "permanent": true
     },
     {
       "source": "/correlaidx/switzerland/",
-      "destination": "/community/correlaidx/Switzerland",
+      "destination": "/community/correlaidx/switzerland",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/austria/",
-      "destination": "/en/community/correlaidx/Austria",
+      "destination": "/en/community/correlaidx/austria",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/berlin/",
-      "destination": "/en/community/correlaidx/Berlin",
+      "destination": "/en/community/correlaidx/berlin",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/bremen/",
-      "destination": "/en/community/correlaidx/Bremen",
+      "destination": "/en/community/correlaidx/bremen",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/cologne/",
-      "destination": "/en/community/correlaidx/Cologne",
+      "destination": "/en/community/correlaidx/cologne",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/hamburg/",
-      "destination": "/en/community/correlaidx/Hamburg",
+      "destination": "/en/community/correlaidx/hamburg",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/konstanz/",
-      "destination": "/en/community/correlaidx/Konstanz",
+      "destination": "/en/community/correlaidx/konstanz",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/mannheim/",
-      "destination": "/en/community/correlaidx/Mannheim",
+      "destination": "/en/community/correlaidx/mannheim",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/muenster/",
-      "destination": "/en/community/correlaidx/Münster",
+      "destination": "/en/community/correlaidx/münster",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/munich/",
-      "destination": "/en/community/correlaidx/Munich",
+      "destination": "/en/community/correlaidx/munich",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/netherlands/",
-      "destination": "/en/community/correlaidx/Netherlands",
+      "destination": "/en/community/correlaidx/netherlands",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/paris/",
-      "destination": "/en/community/correlaidx/Paris",
+      "destination": "/en/community/correlaidx/paris",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/rhein-main/",
-      "destination": "/en/community/correlaidx/Rhein-Main",
+      "destination": "/en/community/correlaidx/rhein-main",
       "permanent": true
     },
     {
       "source": "/en/correlaidx/switzerland/",
-      "destination": "/en/community/correlaidx/Switzerland",
+      "destination": "/en/community/correlaidx/switzerland",
       "permanent": true
     },
     {

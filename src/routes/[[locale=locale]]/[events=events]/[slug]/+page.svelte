@@ -91,7 +91,12 @@
           </p>
         {/if}
         {#if event.registration_link}
-          <a href={event.registration_link} class="flex" target="_blank">
+          <a
+            href={event.registration_link}
+            class="flex"
+            target="_blank"
+            rel="noreferrer"
+          >
             <span
               class="my-auto flex fill-neutral"
               role="img"

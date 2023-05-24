@@ -67,6 +67,7 @@
           <a
             {href}
             target="_blank"
+            rel="noreferrer"
             class="text-lg font-semibold leading-snug text-base-content transition hover:text-primary"
           >
             <span class="mr-1">
