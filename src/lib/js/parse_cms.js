@@ -160,13 +160,15 @@ export function parseLocalChapterPage(localChapterPage) {
  */
 export function parseEventPage(eventPage) {
   let parsedEventPage;
-  try {
-    parsedEventPage = eventPage.Events[0];
-    parsedEventPage['root'] = new URL(
-      parsedEventPage['registration_link'],
-    ).hostname.replace('www.', '');
-  } catch (err) {
-    reportParseError(err, 'For event page', eventPage);
+  if (eventPage.Events[0]['registration_link']) {
+    try {
+      parsedEventPage = eventPage.Events[0];
+      parsedEventPage['root'] = new URL(
+        parsedEventPage['registration_link'],
+      ).hostname.replace('www.', '');
+    } catch (err) {
+      reportParseError(err, 'For event page', eventPage);
+    }
   }
 
   return parsedEventPage;
