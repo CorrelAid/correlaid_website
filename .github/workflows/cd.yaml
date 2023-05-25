@@ -28,6 +28,24 @@ jobs:
           npm run lint
           npm run test
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run tests on static build
+        env:
+          PUBLIC_API_URL: https://cms.correlaid.org
+          PUBLIC_PRERENDER: ALL
+          PUBLIC_ADAPTER: STATIC
+          PUBLIC_ON_CMS_ERROR: FAIL
+        run: npm run build-and-test
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
       - name: Deploy production on Vercel
         env: # Set the secret as an input
           WEBHOOK: ${{ secrets.VERCEL_WEBHOOK }}
