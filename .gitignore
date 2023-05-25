@@ -14,4 +14,3 @@ vite.config.ts.timestamp-*
 /playwright-report/
 /playwright/.cache/
 tests-examples
-.github/workflows/playwright.yml
