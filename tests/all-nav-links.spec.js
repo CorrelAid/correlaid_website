@@ -178,7 +178,7 @@ test.describe('test regular viewport', () => {
   ];
 
   test('smoke test all nav links', async ({page}) => {
-    await page.goto('http://localhost:3000/', {waitUntil: 'networkidle'});
+    await page.goto('/', {waitUntil: 'networkidle'});
     for (const linkItem of linkAndItems) {
       await linkItem.linkClick(page);
       await page.waitForURL(linkItem['page'], {waitUntil: 'networkidle'});
