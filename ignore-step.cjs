@@ -35,10 +35,12 @@ const req = https.request(options, (res) => {
     }
 
     if (!prodRunningFromDeployHook) {
-      console.log('🛑 - Build cancelled');
+      console.log('🛑 - Build cancelled because it was triggered by GitHub.');
       process.exit(0);
     } else {
-      console.log('✅ - Build can proceed');
+      console.log(
+        '✅ - Build can proceed because it was triggered by a deploy hook.',
+      );
       process.exit(1);
     }
   });
