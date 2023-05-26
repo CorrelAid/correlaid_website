@@ -5,6 +5,9 @@ on:
   repository_dispatch:
     types:
       - webhook
+  push:
+    branches:
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
