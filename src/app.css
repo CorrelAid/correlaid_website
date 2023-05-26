@@ -161,3 +161,13 @@
   padding-top: 1px;
   padding-bottom: 1px;
 }
+
+.dvh-100 {
+  height: 100vh;
+}
+
+@supports (height: 100dvh) {
+  .dvh-100 {
+    height: 100dvh;
+  }
+}

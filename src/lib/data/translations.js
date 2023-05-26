@@ -77,7 +77,7 @@ export default {
       text: 'Spenden',
       url: 'https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good',
     },
-    'footer.imprint': {text: 'Impressum & Datenschutz', url: '/impressum'},
+    'footer.imprint': {text: 'Impressum', url: '/impressum'},
     'footer.coc': {text: 'Code of Conduct', url: '/codeofconduct'},
     'footer.coe': {text: 'Code of Ethics', url: '/codeofethics'},
     // 'footer.contact': {text: 'Kontakt', url: '/contact'},
@@ -138,7 +138,7 @@ export default {
     'navbar.community': {text: 'Community', url: '/en/community'},
     // Subnav community
     'navbar.community.correlaidx': {
-      text: 'CorrelAidX',
+      text: 'Get involved locally',
       url: '/en/community/correlaidx',
     },
     'navbar.community.founding_lc': {
@@ -170,7 +170,7 @@ export default {
       text: 'Donate',
       url: 'https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good',
     },
-    'footer.imprint': {text: 'Imprint & Data Protection', url: '/en/imprint'},
+    'footer.imprint': {text: 'Imprint', url: '/en/imprint'},
     'footer.coc': {text: 'Code of Conduct', url: '/en/codeofconduct'},
     'footer.coe': {text: 'Code of Ethics', url: '/en/codeofethics'},
     // 'footer.contact': {text: 'Contact', url: '/en/contact'},

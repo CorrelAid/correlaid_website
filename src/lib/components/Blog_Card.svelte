@@ -94,7 +94,7 @@
       </p>
 
       <div class="pb-1 pt-1.5">
-        <p class="overflow-hidden text-justify text-base-content line-clamp-3">
+        <p class="overflow-hidden text-base-content line-clamp-3">
           {teaser}
         </p>
       </div>

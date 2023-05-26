@@ -33,7 +33,7 @@
       </h2>
     {/if}
     {#if description != ''}
-      <p class="pb-3 text-justify">{description}</p>
+      <p class="pb-3">{description}</p>
     {/if}
   </div>
 </div>

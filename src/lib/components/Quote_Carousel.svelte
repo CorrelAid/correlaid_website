@@ -55,7 +55,7 @@
 
                   <div class="mt-4 md:col-span-6 md:mt-0">
                     <p
-                      class="text-md text-justify drop-shadow-md line-clamp-5 md:line-clamp-4"
+                      class="text-md drop-shadow-md line-clamp-5 md:line-clamp-4"
                     >
                       {quote.quote_id.translations[0].text}
                     </p>
@@ -68,13 +68,11 @@
                 </div>
               {:else}
                 <div class="px-3">
-                  <p
-                    class="line-clamp-7 pt-8 text-justify text-lg drop-shadow-md"
-                  >
+                  <p class="line-clamp-7 pt-8 text-lg drop-shadow-md">
                     {quote.quote_id.translations[0].text}
                   </p>
                   <p
-                    class="line-clamp-7 pt-6 text-justify text-lg font-semibold drop-shadow-md"
+                    class="line-clamp-7 pt-6 text-lg font-semibold drop-shadow-md"
                   >
                     {quote.quote_id.translations[0].subtitle}
                   </p>
