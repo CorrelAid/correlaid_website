@@ -43,9 +43,9 @@
   }
 </script>
 
-<div class="absolute z-30 h-100dvh w-screen xl:hidden" id="drawer">
+<div class="dvh-100 absolute z-30 w-screen xl:hidden" id="drawer">
   <div
-    class="absolute left-0 z-30 flex h-100dvh w-5/6 flex-col justify-between border-r bg-white"
+    class="dvh-100 absolute left-0 z-30 flex w-5/6 flex-col justify-between border-r bg-white"
     id="drawer-sidenav"
     bind:clientWidth={sidenav_width}
     in:fly={{x: -sidenav_width, duration: 250}}
