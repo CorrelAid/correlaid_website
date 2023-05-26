@@ -43,6 +43,10 @@ module.exports = {
         48: '80rem',
       },
 
+      height: {
+        '100dvh': '100dvh',
+      },
+
       colors: {
         primary: '#96c342',
         'primary-75': '#a5d884',
