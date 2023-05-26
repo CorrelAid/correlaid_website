@@ -3,7 +3,7 @@
 This repository contains the source code for the CorrelAid website at
 [www.correlaid.org](www.correlaid.org). The source code mainly addresses the
 technical functionality of the website, while the content is stored in a
-headless cms system and fetched from there.
+headless CMS built with [Directus](https://directus.io/) and fetched from there.
 
 The repository also has a CI/CD process set up, such that contributions to the
 main branch will directly be reflected in the live website.
@@ -16,24 +16,25 @@ to that is in the right place. For anybody wanting to contribute content, please
 look for the corresponding contact on the CorrelAid website and contact them.
 
 There are mainly two ways to contribute, and both are very much welcome and
-appreciated. First and foremost feedback in the for of issues (bugs,
-suggestions, feature requests) and the discussion thereof is the foundation for
-anybody actually implementing anything.
+appreciated:
 
-The second way to contribute is to make improvements to the source code (and
-related files) themselves. Such changes should always address an existing issue
-to make organization easier.
+- First and foremost, feedback in the form of **issues** (bugs,
+  suggestions, feature requests) and the discussion thereof is the foundation for
+  anybody actually implementing anything.
+
+- The second way to contribute is to **make improvements to the source code** (and
+  related files) themselves. Such changes should always address an existing issue
+  to make organization easier.
 
 ### Contribution process
 
 The first goal of the contribution process should be to make a _successful_ pull
-request to the `preview` branch. While this sounds simple enough, there is a
+request to the `main` branch. While this sounds simple enough, there is a
 little bit of setup involved in making a PR _successful_. Mainly the criteria
 are:
 
 - The PR should be clearly associated with an issue (link the issue in the PR)
-  and should be coming from a branch that can be associated with that issue as
-  well.
+  and should be coming from a branch that can be associated with that issue as well.
 - There should be no merge conflicts.
 - The PR should pass the continuous integration checks.
 
@@ -45,8 +46,7 @@ In order to meet these criteria we suggest the following contribution process.
    avoid multiple people
    working on the same topic at once unknowingly of one another.
 1. Create a new branch for your work on that issue, by branching of the current
-   state of the `preview` branch. (If you are an external contributor you'll have
-   to for the repo first)
+   state of the `main` branch. GitHub allows creating branches in the UI of an issue. See doc [here](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-a-branch-for-an-issue)
 1. Make sure you development environment is setup in accordance to the suggested
    [dev setup](#dev-setup)
 1. Implement you changes
@@ -54,20 +54,14 @@ In order to meet these criteria we suggest the following contribution process.
 1. Make sure that all the required quality assurance passes on you local
    machine. See [quality assurance tldr](#quality-assurance)
 1. Commit and push your changes to github
-1. Create a PR from you branch to `preview`. At this stage all the QA checks in
+1. Create a PR from you branch to `main`. At this stage all the QA checks in
    the CI should usually pass automatically if they were successful locally and
    everything is committed.
 
-It the PR to `preview` is successfully merged, a dynamic website is deployed
-reflects the PRs changes and that can be reviewed to decide whether the changes
-can go to production.
-
-Once one or several PRs with `preview` where successful we'll create a new PR
-from `preview` to `main`, that will automatically deploy the changes to the
-production website if successful. This will preform a static build of the
+It the PR to `main` is successfully merged, a [dynamic website](correalaid.pages.dev) is deployed that reflects the PRs changes. In addition, a [CD action](https://github.com/CorrelAid/correlaid_website/blob/main/.github/workflows/cd.yaml) is triggered. This will preform a static build of the
 website and run sum additional tests against that build. See the [QA
 section](#quality-assurance) for details on how to check this locally prior to a
-PR.
+PR.. If the tests suceed, a static version of the website is deployed to [corredlaid.org](correlaid.org)
 
 ## Dev Setup
 
@@ -88,10 +82,6 @@ PR.
         npm run dev
 
 For details about the projects quality assurance [see below](#quality-assurance).
-
-## Git Policies
-
-Merge with preview, then merge with master.
 
 ## Project explanation
 
@@ -117,7 +107,6 @@ Only the implementations of most important concepts are explained here in a gene
 
 #### Standards
 
-- Text should be justified: ""
 - Links should have the following classes: "text-secondary font-normal drop-shadpw-sm"
 - Links that are also titles should have the following classes: "text-xl font-semibold text-base-content transition hover:text-primary" (exception: partners)
 - Titles that are no links should have following classes: "text-2xl text-primary drop-shadow-sm"
