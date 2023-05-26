@@ -45,7 +45,7 @@
 <footer class="w-screen border-t border-neutral-25">
   <div class=" flex pt-12">
     <ul
-      class="mx-auto flex items-center gap-2 text-xs font-light text-base-content md:gap-4 md:text-base"
+      class="mx-auto flex items-center gap-3 text-sm font-light text-base-content md:gap-4 md:text-base"
     >
       {#each links as link}
         <li>
