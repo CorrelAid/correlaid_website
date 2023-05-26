@@ -43,9 +43,9 @@
   }
 </script>
 
-<div class="absolute z-30 h-[100dvh] w-screen xl:hidden" id="drawer">
+<div class="absolute z-30 h-screen w-screen xl:hidden" id="drawer">
   <div
-    class="absolute left-0 z-30 flex h-[100dvh] w-5/6 flex-col justify-between border-r bg-white"
+    class="absolute left-0 z-30 flex h-screen w-5/6 flex-col justify-between border-r bg-white"
     id="drawer-sidenav"
     bind:clientWidth={sidenav_width}
     in:fly={{x: -sidenav_width, duration: 250}}
@@ -132,7 +132,7 @@
     </div>
   </div>
   <button
-    class="absolute z-20 h-[100dvh] w-screen bg-neutral opacity-80"
+    class="absolute z-20 h-screen w-screen bg-neutral opacity-80"
     id="drawer-overlay"
     aria-label={$t('access.close').text}
     on:click={() => ($drawer = !$drawer)}
