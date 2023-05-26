@@ -42,21 +42,22 @@ In order to meet these criteria we suggest the following contribution process.
 
 1. Pick an issue that you want to contribute to, that is not assigned to anybody
    else.
-1. Assign this issue to you/have it assigned to you (external contributors), to
+2. Assign this issue to you/have it assigned to you (external contributors), to
    avoid multiple people
    working on the same topic at once unknowingly of one another.
-1. Create a new branch for your work on that issue, by branching of the current
+3. Create a new branch for your work on that issue, by branching of the current
    state of the `main` branch. GitHub allows creating branches in the UI of an issue. See doc [here](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-a-branch-for-an-issue)
-1. Make sure you development environment is setup in accordance to the suggested
+4. Make sure you development environment is setup in accordance to the suggested
    [dev setup](#dev-setup)
-1. Implement you changes
-1. Check you changes in a local deployment of the site
-1. Make sure that all the required quality assurance passes on you local
+5. Implement you changes
+6. Check you changes in a local deployment of the site
+7. Make sure that all the required quality assurance passes on you local
    machine. See [quality assurance tldr](#quality-assurance)
-1. Commit and push your changes to github
-1. Create a PR from you branch to `main`. At this stage all the QA checks in
+8. Commit and push your changes to github
+9. Create a PR from you branch to `main`. At this stage all the QA checks in
    the CI should usually pass automatically if they were successful locally and
-   everything is committed.
+   everything is committed. Your branch is deployed to cloudflare and you can see your changes in a live preview version.
+10. Merge the branch with main
 
 It the PR to `main` is successfully merged, a [dynamic website](correalaid.pages.dev) is deployed that reflects the PRs changes. In addition, a [CD action](https://github.com/CorrelAid/correlaid_website/blob/main/.github/workflows/cd.yaml) is triggered. This will preform a static build of the
 website and run sum additional tests against that build. See the [QA
