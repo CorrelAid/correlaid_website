@@ -26,7 +26,7 @@
       <h3 class="pb-3 text-lg font-normal">{position}</h3>
     {/if}
     {#if description}
-      <p class="pb-3 text-justify text-base">{description}</p>
+      <p class="pb-3 text-base">{description}</p>
     {/if}
     {#if email && email != ''}
       <p class="pb-4">
