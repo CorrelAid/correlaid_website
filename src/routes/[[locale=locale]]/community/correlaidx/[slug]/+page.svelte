@@ -52,6 +52,9 @@
     </div>
   {/if}
   {#if lcPage['local_admins'].length != 0}
+    <div class="mx-4 mb-12">
+      <h2 class="text-3xl font-bold text-base-content">Team</h2>
+    </div>
     <div class="flex flex-col gap-y-8 px-4 pb-12">
       {#each lcPage['local_admins'] as person}
         <Person {...person} email={lcPage['lcEmail']} />

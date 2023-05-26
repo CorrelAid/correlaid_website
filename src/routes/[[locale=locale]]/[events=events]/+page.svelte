@@ -47,7 +47,7 @@
     $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events';
 </script>
 
-<h2 class="mb-4 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
+<h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
   {currentEventSeperator}
 </h2>
 
@@ -57,7 +57,7 @@
   {/each}
 </div>
 
-<h2 class="mb-4 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
+<h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
   {pastEventSeperator}
 </h2>
 

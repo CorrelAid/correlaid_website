@@ -117,7 +117,7 @@ Only the implementations of most important concepts are explained here in a gene
 
 #### Standards
 
-- Text should be justified: "text-justify"
+- Text should be justified: ""
 - Links should have the following classes: "text-secondary font-normal drop-shadpw-sm"
 - Links that are also titles should have the following classes: "text-xl font-semibold text-base-content transition hover:text-primary" (exception: partners)
 - Titles that are no links should have following classes: "text-2xl text-primary drop-shadow-sm"

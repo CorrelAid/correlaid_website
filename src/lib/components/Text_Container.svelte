@@ -11,7 +11,7 @@
   <div class="">
     <Html
       source={`<h1>${title}</h1><p class="text-md">${teaser}</p>`}
-      options={'mx-auto'}
+      options={'mx-auto '}
     />
   </div>
 
