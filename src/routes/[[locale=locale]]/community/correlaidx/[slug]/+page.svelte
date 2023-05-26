@@ -16,6 +16,7 @@
   /** @type {import('./$types').PageData} */
   export let data;
   $: lcPage = data;
+  $: console.log(lcPage);
 </script>
 
 <div class="relative">
@@ -61,9 +62,9 @@
       {/each}
     </div>
   {/if}
-  {#if lcPage['how_to_get_in_touch']}
+  {#if lcPage.howToGetInTouch}
     <div class="mb-12 px-4">
-      <Icon icon_type={'get_in_touch'} text={lcPage['how_to_get_in_touch']} />
+      <Icon icon_type={'get_in_touch'} text={lcPage.howToGetInTouch} />
     </div>
   {/if}
 </div>
