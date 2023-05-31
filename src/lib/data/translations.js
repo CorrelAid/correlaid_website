@@ -30,7 +30,7 @@ export default {
     // },
     'navbar.education.learning_r': {text: 'R Lernen', url: '/bildung/r-lernen'},
     'navbar.education.resources': {
-      text: 'Bildungsressourcen',
+      text: 'Bildungsmaterial',
       url: '/bildung/ressourcen',
     },
     'navbar.education.tidy_tuesday': {

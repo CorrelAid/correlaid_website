@@ -16,7 +16,7 @@
 </script>
 
 <div
-  class="relative border bg-gradient-to-r from-primary-75 to-secondary-75 text-white"
+  class="relative border bg-gradient-to-r from-secondary-75 to-primary-75 text-white"
 >
   <div class="container mx-auto">
     {#if browser}
