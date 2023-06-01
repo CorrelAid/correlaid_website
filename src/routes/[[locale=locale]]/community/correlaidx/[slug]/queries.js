@@ -9,6 +9,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE") {
 		}
 	) {
 		date
+		end_date
 		title
 		teaser
 		registration_link

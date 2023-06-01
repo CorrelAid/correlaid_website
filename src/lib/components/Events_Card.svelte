@@ -9,12 +9,18 @@
   import {gen_lc_href} from '$lib/js/helpers';
   export let teaser;
   export let date;
+  export let end_date = void null;
   export let tags;
   export let language;
   export let local_chapters;
   import Langs from '$lib/components/Langs.svelte';
   let proc_date;
+  let proc_end_date;
   $: proc_date = toLocalDateString(date, $locale);
+  $: if (end_date) {
+    proc_end_date = toLocalDateString(end_date, $locale);
+  }
+  $: console.log(end_date, date);
 
   if (typeof slug !== undefined) {
     href = $t('navbar.events').url + '/' + slug;
@@ -28,7 +34,7 @@
     <div class="col-span-full xl:col-span-3">
       <div class=" align-center flex space-x-2 pb-2">
         <p class="mr-8 text-xl font-light">
-          {proc_date}
+          {proc_date}{proc_end_date ? ` - ${proc_end_date}` : ''}
         </p>
       </div>
 
