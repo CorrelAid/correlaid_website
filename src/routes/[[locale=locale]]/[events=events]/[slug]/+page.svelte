@@ -26,8 +26,6 @@
   export let data;
 
   $: event = data;
-
-  $: console.log(event);
 </script>
 
 <TextContainer title={event.title} teaser={event.teaser}>
@@ -72,7 +70,7 @@
             )}</span
           ></span
         >
-        {#if event.lang == 'de-DE'}
+        {#if event.language == 'de-DE'}
           <span
             class="inline-block rounded-full bg-white shadow-none"
             role="img"
