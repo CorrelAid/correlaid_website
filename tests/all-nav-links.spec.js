@@ -140,8 +140,11 @@ test.describe('test regular viewport', () => {
     },
     {
       linkClick: async (page) => {
-        await page.getByRole('link', {name: 'Community'}).hover();
-        page.getByTestId('BottomNav/community/correlaix').click();
+        await page
+          .getByTestId('navColoringTest-navbar.community')
+          .getByRole('link', {name: 'Community'})
+          .hover();
+        page.getByTestId('BottomNav/community/correlaidx').click();
       },
       page: '**/community/correlaidx/',
     },
