@@ -363,7 +363,7 @@ Playwright doesnt work on Arch Linxu for example.
 Run these commands after serving the page on 3000 (see above).
 
 ```
-docker run -v $PWD:/tests -w /tests --rm -it mcr.microsoft.com/playwright:v1.34.3-focal /bin/bash
+docker run -v $PWD:/tests -w /tests --rm -it mcr.microsoft.com/playwright:v1.33.0-focal /bin/bash
 npm install
 npx playwright install-deps
 npx playwright test
