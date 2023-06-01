@@ -1,5 +1,7 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
+  import {page} from '$app/stores';
+  import {gen_lc_href} from '$lib/js/helpers';
   import {gen_date, gen_time} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
   import {locale} from '$lib/stores/i18n';
@@ -24,10 +26,27 @@
   export let data;
 
   $: event = data;
+
+  $: console.log(event);
 </script>
 
 <TextContainer title={event.title} teaser={event.teaser}>
   <div class="mx-4" slot="sub_subtitle">
+    {#if event.local_chapters.length !== 0}
+      <p class="pb-2">
+        {#each event.local_chapters as lc, i}
+          <a
+            class="text-medium font-semibold text-base-content transition hover:text-primary"
+            href={gen_lc_href(
+              $page.params,
+              lc.Local_Chapters_id.translations[0].city,
+            )}
+          >
+            CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
+          >{#if i < event.local_chapters.length - 1}{', '} {/if}
+        {/each}
+      </p>
+    {/if}
     <Box>
       <p class="flex flex-col space-y-2 md:flex-row md:space-x-4 md:space-y-0">
         <span class="flex">

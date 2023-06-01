@@ -17,6 +17,13 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE") {
 		type
 		slug
 		tags
+		local_chapters {
+			Local_Chapters_id {
+				translations(filter: { languages_code: { code: { _eq: $language } } }) {
+					city
+				}
+			}
+		}
 	}
 	Local_Chapters(filter: { translations: { city: { _eq: $slug } } }) {
 		Projects {

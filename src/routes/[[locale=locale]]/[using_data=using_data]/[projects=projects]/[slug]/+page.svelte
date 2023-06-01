@@ -1,7 +1,9 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
+  import {page} from '$app/stores';
   import Html from '$lib/components/Html.svelte';
+  import {gen_lc_href} from '$lib/js/helpers';
   import TextContainer from '$lib/components/Text_Container.svelte';
   import Links from '$lib/components/Links.svelte';
   import Box from '$lib/components/Box.svelte';
@@ -18,6 +20,17 @@
 
 <TextContainer title={project.title} teaser={project.teaser}>
   <div class="mx-4" slot="sub_subtitle">
+    {#if project.Local_Chapters.length !== 0}
+      {#each project.Local_Chapters as lc}
+        <a
+          class="text-medium mb-3 font-semibold text-base-content transition line-clamp-3 hover:text-primary"
+          href={gen_lc_href(
+            $page.params,
+            lc.Local_Chapters_id.translations[0].city,
+          )}>CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
+        >
+      {/each}
+    {/if}
     <div class="mb-5">
       <ProjectLinks {...project.projectLinks} />
     </div>
@@ -26,7 +39,7 @@
         {project.organization_name}
       </h2>
       <p>
-        <Html source={project.organization_description} />
+        <Html source={project.organization_description} options={'!px-0'} />
       </p>
     </Box>
   </div>

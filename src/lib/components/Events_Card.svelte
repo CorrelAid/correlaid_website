@@ -5,10 +5,13 @@
   export let href;
   export let slug;
   export let title;
+  import {page} from '$app/stores';
+  import {gen_lc_href} from '$lib/js/helpers';
   export let teaser;
   export let date;
   export let tags;
   export let language;
+  export let local_chapters;
   import Langs from '$lib/components/Langs.svelte';
   let proc_date;
   $: proc_date = toLocalDateString(date, $locale);
@@ -23,8 +26,10 @@
     class="z-1 relative top-0 grid h-full w-full grid-cols-4 rounded border border-neutral-25 bg-white p-4"
   >
     <div class="col-span-full xl:col-span-3">
-      <div class=" align-center flex w-40 space-x-2 pb-2">
-        <span class="text-xl font-light">{proc_date}</span>
+      <div class=" align-center flex space-x-2 pb-2">
+        <p class="mr-8 text-xl font-light">
+          {proc_date}
+        </p>
       </div>
 
       <div class="pb-2">
@@ -45,9 +50,23 @@
         {/each}
       </div>
 
-      <p class="mb-4 text-base-content line-clamp-3 xl:pb-0 xl:pr-4">
+      <p class="mb-3 text-base-content line-clamp-3 xl:pb-0 xl:pr-4">
         {teaser}
       </p>
+
+      {#if local_chapters.length !== 0}
+        {#each local_chapters as lc, i}
+          <a
+            class="text-medium font-semibold text-base-content transition hover:text-primary"
+            href={gen_lc_href(
+              $page.params,
+              lc.Local_Chapters_id.translations[0].city,
+            )}
+          >
+            CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
+          >{#if i < local_chapters.length - 1}{', '} {/if}
+        {/each}
+      {/if}
     </div>
   </div>
 </div>

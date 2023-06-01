@@ -28,6 +28,7 @@ export function events(event) {
     date: new Date(event.date),
     tags: event.tags,
     language: event.language,
+    local_chapters: event.local_chapters,
   };
 }
 export function podcast_episodes(episode) {

@@ -41,10 +41,11 @@
       {title}
     </h3>
 
+    <p class="mb-3 line-clamp-3">{summary}</p>
     {#if correlaidx.length !== 0}
       {#each correlaidx as lc}
         <a
-          class="text-medium mb-3 text-base-content transition line-clamp-3 hover:text-primary"
+          class="text-medium mb-3 font-semibold text-base-content transition line-clamp-3 hover:text-primary"
           href={gen_lc_href(
             $page.params,
             lc.Local_Chapters_id.translations[0].city,
@@ -52,8 +53,6 @@
         >
       {/each}
     {/if}
-
-    <p class="mb-3 line-clamp-3">{summary}</p>
     <ProjectLinks {href} {repo} {podcast_href} {post_slug} />
   </div>
 </div>
