@@ -141,7 +141,7 @@ test.describe('test regular viewport', () => {
     {
       linkClick: async (page) => {
         await page.getByRole('link', {name: 'Community'}).hover();
-        page.getByRole('link', {name: 'Engagiere dich vor Ort'}).click();
+        page.getByTestId('BottomNav/community/correlaix').click();
       },
       page: '**/community/correlaidx/',
     },
