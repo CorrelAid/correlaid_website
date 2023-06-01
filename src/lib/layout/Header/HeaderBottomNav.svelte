@@ -73,6 +73,7 @@
                       <a
                         class="transition hover:text-primary"
                         href={$t(subnavItem).url}
+                        data-testid={`BottomNav${$t(subnavItem).url}`}
                       >
                         {$t(subnavItem).text}
                       </a>

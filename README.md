@@ -330,11 +330,11 @@ tests the static build which is used in production.
 
 1.  Set the environment variables `ADAPTER='STATIC'` and `PRERENDER='ALL'`
 
-1.  Build the static page
+2.  Build the static page
 
         npm run build
 
-1.  Serve the static page on port 3000.
+3.  Serve the static page on port 3000.
 
          npm run serve-static
 
@@ -342,7 +342,7 @@ tests the static build which is used in production.
     sometimes it provides more functioality than the static page will
     actually have.
 
-1.  Run the e2e tests. The tests don't actually care whether the page is static,
+4.  Run the e2e tests. The tests don't actually care whether the page is static,
     but they need it to run on port 3000
 
          npm run e2e
@@ -356,3 +356,15 @@ helpful commands that leverage the interactivity of the playwright framework.
 
 End to end test cases are stored in the `tests/` folder, so new tests should be
 added there.
+
+#### Alternative e2e testing with docker
+
+Playwright doesnt work on Arch Linxu for example.
+Run these commands after serving the page on 3000 (see above).
+
+```
+docker run -v $PWD:/tests -w /tests --rm -it mcr.microsoft.com/playwright:v1.34.3-focal /bin/bash
+npm install
+npx playwright install-deps
+npx playwright test
+```

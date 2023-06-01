@@ -16,7 +16,6 @@
   /** @type {import('./$types').PageData} */
   export let data;
   $: lcPage = data;
-  $: console.log(lcPage);
 </script>
 
 <div class="relative">

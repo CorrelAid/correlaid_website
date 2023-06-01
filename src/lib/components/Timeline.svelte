@@ -34,7 +34,6 @@
   }
   const icon_mobile = 150;
   const icon_lg = 200;
-  $: console.log(steps);
 </script>
 
 <div class="hidden lg:block">
