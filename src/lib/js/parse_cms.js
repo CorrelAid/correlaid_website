@@ -116,6 +116,9 @@ export function parseProject(project) {
       projectLinks: projectLinks,
       projectContacts: projectContacts,
     };
+    if (project.Local_Chapters.length > 0) {
+      parsedProject['Local_Chapters'] = project.Local_Chapters;
+    }
   } catch (err) {
     reportParseError(err, 'For Project page', project);
   }

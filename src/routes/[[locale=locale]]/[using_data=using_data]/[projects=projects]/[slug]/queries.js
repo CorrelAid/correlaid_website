@@ -55,7 +55,14 @@ query Project($slug: String, $language: String = "de-DE") {
 			summary
 		}
 		Local_Chapters {
-			id
+			Local_Chapters_id{
+                id
+                translations(filter: { languages_code: { code: { _eq: $language } } }) {
+                    city
+                }
+            }
+
+			
 		}
 	}
 }
