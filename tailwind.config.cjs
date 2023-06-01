@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Roboto'],
+        londrina: ['Londrina Solid'],
       },
 
       typography(theme) {
