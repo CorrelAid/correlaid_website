@@ -5,6 +5,7 @@ query EventDetails($slug: String = "ringvorlesung-sose23", $language: String = "
 		date
 		start_time
 		end_time
+		end_date
 		registration_link
 		target_group
 		language

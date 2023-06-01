@@ -21,7 +21,7 @@ export function blog_posts(post) {
   };
 }
 export function events(event) {
-  return {
+  const parsedEvent = {
     slug: event.slug,
     title: event.title,
     teaser: event.teaser,
@@ -30,6 +30,10 @@ export function events(event) {
     language: event.language,
     local_chapters: event.local_chapters,
   };
+  if (event.end_date) {
+    parsedEvent['end_date'] = new Date(event.end_date);
+  }
+  return parsedEvent;
 }
 export function podcast_episodes(episode) {
   const parsedEpisode = {

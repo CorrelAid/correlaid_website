@@ -55,21 +55,27 @@
             ><Calendar width={19} height={19} /></span
           >
 
-          <span class="y-auto pl-2">{gen_date(event.date, $locale)}</span>
+          <span class="y-auto pl-2"
+            >{gen_date(event.date, $locale)}{event.end_date
+              ? ` - ${gen_date(event.end_date, $locale)}`
+              : ''}</span
+          >
         </span>
-        <span class="flex">
-          <span
-            class=" my-auto flex fill-neutral"
-            role="img"
-            aria-label={$t('access.time').text}
-            ><Time width={20} height={20} /></span
-          ><span class="my-auto pl-2"
-            >{gen_time(event.start_time, $locale)} - {gen_time(
-              event.end_time,
-              $locale,
-            )}</span
-          ></span
-        >
+        {#if !event.end_date}
+          <span class="flex">
+            <span
+              class=" my-auto flex fill-neutral"
+              role="img"
+              aria-label={$t('access.time').text}
+              ><Time width={20} height={20} /></span
+            ><span class="my-auto pl-2"
+              >{gen_time(event.start_time, $locale)} - {gen_time(
+                event.end_time,
+                $locale,
+              )}</span
+            ></span
+          >
+        {/if}
         {#if event.language == 'de-DE'}
           <span
             class="inline-block rounded-full bg-white shadow-none"

@@ -5,6 +5,7 @@ query Events($language: String = "de-DE") {
 		date
 		start_time
 		end_time
+		end_date
 		title
 		teaser
 		registration_link
