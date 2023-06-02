@@ -20,7 +20,7 @@
 
 <TextContainer title={project.title} teaser={project.teaser}>
   <div class="mx-4" slot="sub_subtitle">
-    {#if project.Local_Chapters.length !== 0}
+    {#if project.Local_Chapters}
       {#each project.Local_Chapters as lc}
         <a
           class="text-medium mb-3 font-semibold text-base-content transition line-clamp-3 hover:text-primary"
