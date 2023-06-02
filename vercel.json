@@ -1071,7 +1071,7 @@
       "permanent": true
     },
     {
-      "source": "/blog/r-lernen-kurs?",
+      "source": "/blog/r-lernen-kurs",
       "destination": "/bildung/r-lernen/",
       "permanent": true
     },
