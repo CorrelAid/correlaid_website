@@ -546,6 +546,11 @@
       "permanent": false
     },
     {
+      "source": "/about/",
+      "destination": "/ueber/",
+      "permanent": true
+    },
+    {
       "source": "/about/ethics/",
       "destination": "/ueber/werte/",
       "permanent": true
@@ -1058,6 +1063,16 @@
     {
       "source": "/en/blog/2023-04-20-volunteering-day/",
       "destination": "/en/blog/volunteering-day",
+      "permanent": true
+    },
+    {
+      "source": "/blog/r-lernen-kurs/",
+      "destination": "/bildung/r-lernen/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/r-lernen-kurs",
+      "destination": "/bildung/r-lernen/",
       "permanent": true
     },
     {
@@ -2593,6 +2608,11 @@
     {
       "source": "/projects/2022-04-lau/",
       "destination": "/daten-nutzen/projekte/2022-04-LAU",
+      "permanent": true
+    },
+    {
+      "source": "/material/datenreifegradmodell.pdf",
+      "destination": "https://cms.correlaid.org/assets/4034dae6-ed1f-445c-bccb-8e8f7c1bddce",
       "permanent": true
     }
   ]
