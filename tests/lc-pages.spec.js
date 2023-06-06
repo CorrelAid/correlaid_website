@@ -9,14 +9,14 @@ test.describe('test lc chapter pages', () => {
     });
     await expect(page.getByRole('heading', {name: 'Berlin'})).toHaveCount(1);
 
-    await page.goto('/community/correlaidx/');
+    await page.goto('/community/correlaidx/', {waitUntil: 'networkidle'});
     await page.getByRole('link', {name: 'Hamburg'}).click();
     await page.waitForURL('**/community/correlaidx/hamburg/', {
       waitUntil: 'networkidle',
     });
     await expect(page.getByRole('heading', {name: 'Hamburg'})).toHaveCount(1);
 
-    await page.goto('/community/correlaidx/');
+    await page.goto('/community/correlaidx/', {waitUntil: 'networkidle'});
     await page.getByRole('link', {name: 'Rhein-Main'}).click();
     await page.waitForURL('**/community/correlaidx/rhein-main/', {
       waitUntil: 'networkidle',
