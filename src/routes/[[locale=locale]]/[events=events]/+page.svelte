@@ -1,9 +1,11 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
+  import {filter_data} from '$lib/stores/filter_data';
   import {locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Events_Card from '$lib/components/Events_Card.svelte';
   import {parseEntries} from '$lib/js/parse_cms';
+  import Filter from '../../../lib/components/Filter.svelte';
 
   onMount(() => {
     $page_key = 'navbar.events';
@@ -35,11 +37,11 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  $: events = parseEntries(data.events, 'events');
+  $: events_data = parseEntries(data.events, 'events');
 
   // Needs to stay client because it depends on the current date
   // and can therefore not be statically build
-  $: splitEvents = timeSplitEvents(events);
+  $: events = timeSplitEvents($filter_data);
 
   $: currentEventSeperator =
     $locale === 'de' ? 'Kommende Veranstaltungen' : 'Upcoming Events';
@@ -47,12 +49,14 @@
     $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events';
 </script>
 
+<Filter data={events_data} type={'events'} />
+
 <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
   {currentEventSeperator}
 </h2>
 
 <div class="space-y-8 px-4">
-  {#each splitEvents.future as event}
+  {#each events.future as event}
     <Events_Card {...event} />
   {/each}
 </div>
@@ -62,7 +66,7 @@
 </h2>
 
 <div class="space-y-8 px-4">
-  {#each splitEvents.past as event}
+  {#each events.past as event}
     <Events_Card {...event} />
   {/each}
 </div>

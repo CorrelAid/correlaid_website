@@ -68,6 +68,7 @@
     "svelte-markdown": "^0.2.3",
     "svelte-media-queries": "^1.5.4",
     "svelte-prism": "^1.1.6",
+    "svelte-select": "^5.6.1",
     "undici": "^5.22.0",
     "yup": "^0.32.11"
   }
