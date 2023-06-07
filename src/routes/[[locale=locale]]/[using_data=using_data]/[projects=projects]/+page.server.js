@@ -13,12 +13,14 @@ export async function load({params}) {
 
   const projects = data.Projects;
 
-  const posts = handle_lang(
-    _.flatMap(data.Projects[0].Posts, (data) => [data.Posts_id]),
-    params,
-  );
+  for (const project of projects) {
+    const posts = handle_lang(
+      _.flatMap(project.Posts, (data) => [data.Posts_id]),
+      params,
+    );
 
-  data.Projects[0].Posts = posts;
+    project.Posts = posts;
+  }
 
   return {projects: parseEntries(projects, 'projects')};
 }
