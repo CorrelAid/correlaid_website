@@ -57,7 +57,14 @@
       {#each correlaidx as lc}
         <a
           class="text-medium mb-3 line-clamp-3 font-semibold text-base-content transition hover:text-primary"
+<<<<<<< HEAD
           href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
+=======
+          href={gen_lc_href(
+            $page.params,
+            lc.Local_Chapters_id.translations[0].city,
+          )}>CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
+>>>>>>> 81695d9 (server side parsing of project overview)
         >
       {/each}
     {/if}
