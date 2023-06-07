@@ -4,7 +4,7 @@ export default {
     'navbar.about': {text: 'Über uns', url: '/ueber'},
     // Subnav projects_consulting
     'navbar.about.team': {text: 'Team', url: '/ueber/team'},
-    'navbar.about.values': {text: 'Werte', url: '/ueber/werte'},
+    'navbar.about.values': {text: 'Unsere Werte', url: '/ueber/werte'},
     'navbar.about.partners': {text: 'Partner', url: '/ueber/partner'},
     //
     'navbar.using_data': {text: 'Daten nutzen', url: '/daten-nutzen'},
@@ -98,7 +98,7 @@ export default {
     'navbar.about': {text: 'About Us', url: '/en/about'},
     // Subnav projects_consulting
     'navbar.about.team': {text: 'Team', url: '/en/about/team'},
-    'navbar.about.values': {text: 'Values', url: '/en/about/values'},
+    'navbar.about.values': {text: 'Our Values', url: '/en/about/values'},
     'navbar.about.partners': {text: 'Partners', url: '/en/about/partners'},
     //
     'navbar.using_data': {text: 'Using Data', url: '/en/using-data'},
@@ -138,7 +138,7 @@ export default {
     'navbar.community': {text: 'Community', url: '/en/community'},
     // Subnav community
     'navbar.community.correlaidx': {
-      text: 'Get involved locally',
+      text: 'Get Involved Locally',
       url: '/en/community/correlaidx',
     },
     'navbar.community.founding_lc': {
