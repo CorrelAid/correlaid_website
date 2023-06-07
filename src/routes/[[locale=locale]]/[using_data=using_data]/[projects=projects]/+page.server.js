@@ -3,6 +3,7 @@ import {get_lang} from '$lib/js/helpers';
 import {handle_lang} from '$lib/js/helpers';
 import _ from 'lodash';
 import {projectOverviewQuery} from './queries.js';
+import {parseEntries} from '$lib/js/parse_cms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
@@ -19,5 +20,5 @@ export async function load({params}) {
 
   data.Projects[0].Posts = posts;
 
-  return {projects: projects};
+  return {projects: parseEntries(projects, 'projects')};
 }

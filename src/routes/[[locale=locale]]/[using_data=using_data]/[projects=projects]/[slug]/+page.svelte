@@ -23,7 +23,7 @@
     {#if project.Local_Chapters}
       {#each project.Local_Chapters as lc}
         <a
-          class="text-medium mb-3 font-semibold text-base-content transition line-clamp-3 hover:text-primary"
+          class="text-medium mb-3 line-clamp-3 font-semibold text-base-content transition hover:text-primary"
           href={gen_lc_href(
             $page.params,
             lc.Local_Chapters_id.translations[0].city,

@@ -84,7 +84,7 @@
           </a>
         {/if}
       </h3>
-      <p class="pt-1.5 text-sm line-clamp-1">
+      <p class="line-clamp-1 pt-1.5 text-sm">
         {proc_date} - {#each content_creators as person, i}
           {#if person.Content_Creators_id.person}
             {person.Content_Creators_id.person
@@ -94,7 +94,7 @@
       </p>
 
       <div class="pb-1 pt-1.5">
-        <p class="overflow-hidden text-base-content line-clamp-3">
+        <p class="line-clamp-3 overflow-hidden text-base-content">
           {teaser}
         </p>
       </div>
