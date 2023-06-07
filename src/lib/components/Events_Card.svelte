@@ -49,13 +49,13 @@
       <div class="mb-4">
         {#each tags as tag}
           <span
-            class="mr-2 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white line-clamp-1"
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
             >{tag}</span
           >
         {/each}
       </div>
 
-      <p class="mb-3 text-base-content line-clamp-3 xl:pb-0 xl:pr-4">
+      <p class="mb-3 line-clamp-3 text-base-content xl:pb-0 xl:pr-4">
         {teaser}
       </p>
 

@@ -63,7 +63,7 @@
       </div>
     {:else}
       <h3
-        class="mb-3 block text-xl font-semibold text-base-content transition line-clamp-3"
+        class="mb-3 line-clamp-3 block text-xl font-semibold text-base-content transition"
       >
         {title}
       </h3>
@@ -71,7 +71,7 @@
     <div class="mb-2">
       {#each tags as tag}
         <span
-          class="mr-2 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white line-clamp-1"
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
           >{tag}</span
         >
       {/each}
@@ -80,7 +80,7 @@
     <h4 class="text-md line-clamp-3">{subtitle}</h4>
     {#if resp_unit != ''}
       <a
-        class="pt-2 font-semibold text-base-content transition line-clamp-3 hover:text-primary"
+        class="line-clamp-3 pt-2 font-semibold text-base-content transition hover:text-primary"
         href={href_resp_unit}>{resp_unit}</a
       >
     {/if}
