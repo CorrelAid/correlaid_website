@@ -2,14 +2,13 @@
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import Partner from '$lib/components/Partner.svelte';
-  import {parseEntries} from '$lib/js/parse_cms.js';
 
   onMount(() => {
     $page_key = 'navbar.about.partners';
   });
 
   export let data;
-  $: partners = parseEntries(data.partners, 'partners');
+  $: partners = data.partners;
 </script>
 
 <div class="mt-12">

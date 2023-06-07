@@ -3,7 +3,6 @@
   import {locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Events_Card from '$lib/components/Events_Card.svelte';
-  import {parseEntries} from '$lib/js/parse_cms';
 
   onMount(() => {
     $page_key = 'navbar.events';
@@ -35,7 +34,7 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  $: events = parseEntries(data.events, 'events');
+  $: events = data.events;
 
   // Needs to stay client because it depends on the current date
   // and can therefore not be statically build

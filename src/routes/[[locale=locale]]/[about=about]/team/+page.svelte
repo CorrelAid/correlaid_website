@@ -3,23 +3,20 @@
   import {onMount} from 'svelte';
   import Html from '$lib/components/Html.svelte';
   import Person from '$lib/components/Person.svelte';
-  import {parseEntries} from '$lib/js/parse_cms.js';
 
   onMount(() => {
     $page_key = 'navbar.about.team';
   });
   export let data;
 
-  $: remote_office = parseEntries(data.remote_office, 'global_administrators');
-  $: board = parseEntries(data.board, 'global_administrators');
-  $: organizational_structure = data.organizational_structure;
+  $: remote_office = data.remote_office;
+  $: board = data.board;
+  $: remote_office_description = data.remote_office_description;
+  $: board_description = data.board_description;
 </script>
 
 <div class="mt-12">
-  <Html
-    source={organizational_structure.translations[0].remote_office}
-    options={'pb-12  mx-auto'}
-  />
+  <Html source={remote_office_description} options={'pb-12  mx-auto'} />
 
   <div class="container mx-auto flex flex-col gap-y-8 px-4 pb-12">
     {#each remote_office as person}
@@ -27,11 +24,7 @@
     {/each}
   </div>
 
-  <Html
-    source={organizational_structure.translations[0].board}
-    options={'mx-auto pb-12'}
-    width={'text'}
-  />
+  <Html source={board_description} options={'mx-auto pb-12'} />
 
   <div class="container mx-auto flex flex-col gap-y-8 px-4 pb-12">
     {#each board as person}
