@@ -21,7 +21,7 @@
     proc_end_date = toLocalDateString(end_date, $locale);
   }
 
-  if (typeof slug !== undefined) {
+  $: if (typeof slug !== undefined) {
     href = $t('navbar.events').url + '/' + slug;
   }
 </script>

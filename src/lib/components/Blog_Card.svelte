@@ -18,7 +18,7 @@
 
   let proc_date;
 
-  if (typeof slug !== 'undefined') {
+  $: if (typeof slug !== 'undefined') {
     href = $t('navbar.blog').url + '/' + slug;
   }
 
