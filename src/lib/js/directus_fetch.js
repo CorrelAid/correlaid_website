@@ -1,5 +1,6 @@
 import {error} from '@sveltejs/kit';
 import {PUBLIC_API_URL} from '$env/static/public';
+import {DIRECTUS_TOKEN} from '$env/static/private';
 
 /*
  * Validate graphql variables wrt. the expected variables
@@ -42,7 +43,12 @@ function queryErrorMsg(query, vars) {
  * set of typically used names. This can be disabled with the
  * allowAllVars flag.
  */
-async function directus_fetch(query, vars, allowAllVarNames = false) {
+async function directus_fetch(
+  query,
+  vars,
+  allowAllVarNames = false,
+  additionalHeaders = {},
+) {
   if (!allowAllVarNames) {
     validateVars(vars);
   }
@@ -52,10 +58,15 @@ async function directus_fetch(query, vars, allowAllVarNames = false) {
     payload['variables'] = vars;
   }
 
+  const headers = Object.assign(
+    {'Content-Type': 'application/json'},
+    additionalHeaders,
+  );
+
   const response = await fetch(PUBLIC_API_URL + '/graphql', {
     method: 'post',
     body: JSON.stringify(payload),
-    headers: {'Content-Type': 'application/json'},
+    headers: headers,
   });
   if (!response.ok) {
     throw error(500, {
@@ -78,3 +89,13 @@ async function directus_fetch(query, vars, allowAllVarNames = false) {
 }
 
 export default directus_fetch;
+
+export async function directus_authorized_fetch(
+  query,
+  vars,
+  allowAllVarNames = false,
+) {
+  return await directus_fetch(query, vars, allowAllVarNames, {
+    Authorization: `Bearer ${DIRECTUS_TOKEN}`,
+  });
+}

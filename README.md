@@ -84,6 +84,26 @@ PR.. If the tests suceed, a static version of the website is deployed to [corred
 
 For details about the projects quality assurance [see below](#quality-assurance).
 
+### Secrets
+
+There is one possibly relevant secret for development which is a directus token
+that should be placed in the `.env` file if present.
+
+      echo "DIRECTUS_TOKEN=<your token>" >> .env
+
+The token is only relevant for processing project related data and not required for
+contributing to other parts of the page that are not related to projects. Dynamic local serving of the website
+should therefore work even without such a token as long as one does not navigate
+to a project related subpage. It will however not be possible to create a static
+build without such a token.
+
+Contributors that wish to make a static build or wish to contribute to project
+related pages have the following options. If they have directus access, they can
+create a static token for themselves inside of directus, but they need suitable
+permissions for the token to be useful. Contributors without suitable
+permissions or without directus access should contact the project team to either
+get directus access, suitable permissions or a token.
+
 ## Project explanation
 
 SvelteKit is documented [here](https://kit.svelte.dev/docs/introduction)
@@ -206,7 +226,7 @@ any routes cannot be prerendered and hence, would prevent a static build.
 ### Static build
 
 In order to make a static build, the environment variable `PUBLIC_ADAPTER=STATIC` has to be set. Static builds are only allowed if
-`PUBLIC_PRERENDER=ALL`.
+`PUBLIC_PRERENDER=ALL`. The static build will also require a directus token `DIRECTUS_TOKEN=<your token>`.
 
 ### PUBLIC_ON_CMS_ERROR
 

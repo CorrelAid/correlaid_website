@@ -1,4 +1,4 @@
-import directus_fetch from '$lib/js/directus_fetch';
+import {directus_authorized_fetch} from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import {handle_lang} from '$lib/js/helpers';
 import _ from 'lodash';
@@ -7,7 +7,7 @@ import {parseEntries} from '$lib/js/parse_cms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(projectOverviewQuery, {
+  const data = await directus_authorized_fetch(projectOverviewQuery, {
     language: get_lang(params),
   });
 
