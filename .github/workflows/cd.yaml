@@ -40,6 +40,7 @@ jobs:
           PUBLIC_PRERENDER: ALL
           PUBLIC_ADAPTER: STATIC
           PUBLIC_ON_CMS_ERROR: FAIL
+          DIRECTUS_TOKEN: ${{ secrets.DIRECTUS_TOKEN }}
         run: npm run build-and-test
 
       - uses: actions/upload-artifact@v3
