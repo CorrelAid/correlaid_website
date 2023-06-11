@@ -91,11 +91,11 @@ that should be placed in the `.env` file if present.
 
       echo "DIRECTUS_TOKEN=<your token>" >> .env
 
-The token is only relevant for processing project related data and not required for
-contributing to other parts of the page that are not related to projects. Dynamic local serving of the website
-should therefore work even without such a token as long as one does not navigate
-to a project related subpage. It will however not be possible to create a static
-build without such a token.
+The token is only relevant for processing project related data and not required
+for contributing to other parts of the page that are not related to projects.
+Dynamic local serving of the website should therefore work even without such a
+token as long as one does not navigate to a project related subpage. It will
+however not be possible to create a static build without such a token.
 
 Contributors that wish to make a static build or wish to contribute to project
 related pages have the following options. If they have directus access, they can
