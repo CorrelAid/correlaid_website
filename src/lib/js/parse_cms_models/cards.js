@@ -53,6 +53,8 @@ export function podcast_episodes(episode) {
 }
 
 export function projects(project) {
+  const status = project.status;
+
   const parsedProjectCard = {
     title: project.translations[0].title,
     organization:
@@ -69,7 +71,12 @@ export function projects(project) {
   }
 
   if (project.Local_Chapters.length > 0) {
-    parsedProjectCard['correlaidx'] = project.Local_Chapters;
+    parsedProjectCard['correlaidx'] = project.Local_Chapters.map((lc) => {
+      if (typeof lc.Local_Chapters_id.translations[0].city !== 'string') {
+        throw new Error('Local chapter name is missing or not a string');
+      }
+      return lc.Local_Chapters_id.translations[0].city;
+    });
   }
 
   if (project.Podcast) {
@@ -86,7 +93,26 @@ export function projects(project) {
     parsedProjectCard['repo'] = project.Projects_Outputs[0].url;
   }
 
-  return parsedProjectCard;
+  function anonymizeProjectCard(parsedProjectCard) {
+    const anonymizedProjectCard = {};
+
+    anonymizedProjectCard['title'] = parsedProjectCard['title'];
+    anonymizedProjectCard['subpage'] = parsedProjectCard['subpage'];
+
+    for (const field of ['summary', 'project_id', 'correlaidx']) {
+      if (field in parsedProjectCard) {
+        anonymizedProjectCard[field] = parsedProjectCard[field];
+      }
+    }
+
+    return anonymizedProjectCard;
+  }
+
+  if (status === 'published_anon') {
+    return anonymizeProjectCard(parsedProjectCard);
+  } else {
+    return parsedProjectCard;
+  }
 }
 
 export function lcProjects(lcProject) {
@@ -107,7 +133,12 @@ export function lcProjects(lcProject) {
   }
 
   if (project.Local_Chapters.length > 0) {
-    parsedProjectCard['correlaidx'] = project.Local_Chapters;
+    parsedProjectCard['correlaidx'] = project.Local_Chapters.map((lc) => {
+      if (typeof lc.Local_Chapters_id.translations[0].city !== 'string') {
+        throw new Error('Local chapter name is missing or not a string');
+      }
+      return lc.Local_Chapters_id.translations[0].city;
+    });
   }
 
   if (project.Podcast) {

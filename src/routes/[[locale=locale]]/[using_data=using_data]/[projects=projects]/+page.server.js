@@ -22,5 +22,8 @@ export async function load({params}) {
     project.Posts = posts;
   }
 
-  return {projects: parseEntries(projects, 'projects')};
+  // Some projects are anonymized and contain sensitive data.
+  // In case of an error, we don't want to log the input, which is
+  // why we set logInputOnError to false.
+  return {projects: parseEntries(projects, 'projects', false)};
 }

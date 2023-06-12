@@ -24,24 +24,23 @@
       {#each project.Local_Chapters as lc}
         <a
           class="text-medium mb-3 line-clamp-3 font-semibold text-base-content transition hover:text-primary"
-          href={gen_lc_href(
-            $page.params,
-            lc.Local_Chapters_id.translations[0].city,
-          )}>CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
+          href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
         >
       {/each}
     {/if}
     <div class="mb-5">
       <ProjectLinks {...project.projectLinks} />
     </div>
-    <Box>
-      <h2 class="text-xl font-semibold">
-        {project.organization_name}
-      </h2>
-      <p>
-        <Html source={project.organization_description} options={'!px-0'} />
-      </p>
-    </Box>
+    {#if project.organization}
+      <Box>
+        <h2 class="text-xl font-semibold">
+          {project.organization.name}
+        </h2>
+        <p>
+          <Html source={project.organization.description} options={'!px-0'} />
+        </p>
+      </Box>
+    {/if}
   </div>
 
   <Html source={project.description} options={'mx-auto'} slot="main" />
