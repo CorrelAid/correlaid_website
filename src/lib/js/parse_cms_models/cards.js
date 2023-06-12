@@ -27,6 +27,7 @@ export function events(event) {
     teaser: event.teaser,
     date: new Date(event.date),
     tags: event.tags,
+    type: event.type,
     language: event.language,
     local_chapters: event.local_chapters,
   };

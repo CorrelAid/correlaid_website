@@ -92,6 +92,9 @@ export default {
     'access.online': {text: 'Dieses Event findet online statt.'},
     'access.sign_up': {text: 'Anmelden'},
     'access.language': {text: 'Sprache wechseln'},
+    'filter.language': {text: 'Sprache'},
+    'filter.type': {text: 'Typ'},
+    'filter.no_results': {text: 'Keine Ergebnisse'},
   },
   en: {
     'navbar.home': {text: null, url: '/en'},
@@ -185,5 +188,8 @@ export default {
     'access.online': {text: 'This event is online'},
     'access.sign_up': {text: 'Sign Up'},
     'access.language': {text: 'Change Language'},
+    'filter.language': {text: 'Language'},
+    'filter.type': {text: 'Type'},
+    'filter.no_results': {text: 'No Results'},
   },
 };

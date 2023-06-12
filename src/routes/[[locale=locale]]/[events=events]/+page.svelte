@@ -1,7 +1,7 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
+  import {t, locale} from '$lib/stores/i18n';
   import {filter_data} from '$lib/stores/filter_data';
-  import {locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Events_Card from '$lib/components/Events_Card.svelte';
   import {parseEntries} from '$lib/js/parse_cms';
@@ -37,10 +37,14 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
+  // original unfiltered data
   $: events_data = parseEntries(data.events, 'events');
+
+  $: $filter_data = events_data;
 
   // Needs to stay client because it depends on the current date
   // and can therefore not be statically build
+  // using store data that was manipulated by component
   $: events = timeSplitEvents($filter_data);
 
   $: currentEventSeperator =
@@ -49,24 +53,31 @@
     $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events';
 </script>
 
-<Filter data={events_data} type={'events'} />
+<!-- passing unfiltered data to component -->
+<Filter data={events_data} filter_type={'events'} />
 
 <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
   {currentEventSeperator}
 </h2>
-
-<div class="space-y-8 px-4">
-  {#each events.future as event}
-    <Events_Card {...event} />
-  {/each}
-</div>
+{#if events.future.length === 0}
+  <p class="px-4">{$t('filter.no_results').text}</p>
+{:else}
+  <div class="space-y-8 px-4">
+    {#each events.future as event}
+      <Events_Card {...event} />
+    {/each}
+  </div>
+{/if}
 
 <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
   {pastEventSeperator}
 </h2>
-
-<div class="space-y-8 px-4">
-  {#each events.past as event}
-    <Events_Card {...event} />
-  {/each}
-</div>
+{#if events.past.length === 0}
+  <p class="px-4">{$t('filter.no_results').text}</p>
+{:else}
+  <div class="space-y-8 px-4">
+    {#each events.past as event}
+      <Events_Card {...event} />
+    {/each}
+  </div>
+{/if}

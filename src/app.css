@@ -209,3 +209,7 @@
   font-weight: 900;
   src: url('/fonts/londrina/londrina-solid-v15-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+input:focus {
+  box-shadow: none !important;
+}
