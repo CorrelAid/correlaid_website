@@ -45,14 +45,18 @@ export function parseContent(rawSections, page) {
   return parsedContent;
 }
 
-export function parseEntries(rawEntries, type) {
+export function parseEntries(rawEntries, type, logInputOnError = true) {
   const parsedEntries = [];
   for (const rawEntry of rawEntries) {
     try {
       const entry = parseModel[type](rawEntry);
       parsedEntries.push(entry);
     } catch (err) {
-      reportParseError(err, `For type ${type}`, rawEntry);
+      if (logInputOnError) {
+        reportParseError(err, `For type ${type}`, rawEntry);
+      } else {
+        reportParseError(err, `For type ${type}`);
+      }
     }
   }
   return parsedEntries;
@@ -109,20 +113,35 @@ export function parseProject(project) {
       title: project.translations[0].title,
       teaser: project.translations[0].summary,
       description: project.translations[0].description,
-      organization_name:
-        project.Organizations[0].Organizations_id.translations[0].name,
-      organization_description:
-        project.Organizations[0].Organizations_id.translations[0].description,
+      organization: {
+        name: project.Organizations[0].Organizations_id.translations[0].name,
+        description:
+          project.Organizations[0].Organizations_id.translations[0].description,
+      },
       projectLinks: projectLinks,
       projectContacts: projectContacts,
     };
     if (project.Local_Chapters.length > 0) {
-      parsedProject['Local_Chapters'] = project.Local_Chapters;
+      parsedProject['Local_Chapters'] = project.Local_Chapters.map(
+        (lc) => lc.Local_Chapters_id.translations[0].city,
+      );
     }
   } catch (err) {
     reportParseError(err, 'For Project page', project);
   }
   return parsedProject;
+}
+
+export function anonymizeProject(parsedProject) {
+  const anonymizedProject = {
+    title: parsedProject.title,
+    teaser: parsedProject.teaser,
+    description: parsedProject.description,
+    organization: void 0,
+    projectLinks: {},
+    projectContacts: [],
+  };
+  return anonymizedProject;
 }
 
 export function parseLocalChapterPage(localChapterPage) {
