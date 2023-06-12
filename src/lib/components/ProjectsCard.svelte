@@ -3,11 +3,11 @@
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import {page} from '$app/stores';
   import {gen_lc_href} from '$lib/js/helpers';
-  import {t} from '$lib/stores/i18n';
+  import {t, locale} from '$lib/stores/i18n';
 
   export let title;
-  export let organization;
   export let subpage;
+  export let organization = void 0;
   export let summary = 'tbd';
   export let correlaidx = [];
   export let project_id = void 0;
@@ -15,6 +15,17 @@
   export let post_slug = void 0;
   export let podcast_href = void 0;
 
+  const annonymousOrg = typeof organization === 'undefined';
+
+  $: {
+    if (annonymousOrg) {
+      if ($locale === 'de') {
+        organization = 'Anonyme Organisation';
+      } else {
+        organization = 'Anonymous Organization';
+      }
+    }
+  }
   $: href = subpage
     ? $t('navbar.using_data.projects').url + '/' + project_id
     : null;
@@ -46,10 +57,7 @@
       {#each correlaidx as lc}
         <a
           class="text-medium mb-3 line-clamp-3 font-semibold text-base-content transition hover:text-primary"
-          href={gen_lc_href(
-            $page.params,
-            lc.Local_Chapters_id.translations[0].city,
-          )}>CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
+          href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
         >
       {/each}
     {/if}
