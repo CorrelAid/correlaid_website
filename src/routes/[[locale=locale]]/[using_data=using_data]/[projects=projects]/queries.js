@@ -1,6 +1,7 @@
 export const projectOverviewQuery = `
 query ProjectOverview($language: String = "de-DE") {
-	Projects {
+	Projects(filter: { status: { _eq: "published" } }) {
+		status
 		subpage
 		project_id
 		Podcast {
@@ -20,7 +21,7 @@ query ProjectOverview($language: String = "de-DE") {
 				}
 			}
 		}
-		Projects_Outputs {
+		Projects_Outputs(filter: { is_public: { _eq: true } }) {
 			url
 			output_type
 		}
@@ -40,14 +41,12 @@ query ProjectOverview($language: String = "de-DE") {
 			summary
 		}
 		Local_Chapters {
-			Local_Chapters_id{
-				translations(filter: { languages_code: { code: { _eq: $language }}}){
+			Local_Chapters_id {
+				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}
 			}
-			
 		}
 	}
 }
-
 `;

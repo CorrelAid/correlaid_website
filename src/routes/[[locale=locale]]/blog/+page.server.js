@@ -2,6 +2,7 @@ import directus_fetch from '$lib/js/directus_fetch';
 import {handle_lang} from '$lib/js/helpers';
 import {get_lang} from '$lib/js/helpers';
 import {blogQuery} from './queries.js';
+import {parseEntries} from '$lib/js/parse_cms.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
@@ -9,5 +10,5 @@ export async function load({params}) {
 
   const posts = handle_lang(data.Posts, params);
 
-  return {posts: posts};
+  return {posts: parseEntries(posts, 'blog_posts')};
 }

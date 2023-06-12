@@ -7,6 +7,7 @@
   import {parseEntries} from '$lib/js/parse_cms';
   import Filter from '../../../lib/components/Filter.svelte';
 
+
   onMount(() => {
     $page_key = 'navbar.events';
   });
@@ -41,6 +42,7 @@
   $: events_data = parseEntries(data.events, 'events');
 
   $: $filter_data = events_data;
+
 
   // Needs to stay client because it depends on the current date
   // and can therefore not be statically build

@@ -2,7 +2,6 @@
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import BlogCard from '$lib/components/Blog_Card.svelte';
-  import {parseEntries} from '$lib/js/parse_cms.js';
 
   onMount(() => {
     $page_key = 'navbar.podcast';
@@ -10,7 +9,7 @@
 
   export let data;
 
-  $: podcast_episodes = parseEntries(data.podcast_episodes, 'podcast_episodes');
+  $: podcast_episodes = data.podcast_episodes;
 </script>
 
 <div class="container mx-auto px-4 pb-8">
