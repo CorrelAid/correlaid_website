@@ -43,7 +43,8 @@
   $: console.log(filter_data);
   let filter_data = events_data;
 
-  $: $filter_data = events_data;
+  $: console.log(filter_data);
+  let filter_data = events_data;
 
   // Needs to stay client because it depends on the current date
   // and can therefore not be statically build

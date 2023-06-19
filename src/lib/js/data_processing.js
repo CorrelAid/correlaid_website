@@ -28,28 +28,15 @@ export function filterByChapter(data, chapter) {
   });
 }
 
-<<<<<<< HEAD
 export function filterByTags(data, tags) {
   return data.filter((object) => {
     const objectTags = object.tags || [];
-=======
-export function filterByTag(data, tags) {
-  return data.filter((object) => {
-    const objectTags = object.tags || [];
-    if (!Array.isArray(tags)) tags = [tags];
->>>>>>> cd3c0dc (209 for events done)
     return tags.every((tag) => objectTags.includes(tag));
   });
 }
 
-<<<<<<< HEAD
 export function filterDefinedBy(property, objects, value) {
   return _.filter(objects, (object) => {
     return object && object[property] === value;
-=======
-export function filterBy(kind, objects, targetType) {
-  return _.filter(objects, (object) => {
-    return object && object[kind] === targetType;
->>>>>>> cd3c0dc (209 for events done)
   });
 }
