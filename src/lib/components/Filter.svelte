@@ -1,17 +1,17 @@
 <script>
-  import {filter_data} from '$lib/stores/filter_data';
   import {goto} from '$app/navigation';
   import {page} from '$app/stores';
   import {t} from '$lib/stores/i18n';
   import {
-    filterBy,
+    filterDefinedBy,
     filterByChapter,
-    filterByTag,
+    filterByTags,
   } from '$lib/js/data_processing.js';
   import Select from 'svelte-select';
   import _ from 'lodash';
   export let filter_type;
   export let data;
+  export let filter_data;
   import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
 
   let chapterList;
@@ -20,6 +20,8 @@
   let type;
   let langList;
   let chapter;
+
+  // $: console.log(filter_data)
 
   $: if (filter_type == 'events') {
     chapterList = _.chain(data)
@@ -44,10 +46,7 @@
     .map((value, i) => ({
       value: value,
       index: i,
-      label: value
-        .split('_')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' '),
+      label: value.replace(/_/g, ' '),
     }));
 
   function fromParam(param, lst, complex) {
@@ -105,26 +104,26 @@
     }
     if (langList) {
       if (lang) {
-        data_ = filterBy('language', data_, lang.value);
+        data_ = filterDefinedBy('language', data_, lang.value);
       } else {
       }
     }
 
     if (tag) {
       tag = _.chain(tag).flatMap('value').value();
-      data_ = filterByTag(data_, tag);
+      data_ = filterByTags(data_, tag);
     } else {
     }
 
     if (type) {
-      data_ = filterBy('type', data_, type.value);
+      data_ = filterDefinedBy('type', data_, type.value);
     } else {
     }
 
     return data_;
   }
 
-  $: $filter_data = filter(data, type, lang, tag, chapter);
+  $: filter_data = filter(data, type, lang, tag, chapter);
   $: {
     const newUrl = new URL($page.url);
 
@@ -180,7 +179,7 @@
       <span class="mt-2 block pb-1 text-lg font-semibold"
         >{$t('filter.type').text}:</span
       >
-      <div class="">
+      <div class="capitalize">
         <Select
           items={typeList}
           searchable={true}

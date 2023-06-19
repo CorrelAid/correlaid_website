@@ -26,10 +26,7 @@
     href = $t('navbar.events').url + '/' + slug;
   }
 
-  $: type = type
-    .split('_')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+  $: type = type.replace(/_/g, ' ');
 </script>
 
 <div class="offset-right relative w-full" style="">
@@ -54,7 +51,7 @@
       <Langs langs={[language]} />
       <div class="mb-4">
         <span
-          class="mr-2 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white line-clamp-1"
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white"
         >
           {type}</span
         >
