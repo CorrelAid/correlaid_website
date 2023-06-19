@@ -20,6 +20,30 @@ export function blog_posts(post) {
     content_creators: post.content_creators,
   };
 }
+
+/**
+ * Extracts local chapter names from a raw subelement array and adds them to the parsed element.
+ *
+ * @param {object} parsedElement - The element to which the local chapter names should be added.
+ * @param {Array} lcSbuElementsRaw - The raw subelement array.
+ * @param {string} entryName - The name of the entry in the parsed element.
+ *   Defaults to 'correlaidx'.
+ */
+function parseLcSubElements(
+  parsedElement,
+  lcSbuElementsRaw,
+  entryName = 'correlaidx',
+) {
+  if (lcSbuElementsRaw.length > 0) {
+    parsedElement[entryName] = lcSbuElementsRaw.map((lc) => {
+      if (typeof lc.Local_Chapters_id.translations[0].city !== 'string') {
+        throw new Error('Local chapter name is missing or not a string');
+      }
+      return lc.Local_Chapters_id.translations[0].city;
+    });
+  }
+}
+
 export function events(event) {
   const parsedEvent = {
     slug: event.slug,
@@ -29,11 +53,13 @@ export function events(event) {
     tags: event.tags,
     type: event.type,
     language: event.language,
-    local_chapters: event.local_chapters,
   };
   if (event.end_date) {
     parsedEvent['end_date'] = new Date(event.end_date);
   }
+
+  parseLcSubElements(parsedEvent, event.local_chapters);
+
   return parsedEvent;
 }
 export function podcast_episodes(episode) {
@@ -70,14 +96,7 @@ export function projects(project) {
     parsedProjectCard['project_id'] = project.project_id;
   }
 
-  if (project.Local_Chapters.length > 0) {
-    parsedProjectCard['correlaidx'] = project.Local_Chapters.map((lc) => {
-      if (typeof lc.Local_Chapters_id.translations[0].city !== 'string') {
-        throw new Error('Local chapter name is missing or not a string');
-      }
-      return lc.Local_Chapters_id.translations[0].city;
-    });
-  }
+  parseLcSubElements(parsedProjectCard, project.Local_Chapters);
 
   if (project.Podcast) {
     parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
