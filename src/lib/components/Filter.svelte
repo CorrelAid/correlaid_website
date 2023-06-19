@@ -2,31 +2,24 @@
   import {goto} from '$app/navigation';
   import {page} from '$app/stores';
   import {t} from '$lib/stores/i18n';
-  import {
-    filterDefinedBy,
-    filterByChapter,
-    filterByTags,
-  } from '$lib/js/data_processing.js';
+  import {filterDefinedBy, filterByMultiple} from '$lib/js/data_processing.js';
   import Select from 'svelte-select';
   import _ from 'lodash';
   export let filter_type;
-  export let data;
+  export let orig_data;
   export let filter_data;
   import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
 
   let chapterList;
-  let tag;
+  let tags;
   let lang;
   let type;
   let langList;
-  let chapter;
-
-  // $: console.log(filter_data)
+  let chapters;
 
   $: if (filter_type == 'events') {
-    chapterList = _.chain(data)
-      .flatMap('local_chapters')
-      .map('Local_Chapters_id.translations[0].city')
+    chapterList = _.chain(orig_data)
+      .flatMap('correlaidx')
       .compact()
       .uniq()
       .value();
@@ -37,9 +30,9 @@
     ];
   }
 
-  $: tagList = _.chain(data).flatMap('tags').uniq().value();
+  $: tagList = _.chain(orig_data).flatMap('tags').uniq().value();
 
-  $: typeList = _.chain(data)
+  $: typeList = _.chain(orig_data)
     .flatMap('type')
     .uniq()
     .value()
@@ -66,9 +59,20 @@
     }
   }
 
-  function onChange() {
-    if ($page.url.searchParams.get('lc')) {
-      chapter = fromParam('lc', chapterList);
+  function extractUrlSearchParams() {
+    if ($page.url.searchParams.get('lcs')) {
+      const chapters_ = $page.url.searchParams.get('lcs').split(',');
+      const arr = [];
+      for (let i = 0; i < chapters_.length; i++) {
+        if (chapterList.includes(chapters_[i])) {
+          arr.push({
+            value: chapters_[i],
+            label: chapters_[i],
+            index: chapterList.indexOf(chapters_[i]),
+          });
+        }
+      }
+      chapters = arr;
     }
     if ($page.url.searchParams.get('type')) {
       type = fromParam('type', typeList, true);
@@ -76,29 +80,30 @@
     if ($page.url.searchParams.get('lang')) {
       lang = fromParam('lang', langList, true);
     }
-    if ($page.url.searchParams.get('tag')) {
-      console.log(tag);
-      const tag_ = $page.url.searchParams.get('tag').split(',');
+    if ($page.url.searchParams.get('tags')) {
+      const tags_ = $page.url.searchParams.get('tags').split(',');
       const arr = [];
-      for (let i = 0; i < tag_.length; i++) {
-        if (tagList.includes(tag_[i])) {
+      for (let i = 0; i < tags_.length; i++) {
+        if (tagList.includes(tags_[i])) {
           arr.push({
-            value: tag_[i],
-            label: tag_[i],
-            index: tagList.indexOf(tag_[i]),
+            value: tags_[i],
+            label: tags_[i],
+            index: tagList.indexOf(tags_[i]),
           });
         }
       }
-      tag = arr;
+      tags = arr;
     }
   }
 
-  $: onChange($page.url.searchParams);
+  $: extractUrlSearchParams($page.url.searchParams);
 
-  function filter(data_, type, lang, tag, chapter) {
+  function filter(data, type, lang, tags, chapters) {
+    let data_ = structuredClone(data);
     if (chapterList) {
-      if (chapter) {
-        data_ = filterByChapter(data_, chapter.value);
+      if (chapters) {
+        chapters = _.chain(chapters).flatMap('value').value();
+        data_ = filterByMultiple(data_, chapters, 'correlaidx');
       } else {
       }
     }
@@ -109,9 +114,9 @@
       }
     }
 
-    if (tag) {
-      tag = _.chain(tag).flatMap('value').value();
-      data_ = filterByTags(data_, tag);
+    if (tags) {
+      tags = _.chain(tags).flatMap('value').value();
+      data_ = filterByMultiple(data_, tags, 'tags');
     } else {
     }
 
@@ -123,24 +128,27 @@
     return data_;
   }
 
-  $: filter_data = filter(data, type, lang, tag, chapter);
+  $: filter_data = filter(orig_data, type, lang, tags, chapters);
   $: {
     const newUrl = new URL($page.url);
 
-    if (chapter) {
-      newUrl?.searchParams?.set('lc', chapter.value);
+    if (chapters) {
+      newUrl?.searchParams?.set(
+        'lcs',
+        _.chain(chapters).flatMap('value').value(),
+      );
     } else {
-      newUrl?.searchParams?.delete('lc');
+      newUrl?.searchParams?.delete('lcs');
     }
     if (type) {
       newUrl?.searchParams?.set('type', type.value);
     } else {
       newUrl?.searchParams?.delete('type');
     }
-    if (tag) {
-      newUrl?.searchParams?.set('tag', _.chain(tag).flatMap('value').value());
+    if (tags) {
+      newUrl?.searchParams?.set('tags', _.chain(tags).flatMap('value').value());
     } else {
-      newUrl?.searchParams?.delete('tag');
+      newUrl?.searchParams?.delete('tags');
     }
     if (lang) {
       newUrl?.searchParams?.set('lang', lang.value);
@@ -152,15 +160,18 @@
   }
 
   let hidden = 'hidden';
-  $: if (chapter || type || lang || tag) {
+  $: if (chapters || type || lang || tags) {
     hidden = 'visible';
   }
-  function handle_hidden() {
-    hidden === 'hidden' ? (hidden = 'visible') : (hidden = 'hidden');
+  function handleHidden() {
+    hidden = hidden === 'hidden' ? 'visible' : 'hidden';
   }
+  const Max = 3;
+  $: hasMaxTags = tags?.length === Max;
+  $: tagList_ = hasMaxTags ? [] : [...tagList];
 
-  $: maxItems = tag?.length === 3;
-  $: tagList_ = maxItems ? [] : [...tagList];
+  $: hasMaxChapters = chapters?.length === Max;
+  $: chapterList_ = hasMaxChapters ? [] : [...chapterList];
 </script>
 
 <div class="mx-4">
@@ -168,7 +179,7 @@
     <button
       class="inline-flex items-center justify-center pb-1 text-xl font-semibold transition hover:text-secondary"
       aria-expanded="true"
-      on:click={handle_hidden}
+      on:click={handleHidden}
     >
       Filter
       <DropdownIcon height={27} width={27} />
@@ -177,12 +188,12 @@
   <div class="text_width grid items-center gap-y-4 md:gap-x-6 {hidden}">
     <div>
       <span class="mt-2 block pb-1 text-lg font-semibold"
-        >{$t('filter.type').text}:</span
+        >{$t('filter.type').text}</span
       >
       <div class="capitalize">
         <Select
           items={typeList}
-          searchable={true}
+          searchable={false}
           bind:value={type}
           --list-z-index="30"
         />
@@ -190,24 +201,25 @@
     </div>
     {#if filter_type == 'events'}
       <div>
-        <span class="block pb-1 text-lg font-semibold">Local Chapter:</span>
+        <span class="block pb-1 text-lg font-semibold">Local Chapters</span>
         <div class="">
           <Select
+            multiple
             items={chapterList}
-            searchable={true}
-            bind:value={chapter}
+            searchable={false}
+            bind:value={chapters}
             --list-z-index="30"
           />
         </div>
       </div>
       <div>
         <span class="block pb-1 text-lg font-semibold"
-          >{$t('filter.language').text}:</span
+          >{$t('filter.language').text}</span
         >
         <div class="">
           <Select
             items={langList}
-            searchable={true}
+            searchable={false}
             bind:value={lang}
             --list-z-index="30"
           />
@@ -216,16 +228,18 @@
     {/if}
 
     <div>
-      <span class="block pb-1 text-lg font-semibold">Tags:</span>
+      <span class="block pb-1 text-lg font-semibold">Tags</span>
       <div class="">
         <Select
           items={tagList_}
           multiple
           searchable={true}
-          bind:value={tag}
+          bind:value={tags}
           --list-z-index="30"
         >
-          <div class="empty" slot="empty">{maxItems ? '' : 'No options'}</div>
+          <div class="empty" slot="empty">
+            <p class="rounded py-2 pl-4">{hasMaxTags ? '' : 'No options'}</p>
+          </div>
         </Select>
       </div>
     </div>

@@ -3,9 +3,7 @@
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Events_Card from '$lib/components/Events_Card.svelte';
-  import {parseEntries} from '$lib/js/parse_cms';
   import Filter from '../../../lib/components/Filter.svelte';
-
 
   onMount(() => {
     $page_key = 'navbar.events';
@@ -38,13 +36,9 @@
   /** @type {import('./$types').PageData} */
   export let data;
   // original unfiltered data
-  $: events_data = parseEntries(data.events, 'events');
+  $: events_data = data.events;
 
-  $: console.log(filter_data);
-  let filter_data = events_data;
-
-  $: console.log(filter_data);
-  let filter_data = events_data;
+  let filter_data;
 
   // Needs to stay client because it depends on the current date
   // and can therefore not be statically build
@@ -61,7 +55,8 @@
 </script>
 
 <!-- passing unfiltered data to component -->
-<Filter data={events_data} filter_type={'events'} bind:filter_data />
+
+<Filter orig_data={events_data} filter_type={'events'} bind:filter_data />
 {#if events}
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
     {currentEventSeperator}

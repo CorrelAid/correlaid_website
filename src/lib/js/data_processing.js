@@ -13,25 +13,24 @@ export function unpack_events(event, date, part = false) {
   return obj;
 }
 
-export function filterByChapter(data, chapter) {
-  return _.filter(data, (obj) => {
-    if (chapter === 'Global') {
-      return _.isEmpty(_.get(obj, 'local_chapters', []));
-    } else {
-      return (
-        _.get(
-          obj,
-          'local_chapters[0].Local_Chapters_id.translations[0].city',
-        ) === chapter
-      );
-    }
-  });
+export function filterByChapters(data, chapter) {
+  if (chapter === 'Global') {
+    return data.filter((obj) => obj.correlaidx.length === 0);
+  } else {
+    return data.filter((obj) => obj.correlaidx.includes(chapter));
+  }
 }
 
-export function filterByTags(data, tags) {
+export function filterByMultiple(data, filter_values, property) {
   return data.filter((object) => {
-    const objectTags = object.tags || [];
-    return tags.every((tag) => objectTags.includes(tag));
+    const objectsProperty = object[property];
+    return filter_values.every((single) => {
+      if (single === 'Global' && property === 'correlaidx') {
+        return objectsProperty.length === 0;
+      } else {
+        return objectsProperty.includes(single);
+      }
+    });
   });
 }
 

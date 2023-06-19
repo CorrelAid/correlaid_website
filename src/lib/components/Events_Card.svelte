@@ -27,6 +27,7 @@
   }
 
   $: type = type.replace(/_/g, ' ');
+  // $:console.log(title, correlaidx)
 </script>
 
 <div class="offset-right relative w-full" style="">
