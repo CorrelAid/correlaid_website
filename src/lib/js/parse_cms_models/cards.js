@@ -82,10 +82,14 @@ export function projects(project) {
 
   const parsedProjectCard = {
     title: project.translations[0].title,
-    organization:
-      project.Organizations[0].Organizations_id.translations[0].name,
+    isInternal: project.is_internal,
     subpage: project.subpage,
   };
+
+  if (!project.is_internal) {
+    parsedProjectCard['organization'] =
+      project.Organizations[0].Organizations_id.translations[0].name;
+  }
 
   if (project.translations[0].summary !== null) {
     parsedProjectCard['summary'] = project.translations[0].summary;
@@ -116,6 +120,13 @@ export function projects(project) {
 
     anonymizedProjectCard['title'] = parsedProjectCard['title'];
     anonymizedProjectCard['subpage'] = parsedProjectCard['subpage'];
+
+    // This is expected to be always False for anonymized projects
+    // as there should normally no reason to anonymize an internal projects.
+    // However, if we want to anonymize an internal project, we can have to
+    // explicitly overwrite this value because otherwise the different layout
+    // of internal projects would be used negating the anonymity
+    anonymizedProjectCard['isInternal'] = false;
 
     for (const field of ['summary', 'project_id', 'correlaidx']) {
       if (field in parsedProjectCard) {
