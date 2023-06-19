@@ -12,7 +12,7 @@
   export let end_date = void null;
   export let tags;
   export let language;
-  export let local_chapters;
+  export let local_chapters = [];
   import Langs from '$lib/components/Langs.svelte';
   let proc_date;
   let proc_end_date;
@@ -63,12 +63,9 @@
         {#each local_chapters as lc, i}
           <a
             class="text-medium font-semibold text-base-content transition hover:text-primary"
-            href={gen_lc_href(
-              $page.params,
-              lc.Local_Chapters_id.translations[0].city,
-            )}
+            href={gen_lc_href($page.params, lc)}
           >
-            CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
+            CorrelAidX {lc}</a
           >{#if i < local_chapters.length - 1}{', '} {/if}
         {/each}
       {/if}
