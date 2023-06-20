@@ -1,12 +1,14 @@
 <script>
   import Nonprofit from '$lib/svg/Nonprofit.svelte';
+  import CorrelAidLogo from '$lib/svg/CorrelAid_Logo_min.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import {page} from '$app/stores';
   import {gen_lc_href} from '$lib/js/helpers';
-  import {t, locale} from '$lib/stores/i18n';
+  import {t} from '$lib/stores/i18n';
 
   export let title;
   export let subpage;
+  export let isInternal;
   export let organization = void 0;
   export let summary = 'tbd';
   export let correlaidx = [];
@@ -15,16 +17,16 @@
   export let post_slug = void 0;
   export let podcast_href = void 0;
 
-  const annonymousOrg = typeof organization === 'undefined';
+  const annonymousOrg = typeof organization === 'undefined' && !isInternal;
 
   $: {
     if (annonymousOrg) {
-      if ($locale === 'de') {
-        organization = 'Anonyme Organisation';
-      } else {
-        organization = 'Anonymous Organization';
-      }
+      organization = $t('organization.anonymous').text;
     }
+  }
+
+  $: if (isInternal) {
+    organization = $t('organization.internalProject').text;
   }
   $: href = subpage
     ? $t('navbar.using_data.projects').url + '/' + project_id
@@ -40,10 +42,17 @@
 
   <div class="px-4 pb-6 pt-6">
     <div class="mb-2 flex items-center pb-2">
-      <Nonprofit width={25} height={25} />
-      <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
-        {organization}
-      </h4>
+      {#if !isInternal}
+        <Nonprofit width={25} height={25} />
+        <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
+          {organization}
+        </h4>
+      {:else}
+        <CorrelAidLogo width={25} height={25} />
+        <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
+          {organization}
+        </h4>
+      {/if}
     </div>
 
     <h3

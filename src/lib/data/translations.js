@@ -92,6 +92,8 @@ export default {
     'access.online': {text: 'Dieses Event findet online statt.'},
     'access.sign_up': {text: 'Anmelden'},
     'access.language': {text: 'Sprache wechseln'},
+    'organization.anonymous': {text: 'Anonyme Organisation'},
+    'organization.internalProject': {text: 'Internes Projekt'},
   },
   en: {
     'navbar.home': {text: null, url: '/en'},
@@ -185,5 +187,7 @@ export default {
     'access.online': {text: 'This event is online'},
     'access.sign_up': {text: 'Sign Up'},
     'access.language': {text: 'Change Language'},
+    'organization.anonymous': {text: 'Anonymous Organization'},
+    'organization.internalProject': {text: 'Internal Project'},
   },
 };

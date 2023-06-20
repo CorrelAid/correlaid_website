@@ -5,6 +5,7 @@ describe('project card parsing and anonymization', () => {
     status: 'published_anon',
     subpage: false,
     project_id: 'Some project id',
+    is_internal: false,
     Podcast: null,
     Posts: [],
     Projects_Outputs: [],
@@ -36,6 +37,7 @@ describe('project card parsing and anonymization', () => {
     status: 'published',
     subpage: false,
     project_id: 'Another project id',
+    is_internal: false,
     Podcast: null,
     Posts: [],
     Projects_Outputs: [],
@@ -56,6 +58,25 @@ describe('project card parsing and anonymization', () => {
     translations: [
       {
         title: 'Another public project title',
+        description: '',
+        summary: null,
+      },
+    ],
+    Local_Chapters: [],
+  };
+
+  const internalProject = {
+    status: 'published',
+    subpage: false,
+    project_id: 'Internal project id',
+    is_internal: true,
+    Podcast: null,
+    Posts: [],
+    Projects_Outputs: [],
+    Organizations: [],
+    translations: [
+      {
+        title: 'Internal project title',
         description: '',
         summary: null,
       },
@@ -87,5 +108,12 @@ describe('project card parsing and anonymization', () => {
     expect(parsedProjectCard.title).toEqual('Public project title');
     expect(parsedProjectCard.subpage).toEqual(true);
     expect(parsedProjectCard.project_id).toEqual('Some project id');
+  });
+
+  test('parse internal project', () => {
+    const parsedProjectCard = projects(internalProject);
+
+    expect(parsedProjectCard.organization).toBeUndefined();
+    expect(parsedProjectCard.isInternal).toBeTruthy();
   });
 });
