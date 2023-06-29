@@ -95,6 +95,8 @@ export default {
     'filter.language': {text: 'Sprache'},
     'filter.type': {text: 'Typ'},
     'filter.no_results': {text: 'Keine Ergebnisse'},
+    'filter.placeholder': {text: 'Bitte auswählen'},
+    'filter.search': {text: 'Suchen'},
   },
   en: {
     'navbar.home': {text: null, url: '/en'},
@@ -191,5 +193,7 @@ export default {
     'filter.language': {text: 'Language'},
     'filter.type': {text: 'Type'},
     'filter.no_results': {text: 'No Results'},
+    'filter.placeholder': {text: 'Please select'},
+    'filter.search': {text: 'Search'},
   },
 };

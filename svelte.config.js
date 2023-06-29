@@ -21,6 +21,8 @@ const excl = [
   'filter.language',
   'filter.type',
   'filter.no_results',
+  'filter.placeholder',
+  'filter.search',
 ];
 
 const mainRoutes = {

@@ -20,11 +20,36 @@ function filterDefinedBy(property, objects, value) {
   });
 }
 
-export function filter(data, selects) {
+function filterStringSearch(searchTerm, searchOptions, objects) {
+  return _.filter(objects, (object) => {
+    let bool = false;
+    for (const item of searchOptions) {
+      if (item.multiple === true) {
+        for (const single of object[item.name]) {
+          if (single.toLowerCase().includes(searchTerm.toLowerCase())) {
+            bool = true;
+          }
+        }
+      } else {
+        if (
+          object &&
+          object[item.name].toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
+          bool = true;
+        }
+      }
+    }
+    return bool;
+  });
+}
+
+export function filter(data, selects, searchTerm, searchOptions) {
   let data_ = structuredClone(data);
-  console.log(selects);
+  if (searchTerm) {
+    data_ = filterStringSearch(searchTerm, searchOptions, data_);
+  }
+
   for (const select of selects) {
-    console.log(select.value);
     if (select.value) {
       if (select.multiple === true) {
         const values = _.chain(select.value).flatMap('value').value();
@@ -37,58 +62,89 @@ export function filter(data, selects) {
   return data_;
 }
 
-export function setFilterParams(url, selects) {
+export function setUrlParams(url, selects) {
   const newUrl = new URL(url);
   for (const select of selects) {
-    if (select.multiple === true) {
-      newUrl?.searchParams?.set(
-        select.param,
-        _.chain(select.value).flatMap('value').value(),
-      );
-    }
     if (select.value) {
-      newUrl?.searchParams?.set(select.param, select.value.value);
+      if (select.multiple === true) {
+        newUrl?.searchParams?.set(
+          select.param,
+          _.chain(select.value).flatMap('value').value(),
+        );
+      } else {
+        newUrl?.searchParams?.set(select.param, select.value.value);
+      }
+    } else {
+      newUrl?.searchParams?.delete(select.param);
     }
   }
 
   goto(newUrl);
 }
 
-function fromParam(param, lst, searchParams) {
-  const value_ = searchParams.get(param);
-  // if (complex === true) {
-  //   lst = _.chain(lst).flatMap('value').value();
-  // }
-  if (lst.includes(value_)) {
+function genValue(value, values, items) {
+  if (values.includes(value)) {
     return {
-      value: value_,
-      label: value_
-        .split('_')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' '),
-      index: lst.indexOf(value_),
+      value: value,
+      label: _.find(items, {value: value}).label,
+      index: values.indexOf(value),
     };
   }
 }
 
-export function extractUrlSearchParams(searchParams, selects) {
-  for (const select of selects) {
-    if (searchParams.get(select.param)) {
-      if (select.multiple === true) {
-        const paramValue = searchParams.get(select.param).split(',');
-        const arr = [];
-        for (let i = 0; i < paramValue.length; i++) {
-          if (select.items.includes(paramValue[i])) {
-            arr.push({
-              value: paramValue[i],
-              label: paramValue[i],
-              index: select.items.indexOf(paramValue[i]),
-            });
+export function extractUrlSearchParams(searchParams, values, selects) {
+  for (const key in values) {
+    if (values.hasOwnProperty(key)) {
+      if (searchParams.get(key)) {
+        const value_ = searchParams.get(key);
+        const items = _.find(selects, {param: key}).items;
+        const values_ = _.chain(items).flatMap('value').value();
+        if (_.find(selects, {param: key}).multiple === true) {
+          const value_lst = value_.split(',');
+          const arr = [];
+          for (let i = 0; i < value_lst.length; i++) {
+            arr.push(genValue(value_lst[i], values_, items));
           }
+          values[key] = arr;
+        } else {
+          values[key] = genValue(value_, values_, items);
         }
-      } else {
-        select.value = fromParam(select.param, select.items, searchParams);
       }
     }
   }
+}
+
+function packMap(data, param) {
+  return _.chain(data)
+    .flatMap(param)
+    .compact()
+    .uniq()
+    .value()
+    .map((value, i) => ({
+      value: value.toLowerCase(),
+      index: i,
+      label: value.replace(/_/g, ' '),
+    }));
+}
+
+export function genDropdownLists(orig_data, selects) {
+  const chapterList = packMap(orig_data, 'correlaidx');
+  chapterList.push({value: 'global', label: 'Global'});
+  _.find(selects, {param: 'correlaidx'}).items = chapterList;
+
+  const langList = [
+    {value: 'en-US', label: 'en'},
+    {value: 'de-DE', label: 'de'},
+  ];
+  _.find(selects, {param: 'language'}).items = langList;
+
+  // _.find(selects, { param: 'tags' }).items = _.chain(orig_data)
+  //   .flatMap('tags')
+  //   .uniq()
+  //   .value();
+
+  const typeList = packMap(orig_data, 'type');
+  _.find(selects, {param: 'type'}).items = typeList;
+
+  return selects;
 }

@@ -1,17 +1,24 @@
 <script>
-  // import {page} from '$app/stores';
+  import {page} from '$app/stores';
   import {t} from '$lib/stores/i18n';
+  import {onMount} from 'svelte';
+  import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
   import {
     filter,
-    // setFilterParams,
-    // extractUrlSearchParams,
+    genDropdownLists,
+    setUrlParams,
+    extractUrlSearchParams,
   } from '$lib/js/filter.js';
   import Select from 'svelte-select';
   import _ from 'lodash';
+
   export let filter_type;
   export let orig_data;
   export let filter_data;
-  import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
+  let hidden = 'visible';
+  let searchTerm;
+
+  const values = {};
 
   const selects = [
     {
@@ -32,73 +39,59 @@
       multiple: false,
       param: 'language',
     },
-    {
-      title: 'Tags',
-      searchable: true,
-      multiple: true,
-      param: 'tags',
-    },
   ];
 
-  const chapterList = _.chain(orig_data)
-    .flatMap('correlaidx')
-    .compact()
-    .uniq()
-    .value();
-  chapterList.push('Global');
-  _.find(selects, {param: 'correlaidx'}).items = chapterList;
-
-  const langList = [
-    {value: 'en-US', label: 'en'},
-    {value: 'de-DE', label: 'de'},
+  const searchOptions = [
+    {name: 'tags', multiple: true},
+    {name: 'title', multiple: false},
+    {name: 'teaser', multiple: false},
   ];
 
-  _.find(selects, {param: 'language'}).items = langList;
+  console.log(orig_data);
 
-  _.find(selects, {param: 'tags'}).items = _.chain(orig_data)
-    .flatMap('tags')
-    .uniq()
-    .value();
+  onMount(async () => {
+    // when searchParams is set, set them in filter
+    extractUrlSearchParams($page.url.searchParams, values, selects);
+    // if value is set dont hide filter (if someone goes to page with defined url param)
+    // if (Object.values(values).some((value) => value !== null)) {
+    //   hidden = 'visible';
+    // }
+  });
 
-  const typeList = _.chain(orig_data)
-    .flatMap('type')
-    .uniq()
-    .value()
-    .map((value, i) => ({
-      value: value,
-      index: i,
-      label: value.replace(/_/g, ' '),
-    }));
-  _.find(selects, {param: 'type'}).items = typeList;
+  genDropdownLists(orig_data, selects);
 
-  // $: extractUrlSearchParams($page.url.searchParams, selects);
-  // $: setFilterParams($page.url, selects)
-
-  $: filter_data = filter(orig_data, selects, values);
-
-  let hidden = 'hidden';
-  // $: if (chapters || type || lang || tags) {
-  //   hidden = 'visible';
-  // }
   function handleHidden() {
     hidden = hidden === 'hidden' ? 'visible' : 'hidden';
   }
-  // const Max = 3;
-  // $: hasMaxTags = tags?.length === Max;
-  // $: tagList_ = hasMaxTags ? [] : [...tagList];
 
+  // limit selectable items
+  // const Max = 3;
   // $: hasMaxChapters = chapters?.length === Max;
   // $: chapterList_ = hasMaxChapters ? [] : [...chapterList];
 
-  const values = {};
+  // update selects as values changes. We cant update selects directly because of infinite loop.
   function changeVal(values_) {
     for (const key in values_) {
-      if (p.hasOwnProperty(key)) {
+      if (values_.hasOwnProperty(key)) {
         _.find(selects, {param: key}).value = values_[key];
       }
     }
   }
   $: changeVal(values);
+
+  // when values changes, use updated selects to filter the original data
+  $: filter_data = filter(
+    orig_data,
+    selects,
+    searchTerm,
+    searchOptions,
+    values,
+  );
+
+  // when selects changes, update url params
+  $: setUrlParams($page.url, selects, values);
+  let listOpen = false;
+  $: listOpen = false;
 </script>
 
 <div class="mx-4">
@@ -113,13 +106,28 @@
     </button>
   </div>
   <div class="text_width grid items-center gap-y-4 md:gap-x-6 {hidden}">
+    <div class="">
+      <span class="mt-4 block pb-1 text-lg font-semibold"
+        >{$t('filter.search').text}</span
+      >
+      <div class="flex">
+        <input
+          bind:value={searchTerm}
+          placeholder={$t('filter.search').text}
+          class="h-full w-full rounded-md border border-neutral-25 p-2 pl-4"
+        />
+      </div>
+    </div>
     {#each selects as select}
       <div>
         <span class="mt-2 block pb-1 text-lg font-semibold">{select.title}</span
         >
-        <div class="capitalize">
+        <div class={select.param !== 'language' ? 'capitalize' : ''}>
           <Select
+            showChevron
+            placeholder={$t('filter.placeholder').text}
             items={select.items}
+            closeListOnChange={select.multiple == true ? true : false}
             searchable={select.searchable}
             multiple={select.multiple}
             bind:value={values[select.param]}
@@ -130,3 +138,6 @@
     {/each}
   </div>
 </div>
+
+<style>
+</style>
