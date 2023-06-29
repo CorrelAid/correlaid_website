@@ -14,37 +14,14 @@
 
   export let orig_data;
   export let filter_data;
-  let hidden = 'visible';
+
+  export let selects;
+  export let searchOptions;
+
+  let hidden = 'hidden';
   let searchTerm;
 
   const values = {};
-
-  const selects = [
-    {
-      title: $t('filter.type').text,
-      searchable: false,
-      multiple: false,
-      param: 'type',
-    },
-    {
-      title: 'Local Chapters',
-      searchable: false,
-      multiple: true,
-      param: 'correlaidx',
-    },
-    {
-      title: $t('filter.language').text,
-      searchable: false,
-      multiple: false,
-      param: 'language',
-    },
-  ];
-
-  const searchOptions = [
-    {name: 'tags', multiple: true},
-    {name: 'title', multiple: false},
-    {name: 'teaser', multiple: false},
-  ];
 
   console.log(orig_data);
 
@@ -52,9 +29,9 @@
     // when searchParams is set, set them in filter
     extractUrlSearchParams($page.url.searchParams, values, selects);
     // if value is set dont hide filter (if someone goes to page with defined url param)
-    // if (Object.values(values).some((value) => value !== null)) {
-    //   hidden = 'visible';
-    // }
+    if (Object.values(values).some((value) => value !== null)) {
+      hidden = 'visible';
+    }
   });
 
   genDropdownLists(orig_data, selects);
@@ -88,7 +65,7 @@
   );
 
   // when selects changes, update url params
-  $: setUrlParams($page.url, selects, values);
+  $: history.replaceState({}, '', setUrlParams($page.url, selects, values));
   let listOpen = false;
   $: listOpen = false;
 </script>
@@ -126,7 +103,6 @@
             showChevron
             placeholder={$t('filter.placeholder').text}
             items={select.items}
-            closeListOnChange={select.multiple == true ? true : false}
             searchable={select.searchable}
             multiple={select.multiple}
             bind:value={values[select.param]}

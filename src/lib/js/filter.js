@@ -3,11 +3,14 @@ import _ from 'lodash';
 function filterByMultiple(data, filter_values, property) {
   return data.filter((object) => {
     const objectsProperty = object[property];
+
     return filter_values.every((single) => {
-      if (single === 'Global' && property === 'correlaidx') {
+      if (single === 'global' && property === 'correlaidx') {
         return objectsProperty.length === 0;
       } else {
-        return objectsProperty.includes(single);
+        return objectsProperty
+          .map((entry) => entry.toLowerCase())
+          .includes(single);
       }
     });
   });
@@ -15,7 +18,7 @@ function filterByMultiple(data, filter_values, property) {
 
 function filterDefinedBy(property, objects, value) {
   return _.filter(objects, (object) => {
-    return object && object[property] === value;
+    return object && object[property].toLowerCase() === value.toLowerCase();
   });
 }
 
@@ -78,7 +81,7 @@ export function setUrlParams(url, selects) {
     }
   }
   // https://dev.to/mohamadharith/mutating-query-params-in-sveltekit-without-page-reloads-or-navigations-2i2b
-  history.replaceState({}, '', newUrl);
+  return newUrl;
 }
 
 function genValue(value, values, items) {

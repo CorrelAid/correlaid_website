@@ -52,11 +52,38 @@
     $locale === 'de' ? 'Kommende Veranstaltungen' : 'Upcoming Events';
   $: pastEventSeperator =
     $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events';
+
+  const selects = [
+    {
+      title: $t('filter.type').text,
+      searchable: false,
+      multiple: false,
+      param: 'type',
+    },
+    {
+      title: 'Local Chapters',
+      searchable: false,
+      multiple: true,
+      param: 'correlaidx',
+    },
+    {
+      title: $t('filter.language').text,
+      searchable: false,
+      multiple: false,
+      param: 'language',
+    },
+  ];
+
+  const searchOptions = [
+    {name: 'tags', multiple: true},
+    {name: 'title', multiple: false},
+    {name: 'teaser', multiple: false},
+  ];
 </script>
 
 <!-- passing unfiltered data to component -->
 
-<Filter orig_data={events_data} filter_type={'events'} bind:filter_data />
+<Filter orig_data={events_data} bind:filter_data {selects} {searchOptions} />
 {#if events}
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
     {currentEventSeperator}
