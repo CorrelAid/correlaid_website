@@ -12,7 +12,6 @@
   import Select from 'svelte-select';
   import _ from 'lodash';
 
-  export let filter_type;
   export let orig_data;
   export let filter_data;
   let hidden = 'visible';

@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import {goto} from '$app/navigation';
 
 function filterByMultiple(data, filter_values, property) {
   return data.filter((object) => {
@@ -78,8 +77,8 @@ export function setUrlParams(url, selects) {
       newUrl?.searchParams?.delete(select.param);
     }
   }
-
-  goto(newUrl);
+  // https://dev.to/mohamadharith/mutating-query-params-in-sveltekit-without-page-reloads-or-navigations-2i2b
+  history.replaceState({}, '', newUrl);
 }
 
 function genValue(value, values, items) {
