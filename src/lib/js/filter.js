@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-function filterByMultiple(data, filter_values, property) {
+export function filterByMultiple(data, filter_values, property) {
   return data.filter((object) => {
     const objectsProperty = object[property];
 
@@ -22,7 +22,7 @@ function filterDefinedBy(property, objects, value) {
   });
 }
 
-function filterStringSearch(searchTerm, searchOptions, objects) {
+export function filterStringSearch(searchTerm, searchOptions, objects) {
   return _.filter(objects, (object) => {
     let bool = false;
     for (const item of searchOptions) {
