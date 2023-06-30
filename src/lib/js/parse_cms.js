@@ -68,7 +68,12 @@ export function parseProject(project) {
     const projectLinks = {};
 
     if (project.Projects_Outputs.length !== 0) {
-      projectLinks['repo'] = project.Projects_Outputs[0].url;
+      const repo = project.Projects_Outputs.find(
+        (obj) => obj.output_type === 'repository',
+      );
+      if (repo) {
+        projectLinks['repo'] = repo.url;
+      }
     }
 
     if (project.Podcast) {
