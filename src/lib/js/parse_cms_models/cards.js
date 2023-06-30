@@ -41,6 +41,8 @@ function parseLcSubElements(
       }
       return lc.Local_Chapters_id.translations[0].city;
     });
+  } else if (lcSbuElementsRaw.length === 0) {
+    parsedElement[entryName] = [];
   }
 }
 

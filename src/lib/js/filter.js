@@ -3,14 +3,13 @@ import _ from 'lodash';
 export function filterByMultiple(data, filter_values, property) {
   return data.filter((object) => {
     const objectsProperty = object[property];
-
     return filter_values.every((single) => {
       if (single === 'global' && property === 'correlaidx') {
         return objectsProperty.length === 0;
       } else {
         return objectsProperty
           .map((entry) => entry.toLowerCase())
-          .includes(single);
+          .includes(single.toLowerCase());
       }
     });
   });
@@ -41,6 +40,7 @@ export function filterStringSearch(searchTerm, searchOptions, objects) {
         }
       }
     }
+
     return bool;
   });
 }
@@ -130,23 +130,20 @@ function packMap(data, param) {
 }
 
 export function genDropdownLists(orig_data, selects) {
-  const chapterList = packMap(orig_data, 'correlaidx');
-  chapterList.push({value: 'global', label: 'Global'});
-  _.find(selects, {param: 'correlaidx'}).items = chapterList;
-
-  const langList = [
-    {value: 'en-US', label: 'en'},
-    {value: 'de-DE', label: 'de'},
-  ];
-  _.find(selects, {param: 'language'}).items = langList;
-
-  // _.find(selects, { param: 'tags' }).items = _.chain(orig_data)
-  //   .flatMap('tags')
-  //   .uniq()
-  //   .value();
-
-  const typeList = packMap(orig_data, 'type');
-  _.find(selects, {param: 'type'}).items = typeList;
-
+  for (let i = 0; i < selects.length; i++) {
+    let lst;
+    if (selects[i].param === 'language' || selects[i].param === 'langs') {
+      lst = [
+        {value: 'en-US', label: 'en'},
+        {value: 'de-DE', label: 'de'},
+      ];
+    } else {
+      lst = packMap(orig_data, selects[i].param);
+      if (selects[i].param === 'correlaidx') {
+        lst.push({value: 'global', label: 'Global'});
+      }
+    }
+    selects[i].items = lst;
+  }
   return selects;
 }

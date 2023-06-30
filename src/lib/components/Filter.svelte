@@ -23,8 +23,6 @@
 
   const values = {};
 
-  console.log(orig_data);
-
   onMount(async () => {
     // when searchParams is set, set them in filter
     extractUrlSearchParams($page.url.searchParams, values, selects);
@@ -98,7 +96,11 @@
       <div>
         <span class="mt-2 block pb-1 text-lg font-semibold">{select.title}</span
         >
-        <div class={select.param !== 'language' ? 'capitalize' : ''}>
+        <div
+          class={select.param !== 'language' && select.param !== 'langs'
+            ? 'capitalize'
+            : ''}
+        >
           <Select
             showChevron
             placeholder={$t('filter.placeholder').text}
@@ -107,7 +109,9 @@
             multiple={select.multiple}
             bind:value={values[select.param]}
             --list-z-index="30"
-          />
+          >
+            <div slot="empty" /></Select
+          >
         </div>
       </div>
     {/each}
