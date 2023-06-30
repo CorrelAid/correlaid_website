@@ -16,7 +16,6 @@
   export let repo = void 0;
   export let post_slug = void 0;
   export let podcast_href = void 0;
-  console.log(repo);
 
   const annonymousOrg = typeof organization === 'undefined' && !isInternal;
 
