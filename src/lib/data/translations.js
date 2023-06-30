@@ -97,6 +97,8 @@ export default {
     'filter.no_results': {text: 'Keine Ergebnisse'},
     'filter.placeholder': {text: 'Bitte auswählen'},
     'filter.search': {text: 'Suchen'},
+    'organization.anonymous': {text: 'Anonyme Organisation'},
+    'organization.internalProject': {text: 'Internes Projekt'},
   },
   en: {
     'navbar.home': {text: null, url: '/en'},
@@ -195,5 +197,7 @@ export default {
     'filter.no_results': {text: 'No Results'},
     'filter.placeholder': {text: 'Please select'},
     'filter.search': {text: 'Search'},
+    'organization.anonymous': {text: 'Anonymous Organization'},
+    'organization.internalProject': {text: 'Internal Project'},
   },
 };

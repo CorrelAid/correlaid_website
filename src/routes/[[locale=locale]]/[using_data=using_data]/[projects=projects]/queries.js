@@ -4,6 +4,7 @@ query ProjectOverview($language: String = "de-DE") {
 		status
 		subpage
 		project_id
+		is_internal
 		Podcast {
 			language
 			soundcloud_link
