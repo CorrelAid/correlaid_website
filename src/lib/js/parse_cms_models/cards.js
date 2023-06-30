@@ -112,7 +112,12 @@ export function projects(project) {
   }
 
   if (project.Projects_Outputs.length > 0) {
-    parsedProjectCard['repo'] = project.Projects_Outputs[0].url;
+    const repo = project.Projects_Outputs.find(
+      (obj) => obj.output_type === 'repository',
+    );
+    if (repo) {
+      parsedProjectCard['repo'] = repo.url;
+    }
   }
 
   function anonymizeProjectCard(parsedProjectCard) {
@@ -178,7 +183,12 @@ export function lcProjects(lcProject) {
       project.Posts[0].Posts_id.translations[0].slug;
   }
   if (project.Projects_Outputs.length > 0) {
-    parsedProjectCard['repo'] = project.Projects_Outputs[0].url;
+    const repo = project.Projects_Outputs.find(
+      (obj) => obj.output_type === 'repository',
+    );
+    if (repo) {
+      parsedProjectCard['repo'] = repo.url;
+    }
   }
 
   return parsedProjectCard;
