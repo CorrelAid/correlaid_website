@@ -5,6 +5,8 @@ import {error} from '@sveltejs/kit';
 import {parseJobPage} from '$lib/js/parse_cms';
 import {handle_lang} from '$lib/js/helpers';
 
+export const prerender = 'auto';
+
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
   const vars = {
