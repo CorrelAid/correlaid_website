@@ -1,0 +1,92 @@
+<script>
+  import {t, locale} from '$lib/stores/i18n';
+  import {toLocalDateString, convertContractType} from '$lib/js/helpers';
+
+  export let title;
+  export let slug;
+  export let summary;
+  export let fte;
+  export let type;
+  export let language;
+  export let deadline;
+  export let location;
+  export let salary;
+  export let tags = [];
+  export let href = '';
+
+  const listStyle = 'min-w-min mr-4 mb-2';
+
+  const emojis = {
+    '1oclock': '&#x1F550;',
+    'money-bag': '&#x1F4B0;',
+    'location-pin': '&#x1F4CD;',
+    'speaking-head': '&#x1F5E3;',
+  };
+
+  let cardDetails = {};
+
+  $: if (typeof slug !== 'undefined') {
+    href = $t('navbar.jobs').url + '/' + slug;
+  }
+
+  $: {
+    cardDetails = {};
+    if ($locale === 'de') {
+      cardDetails['Bewerbungsschluss: '] = toLocalDateString(
+        deadline,
+        $locale,
+        true,
+      );
+      cardDetails['Art: '] = convertContractType(type, $locale);
+    } else {
+      cardDetails['Application Deadline: '] = toLocalDateString(
+        deadline,
+        $locale,
+        true,
+      );
+      cardDetails['Type: '] = convertContractType(type, $locale);
+    }
+    cardDetails[emojis['1oclock']] = fte;
+    cardDetails[emojis['location-pin']] = location;
+    cardDetails[emojis['money-bag']] = salary;
+    cardDetails[emojis['speaking-head']] = language;
+  }
+</script>
+
+<div class="offset-right relative w-full" style="">
+  <div
+    class="z-1 relative top-0 grid h-full w-full grid-cols-4 rounded border border-neutral-25 bg-white p-4"
+  >
+    <div class="col-span-full">
+      <div class="pb-2">
+        <a
+          {href}
+          class="text-xl font-semibold text-base-content transition hover:text-primary"
+        >
+          {title}
+        </a>
+      </div>
+      <div class="mb-4">
+        {#each tags as tag}
+          <span
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+            >{tag}</span
+          >
+        {/each}
+      </div>
+
+      <ul class="mb-4 flex flex-wrap">
+        {#each Object.keys(cardDetails) as key}
+          <li class={listStyle}>
+            <strong>{@html key}</strong>
+            {cardDetails[key]}
+          </li>
+        {/each}
+      </ul>
+
+      <p class="mb-3 line-clamp-3 text-lg text-base-content xl:pb-0 xl:pr-4">
+        {summary}
+      </p>
+    </div>
+  </div>
+</div>

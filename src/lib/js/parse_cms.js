@@ -1,4 +1,5 @@
 import * as parseModel from './parse_cms_models';
+import {gen_img_url} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 
 function reportParseError(err, description, rawInput) {
@@ -227,4 +228,66 @@ export function parseBlogPostPage(blogPostPage) {
     reportParseError(err, 'For blog post page', blogPostPage);
   }
   return parsedBlogPostPage;
+}
+
+export function parseJobPage(jobPage) {
+  const parsedJobPage = {
+    title: jobPage.Jobs[0].translations.title,
+    summary: jobPage.Jobs[0].translations.summary,
+    description: jobPage.Jobs[0].translations.description,
+    location: jobPage.Jobs[0].location,
+    language: jobPage.Jobs[0].language,
+    deadline: new Date(jobPage.Jobs[0].deadline),
+    salary: jobPage.Jobs[0].salary,
+    FTE: jobPage.Jobs[0].FTE,
+    type: jobPage.Jobs[0].type,
+  };
+
+  if (jobPage.Jobs[0].tags) {
+    parsedJobPage['tags'] = jobPage.Jobs[0].tags;
+  } else {
+    parsedJobPage['tags'] = [];
+  }
+
+  const colleagues = [];
+  if (jobPage.Jobs[0].colleagues) {
+    for (const person of jobPage.Jobs[0].colleagues) {
+      const parsedPerson = {
+        name: person.People_id.name,
+      };
+      if (person.People_id.image) {
+        parsedPerson['img'] = gen_img_url(
+          person.People_id.image.id,
+          'fit=cover&width=200&height=200&quality=80',
+        );
+        parsedPerson['image_desc'] = person.People_id.image.description;
+      }
+      if (
+        person.People_id.translations[0] &&
+        person.People_id.translations[0].pronouns
+      ) {
+        parsedPerson[
+          'pronouns'
+        ] = `(${person.People_id.translations[0].pronouns})`;
+      }
+      const parsedLinks = {name: person.People_id.name};
+
+      for (const link of [
+        'website',
+        'linkedin',
+        'mastodon',
+        'twitter',
+        'github',
+      ]) {
+        if (person.People_id[link]) {
+          parsedLinks[link] = person.People_id[link];
+        }
+      }
+
+      parsedPerson['links'] = parsedLinks;
+      colleagues.push(parsedPerson);
+    }
+  }
+  parsedJobPage['colleagues'] = colleagues;
+  return parsedJobPage;
 }

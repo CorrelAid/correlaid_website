@@ -81,6 +81,13 @@ const queries = {
   }
 
   `,
+  jobs: `
+  query Jobs{
+    Jobs(filter: { status: { _eq: "published" }  }) {
+      slug
+    }
+  }
+  `,
 };
 
 console.log(
@@ -168,6 +175,14 @@ async function addEventRoutes(routes) {
   }
 }
 
+async function addJobRoutes(routes) {
+  const results = await queryCmsGraphQl(queries['jobs']);
+  for (const job of results['data']['Jobs']) {
+    routes.push(`/jobs/${job.slug}`);
+    routes.push(`/en/jobs/${job.slug}`);
+  }
+}
+
 const prerenderRoutes = [];
 
 if (process.env.PUBLIC_PRERENDER === 'ALL') {
@@ -193,6 +208,7 @@ if (process.env.PUBLIC_PRERENDER === 'ALL') {
   await addLcRoutes(prerenderRoutes);
   await addProjectRoutes(prerenderRoutes);
   await addEventRoutes(prerenderRoutes);
+  await addJobRoutes(prerenderRoutes);
   prerenderRoutes.push('/404/');
   prerenderRoutes.push('/en/404/');
 } else {

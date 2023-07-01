@@ -14,6 +14,7 @@
     'footer.coc',
     'footer.coe',
     'navbar.about.team',
+    'navbar.jobs',
   ];
 
   const socialMediaLinks = [
@@ -45,10 +46,10 @@
 <footer class="w-screen border-t border-neutral-25">
   <div class=" flex pt-12">
     <ul
-      class="mx-auto flex items-center gap-3 text-sm font-light text-base-content md:gap-4 md:text-base"
+      class="mx-auto flex flex-wrap items-center justify-center gap-3 text-sm font-light text-base-content md:gap-4 md:text-base"
     >
       {#each links as link}
-        <li>
+        <li class="px-2">
           <a class="transition hover:text-primary" href={$t(link).url}>
             {$t(link).text}
           </a>

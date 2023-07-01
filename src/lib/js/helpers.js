@@ -1,5 +1,4 @@
 import translations from '$lib/data/translations';
-import _ from 'lodash';
 import {PUBLIC_API_URL} from '$env/static/public';
 
 /**
@@ -138,7 +137,6 @@ export function toLocalDateString(date, locale, year = false) {
       year: 'numeric',
     };
   }
-
   return date.toLocaleString(locale, options);
 }
 
@@ -172,33 +170,44 @@ export function gen_time(time, locale) {
 }
 
 /**
- * Checking if post exists in current locale, if not using other language.
- * Getting languages the posts exists in.
+ * Extracts existing languages from a list from an data entry
+ * with translations.
  */
-export function handle_lang(posts, params) {
-  for (let i = 0; i < posts.length; i++) {
-    const langs = [];
-    const translations = [];
-    for (let y = 0; y < posts[i].translations.length; y++) {
-      if (posts[i].translations[y].slug != null) {
-        langs.push(posts[i].translations[y].languages_code.code);
-        translations.push(posts[i].translations[y]);
-      }
-    }
-    posts[i].langs = langs;
-    const used_translation = _.find(
-      translations,
-      (el) => el.languages_code.code === get_lang(params),
-    );
+function extractLanguages(entry) {
+  const langs = entry.translations.map((translation) => {
+    translation.languages_code.code;
+  });
+  return langs;
+}
 
-    if (used_translation) {
-      posts[i].translations = used_translation;
-    } else {
-      posts[i].translations = translations[0];
-    }
+/**
+ * Get translation translation with fallback.
+ * The fallback is any other available translation.
+ */
+function getTranslation(entry, currentLanguage) {
+  const translation = entry.translations.find(
+    (translation) => translation.languages_code.code === currentLanguage,
+  );
+  if (translation) {
+    return translation;
+  } else {
+    return entry.translations[0];
+  }
+}
+
+/**
+ * Checking if entries exists in current locale, if not falls back to another available language.
+ * Also adds an array of existing languages as a property to every entry.
+ */
+export function handle_lang(entries, params) {
+  for (const entry of entries) {
+    entry.langs = extractLanguages(entry);
+    // TODO: This is not very nice because it changes the data type from array to object.
+    // It also is misleading in terms of the naming as the property name is still plural.
+    entry.translations = getTranslation(entry, get_lang(params));
   }
 
-  return posts;
+  return entries;
 }
 
 export function gen_lc_href(params, city) {
@@ -208,4 +217,42 @@ export function gen_lc_href(params, city) {
     city.toLowerCase(),
   ].join('');
   return lc_href;
+}
+
+export function convertContractType(type, locale) {
+  if (locale === 'de') {
+    switch (type) {
+      case 'full-time':
+        return 'Vollzeit';
+      case 'part-time':
+        return `Teilzeit`;
+      case 'internship':
+        return 'Praktikum';
+      case 'volunteer':
+        return 'Freiwillig';
+      case 'contract':
+        return 'Vertrag';
+      case 'temporary':
+        return 'Zeitlich begrenzt';
+      default:
+        return type;
+    }
+  } else {
+    switch (type) {
+      case 'full-time':
+        return 'Full-time';
+      case 'part-time':
+        return `Part-time`;
+      case 'internship':
+        return 'Internship';
+      case 'volunteer':
+        return 'Volunteer';
+      case 'contract':
+        return 'Contract';
+      case 'temporary':
+        return 'Temporary';
+      default:
+        return type;
+    }
+  }
 }

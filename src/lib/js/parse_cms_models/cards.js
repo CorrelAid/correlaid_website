@@ -211,3 +211,23 @@ export function workshops(workshop) {
   }
   return parsedWorkshop;
 }
+
+export function jobs(job) {
+  const parsedJob = {
+    slug: job.slug,
+    title: job.translations.title,
+    summary: job.translations.summary,
+    type: job.type,
+    fte: job.FTE,
+    salary: job.salary,
+    language: job.language,
+    deadline: new Date(job.deadline),
+    location: job.location,
+  };
+
+  if (job.tags) {
+    parsedJob['tags'] = job.tags;
+  }
+
+  return parsedJob;
+}
