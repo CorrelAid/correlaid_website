@@ -16,7 +16,7 @@ test.describe('test regular viewport', () => {
     },
     {
       linkClick: async (page) =>
-        page.getByRole('link', {name: 'Podcast'}).click(),
+        page.getByRole('link', {name: 'Podcast', exact: true}).click(),
       page: '**/podcast/',
     },
     {

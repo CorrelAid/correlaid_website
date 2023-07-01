@@ -225,7 +225,7 @@ if (process.env.PUBLIC_ADAPTER === 'STATIC') {
     assets: staticBuildDir,
     fallback: null,
     precompress: false,
-    strict: true,
+    strict: false,
   });
 } else {
   configuredAdapter = adapter({
