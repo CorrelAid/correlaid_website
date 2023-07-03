@@ -34,14 +34,12 @@ function parseLcSubElements(
   lcSbuElementsRaw,
   entryName = 'correlaidx',
 ) {
-  if (lcSbuElementsRaw.length > 0) {
-    parsedElement[entryName] = lcSbuElementsRaw.map((lc) => {
-      if (typeof lc.Local_Chapters_id.translations[0].city !== 'string') {
-        throw new Error('Local chapter name is missing or not a string');
-      }
-      return lc.Local_Chapters_id.translations[0].city;
-    });
-  }
+  parsedElement[entryName] = lcSbuElementsRaw.map((lc) => {
+    if (typeof lc.Local_Chapters_id.translations[0].city !== 'string') {
+      throw new Error('Local chapter name is missing or not a string');
+    }
+    return lc.Local_Chapters_id.translations[0].city;
+  });
 }
 
 export function events(event) {
@@ -51,6 +49,7 @@ export function events(event) {
     teaser: event.teaser,
     date: new Date(event.date),
     tags: event.tags,
+    type: event.type,
     language: event.language,
   };
   if (event.end_date) {

@@ -18,6 +18,11 @@ const excl = [
   'access.language',
   'access.date',
   'access.time',
+  'filter.language',
+  'filter.type',
+  'filter.no_results',
+  'filter.placeholder',
+  'filter.search',
   'organization.anonymous',
   'organization.internalProject',
 ];

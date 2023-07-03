@@ -5,6 +5,7 @@
   export let href;
   export let slug;
   export let title;
+  export let type;
   import {page} from '$app/stores';
   import {gen_lc_href} from '$lib/js/helpers';
   export let teaser;
@@ -24,6 +25,8 @@
   $: if (typeof slug !== 'undefined') {
     href = $t('navbar.events').url + '/' + slug;
   }
+
+  $: type = type.replace(/_/g, ' ');
 </script>
 
 <div class="offset-right relative w-full" style="">
@@ -47,6 +50,11 @@
       </div>
       <Langs langs={[language]} />
       <div class="mb-4">
+        <span
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white"
+        >
+          {type}</span
+        >
         {#each tags as tag}
           <span
             class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
