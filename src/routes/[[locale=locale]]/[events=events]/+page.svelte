@@ -38,14 +38,14 @@
   // original unfiltered data
   $: events_data = data.events;
 
-  let filter_data;
+  let filteredData;
 
   // Needs to stay client because it depends on the current date
   // and can therefore not be statically build
   // using store data that was manipulated by component
   let events;
-  $: if (filter_data) {
-    events = timeSplitEvents(filter_data);
+  $: if (filteredData) {
+    events = timeSplitEvents(filteredData);
   }
 
   $: currentEventSeperator =
@@ -75,15 +75,15 @@
   ];
 
   const searchOptions = [
-    {name: 'tags', multiple: true},
-    {name: 'title', multiple: false},
-    {name: 'teaser', multiple: false},
+    {searchProperty: 'tags', multiple: true},
+    {searchProperty: 'title', multiple: false},
+    {searchProperty: 'teaser', multiple: false},
   ];
 </script>
 
 <!-- passing unfiltered data to component -->
 
-<Filter orig_data={events_data} bind:filter_data {selects} {searchOptions} />
+<Filter orig_data={events_data} bind:filteredData {selects} {searchOptions} />
 {#if events}
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
     {currentEventSeperator}

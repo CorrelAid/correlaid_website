@@ -10,7 +10,7 @@
   });
 
   export let data;
-  let filter_data;
+  let filteredData;
   $: podcast_episodes = data.podcast_episodes;
 
   const selects = [
@@ -23,21 +23,21 @@
   ];
 
   const searchOptions = [
-    {name: 'title', multiple: false},
-    {name: 'teaser', multiple: false},
+    {searchProperty: 'title', multiple: false},
+    {searchProperty: 'teaser', multiple: false},
   ];
 </script>
 
 <Filter
   orig_data={podcast_episodes}
-  bind:filter_data
+  bind:filteredData
   {selects}
   {searchOptions}
 />
 <div class="container mx-auto mt-8 px-4 pb-8">
   <div class="space-y-8">
-    {#if filter_data}
-      {#each filter_data as episode}
+    {#if filteredData}
+      {#each filteredData as episode}
         <BlogCard {...episode} external={true} />
       {/each}
     {/if}

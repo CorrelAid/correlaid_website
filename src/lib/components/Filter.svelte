@@ -7,13 +7,13 @@
     filter,
     genDropdownLists,
     setUrlParams,
-    extractUrlSearchParams,
+    applyUrlSearchParams,
   } from '$lib/js/filter.js';
   import Select from 'svelte-select';
   import _ from 'lodash';
 
   export let orig_data;
-  export let filter_data;
+  export let filteredData;
 
   export let selects;
   export let searchOptions;
@@ -25,7 +25,7 @@
 
   onMount(async () => {
     // when searchParams is set, set them in filter
-    extractUrlSearchParams($page.url.searchParams, values, selects);
+    applyUrlSearchParams($page.url.searchParams, values, selects);
     // if value is set dont hide filter (if someone goes to page with defined url param)
     if (Object.values(values).some((value) => value !== null)) {
       hidden = 'visible';
@@ -38,11 +38,6 @@
     hidden = hidden === 'hidden' ? 'visible' : 'hidden';
   }
 
-  // limit selectable items
-  // const Max = 3;
-  // $: hasMaxChapters = chapters?.length === Max;
-  // $: chapterList_ = hasMaxChapters ? [] : [...chapterList];
-
   // update selects as values changes. We cant update selects directly because of infinite loop.
   function changeVal(values_) {
     for (const key in values_) {
@@ -54,7 +49,7 @@
   $: changeVal(values);
 
   // when values changes, use updated selects to filter the original data
-  $: filter_data = filter(
+  $: filteredData = filter(
     orig_data,
     selects,
     searchTerm,
@@ -64,8 +59,6 @@
 
   // when selects changes, update url params
   $: history.replaceState({}, '', setUrlParams($page.url, selects, values));
-  let listOpen = false;
-  $: listOpen = false;
 </script>
 
 <div class="mx-4">

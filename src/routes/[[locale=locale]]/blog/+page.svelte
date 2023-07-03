@@ -11,7 +11,7 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let filter_data;
+  let filteredData;
   let posts;
   $: posts = data.posts;
   const selects = [
@@ -24,15 +24,15 @@
   ];
 
   const searchOptions = [
-    {name: 'title', multiple: false},
-    {name: 'teaser', multiple: false},
+    {searchProperty: 'title', multiple: false},
+    {searchProperty: 'teaser', multiple: false},
   ];
 </script>
 
-<Filter orig_data={posts} bind:filter_data {selects} {searchOptions} />
+<Filter orig_data={posts} bind:filteredData {selects} {searchOptions} />
 <div class="mt-8 space-y-8 px-4">
-  {#if filter_data}
-    {#each filter_data as post, i}
+  {#if filteredData}
+    {#each filteredData as post, i}
       <div class={i === 0 ? 'col-span-full' : 'col-span-1'}>
         <BlogCard {...post} />
       </div>
