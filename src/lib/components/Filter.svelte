@@ -19,6 +19,7 @@
   export let searchOptions;
 
   let hidden = 'hidden';
+  let aria_expanded = false;
   let searchTerm;
 
   const values = {};
@@ -29,6 +30,7 @@
     // if value is set dont hide filter (if someone goes to page with defined url param)
     if (Object.values(values).some((value) => value !== null)) {
       hidden = 'visible';
+      aria_expanded = true;
     }
   });
 
@@ -36,6 +38,7 @@
 
   function handleHidden() {
     hidden = hidden === 'hidden' ? 'visible' : 'hidden';
+    aria_expanded = aria_expanded ? false : true;
   }
 
   // update selects as values changes. We cant update selects directly because of infinite loop.
@@ -65,14 +68,18 @@
   <div class="border-b border-neutral-25">
     <button
       class="inline-flex items-center justify-center pb-1 text-xl font-semibold transition hover:text-secondary"
-      aria-expanded="true"
+      aria-expanded={aria_expanded}
+      aria-controls="filter"
       on:click={handleHidden}
     >
       Filter
       <DropdownIcon height={27} width={27} />
     </button>
   </div>
-  <div class="text_width grid items-center gap-y-4 md:gap-x-6 {hidden}">
+  <div
+    class="text_width grid items-center gap-y-4 md:gap-x-6 {hidden}"
+    id="filter"
+  >
     <div class="">
       <span class="mt-4 block pb-1 text-lg font-semibold"
         >{$t('filter.search').text}</span
