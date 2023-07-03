@@ -175,7 +175,7 @@ export function gen_time(time, locale) {
  */
 function extractLanguages(entry) {
   const langs = entry.translations.map((translation) => {
-    translation.languages_code.code;
+    return translation.languages_code.code;
   });
   return langs;
 }
