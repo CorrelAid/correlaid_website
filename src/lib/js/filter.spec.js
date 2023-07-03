@@ -29,9 +29,9 @@ describe('filters', () => {
   test('filter by search term', () => {
     const searchTerm = 'Fishing';
     const searchOptions = [
-      {name: 'title', multiple: false},
-      {name: 'tags', multiple: true},
-      {name: 'teaser', multiple: false},
+      {searchProperty: 'title', multiple: false},
+      {searchProperty: 'tags', multiple: true},
+      {searchProperty: 'teaser', multiple: false},
     ];
 
     const filteredObjects = filterStringSearch(
