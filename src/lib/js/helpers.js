@@ -173,9 +173,18 @@ export function gen_time(time, locale) {
  * Extracts existing languages from a list from an data entry
  * with translations.
  */
+// function extractLanguages(entry) {
+//   const langs = entry.translations.map((translation) => {
+//     console.log(translation.languages_code.code)
+//     translation.languages_code.code;
+//   });
+//   console.log(langs)
+//   return langs;
+// }
+
 function extractLanguages(entry) {
   const langs = entry.translations.map((translation) => {
-    translation.languages_code.code;
+    return translation.languages_code.code;
   });
   return langs;
 }
