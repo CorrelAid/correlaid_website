@@ -53,7 +53,7 @@
   $: pastEventSeperator =
     $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events';
 
-  const selects = [
+  $: selects = [
     {
       title: $t('filter.type').text,
       searchable: false,

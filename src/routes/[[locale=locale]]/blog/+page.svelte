@@ -14,7 +14,7 @@
   let filteredData;
   let posts;
   $: posts = data.posts;
-  const selects = [
+  $: selects = [
     {
       title: $t('filter.language').text,
       searchable: false,

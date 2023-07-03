@@ -13,7 +13,7 @@
   let filteredData;
   $: podcast_episodes = data.podcast_episodes;
 
-  const selects = [
+  $: selects = [
     {
       title: $t('filter.language').text,
       searchable: false,
