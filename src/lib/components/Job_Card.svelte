@@ -75,7 +75,7 @@
         {/each}
       </div>
 
-      <ul class="mb-4 flex flex-wrap">
+      <ul class="mb-3 flex flex-wrap">
         {#each Object.keys(cardDetails) as key}
           <li class={listStyle}>
             <strong>{@html key}</strong>
