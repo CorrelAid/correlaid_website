@@ -1,10 +1,26 @@
-import 'dotenv/config';
 import _ from 'lodash';
 import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
 import translations from './src/lib/data/translations.js';
 import {fetch} from 'undici';
+
+import path from 'node:path';
+import dotenv from 'dotenv';
+
+// Mimic vites loading order using the dotenv default overwrite = false
+// This means preexisting env vars have highest priority followed by
+// env specific vars general env vars
+// .local versions of the variables always overwrite their non-local
+// counterpart
+dotenv.config({
+  path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}.local`),
+});
+dotenv.config({
+  path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`),
+});
+dotenv.config({path: path.resolve(process.cwd(), '.env.local')});
+dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
 const excl = [
   'misc.read_more',
@@ -32,7 +48,15 @@ const mainRoutes = {
   en: _.omit(translations['en'], excl),
 };
 
-const URL = 'https://cms.correlaid.org/graphql';
+const URL = `${process.env.PUBLIC_API_URL}/graphql`;
+
+function getAllowedStatus() {
+  const allowedStatus = ['published'];
+  if (process.env.PUBLIC_SHOW_JOB_PREVIEWS === 'TRUE') {
+    allowedStatus.push('preview');
+  }
+  return allowedStatus;
+}
 
 if (
   process.env.PUBLIC_ADAPTER === 'STATIC' &&
@@ -87,8 +111,8 @@ const queries = {
 
   `,
   jobs: `
-  query Jobs{
-    Jobs(filter: { status: { _eq: "published" }  }) {
+  query Jobs($status: [String] = ["published"]) {
+    Jobs(filter: { status: { _in: $status }  }) {
       slug
     }
   }
@@ -181,7 +205,9 @@ async function addEventRoutes(routes) {
 }
 
 async function addJobRoutes(routes) {
-  const results = await queryCmsGraphQl(queries['jobs']);
+  const results = await queryCmsGraphQl(queries['jobs'], {
+    status: getAllowedStatus(),
+  });
   for (const job of results['data']['Jobs']) {
     routes.push(`/jobs/${job.slug}`);
     routes.push(`/en/jobs/${job.slug}`);

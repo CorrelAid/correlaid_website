@@ -1,8 +1,8 @@
 export const jobDetailQuery = `
-query Jobs($language: String = "de-DE", $slug: String) {
+query Jobs($language: String = "de-DE", $status: [String] = ["published"], $slug: String) {
 	Jobs(
 		filter: {
-			_and: [{ status: { _eq: "published" } }, { slug: { _eq: $slug } }]
+			_and: [{ status: { _in: $status } }, { slug: { _eq: $slug } }]
 		}
 	) {
 		slug 

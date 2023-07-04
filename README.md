@@ -70,10 +70,6 @@ PR.. If the tests suceed, a static version of the website is deployed to [corred
 
         npm install
 
-1.  Create .env file with the cms url env variable
-
-        echo "PUBLIC_API_URL=https://cms.correlaid.org" \nPUBLIC_PRERENDER="" \nPUBLIC_ADAPTER="" \nPUBLIC_ON_CMS_ERROR="FAIL"=""> .env
-
 1.  Set up pre-commit hooks
 
         npm run init_pre_commit
@@ -84,12 +80,12 @@ PR.. If the tests suceed, a static version of the website is deployed to [corred
 
 For details about the projects quality assurance [see below](#quality-assurance).
 
-### Secrets
+### Secrets and local configuration changes
 
 There is one possibly relevant secret for development which is a directus token
-that should be placed in the `.env` file if present.
+that, if present, should be placed in the `.env.local` file.
 
-      echo "DIRECTUS_TOKEN=<your token>" >> .env
+      echo "DIRECTUS_TOKEN=<your token>" > .env.local
 
 The token is only relevant for processing project related data and not required
 for contributing to other parts of the page that are not related to projects.
@@ -103,6 +99,14 @@ create a static token for themselves inside of directus, but they need suitable
 permissions for the token to be useful. Contributors without suitable
 permissions or without directus access should contact the project team to either
 get directus access, suitable permissions or a token.
+
+To change the default configuration are of the website, developers
+can add additional configurations to the `.env.local` file as well. This file will not be
+committed and will therefore not interfere with anybody else's configurations or
+with deployments. See the other (non-local) `.env` files for configurations that
+you might want to overwrite. One possibility, for instance, might be the inclusion
+of non-published job announcements that are only available for preview so far. For this
+concrete example include `PUBLIC_SHOW_JOB_PREVIEWS='TRUE'`.
 
 ## Project explanation
 

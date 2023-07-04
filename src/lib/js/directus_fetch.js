@@ -1,5 +1,5 @@
 import {error} from '@sveltejs/kit';
-import {PUBLIC_API_URL} from '$env/static/public';
+import {PUBLIC_API_URL, PUBLIC_SHOW_JOB_PREVIEWS} from '$env/static/public';
 import {DIRECTUS_TOKEN} from '$env/static/private';
 
 /*
@@ -11,7 +11,7 @@ import {DIRECTUS_TOKEN} from '$env/static/private';
  * while the default value is used.
  */
 export function validateVars(vars) {
-  const allowedVars = ['page', 'language', 'slug'];
+  const allowedVars = ['page', 'language', 'slug', 'status'];
 
   for (const name in vars) {
     if (vars.hasOwnProperty(name)) {
@@ -98,4 +98,12 @@ export async function directus_authorized_fetch(
   return await directus_fetch(query, vars, allowAllVarNames, {
     Authorization: `Bearer ${DIRECTUS_TOKEN}`,
   });
+}
+
+export function getAllowedStatus() {
+  const allowedStatus = ['published'];
+  if (PUBLIC_SHOW_JOB_PREVIEWS === 'TRUE') {
+    allowedStatus.push('preview');
+  }
+  return allowedStatus;
 }
