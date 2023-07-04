@@ -2,36 +2,13 @@
   import {page_key} from '$lib/stores/page_key';
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
+  import {timeSplitEntries} from '$lib/js/entries';
   import Events_Card from '$lib/components/Events_Card.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
 
   onMount(() => {
     $page_key = 'navbar.events';
   });
-
-  function timeSplitEvents(parsedEvents) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    function byDate(a, b) {
-      if (a.date < b.date) return -1;
-      if (a.date > b.date) return 1;
-      return 0;
-    }
-
-    const futureEvents = parsedEvents
-      .filter((event) => event.date >= today)
-      .sort(byDate);
-    const pastEvents = parsedEvents
-      .filter((event) => event.date < today)
-      .sort(byDate)
-      .reverse();
-
-    return {
-      past: pastEvents,
-      future: futureEvents,
-    };
-  }
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -45,12 +22,12 @@
   // using store data that was manipulated by component
   let events;
   $: if (filteredData) {
-    events = timeSplitEvents(filteredData);
+    events = timeSplitEntries(filteredData, (event) => event.date);
   }
 
-  $: currentEventSeperator =
+  $: currentEventSeparator =
     $locale === 'de' ? 'Kommende Veranstaltungen' : 'Upcoming Events';
-  $: pastEventSeperator =
+  $: pastEventSeparator =
     $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events';
 
   $: selects = [
@@ -86,7 +63,7 @@
 <Filter orig_data={events_data} bind:filteredData {selects} {searchOptions} />
 {#if events}
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
-    {currentEventSeperator}
+    {currentEventSeparator}
   </h2>
   {#if events.future.length === 0}
     <p class="px-4">{$t('filter.no_results').text}</p>
@@ -99,7 +76,7 @@
   {/if}
 
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
-    {pastEventSeperator}
+    {pastEventSeparator}
   </h2>
   {#if events.past.length === 0}
     <p class="px-4">{$t('filter.no_results').text}</p>

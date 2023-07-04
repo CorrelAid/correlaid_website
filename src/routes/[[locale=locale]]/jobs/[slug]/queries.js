@@ -4,6 +4,7 @@ query Jobs($language: String = "de-DE", $status: [String] = ["published"], $slug
 		filter: {
 			_and: [{ status: { _in: $status } }, { slug: { _eq: $slug } }]
 		}
+		sort : ["deadline"]
 	) {
 		slug 
 		deadline
