@@ -85,7 +85,7 @@ export function projects(project) {
     subpage: project.subpage,
   };
 
-  if (!project.is_internal) {
+  if (!project.is_internal && project.status !== 'published_anon') {
     parsedProjectCard['organization'] =
       project.Organizations[0].Organizations_id.translations[0].name;
   }

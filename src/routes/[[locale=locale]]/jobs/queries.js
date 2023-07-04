@@ -1,6 +1,6 @@
 export const jobsOverviewQuery = `
-query Jobs {
-	Jobs(filter: { status: { _eq: "published" }  }) {
+query Jobs($status: [String] = ["published"]) {
+	Jobs(filter: { status: { _in: $status }  }) {
         slug
 		language
         deadline

@@ -4,6 +4,7 @@ import {jobDetailQuery} from './queries.js';
 import {error} from '@sveltejs/kit';
 import {parseJobPage} from '$lib/js/parse_cms';
 import {handle_lang} from '$lib/js/helpers';
+import {getAllowedStatus} from '$lib/js/directus_fetch.js';
 
 export const prerender = 'auto';
 
@@ -12,6 +13,7 @@ export async function load({params}) {
   const vars = {
     slug: params.slug,
     language: get_lang(params),
+    status: getAllowedStatus(),
   };
   const data = await directus_fetch(jobDetailQuery, vars);
 
