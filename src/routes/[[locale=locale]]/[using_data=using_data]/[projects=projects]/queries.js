@@ -1,5 +1,5 @@
 export const projectOverviewQuery = `
-query ProjectOverview($language: String = "de-DE") {
+query ProjectOverview($language: String = "de-DE", $status: [String] = ["published"]) {
 	Projects(filter: { status: { _in: ["published", "published_anon"] } }) {
 		status
 		subpage
@@ -11,7 +11,7 @@ query ProjectOverview($language: String = "de-DE") {
 			title
 		}
 		Posts {
-			Posts_id {
+			Posts_id(filter: { status: { _in: $status } }) {
 				id
 				translations {
 					languages_code {

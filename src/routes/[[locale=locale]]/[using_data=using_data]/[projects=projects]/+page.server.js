@@ -1,7 +1,9 @@
-import {directus_authorized_fetch} from '$lib/js/directus_fetch';
+import {
+  directus_authorized_fetch,
+  getAllowedStatus,
+} from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import {handle_lang} from '$lib/js/helpers';
-import _ from 'lodash';
 import {projectOverviewQuery} from './queries.js';
 import {parseEntries} from '$lib/js/parse_cms';
 
@@ -9,13 +11,16 @@ import {parseEntries} from '$lib/js/parse_cms';
 export async function load({params}) {
   const data = await directus_authorized_fetch(projectOverviewQuery, {
     language: get_lang(params),
+    status: getAllowedStatus(),
   });
 
   const projects = data.Projects;
 
   for (const project of projects) {
     const posts = handle_lang(
-      _.flatMap(project.Posts, (data) => [data.Posts_id]),
+      project.Posts.map((data) => data.Posts_id).filter(
+        (data) => data !== null,
+      ),
       params,
     );
 

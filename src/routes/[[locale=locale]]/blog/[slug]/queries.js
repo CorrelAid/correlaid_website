@@ -1,6 +1,17 @@
 export const blogPostQuery = `
-query BlogPostQuery($slug: String, $language: String = "de-DE") {
-	Posts(filter: { translations: { slug: { _eq: $slug } } }) {
+query BlogPostQuery(
+	$slug: String
+	$status: [String] = ["published"]
+	$language: String = "de-DE"
+) {
+	Posts(
+		filter: {
+			_and: [
+				{ translations: { slug: { _eq: $slug } } }
+				{ status: { _in: $status } }
+			]
+		}
+	) {
 		pubdate
 		title_image {
 			id

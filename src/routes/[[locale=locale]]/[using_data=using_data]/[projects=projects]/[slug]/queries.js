@@ -1,5 +1,9 @@
 export const projectDetailsQuery = `
-query Project($slug: String, $language: String = "de-DE") {
+query Project(
+	$slug: String
+	$language: String = "de-DE"
+	$status: [String] = ["published"]
+) {
 	Projects(
 		filter: {
 			_and: [{ project_id: { _eq: $slug } }, { status: { _eq: "published" } }]
@@ -10,7 +14,7 @@ query Project($slug: String, $language: String = "de-DE") {
 			soundcloud_link
 		}
 		Posts {
-			Posts_id {
+			Posts_id(filter: { status: { _in: $status } }) {
 				translations {
 					languages_code {
 						code

@@ -178,8 +178,10 @@ export function lcProjects(lcProject) {
     parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
   }
   if (project.Posts.length > 0) {
-    parsedProjectCard['post_slug'] =
-      project.Posts[0].Posts_id.translations[0].slug;
+    if (project.Posts[0].Posts_id !== null) {
+      parsedProjectCard['post_slug'] =
+        project.Posts[0].Posts_id.translations[0].slug;
+    }
   }
   if (project.Projects_Outputs.length > 0) {
     const repo = project.Projects_Outputs.find(
