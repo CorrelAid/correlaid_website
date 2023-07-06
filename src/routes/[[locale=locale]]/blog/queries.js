@@ -1,6 +1,9 @@
 export const blogQuery = `
-query BlogQuery($language: String = "de-DE") {
-	Posts(sort: "-pubdate") {
+query BlogQuery(
+	$language: String = "de-DE"
+	$status: [String] = ["published"]
+) {
+	Posts(sort: "-pubdate", filter: { status: { _in: $status } }) {
 		pubdate
 		title_image {
 			id

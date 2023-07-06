@@ -1,5 +1,5 @@
 export const lcDetailsQuery = `
-query LocalChapterDetails($slug: String, $language: String = "de-DE") {
+query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [String] = ["published"]) {
 	Events(sort: ["date"], 
 		filter: {
 			local_chapters: {
@@ -30,51 +30,51 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE") {
 		Projects {
 			Projects_id {
 				subpage
-		project_id
-		Podcast {
-			language
-			soundcloud_link
-			title
-		}
-		Posts {
-			Posts_id {
-				id
-				translations {
-					languages_code {
-						code
-					}
+				project_id
+				Podcast {
+					language
+					soundcloud_link
 					title
-					slug
 				}
-			}
-		}
-		Projects_Outputs {
-			url
-			output_type
-		}
-		Organizations {
-			Organizations_id {
-				translations(filter: { languages_code: { code: { _eq: $language } } }) {
-					languages_code {
-						code
+				Posts {
+					Posts_id(filter: { status: { _in: $status } }) {
+						id
+						translations {
+							languages_code {
+								code
+							}
+							title
+							slug
+						}
 					}
-					name
 				}
-			}
-		}
-		translations(filter: { languages_code: { code: { _eq: $language } } }) {
-			title
-			description
-			summary
-		}
-		Local_Chapters {
-			Local_Chapters_id{
-				translations(filter: { languages_code: { code: { _eq: $language }}}){
-					city
+				Projects_Outputs {
+					url
+					output_type
 				}
-			}
-			
-		}
+				Organizations {
+					Organizations_id {
+						translations(filter: { languages_code: { code: { _eq: $language } } }) {
+							languages_code {
+								code
+							}
+							name
+						}
+					}
+				}
+				translations(filter: { languages_code: { code: { _eq: $language } } }) {
+					title
+					description
+					summary
+				}
+				Local_Chapters {
+					Local_Chapters_id{
+						translations(filter: { languages_code: { code: { _eq: $language }}}){
+							city
+						}
+					}
+					
+				}
 			}
 		}
 		location

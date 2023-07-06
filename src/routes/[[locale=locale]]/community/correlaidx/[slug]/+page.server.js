@@ -1,4 +1,5 @@
 import directus_fetch from '$lib/js/directus_fetch';
+import {getAllowedStatus} from '$lib/js/directus_fetch.js';
 import {get_lang} from '$lib/js/helpers';
 import {lcDetailsQuery} from './queries.js';
 import {error} from '@sveltejs/kit';
@@ -37,6 +38,7 @@ export async function load({params}) {
   const data = await directus_fetch(lcDetailsQuery, {
     slug: capitalize(params.slug),
     language: get_lang(params),
+    status: getAllowedStatus(),
   });
 
   if (data.Local_Chapters.length === 0) {

@@ -75,8 +75,8 @@ function canBePrerendered(url) {
 
 const queries = {
   blogs: `
-  query BlogSlugs {
-    Posts(sort: ["-pubdate"]) {
+  query BlogSlugs($status: [String] = ["published"]) {
+    Posts(sort: ["-pubdate"], filter: {status: { _in: $status }}) {
       translations(filter:{slug:{_neq:null}}) {
         languages_code {
           code
@@ -163,7 +163,9 @@ async function queryCmsGraphQl(query, vars) {
 }
 
 async function addBlogRoutes(routes) {
-  const postsResult = await queryCmsGraphQl(queries['blogs']);
+  const postsResult = await queryCmsGraphQl(queries['blogs'], {
+    status: getAllowedStatus(),
+  });
   for (const post of postsResult['data']['Posts']) {
     addBlogRoutesWithLanguageFallback(routes, post['translations']);
   }
