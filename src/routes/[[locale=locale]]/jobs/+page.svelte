@@ -31,7 +31,7 @@
 </script>
 
 <div class="space-y-8 px-4">
-  <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
+  <h2 class="mb-6 mt-8 text-2xl font-bold drop-shadow-sm">
     {currentJobSeparator}
   </h2>
   {#if jobs.future.length !== 0}
@@ -44,7 +44,7 @@
     </p>
   {/if}
 
-  <h2 class="mb-6 mt-4 px-4 text-2xl font-bold drop-shadow-sm">
+  <h2 class="mb-6 mt-4 text-2xl font-bold drop-shadow-sm">
     {pastJobSeparator}
   </h2>
   {#if jobs.past.length !== 0}

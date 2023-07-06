@@ -42,7 +42,7 @@
 
 <div class="mx-auto flex items-center gap-12">
   <div class="mx-auto hidden xl:block">
-    <nav aria-label="Site Nav Bottom">
+    <nav aria-label="Bottom Navigation">
       <ul class="flex items-center gap-8 text-xl">
         {#each bot_nav as navItem}
           <li>

@@ -1,6 +1,6 @@
 <script>
+  import {t, locale} from '$lib/stores/i18n';
   import Html from '$lib/components/Html.svelte';
-  import {locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import {page_key} from '$lib/stores/page_key';
   import TextContainer from '$lib/components/Text_Container.svelte';
@@ -14,10 +14,10 @@
 
   const listStyle = 'min-w-min mr-4 mb-2';
   const emojis = {
-    '1oclock': '&#x1F550;',
-    'money-bag': '&#x1F4B0;',
-    'location-pin': '&#x1F4CD;',
-    'speaking-head': '&#x1F5E3;',
+    workload: '&#x1F550;',
+    salary: '&#x1F4B0;',
+    location: '&#x1F4CD;',
+    language_: '&#x1F5E3;',
   };
 
   let jobSummaryBoxContent;
@@ -41,10 +41,10 @@
       );
       jobSummaryBoxContent['Type: '] = convertContractType(job.type, $locale);
     }
-    jobSummaryBoxContent[emojis['1oclock']] = job.FTE;
-    jobSummaryBoxContent[emojis['location-pin']] = job.location;
-    jobSummaryBoxContent[emojis['money-bag']] = job.salary;
-    jobSummaryBoxContent[emojis['speaking-head']] = job.language;
+    jobSummaryBoxContent[emojis['workload']] = job.FTE;
+    jobSummaryBoxContent[emojis['location']] = job.location;
+    jobSummaryBoxContent[emojis['salary']] = job.salary;
+    jobSummaryBoxContent[emojis['language_']] = job.language;
   }
 </script>
 
@@ -64,7 +64,20 @@
       <ul class="flex flex-wrap">
         {#each Object.keys(jobSummaryBoxContent) as key}
           <li class={listStyle}>
-            <strong>{@html key}</strong>
+            {#if Object.values(emojis).some((value) => key.includes(value))}
+              <strong aria-hidden="true">{@html key}</strong>
+              <span class="sr-only"
+                >{$t(
+                  `access.${
+                    Object.entries(emojis).find(
+                      ([key_, value]) => value === key,
+                    )[0]
+                  }`,
+                ).text}</span
+              >
+            {:else}
+              <strong>{@html key}</strong>
+            {/if}
             {jobSummaryBoxContent[key]}
           </li>
         {/each}

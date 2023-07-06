@@ -17,10 +17,10 @@
   const listStyle = 'min-w-min mr-4 mb-2';
 
   const emojis = {
-    '1oclock': '&#x1F550;',
-    'money-bag': '&#x1F4B0;',
-    'location-pin': '&#x1F4CD;',
-    'speaking-head': '&#x1F5E3;',
+    workload: '&#x1F550;',
+    salary: '&#x1F4B0;',
+    location: '&#x1F4CD;',
+    language_: '&#x1F5E3;',
   };
 
   let cardDetails = {};
@@ -46,10 +46,12 @@
       );
       cardDetails['Type: '] = convertContractType(type, $locale);
     }
-    cardDetails[emojis['1oclock']] = fte;
-    cardDetails[emojis['location-pin']] = location;
-    cardDetails[emojis['money-bag']] = salary;
-    cardDetails[emojis['speaking-head']] = language;
+    cardDetails[emojis['workload']] = fte;
+    cardDetails[emojis['location']] = location;
+    cardDetails[emojis['salary']] = salary;
+    cardDetails[emojis['language_']] = language;
+
+    console.log(cardDetails);
   }
 </script>
 
@@ -78,7 +80,21 @@
       <ul class="mb-3 flex flex-wrap">
         {#each Object.keys(cardDetails) as key}
           <li class={listStyle}>
-            <strong>{@html key}</strong>
+            {#if Object.values(emojis).some((value) => key.includes(value))}
+              <strong aria-hidden="true">{@html key}</strong>
+              <span class="sr-only"
+                >{$t(
+                  `access.${
+                    Object.entries(emojis).find(
+                      ([key_, value]) => value === key,
+                    )[0]
+                  }`,
+                ).text}</span
+              >
+            {:else}
+              <strong>{@html key}</strong>
+            {/if}
+
             {cardDetails[key]}
           </li>
         {/each}
