@@ -28,7 +28,7 @@ test.describe('test iPhone SE viewport', () => {
     await page.goto('/', {waitUntil: 'networkidle'});
     await page.getByRole('button').click();
     await page
-      .getByRole('navigation', {name: 'Main Nav'})
+      .getByRole('navigation', {name: 'Main'})
       .getByRole('link', {name: 'Blog'})
       .click();
     await page.waitForNavigation({url: '**/blog/'});
