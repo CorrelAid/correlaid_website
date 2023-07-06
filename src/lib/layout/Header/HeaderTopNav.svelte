@@ -8,7 +8,7 @@
 
 <div class="mb-3 mt-1 flex">
   <div class="mx-auto">
-    <nav aria-label="Site Nav Top">
+    <nav aria-label="Top Navigation">
       <ul
         class="flex items-center gap-6 font-light tracking-wide text-base-content"
       >

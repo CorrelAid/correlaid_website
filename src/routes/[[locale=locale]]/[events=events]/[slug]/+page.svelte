@@ -48,13 +48,10 @@
     <Box>
       <p class="flex flex-col space-y-2 md:flex-row md:space-x-4 md:space-y-0">
         <span class="flex">
-          <span
-            class="my-auto flex fill-neutral"
-            role="img"
-            aria-label={$t('access.date').text}
+          <span class="my-auto flex fill-neutral" arria-hidden="true"
             ><Calendar width={19} height={19} /></span
           >
-
+          <span class="sr-only">{$t('access.date').text}</span>
           <span class="y-auto pl-2"
             >{gen_date(event.date, $locale)}{event.end_date
               ? ` - ${gen_date(event.end_date, $locale)}`
@@ -63,12 +60,11 @@
         </span>
         {#if !event.end_date}
           <span class="flex">
-            <span
-              class=" my-auto flex fill-neutral"
-              role="img"
-              aria-label={$t('access.time').text}
+            <span class=" my-auto flex fill-neutral" arria-hidden="true"
               ><Time width={20} height={20} /></span
-            ><span class="my-auto pl-2"
+            >
+            <span class="sr-only">{$t('access.time').text}</span>
+            <span class="my-auto pl-2"
               >{gen_time(event.start_time, $locale)} - {gen_time(
                 event.end_time,
                 $locale,
@@ -79,11 +75,11 @@
         {#if event.language == 'de-DE'}
           <span
             class="inline-block rounded-full bg-white shadow-none"
-            role="img"
-            aria-label="Event ist auf deutsch."
+            arria-hidden="true"
           >
             <De height={icon_h} width={icon_h} />
           </span>
+          <span class="sr-only">Event ist auf deutsch.</span>
         {:else}
           <span
             class="inline-block rounded-full bg-white shadow-none"
@@ -95,22 +91,18 @@
         {/if}
         {#if event.location}
           <p class="flex">
-            <span
-              class="my-auto flex fill-neutral"
-              role="img"
-              aria-label={$t('access.location').text}
+            <span class="my-auto flex fill-neutral" arria-hidden="true"
               ><Location width={20} height={20} /></span
-            > <span class="my-auto pl-2">{event.location}</span>
+            > <span class="sr-only">{$t('access.location').text}</span>
+            <span class="my-auto pl-2">{event.location}</span>
           </p>
         {/if}
         {#if event.online}
           <p class="flex">
-            <span
-              class="my-auto flex fill-neutral"
-              role="img"
-              aria-label={$t('access.online').text}
+            <span class="my-auto flex fill-neutral" arria-hidden="true"
               ><Headset width={20} height={20} /></span
-            > <span class="my-auto pl-2">Online</span>
+            ><span class="sr-only">{$t('access.online').text}</span>
+            <span class="my-auto pl-2">Online</span>
           </p>
         {/if}
         {#if event.registration_link}
@@ -120,12 +112,10 @@
             target="_blank"
             rel="noreferrer"
           >
-            <span
-              class="my-auto flex fill-neutral"
-              role="img"
-              aria-label={$t('access.sign_up').text}
+            <span class="my-auto flex fill-neutral" arria-hidden="true"
               ><SignUp width={20} height={20} /></span
-            > <span class="my-auto pl-2">{event['root']}</span>
+            > <span class="sr-only">{$t('access.sign_up').text}</span>
+            <span class="my-auto pl-2">{event['root']}</span>
           </a>
         {/if}
       </p>

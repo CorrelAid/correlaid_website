@@ -42,8 +42,6 @@
     <span
       class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
       style={`background-image: url(${gen_img_url(image_id)})`}
-      role="img"
-      aria-label={image_alt}
     />
     {#if image_desc}
       <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 lg:block">

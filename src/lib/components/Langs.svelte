@@ -12,28 +12,28 @@
       {#if lang == 'de-DE'}
         <span
           class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
-          role="img"
-          aria-label="Verfügbar auf deutsch"
+          aria-hidden="true"
         >
           <De height={icon_h} width={icon_h} />
         </span>
+        <span class="sr-only">Verfügbar auf Deutsch</span>
       {:else}
         <span
           class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
-          role="img"
-          aria-label="Available in english"
+          aria-hidden="true"
         >
           <En height={icon_h} width={icon_h} />
         </span>
+        <span class="sr-only">Available in english</span>
       {/if}
     {/each}
   {:else}
     <span
       class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
-      role="img"
-      aria-label="Bilingual"
+      aria-hidden="true"
     >
       <International height={icon_h} width={icon_h} />
     </span>
+    <span class="sr-only">Bilingual</span>
   {/if}
 </div>
