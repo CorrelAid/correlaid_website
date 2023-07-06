@@ -38,6 +38,7 @@
 <header
   class="fixed top-0 z-30 w-screen border-b border-neutral-25 bg-white xl:static"
   bind:clientHeight={$header_height}
+  aria-label="Site Header"
 >
   <div class="mx-auto px-4 sm:px-6 xl:px-8">
     <div class="flex grid-cols-10 items-center justify-between xl:grid">
