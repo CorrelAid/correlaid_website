@@ -19,6 +19,7 @@ export const bot_nav = [
     category: 'using_data',
     children: [
       'navbar.using_data.projects',
+      'navbar.using_data.project_database',
       'navbar.using_data.consulting',
       'navbar.using_data.hackathons',
     ],

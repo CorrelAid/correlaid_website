@@ -10,7 +10,7 @@
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.using_data.projects';
+    $page_key = 'navbar.using_data.project_database';
   });
 
   /** @type {import('./$types').PageData} */

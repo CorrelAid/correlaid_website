@@ -13,6 +13,10 @@ export default {
       text: 'Data4Good Projekte',
       url: '/daten-nutzen/projekte',
     },
+    'navbar.using_data.project_database': {
+      text: 'Projektdatenbank',
+      url: '/daten-nutzen/projektdatenbank',
+    },
     'navbar.using_data.consulting': {
       text: 'Beratung',
       url: '/daten-nutzen/beratung',
@@ -117,6 +121,10 @@ export default {
     'navbar.using_data.projects': {
       text: 'Data4Good Projects',
       url: '/en/using-data/projects',
+    },
+    'navbar.using_data.project_database': {
+      text: 'Project Database',
+      url: '/daten-nutzen/project_database',
     },
     'navbar.using_data.consulting': {
       text: 'Consulting',
