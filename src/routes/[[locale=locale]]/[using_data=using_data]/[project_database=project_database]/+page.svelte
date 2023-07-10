@@ -1,6 +1,7 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
+  import Filter from '$lib/components/Filter.svelte';
   import ProjectsCard from '$lib/components/ProjectsCard.svelte';
 
   onMount(() => {
@@ -10,10 +11,31 @@
   // const source = '# WIP';
   export let data;
   $: projects = data.projects;
+  let filteredData;
+  let projects;
+
+  $: selects = [
+    {
+      title: 'Local Chapters',
+      searchable: false,
+      multiple: true,
+      param: 'correlaidx',
+    },
+  ];
+  $: console.log(projects);
+
+  const searchOptions = [
+    {searchProperty: 'title', multiple: false},
+    {searchProperty: 'summary', multiple: false},
+    {searchProperty: 'organization', multiple: false},
+  ];
 </script>
 
-<div class="space-y-8 px-4">
-  {#each projects as project}
-    <ProjectsCard {...project} />
-  {/each}
+<Filter orig_data={projects} bind:filteredData {selects} {searchOptions} />
+<div class="mt-8 space-y-8 px-4">
+  {#if filteredData}
+    {#each filteredData as project}
+      <ProjectsCard {...project} />
+    {/each}
+  {/if}
 </div>

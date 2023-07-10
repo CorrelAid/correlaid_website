@@ -1,23 +1,24 @@
-export const projectOverviewQuery = `
-query ProjectOverview($language: String = "de-DE", $status: [String] = ["published"]) {
-	Projects(filter: { status: { _in: ["published", "published_anon"] } }) {
+export const projectDetailsQuery = `
+query Project(
+	$slug: String
+	$language: String = "de-DE"
+	$status: [String] = ["published"]
+) {
+	Projects(
+		filter: {
+			_and: [{ project_id: { _eq: $slug } }, { status: { _eq: "published" } }]
+		}
+	) {
 		status
-		subpage
-		project_id
-		is_internal
 		Podcast {
-			language
 			soundcloud_link
-			title
 		}
 		Posts {
 			Posts_id(filter: { status: { _in: $status } }) {
-				id
 				translations {
 					languages_code {
 						code
 					}
-					title
 					slug
 				}
 			}
@@ -26,6 +27,25 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 			url
 			output_type
 		}
+		People {
+			People_id {
+				name
+				translations {
+					languages_code {
+						code
+					}
+					pronouns
+				}
+				website
+				twitter
+				linkedin
+				mastodon
+				github
+				image {
+					id
+				}
+			}
+		}
 		Organizations {
 			Organizations_id {
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
@@ -33,9 +53,11 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 						code
 					}
 					name
+					description
 				}
 			}
 		}
+
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
 			title
 			description
@@ -43,6 +65,7 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		}
 		Local_Chapters {
 			Local_Chapters_id {
+				id
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}

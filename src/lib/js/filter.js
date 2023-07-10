@@ -31,20 +31,24 @@ function filterDefinedBy(property, objects, value) {
 export function filterStringSearch(searchTerm, searchOptions, objects) {
   return _.filter(objects, (object) => {
     for (const item of searchOptions) {
-      if (item.multiple) {
-        for (const contentElement of object[item.searchProperty]) {
-          if (contentElement.toLowerCase().includes(searchTerm.toLowerCase())) {
+      if (object[item.searchProperty]) {
+        if (item.multiple) {
+          for (const contentElement of object[item.searchProperty]) {
+            if (
+              contentElement.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return true;
+            }
+          }
+        } else {
+          if (
+            object &&
+            object[item.searchProperty]
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+          ) {
             return true;
           }
-        }
-      } else {
-        if (
-          object &&
-          object[item.searchProperty]
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase())
-        ) {
-          return true;
         }
       }
     }

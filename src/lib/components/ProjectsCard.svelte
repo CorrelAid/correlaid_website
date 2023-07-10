@@ -29,7 +29,7 @@
     organization = $t('organization.internalProject').text;
   }
   $: href = subpage
-    ? $t('navbar.using_data.projects').url + '/' + project_id
+    ? $t('navbar.using_data.project_database').url + '/' + project_id
     : null;
 </script>
 
