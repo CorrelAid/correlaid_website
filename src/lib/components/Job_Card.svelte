@@ -50,8 +50,6 @@
     cardDetails[emojis['location']] = location;
     cardDetails[emojis['salary']] = salary;
     cardDetails[emojis['language_']] = language;
-
-    console.log(cardDetails);
   }
 </script>
 

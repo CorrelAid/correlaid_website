@@ -1,6 +1,7 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
+  import {t} from '$lib/stores/i18n';
   import Filter from '$lib/components/Filter.svelte';
   import ProjectsCard from '$lib/components/ProjectsCard.svelte';
 
@@ -20,6 +21,24 @@
       searchable: false,
       multiple: true,
       param: 'correlaidx',
+    },
+    {
+      title: $t('filter.type').text,
+      searchable: false,
+      multiple: true,
+      param: 'type',
+    },
+    {
+      title: 'Sektor',
+      searchable: false,
+      multiple: false,
+      param: 'organization_sector',
+    },
+    {
+      title: 'Datentyp',
+      searchable: false,
+      multiple: true,
+      param: 'data',
     },
   ];
   $: console.log(projects);

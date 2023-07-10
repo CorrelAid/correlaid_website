@@ -5,6 +5,8 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		subpage
 		project_id
 		is_internal
+		type
+		data
 		Podcast {
 			language
 			soundcloud_link
@@ -28,6 +30,7 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		}
 		Organizations {
 			Organizations_id {
+				sector
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					languages_code {
 						code

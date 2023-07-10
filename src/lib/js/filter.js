@@ -9,22 +9,26 @@ Filters an array of objects by multiple values in a specified property. object[p
 */
 export function filterByMultiple(data, filterValues, property) {
   return data.filter((object) => {
-    const objectsProperty = object[property];
-    return filterValues.every((contentElement) => {
-      if (contentElement === 'global' && property === 'correlaidx') {
-        return objectsProperty.length === 0;
-      } else {
-        return objectsProperty
-          .map((entry) => entry.toLowerCase())
-          .includes(contentElement.toLowerCase());
-      }
-    });
+    if (object[property]) {
+      const objectsProperty = object[property];
+      return filterValues.every((contentElement) => {
+        if (contentElement === 'global' && property === 'correlaidx') {
+          return objectsProperty.length === 0;
+        } else {
+          return objectsProperty
+            .map((entry) => entry.toLowerCase())
+            .includes(contentElement.toLowerCase());
+        }
+      });
+    }
   });
 }
 
 function filterDefinedBy(property, objects, value) {
   return _.filter(objects, (object) => {
-    return object && object[property].toLowerCase() === value.toLowerCase();
+    if (object[property]) {
+      return object && object[property].toLowerCase() === value.toLowerCase();
+    }
   });
 }
 

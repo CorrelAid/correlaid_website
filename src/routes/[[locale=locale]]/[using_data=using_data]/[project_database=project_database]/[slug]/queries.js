@@ -10,6 +10,8 @@ query Project(
 		}
 	) {
 		status
+		type
+		data
 		Podcast {
 			soundcloud_link
 		}

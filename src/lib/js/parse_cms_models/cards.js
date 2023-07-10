@@ -1,4 +1,5 @@
 import {gen_img_url} from '../helpers.js';
+import _ from 'lodash';
 
 export function blog_posts(post) {
   let imageUrl;
@@ -88,14 +89,28 @@ export function projects(project) {
   if (!project.is_internal && project.status !== 'published_anon') {
     parsedProjectCard['organization'] =
       project.Organizations[0].Organizations_id.translations[0].name;
+    parsedProjectCard['organization_sector'] =
+      project.Organizations[0].Organizations_id.sector;
   }
 
   if (project.translations[0].summary !== null) {
     parsedProjectCard['summary'] = project.translations[0].summary;
   }
 
-  if (project.subpage) {
-    parsedProjectCard['project_id'] = project.project_id;
+  if (project.type) {
+    parsedProjectCard['type'] = project['type'].map((str) => str.toLowerCase());
+  }
+
+  if (project.data) {
+    if (!_.isEmpty(project['data'])) {
+      parsedProjectCard['data'] = project['data'].map((str) =>
+        str.toLowerCase(),
+      );
+    }
+  }
+
+  if (project.translations[0].summary !== null) {
+    parsedProjectCard['summary'] = project.translations[0].summary;
   }
 
   parseLcSubElements(parsedProjectCard, project.Local_Chapters);
@@ -103,6 +118,7 @@ export function projects(project) {
   if (project.Podcast) {
     parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
   }
+
   for (const post of project.Posts) {
     if (post.translations.slug) {
       parsedProjectCard['post_slug'] = post.translations.slug;

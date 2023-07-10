@@ -8,6 +8,8 @@
 
   export let title;
   export let subpage;
+  export let data = void 0;
+  export let type = void 0;
   export let isInternal;
   export let organization = void 0;
   export let summary = 'tbd';
@@ -60,7 +62,25 @@
     >
       {title}
     </h3>
-
+    <div class="mb-4">
+      {#if type}
+        {#each type as tag}
+          <span
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white"
+          >
+            {tag}</span
+          >
+        {/each}
+      {/if}
+      {#if data}
+        {#each data as tag}
+          <span
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+            >{tag}</span
+          >
+        {/each}
+      {/if}
+    </div>
     <p class="mb-3 line-clamp-3">{summary}</p>
     {#if correlaidx.length !== 0}
       {#each correlaidx as lc}
