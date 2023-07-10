@@ -29,13 +29,13 @@
       param: 'type',
     },
     {
-      title: 'Sektor',
+      title: $t('filter.organization_sector').text,
       searchable: false,
       multiple: false,
       param: 'organization_sector',
     },
     {
-      title: 'Datentyp',
+      title: $t('filter.data_type').text,
       searchable: false,
       multiple: true,
       param: 'data',
