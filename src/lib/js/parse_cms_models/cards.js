@@ -97,12 +97,16 @@ export function projects(project) {
     parsedProjectCard['summary'] = project.translations[0].summary;
   }
 
+  if (project.subpage) {
+    parsedProjectCard['project_id'] = project.project_id;
+  }
+
   if (project.type) {
     parsedProjectCard['type'] = project['type'].map((str) => str.toLowerCase());
   }
 
   if (project.data) {
-    if (!_.isEmpty(project['data'])) {
+    if (!_.isEmpty(project.data)) {
       parsedProjectCard['data'] = project['data'].map((str) =>
         str.toLowerCase(),
       );
