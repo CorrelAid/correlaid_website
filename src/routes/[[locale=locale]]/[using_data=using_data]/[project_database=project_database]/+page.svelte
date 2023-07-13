@@ -50,7 +50,13 @@
   ];
 </script>
 
-<Filter orig_data={projects} bind:filteredData {selects} {searchOptions} />
+<Filter
+  orig_data={projects}
+  bind:filteredData
+  {selects}
+  {searchOptions}
+  expanded={true}
+/>
 <div class="mt-8 space-y-8 px-4">
   {#if filteredData}
     {#each filteredData as project}

@@ -12,7 +12,7 @@
   export let type = void 0;
   export let isInternal;
   export let organization = void 0;
-  export let summary = 'tbd';
+  export let summary = void 0;
   export let correlaidx = [];
   export let project_id = void 0;
   export let repo = void 0;
@@ -81,7 +81,9 @@
         {/each}
       {/if}
     </div>
-    <p class="mb-3 line-clamp-3">{summary}</p>
+    {#if summary}
+      <p class="mb-3 line-clamp-3">{summary}</p>
+    {/if}
     {#if correlaidx.length !== 0}
       {#each correlaidx as lc}
         <a
