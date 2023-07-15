@@ -4,7 +4,6 @@
   import {t} from '$lib/stores/i18n';
   import BlogCard from '$lib/components/Blog_Card.svelte';
   import Events_Card from '$lib/components/Events_Card.svelte';
-  import {parseEntries} from '$lib/js/parse_cms.js';
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -14,14 +13,14 @@
   });
 
   let posts;
-  $: posts = parseEntries(data.posts, 'blog_posts');
+  $: posts = data.posts;
   let events;
-  $: events = parseEntries(data.events, 'events');
+  $: events = data.events;
   let podcast_episodes;
-  $: podcast_episodes = parseEntries(data.podcast_episodes, 'podcast_episodes');
+  $: podcast_episodes = data.podcast_episodes;
 </script>
 
-<div class="">
+<div class="px-4">
   <div class="mb-12">
     <a
       class="text-3xl font-bold text-base-content transition hover:text-primary"
@@ -56,7 +55,7 @@
   </div>
   <div class="space-y-8">
     {#each podcast_episodes as episode}
-      <BlogCard {...episode} />
+      <BlogCard {...episode} external={true} />
     {/each}
   </div>
 </div>

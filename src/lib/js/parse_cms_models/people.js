@@ -15,7 +15,6 @@ export function contacts(section) {
 
   const personParams = {
     name: section.item.person.name,
-    email: section.item.person.email,
     position: section.item.translations[0].position,
     description: section.item.translations[0].description,
     links: links,
@@ -26,10 +25,17 @@ export function contacts(section) {
       section.item.person.image.id,
       'fit=cover&width=200&height=200&quality=80',
     );
+    personParams['image_desc'] = section.item.person.image.description;
   }
 
   if (section.item.person.translations[0]) {
     personParams['pronouns'] = section.item.person.translations[0].pronouns;
+  }
+
+  if (section.item.email) {
+    personParams['email'] = section.item.email;
+  } else {
+    personParams['email'] = section.item.person.email;
   }
 
   return personParams;
@@ -53,6 +59,7 @@ function persons(person) {
       person.person.image.id,
       'fit=cover&width=200&height=200&quality=80',
     );
+    parsedPerson['image_desc'] = person.person.image.description;
   }
 
   if (person.person.translations[0]) {

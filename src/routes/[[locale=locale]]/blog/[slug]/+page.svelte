@@ -2,47 +2,59 @@
   import Html from '$lib/components/Html.svelte';
   import {onMount} from 'svelte';
   import {page_key} from '$lib/stores/page_key';
-  import {gen_date} from '$lib/js/helpers';
   import {locale} from '$lib/stores/i18n';
   import TextContainer from '$lib/components/Text_Container.svelte';
   import Person from '$lib/components/Person.svelte';
-  import {parseEntries} from '$lib/js/parse_cms';
+  import _ from 'lodash';
+  import {localeToLang, gen_date} from '$lib/js/helpers';
 
   onMount(() => {
     $page_key = 'navbar.blog';
   });
 
+  function getLanguageContent(contentAllLanguages, locale) {
+    let langContent = _.find(
+      contentAllLanguages,
+      (el) => el.languages_code.code === localeToLang(locale),
+    );
+
+    if (typeof langContent === 'undefined') {
+      langContent = contentAllLanguages[0];
+    }
+    return langContent;
+  }
+
   /** @type {import('./$types').PageData} */
   export let data;
-  $: post = data.post;
-  $: pubdate = data.pubdate;
-  $: lang_content = data.lang_content;
-  $: content_creators = parseEntries(data.content_creators, 'content_creators');
-  $: proc_date = gen_date(pubdate, $locale, true);
+  $: blogPostPage = data;
+  $: langContent = getLanguageContent(
+    blogPostPage.contentAllLanguages,
+    $locale,
+  );
+  $: procDate = gen_date(blogPostPage.pubDate, $locale, true);
 </script>
 
 <TextContainer
-  title={lang_content.title}
-  title_image={post.title_image}
-  image_alt={lang_content.image_alt}
-  teaser={lang_content.teaser}
+  title={langContent.title}
+  title_image={blogPostPage.post.title_image}
+  image_alt={langContent.image_alt}
+  teaser={langContent.teaser}
 >
   <div slot="sub_subtitle">
-    {#if proc_date}
+    {#if procDate}
       <p class="mx-4 pb-4 text-lg font-light">
-        {proc_date} - {#each content_creators as person, i}
+        {procDate} - {#each blogPostPage.content_creators as person, i}
           {person.name}
           {person.pronouns ? `(${person.pronouns})` : ''}
-          {#if i < content_creators.length - 1}{', '} {/if}{/each}
+          {#if i < blogPostPage.content_creators.length - 1}{', '} {/if}{/each}
       </p>
     {/if}
   </div>
-  <Html source={lang_content.text} options={'mx-auto'} slot="main" />
+  <Html source={langContent.text} options={'mx-auto'} slot="main" />
 </TextContainer>
-{#if content_creators.length != 0}
-  <div class="container mx-auto space-y-8 px-4 pt-12">
-    <hr />
-    {#each content_creators as person}
+{#if blogPostPage.content_creators.length != 0}
+  <div class="container mx-auto space-y-8 px-4 py-12">
+    {#each blogPostPage.content_creators as person}
       <Person {...person} />
     {/each}
   </div>

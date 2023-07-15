@@ -42,12 +42,12 @@
 
 <div class="mx-auto flex items-center gap-12">
   <div class="mx-auto hidden xl:block">
-    <nav aria-label="Site Nav Bottom">
-      <ul class="flex items-center gap-6 text-xl">
+    <nav aria-label="Bottom Navigation">
+      <ul class="flex items-center gap-8 text-xl">
         {#each bot_nav as navItem}
           <li>
             <div
-              class="pl-4"
+              class=""
               class:font-medium={isSubPage(navItem.key, lastClickedLink)}
               class:text-secondary={isSubPage(navItem.key, lastClickedLink)}
               data-testid={'navColoringTest-' + navItem.key}
@@ -61,18 +61,19 @@
             </div>
             {#if toggles[navItem.category]}
               <div
-                class="absolute z-30 w-56"
+                class="absolute z-30 -ml-4 w-56"
                 on:mouseleave={closeall}
                 style="top: {$header_height + 1}px"
               >
                 <ul
-                  class="rounded-b border-x border-b border-neutral-25 bg-white pt-2 pb-1 text-base font-light text-base-content"
+                  class="rounded-b border-x border-b border-neutral-25 bg-white pb-1 pt-2 text-base font-light text-base-content"
                 >
                   {#each navItem.children as subnavItem}
                     <li class="px-4 pb-2">
                       <a
                         class="transition hover:text-primary"
                         href={$t(subnavItem).url}
+                        data-testid={`BottomNav${$t(subnavItem).url}`}
                       >
                         {$t(subnavItem).text}
                       </a>

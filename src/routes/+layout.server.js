@@ -3,6 +3,8 @@ import {pageContentQuery} from './queries.js';
 import {get_lang, get_locale, find} from '$lib/js/helpers';
 import translations from '$lib/data/translations';
 import {PUBLIC_PRERENDER} from '$env/static/public';
+import {parseContent} from '$lib/js/parse_cms';
+
 let pr;
 
 if (PUBLIC_PRERENDER === 'ALL') {
@@ -39,8 +41,9 @@ export async function load({params, url}) {
     const builder = data.Pages[0].builder;
 
     if (builder === undefined) {
+      return;
     } else {
-      return {builder: builder};
+      return {content: parseContent(builder)};
     }
   }
 }

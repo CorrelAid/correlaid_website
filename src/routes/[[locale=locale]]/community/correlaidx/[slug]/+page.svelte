@@ -7,8 +7,6 @@
   import Html from '$lib/components/Html.svelte';
   import Events_Card from '$lib/components/Events_Card.svelte';
   import Person from '$lib/components/Person.svelte';
-  import {parseEntries} from '$lib/js/parse_cms';
-  import {lcHeros as parseLcHero} from '$lib/js/parse_cms_models';
   import Icon from '$lib/components/Icon.svelte';
 
   onMount(() => {
@@ -17,71 +15,55 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let local_admins;
-
-  $: local_chapter = data.local_chapter;
-  $: hero = parseLcHero(data.local_chapter);
-  $: events = parseEntries(data.events, 'events');
-  $: projects = parseEntries(data.projects, 'lcProjects');
-  $: if (local_chapter) {
-    local_admins = parseEntries(
-      local_chapter.local_administrators,
-      'local_administrators',
-    );
-  }
+  $: lcPage = data;
 </script>
 
 <div class="relative">
   <div class="w-screen pb-12">
-    <Hero {...hero} />
+    <Hero {...lcPage['hero']} />
   </div>
 </div>
-<div class="px-4">
-  <div class="container mx-auto pb-12">
-    <Html
-      source={local_chapter.translations[0].description}
-      options={'mx-auto'}
-    />
-  </div>
-  {#if projects.length !== 0}
-    <div class="container mx-auto mb-12 space-y-8">
+<div class="container mx-auto">
+  <Html source={lcPage['description']} options={'px-0 mb-12'} />
+  {#if lcPage['projects'].length !== 0}
+    <div class=" mb-12 space-y-8 px-4">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-base-content">
           {$t('navbar.using_data.projects').text}
         </h2>
       </div>
       <div class="space-y-6">
-        {#each projects as project}
+        {#each lcPage['projects'] as project}
           <ProjectsCard {...project} />
         {/each}
       </div>
     </div>
   {/if}
-  {#if events.length !== 0}
-    <div class="container mx-auto mb-12 space-y-8">
+  {#if lcPage['events'].length !== 0}
+    <div class=" mb-12 space-y-8 px-4">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-base-content">
           {$t('navbar.events').text}
         </h2>
       </div>
-      {#each events as event}
+      {#each lcPage['events'] as event}
         <Events_Card {...event} />
       {/each}
     </div>
   {/if}
-  {#if local_chapter.local_administrators.length != 0}
-    <div class="container mx-auto mb-12">
-      {#each local_admins as person}
-        <Person {...person} email={local_chapter.lc_email} />
+  {#if lcPage['local_admins'].length != 0}
+    <div class="mx-4 mb-12">
+      <h2 class="text-3xl font-bold text-base-content">Team</h2>
+    </div>
+    <div class="flex flex-col gap-y-8 px-4 pb-12">
+      {#each lcPage['local_admins'] as person}
+        <Person {...person} email={lcPage['lcEmail']} />
       {/each}
     </div>
   {/if}
-  {#if local_chapter.translations[0].how_to_get_in_touch}
-    <div class="container mx-auto mb-12">
-      <Icon
-        icon_type={'get_in_touch'}
-        text={local_chapter.translations[0].how_to_get_in_touch}
-      />
+  {#if lcPage.howToGetInTouch}
+    <div class="mb-12 px-4">
+      <Icon icon_type={'get_in_touch'} text={lcPage.howToGetInTouch} />
     </div>
   {/if}
 </div>

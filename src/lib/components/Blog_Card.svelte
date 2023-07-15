@@ -4,6 +4,7 @@
   import Langs from '$lib/components/Langs.svelte';
   export let image_alt;
   export let langs;
+  import ExternalLink from '../svg/External_Link.svelte';
   export let title;
   export let teaser;
   // export let tags;
@@ -12,10 +13,12 @@
   export let pubdate;
   export let image_url = void 0;
   export let slug = void 0;
+  export let external = false;
+  export let image_desc = void 0;
 
   let proc_date;
 
-  if (typeof slug !== 'undefined') {
+  $: if (typeof slug !== 'undefined') {
     href = $t('navbar.blog').url + '/' + slug;
   }
 
@@ -23,47 +26,65 @@
 </script>
 
 <article
-  class="relative grid-cols-2 rounded border-t border-r border-l border-neutral-25 shadow-sm md:grid"
+  class="relative grid-cols-2 rounded border-l border-r border-t border-neutral-25 shadow-sm md:grid"
 >
-  <!-- <div class="absolute top-0 -mt-6 space-x-2">
-  {#if tags}
-    {#each tags as tag}
-      <span
-        class="inline-flex items-center rounded bg-secondary px-3 py-1 text-xs font-bold text-white "
-        >{tag}</span
-      >
-    {/each}
-  {/if}
-</div> -->
   <span
-    class="absolute inset-x-0 bottom-0 h-2 rounded-b bg-gradient-to-r from-primary to-secondary opacity-75"
+    class="absolute inset-x-0 bottom-0 z-10 h-2 rounded-b bg-gradient-to-r from-primary to-secondary opacity-75"
   />
   <Langs {langs} />
 
   <div class="flex">
-    <div class="mx-auto">
-      <a {href} aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}">
-        {#if typeof image_url !== 'undefined'}
-          <img class="rounded-tl" alt={image_alt} src={image_url} />
-        {:else}
-          <!-- TODO: Do we need this image placeholder? -->
-          <img class="rounded-tl" alt={image_alt} src="" />
-        {/if}
-      </a>
-    </div>
+    <a
+      class="relative mx-auto w-full"
+      {href}
+      aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}"
+      style="padding-bottom: 56.25%;"
+    >
+      {#if typeof image_url !== 'undefined'}
+        <img
+          class="absolute left-0 top-0 z-0 h-full w-full rounded-tl"
+          alt={image_alt}
+          src={image_url}
+          title={image_desc}
+        />
+      {:else}
+        <!-- TODO: Do we need this image placeholder? -->
+        <div class="rounded-tl bg-gray-300" />
+      {/if}
+    </a>
   </div>
   <div class="">
-    <div class="px-4 pb-4 pt-2 md:p-4">
-      <h3 class="line-clamp-2 md:pr-12">
-        <a
-          {href}
-          class="text-lg font-semibold leading-snug text-base-content transition hover:text-primary"
-        >
-          {title}
-        </a>
-      </h3>
+    <div class="px-4 pb-4 pt-3 md:p-4 md:pt-2">
+      <h3 class="line-clamp-2 md:pr-7">
+        {#if external === false}
+          <a
+            {href}
+            class="text-lg font-semibold leading-snug text-base-content transition hover:text-primary"
+          >
+            {title}
+          </a>
+        {:else}
+          <a
+            {href}
+            target="_blank"
+            rel="noreferrer"
+            class="text-lg font-semibold leading-snug text-base-content transition hover:text-primary"
+          >
+            <span class="mr-1">
+              {title}
+            </span>
 
-      <p class="pt-2 text-sm line-clamp-1">
+            <span class="inline-block align-text-top"
+              ><ExternalLink
+                height={20}
+                width={20}
+                color={'rgb(60, 60, 59)'}
+              /></span
+            >
+          </a>
+        {/if}
+      </h3>
+      <p class="line-clamp-1 pt-1.5 text-sm">
         {proc_date} - {#each content_creators as person, i}
           {#if person.Content_Creators_id.person}
             {person.Content_Creators_id.person
@@ -72,8 +93,8 @@
         {/each}
       </p>
 
-      <div class="pt-2 pb-1">
-        <p class="overflow-hidden text-justify text-base-content line-clamp-4">
+      <div class="pb-1 pt-1.5">
+        <p class="line-clamp-3 overflow-hidden text-base-content">
           {teaser}
         </p>
       </div>

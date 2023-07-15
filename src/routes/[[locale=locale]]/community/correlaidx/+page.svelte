@@ -1,6 +1,6 @@
 <script>
   import {page} from '$app/stores';
-  import {get_locale} from '$lib/js/helpers';
+  import {gen_lc_href} from '$lib/js/helpers';
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import Box from '$lib/components/Box.svelte';
@@ -19,17 +19,13 @@
   $: local_chapters = data.local_chapters;
 </script>
 
-<div class="">
+<div class="px-4">
   <div class="">
     <div class="mb-16 grid grid-cols-2 gap-7">
       {#each local_chapters as local_chapter}
-        <a
-          href={`${
-            get_locale($page.params) == 'de' ? '' : '/en'
-          }/community/correlaidx/${local_chapter.translations[0].city}`}
-        >
+        <a href={gen_lc_href($page.params, local_chapter.translations[0].city)}>
           <Box type={'correlaidx'}>
-            <h2>{local_chapter.translations[0].city}</h2>
+            <h2 class="">{local_chapter.translations[0].city}</h2>
           </Box>
         </a>
       {/each}

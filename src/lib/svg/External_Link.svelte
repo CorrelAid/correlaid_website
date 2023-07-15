@@ -4,7 +4,7 @@
   export let color = 'white';
 </script>
 
-<svg {width} {height} fill="none" viewBox="0 0 24 24" stroke={color} class="">
+<svg {width} {height} fill="none" viewBox="0 0 24 24">
   <path
     stroke-linecap="round"
     stroke-linejoin="round"

@@ -1,6 +1,7 @@
 import {get_lang} from '$lib/js/helpers';
 import directus_fetch from '$lib/js/directus_fetch';
 import {adminQuery} from './queries.js';
+import {parseEntries} from '$lib/js/parse_cms.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
@@ -11,6 +12,6 @@ export async function load({params}) {
   );
 
   return {
-    ethics_commission: ethics_commission,
+    ethics_commission: parseEntries(ethics_commission, 'global_administrators'),
   };
 }

@@ -6,13 +6,15 @@
   export let links;
   export let email = '';
   export let pronouns = '';
+  export let image_desc = void 0;
+
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
 </script>
 
-<div class="grid grid-cols-8 gap-x-12 rounded pb-6 pt-8">
-  <div class="col-span-full flex items-center md:col-span-3">
-    <Avatar src={img} alt={name} />
+<div class="grid grid-cols-8 gap-x-9 rounded pb-6 pt-2">
+  <div class="col-span-full flex items-center justify-center md:col-span-3">
+    <Avatar src={img} alt={name} {image_desc} />
   </div>
 
   <div class="col-span-full pt-5 text-neutral md:col-span-5 md:pt-0">
@@ -24,7 +26,7 @@
       <h3 class="pb-3 text-lg font-normal">{position}</h3>
     {/if}
     {#if description}
-      <p class="pb-3 text-justify text-base">{description}</p>
+      <p class="pb-3 text-base">{description}</p>
     {/if}
     {#if email && email != ''}
       <p class="pb-4">

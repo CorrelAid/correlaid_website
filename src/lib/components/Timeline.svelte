@@ -1,7 +1,10 @@
 <script>
   export let steps;
+  export let color;
   import Html from '$lib/components/Html.svelte';
   import Inform from '$lib/svg/Inform.svelte';
+  import Team from '$lib/svg/Team.svelte';
+  import Finish from '$lib/svg/Finish.svelte';
   import Infrastrucuture from '$lib/svg/Infrastrucuture.svelte';
   import LikeMinded from '$lib/svg/LikeMinded.svelte';
   function check_x(i) {
@@ -50,20 +53,28 @@
             <LikeMinded width={icon_lg} height={icon_lg} />
           {:else if step.timeline_steps_id.icon == 'infrastructure'}
             <Infrastrucuture width={icon_lg} height={icon_lg} />
+          {:else if step.timeline_steps_id.icon == 'team'}
+            <Team width={icon_lg} height={icon_lg} />
+          {:else if step.timeline_steps_id.icon == 'finish'}
+            <Finish width={icon_lg} height={icon_lg} />
           {/if}
         </div>
       </div>
-      <div class="w-2/3 {check_x(i)}-1/3 absolute grid h-full grid-cols-2">
+      <div
+        class="w-2/3 {check_x(i)}-1/3 absolute -z-10 grid h-full grid-cols-2"
+      >
         {#if check_odd(i) == false}
           <div />
         {/if}
         <div
           class="{i + 1 === steps.length ? '' : 'border-b-2'} {check_border(
             i,
-          )} relative col-span-1 border-neutral-25 py-12"
+          )} relative -z-10 col-span-1 border-neutral-25 py-12"
         >
           <span
-            class="absolute bg-gradient-to-r from-tertiary to-secondary text-lg font-semibold text-white shadow-md {check_x(
+            class="absolute bg-gradient-to-r {color === 'correlaid'
+              ? 'from-secondary to-primary'
+              : 'from-tertiary to-secondary'} text-lg font-semibold text-white shadow-md {check_x(
               i,
             )}-0 {check_odd(i)
               ? '-ml-5'
@@ -76,22 +87,22 @@
         {/if}
       </div>
       <div
-        class="w-2/3 {check_odd(i)
+        class="z-20 w-2/3 {check_odd(i)
           ? 'relative left-1/3  pl-7'
           : 'pr-7'} z-20 h-full py-12"
       >
         <Html
           source={step.timeline_steps_id.translations[0].text}
-          options={''}
+          options={'container mx-auto z-20'}
         />
       </div>
     </div>
     <div />
   {/each}
 </div>
-<div class="text_width lg:hidden">
+<div class="container lg:hidden">
   {#each steps as step, i}
-    <div class=" w-full py-8" />
+    <div class=" w-full" />
     <div
       class="relative mb-12 flex justify-center border-t-2 border-neutral-25"
     >
@@ -109,13 +120,14 @@
               <LikeMinded width={icon_mobile} height={icon_mobile} />
             {:else if step.timeline_steps_id.icon == 'infrastructure'}
               <Infrastrucuture width={icon_mobile} height={icon_mobile} />
+            {:else if step.timeline_steps_id.icon == 'team'}
+              <Team width={icon_lg} height={icon_lg} />
+            {:else if step.timeline_steps_id.icon == 'finish'}
+              <Finish width={icon_lg} height={icon_lg} />
             {/if}
           </div>
         </div>
-        <Html
-          source={step.timeline_steps_id.translations[0].text}
-          options={''}
-        />
+        <Html source={step.timeline_steps_id.translations[0].text} />
       </div>
     </div>
   {/each}

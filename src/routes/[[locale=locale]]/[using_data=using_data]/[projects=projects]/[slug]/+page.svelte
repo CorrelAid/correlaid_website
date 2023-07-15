@@ -1,13 +1,13 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
+  import {page} from '$app/stores';
   import Html from '$lib/components/Html.svelte';
+  import {gen_lc_href} from '$lib/js/helpers';
   import TextContainer from '$lib/components/Text_Container.svelte';
   import Links from '$lib/components/Links.svelte';
   import Box from '$lib/components/Box.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
-
-  import {parseProject} from '$lib/js/parse_cms';
 
   onMount(() => {
     $page_key = 'navbar.using_data.projects';
@@ -15,27 +15,37 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  $: project = parseProject(data.project);
+  $: project = data;
 </script>
 
 <TextContainer title={project.title} teaser={project.teaser}>
   <div class="mx-4" slot="sub_subtitle">
+    {#if project.Local_Chapters}
+      {#each project.Local_Chapters as lc}
+        <a
+          class="text-medium line-clamp-3 mb-3 font-semibold text-base-content transition hover:text-primary"
+          href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
+        >
+      {/each}
+    {/if}
     <div class="mb-5">
       <ProjectLinks {...project.projectLinks} />
     </div>
-    <Box>
-      <h2 class="text-xl font-semibold">
-        {project.organization_name}
-      </h2>
-      <p>
-        {project.organization_description}
-      </p>
-    </Box>
+    {#if project.organization}
+      <Box>
+        <h2 class="text-xl font-semibold">
+          {project.organization.name}
+        </h2>
+        <p>
+          <Html source={project.organization.description} options={'!px-0'} />
+        </p>
+      </Box>
+    {/if}
   </div>
 
   <Html source={project.description} options={'mx-auto'} slot="main" />
 </TextContainer>
-<div class="text_width mx-auto pb-12">
+<div class="container mx-auto pb-12">
   <div class="px-4">
     <Box>
       <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>

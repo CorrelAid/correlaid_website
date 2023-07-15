@@ -1,9 +1,13 @@
 export const latestUpdatesQuery = `
-query LatestUpdates($language: String = "de-DE") {
-	Posts(sort: ["-pubdate"]) {
+query LatestUpdates(
+	$language: String = "de-DE"
+	$status: [String] = ["published"]
+) {
+	Posts(sort: ["-pubdate"], filter: { status: { _in: $status } }) {
 		pubdate
 		title_image {
 			id
+			description
 		}
 		content_creators {
 			Content_Creators_id {
@@ -24,16 +28,16 @@ query LatestUpdates($language: String = "de-DE") {
 			}
 			image_alt
 			title
-			tags
 			slug
 			teaser
 		}
 	}
-	Events(sort: ["-date"]) {
+	Events(sort: ["date"], filter: {date: {_gte: "$NOW"}}) {
 		id
 		date
 		start_time
 		end_time
+		end_date
 		title
 		teaser
 		registration_link
@@ -60,6 +64,7 @@ query LatestUpdates($language: String = "de-DE") {
 		tags
     image {
 			id
+			description
 		}
 		image_alt
 		content_creators {

@@ -11,12 +11,10 @@
   import Footer from '$lib/layout/Footer.svelte';
   import Html from '$lib/components/Html.svelte';
   import Hero from '$lib/components/Hero.svelte';
-  import Carousel from '$lib/components/Carousel.svelte';
   import Timeline from '$lib/components/Timeline.svelte';
   import QuoteCarousel from '$lib/components/Quote_Carousel.svelte';
   import Cta from '$lib/components/CTA.svelte';
   import CtaGroup from '$lib/components/CTA_group.svelte';
-  import * as parseModel from '$lib/js/parse_cms_models';
   import LinkButton from '../lib/components/Link_Button.svelte';
   import Icon from '../lib/components/Icon.svelte';
 
@@ -43,41 +41,6 @@
     }
   }
 
-  function parseContent(rawSections) {
-    if (!rawSections) {
-      return;
-    }
-
-    const parsedContent = [];
-    for (const rawSection of rawSections) {
-      try {
-        const section = {
-          collection: rawSection.collection,
-          props: parseModel[rawSection.collection](rawSection),
-        };
-        if (section.collection === 'heros') {
-          section.sort = rawSection.sort;
-        }
-        if (section.collection === 'contacts') {
-          section.item = {hr: rawSection.item.hr};
-        }
-        if (section.collection === 'wysiwyg') {
-          section.sort = rawSection.sort;
-        }
-        parsedContent.push(section);
-      } catch (err) {
-        console.group();
-        console.log(
-          `Error parsing ${rawSection.collection} on page ${$page_key}`,
-        );
-        console.log(err.message);
-        console.log(rawSection);
-        console.groupEnd();
-      }
-    }
-    return parsedContent;
-  }
-
   // Setting page title by retreiving translations from translations and conditionally taking
   // into account dynamic pages by using the page title attribute from the page data,
   // assigned in the dynamic pages +page.server
@@ -87,10 +50,11 @@
     $page.data.title != null
       ? `${$t($page_key).text + ' - ' + $page.data.title}`
       : `${$t($page_key).text}`;
-  $: title = $page_key === 'navbar.home' ? 'CorrelAid' : title_content;
+  $: title =
+    $page_key === 'navbar.home' ? 'CorrelAid - Data4Good' : title_content;
 
   let content;
-  $: content = parseContent(data.builder);
+  $: content = data.content;
 </script>
 
 <svelte:head>
@@ -104,7 +68,7 @@
   <Header on:changeLanguage={handleLocaleChange} />
   {#if $header_height}
     <div class="block xl:hidden" style="min-height: {$header_height}px;" />
-    <div id="grow" class="w-screen">
+    <main id="grow" class="w-screen">
       <!-- page.error case is required for the static build which otherwise renders content -->
       {#if content && $page.error == null}
         {#each content as section}
@@ -113,11 +77,11 @@
               <Hero {...section.props} />
             </div>
           {:else if section.collection === 'cta_group'}
-            <div class="container mx-auto space-y-8 px-4 pb-10">
+            <div class="container mx-auto mb-12 space-y-8 px-4">
               <CtaGroup {...section.props} />
             </div>
           {:else if section.collection === 'ctas'}
-            <div class="container mx-auto">
+            <div class="container mx-auto mb-12 px-4">
               <Cta {...section.props} />
             </div>
           {:else if section.collection === 'timelines'}
@@ -132,35 +96,26 @@
               </div>
             </div>
           {:else if section.collection === 'contacts'}
-            <div class="container mx-auto mb-12 px-4">
-              {#if section.item.hr === true}
-                <hr class="" />
-              {/if}
+            <div class="container mx-auto mb-12 mt-8 px-4 md:mt-0">
               <Person {...section.props} />
-            </div>
-          {:else if section.collection === 'carousel'}
-            <div class="mb-12">
-              <Carousel {...section.props} />
             </div>
           {:else if section.collection === 'quote_carousel'}
             <div class="mb-12">
               <QuoteCarousel {...section.props} />
             </div>
           {:else if section.collection === 'buttons'}
-            <div class="text_width mx-auto mb-12">
+            <div class="container mx-auto mb-12">
               <div class="flex items-center justify-center">
                 <LinkButton {...section.props} />
               </div>
             </div>
           {:else if section.collection === 'icons'}
-            <div class="text_width mx-auto mb-12 px-4">
+            <div class="container mx-auto mb-12 px-4">
               <Icon {...section.props} />
             </div>
           {:else if section.collection === 'custom_sections'}
             <div class="container mx-auto mb-12">
-              <div class="mx-4">
-                <slot />
-              </div>
+              <slot />
             </div>
           {/if}
         {/each}
@@ -174,7 +129,7 @@
 
         <slot />
       {/if}
-    </div>
+    </main>
     <Footer />
   {/if}
 </div>

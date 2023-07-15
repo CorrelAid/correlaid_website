@@ -18,7 +18,7 @@
       class="w-full rounded-md bg-gradient-to-r from-tertiary-75 to-secondary-75 p-1"
     >
       <div
-        class="back h-full w-full items-center justify-center space-y-2 px-4 py-4 font-medium text-white drop-shadow-md"
+        class="back h-full w-full items-center justify-center p-4 font-medium text-white drop-shadow-md"
       >
         <slot />
       </div>

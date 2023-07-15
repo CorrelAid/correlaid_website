@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Roboto'],
+        londrina: ['Londrina Solid'],
       },
 
       typography(theme) {
@@ -36,6 +37,11 @@ module.exports = {
 
       minWidth: {
         36: '9rem',
+      },
+
+      maxWidth: {
+        80: '20rem',
+        48: '80rem',
       },
 
       colors: {
@@ -68,7 +74,6 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
   ],

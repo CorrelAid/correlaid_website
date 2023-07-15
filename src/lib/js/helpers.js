@@ -1,20 +1,19 @@
 import translations from '$lib/data/translations';
-import _ from 'lodash';
 import {PUBLIC_API_URL} from '$env/static/public';
 
-/*
+/**
  * Extracts the last substring after /
  */
 export const getLastItem = (thePath) =>
   thePath.substring(thePath.lastIndexOf('/') + 1);
 
-/*
+/**
  * Extracts the last substring after .
  */
 export const getGroup = (thePath) =>
   thePath.substring(thePath.lastIndexOf('.') + 1);
 
-/*
+/**
  * Extracts a translation from translations, given a locale and a page key.
  */
 export function translate(locale, key, vars) {
@@ -40,7 +39,7 @@ export function translate(locale, key, vars) {
   return {text, url};
 }
 
-/*
+/**
  * Contructs regex that matches valid url paramters by extracting
  * them from translations given one or multiple page keys.
  */
@@ -71,14 +70,14 @@ function normalizePath(path) {
   }
 }
 
-/*
+/**
  * Finds a page key given a valid url.
  */
 export const find = (v, path) => {
   return Object.keys(v).filter((k) => v[k].url === normalizePath(path));
 };
 
-/*
+/**
  * Returns the name of the language in directus format given the path parameters object.
  */
 export function get_lang(params) {
@@ -91,7 +90,20 @@ export function get_lang(params) {
   return lang;
 }
 
-/* Gets the locale name (its undefined when german and taken from params.locale,
+export function localeToLang(locale) {
+  let lang;
+  if (locale === 'de') {
+    lang = 'de-DE';
+  } else if (locale === 'en') {
+    lang = 'en-US';
+  } else {
+    throw new Error('Unknonw locale');
+  }
+  return lang;
+}
+
+/**
+ * Gets the locale name (its undefined when german and taken from params.locale,
  * because locale is optional parameter).
  */
 export function get_locale(params) {
@@ -105,11 +117,15 @@ export function gen_img_url(id, transform = '') {
   return `${PUBLIC_API_URL}/assets/${id}?${transform}`;
 }
 
-/*
- * Generates a custom date string given a date string taken from directus and a locale.
- * If year is true, it also return the year
+/**
+ * Generates a custom date string given a Date object
+ *
+ * @param {Date} date
+ * @param {string} locale String representation of the locale
+ * @param {boolean} year A Flag whether the output should contain the year
+ * @return {string} Represents the date formatted according to the locale and the year flag
  */
-export function gen_date(date, locale, year = false) {
+export function toLocalDateString(date, locale, year = false) {
   let options = {
     month: 'long',
     day: 'numeric',
@@ -121,12 +137,24 @@ export function gen_date(date, locale, year = false) {
       year: 'numeric',
     };
   }
-  date = new Date(Date.parse(date));
-
   return date.toLocaleString(locale, options);
 }
 
-/*
+/**
+ * Generates a custom date string.
+ *
+ * @param {string} date String representation of a date
+ * @param {string} locale String representation of the locale
+ * @param {boolean} year A Flag whether the output should contain the year
+ * @return {string} Represents the date formatted according to the locale and the year flag
+ */
+export function gen_date(date, locale, year = false) {
+  date = new Date(Date.parse(date));
+
+  return toLocalDateString(date, locale, year);
+}
+
+/**
  * Generates a custom time string given a time string taken from
  * directus and a locale.
  */
@@ -141,41 +169,90 @@ export function gen_time(time, locale) {
   return time.toLocaleTimeString(locale, options);
 }
 
-/*
- * Checking if post exists in current locale, if not using other language.
- * Getting languages the posts exists in.
+/**
+ * Extracts existing languages from a list from an data entry
+ * with translations.
  */
-export function handle_lang(posts, params) {
-  for (let i = 0; i < posts.length; i++) {
-    const langs = [];
-    const translations = [];
-    for (let y = 0; y < posts[i].translations.length; y++) {
-      if (posts[i].translations[y].slug != null) {
-        langs.push(posts[i].translations[y].languages_code.code);
-        translations.push(posts[i].translations[y]);
-      }
-    }
-    posts[i].langs = langs;
-    const used_translation = _.find(
-      translations,
-      (el) => el.languages_code.code === get_lang(params),
-    );
+function extractLanguages(entry) {
+  const langs = entry.translations.map((translation) => {
+    return translation.languages_code.code;
+  });
+  return langs;
+}
 
-    if (used_translation) {
-      posts[i].translations = used_translation;
-    } else {
-      posts[i].translations = translations[0];
-    }
+/**
+ * Get translation translation with fallback.
+ * The fallback is any other available translation.
+ */
+function getTranslation(entry, currentLanguage) {
+  const translation = entry.translations.find(
+    (translation) => translation.languages_code.code === currentLanguage,
+  );
+  if (translation) {
+    return translation;
+  } else {
+    return entry.translations[0];
+  }
+}
+
+/**
+ * Checking if entries exists in current locale, if not falls back to another available language.
+ * Also adds an array of existing languages as a property to every entry.
+ */
+export function handle_lang(entries, params) {
+  for (const entry of entries) {
+    entry.langs = extractLanguages(entry);
+    // TODO: This is not very nice because it changes the data type from array to object.
+    // It also is misleading in terms of the naming as the property name is still plural.
+    entry.translations = getTranslation(entry, get_lang(params));
   }
 
-  return posts;
+  return entries;
 }
 
 export function gen_lc_href(params, city) {
   const lc_href = [
     get_locale(params) == 'de' ? '' : '/en',
     '/community/correlaidx/',
-    city,
+    city.toLowerCase(),
   ].join('');
   return lc_href;
+}
+
+export function convertContractType(type, locale) {
+  if (locale === 'de') {
+    switch (type) {
+      case 'full-time':
+        return 'Vollzeit';
+      case 'part-time':
+        return `Teilzeit`;
+      case 'internship':
+        return 'Praktikum';
+      case 'volunteer':
+        return 'Freiwillig';
+      case 'contract':
+        return 'Vertrag';
+      case 'temporary':
+        return 'Zeitlich begrenzt';
+      default:
+        return type;
+    }
+  } else {
+    switch (type) {
+      case 'full-time':
+        return 'Full-time';
+      case 'part-time':
+        return `Part-time`;
+      case 'internship':
+        return 'Internship';
+      case 'volunteer':
+        return 'Volunteer';
+      case 'contract':
+        return 'Contract';
+      case 'temporary':
+        return 'Temporary';
+      default:
+        return type;
+    }
+  }
 }

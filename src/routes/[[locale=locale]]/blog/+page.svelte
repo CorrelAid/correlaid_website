@@ -1,8 +1,9 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
+  import {t} from '$lib/stores/i18n';
   import BlogCard from '$lib/components/Blog_Card.svelte';
-  import {parseEntries} from '$lib/js/parse_cms.js';
+  import Filter from '../../../lib/components/Filter.svelte';
 
   onMount(() => {
     $page_key = 'navbar.blog';
@@ -10,15 +11,31 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-
+  let filteredData;
   let posts;
-  $: posts = parseEntries(data.posts, 'blog_posts');
+  $: posts = data.posts;
+  $: selects = [
+    {
+      title: $t('filter.language').text,
+      searchable: false,
+      multiple: true,
+      param: 'langs',
+    },
+  ];
+
+  const searchOptions = [
+    {searchProperty: 'title', multiple: false},
+    {searchProperty: 'teaser', multiple: false},
+  ];
 </script>
 
-<div class="space-y-8">
-  {#each posts as post, i}
-    <div class={i === 0 ? 'col-span-full' : 'col-span-1'}>
-      <BlogCard {...post} />
-    </div>
-  {/each}
+<Filter orig_data={posts} bind:filteredData {selects} {searchOptions} />
+<div class="mt-8 space-y-8 px-4">
+  {#if filteredData}
+    {#each filteredData as post, i}
+      <div class={i === 0 ? 'col-span-full' : 'col-span-1'}>
+        <BlogCard {...post} />
+      </div>
+    {/each}
+  {/if}
 </div>

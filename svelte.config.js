@@ -1,10 +1,26 @@
-import 'dotenv/config';
 import _ from 'lodash';
 import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
 import translations from './src/lib/data/translations.js';
 import {fetch} from 'undici';
+
+import path from 'node:path';
+import dotenv from 'dotenv';
+
+// Mimic vites loading order using the dotenv default overwrite = false
+// This means preexisting env vars have highest priority followed by
+// env specific vars general env vars
+// .local versions of the variables always overwrite their non-local
+// counterpart
+dotenv.config({
+  path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}.local`),
+});
+dotenv.config({
+  path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`),
+});
+dotenv.config({path: path.resolve(process.cwd(), '.env.local')});
+dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
 const excl = [
   'misc.read_more',
@@ -16,6 +32,18 @@ const excl = [
   'access.online',
   'access.sign_up',
   'access.language',
+  'access.date',
+  'access.time',
+  'access.salary',
+  'access.workload',
+  'access.language_',
+  'filter.language',
+  'filter.type',
+  'filter.no_results',
+  'filter.placeholder',
+  'filter.search',
+  'organization.anonymous',
+  'organization.internalProject',
 ];
 
 const mainRoutes = {
@@ -23,7 +51,15 @@ const mainRoutes = {
   en: _.omit(translations['en'], excl),
 };
 
-const URL = 'https://cms.correlaid.org/graphql';
+const URL = `${process.env.PUBLIC_API_URL}/graphql`;
+
+function getAllowedStatus() {
+  const allowedStatus = ['published'];
+  if (process.env.PUBLIC_SHOW_JOB_PREVIEWS === 'TRUE') {
+    allowedStatus.push('preview');
+  }
+  return allowedStatus;
+}
 
 if (
   process.env.PUBLIC_ADAPTER === 'STATIC' &&
@@ -35,15 +71,15 @@ if (
 function canBePrerendered(url) {
   return (
     url[0] === '/' &&
-    url !== '/community/become_member/membership_application' &&
-    url !== '/community/mitglied_werden/mitgliedsantrag'
+    url !== '/community/become-member/membership-application' &&
+    url !== '/community/mitglied-werden/mitgliedsantrag'
   );
 }
 
 const queries = {
   blogs: `
-  query BlogSlugs {
-    Posts(sort: ["-pubdate"]) {
+  query BlogSlugs($status: [String] = ["published"]) {
+    Posts(sort: ["-pubdate"], filter: {status: { _in: $status }}) {
       translations(filter:{slug:{_neq:null}}) {
         languages_code {
           code
@@ -77,6 +113,13 @@ const queries = {
   }
 
   `,
+  jobs: `
+  query Jobs($status: [String] = ["published"]) {
+    Jobs(filter: { status: { _in: $status }  }) {
+      slug
+    }
+  }
+  `,
 };
 
 console.log(
@@ -106,7 +149,11 @@ async function queryCmsGraphQl(query, vars) {
     headers: {'Content-Type': 'application/json'},
   });
   if (!response.ok) {
-    throw new Error(`unexpected cms response ${response.statusText}`);
+    throw new Error(
+      `unexpected cms response ${response.statusText} for query ${
+        query.split(/\r?\n/)[0]
+      }`,
+    );
   }
 
   const data = await response.json();
@@ -119,7 +166,9 @@ async function queryCmsGraphQl(query, vars) {
 }
 
 async function addBlogRoutes(routes) {
-  const postsResult = await queryCmsGraphQl(queries['blogs']);
+  const postsResult = await queryCmsGraphQl(queries['blogs'], {
+    status: getAllowedStatus(),
+  });
   for (const post of postsResult['data']['Posts']) {
     addBlogRoutesWithLanguageFallback(routes, post['translations']);
   }
@@ -131,7 +180,7 @@ async function addLcRoutes(routes) {
   });
   for (const lc of germanResults['data']['Local_Chapters']) {
     for (const t of lc['translations']) {
-      routes.push(`/community/correlaidx/${t.slug}`);
+      routes.push(`/community/correlaidx/${t.slug.toLowerCase()}`);
     }
   }
   const englishResults = await queryCmsGraphQl(queries['lcs'], {
@@ -139,7 +188,7 @@ async function addLcRoutes(routes) {
   });
   for (const post of englishResults['data']['Local_Chapters']) {
     for (const t of post['translations']) {
-      routes.push(`/en/community/correlaidx/${t.slug}`);
+      routes.push(`/en/community/correlaidx/${t.slug.toLowerCase()}`);
     }
   }
 }
@@ -147,8 +196,8 @@ async function addLcRoutes(routes) {
 async function addProjectRoutes(routes) {
   const results = await queryCmsGraphQl(queries['projects']);
   for (const project of results['data']['Projects']) {
-    routes.push(`/daten_nutzen/projekte/${project.slug}`);
-    routes.push(`/en/using_data/projects/${project.slug}`);
+    routes.push(`/daten-nutzen/projekte/${project.slug}`);
+    routes.push(`/en/using-data/projects/${project.slug}`);
   }
 }
 
@@ -157,6 +206,16 @@ async function addEventRoutes(routes) {
   for (const event of results['data']['Events']) {
     routes.push(`/veranstaltungen/${event.slug}`);
     routes.push(`/en/events/${event.slug}`);
+  }
+}
+
+async function addJobRoutes(routes) {
+  const results = await queryCmsGraphQl(queries['jobs'], {
+    status: getAllowedStatus(),
+  });
+  for (const job of results['data']['Jobs']) {
+    routes.push(`/jobs/${job.slug}`);
+    routes.push(`/en/jobs/${job.slug}`);
   }
 }
 
@@ -185,33 +244,39 @@ if (process.env.PUBLIC_PRERENDER === 'ALL') {
   await addLcRoutes(prerenderRoutes);
   await addProjectRoutes(prerenderRoutes);
   await addEventRoutes(prerenderRoutes);
+  await addJobRoutes(prerenderRoutes);
   prerenderRoutes.push('/404/');
   prerenderRoutes.push('/en/404/');
 } else {
   prerenderRoutes.push('*');
 }
 
+let configuredAdapter;
+
+if (process.env.PUBLIC_ADAPTER === 'STATIC') {
+  const staticBuildDir = process.env.BUILD_DIR || '.svelte-kit/cloudflare';
+
+  configuredAdapter = adapterStatic({
+    pages: staticBuildDir,
+    assets: staticBuildDir,
+    fallback: null,
+    precompress: false,
+    strict: false,
+  });
+} else {
+  configuredAdapter = adapter({
+    routes: {
+      include: ['/*'],
+      exclude: ['<all>'],
+    },
+  });
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter:
-      process.env.PUBLIC_ADAPTER === 'STATIC'
-        ? adapterStatic({
-            pages: '.svelte-kit/cloudflare',
-            assets: '.svelte-kit/cloudflare',
-            fallback: null,
-            precompress: false,
-            strict: true,
-          })
-        : adapter({
-            routes: {
-              include: ['/*'],
-              exclude: ['<all>'],
-            },
-          }),
-    prerender: {
-      entries: process.env.PUBLIC_PRERENDER === 'ALL' ? prerenderRoutes : ['*'],
-    },
+    adapter: configuredAdapter,
+    prerender: {entries: prerenderRoutes},
   },
   preprocess: vitePreprocess(),
 };

@@ -3,6 +3,7 @@ query Awards($language: String = "de-DE"){
 	Awards(sort: ["-year"]) {
 		image {
 			id
+			description
 		}
 		year
 		translations(

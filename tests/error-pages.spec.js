@@ -6,14 +6,14 @@ import {test, expect} from '@playwright/test';
 // with an env variable)
 test.describe('test error pages', () => {
   test.skip('test pages root', async ({page}) => {
-    await page.goto('http://localhost:3000/not-a-valid-path', {
+    await page.goto('/not-a-valid-path', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto('http://localhost:3000/en/not-a-valid-path', {
+    await page.goto('/en/not-a-valid-path', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
@@ -22,14 +22,14 @@ test.describe('test error pages', () => {
   });
 
   test.skip('test pages blog', async ({page}) => {
-    await page.goto('http://localhost:3000/blog/not-a-valid-post', {
+    await page.goto('/blog/not-a-valid-post', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto('http://localhost:3000/en/blog/not-a-valid-post', {
+    await page.goto('/en/blog/not-a-valid-post', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
@@ -38,14 +38,14 @@ test.describe('test error pages', () => {
   });
 
   test.skip('test pages events', async ({page}) => {
-    await page.goto('http://localhost:3000/veranstaltungen/not-a-valid-event', {
+    await page.goto('/veranstaltungen/not-a-valid-event', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto('http://localhost:3000/en/events/not-a-valid-event', {
+    await page.goto('/en/events/not-a-valid-event', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
@@ -54,36 +54,32 @@ test.describe('test error pages', () => {
   });
 
   test.skip('test pages projects', async ({page}) => {
-    await page.goto(
-      'http://localhost:3000/daten_nutzen/projekte/not-a-valid-project',
-      {waitUntil: 'networkidle'},
-    );
+    await page.goto('/daten_nutzen/projekte/not-a-valid-project', {
+      waitUntil: 'networkidle',
+    });
     await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto(
-      'http://localhost:3000/en/using_data/projects/not-a-valid-project',
-      {waitUntil: 'networkidle'},
-    );
+    await page.goto('/en/using-data/projects/not-a-valid-project', {
+      waitUntil: 'networkidle',
+    });
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
       ignoreCase: true,
     });
   });
 
   test.skip('test pages correlaidx', async ({page}) => {
-    await page.goto(
-      'http://localhost:3000/community/correlaidx/not-a-valid-lc',
-      {waitUntil: 'networkidle'},
-    );
+    await page.goto('/community/correlaidx/not-a-valid-lc', {
+      waitUntil: 'networkidle',
+    });
     await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto(
-      'http://localhost:3000/en/community/correlaidx/not-a-valid-lc',
-      {waitUntil: 'networkidle'},
-    );
+    await page.goto('/en/community/correlaidx/not-a-valid-lc', {
+      waitUntil: 'networkidle',
+    });
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
       ignoreCase: true,
     });

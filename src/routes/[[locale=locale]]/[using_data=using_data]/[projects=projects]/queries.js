@@ -1,15 +1,17 @@
 export const projectOverviewQuery = `
-query ProjectOverview($language: String = "de-DE") {
-	Projects {
+query ProjectOverview($language: String = "de-DE", $status: [String] = ["published"]) {
+	Projects(filter: { status: { _in: ["published", "published_anon"] } }) {
+		status
 		subpage
 		project_id
+		is_internal
 		Podcast {
 			language
 			soundcloud_link
 			title
 		}
 		Posts {
-			Posts_id {
+			Posts_id(filter: { status: { _in: $status } }) {
 				id
 				translations {
 					languages_code {
@@ -20,7 +22,7 @@ query ProjectOverview($language: String = "de-DE") {
 				}
 			}
 		}
-		Projects_Outputs {
+		Projects_Outputs(filter: { is_public: { _eq: true } }) {
 			url
 			output_type
 		}
@@ -40,14 +42,12 @@ query ProjectOverview($language: String = "de-DE") {
 			summary
 		}
 		Local_Chapters {
-			Local_Chapters_id{
-				translations(filter: { languages_code: { code: { _eq: $language }}}){
+			Local_Chapters_id {
+				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}
 			}
-			
 		}
 	}
 }
-
 `;

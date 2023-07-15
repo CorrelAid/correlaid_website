@@ -1,11 +1,20 @@
 export const projectDetailsQuery = `
-query Project($slug: String, $language: String = "de-DE") {
-	Projects(filter: { project_id: { _eq: $slug } }) {
+query Project(
+	$slug: String
+	$language: String = "de-DE"
+	$status: [String] = ["published"]
+) {
+	Projects(
+		filter: {
+			_and: [{ project_id: { _eq: $slug } }, { status: { _eq: "published" } }]
+		}
+	) {
+		status
 		Podcast {
 			soundcloud_link
 		}
 		Posts {
-			Posts_id {
+			Posts_id(filter: { status: { _in: $status } }) {
 				translations {
 					languages_code {
 						code
@@ -14,7 +23,7 @@ query Project($slug: String, $language: String = "de-DE") {
 				}
 			}
 		}
-		Projects_Outputs {
+		Projects_Outputs(filter: { is_public: { _eq: true } }) {
 			url
 			output_type
 		}
@@ -55,7 +64,12 @@ query Project($slug: String, $language: String = "de-DE") {
 			summary
 		}
 		Local_Chapters {
-			id
+			Local_Chapters_id {
+				id
+				translations(filter: { languages_code: { code: { _eq: $language } } }) {
+					city
+				}
+			}
 		}
 	}
 }

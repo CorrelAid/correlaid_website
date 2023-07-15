@@ -7,6 +7,7 @@
   import ExternalLink from '../svg/External_Link.svelte';
 
   export let title;
+  export let tags;
   export let subtitle;
   export let resp_unit = '';
   export let correlaidx_city = '';
@@ -33,9 +34,9 @@
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
-  <div class="px-3 pt-4 pb-6">
+  <div class="px-3 pb-6 pt-4">
     {#if href != ''}
-      <div class="mr-10 mb-3">
+      <div class="mb-3 mr-10">
         {#if href.includes('https://')}
           <a
             {href}
@@ -62,16 +63,24 @@
       </div>
     {:else}
       <h3
-        class="mb-3 block text-xl font-semibold text-base-content transition line-clamp-3"
+        class="line-clamp-3 mb-3 block text-xl font-semibold text-base-content transition"
       >
         {title}
       </h3>
     {/if}
+    <div class="mb-2">
+      {#each tags as tag}
+        <span
+          class="line-clamp-1 mr-2 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+          >{tag}</span
+        >
+      {/each}
+    </div>
 
     <h4 class="text-md line-clamp-3">{subtitle}</h4>
     {#if resp_unit != ''}
       <a
-        class="pt-2 font-semibold text-base-content transition line-clamp-3 hover:text-primary"
+        class="line-clamp-3 pt-2 font-semibold text-base-content transition hover:text-primary"
         href={href_resp_unit}>{resp_unit}</a
       >
     {/if}

@@ -1,0 +1,2619 @@
+{
+  "redirects": [
+    {
+      "source": "/about/contact/",
+      "destination": "/ueber/team/",
+      "permanent": true
+    },
+    {
+      "source": "/volunteer/newsletter/",
+      "destination": "/newsletter/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/projects/",
+      "destination": "/en/using-data/projects/",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/",
+      "destination": "/en/using-data/projects/",
+      "permanent": true
+    },
+    {
+      "source": "/en/volunteer/projects/",
+      "destination": "/en/using-data/projects/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/experts/",
+      "destination": "/en/using-data/consulting/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/",
+      "destination": "/en/using-data/",
+      "permanent": true
+    },
+    {
+      "source": "/en/volunteer/newsletter/",
+      "destination": "/en/newsletter/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/rlernen/",
+      "destination": "/en/education/learning-r/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/education/",
+      "destination": "/en/education/",
+      "permanent": true
+    },
+    {
+      "source": "/en/volunteer/correlaidx/",
+      "destination": "/en/community/correlaidx/",
+      "permanent": true
+    },
+    {
+      "source": "/en/volunteer/",
+      "destination": "/en/community/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/projects/",
+      "destination": "/daten-nutzen/projekte/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/experts/",
+      "destination": "/daten-nutzen/beratung/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/",
+      "destination": "/daten-nutzen/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/community/",
+      "destination": "/daten-nutzen/",
+      "permanent": true
+    },
+    {
+      "source": "/volunteer/correlaidx/",
+      "destination": "/community/correlaidx/",
+      "permanent": true
+    },
+    {
+      "source": "/volunteer/",
+      "destination": "/community/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/rlernen/",
+      "destination": "/bildung/r-lernen/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/bildung/",
+      "destination": "/bildung/r-lernen/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/community/",
+      "destination": "/en/using-data/",
+      "permanent": true
+    },
+    {
+      "source": "/en/volunteer/a-remote-network/",
+      "destination": "/en/community/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/projects_before/",
+      "destination": "/en/using-data/projects/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/_index_after/",
+      "destination": "/en/using-data/",
+      "permanent": true
+    },
+    {
+      "source": "/en/volunteer/_index_after/",
+      "destination": "/en/community/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/projects_before/",
+      "destination": "/daten-nutzen/projekte/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/_index_after/",
+      "destination": "/daten-nutzen/",
+      "permanent": true
+    },
+    {
+      "source": "/volunteer/_index_after/",
+      "destination": "/community/",
+      "permanent": true
+    },
+    {
+      "source": "/events/2023-04/girls-day/",
+      "destination": "/veranstaltungen/girls-day-23/",
+      "permanent": true
+    },
+    {
+      "source": "/events/2019-11/meetup/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-06/datadialogue-berlin/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-06/oodm1-erum/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-07/180-degrees-consulting/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-07/oodm2-datastrategy/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-07/youvo-workshop/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-08/oodm3-interactive-science/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-08/youvo-workshop/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-09/oodm4-lazy-data-scientist-automation/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-10/oodm5-matplotlib/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-11/correlcon/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-12/oodm6-mobility/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2020-12/stuttgart-kickoff/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-01/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-02/oodm8-abc-der-daten/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-02/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-03/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-03/talk-energy-consumption/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-04/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-05/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-06/correlaidx-stuttgart-event/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-06/jena-webscraping-workshop/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-06/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-07/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-08/digitalenachbarschaft/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-08/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-08/tidytuesday-challenge/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-09/digitalenachbarschaft2/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-09/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-10/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-11/correlcon/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-11/oodm8/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-11/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2021-12/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-01/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-02/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-03/oodm-svelte/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-03/open-data-day/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-03/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-04/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-05/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-06/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-07/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-08/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-09/cfe_hackathon/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-09/correlaidx-austria-events/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-09/correlaidx-austria-events2/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-09/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-10/correlaidx-austria-events-3/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-10/correlaidx-austria-events-4/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-10/correlaidx-cologne-hackathon/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-10/open-onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-11/correlaidx-austria-events-5/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-11/correlaidx-austria-events-6/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-11/git_for_newbies/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-11/numpy_pandas/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-11/onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-11/python_basics/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-12/bike-data-event/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-12/correlaidx-austria-events-7/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-12/data-viz/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2022-12/onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-01/correlaidx-austria-events-8/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-01/onboarding-call/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-01/oodm-jupytext/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-02/onboarding-call-february/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-03/onboarding-call-march/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-03/workshop-datenstrategie/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-04/onboarding-call-april/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/correlaidx_austria_workshop_1/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/correlaidx_austria_workshop_2/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/correlaidx_austria_workshop_3/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/correlaidx_austria_workshop_4/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/git_workshop_2/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/git_workshop_3/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/git_workshop_4/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/onboarding-call-may/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-05/workshop-git/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-06/open-onboarding-call-june/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/events/2023-07/open-onboarding-call-july/",
+      "destination": "/veranstaltungen/",
+      "permanent": false
+    },
+    {
+      "source": "/about/",
+      "destination": "/ueber/",
+      "permanent": true
+    },
+    {
+      "source": "/about/ethics/",
+      "destination": "/ueber/werte/",
+      "permanent": true
+    },
+    {
+      "source": "/about/privacy/",
+      "destination": "/ueber/werte/",
+      "permanent": true
+    },
+    {
+      "source": "/about/partners/",
+      "destination": "/ueber/partner/",
+      "permanent": true
+    },
+    {
+      "source": "/nonprofits/no_page/newsletter/",
+      "destination": "/newsletter/",
+      "permanent": true
+    },
+    {
+      "source": "/footer/impressum/",
+      "destination": "/impressum/",
+      "permanent": true
+    },
+    {
+      "source": "/en/nonprofits/no_page/newsletter/",
+      "destination": "/en/newsletter/",
+      "permanent": true
+    },
+    {
+      "source": "/en/footer/imprint/",
+      "destination": "/en/imprint/",
+      "permanent": true
+    },
+    {
+      "source": "/en/events/2019-11/meetup/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-06/datadialogue-berlin/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-06/oodm1-erum/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-07/180-degrees-consulting/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-07/oodm2-datastrategy/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-07/youvo-workshop/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-08/oodm3-interactive-science/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-08/youvo-workshop/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-09/oodm4-lazy-data-scientist-automation/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-10/oodm5-matplotlib/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-11/correlcon/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-12/oodm6-mobility/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2020-12/stuttgart-kickoff/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-01/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-02/oodm8-abc-der-daten/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-02/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-03/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-03/talk-energy-consumption/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-04/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-05/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-05/projectcycle/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-06/correlaidx-stuttgart-event/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-06/jena-webscraping-workshop/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-06/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-07/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-08/digitalenachbarschaft/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-08/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-08/tidytuesday-challenge/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-09/digitalenachbarschaft2/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-09/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-10/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-11/correlcon/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-11/oodm8/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-11/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2021-12/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-01/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-02/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-03/oodm-svelte/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-03/open-data-day/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-03/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-04/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-05/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-06/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-07/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-08/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-09/cfe_hackathon/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-09/correlaidx-austria-events/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-09/correlaidx-austria-events2/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-09/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-10/correlaidx-austria-events-3/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-10/correlaidx-austria-events-4/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-10/correlaidx-cologne-hackathon/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-10/open-onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-11/correlaidx-austria-events-5/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-11/correlaidx-austria-events-6/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-11/git_for_newbies/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-11/numpy_pandas/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-11/onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-11/python_basics/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-12/bike-data-event/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-12/correlaidx-austria-events-7/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-12/data-viz/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2022-12/open-onboarding-call-december/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-01/correlaidx-austria-events-8/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-01/onboarding-call/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-01/oodm-jupytext/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-02/onboarding-call-february/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-03/onboarding-call-march/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-03/workshop-datenstrategie/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-04/girls-day/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-04/onboarding-call-april/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/correlaidx_austria_workshop_1/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/correlaidx_austria_workshop_2/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/correlaidx_austria_workshop_3/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/correlaidx_austria_workshop_4/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/git_workshop_2/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/git_workshop_3/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/git_workshop_4/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/onboarding-call-may/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-05/workshop-git/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-06/open-onboarding-call-june/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/events/2023-07/open-onboarding-call-july/",
+      "destination": "/en/events/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/dortmund/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/freiburg/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/goettingen/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/jena/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/karlsruhe/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/leipzig/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/ruhrgebiet/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/stuttgart/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/footer/licensecontract/",
+      "destination": "/en/community/founding-lc/",
+      "permanent": false
+    },
+    {
+      "source": "/en/correlaidx/",
+      "destination": "/en/community/correlaidx/",
+      "permanent": true
+    },
+    {
+      "source": "/en/become-member/",
+      "destination": "/en/community/become-member/",
+      "permanent": true
+    },
+    {
+      "source": "/en/about/codeofconduct/",
+      "destination": "/en/codeofethics",
+      "permanent": true
+    },
+    {
+      "source": "/en/about/codeofethics/",
+      "destination": "/en/codeofconduct/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2023-04-20-volunteering-day/",
+      "destination": "/en/blog/volunteering-day",
+      "permanent": true
+    },
+    {
+      "source": "/blog/r-lernen-kurs/",
+      "destination": "/bildung/r-lernen/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/r-lernen-kurs",
+      "destination": "/bildung/r-lernen/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/r_lernen_2023/",
+      "destination": "/en/blog/r-lernen-2023/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/datendialog-europa/",
+      "destination": "/en/blog/data-dialogue-europa/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/data-dialog-berlin/",
+      "destination": "/en/blog/data-dialogue-berlin/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/correlaid-x/",
+      "destination": "/en/blog/correlaidx/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/big-data-und-verantwortung/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/blockchain-explained/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/data-science-books-to-read/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/datadialogue-berlin-online-recap/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/datadialogue-berlin-online/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/dataquest-learner-stories/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/diversity_antidiscrimination/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/experteninterview-hans-verbeek/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/experteninterview-simon-munzert/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/expertinneninterview-anita-gohdes/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/expertinneninterview-nadine-meidert/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/free-and-easy-video-calling/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/gender_bias_and_mobility/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/graphical-perception-political-polls-traunmueller/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/hackathon-gleif/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/ist-die-afd-unterschaetzt/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/journocode-workflow/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/koalitionsszenarien-marc-debus/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/kooperation-projektbuero-hamburg/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/markov-chains/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/mdb-network/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/metwo/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/music-with-r/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/neue-berichterstattung-umfragen/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/online-community-night/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/open-cities-ai/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/pepsi/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/point-pattern-analysis/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/problems-ai/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/prognose-bundestagswahl-zweitstimme/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/reconstructing-cambridge-analytica/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/schwarm-prognose/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/scraping-reddit/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/tic-tac-toe-ai/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/tidytuesday-meetup/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/understand-p-values/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/update-blog/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/wahl-o-mat-analyse/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/we2-twitter-analysis/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/whats-out-there-1/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/whats-out-there-2/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/whats-out-there-3/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/womens-day-2023/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/year_2022/",
+      "destination": "/en/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/en/about/ethics/",
+      "destination": "/en/about/values/",
+      "permanent": true
+    },
+    {
+      "source": "/en/about/privacy/",
+      "destination": "/en/about/values/",
+      "permanent": true
+    },
+    {
+      "source": "/en/about/contact/",
+      "destination": "/en/about/team/",
+      "permanent": true
+    },
+    {
+      "source": "/en/about/partners/",
+      "destination": "/en/about/partners/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/2022/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/2023/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/activism/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/analysis/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/artificial-intelligence/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/bundestagswahl-2017/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/comment/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/correlaid/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/correlaidx/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/crazy-r/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/data-ethics/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/data-journalism/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/data-literacy/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/data-science/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/data4good/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/dataviz/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/diversity/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/diy/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/education/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/events/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/expertinneninterview/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/hackathon/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/internal-project/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/network/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/netzwerk/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/news/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/oragnization/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/politics/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/pr/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/programming/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/projekt/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/projekte/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/r-lernen/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/r/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/reading/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/rstats/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/social-science/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/statistics/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/veranstaltungen/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/volunteering/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/categories/whats-out-there/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/footer/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/languages/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/languages/deutsch/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/languages/english/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/languages/german/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/austria/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/berlin/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/cologne/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/correlaidx/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/data4good/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/datastrategy/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/dataviz/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/education/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/girls-day/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/hackathon/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/impact/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/konstanz/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/lc-berlin/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/mobility/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/npos/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/oodm/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/opendata/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/python/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/r/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/rstats/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/showcase/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/tags/visualization/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/",
+      "destination": "/daten-nutzen/projekte/",
+      "permanent": true
+    },
+    {
+      "source": "/volunteer/projektarbeit/",
+      "destination": "/daten-nutzen/projekte/",
+      "permanent": true
+    },
+    {
+      "source": "/volunteer/ein-remote-netzwerk/",
+      "destination": "/community/volunteer-teams/",
+      "permanent": true
+    },
+    {
+      "source": "/mitgliedwerden/",
+      "destination": "/community/mitglied-werden/",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/dortmund/",
+      "destination": "/community/lc-gruenden/",
+      "permanent": false
+    },
+    {
+      "source": "/correlaidx/freiburg/",
+      "destination": "/community/lc-gruenden/",
+      "permanent": false
+    },
+    {
+      "source": "/correlaidx/goettingen/",
+      "destination": "/community/lc-gruenden/",
+      "permanent": false
+    },
+    {
+      "source": "/correlaidx/jena/",
+      "destination": "/community/lc-gruenden/",
+      "permanent": false
+    },
+    {
+      "source": "/correlaidx/karlsruhe/",
+      "destination": "/community/lc-gruenden/",
+      "permanent": false
+    },
+    {
+      "source": "/correlaidx/leipzig/",
+      "destination": "/community/lc-gruenden/",
+      "permanent": false
+    },
+    {
+      "source": "/correlaidx/ruhrgebiet/",
+      "destination": "/community/lc-gruenden/",
+      "permanent": false
+    },
+    {
+      "source": "/correlaidx/stuttgart/",
+      "destination": "/community/lc-gruenden/",
+      "permanent": false
+    },
+    {
+      "source": "/correlaidx/austria/",
+      "destination": "/community/correlaidx/österreich/",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/netherlands/",
+      "destination": "/community/correlaidx/nederland/",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/",
+      "destination": "/community/correlaidx/",
+      "permanent": true
+    },
+    {
+      "source": "/about/codeofethics/",
+      "destination": "/codeofethics",
+      "permanent": true
+    },
+    {
+      "source": "/about/codeofconduct/",
+      "destination": "/codeofconduct",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2023-04-20-volunteering-day/",
+      "destination": "/blog/tag-des-ehrenamts/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/r_lernen_2023/",
+      "destination": "/blog/r-lernen-2023/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/datendialog-europa/",
+      "destination": "/blog/daten-dialog-europa/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/data-dialog-berlin/",
+      "destination": "/blog/data-dialogue-berlin/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/correlaid-x/",
+      "destination": "/blog/correlaidx/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/1000-data-scientists/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/big-data-und-verantwortung/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/blockchain-explained/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/data-science-books-to-read/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/datadialogue-berlin-online-recap/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/datadialogue-berlin-online/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/dataquest-learner-stories/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/experteninterview-hans-verbeek/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/experteninterview-simon-munzert/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/expertinneninterview-anita-gohdes/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/expertinneninterview-nadine-meidert/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/free-and-easy-video-calling/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/gender_bias_and_mobility/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/graphical-perception-political-polls-traunmueller/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hackathon-gleif/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/iomids-stipendium/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ist-die-afd-unterschaetzt/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/journocode-workflow/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/koalitionsszenarien-marc-debus/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kooperation-projektbuero-hamburg/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/markov-chains/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/mdb-network/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/metwo/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/music-with-r/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/neue-berichterstattung-umfragen/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/online-community-night/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/open-cities-ai/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pepsi/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pl%C3%B6tzlich-digital-slack/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/point-pattern-analysis/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/problems-ai/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/prognose-bundestagswahl-zweitstimme/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/reconstructing-cambridge-analytica/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/schwarm-prognose/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/scraping-reddit/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tic-tac-toe-ai/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tidytuesday-meetup/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/understand-p-values/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/update-blog/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/wahl-o-mat-analyse/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/we2-twitter-analysis/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/whats-out-there-1/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/whats-out-there-2/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/whats-out-there-3/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/womens-day-2023/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/year_2022/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/about/willkommen/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/2022/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/2023/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/activism/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/analysis/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/artificial-intelligence/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/bundestagswahl-2017/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/comment/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/correlaid/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/correlaidx/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/crazy-r/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/data-ethics/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/data-journalism/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/data-literacy/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/data-science/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/data4good/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/dataviz/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/diversity/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/diy/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/education/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/ehrenamt/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/expertinneninterview/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/hackathon/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/internal-project/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/network/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/netzwerk/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/news/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/oragnization/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/politics/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/pr/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/programming/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/projekt/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/projekte/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/r-lernen/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/r/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/reading/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/rstats/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/social-science/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/statistics/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/veranstaltungen/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/categories/whats-out-there/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/de2/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/de2/categories/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/de2/languages/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/footer/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/footer/licensecontract/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/languages/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/languages/deutsch/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/languages/english/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/languages/german/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/austria/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/berlin/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/cologne/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/correlaidx/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/data4good/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/datastrategy/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/dataviz/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/education/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/girls-day/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/hackathon/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/impact/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/konstanz/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/lc-berlin/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/mobility/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/npos/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/oodm/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/opendata/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/python/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/r/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/rstats/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/showcase/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/visualization/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/berlin/",
+      "destination": "/community/correlaidx/berlin",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/bremen/",
+      "destination": "/community/correlaidx/bremen",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/hamburg/",
+      "destination": "/community/correlaidx/hamburg",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/k%C3%B6ln/",
+      "destination": "/community/correlaidx/köln",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/konstanz/",
+      "destination": "/community/correlaidx/konstanz",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/m%C3%BCnchen/",
+      "destination": "/community/correlaidx/münchen",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/m%C3%BCnster/",
+      "destination": "/community/correlaidx/münster",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/mannheim/",
+      "destination": "/community/correlaidx/mannheim",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/paris/",
+      "destination": "/community/correlaidx/paris",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/rhein-main/",
+      "destination": "/community/correlaidx/rhein-main",
+      "permanent": true
+    },
+    {
+      "source": "/correlaidx/switzerland/",
+      "destination": "/community/correlaidx/switzerland",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/austria/",
+      "destination": "/en/community/correlaidx/austria",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/berlin/",
+      "destination": "/en/community/correlaidx/berlin",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/bremen/",
+      "destination": "/en/community/correlaidx/bremen",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/cologne/",
+      "destination": "/en/community/correlaidx/cologne",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/hamburg/",
+      "destination": "/en/community/correlaidx/hamburg",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/konstanz/",
+      "destination": "/en/community/correlaidx/konstanz",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/mannheim/",
+      "destination": "/en/community/correlaidx/mannheim",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/muenster/",
+      "destination": "/en/community/correlaidx/münster",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/munich/",
+      "destination": "/en/community/correlaidx/munich",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/netherlands/",
+      "destination": "/en/community/correlaidx/netherlands",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/paris/",
+      "destination": "/en/community/correlaidx/paris",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/rhein-main/",
+      "destination": "/en/community/correlaidx/rhein-main",
+      "permanent": true
+    },
+    {
+      "source": "/en/correlaidx/switzerland/",
+      "destination": "/en/community/correlaidx/switzerland",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2018-11-tvk/",
+      "destination": "/en/using-data/projects/2018-11-TVK",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2019-06-wel/",
+      "destination": "/en/using-data/projects/2019-06-WEL",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2020-03-den/",
+      "destination": "/en/using-data/projects/2020-03-DEN",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2020-03-erl/",
+      "destination": "/en/using-data/projects/2020-03-ERL",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2020-05-eyp/",
+      "destination": "/en/using-data/projects/2020-05-EYP",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2020-11-mar/",
+      "destination": "/en/using-data/projects/2020-11-MAR",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2021-02-cfe/",
+      "destination": "/en/using-data/projects/2021-02-CFE",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2021-03-hac/",
+      "destination": "/en/using-data/projects/2021-03-HAC",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/2022-04-lau/",
+      "destination": "/en/using-data/projects/2022-04-LAU",
+      "permanent": true
+    },
+    {
+      "source": "/events/",
+      "destination": "/veranstaltungen",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2018-11-tvk/",
+      "destination": "/daten-nutzen/projekte/2018-11-TVK",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2019-06-wel/",
+      "destination": "/daten-nutzen/projekte/2019-06-WEL",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2020-03-den/",
+      "destination": "/daten-nutzen/projekte/2020-03-DEN",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2020-03-erl/",
+      "destination": "/daten-nutzen/projekte/2020-03-ERL",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2020-05-eyp/",
+      "destination": "/daten-nutzen/projekte/2020-05-EYP",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2020-11-mar/",
+      "destination": "/daten-nutzen/projekte/2020-11-MAR",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2021-02-cfe/",
+      "destination": "/daten-nutzen/projekte/2021-02-CFE",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2021-03-hac/",
+      "destination": "/daten-nutzen/projekte/2021-03-HAC",
+      "permanent": true
+    },
+    {
+      "source": "/projects/2022-04-lau/",
+      "destination": "/daten-nutzen/projekte/2022-04-LAU",
+      "permanent": true
+    },
+    {
+      "source": "/material/datenreifegradmodell.pdf",
+      "destination": "https://cms.correlaid.org/assets/4034dae6-ed1f-445c-bccb-8e8f7c1bddce",
+      "permanent": true
+    }
+  ]
+}

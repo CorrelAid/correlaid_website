@@ -43,42 +43,6 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 					}
 				}
 
-				... on carousel {
-					carousel_elements {
-						carousel_element_id {
-							translations(
-								filter: { languages_code: { code: { _eq: $language } } }
-							) {
-								title
-							}
-							hero {
-								height
-								gradient_only
-								image {
-									id
-								}
-								translations(
-									filter: { languages_code: { code: { _eq: $language } } }
-								) {
-									text
-									image_alt
-								}
-								buttons {
-									buttons_id {
-										color
-										translations(
-											filter: { languages_code: { code: { _eq: $language } } }
-										) {
-											text
-											link
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-
 				... on custom_sections {
 					id
 				}
@@ -91,7 +55,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 				}
 
 				... on contacts {
-					hr
+					email
 					translations(
 						filter: { languages_code: { code: { _eq: $language } } }
 					) {
@@ -108,6 +72,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 						email
 						image {
 							id
+							description
 						}
 					}
 				}
@@ -118,6 +83,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 						quote_id {
 							image {
 								id
+								description
 							}
 							translations(
 								filter: { languages_code: { code: { _eq: $language } } }
@@ -129,6 +95,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 					}
 				}
 				... on timelines {
+					color
 					steps {
 						timeline_steps_id {
 							icon
@@ -146,6 +113,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 					gradient_only
 					image {
 						id
+						description
 					}
 					translations(
 						filter: { languages_code: { code: { _eq: $language } } }

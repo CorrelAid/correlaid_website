@@ -24,6 +24,7 @@
   export let bot_nav;
 
   const toggles = {};
+
   for (const navItem of bot_nav) {
     toggles[navItem.category] = false;
   }
@@ -42,15 +43,15 @@
   }
 </script>
 
-<div class="absolute z-30 h-screen w-screen xl:hidden" id="drawer">
+<div class="dvh-100 absolute z-30 w-screen xl:hidden" id="drawer">
   <div
-    class="absolute left-0 z-30 flex h-screen w-5/6 flex-col justify-between border-r bg-white"
+    class="dvh-100 absolute left-0 z-30 flex w-5/6 flex-col justify-between border-r bg-white"
     id="drawer-sidenav"
     bind:clientWidth={sidenav_width}
     in:fly={{x: -sidenav_width, duration: 250}}
     out:fly={{x: -sidenav_width, duration: 250}}
   >
-    <nav aria-label="Main Nav" class="flex flex-col pt-7 pl-7">
+    <nav aria-label="Main" class="z-30 flex flex-col pl-7 pt-7">
       <ul class="space-y-3 text-2xl text-base-content">
         {#each bot_nav as navItem}
           <li>
@@ -60,6 +61,9 @@
               </a>
               <button
                 aria-label="Dropdown: {$t(navItem.key).text}"
+                aria-expanded={toggles[navItem.category] === true
+                  ? 'true'
+                  : 'false'}
                 on:click={() =>
                   toggles[navItem.category]
                     ? (toggles[navItem.category] = false)
@@ -103,7 +107,7 @@
     </nav>
 
     <div class="">
-      <div class="flex w-2/4 items-center pl-7 pb-7">
+      <div class="flex w-2/4 items-center pb-7 pl-7">
         <div class="mx-auto flex items-center gap-5">
           <LinkButton
             text={$t('navbar.donate').text}

@@ -1,10 +1,11 @@
 export const eventDetailQuery = `
-query EventDetails($slug: String, $language: String = "de-DE") {
+query EventDetails($slug: String = "ringvorlesung-sose23", $language: String = "de-DE") {
 	Events(filter: { slug: { _eq: $slug } }) {
 		id
 		date
 		start_time
 		end_time
+		end_date
 		registration_link
 		target_group
 		language

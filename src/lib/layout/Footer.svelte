@@ -14,16 +14,42 @@
     'footer.coc',
     'footer.coe',
     'navbar.about.team',
+    'navbar.jobs',
+  ];
+
+  const socialMediaLinks = [
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/correlaid',
+      logo: Instagram,
+    },
+    {name: 'Twitter', url: 'https://twitter.com/correlaid', logo: Twitter},
+    {name: 'Mastodon', url: 'https://masto.ai/@correlaid', logo: Mastodon},
+    {
+      name: 'LinkedIn',
+      url: 'https://de.linkedin.com/company/correlaid',
+      logo: Linkedin,
+    },
+    {
+      name: 'Facebook',
+      url: 'https://facebook.com/WeAreCorrelAid',
+      logo: Facebook,
+    },
+    {
+      name: 'Youtube',
+      url: 'https://www.youtube.com/channel/UCs_k9roCuWLy17xxpigrWbg',
+      logo: Youtube,
+    },
   ];
 </script>
 
 <footer class="w-screen border-t border-neutral-25">
   <div class=" flex pt-12">
     <ul
-      class="mx-auto flex items-center gap-3 text-sm font-light text-base-content md:text-base"
+      class="mx-auto flex flex-wrap items-center justify-center gap-3 text-sm font-light text-base-content md:gap-4 md:text-base"
     >
       {#each links as link}
-        <li>
+        <li class="px-2">
           <a class="transition hover:text-primary" href={$t(link).url}>
             {$t(link).text}
           </a>
@@ -34,44 +60,20 @@
 
   <div class=" mx-auto flex py-6">
     <div class="mx-auto grid grid-flow-col gap-6">
-      <a
-        href="https://www.instagram.com/correlaid"
-        aria-label="CorrelAid Instagram"
-        ><Instagram
-          width={social_media_height}
-          height={social_media_height}
-        /></a
-      >
-      <a href="https://twitter.com/correlaid" aria-label="CorrelAid Twitter"
-        ><Twitter width={social_media_height} height={social_media_height} /></a
-      >
-      <a href="https://masto.ai/@correlaid" aria-label="CorrelAid Mastodon"
-        ><Mastodon
-          width={social_media_height}
-          height={social_media_height}
-        /></a
-      >
-      <a
-        href="https://de.linkedin.com/company/correlaid"
-        aria-label="CorrelAid LinkedIn"
-        ><Linkedin
-          width={social_media_height}
-          height={social_media_height}
-        /></a
-      >
-      <a
-        href="https://facebook.com/WeAreCorrelAid"
-        aria-label="CorrelAid Facebook"
-        ><Facebook
-          width={social_media_height}
-          height={social_media_height}
-        /></a
-      >
-      <a
-        href="https://www.youtube.com/channel/UCs_k9roCuWLy17xxpigrWbg"
-        aria-label="CorrelAid YouTube"
-        ><Youtube width={social_media_height} height={social_media_height} /></a
-      >
+      {#each socialMediaLinks as linkDetails}
+        <a
+          href={linkDetails.url}
+          aria-label={`CorrelAid ${linkDetails.name}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <svelte:component
+            this={linkDetails.logo}
+            width={social_media_height}
+            height={social_media_height}
+          />
+        </a>
+      {/each}
     </div>
   </div>
 

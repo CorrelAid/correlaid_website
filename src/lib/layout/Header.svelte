@@ -36,9 +36,9 @@
 </script>
 
 <header
-  aria-label="Site Header"
   class="fixed top-0 z-30 w-screen border-b border-neutral-25 bg-white xl:static"
   bind:clientHeight={$header_height}
+  aria-label="Site Header"
 >
   <div class="mx-auto px-4 sm:px-6 xl:px-8">
     <div class="flex grid-cols-10 items-center justify-between xl:grid">
@@ -58,7 +58,7 @@
       <!-- middle part of navbar -->
       <nav
         class="3xl:col-span-4 col-span-6 hidden flex-col xl:block"
-        aria-label="Navigation"
+        aria-label="Main"
       >
         <HeaderTopNav {top_nav} {lastClickedLink} />
         <HeaderBottomNav

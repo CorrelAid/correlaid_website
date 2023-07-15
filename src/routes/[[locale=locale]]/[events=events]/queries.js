@@ -1,10 +1,11 @@
 export const eventQuery = `
 query Events($language: String = "de-DE") {
-	Events(sort: ["-date"]) {
+	Events(sort: ["date"]) {
 		id
 		date
 		start_time
 		end_time
+		end_date
 		title
 		teaser
 		registration_link

@@ -1,8 +1,9 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
+  import {t} from '$lib/stores/i18n';
   import BlogCard from '$lib/components/Blog_Card.svelte';
-  import {parseEntries} from '$lib/js/parse_cms.js';
+  import Filter from '../../../lib/components/Filter.svelte';
 
   import Pagination from '$lib/components/pagination/Pagination.svelte';
 
@@ -18,15 +19,37 @@
   }
 
   export let data;
+  let filteredData;
+  $: podcast_episodes = data.podcast_episodes;
 
-  $: podcast_episodes = parseEntries(data.podcast_episodes, 'podcast_episodes');
+  $: selects = [
+    {
+      title: $t('filter.language').text,
+      searchable: false,
+      multiple: true,
+      param: 'langs',
+    },
+  ];
+
+  const searchOptions = [
+    {searchProperty: 'title', multiple: false},
+    {searchProperty: 'teaser', multiple: false},
+  ];
 </script>
 
-<div class="container mx-auto space-y-4 pb-8">
-  <Pagination {number_of_items} {items_per_page} on:navigate={changePage} />
+<Pagination {number_of_items} {items_per_page} on:navigate={changePage} />
+<Filter
+  orig_data={podcast_episodes}
+  bind:filteredData
+  {selects}
+  {searchOptions}
+/>
+<div class="container mx-auto mt-8 px-4 pb-8">
   <div class="space-y-8">
-    {#each podcast_episodes as episode}
-      <BlogCard {...episode} />
-    {/each}
+    {#if filteredData}
+      {#each filteredData as episode}
+        <BlogCard {...episode} external={true} />
+      {/each}
+    {/if}
   </div>
 </div>
