@@ -32,6 +32,7 @@
    */
   function handleLocaleChange(event) {
     // if the page contains a slug, get the root url and add the slug
+    console.log($page_key);
     if ($page.params.slug != null) {
       const url = $t($page_key).url + '/' + $page.params.slug;
       goto(url);

@@ -61,7 +61,7 @@ test.describe('test error pages', () => {
       ignoreCase: true,
     });
 
-    await page.goto('/en/using-data/projects-database/not-a-valid-project', {
+    await page.goto('/en/using-data/project-database/not-a-valid-project', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
