@@ -39,7 +39,7 @@
     }
   });
 
-  genDropdownLists(orig_data, selects);
+  $: selects = genDropdownLists(orig_data, selects);
 
   function handleHidden() {
     hidden = hidden === 'hidden' ? 'visible' : 'hidden';
