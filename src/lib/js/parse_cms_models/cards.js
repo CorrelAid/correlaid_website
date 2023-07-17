@@ -86,6 +86,20 @@ export function projects(project) {
     subpage: project.subpage,
   };
 
+  if (project.translations[0].type) {
+    parsedProjectCard['type'] = project.translations[0]['type'].map((str) =>
+      str.replace('_', ' ').toLowerCase(),
+    );
+  }
+
+  if (project.translations[0].data) {
+    if (!_.isEmpty(project.translations[0].data)) {
+      parsedProjectCard['data'] = project.translations[0].data.map((str) =>
+        str.replace('_', ' ').toLowerCase(),
+      );
+    }
+  }
+
   if (!project.is_internal && project.status !== 'published_anon') {
     parsedProjectCard['organization'] =
       project.Organizations[0].Organizations_id.translations[0].name;
@@ -99,18 +113,6 @@ export function projects(project) {
 
   if (project.subpage) {
     parsedProjectCard['project_id'] = project.project_id;
-  }
-
-  if (project.type) {
-    parsedProjectCard['type'] = project['type'].map((str) => str.toLowerCase());
-  }
-
-  if (project.data) {
-    if (!_.isEmpty(project.data)) {
-      parsedProjectCard['data'] = project['data'].map((str) =>
-        str.toLowerCase(),
-      );
-    }
   }
 
   if (project.translations[0].summary !== null) {
@@ -152,7 +154,13 @@ export function projects(project) {
     // of internal projects would be used negating the anonymity
     anonymizedProjectCard['isInternal'] = false;
 
-    for (const field of ['summary', 'project_id', 'correlaidx']) {
+    for (const field of [
+      'summary',
+      'project_id',
+      'correlaidx',
+      'type',
+      'data',
+    ]) {
       if (field in parsedProjectCard) {
         anonymizedProjectCard[field] = parsedProjectCard[field];
       }
@@ -170,6 +178,7 @@ export function projects(project) {
 
 export function lcProjects(lcProject) {
   const project = lcProject.Projects_id;
+  console.log(project);
   const parsedProjectCard = {
     title: project.translations[0].title,
     organization:
@@ -209,6 +218,19 @@ export function lcProjects(lcProject) {
     );
     if (repo) {
       parsedProjectCard['repo'] = repo.url;
+    }
+  }
+  if (project.translations[0].type) {
+    parsedProjectCard['type'] = project.translations[0]['type'].map((str) =>
+      str.replace('_', ' ').toLowerCase(),
+    );
+  }
+
+  if (project.translations[0].data) {
+    if (!_.isEmpty(project.translations[0].data)) {
+      parsedProjectCard['data'] = project.translations[0].data.map((str) =>
+        str.replace('_', ' ').toLowerCase(),
+      );
     }
   }
 

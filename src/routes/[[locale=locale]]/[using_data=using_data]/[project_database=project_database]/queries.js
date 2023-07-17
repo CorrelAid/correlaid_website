@@ -5,8 +5,6 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		subpage
 		project_id
 		is_internal
-		type
-		data
 		Podcast {
 			language
 			soundcloud_link
@@ -43,6 +41,8 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 			title
 			description
 			summary
+			type
+			data
 		}
 		Local_Chapters {
 			Local_Chapters_id {

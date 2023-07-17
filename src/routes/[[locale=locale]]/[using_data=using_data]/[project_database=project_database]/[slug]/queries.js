@@ -10,8 +10,6 @@ query Project(
 		}
 	) {
 		status
-		type
-		data
 		Podcast {
 			soundcloud_link
 		}
@@ -64,6 +62,8 @@ query Project(
 			title
 			description
 			summary
+			type
+			data
 		}
 		Local_Chapters {
 			Local_Chapters_id {

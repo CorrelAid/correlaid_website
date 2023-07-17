@@ -66,6 +66,8 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 					title
 					description
 					summary
+					type
+					data
 				}
 				Local_Chapters {
 					Local_Chapters_id{
