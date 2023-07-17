@@ -1,4 +1,5 @@
 import * as parseModel from './parse_cms_models';
+import _ from 'lodash';
 import {gen_img_url} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 
@@ -127,6 +128,20 @@ export function parseProject(project) {
       projectLinks: projectLinks,
       projectContacts: projectContacts,
     };
+
+    if (project.translations[0].type) {
+      parsedProject['type'] = project.translations[0]['type'].map((str) =>
+        str.replace('_', ' ').toLowerCase(),
+      );
+    }
+
+    if (project.translations[0].data) {
+      if (!_.isEmpty(project.translations[0].data)) {
+        parsedProject['data'] = project.translations[0].data.map((str) =>
+          str.replace('_', ' ').toLowerCase(),
+        );
+      }
+    }
     if (project.Local_Chapters.length > 0) {
       parsedProject['Local_Chapters'] = project.Local_Chapters.map(
         (lc) => lc.Local_Chapters_id.translations[0].city,

@@ -19,22 +19,19 @@
   export let post_slug = void 0;
   export let podcast_href = void 0;
 
-  const annonymousOrg = typeof organization === 'undefined' && !isInternal;
+  // $: if (organization === 'undefined'){
+  //   organization_name = $t('organization.anonymous').text;
+  // }
+  // if (isInternal) {
+  //   organization_name = $t('organization.internalProject').text;
+  // }
+  // else{
+  //   organization_name = organization;
+  // }
 
-  $: {
-    if (annonymousOrg) {
-      organization = $t('organization.anonymous').text;
-    }
-  }
-
-  $: if (isInternal) {
-    organization = $t('organization.internalProject').text;
-  }
   $: href = subpage
     ? $t('navbar.using_data.project_database').url + '/' + project_id
     : null;
-
-  $: console.log(type);
 </script>
 
 <div
@@ -87,12 +84,14 @@
       <p class="mb-3 line-clamp-3">{summary}</p>
     {/if}
     {#if correlaidx.length !== 0}
-      {#each correlaidx as lc}
-        <a
-          class="text-medium mb-3 line-clamp-3 font-semibold text-base-content transition hover:text-primary"
-          href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
-        >
-      {/each}
+      <div class="pb-3">
+        {#each correlaidx as lc}
+          <a
+            class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
+            href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
+          >
+        {/each}
+      </div>
     {/if}
     <ProjectLinks {href} {repo} {podcast_href} {post_slug} />
   </div>

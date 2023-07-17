@@ -41,7 +41,6 @@
       param: 'data',
     },
   ];
-  $: console.log(projects);
 
   const searchOptions = [
     {searchProperty: 'title', multiple: false},

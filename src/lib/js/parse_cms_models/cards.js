@@ -1,5 +1,6 @@
 import {gen_img_url} from '../helpers.js';
 import _ from 'lodash';
+import translations from '../../data/translations.js';
 
 export function blog_posts(post) {
   let imageUrl;
@@ -80,6 +81,8 @@ export function podcast_episodes(episode) {
 export function projects(project) {
   const status = project.status;
 
+  const lang = project.translations[0].languages_code.code;
+
   const parsedProjectCard = {
     title: project.translations[0].title,
     isInternal: project.is_internal,
@@ -105,6 +108,16 @@ export function projects(project) {
       project.Organizations[0].Organizations_id.translations[0].name;
     parsedProjectCard['organization_sector'] =
       project.Organizations[0].Organizations_id.sector;
+  }
+
+  if (project.isInternal) {
+    if (lang === 'de-DE') {
+      parsedProjectCard['organization'] =
+        translations['de']['organization.internalProject'].text;
+    } else {
+      parsedProjectCard['organization'] =
+        translations['en']['organization.internalProject'].text;
+    }
   }
 
   if (project.translations[0].summary !== null) {
@@ -141,11 +154,18 @@ export function projects(project) {
     }
   }
 
-  function anonymizeProjectCard(parsedProjectCard) {
+  function anonymizeProjectCard(parsedProjectCard, lang) {
     const anonymizedProjectCard = {};
 
     anonymizedProjectCard['title'] = parsedProjectCard['title'];
     anonymizedProjectCard['subpage'] = parsedProjectCard['subpage'];
+    if (lang === 'de-DE') {
+      anonymizedProjectCard['organization'] =
+        translations['de']['organization.anonymous'].text;
+    } else {
+      anonymizedProjectCard['organization'] =
+        translations['en']['organization.anonymous'].text;
+    }
 
     // This is expected to be always False for anonymized projects
     // as there should normally no reason to anonymize an internal projects.
@@ -170,7 +190,7 @@ export function projects(project) {
   }
 
   if (status === 'published_anon') {
-    return anonymizeProjectCard(parsedProjectCard);
+    return anonymizeProjectCard(parsedProjectCard, lang);
   } else {
     return parsedProjectCard;
   }
@@ -178,7 +198,7 @@ export function projects(project) {
 
 export function lcProjects(lcProject) {
   const project = lcProject.Projects_id;
-  console.log(project);
+
   const parsedProjectCard = {
     title: project.translations[0].title,
     organization:
