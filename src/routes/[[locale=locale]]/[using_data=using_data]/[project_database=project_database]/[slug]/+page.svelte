@@ -16,6 +16,9 @@
   /** @type {import('./$types').PageData} */
   export let data;
   $: project = data;
+
+  $: console.log(project.type);
+  $: console.log(project.data);
 </script>
 
 <TextContainer title={project.title} teaser={project.teaser}>
@@ -41,7 +44,7 @@
         {/if}
       </div>
     {/if}
-    {#if project.Local_Chapters !== 0}
+    {#if project.Local_Chapters}
       <div class="pb-3">
         {#each project.Local_Chapters as lc}
           <a
