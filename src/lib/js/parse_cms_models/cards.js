@@ -110,7 +110,7 @@ export function projects(project) {
       project.Organizations[0].Organizations_id.sector;
   }
 
-  if (project.isInternal) {
+  if (project.is_internal) {
     if (lang === 'de-DE') {
       parsedProjectCard['organization'] =
         translations['de']['organization.internalProject'].text;

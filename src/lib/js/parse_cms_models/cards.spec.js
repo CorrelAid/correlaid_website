@@ -26,6 +26,9 @@ describe('project card parsing and anonymization', () => {
     translations: [
       {
         title: 'Public project title',
+        languages_code: {
+          code: 'de-DE',
+        },
         description: '',
         summary: null,
       },
@@ -57,6 +60,9 @@ describe('project card parsing and anonymization', () => {
     ],
     translations: [
       {
+        languages_code: {
+          code: 'de-DE',
+        },
         title: 'Another public project title',
         description: '',
         summary: null,
@@ -76,6 +82,9 @@ describe('project card parsing and anonymization', () => {
     Organizations: [],
     translations: [
       {
+        languages_code: {
+          code: 'de-DE',
+        },
         title: 'Internal project title',
         description: '',
         summary: null,
@@ -87,7 +96,7 @@ describe('project card parsing and anonymization', () => {
   test('parse anonymous', () => {
     const parsedProjectCard = projects(anonProject);
 
-    expect(parsedProjectCard.organization).toBeUndefined();
+    expect(parsedProjectCard.organization).toEqual('Anonyme Organisation');
     expect(parsedProjectCard.title).toEqual('Public project title');
     expect(parsedProjectCard.subpage).toEqual(false);
   });
@@ -104,7 +113,7 @@ describe('project card parsing and anonymization', () => {
     const anonProjectWithSubpage = {...anonProject, subpage: true};
     const parsedProjectCard = projects(anonProjectWithSubpage);
 
-    expect(parsedProjectCard.organization).toBeUndefined();
+    expect(parsedProjectCard.organization).toEqual('Anonyme Organisation');
     expect(parsedProjectCard.title).toEqual('Public project title');
     expect(parsedProjectCard.subpage).toEqual(true);
     expect(parsedProjectCard.project_id).toEqual('Some project id');
@@ -112,8 +121,7 @@ describe('project card parsing and anonymization', () => {
 
   test('parse internal project', () => {
     const parsedProjectCard = projects(internalProject);
-
-    expect(parsedProjectCard.organization).toBeUndefined();
+    expect(parsedProjectCard.organization).toEqual('Internes Projekt');
     expect(parsedProjectCard.isInternal).toBeTruthy();
   });
 });
