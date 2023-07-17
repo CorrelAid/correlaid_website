@@ -54,14 +54,14 @@ test.describe('test error pages', () => {
   });
 
   test.skip('test pages projects', async ({page}) => {
-    await page.goto('/daten_nutzen/projekte/not-a-valid-project', {
+    await page.goto('/daten_nutzen/projektdatenbank/not-a-valid-project', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto('/en/using-data/projects/not-a-valid-project', {
+    await page.goto('/en/using-data/projects-database/not-a-valid-project', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
