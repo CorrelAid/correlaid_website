@@ -34,7 +34,9 @@ test.describe('test lc chapter pages', () => {
   });
 
   test('lc links in projects', async ({page}) => {
-    await page.goto('/daten-nutzen/projekte/', {waitUntil: 'networkidle'});
+    await page.goto('/daten-nutzen/projektdatenbank/', {
+      waitUntil: 'networkidle',
+    });
     await page.getByRole('link', {name: 'CorrelAidX Mannheim'}).first().click();
     await page.waitForURL('**/community/correlaidx/mannheim/', {
       waitUntil: 'networkidle',
