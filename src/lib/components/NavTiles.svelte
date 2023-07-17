@@ -3,6 +3,18 @@
   const icon_size = 73;
   import {t} from '$lib/stores/i18n';
   const colorScale = ['#3864a3', '#538794', '#6fa07f', '#78a972', '#96c342'];
+
+  function get_text(translation) {
+    console.log(translation);
+    let text = translation;
+
+    if (text === 'Bildungsressourcen') {
+      text = 'Ressourcen';
+    } else if (text == 'Projektdatenbank') {
+      text = 'ProjektDB';
+    }
+    return text;
+  }
 </script>
 
 <div
@@ -32,11 +44,9 @@
           />
 
           <h2
-            class="break-word mx-2 pt-2 text-center font-londrina text-xl leading-6 tracking-[0.025em] text-white opacity-100 md:text-2xl md:leading-7"
+            class="w-42 mx-2 break-words pt-2 text-center font-londrina text-xl leading-6 tracking-[0.025em] text-white opacity-100 md:text-2xl md:leading-7"
           >
-            {$t(item.key).text === 'Bildungsressourcen'
-              ? 'Ressourcen'
-              : $t(item.key).text}
+            {get_text($t(item.key).text)}
           </h2>
         </div>
       </a>
