@@ -1,4 +1,6 @@
 import {gen_img_url} from '../helpers.js';
+import _ from 'lodash';
+import translations from '../../data/translations.js';
 
 export function blog_posts(post) {
   let imageUrl;
@@ -79,15 +81,43 @@ export function podcast_episodes(episode) {
 export function projects(project) {
   const status = project.status;
 
+  const lang = project.translations[0].languages_code.code;
+
   const parsedProjectCard = {
     title: project.translations[0].title,
     isInternal: project.is_internal,
     subpage: project.subpage,
   };
 
+  if (project.translations[0].type) {
+    parsedProjectCard['type'] = project.translations[0]['type'].map((str) =>
+      str.replace('_', ' ').toLowerCase(),
+    );
+  }
+
+  if (project.translations[0].data) {
+    if (!_.isEmpty(project.translations[0].data)) {
+      parsedProjectCard['data'] = project.translations[0].data.map((str) =>
+        str.replace('_', ' ').toLowerCase(),
+      );
+    }
+  }
+
   if (!project.is_internal && project.status !== 'published_anon') {
     parsedProjectCard['organization'] =
       project.Organizations[0].Organizations_id.translations[0].name;
+    parsedProjectCard['organization_sector'] =
+      project.Organizations[0].Organizations_id.sector;
+  }
+
+  if (project.is_internal) {
+    if (lang === 'de-DE') {
+      parsedProjectCard['organization'] =
+        translations['de']['organization.internalProject'].text;
+    } else {
+      parsedProjectCard['organization'] =
+        translations['en']['organization.internalProject'].text;
+    }
   }
 
   if (project.translations[0].summary !== null) {
@@ -98,11 +128,16 @@ export function projects(project) {
     parsedProjectCard['project_id'] = project.project_id;
   }
 
+  if (project.translations[0].summary !== null) {
+    parsedProjectCard['summary'] = project.translations[0].summary;
+  }
+
   parseLcSubElements(parsedProjectCard, project.Local_Chapters);
 
   if (project.Podcast) {
     parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
   }
+
   for (const post of project.Posts) {
     if (post.translations.slug) {
       parsedProjectCard['post_slug'] = post.translations.slug;
@@ -119,11 +154,18 @@ export function projects(project) {
     }
   }
 
-  function anonymizeProjectCard(parsedProjectCard) {
+  function anonymizeProjectCard(parsedProjectCard, lang) {
     const anonymizedProjectCard = {};
 
     anonymizedProjectCard['title'] = parsedProjectCard['title'];
     anonymizedProjectCard['subpage'] = parsedProjectCard['subpage'];
+    if (lang === 'de-DE') {
+      anonymizedProjectCard['organization'] =
+        translations['de']['organization.anonymous'].text;
+    } else {
+      anonymizedProjectCard['organization'] =
+        translations['en']['organization.anonymous'].text;
+    }
 
     // This is expected to be always False for anonymized projects
     // as there should normally no reason to anonymize an internal projects.
@@ -132,7 +174,13 @@ export function projects(project) {
     // of internal projects would be used negating the anonymity
     anonymizedProjectCard['isInternal'] = false;
 
-    for (const field of ['summary', 'project_id', 'correlaidx']) {
+    for (const field of [
+      'summary',
+      'project_id',
+      'correlaidx',
+      'type',
+      'data',
+    ]) {
       if (field in parsedProjectCard) {
         anonymizedProjectCard[field] = parsedProjectCard[field];
       }
@@ -142,7 +190,7 @@ export function projects(project) {
   }
 
   if (status === 'published_anon') {
-    return anonymizeProjectCard(parsedProjectCard);
+    return anonymizeProjectCard(parsedProjectCard, lang);
   } else {
     return parsedProjectCard;
   }
@@ -150,6 +198,7 @@ export function projects(project) {
 
 export function lcProjects(lcProject) {
   const project = lcProject.Projects_id;
+
   const parsedProjectCard = {
     title: project.translations[0].title,
     organization:
@@ -189,6 +238,19 @@ export function lcProjects(lcProject) {
     );
     if (repo) {
       parsedProjectCard['repo'] = repo.url;
+    }
+  }
+  if (project.translations[0].type) {
+    parsedProjectCard['type'] = project.translations[0]['type'].map((str) =>
+      str.replace('_', ' ').toLowerCase(),
+    );
+  }
+
+  if (project.translations[0].data) {
+    if (!_.isEmpty(project.translations[0].data)) {
+      parsedProjectCard['data'] = project.translations[0].data.map((str) =>
+        str.replace('_', ' ').toLowerCase(),
+      );
     }
   }
 

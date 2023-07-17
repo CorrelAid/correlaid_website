@@ -9,42 +9,50 @@ Filters an array of objects by multiple values in a specified property. object[p
 */
 export function filterByMultiple(data, filterValues, property) {
   return data.filter((object) => {
-    const objectsProperty = object[property];
-    return filterValues.every((contentElement) => {
-      if (contentElement === 'global' && property === 'correlaidx') {
-        return objectsProperty.length === 0;
-      } else {
-        return objectsProperty
-          .map((entry) => entry.toLowerCase())
-          .includes(contentElement.toLowerCase());
-      }
-    });
+    if (object[property]) {
+      const objectsProperty = object[property];
+      return filterValues.every((contentElement) => {
+        if (contentElement === 'global' && property === 'correlaidx') {
+          return objectsProperty.length === 0;
+        } else {
+          return objectsProperty
+            .map((entry) => entry.toLowerCase())
+            .includes(contentElement.toLowerCase());
+        }
+      });
+    }
   });
 }
 
 function filterDefinedBy(property, objects, value) {
   return _.filter(objects, (object) => {
-    return object && object[property].toLowerCase() === value.toLowerCase();
+    if (object[property]) {
+      return object && object[property].toLowerCase() === value.toLowerCase();
+    }
   });
 }
 
 export function filterStringSearch(searchTerm, searchOptions, objects) {
   return _.filter(objects, (object) => {
     for (const item of searchOptions) {
-      if (item.multiple) {
-        for (const contentElement of object[item.searchProperty]) {
-          if (contentElement.toLowerCase().includes(searchTerm.toLowerCase())) {
+      if (object[item.searchProperty]) {
+        if (item.multiple) {
+          for (const contentElement of object[item.searchProperty]) {
+            if (
+              contentElement.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return true;
+            }
+          }
+        } else {
+          if (
+            object &&
+            object[item.searchProperty]
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+          ) {
             return true;
           }
-        }
-      } else {
-        if (
-          object &&
-          object[item.searchProperty]
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase())
-        ) {
-          return true;
         }
       }
     }
@@ -159,5 +167,6 @@ export function genDropdownLists(orig_data, selects) {
     }
     selects[i].items = lst;
   }
+  console.log(selects);
   return selects;
 }

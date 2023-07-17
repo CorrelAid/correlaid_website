@@ -14,6 +14,7 @@
 
   export let orig_data;
   export let filteredData;
+  export let expanded = false;
 
   export let selects;
   export let searchOptions;
@@ -28,13 +29,17 @@
     // when searchParams is set, set them in filter
     applyUrlSearchParams($page.url.searchParams, values, selects);
     // if value is set dont hide filter (if someone goes to page with defined url param)
-    if (Object.values(values).some((value) => value !== null)) {
+    if (expanded === false) {
+      if (Object.values(values).some((value) => value !== null)) {
+        hidden = 'visible';
+        aria_expanded = true;
+      }
+    } else {
       hidden = 'visible';
-      aria_expanded = true;
     }
   });
 
-  genDropdownLists(orig_data, selects);
+  $: selects = genDropdownLists(orig_data, selects);
 
   function handleHidden() {
     hidden = hidden === 'hidden' ? 'visible' : 'hidden';
