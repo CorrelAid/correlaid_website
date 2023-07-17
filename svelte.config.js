@@ -199,7 +199,7 @@ async function addProjectRoutes(routes) {
   const results = await queryCmsGraphQl(queries['projects']);
   for (const project of results['data']['Projects']) {
     routes.push(`/daten-nutzen/projektdatenbank/${project.slug}`);
-    routes.push(`/en/using-data/projects-database/${project.slug}`);
+    routes.push(`/en/using-data/project-database/${project.slug}`);
   }
 }
 
