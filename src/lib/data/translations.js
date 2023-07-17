@@ -126,7 +126,7 @@ export default {
     },
     'navbar.using_data.project_database': {
       text: 'Projects Database',
-      url: '/en/using-data/project-database',
+      url: '/en/using-data/projects-database',
     },
     'navbar.using_data.consulting': {
       text: 'Consulting',
