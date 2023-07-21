@@ -15,6 +15,7 @@ query AdminsAndOpsStructure($language: String = "de-DE") {
 			website
 			twitter
 			linkedin
+			github
 			mastodon
 			image {
 				id
