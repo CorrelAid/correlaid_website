@@ -14,8 +14,6 @@
   $: projects = data.projects;
   let filteredData;
   let projects;
-  $: console.log(projects);
-  $: console.log('hu');
 
   $: selects = [
     {

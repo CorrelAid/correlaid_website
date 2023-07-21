@@ -41,7 +41,6 @@
       goto(url);
     }
   }
-  $: console.log($page_key);
   // Setting page title by retreiving translations from translations and conditionally taking
   // into account dynamic pages by using the page title attribute from the page data,
   // assigned in the dynamic pages +page.server
