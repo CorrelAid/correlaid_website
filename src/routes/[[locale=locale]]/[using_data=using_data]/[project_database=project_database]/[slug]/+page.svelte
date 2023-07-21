@@ -16,9 +16,6 @@
   /** @type {import('./$types').PageData} */
   export let data;
   $: project = data;
-
-  $: console.log(project.type);
-  $: console.log(project.data);
 </script>
 
 <TextContainer title={project.title} teaser={project.teaser}>

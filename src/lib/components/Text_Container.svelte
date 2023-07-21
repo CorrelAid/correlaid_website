@@ -3,7 +3,7 @@
   import {gen_img_url} from '$lib/js/helpers';
   export let title_image = null;
   export let teaser;
-  export let image_alt;
+  export let image_alt = void 0;
   export let title;
 </script>
 
@@ -24,7 +24,7 @@
         <figure class="h-full w-full">
           <div class="offset relative h-full w-full">
             <img
-              alt={image_alt}
+              alt={image_alt ? image_alt : ''}
               src={gen_img_url(
                 title_image.id,
                 'fit=inside&width=1200&height=675&format=png',

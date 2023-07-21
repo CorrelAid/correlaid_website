@@ -5,7 +5,6 @@
   const colorScale = ['#3864a3', '#538794', '#6fa07f', '#78a972', '#96c342'];
 
   function get_text(translation) {
-    console.log(translation);
     let text = translation;
 
     if (text === 'Bildungsressourcen') {
