@@ -66,7 +66,11 @@
   );
 
   // when selects changes, update url params
-  $: history.replaceState({}, '', setUrlParams($page.url, selects, values));
+  $: history.replaceState(
+    history.state,
+    '',
+    setUrlParams($page.url, selects, values),
+  );
 </script>
 
 <div class="mx-4">
