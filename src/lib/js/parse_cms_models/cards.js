@@ -1,4 +1,4 @@
-import {gen_img_url} from '../helpers.js';
+import {gen_img_url, getTranslation, get_lang} from '../helpers.js';
 import _ from 'lodash';
 import translations from '../../data/translations.js';
 
@@ -78,9 +78,37 @@ export function podcast_episodes(episode) {
   return parsedEpisode;
 }
 
-export function projects(project) {
-  const status = project.status;
+function anonymizeProjectCard(parsedProjectCard, lang) {
+  const anonymizedProjectCard = {};
 
+  anonymizedProjectCard['title'] = parsedProjectCard['title'];
+  anonymizedProjectCard['subpage'] = parsedProjectCard['subpage'];
+  if (lang === 'de-DE') {
+    anonymizedProjectCard['organization'] =
+      translations['de']['organization.anonymous'].text;
+  } else {
+    anonymizedProjectCard['organization'] =
+      translations['en']['organization.anonymous'].text;
+  }
+
+  // This is expected to be always False for anonymized projects
+  // as there should normally no reason to anonymize an internal projects.
+  // However, if we want to anonymize an internal project, we can have to
+  // explicitly overwrite this value because otherwise the different layout
+  // of internal projects would be used negating the anonymity
+  anonymizedProjectCard['isInternal'] = false;
+
+  for (const field of ['summary', 'project_id', 'correlaidx', 'type', 'data']) {
+    if (field in parsedProjectCard) {
+      anonymizedProjectCard[field] = parsedProjectCard[field];
+    }
+  }
+
+  return anonymizedProjectCard;
+}
+
+export function projects(project, params) {
+  const status = project.status;
   const lang = project.translations[0].languages_code.code;
 
   const parsedProjectCard = {
@@ -138,9 +166,11 @@ export function projects(project) {
     parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
   }
 
+  const currentLanguage = get_lang(params);
   for (const post of project.Posts) {
-    if (post.translations.slug) {
-      parsedProjectCard['post_slug'] = post.translations.slug;
+    const translation = getTranslation(post.Posts_id, currentLanguage);
+    if (translation.slug) {
+      parsedProjectCard['post_slug'] = translation.slug;
       break;
     }
   }
@@ -154,41 +184,6 @@ export function projects(project) {
     }
   }
 
-  function anonymizeProjectCard(parsedProjectCard, lang) {
-    const anonymizedProjectCard = {};
-
-    anonymizedProjectCard['title'] = parsedProjectCard['title'];
-    anonymizedProjectCard['subpage'] = parsedProjectCard['subpage'];
-    if (lang === 'de-DE') {
-      anonymizedProjectCard['organization'] =
-        translations['de']['organization.anonymous'].text;
-    } else {
-      anonymizedProjectCard['organization'] =
-        translations['en']['organization.anonymous'].text;
-    }
-
-    // This is expected to be always False for anonymized projects
-    // as there should normally no reason to anonymize an internal projects.
-    // However, if we want to anonymize an internal project, we can have to
-    // explicitly overwrite this value because otherwise the different layout
-    // of internal projects would be used negating the anonymity
-    anonymizedProjectCard['isInternal'] = false;
-
-    for (const field of [
-      'summary',
-      'project_id',
-      'correlaidx',
-      'type',
-      'data',
-    ]) {
-      if (field in parsedProjectCard) {
-        anonymizedProjectCard[field] = parsedProjectCard[field];
-      }
-    }
-
-    return anonymizedProjectCard;
-  }
-
   if (status === 'published_anon') {
     return anonymizeProjectCard(parsedProjectCard, lang);
   } else {
@@ -196,65 +191,8 @@ export function projects(project) {
   }
 }
 
-export function lcProjects(lcProject) {
-  const project = lcProject.Projects_id;
-
-  const parsedProjectCard = {
-    title: project.translations[0].title,
-    organization:
-      project.Organizations[0].Organizations_id.translations[0].name,
-    subpage: project.subpage,
-  };
-
-  if (project.translations[0].summary !== null) {
-    parsedProjectCard['summary'] = project.translations[0].summary;
-  }
-
-  if (project.subpage) {
-    parsedProjectCard['project_id'] = project.project_id;
-  }
-
-  if (project.Local_Chapters.length > 0) {
-    parsedProjectCard['correlaidx'] = project.Local_Chapters.map((lc) => {
-      if (typeof lc.Local_Chapters_id.translations[0].city !== 'string') {
-        throw new Error('Local chapter name is missing or not a string');
-      }
-      return lc.Local_Chapters_id.translations[0].city;
-    });
-  }
-
-  if (project.Podcast) {
-    parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
-  }
-  if (project.Posts.length > 0) {
-    if (project.Posts[0].Posts_id !== null) {
-      parsedProjectCard['post_slug'] =
-        project.Posts[0].Posts_id.translations[0].slug;
-    }
-  }
-  if (project.Projects_Outputs.length > 0) {
-    const repo = project.Projects_Outputs.find(
-      (obj) => obj.output_type === 'repository',
-    );
-    if (repo) {
-      parsedProjectCard['repo'] = repo.url;
-    }
-  }
-  if (project.translations[0].type) {
-    parsedProjectCard['type'] = project.translations[0]['type'].map((str) =>
-      str.replace('_', ' ').toLowerCase(),
-    );
-  }
-
-  if (project.translations[0].data) {
-    if (!_.isEmpty(project.translations[0].data)) {
-      parsedProjectCard['data'] = project.translations[0].data.map((str) =>
-        str.replace('_', ' ').toLowerCase(),
-      );
-    }
-  }
-
-  return parsedProjectCard;
+export function lcProjects(lcProject, params) {
+  return projects(lcProject.Projects_id, params);
 }
 
 export function workshops(workshop) {

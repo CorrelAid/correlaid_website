@@ -93,8 +93,12 @@ describe('project card parsing and anonymization', () => {
     Local_Chapters: [],
   };
 
+  const params = {
+    locale: 'de',
+  };
+
   test('parse anonymous', () => {
-    const parsedProjectCard = projects(anonProject);
+    const parsedProjectCard = projects(anonProject, params);
 
     expect(parsedProjectCard.organization).toEqual('Anonyme Organisation');
     expect(parsedProjectCard.title).toEqual('Public project title');
@@ -102,7 +106,7 @@ describe('project card parsing and anonymization', () => {
   });
 
   test('parse published', () => {
-    const parsedProjectCard = projects(publishedProject);
+    const parsedProjectCard = projects(publishedProject, params);
 
     expect(parsedProjectCard.organization).toEqual('Public organization name');
     expect(parsedProjectCard.title).toEqual('Another public project title');
@@ -111,7 +115,7 @@ describe('project card parsing and anonymization', () => {
 
   test('parse anonymous with subpage', () => {
     const anonProjectWithSubpage = {...anonProject, subpage: true};
-    const parsedProjectCard = projects(anonProjectWithSubpage);
+    const parsedProjectCard = projects(anonProjectWithSubpage, params);
 
     expect(parsedProjectCard.organization).toEqual('Anonyme Organisation');
     expect(parsedProjectCard.title).toEqual('Public project title');
@@ -120,7 +124,7 @@ describe('project card parsing and anonymization', () => {
   });
 
   test('parse internal project', () => {
-    const parsedProjectCard = projects(internalProject);
+    const parsedProjectCard = projects(internalProject, params);
     expect(parsedProjectCard.organization).toEqual('Internes Projekt');
     expect(parsedProjectCard.isInternal).toBeTruthy();
   });
