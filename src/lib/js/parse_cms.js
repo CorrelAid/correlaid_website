@@ -47,11 +47,27 @@ export function parseContent(rawSections, page) {
   return parsedContent;
 }
 
-export function parseEntries(rawEntries, type, logInputOnError = true) {
+/**
+ * Parses an array of raw entries of a given type.
+ *
+ * @param {Array} rawEntries - Array of raw entries.
+ * @param {string} type - name of the function in parse_cms_models that should be used to parse
+ *  the entries.
+ * @param {boolean} logInputOnError - Flag whether the raw input should be logged in case of an error.
+ *  Defaults to true, but should be set to false for sensitive data.
+ * @param {Array} additionalParameters - Additional parameters that should be passed to the parsing
+ *  function via the spread operator.
+ */
+export function parseEntries(
+  rawEntries,
+  type,
+  logInputOnError = true,
+  additionalParameters = [],
+) {
   const parsedEntries = [];
   for (const rawEntry of rawEntries) {
     try {
-      const entry = parseModel[type](rawEntry);
+      const entry = parseModel[type](rawEntry, ...additionalParameters);
       parsedEntries.push(entry);
     } catch (err) {
       if (logInputOnError) {
@@ -165,7 +181,7 @@ export function anonymizeProject(parsedProject) {
   return anonymizedProject;
 }
 
-export function parseLocalChapterPage(localChapterPage) {
+export function parseLocalChapterPage(localChapterPage, params) {
   let parsedLcPage;
   try {
     parsedLcPage = {
@@ -174,6 +190,8 @@ export function parseLocalChapterPage(localChapterPage) {
       projects: parseEntries(
         localChapterPage.Local_Chapters[0].Projects,
         'lcProjects',
+        false,
+        [params],
       ),
     };
 

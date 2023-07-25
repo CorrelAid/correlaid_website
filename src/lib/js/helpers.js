@@ -184,7 +184,7 @@ function extractLanguages(entry) {
  * Get translation translation with fallback.
  * The fallback is any other available translation.
  */
-function getTranslation(entry, currentLanguage) {
+export function getTranslation(entry, currentLanguage) {
   const translation = entry.translations.find(
     (translation) => translation.languages_code.code === currentLanguage,
   );
