@@ -20,7 +20,7 @@
 
 <a
   target={type == 'external' ? '__blank' : ''}
-  rel={type == 'external' ? '__blank' : ''}
+  rel={type == 'external' ? 'noreferrer' : ''}
   class="block min-w-36 max-w-80 rounded-md px-4 py-2 text-center font-semibold text-white shadow-md transition {String(
     color,
   )} {options}"

@@ -75,6 +75,7 @@ export function filter(data, selects, searchTerm, searchOptions) {
       }
     }
   }
+  console.log('filter', data_);
   return data_;
 }
 
@@ -167,5 +168,6 @@ export function genDropdownLists(orig_data, selects) {
     }
     selects[i].items = lst;
   }
+  console.log('dropdowns', selects);
   return selects;
 }

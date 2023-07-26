@@ -39,6 +39,8 @@
       <div class="mb-3 mr-10">
         {#if href.includes('https://')}
           <a
+            target="__blank"
+            rel="noreferrer"
             {href}
             class="mb-3 text-xl font-semibold transition hover:text-primary"
           >
