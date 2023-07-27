@@ -167,5 +167,6 @@ export function genDropdownLists(orig_data, selects) {
     }
     selects[i].items = lst;
   }
+
   return selects;
 }

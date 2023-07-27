@@ -41,6 +41,7 @@ const excl = [
   'filter.type',
   'filter.no_results',
   'filter.placeholder',
+  'filter.responsible',
   'filter.search',
   'filter.data_type',
   'filter.organization_sector',
