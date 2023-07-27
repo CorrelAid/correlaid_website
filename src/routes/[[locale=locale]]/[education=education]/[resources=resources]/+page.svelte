@@ -12,8 +12,6 @@
   export let data;
   $: workshops = data.workshops;
 
-  $: console.log('parent orig', workshops);
-
   let filteredData;
   $: selects = [
     {
@@ -21,6 +19,12 @@
       searchable: false,
       multiple: false,
       param: 'resp_unit',
+    },
+    {
+      title: 'Local Chapter',
+      searchable: false,
+      multiple: false,
+      param: 'correlaidx_city',
     },
     {
       title: $t('filter.language').text,
@@ -35,7 +39,6 @@
     {searchProperty: 'title', multiple: false},
     {searchProperty: 'subtitle', multiple: false},
   ];
-  $: console.log('parent', filteredData);
 </script>
 
 <Filter orig_data={workshops} bind:filteredData {selects} {searchOptions} />
