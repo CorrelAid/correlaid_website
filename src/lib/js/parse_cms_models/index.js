@@ -100,7 +100,7 @@ export function carousel(section) {
     carousel_elements: elements,
   };
 }
-export function quote_carousel(section) {
+export function quote_carousels(section) {
   return {
     quotes: section.item.quotes,
     text_only: section.item.text_only,
