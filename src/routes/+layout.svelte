@@ -76,7 +76,7 @@
             <div class:mb-12={section.sort !== content.length}>
               <Hero {...section.props} />
             </div>
-          {:else if section.collection === 'cta_group'}
+          {:else if section.collection === 'cta_groups'}
             <div class="container mx-auto mb-12 space-y-8 px-4">
               <CtaGroup {...section.props} />
             </div>

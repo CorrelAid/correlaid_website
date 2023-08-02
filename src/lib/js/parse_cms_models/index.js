@@ -65,7 +65,7 @@ export function ctas(section) {
   };
   return ctaParams;
 }
-export function cta_group(section) {
+export function cta_groups(section) {
   const ctas = [];
   for (const ctaRaw of section.item.ctas) {
     const cta = {
