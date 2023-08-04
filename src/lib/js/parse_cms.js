@@ -97,8 +97,8 @@ export function parseProject(project) {
     if (project.Podcast) {
       projectLinks['podcast_href'] = project.Podcast.soundcloud_link;
     }
-    if (project.Posts.length !== 0) {
-      projectLinks['post_slug'] = project.Posts[0].translations.slug;
+    if (project.Blog_Posts.length !== 0) {
+      projectLinks['post_slug'] = project.Blog_Posts[0].translations.slug;
     }
 
     const projectContacts = [];
@@ -246,13 +246,13 @@ export function parseBlogPostPage(blogPostPage) {
 
   try {
     parsedBlogPostPage = {
-      pubDate: blogPostPage.Posts[0].pubdate,
-      contentAllLanguages: blogPostPage.Posts[0].translations,
+      pubDate: blogPostPage.Blog_Posts[0].publication_datetime,
+      contentAllLanguages: blogPostPage.Blog_Posts[0].translations,
       content_creators: parseEntries(
-        blogPostPage.Posts[0].content_creators,
+        blogPostPage.Blog_Posts[0].content_creators,
         'content_creators',
       ),
-      post: blogPostPage.Posts[0],
+      post: blogPostPage.Blog_Posts[0],
     };
     if (typeof parsedBlogPostPage.contentAllLanguages === 'undefined') {
       throw new Error('Blog post does not contain content in any language');

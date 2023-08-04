@@ -14,9 +14,9 @@ export async function load({params}) {
 
   // console.log(data.Posts[0])
 
-  const posts = handle_lang(data.Posts, params);
+  const posts = handle_lang(data.Blog_Posts, params);
 
-  // console.log(posts[0])
+  //console.log(posts[0])
 
   return {posts: parseEntries(posts, 'blog_posts')};
 }
