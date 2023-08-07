@@ -16,14 +16,16 @@ function parseHeroButtons(buttons) {
 
 export function heros(section) {
   const heroParams = {
-    image: section.item.image,
     text: section.item.translations[0].text,
-    image_alt: section.item.translations[0].image_alt,
-    image_desc: section.item.image.description,
     height: section.item.height,
     gradient_only: section.item.gradient_only,
     buttons: parseHeroButtons(section.item.buttons),
   };
+  if (section.item.image) {
+    heroParams['image'] = section.item.image;
+    heroParams['image_desc'] = section.item.image.description;
+    heroParams['image_alt'] = section.item.translations[0].image_alt;
+  }
   return heroParams;
 }
 
