@@ -12,7 +12,7 @@ export function blog_posts(post) {
 
   return {
     langs: post.langs,
-    pubdate: post.pubdate,
+    pubdate: post.publication_datetime,
     slug: post.translations.slug,
     image_alt: post.translations.image_alt,
     title: post.translations.title,

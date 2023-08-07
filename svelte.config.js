@@ -82,7 +82,7 @@ function canBePrerendered(url) {
 const queries = {
   blogs: `
   query BlogSlugs($status: [String] = ["published"]) {
-    Posts(sort: ["-pubdate"], filter: {status: { _in: $status }}) {
+    Blog_Posts(sort: ["-pubdate"], filter: {status: { _in: $status }}) {
       translations(filter:{slug:{_neq:null}}) {
         languages_code {
           code
