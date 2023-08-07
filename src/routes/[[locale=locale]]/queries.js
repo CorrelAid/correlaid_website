@@ -3,7 +3,7 @@ query LatestUpdates(
 	$language: String = "de-DE"
 	$status: [String] = ["published"]
 ) {
-	Posts(sort: ["-publication_datetime"], filter: { status: { _in: $status } }) {
+	Blog_Posts(sort: ["-publication_datetime"], filter: { status: { _in: $status } }) {
 		publication_datetime
 		title_image {
 			id
