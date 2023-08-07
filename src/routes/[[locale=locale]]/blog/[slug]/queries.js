@@ -28,8 +28,6 @@ query BlogPostQuery(
 						filter: { languages_code: { code: { _eq: $language } } }
 					) {
 						pronouns
-						description
-						position
 					}
 					website
 					twitter

@@ -48,8 +48,8 @@ function persons(person) {
   const parsedPerson = {
     name: person.person.name,
     email: person.person.email,
-    position: person.person.translations[0].position,
-    description: person.person.translations[0].description,
+    position: person.translations[0].position,
+    description: person.translations[0].description,
     links: links,
   };
 
