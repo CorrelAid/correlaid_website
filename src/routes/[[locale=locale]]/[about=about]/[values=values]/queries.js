@@ -13,6 +13,7 @@ query Admins($language: String = "de-DE") {
 			email
 			name
 			website
+			github
 			twitter
 			linkedin
 			mastodon
