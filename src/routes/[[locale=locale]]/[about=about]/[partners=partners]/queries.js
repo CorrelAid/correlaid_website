@@ -1,6 +1,6 @@
 export const partnerQuery = `
 query Partners($language: String = "de-DE") {
-	Partner {
+	Partners {
 		name
 		logo {
 			id
