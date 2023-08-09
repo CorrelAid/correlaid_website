@@ -12,8 +12,8 @@
     $page_key = 'navbar.home';
   });
 
-  let posts;
-  $: posts = data.posts;
+  let blog_posts;
+  $: blog_posts = data.blog_posts;
   let events;
   $: events = data.events;
   let podcast_episodes;
@@ -40,7 +40,7 @@
     >
   </div>
   <div class="space-y-8">
-    {#each posts as post}
+    {#each blog_posts as post}
       <div>
         <BlogCard {...post} />
       </div>
