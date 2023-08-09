@@ -167,8 +167,8 @@ export function projects(project, params) {
   }
 
   const currentLanguage = get_lang(params);
-  for (const post of project.Posts) {
-    const translation = getTranslation(post.Posts_id, currentLanguage);
+  for (const post of project.Blog_Posts) {
+    const translation = getTranslation(post.Blog_Posts_id, currentLanguage);
     if (translation.slug) {
       parsedProjectCard['post_slug'] = translation.slug;
       break;

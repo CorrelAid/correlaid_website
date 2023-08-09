@@ -10,8 +10,8 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 			soundcloud_link
 			title
 		}
-		Posts {
-			Posts_id(filter: { status: { _in: $status } }) {
+		Blog_Posts {
+			Blog_Posts_id(filter: { status: { _in: $status } }) {
 				id
 				translations {
 					languages_code {

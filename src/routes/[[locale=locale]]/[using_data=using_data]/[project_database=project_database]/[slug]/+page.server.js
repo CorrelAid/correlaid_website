@@ -21,13 +21,13 @@ export async function load({params}) {
   }
 
   const posts = handle_lang(
-    data.Projects[0].Posts.map((data) => data.Posts_id).filter(
+    data.Projects[0].Blog_Posts.map((data) => data.Blog_Posts_id).filter(
       (data) => data !== null,
     ),
     params,
   );
 
-  data.Projects[0].Posts = posts;
+  data.Projects[0].Blog_Posts = posts;
 
   return parseProject(data.Projects[0]);
 }
