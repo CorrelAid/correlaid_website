@@ -104,17 +104,17 @@ export function parseProject(project) {
     const projectContacts = [];
     for (const person of project.People) {
       const parsedPerson = {
-        name: person.People_id.name,
+        name: person.person_id.name,
       };
       if (
-        person.People_id.translations[0] &&
-        person.People_id.translations[0].pronouns
+        person.person_id.translations[0] &&
+        person.person_id.translations[0].pronouns
       ) {
         parsedPerson[
           'pronouns'
-        ] = `(${person.People_id.translations[0].pronouns})`;
+        ] = `(${person.person_id.translations[0].pronouns})`;
       }
-      const parsedLinks = {name: person.People_id.name};
+      const parsedLinks = {name: person.person_id.name};
 
       for (const link of [
         'website',
@@ -123,8 +123,8 @@ export function parseProject(project) {
         'twitter',
         'github',
       ]) {
-        if (person.People_id[link]) {
-          parsedLinks[link] = person.People_id[link];
+        if (person.person_id[link]) {
+          parsedLinks[link] = person.person_id[link];
         }
       }
 
@@ -286,24 +286,24 @@ export function parseJobPage(jobPage) {
   if (jobPage.Jobs[0].colleagues) {
     for (const person of jobPage.Jobs[0].colleagues) {
       const parsedPerson = {
-        name: person.People_id.name,
+        name: person.person_id.name,
       };
-      if (person.People_id.image) {
+      if (person.person_id.image) {
         parsedPerson['img'] = gen_img_url(
-          person.People_id.image.id,
+          person.person_id.image.id,
           'fit=cover&width=200&height=200&quality=80',
         );
-        parsedPerson['image_desc'] = person.People_id.image.description;
+        parsedPerson['image_desc'] = person.person_id.image.description;
       }
       if (
-        person.People_id.translations[0] &&
-        person.People_id.translations[0].pronouns
+        person.person_id.translations[0] &&
+        person.person_id.translations[0].pronouns
       ) {
         parsedPerson[
           'pronouns'
-        ] = `(${person.People_id.translations[0].pronouns})`;
+        ] = `(${person.person_id.translations[0].pronouns})`;
       }
-      const parsedLinks = {name: person.People_id.name};
+      const parsedLinks = {name: person.person_id.name};
 
       for (const link of [
         'website',
@@ -312,8 +312,8 @@ export function parseJobPage(jobPage) {
         'twitter',
         'github',
       ]) {
-        if (person.People_id[link]) {
-          parsedLinks[link] = person.People_id[link];
+        if (person.person_id[link]) {
+          parsedLinks[link] = person.person_id[link];
         }
       }
 

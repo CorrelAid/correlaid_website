@@ -13,8 +13,8 @@ query Project(
 		Podcast {
 			soundcloud_link
 		}
-		Posts {
-			Posts_id(filter: { status: { _in: $status } }) {
+		Blog_Posts {
+			Blog_Posts_id(filter: { status: { _in: $status } }) {
 				translations {
 					languages_code {
 						code
@@ -28,7 +28,7 @@ query Project(
 			output_type
 		}
 		People {
-			People_id {
+			person_id {
 				name
 				translations {
 					languages_code {
