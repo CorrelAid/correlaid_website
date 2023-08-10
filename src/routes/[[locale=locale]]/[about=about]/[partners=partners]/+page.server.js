@@ -7,5 +7,5 @@ import {parseEntries} from '$lib/js/parse_cms.js';
 export async function load({params}) {
   const data = await directus_fetch(partnerQuery, {language: get_lang(params)});
 
-  return {partners: parseEntries(data.Partner, 'partners')};
+  return {partners: parseEntries(data.Partners, 'partners')};
 }
