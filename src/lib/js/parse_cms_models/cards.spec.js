@@ -7,7 +7,7 @@ describe('project card parsing and anonymization', () => {
     project_id: 'Some project id',
     is_internal: false,
     Podcast: null,
-    Posts: [],
+    Blog_Posts: [],
     Projects_Outputs: [],
     Organizations: [
       {
@@ -42,7 +42,7 @@ describe('project card parsing and anonymization', () => {
     project_id: 'Another project id',
     is_internal: false,
     Podcast: null,
-    Posts: [],
+    Blog_Posts: [],
     Projects_Outputs: [],
     Organizations: [
       {
@@ -77,7 +77,7 @@ describe('project card parsing and anonymization', () => {
     project_id: 'Internal project id',
     is_internal: true,
     Podcast: null,
-    Posts: [],
+    Blog_Posts: [],
     Projects_Outputs: [],
     Organizations: [],
     translations: [

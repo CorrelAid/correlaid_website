@@ -20,14 +20,14 @@ export async function load({params}) {
     throw error(404);
   }
 
-  const posts = handle_lang(
-    data.Projects[0].Posts.map((data) => data.Posts_id).filter(
+  const blog_posts = handle_lang(
+    data.Projects[0].Blog_Posts.map((data) => data.Blog_Posts_id).filter(
       (data) => data !== null,
     ),
     params,
   );
 
-  data.Projects[0].Posts = posts;
+  data.Projects[0].Blog_Posts = blog_posts;
 
   return parseProject(data.Projects[0]);
 }

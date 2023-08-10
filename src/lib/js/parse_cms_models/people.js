@@ -45,7 +45,6 @@ function persons(person) {
   // TODO: does not quite make sense in terms of naming, because it is used to
   // parse global admins directly
   const links = parsePersonLinks(person.person);
-
   const parsedPerson = {
     name: person.person.name,
     email: person.person.email,

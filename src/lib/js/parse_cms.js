@@ -97,24 +97,24 @@ export function parseProject(project) {
     if (project.Podcast) {
       projectLinks['podcast_href'] = project.Podcast.soundcloud_link;
     }
-    if (project.Posts.length !== 0) {
-      projectLinks['post_slug'] = project.Posts[0].translations.slug;
+    if (project.Blog_Posts.length !== 0) {
+      projectLinks['post_slug'] = project.Blog_Posts[0].translations.slug;
     }
 
     const projectContacts = [];
     for (const person of project.People) {
       const parsedPerson = {
-        name: person.People_id.name,
+        name: person.person_id.name,
       };
       if (
-        person.People_id.translations[0] &&
-        person.People_id.translations[0].pronouns
+        person.person_id.translations[0] &&
+        person.person_id.translations[0].pronouns
       ) {
         parsedPerson[
           'pronouns'
-        ] = `(${person.People_id.translations[0].pronouns})`;
+        ] = `(${person.person_id.translations[0].pronouns})`;
       }
-      const parsedLinks = {name: person.People_id.name};
+      const parsedLinks = {name: person.person_id.name};
 
       for (const link of [
         'website',
@@ -123,8 +123,8 @@ export function parseProject(project) {
         'twitter',
         'github',
       ]) {
-        if (person.People_id[link]) {
-          parsedLinks[link] = person.People_id[link];
+        if (person.person_id[link]) {
+          parsedLinks[link] = person.person_id[link];
         }
       }
 
@@ -246,13 +246,13 @@ export function parseBlogPostPage(blogPostPage) {
 
   try {
     parsedBlogPostPage = {
-      pubDate: blogPostPage.Posts[0].pubdate,
-      contentAllLanguages: blogPostPage.Posts[0].translations,
+      pubDate: blogPostPage.Blog_Posts[0].publication_datetime,
+      contentAllLanguages: blogPostPage.Blog_Posts[0].translations,
       content_creators: parseEntries(
-        blogPostPage.Posts[0].content_creators,
+        blogPostPage.Blog_Posts[0].content_creators,
         'content_creators',
       ),
-      post: blogPostPage.Posts[0],
+      post: blogPostPage.Blog_Posts[0],
     };
     if (typeof parsedBlogPostPage.contentAllLanguages === 'undefined') {
       throw new Error('Blog post does not contain content in any language');
@@ -286,24 +286,24 @@ export function parseJobPage(jobPage) {
   if (jobPage.Jobs[0].colleagues) {
     for (const person of jobPage.Jobs[0].colleagues) {
       const parsedPerson = {
-        name: person.People_id.name,
+        name: person.person_id.name,
       };
-      if (person.People_id.image) {
+      if (person.person_id.image) {
         parsedPerson['img'] = gen_img_url(
-          person.People_id.image.id,
+          person.person_id.image.id,
           'fit=cover&width=200&height=200&quality=80',
         );
-        parsedPerson['image_desc'] = person.People_id.image.description;
+        parsedPerson['image_desc'] = person.person_id.image.description;
       }
       if (
-        person.People_id.translations[0] &&
-        person.People_id.translations[0].pronouns
+        person.person_id.translations[0] &&
+        person.person_id.translations[0].pronouns
       ) {
         parsedPerson[
           'pronouns'
-        ] = `(${person.People_id.translations[0].pronouns})`;
+        ] = `(${person.person_id.translations[0].pronouns})`;
       }
-      const parsedLinks = {name: person.People_id.name};
+      const parsedLinks = {name: person.person_id.name};
 
       for (const link of [
         'website',
@@ -312,8 +312,8 @@ export function parseJobPage(jobPage) {
         'twitter',
         'github',
       ]) {
-        if (person.People_id[link]) {
-          parsedLinks[link] = person.People_id[link];
+        if (person.person_id[link]) {
+          parsedLinks[link] = person.person_id[link];
         }
       }
 

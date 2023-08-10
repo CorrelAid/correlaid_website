@@ -12,8 +12,8 @@
   /** @type {import('./$types').PageData} */
   export let data;
   let filteredData;
-  let posts;
-  $: posts = data.posts;
+  let blog_posts;
+  $: blog_posts = data.blog_posts;
   $: selects = [
     {
       title: $t('filter.language').text,
@@ -29,7 +29,7 @@
   ];
 </script>
 
-<Filter orig_data={posts} bind:filteredData {selects} {searchOptions} />
+<Filter orig_data={blog_posts} bind:filteredData {selects} {searchOptions} />
 <div class="mt-8 space-y-8 px-4">
   {#if filteredData}
     {#each filteredData as post, i}
