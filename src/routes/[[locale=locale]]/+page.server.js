@@ -12,10 +12,10 @@ export async function load({params}) {
     status: getAllowedStatus(),
   });
 
-  const posts = handle_lang(data.Posts, params);
+  const blog_posts = handle_lang(data.Blog_Posts, params);
 
   return {
-    posts: parseEntries(posts.slice(0, 2), 'blog_posts'),
+    blog_posts: parseEntries(blog_posts.slice(0, 2), 'blog_posts'),
     events: parseEntries(data.Events.slice(0, 6), 'events'),
     podcast_episodes: parseEntries(
       data.Podcast_Episodes.slice(0, 2),

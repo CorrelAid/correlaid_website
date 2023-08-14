@@ -1,4 +1,5 @@
 import * as parseModel from './parse_cms_models';
+import _ from 'lodash';
 import {gen_img_url} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 
@@ -46,11 +47,27 @@ export function parseContent(rawSections, page) {
   return parsedContent;
 }
 
-export function parseEntries(rawEntries, type, logInputOnError = true) {
+/**
+ * Parses an array of raw entries of a given type.
+ *
+ * @param {Array} rawEntries - Array of raw entries.
+ * @param {string} type - name of the function in parse_cms_models that should be used to parse
+ *  the entries.
+ * @param {boolean} logInputOnError - Flag whether the raw input should be logged in case of an error.
+ *  Defaults to true, but should be set to false for sensitive data.
+ * @param {Array} additionalParameters - Additional parameters that should be passed to the parsing
+ *  function via the spread operator.
+ */
+export function parseEntries(
+  rawEntries,
+  type,
+  logInputOnError = true,
+  additionalParameters = [],
+) {
   const parsedEntries = [];
   for (const rawEntry of rawEntries) {
     try {
-      const entry = parseModel[type](rawEntry);
+      const entry = parseModel[type](rawEntry, ...additionalParameters);
       parsedEntries.push(entry);
     } catch (err) {
       if (logInputOnError) {
@@ -80,24 +97,24 @@ export function parseProject(project) {
     if (project.Podcast) {
       projectLinks['podcast_href'] = project.Podcast.soundcloud_link;
     }
-    if (project.Posts.length !== 0) {
-      projectLinks['post_slug'] = project.Posts[0].translations.slug;
+    if (project.Blog_Posts.length !== 0) {
+      projectLinks['post_slug'] = project.Blog_Posts[0].translations.slug;
     }
 
     const projectContacts = [];
     for (const person of project.People) {
       const parsedPerson = {
-        name: person.People_id.name,
+        name: person.person_id.name,
       };
       if (
-        person.People_id.translations[0] &&
-        person.People_id.translations[0].pronouns
+        person.person_id.translations[0] &&
+        person.person_id.translations[0].pronouns
       ) {
         parsedPerson[
           'pronouns'
-        ] = `(${person.People_id.translations[0].pronouns})`;
+        ] = `(${person.person_id.translations[0].pronouns})`;
       }
-      const parsedLinks = {name: person.People_id.name};
+      const parsedLinks = {name: person.person_id.name};
 
       for (const link of [
         'website',
@@ -106,8 +123,8 @@ export function parseProject(project) {
         'twitter',
         'github',
       ]) {
-        if (person.People_id[link]) {
-          parsedLinks[link] = person.People_id[link];
+        if (person.person_id[link]) {
+          parsedLinks[link] = person.person_id[link];
         }
       }
 
@@ -127,6 +144,20 @@ export function parseProject(project) {
       projectLinks: projectLinks,
       projectContacts: projectContacts,
     };
+
+    if (project.translations[0].type) {
+      parsedProject['type'] = project.translations[0]['type'].map((str) =>
+        str.replace('_', ' ').toLowerCase(),
+      );
+    }
+
+    if (project.translations[0].data) {
+      if (!_.isEmpty(project.translations[0].data)) {
+        parsedProject['data'] = project.translations[0].data.map((str) =>
+          str.replace('_', ' ').toLowerCase(),
+        );
+      }
+    }
     if (project.Local_Chapters.length > 0) {
       parsedProject['Local_Chapters'] = project.Local_Chapters.map(
         (lc) => lc.Local_Chapters_id.translations[0].city,
@@ -150,7 +181,7 @@ export function anonymizeProject(parsedProject) {
   return anonymizedProject;
 }
 
-export function parseLocalChapterPage(localChapterPage) {
+export function parseLocalChapterPage(localChapterPage, params) {
   let parsedLcPage;
   try {
     parsedLcPage = {
@@ -159,6 +190,8 @@ export function parseLocalChapterPage(localChapterPage) {
       projects: parseEntries(
         localChapterPage.Local_Chapters[0].Projects,
         'lcProjects',
+        false,
+        [params],
       ),
     };
 
@@ -213,13 +246,13 @@ export function parseBlogPostPage(blogPostPage) {
 
   try {
     parsedBlogPostPage = {
-      pubDate: blogPostPage.Posts[0].pubdate,
-      contentAllLanguages: blogPostPage.Posts[0].translations,
+      pubDate: blogPostPage.Blog_Posts[0].publication_datetime,
+      contentAllLanguages: blogPostPage.Blog_Posts[0].translations,
       content_creators: parseEntries(
-        blogPostPage.Posts[0].content_creators,
+        blogPostPage.Blog_Posts[0].content_creators,
         'content_creators',
       ),
-      post: blogPostPage.Posts[0],
+      post: blogPostPage.Blog_Posts[0],
     };
     if (typeof parsedBlogPostPage.contentAllLanguages === 'undefined') {
       throw new Error('Blog post does not contain content in any language');
@@ -253,24 +286,24 @@ export function parseJobPage(jobPage) {
   if (jobPage.Jobs[0].colleagues) {
     for (const person of jobPage.Jobs[0].colleagues) {
       const parsedPerson = {
-        name: person.People_id.name,
+        name: person.person_id.name,
       };
-      if (person.People_id.image) {
+      if (person.person_id.image) {
         parsedPerson['img'] = gen_img_url(
-          person.People_id.image.id,
+          person.person_id.image.id,
           'fit=cover&width=200&height=200&quality=80',
         );
-        parsedPerson['image_desc'] = person.People_id.image.description;
+        parsedPerson['image_desc'] = person.person_id.image.description;
       }
       if (
-        person.People_id.translations[0] &&
-        person.People_id.translations[0].pronouns
+        person.person_id.translations[0] &&
+        person.person_id.translations[0].pronouns
       ) {
         parsedPerson[
           'pronouns'
-        ] = `(${person.People_id.translations[0].pronouns})`;
+        ] = `(${person.person_id.translations[0].pronouns})`;
       }
-      const parsedLinks = {name: person.People_id.name};
+      const parsedLinks = {name: person.person_id.name};
 
       for (const link of [
         'website',
@@ -279,8 +312,8 @@ export function parseJobPage(jobPage) {
         'twitter',
         'github',
       ]) {
-        if (person.People_id[link]) {
-          parsedLinks[link] = person.People_id[link];
+        if (person.person_id[link]) {
+          parsedLinks[link] = person.person_id[link];
         }
       }
 

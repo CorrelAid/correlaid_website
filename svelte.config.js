@@ -41,7 +41,10 @@ const excl = [
   'filter.type',
   'filter.no_results',
   'filter.placeholder',
+  'filter.responsible',
   'filter.search',
+  'filter.data_type',
+  'filter.organization_sector',
   'organization.anonymous',
   'organization.internalProject',
 ];
@@ -79,7 +82,7 @@ function canBePrerendered(url) {
 const queries = {
   blogs: `
   query BlogSlugs($status: [String] = ["published"]) {
-    Posts(sort: ["-pubdate"], filter: {status: { _in: $status }}) {
+    Blog_Posts(sort: ["-publication_datetime"], filter: {status: { _in: $status }}) {
       translations(filter:{slug:{_neq:null}}) {
         languages_code {
           code
@@ -169,7 +172,7 @@ async function addBlogRoutes(routes) {
   const postsResult = await queryCmsGraphQl(queries['blogs'], {
     status: getAllowedStatus(),
   });
-  for (const post of postsResult['data']['Posts']) {
+  for (const post of postsResult['data']['Blog_Posts']) {
     addBlogRoutesWithLanguageFallback(routes, post['translations']);
   }
 }
@@ -196,8 +199,8 @@ async function addLcRoutes(routes) {
 async function addProjectRoutes(routes) {
   const results = await queryCmsGraphQl(queries['projects']);
   for (const project of results['data']['Projects']) {
-    routes.push(`/daten-nutzen/projekte/${project.slug}`);
-    routes.push(`/en/using-data/projects/${project.slug}`);
+    routes.push(`/daten-nutzen/projektdatenbank/${project.slug}`);
+    routes.push(`/en/using-data/project-database/${project.slug}`);
   }
 }
 

@@ -50,8 +50,6 @@
     cardDetails[emojis['location']] = location;
     cardDetails[emojis['salary']] = salary;
     cardDetails[emojis['language_']] = language;
-
-    console.log(cardDetails);
   }
 </script>
 
@@ -71,7 +69,7 @@
       <div class="mb-4">
         {#each tags as tag}
           <span
-            class="line-clamp-1 mr-2 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
             >{tag}</span
           >
         {/each}
@@ -100,7 +98,7 @@
         {/each}
       </ul>
 
-      <p class="line-clamp-3 mb-3 text-lg text-base-content xl:pb-0 xl:pr-4">
+      <p class="mb-3 line-clamp-3 text-lg text-base-content xl:pb-0 xl:pr-4">
         {summary}
       </p>
     </div>

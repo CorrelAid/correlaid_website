@@ -4,7 +4,7 @@ query BlogPostQuery(
 	$status: [String] = ["published"]
 	$language: String = "de-DE"
 ) {
-	Posts(
+	Blog_Posts(
 		filter: {
 			_and: [
 				{ translations: { slug: { _eq: $slug } } }
@@ -12,7 +12,7 @@ query BlogPostQuery(
 			]
 		}
 	) {
-		pubdate
+		publication_datetime
 		title_image {
 			id
 			description

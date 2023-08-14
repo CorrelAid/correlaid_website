@@ -16,14 +16,16 @@ function parseHeroButtons(buttons) {
 
 export function heros(section) {
   const heroParams = {
-    image: section.item.image,
     text: section.item.translations[0].text,
-    image_alt: section.item.translations[0].image_alt,
-    image_desc: section.item.image.description,
     height: section.item.height,
     gradient_only: section.item.gradient_only,
     buttons: parseHeroButtons(section.item.buttons),
   };
+  if (section.item.image) {
+    heroParams['image'] = section.item.image;
+    heroParams['image_desc'] = section.item.image.description;
+    heroParams['image_alt'] = section.item.translations[0].image_alt;
+  }
   return heroParams;
 }
 
@@ -65,7 +67,7 @@ export function ctas(section) {
   };
   return ctaParams;
 }
-export function cta_group(section) {
+export function cta_groups(section) {
   const ctas = [];
   for (const ctaRaw of section.item.ctas) {
     const cta = {
@@ -100,7 +102,7 @@ export function carousel(section) {
     carousel_elements: elements,
   };
 }
-export function quote_carousel(section) {
+export function quote_carousels(section) {
   return {
     quotes: section.item.quotes,
     text_only: section.item.text_only,

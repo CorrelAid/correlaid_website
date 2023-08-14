@@ -10,7 +10,7 @@
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.using_data.projects';
+    $page_key = 'navbar.using_data.project_database';
   });
 
   /** @type {import('./$types').PageData} */
@@ -20,14 +20,38 @@
 
 <TextContainer title={project.title} teaser={project.teaser}>
   <div class="mx-4" slot="sub_subtitle">
-    {#if project.Local_Chapters}
-      {#each project.Local_Chapters as lc}
-        <a
-          class="text-medium line-clamp-3 mb-3 font-semibold text-base-content transition hover:text-primary"
-          href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
-        >
-      {/each}
+    {#if project.type || project.data}
+      <div class="mb-4">
+        {#if project.type}
+          {#each project.type as tag}
+            <span
+              class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white"
+            >
+              {tag}</span
+            >
+          {/each}
+        {/if}
+        {#if project.data}
+          {#each project.data as tag}
+            <span
+              class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold capitalize text-white"
+              >{tag}</span
+            >
+          {/each}
+        {/if}
+      </div>
     {/if}
+    {#if project.Local_Chapters}
+      <div class="pb-3">
+        {#each project.Local_Chapters as lc}
+          <a
+            class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
+            href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
+          >
+        {/each}
+      </div>
+    {/if}
+
     <div class="mb-5">
       <ProjectLinks {...project.projectLinks} />
     </div>

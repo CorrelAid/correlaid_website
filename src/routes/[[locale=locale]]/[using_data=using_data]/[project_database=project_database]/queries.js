@@ -10,8 +10,8 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 			soundcloud_link
 			title
 		}
-		Posts {
-			Posts_id(filter: { status: { _in: $status } }) {
+		Blog_Posts {
+			Blog_Posts_id(filter: { status: { _in: $status } }) {
 				id
 				translations {
 					languages_code {
@@ -28,6 +28,7 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		}
 		Organizations {
 			Organizations_id {
+				sector
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					languages_code {
 						code
@@ -37,9 +38,14 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 			}
 		}
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
+			languages_code {
+				code
+			}
 			title
 			description
 			summary
+			type
+			data
 		}
 		Local_Chapters {
 			Local_Chapters_id {

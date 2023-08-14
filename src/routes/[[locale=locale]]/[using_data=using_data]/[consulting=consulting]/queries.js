@@ -16,7 +16,7 @@ query Experts($language: String = "de-DE") {
 				description
 			}
 		}
-		translations {
+		translations(filter: { languages_code: { code: { _eq: $language } } }) {
 			area_of_expertise
 			description
 		}

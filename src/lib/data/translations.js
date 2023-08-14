@@ -13,6 +13,10 @@ export default {
       text: 'Data4Good Projekte',
       url: '/daten-nutzen/projekte',
     },
+    'navbar.using_data.project_database': {
+      text: 'Projektdatenbank',
+      url: '/daten-nutzen/projektdatenbank',
+    },
     'navbar.using_data.consulting': {
       text: 'Beratung',
       url: '/daten-nutzen/beratung',
@@ -94,13 +98,16 @@ export default {
     'access.sign_up': {text: 'Anmelden'},
     'access.language': {text: 'Sprache wechseln'},
     'access.language_': {text: 'Sprache'},
+    'filter.data_type': {text: 'Datentyp'},
     'access.salary': {text: 'Gehalt'},
     'access.workload': {text: 'Arbeitspensum'},
     'filter.language': {text: 'Sprache'},
     'filter.type': {text: 'Typ'},
+    'filter.responsible': {text: 'Verantwortlich'},
     'filter.no_results': {text: 'Keine Ergebnisse'},
     'filter.placeholder': {text: 'Bitte auswählen'},
     'filter.search': {text: 'Suchen'},
+    'filter.organization_sector': {text: 'Sektor der Organisation'},
     'organization.anonymous': {text: 'Anonyme Organisation'},
     'organization.internalProject': {text: 'Internes Projekt'},
   },
@@ -117,6 +124,10 @@ export default {
     'navbar.using_data.projects': {
       text: 'Data4Good Projects',
       url: '/en/using-data/projects',
+    },
+    'navbar.using_data.project_database': {
+      text: 'Projects Database',
+      url: '/en/using-data/project-database',
     },
     'navbar.using_data.consulting': {
       text: 'Consulting',
@@ -205,6 +216,9 @@ export default {
     'filter.no_results': {text: 'No Results'},
     'filter.placeholder': {text: 'Please select'},
     'filter.search': {text: 'Search'},
+    'filter.data_type': {text: 'Type of data'},
+    'filter.responsible': {text: 'Responsible'},
+    'filter.organization_sector': {text: 'Sector of Organization'},
     'organization.anonymous': {text: 'Anonymous Organization'},
     'organization.internalProject': {text: 'Internal Project'},
   },

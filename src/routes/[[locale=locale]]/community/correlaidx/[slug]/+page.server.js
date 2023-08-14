@@ -1,5 +1,7 @@
-import directus_fetch from '$lib/js/directus_fetch';
-import {getAllowedStatus} from '$lib/js/directus_fetch.js';
+import {
+  directus_authorized_fetch,
+  getAllowedStatus,
+} from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import {lcDetailsQuery} from './queries.js';
 import {error} from '@sveltejs/kit';
@@ -35,7 +37,7 @@ function capitalizeInternal(string) {
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(lcDetailsQuery, {
+  const data = await directus_authorized_fetch(lcDetailsQuery, {
     slug: capitalize(params.slug),
     language: get_lang(params),
     status: getAllowedStatus(),
@@ -45,5 +47,5 @@ export async function load({params}) {
     throw error(404);
   }
 
-  return parseLocalChapterPage(data);
+  return parseLocalChapterPage(data, params);
 }

@@ -9,3 +9,4 @@ export {default as Europe} from './Europe.svelte';
 export {default as LocationX} from './LocationX.svelte';
 export {default as PeopleHeart} from './PeopleHeart.svelte';
 export {default as PersonCheck} from './PersonCheck.svelte';
+export {default as Database} from './Database.svelte';

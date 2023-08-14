@@ -3,8 +3,8 @@ query BlogQuery(
 	$language: String = "de-DE"
 	$status: [String] = ["published"]
 ) {
-	Posts(sort: "-pubdate", filter: { status: { _in: $status } }) {
-		pubdate
+	Blog_Posts(sort: "-publication_datetime", filter: { status: { _in: $status } }) {
+		publication_datetime
 		title_image {
 			id
 			description

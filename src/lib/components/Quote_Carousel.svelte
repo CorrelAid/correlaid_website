@@ -43,7 +43,7 @@
                       {#if quote.quote_id.image.description}
                         <div class="right-0 z-30 w-full opacity-100">
                           <span
-                            class="line-clamp-1 z-0 block rounded-b bg-white px-1 py-0.5 text-xs text-black opacity-100"
+                            class="z-0 line-clamp-1 block rounded-b bg-white px-1 py-0.5 text-xs text-black opacity-100"
                             >{quote.quote_id.image.description}</span
                           >
                         </div>
@@ -55,12 +55,12 @@
 
                   <div class="mt-4 md:col-span-6 md:mt-0">
                     <p
-                      class="text-md line-clamp-5 md:line-clamp-4 drop-shadow-md"
+                      class="text-md line-clamp-5 drop-shadow-md md:line-clamp-4"
                     >
                       {quote.quote_id.translations[0].text}
                     </p>
                     <p
-                      class="line-clamp-1 mt-0.5 text-lg font-semibold drop-shadow-md"
+                      class="mt-0.5 line-clamp-1 text-lg font-semibold drop-shadow-md"
                     >
                       {quote.quote_id.translations[0].subtitle}
                     </p>

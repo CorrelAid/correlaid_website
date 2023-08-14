@@ -8,28 +8,29 @@
 
   export let title;
   export let subpage;
+  export let data = void 0;
+  export let type = void 0;
   export let isInternal;
   export let organization = void 0;
-  export let summary = 'tbd';
+  export let summary = void 0;
   export let correlaidx = [];
   export let project_id = void 0;
   export let repo = void 0;
   export let post_slug = void 0;
   export let podcast_href = void 0;
 
-  const annonymousOrg = typeof organization === 'undefined' && !isInternal;
+  // $: if (organization === 'undefined'){
+  //   organization_name = $t('organization.anonymous').text;
+  // }
+  // if (isInternal) {
+  //   organization_name = $t('organization.internalProject').text;
+  // }
+  // else{
+  //   organization_name = organization;
+  // }
 
-  $: {
-    if (annonymousOrg) {
-      organization = $t('organization.anonymous').text;
-    }
-  }
-
-  $: if (isInternal) {
-    organization = $t('organization.internalProject').text;
-  }
   $: href = subpage
-    ? $t('navbar.using_data.projects').url + '/' + project_id
+    ? $t('navbar.using_data.project_database').url + '/' + project_id
     : null;
 </script>
 
@@ -44,31 +45,53 @@
     <div class="mb-2 flex items-center pb-2">
       {#if !isInternal}
         <Nonprofit width={25} height={25} />
-        <h4 class="text-md line-clamp-3 ml-2 font-semibold text-primary">
+        <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
           {organization}
         </h4>
       {:else}
         <CorrelAidLogo width={25} height={25} />
-        <h4 class="text-md line-clamp-3 ml-2 font-semibold text-primary">
+        <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
           {organization}
         </h4>
       {/if}
     </div>
 
     <h3
-      class="line-clamp-3 mb-3 mt-2 block text-xl font-semibold text-base-content transition"
+      class="mb-3 mt-2 line-clamp-3 block text-xl font-semibold text-base-content transition"
     >
       {title}
     </h3>
-
-    <p class="line-clamp-3 mb-3">{summary}</p>
+    <div class="mb-4">
+      {#if type}
+        {#each type as tag}
+          <span
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white"
+          >
+            {tag}</span
+          >
+        {/each}
+      {/if}
+      {#if data}
+        {#each data as tag}
+          <span
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold capitalize text-white"
+            >{tag}</span
+          >
+        {/each}
+      {/if}
+    </div>
+    {#if summary}
+      <p class="mb-3 line-clamp-3">{summary}</p>
+    {/if}
     {#if correlaidx.length !== 0}
-      {#each correlaidx as lc}
-        <a
-          class="text-medium line-clamp-3 mb-3 font-semibold text-base-content transition hover:text-primary"
-          href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
-        >
-      {/each}
+      <div class="pb-3">
+        {#each correlaidx as lc}
+          <a
+            class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
+            href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
+          >
+        {/each}
+      </div>
     {/if}
     <ProjectLinks {href} {repo} {podcast_href} {post_slug} />
   </div>

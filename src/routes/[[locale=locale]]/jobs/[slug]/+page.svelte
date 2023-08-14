@@ -55,7 +55,7 @@
         <div class="mb-4">
           {#each job.tags as tag}
             <span
-              class="line-clamp-1 mr-2 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+              class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
               >{tag}</span
             >
           {/each}

@@ -28,7 +28,11 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 	}
 	Local_Chapters(filter: { translations: { city: { _eq: $slug } } }) {
 		Projects {
-			Projects_id {
+			Projects_id(
+				filter: { status: { _in: ["published", "published_anon"] } }
+			) {
+				status
+				is_internal
 				subpage
 				project_id
 				Podcast {
@@ -36,8 +40,8 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 					soundcloud_link
 					title
 				}
-				Posts {
-					Posts_id(filter: { status: { _in: $status } }) {
+				Blog_Posts {
+					Blog_Posts_id(filter: { status: { _in: $status } }) {
 						id
 						translations {
 							languages_code {
@@ -63,9 +67,14 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 					}
 				}
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
+					languages_code {
+						code
+					}
 					title
 					description
 					summary
+					type
+					data
 				}
 				Local_Chapters {
 					Local_Chapters_id{

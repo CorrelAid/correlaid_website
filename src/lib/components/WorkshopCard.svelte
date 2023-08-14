@@ -39,6 +39,8 @@
       <div class="mb-3 mr-10">
         {#if href.includes('https://')}
           <a
+            target="__blank"
+            rel="noreferrer"
             {href}
             class="mb-3 text-xl font-semibold transition hover:text-primary"
           >
@@ -63,7 +65,7 @@
       </div>
     {:else}
       <h3
-        class="line-clamp-3 mb-3 block text-xl font-semibold text-base-content transition"
+        class="mb-3 line-clamp-3 block text-xl font-semibold text-base-content transition"
       >
         {title}
       </h3>
@@ -71,7 +73,7 @@
     <div class="mb-2">
       {#each tags as tag}
         <span
-          class="line-clamp-1 mr-2 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
           >{tag}</span
         >
       {/each}

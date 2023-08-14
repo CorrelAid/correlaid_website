@@ -5,8 +5,8 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 			sort
 			collection
 			item {
-				... on cta_group {
-					ctas {
+				... on cta_groups {
+                    ctas {
 						ctas_id {
 							button {
 								color
@@ -77,10 +77,10 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 					}
 				}
 
-				... on quote_carousel {
+				... on quote_carousels {
 					text_only
 					quotes {
-						quote_id {
+						quotes_id {
 							image {
 								id
 								description
@@ -152,4 +152,6 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 		}
 	}
 }
+
+
 `;

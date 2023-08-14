@@ -12,8 +12,8 @@
     $page_key = 'navbar.home';
   });
 
-  let posts;
-  $: posts = data.posts;
+  let blog_posts;
+  $: blog_posts = data.blog_posts;
   let events;
   $: events = data.events;
   let podcast_episodes;
@@ -21,18 +21,19 @@
 </script>
 
 <div class="px-4">
-  <div class="mb-12">
-    <a
-      class="text-3xl font-bold text-base-content transition hover:text-primary"
-      href={$t('navbar.events').url}>{$t('navbar.events').text}</a
-    >
-  </div>
-  <div class="grid gap-6">
-    {#each events as event}
-      <Events_Card {...event} />
-    {/each}
-  </div>
-
+  {#if events.length != 0}
+    <div class="mb-12">
+      <a
+        class="text-3xl font-bold text-base-content transition hover:text-primary"
+        href={$t('navbar.events').url}>{$t('navbar.events').text}</a
+      >
+    </div>
+    <div class="grid gap-6">
+      {#each events as event}
+        <Events_Card {...event} />
+      {/each}
+    </div>
+  {/if}
   <div class="my-12">
     <a
       class="text-3xl font-bold text-base-content transition hover:text-primary"
@@ -40,7 +41,7 @@
     >
   </div>
   <div class="space-y-8">
-    {#each posts as post}
+    {#each blog_posts as post}
       <div>
         <BlogCard {...post} />
       </div>

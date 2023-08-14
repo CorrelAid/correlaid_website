@@ -23,7 +23,7 @@ query Jobs($language: String = "de-DE", $status: [String] = ["published"], $slug
 			}
 		}
 		colleagues {
-			People_id {
+			person_id {
 				translations(
 					filter: { languages_code: { code: { _eq: $language } } }
 				) {
