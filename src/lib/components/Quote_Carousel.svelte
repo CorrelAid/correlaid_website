@@ -28,23 +28,23 @@
               {#if text_only === false}
                 <div class="grid px-4 md:grid-cols-10 md:space-x-6">
                   <div class="flex flex-col items-center md:col-span-4">
-                    {#if quote.quote_id.image}
+                    {#if quote.quotes_id.image}
                       <div
                         class="relative w-full"
                         style="padding-bottom: 56.25%;"
                       >
                         <img
                           class="absolute left-0 top-0 z-0 h-full w-full"
-                          alt="Logo/Photo {quote.quote_id.translations[0]
+                          alt="Logo/Photo {quote.quotes_id.translations[0]
                             .subtitle}"
-                          src={gen_img_url(quote.quote_id.image.id)}
+                          src={gen_img_url(quote.quotes_id.image.id)}
                         />
                       </div>
-                      {#if quote.quote_id.image.description}
+                      {#if quote.quotes_id.image.description}
                         <div class="right-0 z-30 w-full opacity-100">
                           <span
                             class="z-0 line-clamp-1 block rounded-b bg-white px-1 py-0.5 text-xs text-black opacity-100"
-                            >{quote.quote_id.image.description}</span
+                            >{quote.quotes_id.image.description}</span
                           >
                         </div>
                       {/if}
@@ -57,24 +57,24 @@
                     <p
                       class="text-md line-clamp-5 drop-shadow-md md:line-clamp-4"
                     >
-                      {quote.quote_id.translations[0].text}
+                      {quote.quotes_id.translations[0].text}
                     </p>
                     <p
                       class="mt-0.5 line-clamp-1 text-lg font-semibold drop-shadow-md"
                     >
-                      {quote.quote_id.translations[0].subtitle}
+                      {quote.quotes_id.translations[0].subtitle}
                     </p>
                   </div>
                 </div>
               {:else}
                 <div class="px-3">
                   <p class="line-clamp-7 pt-8 text-lg drop-shadow-md">
-                    {quote.quote_id.translations[0].text}
+                    {quote.quotes_id.translations[0].text}
                   </p>
                   <p
                     class="line-clamp-7 pt-6 text-lg font-semibold drop-shadow-md"
                   >
-                    {quote.quote_id.translations[0].subtitle}
+                    {quote.quotes_id.translations[0].subtitle}
                   </p>
                 </div>
               {/if}
