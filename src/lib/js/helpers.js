@@ -226,6 +226,8 @@ export function convertContractType(type, locale) {
         return 'Vollzeit';
       case 'part-time':
         return `Teilzeit`;
+      case 'working-student':
+        return `Werkstudent*in`;
       case 'internship':
         return 'Praktikum';
       case 'volunteer':
