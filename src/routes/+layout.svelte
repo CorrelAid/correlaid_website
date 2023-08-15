@@ -99,7 +99,7 @@
             <div class="container mx-auto mb-12 mt-8 px-4 md:mt-0">
               <Person {...section.props} />
             </div>
-          {:else if section.collection === 'quote_carousel'}
+          {:else if section.collection === 'quote_carousels'}
             <div class="mb-12">
               <QuoteCarousel {...section.props} />
             </div>
