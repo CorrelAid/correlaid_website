@@ -201,6 +201,7 @@ export function parseLocalChapterPage(localChapterPage, params) {
       'local_administrators',
     );
     parsedLcPage['lcEmail'] = parsedLcPage['local_chapter'].lc_email;
+
     parsedLcPage['description'] =
       parsedLcPage['local_chapter'].translations[0].description;
     parsedLcPage['howToGetInTouch'] =
