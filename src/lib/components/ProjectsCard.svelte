@@ -3,6 +3,7 @@
   import CorrelAidLogo from '$lib/svg/CorrelAid_Logo_min.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import {page} from '$app/stores';
+  import Html from '$lib/components/Html.svelte';
   import {gen_lc_href} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
 
@@ -81,7 +82,7 @@
       {/if}
     </div>
     {#if summary}
-      <p class="mb-3 line-clamp-3">{summary}</p>
+      <Html source={summary} options={'line-clamp-3 !px-0 my-3'} />
     {/if}
     {#if correlaidx.length !== 0}
       <div class="pb-3">
