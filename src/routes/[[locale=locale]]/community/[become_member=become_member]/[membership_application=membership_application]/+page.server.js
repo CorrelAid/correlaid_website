@@ -1,0 +1,13 @@
+import directus_fetch from '$lib/js/directus_fetch';
+import {MembershipQuery} from './queries.js';
+import {MEMBERSHIP_UPLOADER_API_URL} from '$env/static/public';
+
+/** @type {import('./$types').PageServerLoad} */
+export async function load({params}) {
+  const data = await directus_fetch(MembershipQuery);
+
+  return {
+    membership_application: data.membership_application,
+    membership_uploader_api_url: MEMBERSHIP_UPLOADER_API_URL,
+  };
+}
