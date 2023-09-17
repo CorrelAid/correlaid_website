@@ -72,11 +72,7 @@ if (
 }
 
 function canBePrerendered(url) {
-  return (
-    url[0] === '/' &&
-    url !== '/community/become-member/membership-application' &&
-    url !== '/community/mitglied-werden/mitgliedsantrag'
-  );
+  return url[0] === '/';
 }
 
 const queries = {

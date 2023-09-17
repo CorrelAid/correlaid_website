@@ -2,12 +2,11 @@
   import {page_key} from '$lib/stores/page_key';
   import {onMount} from 'svelte';
   import {createForm} from 'felte';
-  import {_} from 'lodash';
-
+  import _ from 'lodash';
   import {generatePDF} from '$lib/js/pdf_generation.js';
-
+  import {createSchema} from '$lib/js/form_validators.js';
   import {Turnstile} from 'svelte-turnstile';
-  import {ValidationMessage} from '@felte/reporter-svelte';
+  import {ValidationMessage, reporter} from '@felte/reporter-svelte';
   import * as yup from 'yup';
 
   onMount(() => {
@@ -15,103 +14,23 @@
   });
 
   export let data;
-  let membership_application;
-  let validation;
   $: membership_application = data.membership_application.data.fields;
-  $: validation = data.membership_application.data.validation;
+  $: validationData = data.membership_application.data.validation;
   $: membership_application_uploader_url =
     data.membership_application_uploader_url;
 
-  const MAX_FILE_SIZE = 1000000; // 1mb
-
-  const validFileExtensions = {document: ['pdf']};
-  function isValidFileType(fileName, fileType) {
-    return (
-      fileName &&
-      validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1
-    );
-  }
-
   let turnstileError;
-
-  let requiredString;
-  let optionalString;
-  let requiredEmail;
-  let requiredMisc;
-  let requiredDoc;
-  let requiredNumber;
-  let requiredAgreement;
   let schema = yup.object({});
 
-  // creating reusable validation functions in a reactive way (changes when data loads)
-  $: if (validation) {
-    requiredString = yup.string().required(validation.required);
-    optionalString = yup.string();
-    requiredEmail = yup
-      .string()
-      .email(validation.email)
-      .required(validation.required);
-    requiredMisc = yup.mixed().required(validation.required);
-    requiredDoc = yup
-      .mixed()
-      .required(validation.required)
-      .test('is-valid-type', validation.doc_type, (value) =>
-        isValidFileType(value && value.name.toLowerCase(), 'document'),
-      )
-      .test(
-        'is-valid-size',
-        validation.doc_size,
-        (value) => value && value.size <= MAX_FILE_SIZE,
-      );
-    requiredNumber = yup
-      .number(validation.number)
-      .transform((value) =>
-        isNaN(value) || value === null || value === undefined ? 0 : value,
-      )
-      .required(validation.required)
-      .positive(validation.positive)
-      .integer(validation.integer);
+  $: schema = createSchema(validationData, membership_application);
 
-    requiredAgreement = yup
-      .boolean()
-      .oneOf([true], validation.agree)
-      .required(validation.required);
-  }
-
-  $: schema = yup.object({
-    name: requiredString,
-    surname: requiredString,
-    street: requiredString,
-    house_number: requiredString,
-    house_number_ext: optionalString,
-    postcode: requiredNumber,
-    city: requiredString,
-    email: requiredEmail,
-    // these fields are only required when the corresponding radio button was selected
-    contribution_amount_sponsor:
-      _.find(membership_application, ['name', 'membership_type']).value ===
-      'sponsor'
-        ? requiredNumber
-        : yup.mixed(),
-    contribution_amount_participating:
-      _.find(membership_application, ['name', 'membership_type']).value ===
-      'participating'
-        ? requiredMisc
-        : yup.mixed(),
-    //
-    agreement: requiredAgreement,
-    membership_type: requiredMisc,
-    iban: requiredString,
-    bic: requiredString,
-    sepa: requiredDoc,
-    application_form: requiredDoc,
-    turnstile: yup.mixed(),
-  });
+  $: console.log(schema);
 
   const {form} = createForm({
     validate: async (values) => {
       try {
-        await schema.validate(values, {abortEarly: false});
+        // await schema.validate(values, { abortEarly: false });
+        return;
       } catch (err) {
         const errors = err.inner.reduce(
           (res, value) => ({
@@ -123,10 +42,9 @@
         return errors;
       }
     },
-    async onSuccess(response) {
-      const formData = form.getValues(); // Get the form data
-
-      const dataURL = generatePDF(formData);
+    extend: reporter,
+    onSubmit: async (values) => {
+      const dataURL = generatePDF(values);
       const pdfBlob = await (await fetch(dataURL)).blob();
 
       const formDataWithFile = new FormData();
@@ -175,7 +93,7 @@
   }
 </script>
 
-{#if membership_application && !_.isEmpty(validation)}
+{#if membership_application}
   <div
     class="z-1 offset-right z-1 relative top-0 rounded border border-neutral-25 bg-white p-4"
   >

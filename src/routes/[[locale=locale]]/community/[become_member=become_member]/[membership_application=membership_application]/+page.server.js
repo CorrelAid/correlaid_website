@@ -1,6 +1,6 @@
 import directus_fetch from '$lib/js/directus_fetch';
 import {MembershipQuery} from './queries.js';
-import {MEMBERSHIP_UPLOADER_API_URL} from '$env/static/public';
+import {PUBLIC_MEMBERSHIP_UPLOADER_API_URL} from '$env/static/public';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {
@@ -8,6 +8,6 @@ export async function load({params}) {
 
   return {
     membership_application: data.membership_application,
-    membership_uploader_api_url: MEMBERSHIP_UPLOADER_API_URL,
+    membership_uploader_api_url: PUBLIC_MEMBERSHIP_UPLOADER_API_URL,
   };
 }
