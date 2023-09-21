@@ -17,14 +17,13 @@
   $: membership_application = data.membership_application.data.fields;
   $: validationData = data.membership_application.data.validation;
   $: membership_application_uploader_url =
-    data.membership_application_uploader_url;
+    data.membership_application_uploader_api_url;
 
   let turnstileError;
+  let turnstileToken;
   let schema = yup.object({});
 
   $: schema = createSchema(validationData, membership_application);
-
-  $: console.log(schema);
 
   const {form} = createForm({
     validate: async (values) => {
@@ -49,9 +48,8 @@
 
       const formDataWithFile = new FormData();
       formDataWithFile.append('file', pdfBlob, 'foo.pdf');
-      formDataWithFile.append('name', formData.name);
-      formDataWithFile.append('email', formData.email);
-      formDataWithFile.append('token', formData.token);
+      formDataWithFile.append('email', values.email);
+      formDataWithFile.append('token', turnstileToken);
 
       try {
         const apiResponse = await fetch(membership_application_uploader_url, {
@@ -61,7 +59,7 @@
 
         if (apiResponse.ok) {
           // API request was successful
-          const apiData = await apiResponse.json();
+          const apiData = await apiResponse.text();
           console.log(apiData);
           // Handle any further logic or UI updates
         } else {
@@ -75,6 +73,10 @@
       }
     },
   });
+
+  function turnstileCallback(evnt) {
+    turnstileToken = evnt.detail.token;
+  }
 
   // conditionally show the amount fields (based on selected membership type)
   function handle_hide(name) {
@@ -98,7 +100,7 @@
     class="z-1 offset-right z-1 relative top-0 rounded border border-neutral-25 bg-white p-4"
   >
     <form
-      class="m-auto flex flex-col px-4 pb-12 xl:w-2/4"
+      class="m-auto grid grid-cols-3 gap-5 px-4 pb-12 xl:w-2/4"
       use:form
       method="post"
     >
@@ -152,7 +154,11 @@
         {/if}
       {/each}
       <div class="mt-4">
-        <Turnstile formsField="turnstile" siteKey="0x4AAAAAAAD8yTOmVCP00Ur3" />
+        <Turnstile
+          formsField="turnstile"
+          siteKey="0x4AAAAAAAD8yTOmVCP00Ur3"
+          on:turnstile-callback={turnstileCallback}
+        />
         {#if turnstileError}
           <span class="my-2 text-sm text-red-500">{turnstileError}</span>
         {/if}

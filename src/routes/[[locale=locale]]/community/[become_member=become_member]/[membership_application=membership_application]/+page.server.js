@@ -8,6 +8,6 @@ export async function load({params}) {
 
   return {
     membership_application: data.membership_application,
-    membership_uploader_api_url: PUBLIC_MEMBERSHIP_UPLOADER_API_URL,
+    membership_application_uploader_api_url: PUBLIC_MEMBERSHIP_UPLOADER_API_URL,
   };
 }

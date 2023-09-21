@@ -19,5 +19,5 @@ export function generatePDF(values) {
   }
 
   // Return the data URL of the PDF
-  return doc.output('dataurl');
+  return doc.output('dataurlstring');
 }
