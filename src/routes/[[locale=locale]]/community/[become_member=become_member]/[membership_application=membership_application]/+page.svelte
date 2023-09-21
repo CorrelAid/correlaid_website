@@ -80,15 +80,25 @@
 
   // conditionally show the amount fields (based on selected membership type)
   function handle_hide(name) {
-    if (
-      (name === 'contribution_amount_participating') &
-        (_.find(membership_application, ['name', 'membership_type']).value ===
-          'sponsor') ||
-      (name === 'contribution_amount_sponsor') &
-        (_.find(membership_application, ['name', 'membership_type']).value ===
-          'participating')
-    ) {
-      return false;
+    if (name === 'contribution_amount_participating') {
+      if (
+        _.find(membership_application, ['name', 'membership_type']).value ===
+        'participating'
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if (name === 'contribution_amount_sponsor') {
+      if (
+        _.find(membership_application, ['name', 'membership_type']).value ===
+        'sponsor'
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return true;
     }
@@ -97,16 +107,20 @@
 
 {#if membership_application}
   <div
-    class="z-1 offset-right z-1 relative top-0 rounded border border-neutral-25 bg-white p-4"
+    class="z-1 offset-right z-1 relative top-0 m-3 rounded border border-neutral-25 bg-white p-2"
   >
     <form
-      class="m-auto grid grid-cols-3 gap-5 px-4 pb-12 xl:w-2/4"
+      class="m-auto gap-5 px-4 pb-12 lg:grid lg:grid-cols-2"
       use:form
       method="post"
     >
       {#each membership_application as field, i}
         {#if handle_hide(field.name)}
-          <div class="flex flex-col">
+          <div
+            class="flex flex-col {field.width === 'half'
+              ? 'lg:col-span-1'
+              : 'lg:col-span-2'}"
+          >
             {#if field.type === 'checkbox'}
               <label for={field.name} class="mb-2 mt-4 font-semibold"
                 >{field.mandatory === true ? '* ' : ''}{field.label}</label
@@ -153,7 +167,7 @@
           </div>
         {/if}
       {/each}
-      <div class="mt-4">
+      <div class="col-span-2 mt-4">
         <Turnstile
           formsField="turnstile"
           siteKey="0x4AAAAAAAD8yTOmVCP00Ur3"
