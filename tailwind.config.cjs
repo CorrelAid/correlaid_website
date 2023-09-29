@@ -9,6 +9,7 @@ module.exports = {
       fontFamily: {
         sans: ['Roboto'],
         londrina: ['Londrina Solid'],
+        signature: ['Nothing You Could Do'],
       },
 
       typography(theme) {

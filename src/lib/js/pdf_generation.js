@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 
-export function generatePDF(values) {
+export function generatePDF(values, membership_application) {
   // Create a new jsPDF instance
   // eslint-disable-next-line new-cap
   const doc = new jsPDF();
@@ -9,15 +9,27 @@ export function generatePDF(values) {
   const x = 10;
   let y = 10;
 
-  // Loop through the form data and add it to the PDF
-  for (const [key, value] of Object.entries(values)) {
-    // Add the key-value pair to the PDF
-    doc.text(`${key}: ${value}`, x, y);
-
-    // Increment the y coordinate for the next line
+  // Loop through the form data and add it to   the PDF
+  for (const group of membership_application) {
+    // make text bigger
+    doc.setFontSize(16);
+    doc.text(`${group.title}`, x, y);
     y += 10;
+    for (const field of group.fields) {
+      doc.setFontSize(12);
+      // Add the key-value pair to the PDF
+      const value = values[field.name];
+      if (value !== undefined) {
+        doc.text(`${field.label}: ${value}`, x, y, {maxWidth: 40});
+        y += 10;
+      }
+
+      // Increment the y coordinate for the next line
+    }
   }
 
   // Return the data URL of the PDF
-  return doc.output('dataurlstring');
+  const pdf = doc.output('pdfobjectnewwindow');
+  console.log(pdf);
+  return pdf;
 }
