@@ -108,6 +108,14 @@ you might want to overwrite. One possibility, for instance, might be the inclusi
 of non-published job announcements that are only available for preview so far. For this
 concrete example include `PUBLIC_PREVIEW_JOBS_AND_POSTS='TRUE'`.
 
+#### Membership Application
+
+To test the membership application form run [this](https://github.com/CorrelAid/membership_application_uploader) application next to the CorrelAid website. For instructions take a look at the README of this repo. An additional environment that needs to be set is:
+
+```
+PUBLIC_MEMBERSHIP_UPLOADER_API_URL='http://localhost:8080'
+```
+
 ## Project explanation
 
 SvelteKit is documented [here](https://kit.svelte.dev/docs/introduction)
