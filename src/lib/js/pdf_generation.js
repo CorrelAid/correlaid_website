@@ -20,7 +20,7 @@ export function generatePDF(values, membership_application) {
       // Add the key-value pair to the PDF
       const value = values[field.name];
       if (value !== undefined) {
-        doc.text(`${field.label}: ${value}`, x, y, {maxWidth: 40});
+        doc.text(`${field.name}: ${value}`, x, y);
         y += 10;
       }
 
@@ -30,6 +30,5 @@ export function generatePDF(values, membership_application) {
 
   // Return the data URL of the PDF
   const pdf = doc.output('pdfobjectnewwindow');
-  console.log(pdf);
   return pdf;
 }

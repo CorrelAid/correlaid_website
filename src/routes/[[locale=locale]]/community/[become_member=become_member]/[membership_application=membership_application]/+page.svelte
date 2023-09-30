@@ -19,6 +19,8 @@
   $: membership_application_uploader_url =
     data.membership_application_uploader_api_url;
 
+  let submited = false;
+
   let turnstileToken;
   let SubmitError;
   let schema = yup.object({});
@@ -29,7 +31,7 @@
     validate: async (values) => {
       values.turnstile = turnstileToken;
       try {
-        // await schema.validate(values, { abortEarly: false });
+        await schema.validate(values, {abortEarly: false});
         return;
       } catch (err) {
         const errors = err.inner.reduce(
@@ -62,7 +64,7 @@
           // API request was successful
           const apiData = await apiResponse.text();
           console.log(apiData);
-          // Handle any further logic or UI updates
+          submited = true;
         } else {
           // API request failed
           console.log('API request failed');
@@ -100,7 +102,7 @@
   }
 </script>
 
-{#if membership_application}
+{#if membership_application && !submited}
   <form class="relative m-auto px-4 pb-12" use:form method="post">
     {#each membership_application as group, i}
       <div
@@ -192,4 +194,10 @@
       {/if}
     </div>
   </form>
+{:else}
+  <div class="offset-right relative mb-12 border-y border-l px-4 py-8 lg:px-8">
+    <p class="text-xl">
+      Herzlichen Glückwunsch, du hast den Mitgliedsantrag abgeschickt!
+    </p>
+  </div>
 {/if}
