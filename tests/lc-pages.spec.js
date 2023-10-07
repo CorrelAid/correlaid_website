@@ -38,7 +38,7 @@ test.describe('test lc chapter pages', () => {
       waitUntil: 'networkidle',
     });
     await page.getByRole('link', {name: 'CorrelAidX Mannheim'}).first().click();
-    await page.waitForURL('**/volunteering/correlaidx/mannheim/', {
+    await page.waitForURL('**/mitmachen/correlaidx/mannheim/', {
       waitUntil: 'networkidle',
     });
     await expect(
