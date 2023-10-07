@@ -2,7 +2,7 @@ import directus_fetch from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import {localChapterQuery} from './queries.js';
 
-/** @type {import('./$types').PageServerLoad} */
+/** @type {import('./$types.js').PageServerLoad} */
 export async function load({params}) {
   const data = await directus_fetch(localChapterQuery, {
     language: get_lang(params),

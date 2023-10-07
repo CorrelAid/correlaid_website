@@ -39,10 +39,10 @@ export const bot_nav = [
     category: 'volunteering',
     children: [
       'navbar.volunteering.correlaidx',
-      'navbar.volunteering.founding_lc',
       'navbar.volunteering.volunteer_teams',
       // "navbar.volunteering.volunteer_journeys",
       'navbar.volunteering.become_member',
+      'navbar.volunteering.founding_lc',
     ],
   },
 ];
