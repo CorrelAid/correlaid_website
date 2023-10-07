@@ -35,14 +35,14 @@ export const bot_nav = [
     ],
   },
   {
-    key: 'navbar.community',
-    category: 'community',
+    key: 'navbar.volunteering',
+    category: 'volunteering',
     children: [
-      'navbar.community.correlaidx',
-      'navbar.community.founding_lc',
-      'navbar.community.volunteer_teams',
-      // "navbar.community.volunteer_journeys",
-      'navbar.community.become_member',
+      'navbar.volunteering.correlaidx',
+      'navbar.volunteering.founding_lc',
+      'navbar.volunteering.volunteer_teams',
+      // "navbar.volunteering.volunteer_journeys",
+      'navbar.volunteering.become_member',
     ],
   },
 ];

@@ -213,7 +213,9 @@ export function handle_lang(entries, params) {
 export function gen_lc_href(params, city) {
   const lc_href = [
     get_locale(params) == 'de' ? '' : '/en',
-    '/community/correlaidx/',
+    get_locale(params) == 'de'
+      ? '/mitmachen/correlaidx/'
+      : '/volunteering/correlaidx/',
     city.toLowerCase(),
   ].join('');
   return lc_href;
