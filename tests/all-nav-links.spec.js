@@ -144,9 +144,9 @@ test.describe('test regular viewport', () => {
           .getByTestId('navColoringTest-navbar.volunteering')
           .getByRole('link', {name: 'Mitmachen'})
           .hover();
-        page.getByTestId('BottomNav/volunteering/correlaidx').click();
+        page.getByTestId('BottomNav/mitmachen/correlaidx').click();
       },
-      page: '**/volunteering/correlaidx/',
+      page: '**/mitmachen/correlaidx/',
     },
     {
       linkClick: async (page) => {
@@ -156,7 +156,7 @@ test.describe('test regular viewport', () => {
           .hover();
         page.getByRole('link', {name: 'Gründe (d)eine Lokalgruppe'}).click();
       },
-      page: '**/volunteering/lc-gruenden/',
+      page: '**/mitmachen/lc-gruenden/',
     },
     {
       linkClick: async (page) => {
@@ -166,7 +166,7 @@ test.describe('test regular viewport', () => {
           .hover();
         page.getByRole('link', {name: 'Trete einem Team bei'}).click();
       },
-      page: '**/volunteering/volunteer-teams/',
+      page: '**/mitmachen/volunteer-teams/',
     },
     {
       linkClick: async (page) => {
@@ -176,7 +176,7 @@ test.describe('test regular viewport', () => {
           .hover();
         page.getByRole('link', {name: 'Vereinsmitglied werden'}).click();
       },
-      page: '**/volunteering/mitglied-werden/',
+      page: '**/mitmachen/mitglied-werden/',
     },
   ];
 
