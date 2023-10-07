@@ -6,15 +6,6 @@ export const top_nav = [
 ];
 export const bot_nav = [
   {
-    key: 'navbar.about',
-    category: 'about',
-    children: [
-      'navbar.about.team',
-      'navbar.about.values',
-      'navbar.about.partners',
-    ],
-  },
-  {
     key: 'navbar.using_data',
     category: 'using_data',
     children: [
@@ -43,6 +34,15 @@ export const bot_nav = [
       // "navbar.volunteering.volunteer_journeys",
       'navbar.volunteering.become_member',
       'navbar.volunteering.founding_lc',
+    ],
+  },
+  {
+    key: 'navbar.about',
+    category: 'about',
+    children: [
+      'navbar.about.team',
+      'navbar.about.values',
+      'navbar.about.partners',
     ],
   },
 ];
