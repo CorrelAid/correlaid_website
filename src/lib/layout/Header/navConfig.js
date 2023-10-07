@@ -6,15 +6,6 @@ export const top_nav = [
 ];
 export const bot_nav = [
   {
-    key: 'navbar.about',
-    category: 'about',
-    children: [
-      'navbar.about.team',
-      'navbar.about.values',
-      'navbar.about.partners',
-    ],
-  },
-  {
     key: 'navbar.using_data',
     category: 'using_data',
     children: [
@@ -35,14 +26,23 @@ export const bot_nav = [
     ],
   },
   {
-    key: 'navbar.community',
-    category: 'community',
+    key: 'navbar.volunteering',
+    category: 'volunteering',
     children: [
-      'navbar.community.correlaidx',
-      'navbar.community.founding_lc',
-      'navbar.community.volunteer_teams',
-      // "navbar.community.volunteer_journeys",
-      'navbar.community.become_member',
+      'navbar.volunteering.correlaidx',
+      'navbar.volunteering.volunteer_teams',
+      // "navbar.volunteering.volunteer_journeys",
+      'navbar.volunteering.become_member',
+      'navbar.volunteering.founding_lc',
+    ],
+  },
+  {
+    key: 'navbar.about',
+    category: 'about',
+    children: [
+      'navbar.about.team',
+      'navbar.about.values',
+      'navbar.about.partners',
     ],
   },
 ];

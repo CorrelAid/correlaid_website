@@ -1,6 +1,6 @@
 import {constructRe} from '$lib/js/helpers';
 
-const re = constructRe(['navbar.volunteering.founding_lc']);
+const re = constructRe(['navbar.volunteering']);
 
 /** @type {import('@sveltejs/kit').ParamMatcher} */
 export function match(param) {

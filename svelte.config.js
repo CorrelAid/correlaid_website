@@ -74,8 +74,8 @@ if (
 function canBePrerendered(url) {
   return (
     url[0] === '/' &&
-    url !== '/community/become-member/membership-application' &&
-    url !== '/community/mitglied-werden/mitgliedsantrag'
+    url !== '/volunteering/become-member/membership-application' &&
+    url !== '/mitmachen/mitglied-werden/mitgliedsantrag'
   );
 }
 
@@ -183,7 +183,7 @@ async function addLcRoutes(routes) {
   });
   for (const lc of germanResults['data']['Local_Chapters']) {
     for (const t of lc['translations']) {
-      routes.push(`/community/correlaidx/${t.slug.toLowerCase()}`);
+      routes.push(`/mitmachen/correlaidx/${t.slug.toLowerCase()}`);
     }
   }
   const englishResults = await queryCmsGraphQl(queries['lcs'], {
@@ -191,7 +191,7 @@ async function addLcRoutes(routes) {
   });
   for (const post of englishResults['data']['Local_Chapters']) {
     for (const t of post['translations']) {
-      routes.push(`/en/community/correlaidx/${t.slug.toLowerCase()}`);
+      routes.push(`/en/volunteering/correlaidx/${t.slug.toLowerCase()}`);
     }
   }
 }

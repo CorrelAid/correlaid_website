@@ -70,14 +70,14 @@ test.describe('test error pages', () => {
   });
 
   test.skip('test pages correlaidx', async ({page}) => {
-    await page.goto('/community/correlaidx/not-a-valid-lc', {
+    await page.goto('/mitmachen/correlaidx/not-a-valid-lc', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*nicht gefunden.*/, {
       ignoreCase: true,
     });
 
-    await page.goto('/en/community/correlaidx/not-a-valid-lc', {
+    await page.goto('/en/volunteering/correlaidx/not-a-valid-lc', {
       waitUntil: 'networkidle',
     });
     await expect(page.locator('#grow')).toHaveText(/.*not found.*/, {
