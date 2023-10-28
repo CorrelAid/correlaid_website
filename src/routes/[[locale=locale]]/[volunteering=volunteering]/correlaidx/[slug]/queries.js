@@ -27,10 +27,10 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 		}
 	}
 	Local_Chapters(filter: { translations: { city: { _eq: $slug } } }) {
-		Projects {
-			Projects_id(
-				filter: { status: { _in: ["published", "published_anon"] } }
-			) {
+		Projects(
+			filter: { Projects_id :{status: { _in: ["published", "published_anon"] } }}
+		) {
+			Projects_id{
 				status
 				is_internal
 				subpage

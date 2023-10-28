@@ -8,7 +8,7 @@
   import 'maplibre-gl/dist/maplibre-gl.css';
 
   onMount(() => {
-    $page_key = 'navbar.community.correlaidx';
+    $page_key = 'navbar.volunteering.correlaidx';
   });
 
   export let data;

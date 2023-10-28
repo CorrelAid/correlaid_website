@@ -1,7 +1,7 @@
 import {constructRe} from '$lib/js/helpers';
 
 const re = constructRe([
-  'navbar.community.become_member.membership_application',
+  'navbar.volunteering.become_member.membership_application',
 ]);
 
 /** @type {import('@sveltejs/kit').ParamMatcher} */

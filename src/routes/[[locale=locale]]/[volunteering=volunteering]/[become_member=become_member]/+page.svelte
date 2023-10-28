@@ -3,6 +3,8 @@
   import {onMount} from 'svelte';
 
   onMount(() => {
-    $page_key = 'navbar.community.volunteer_teams';
+    $page_key = 'navbar.volunteering.become_member';
   });
+
+  // const source = '# WIP';
 </script>

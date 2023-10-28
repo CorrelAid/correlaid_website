@@ -10,7 +10,7 @@
   import Icon from '$lib/components/Icon.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.community.correlaidx';
+    $page_key = 'navbar.volunteering.correlaidx';
   });
 
   /** @type {import('./$types').PageData} */

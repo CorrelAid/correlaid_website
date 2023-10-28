@@ -213,7 +213,9 @@ export function handle_lang(entries, params) {
 export function gen_lc_href(params, city) {
   const lc_href = [
     get_locale(params) == 'de' ? '' : '/en',
-    '/community/correlaidx/',
+    get_locale(params) == 'de'
+      ? '/mitmachen/correlaidx/'
+      : '/volunteering/correlaidx/',
     city.toLowerCase(),
   ].join('');
   return lc_href;
@@ -226,6 +228,8 @@ export function convertContractType(type, locale) {
         return 'Vollzeit';
       case 'part-time':
         return `Teilzeit`;
+      case 'working-student':
+        return `Werkstudent*in`;
       case 'internship':
         return 'Praktikum';
       case 'volunteer':

@@ -135,48 +135,48 @@ test.describe('test regular viewport', () => {
     },
     {
       linkClick: async (page) =>
-        page.getByRole('link', {name: 'Community'}).click(),
-      page: '**/community/',
+        page.getByRole('link', {name: 'Mitmachen'}).click(),
+      page: '**/mitmachen/',
     },
     {
       linkClick: async (page) => {
         await page
-          .getByTestId('navColoringTest-navbar.community')
-          .getByRole('link', {name: 'Community'})
+          .getByTestId('navColoringTest-navbar.volunteering')
+          .getByRole('link', {name: 'Mitmachen'})
           .hover();
-        page.getByTestId('BottomNav/community/correlaidx').click();
+        page.getByTestId('BottomNav/mitmachen/correlaidx').click();
       },
-      page: '**/community/correlaidx/',
+      page: '**/mitmachen/correlaidx/',
     },
     {
       linkClick: async (page) => {
         await page
-          .getByTestId('navColoringTest-navbar.community')
-          .getByRole('link', {name: 'Community'})
+          .getByTestId('navColoringTest-navbar.volunteering')
+          .getByRole('link', {name: 'Mitmachen'})
           .hover();
         page.getByRole('link', {name: 'Gründe (d)eine Lokalgruppe'}).click();
       },
-      page: '**/community/lc-gruenden/',
+      page: '**/mitmachen/lc-gruenden/',
     },
     {
       linkClick: async (page) => {
         await page
-          .getByTestId('navColoringTest-navbar.community')
-          .getByRole('link', {name: 'Community'})
+          .getByTestId('navColoringTest-navbar.volunteering')
+          .getByRole('link', {name: 'Mitmachen'})
           .hover();
         page.getByRole('link', {name: 'Trete einem Team bei'}).click();
       },
-      page: '**/community/volunteer-teams/',
+      page: '**/mitmachen/volunteer-teams/',
     },
     {
       linkClick: async (page) => {
         await page
-          .getByTestId('navColoringTest-navbar.community')
-          .getByRole('link', {name: 'Community'})
+          .getByTestId('navColoringTest-navbar.volunteering')
+          .getByRole('link', {name: 'Mitmachen'})
           .hover();
         page.getByRole('link', {name: 'Vereinsmitglied werden'}).click();
       },
-      page: '**/community/mitglied-werden/',
+      page: '**/mitmachen/mitglied-werden/',
     },
   ];
 

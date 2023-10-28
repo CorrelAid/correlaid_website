@@ -57,7 +57,7 @@
         >
         {#each tags as tag}
           <span
-            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold capitalize text-white"
             >{tag}</span
           >
         {/each}

@@ -46,31 +46,31 @@ export default {
       url: '/bildung/mentoring',
     },
     //
-    'navbar.community': {text: 'Community', url: '/community'},
+    'navbar.volunteering': {text: 'Mitmachen', url: '/mitmachen'},
     // Subnav community
-    'navbar.community.correlaidx': {
+    'navbar.volunteering.correlaidx': {
       text: 'Engagiere dich vor Ort',
-      url: '/community/correlaidx',
+      url: '/mitmachen/correlaidx',
     },
-    'navbar.community.founding_lc': {
+    'navbar.volunteering.founding_lc': {
       text: 'Gründe (d)eine Lokalgruppe',
-      url: '/community/lc-gruenden',
+      url: '/mitmachen/lc-gruenden',
     },
-    // 'navbar.community.volunteer_journeys': {
+    // 'navbar.volunteering.volunteer_journeys': {
     //  text: 'Volunteer Journeys',
-    //  url: '/community/volunteer-journeys',
+    //  url: '/mitmachen/volunteer-journeys',
     // },
-    'navbar.community.become_member': {
+    'navbar.volunteering.become_member': {
       text: 'Vereinsmitglied werden',
-      url: '/community/mitglied-werden',
+      url: '/mitmachen/mitglied-werden',
     },
-    'navbar.community.volunteer_teams': {
+    'navbar.volunteering.volunteer_teams': {
       text: 'Trete einem Team bei',
-      url: '/community/volunteer-teams',
+      url: '/mitmachen/volunteer-teams',
     },
-    'navbar.community.become_member.membership_application': {
+    'navbar.volunteering.become_member.membership_application': {
       text: 'Mitgliedsantrag',
-      url: '/community/mitglied-werden/mitgliedsantrag',
+      url: '/mitmachen/mitglied-werden/mitgliedsantrag',
     },
     //
     'navbar.events': {text: 'Veranstaltungen', url: '/veranstaltungen'},
@@ -78,7 +78,7 @@ export default {
     'navbar.podcast': {text: 'Podcast', url: '/podcast'},
     'navbar.newsletter': {text: 'Newsletter', url: '/newsletter'},
     'navbar.donate': {
-      text: 'Spenden',
+      text: 'Fördern',
       url: 'https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good',
     },
     'navbar.jobs': {text: 'Jobs', url: '/jobs'},
@@ -157,31 +157,31 @@ export default {
       url: '/en/education/mentoring',
     },
     //
-    'navbar.community': {text: 'Community', url: '/en/community'},
+    'navbar.volunteering': {text: 'Volunteering', url: '/en/volunteering'},
     // Subnav community
-    'navbar.community.correlaidx': {
+    'navbar.volunteering.correlaidx': {
       text: 'Get Involved Locally',
-      url: '/en/community/correlaidx',
+      url: '/en/volunteering/correlaidx',
     },
-    'navbar.community.founding_lc': {
+    'navbar.volunteering.founding_lc': {
       text: 'Founding a Local Chapter',
-      url: '/en/community/founding-lc',
+      url: '/en/volunteering/founding-lc',
     },
-    'navbar.community.volunteer_teams': {
+    'navbar.volunteering.volunteer_teams': {
       text: 'Join a team',
-      url: '/en/community/volunteer-teams',
+      url: '/en/volunteering/volunteer-teams',
     },
-    // 'navbar.community.volunteer_journeys': {
+    // 'navbar.volunteering.volunteer_journeys': {
     //  text: 'Volunteer Journeys',
-    //  url: '/en/community/volunteer-journeys',
+    //  url: '/en/volunteering/volunteer-journeys',
     // },
-    'navbar.community.become_member': {
+    'navbar.volunteering.become_member': {
       text: 'Become a member',
-      url: '/en/community/become-member',
+      url: '/en/volunteering/become-member',
     },
-    'navbar.community.become_member.membership_application': {
+    'navbar.volunteering.become_member.membership_application': {
       text: 'Membership Application',
-      url: '/community/become-member/membership-application',
+      url: '/volunteering/become-member/membership-application',
     },
     //
     'navbar.events': {text: 'Events', url: '/en/events'},

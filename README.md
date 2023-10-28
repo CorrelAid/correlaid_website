@@ -207,7 +207,7 @@ to the slug.
 - The HTML component makes use of the tailwind typography plugin (with the class
   "prose") by automatically applying predefined styles. All styles are customizable.
 - The carousel component uses [this](https://github.com/vadimkorr/svelte-carousel) external component
-- The page /community/correlaidx contains a map made with [maplibre](https://maplibre.org/) and [maptiler](https://www.maptiler.com/)
+- The page /volunteering/correlaidx contains a map made with [maplibre](https://maplibre.org/) and [maptiler](https://www.maptiler.com/)
 
 ## Production build
 

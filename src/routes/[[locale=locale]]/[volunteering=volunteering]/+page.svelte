@@ -10,14 +10,14 @@
   import NavTiles from '$lib/components/NavTiles.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.community';
+    $page_key = 'navbar.volunteering';
   });
 
   const navItems = [
-    {key: 'navbar.community.correlaidx', icon: Europe},
-    {key: 'navbar.community.founding_lc', icon: LocationX},
-    {key: 'navbar.community.become_member', icon: PersonCheck},
-    {key: 'navbar.community.volunteer_teams', icon: PeopleHeart},
+    {key: 'navbar.volunteering.correlaidx', icon: Europe},
+    {key: 'navbar.volunteering.founding_lc', icon: LocationX},
+    {key: 'navbar.volunteering.become_member', icon: PersonCheck},
+    {key: 'navbar.volunteering.volunteer_teams', icon: PeopleHeart},
   ];
 </script>
 
