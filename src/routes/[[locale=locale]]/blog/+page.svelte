@@ -4,6 +4,7 @@
   import {t} from '$lib/stores/i18n';
   import BlogCard from '$lib/components/Blog_Card.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
+  import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
     $page_key = 'navbar.blog';
@@ -12,6 +13,7 @@
   /** @type {import('./$types').PageData} */
   export let data;
   let filteredData;
+  let trimmedData;
   let blog_posts;
   $: blog_posts = data.blog_posts;
   $: selects = [
@@ -31,11 +33,18 @@
 
 <Filter orig_data={blog_posts} bind:filteredData {selects} {searchOptions} />
 <div class="mt-8 space-y-8 px-4">
-  {#if filteredData}
-    {#each filteredData as post, i}
+  {#if trimmedData}
+    {#each trimmedData as post, i}
       <div class={i === 0 ? 'col-span-full' : 'col-span-1'}>
         <BlogCard {...post} />
       </div>
     {/each}
+  {/if}
+  {#if filteredData}
+    <Pagination
+      items={filteredData}
+      perPage={8}
+      bind:trimmedItems={trimmedData}
+    />
   {/if}
 </div>

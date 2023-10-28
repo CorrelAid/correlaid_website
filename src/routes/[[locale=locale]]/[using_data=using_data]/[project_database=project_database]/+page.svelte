@@ -13,6 +13,7 @@
   export let data;
   $: projects = data.projects;
   let filteredData;
+  let trimmedData;
   let projects;
 
   $: selects = [
@@ -57,9 +58,16 @@
   expanded={true}
 />
 <div class="mt-8 space-y-8 px-4">
-  {#if filteredData}
-    {#each filteredData as project}
+  {#if trimmedData}
+    {#each trimmedData as project}
       <ProjectsCard {...project} />
     {/each}
+  {/if}
+  {#if filteredData}
+    <Pagination
+      items={filteredData}
+      perPage={8}
+      bind:trimmedItems={trimmedData}
+    />
   {/if}
 </div>
