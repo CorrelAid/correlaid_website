@@ -4,6 +4,7 @@
   import {t} from '$lib/stores/i18n';
   import Filter from '$lib/components/Filter.svelte';
   import ProjectsCard from '$lib/components/ProjectsCard.svelte';
+  import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
     $page_key = 'navbar.using_data.project_database';
