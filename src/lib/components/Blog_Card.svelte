@@ -1,6 +1,7 @@
 <script>
   import {t, locale} from '$lib/stores/i18n';
   import {gen_date} from '$lib/js/helpers';
+  import Html from '$lib/components/Html.svelte';
   import Langs from '$lib/components/Langs.svelte';
   export let image_alt;
   export let langs;
@@ -94,9 +95,11 @@
       </p>
 
       <div class="pb-1 pt-1.5">
-        <p class="line-clamp-3 overflow-hidden text-base-content">
-          {teaser}
-        </p>
+        <Html
+          source={teaser}
+          options={'mx-0 !px-0 line-clamp-3 overflow-hidden text-base-content leading-normal'}
+          slot="main"
+        />
       </div>
     </div>
   </div>
