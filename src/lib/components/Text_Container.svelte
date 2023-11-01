@@ -22,7 +22,7 @@
     <div class="container mx-auto">
       <div class=" mx-4 mb-4">
         <figure class="h-full w-full">
-          <div class="offset relative h-full w-full">
+          <div class="offset a aspect-h-9 aspect-w-16 relative">
             <img
               alt={image_alt ? image_alt : ''}
               src={gen_img_url(
