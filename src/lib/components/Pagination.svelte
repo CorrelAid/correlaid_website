@@ -1,6 +1,7 @@
 <script>
   import ArrowLeft from '../svg/Arrow_Left.svelte';
   import ArrowRight from '../svg/Arrow_Right.svelte';
+  import {t} from '$lib/stores/i18n';
 
   export let items;
   export let perPage;
@@ -20,38 +21,26 @@
 </script>
 
 {#if totalItems && totalItems > perPage}
-  <div class="pagination">
+  <div
+    class="pagination pointer-events-auto flex items-center justify-center"
+    role="navigation"
+    aria-label="Pagination"
+  >
     <button
       on:click={() => (currentPage -= 1)}
       disabled={currentPage === 0 ? true : false}
-      aria-label="left arrow icon"
-      aria-describedby="prev"
+      aria-label={$t('access.previous').text}
     >
       <ArrowLeft width={30} height={30} />
     </button>
-    <p>{start + 1} - {end + 1} of {totalItems}</p>
+    <p class="m-0 mx-2">{start + 1} - {end + 1} of {totalItems}</p>
     <button
+      class="flex"
       on:click={() => (currentPage += 1)}
       disabled={currentPage === totalPages - 1 ? true : false}
-      aria-label="right arrow icon"
-      aria-describedby="next"
+      aria-label={$t('access.next').text}
     >
       <ArrowRight width={30} height={30} />
     </button>
   </div>
 {/if}
-
-<style>
-  .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: all;
-  }
-  .pagination p {
-    margin: 0 1rem;
-  }
-  button {
-    display: flex;
-  }
-</style>
