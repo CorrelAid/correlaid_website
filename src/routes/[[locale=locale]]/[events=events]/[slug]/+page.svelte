@@ -72,23 +72,6 @@
             ></span
           >
         {/if}
-        {#if event.language == 'de-DE'}
-          <span
-            class="inline-block rounded-full bg-white shadow-none"
-            arria-hidden="true"
-          >
-            <De height={icon_h} width={icon_h} />
-          </span>
-          <span class="sr-only">Event ist auf deutsch.</span>
-        {:else}
-          <span
-            class="inline-block rounded-full bg-white shadow-none"
-            role="img"
-            aria-label="Event is in english."
-          >
-            <En height={icon_h} width={icon_h} />
-          </span>
-        {/if}
         {#if event.location}
           <p class="flex">
             <span class="my-auto flex fill-neutral" arria-hidden="true"
@@ -108,15 +91,32 @@
         {#if event.registration_link}
           <a
             href={event.registration_link}
-            class="flex"
+            class="flex text-secondary underline"
             target="_blank"
             rel="noreferrer"
           >
             <span class="my-auto flex fill-neutral" arria-hidden="true"
               ><SignUp width={20} height={20} /></span
             > <span class="sr-only">{$t('access.sign_up').text}</span>
-            <span class="my-auto pl-2">{event['root']}</span>
+            <span class="my-auto pl-2">{$t('access.registration').text}</span>
           </a>
+        {/if}
+        {#if event.language == 'de-DE'}
+          <span
+            class="inline-block rounded-full bg-white shadow-none"
+            arria-hidden="true"
+          >
+            <De height={icon_h} width={icon_h} />
+          </span>
+          <span class="sr-only">Event ist auf deutsch.</span>
+        {:else}
+          <span
+            class="inline-block rounded-full bg-white shadow-none"
+            role="img"
+            aria-label="Event is in english."
+          >
+            <En height={icon_h} width={icon_h} />
+          </span>
         {/if}
       </p>
     </Box>
