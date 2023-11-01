@@ -35,6 +35,7 @@ const excl = [
   'access.date',
   'access.time',
   'access.salary',
+  'access.registration',
   'access.workload',
   'access.language_',
   'filter.language',
