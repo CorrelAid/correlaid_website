@@ -222,16 +222,6 @@ export function parseLocalChapterPage(localChapterPage, params) {
  */
 export function parseEventPage(eventPage) {
   const parsedEventPage = eventPage.Events[0];
-  if (eventPage.Events[0]['registration_link']) {
-    try {
-      parsedEventPage['root'] = new URL(
-        parsedEventPage['registration_link'],
-      ).hostname.replace('www.', '');
-    } catch (err) {
-      reportParseError(err, 'For event page', eventPage);
-    }
-  }
-
   return parsedEventPage;
 }
 
