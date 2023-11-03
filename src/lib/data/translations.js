@@ -62,7 +62,7 @@ export default {
     // },
     'navbar.volunteering.become_member': {
       text: 'Vereinsmitglied werden',
-      url: '/mitmachen/mitglied-werden',
+      url: 'https://easyverein.com/public/correlaid/applicationform/7737',
     },
     'navbar.volunteering.volunteer_teams': {
       text: 'Trete einem Team bei',
@@ -178,7 +178,7 @@ export default {
     // },
     'navbar.volunteering.become_member': {
       text: 'Become a member',
-      url: '/en/volunteering/become-member',
+      url: 'https://easyverein.com/public/correlaid/applicationform/7966',
     },
     'navbar.volunteering.become_member.membership_application': {
       text: 'Membership Application',
