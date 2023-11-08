@@ -3,6 +3,7 @@
   import {drawer} from '$lib/stores/drawer';
   import {header_height} from '$lib/stores/dims';
   import HeaderBottomNavButton from './HeaderBottomNavButton.svelte';
+  import ExternalLink from '$lib/svg/External_Link.svelte';
 
   export let bot_nav;
 
@@ -61,7 +62,7 @@
             </div>
             {#if toggles[navItem.category]}
               <div
-                class="absolute z-30 -ml-4 w-56"
+                class="absolute z-30 -ml-4 w-60"
                 on:mouseleave={closeall}
                 style="top: {$header_height + 1}px"
               >
@@ -71,11 +72,28 @@
                   {#each navItem.children as subnavItem}
                     <li class="px-4 pb-2">
                       <a
+                        target={subnavItem ==
+                        'navbar.volunteering.become_member'
+                          ? '__blank'
+                          : ''}
+                        rel={subnavItem == 'navbar.volunteering.become_member'
+                          ? 'noreferrer'
+                          : ''}
                         class="transition hover:text-primary"
                         href={$t(subnavItem).url}
                         data-testid={`BottomNav${$t(subnavItem).url}`}
                       >
                         {$t(subnavItem).text}
+                        {#if subnavItem == 'navbar.volunteering.become_member'}
+                          <span
+                            class="ml-1 inline-block whitespace-nowrap align-text-top"
+                            ><ExternalLink
+                              height={17}
+                              width={17}
+                              color={'black'}
+                            /></span
+                          >
+                        {/if}
                       </a>
                     </li>
                   {/each}
