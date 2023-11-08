@@ -68,10 +68,6 @@ export default {
       text: 'Trete einem Team bei',
       url: '/mitmachen/volunteer-teams',
     },
-    'navbar.volunteering.become_member.membership_application': {
-      text: 'Mitgliedsantrag',
-      url: '/mitmachen/mitglied-werden/mitgliedsantrag',
-    },
     //
     'navbar.events': {text: 'Veranstaltungen', url: '/veranstaltungen'},
     'navbar.blog': {text: 'Blog', url: '/blog'},
@@ -179,10 +175,6 @@ export default {
     'navbar.volunteering.become_member': {
       text: 'Become a member',
       url: 'https://easyverein.com/public/correlaid/applicationform/7966',
-    },
-    'navbar.volunteering.become_member.membership_application': {
-      text: 'Membership Application',
-      url: '/volunteering/become-member/membership-application',
     },
     //
     'navbar.events': {text: 'Events', url: '/en/events'},
