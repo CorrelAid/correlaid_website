@@ -75,8 +75,8 @@ if (
 function canBePrerendered(url) {
   return (
     url[0] === '/' &&
-    url !== '/volunteering/become-member/membership-application' &&
-    url !== '/mitmachen/mitglied-werden/mitgliedsantrag'
+    url !== '/volunteering/become-member' &&
+    url !== '/mitmachen/mitglied-werden'
   );
 }
 
