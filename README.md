@@ -363,7 +363,7 @@ tests the static build which is used in production.
          npm run serve-static
 
     We recommend not to use `vite preview`/`npm run preview` for the static page, because
-    sometimes it provides more functioality than the static page will
+    sometimes it provides more functionality than the static page will
     actually have.
 
 4.  Run the e2e tests. The tests don't actually care whether the page is static,
