@@ -62,15 +62,11 @@ export default {
     // },
     'navbar.volunteering.become_member': {
       text: 'Vereinsmitglied werden',
-      url: '/mitmachen/mitglied-werden',
+      url: 'https://easyverein.com/public/correlaid/applicationform/7737',
     },
     'navbar.volunteering.volunteer_teams': {
       text: 'Trete einem Team bei',
       url: '/mitmachen/volunteer-teams',
-    },
-    'navbar.volunteering.become_member.membership_application': {
-      text: 'Mitgliedsantrag',
-      url: '/mitmachen/mitglied-werden/mitgliedsantrag',
     },
     //
     'navbar.events': {text: 'Veranstaltungen', url: '/veranstaltungen'},
@@ -178,11 +174,7 @@ export default {
     // },
     'navbar.volunteering.become_member': {
       text: 'Become a member',
-      url: '/en/volunteering/become-member',
-    },
-    'navbar.volunteering.become_member.membership_application': {
-      text: 'Membership Application',
-      url: '/volunteering/become-member/membership-application',
+      url: 'https://easyverein.com/public/correlaid/applicationform/7966',
     },
     //
     'navbar.events': {text: 'Events', url: '/en/events'},
