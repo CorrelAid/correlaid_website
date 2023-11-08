@@ -4,6 +4,7 @@
   import {t} from '$lib/stores/i18n';
   import Filter from '$lib/components/Filter.svelte';
   import ProjectsCard from '$lib/components/ProjectsCard.svelte';
+  import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
     $page_key = 'navbar.using_data.project_database';
@@ -13,6 +14,7 @@
   export let data;
   $: projects = data.projects;
   let filteredData;
+  let trimmedData;
   let projects;
 
   $: selects = [
@@ -57,9 +59,16 @@
   expanded={true}
 />
 <div class="mt-8 space-y-8 px-4">
-  {#if filteredData}
-    {#each filteredData as project}
+  {#if trimmedData}
+    {#each trimmedData as project}
       <ProjectsCard {...project} />
     {/each}
+  {/if}
+  {#if filteredData}
+    <Pagination
+      items={filteredData}
+      perPage={8}
+      bind:trimmedItems={trimmedData}
+    />
   {/if}
 </div>

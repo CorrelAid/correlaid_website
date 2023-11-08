@@ -4,6 +4,7 @@
   import {t} from '$lib/stores/i18n';
   import BlogCard from '$lib/components/Blog_Card.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
+  import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
     $page_key = 'navbar.podcast';
@@ -11,6 +12,7 @@
 
   export let data;
   let filteredData;
+  let trimmedData;
   $: podcast_episodes = data.podcast_episodes;
 
   $: selects = [
@@ -36,10 +38,17 @@
 />
 <div class="container mx-auto mt-8 px-4 pb-8">
   <div class="space-y-8">
-    {#if filteredData}
-      {#each filteredData as episode}
+    {#if trimmedData}
+      {#each trimmedData as episode}
         <BlogCard {...episode} external={true} />
       {/each}
+    {/if}
+    {#if filteredData}
+      <Pagination
+        items={filteredData}
+        perPage={8}
+        bind:trimmedItems={trimmedData}
+      />
     {/if}
   </div>
 </div>

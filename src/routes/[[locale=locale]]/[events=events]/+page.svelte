@@ -5,6 +5,7 @@
   import {timeSplitEntries} from '$lib/js/entries';
   import Events_Card from '$lib/components/Events_Card.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
+  import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
     $page_key = 'navbar.events';
@@ -16,6 +17,8 @@
   $: events_data = data.events;
 
   let filteredData;
+  let trimmedPastData;
+  let trimmedFutureData;
 
   $: console.log(events_data);
 
@@ -71,12 +74,20 @@
     <p class="px-4">{$t('filter.no_results').text}</p>
   {:else}
     <div class="space-y-8 px-4">
-      {#each events.future as event}
-        <Events_Card {...event} />
-      {/each}
+      {#if trimmedFutureData}
+        {#each trimmedFutureData as event, i}
+          <Events_Card {...event} />
+        {/each}
+      {/if}
+      {#if events.future}
+        <Pagination
+          items={events.future}
+          perPage={8}
+          bind:trimmedItems={trimmedFutureData}
+        />
+      {/if}
     </div>
   {/if}
-
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
     {pastEventSeparator}
   </h2>
@@ -84,9 +95,18 @@
     <p class="px-4">{$t('filter.no_results').text}</p>
   {:else}
     <div class="space-y-8 px-4">
-      {#each events.past as event}
-        <Events_Card {...event} />
-      {/each}
+      {#if trimmedPastData}
+        {#each trimmedPastData as event}
+          <Events_Card {...event} />
+        {/each}
+      {/if}
+      {#if events.future}
+        <Pagination
+          items={events.past}
+          perPage={8}
+          bind:trimmedItems={trimmedPastData}
+        />
+      {/if}
     </div>
   {/if}
 {/if}
