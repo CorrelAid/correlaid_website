@@ -168,16 +168,6 @@ test.describe('test regular viewport', () => {
       },
       page: '**/mitmachen/volunteer-teams/',
     },
-    {
-      linkClick: async (page) => {
-        await page
-          .getByTestId('navColoringTest-navbar.volunteering')
-          .getByRole('link', {name: 'Mitmachen'})
-          .hover();
-        page.getByRole('link', {name: 'Vereinsmitglied werden'}).click();
-      },
-      page: '**/mitmachen/mitglied-werden/',
-    },
   ];
 
   test('smoke test all nav links', async ({page}) => {
