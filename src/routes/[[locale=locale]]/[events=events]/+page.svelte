@@ -79,13 +79,11 @@
           <Events_Card {...event} />
         {/each}
       {/if}
-      {#if events.future}
-        <Pagination
-          items={events.future}
-          perPage={8}
-          bind:trimmedItems={trimmedFutureData}
-        />
-      {/if}
+      <Pagination
+        items={events.future}
+        perPage={8}
+        bind:trimmedItems={trimmedFutureData}
+      />
     </div>
   {/if}
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
@@ -100,13 +98,11 @@
           <Events_Card {...event} />
         {/each}
       {/if}
-      {#if events.future}
-        <Pagination
-          items={events.past}
-          perPage={8}
-          bind:trimmedItems={trimmedPastData}
-        />
-      {/if}
+      <Pagination
+        items={events.past}
+        perPage={8}
+        bind:trimmedItems={trimmedPastData}
+      />
     </div>
   {/if}
 {/if}
