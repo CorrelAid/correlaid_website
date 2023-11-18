@@ -7,7 +7,6 @@
   export let gradient_only;
   export let height;
   export let text;
-  export let image_alt;
   export let buttons = [];
   export let correlaidx = false;
   export let image = void 0;
