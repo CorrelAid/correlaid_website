@@ -19,10 +19,10 @@ export const bot_nav = [
     key: 'navbar.education',
     category: 'education',
     children: [
-      'navbar.education.resources',
       'navbar.education.learning_r',
-      'navbar.education.tidy_tuesday',
       'navbar.education.mentoring',
+      'navbar.education.tidy_tuesday',
+      'navbar.education.resources',
     ],
   },
   {
