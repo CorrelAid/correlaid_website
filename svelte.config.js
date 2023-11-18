@@ -24,6 +24,8 @@ dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
 const excl = [
   'misc.read_more',
+  'misc.partners',
+  'misc.financial_supporters',
   'access.close',
   'access.open',
   'access.next',
