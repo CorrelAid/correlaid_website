@@ -46,7 +46,7 @@
       </p>
     {/if}
     <Box>
-      <p class="flex flex-col space-y-2 md:flex-row md:space-x-4 md:space-y-0">
+      <p class="flex flex-col space-y-2 md:flex-row md:space-x-3 md:space-y-0">
         <span class="flex">
           <span class="my-auto flex fill-neutral" arria-hidden="true"
             ><Calendar width={19} height={19} /></span
