@@ -46,7 +46,7 @@
 <footer class="w-screen border-t border-neutral-25">
   <div class=" flex pt-12">
     <ul
-      class="mx-auto flex flex-wrap items-center justify-center gap-3 text-sm font-light text-base-content md:gap-4 md:text-base"
+      class="mx-auto flex flex-wrap items-center justify-center gap-3 px-4 text-sm font-light text-base-content md:gap-4 md:text-base"
     >
       {#each links as link}
         <li class="px-2">
@@ -76,10 +76,27 @@
       {/each}
     </div>
   </div>
-
+  <div class=" flex pb-5">
+    <ul
+      class="mx-auto flex items-center gap-3 text-sm font-light text-base-content md:text-base"
+    >
+      <a
+        class="transition hover:text-secondary"
+        href="https://github.com/CorrelAid/correlaid_website"
+      >
+        Website Source
+      </a>
+      <a
+        class="transition hover:text-secondary"
+        href="https://github.com/CorrelAid/correlaid_website/issues"
+      >
+        Bugreport
+      </a>
+    </ul>
+  </div>
   <div class=" flex pb-10">
     <ul
-      class="mx-auto flex items-center gap-6 text-sm font-light tracking-wide text-base-content md:text-base"
+      class="mx-auto flex items-center gap-3 text-sm font-light tracking-wide text-base-content md:text-base"
     >
       <li>CorrelAid. © {new Date().getFullYear()}</li>
     </ul>
