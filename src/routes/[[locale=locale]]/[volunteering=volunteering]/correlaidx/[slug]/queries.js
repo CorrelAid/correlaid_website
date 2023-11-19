@@ -3,7 +3,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 	Events(sort: ["date"], 
 		filter: {
 			local_chapters: {
-				Local_Chapters_id: { translations: { city: { _eq: $slug } } }
+				Local_Chapters_id: { short_id: { _eq: $slug } } 
 			},
             date: {_gte: "$NOW"}
 		}
@@ -26,7 +26,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 			}
 		}
 	}
-	Local_Chapters(filter: { translations: { city: { _eq: $slug } } }) {
+	Local_Chapters(filter: { short_id: { _eq: $slug }  }) {
 		Projects(
 			filter: { Projects_id :{status: { _in: ["published", "published_anon"] } }}
 		) {
