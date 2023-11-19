@@ -18,7 +18,7 @@ test.describe('test lc chapter pages', () => {
 
     await page.goto('/mitmachen/correlaidx/', {waitUntil: 'networkidle'});
     await page.getByRole('link', {name: 'Rhein-Main'}).click();
-    await page.waitForURL('**/mitmachen/correlaidx/rhein-main/', {
+    await page.waitForURL('**/mitmachen/correlaidx/rheinmain/', {
       waitUntil: 'networkidle',
     });
     await expect(page.getByRole('heading', {name: 'Rhein-Main'})).toHaveCount(
