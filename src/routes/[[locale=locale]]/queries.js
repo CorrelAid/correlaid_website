@@ -48,6 +48,7 @@ query LatestUpdates(
 		tags
 		local_chapters {
 			Local_Chapters_id {
+				short_id
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}

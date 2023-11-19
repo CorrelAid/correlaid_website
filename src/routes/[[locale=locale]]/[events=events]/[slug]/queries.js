@@ -18,6 +18,7 @@ query EventDetails($slug: String = "ringvorlesung-sose23", $language: String = "
 		tags
 		local_chapters {
 			Local_Chapters_id {
+				short_id
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}

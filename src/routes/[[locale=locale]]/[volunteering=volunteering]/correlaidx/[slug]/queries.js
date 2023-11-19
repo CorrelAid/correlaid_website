@@ -20,6 +20,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 		tags
 		local_chapters {
 			Local_Chapters_id {
+				short_id
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}
@@ -78,6 +79,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 				}
 				Local_Chapters {
 					Local_Chapters_id{
+						short_id
 						translations(filter: { languages_code: { code: { _eq: $language }}}){
 							city
 						}
@@ -93,6 +95,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 		}
 		founded
 		lc_email
+		short_id
 		local_administrators {
 			Local_Administrators_id {
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {

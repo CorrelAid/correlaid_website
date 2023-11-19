@@ -11,6 +11,7 @@
   export let subtitle;
   export let resp_unit = '';
   export let correlaidx_city = '';
+  export let correlaidx_short_id = '';
   export let language = '';
 
   let href_resp_unit = '';
@@ -20,7 +21,7 @@
     href_resp_unit = '';
   } else if (resp_unit == 'correlaidx') {
     resp_unit = `CorrelAidX ${correlaidx_city}`;
-    href_resp_unit = gen_lc_href($page.params, correlaidx_city);
+    href_resp_unit = gen_lc_href($page.params, correlaidx_short_id);
   } else if (resp_unit == 'remote_office') {
     resp_unit = 'Remote Office';
     href_resp_unit = $t('navbar.about.team').url;
