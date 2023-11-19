@@ -65,11 +65,9 @@ const queries = {
   }
   `,
   lcs: `
-  query LcSlugs($language: String = "de-DE") {
+  query LcSlugs {
 	  Local_Chapters {
-		  translations(filter: { languages_code: { code: { _eq: $language } } }) {
-  			slug: city
-  		}
+      slug: short_id
   	}
   }
   `,
@@ -150,21 +148,13 @@ async function addBlogRoutes(routes) {
 }
 
 async function addLcRoutes(routes) {
-  const germanResults = await queryCmsGraphQl(queries['lcs'], {
-    language: 'de-DE',
-  });
+  const germanResults = await queryCmsGraphQl(queries['lcs']);
   for (const lc of germanResults['data']['Local_Chapters']) {
-    for (const t of lc['translations']) {
-      routes.push(`/mitmachen/correlaidx/${t.slug.toLowerCase()}`);
-    }
+    routes.push(`/mitmachen/correlaidx/${lc.slug.toLowerCase()}`);
   }
-  const englishResults = await queryCmsGraphQl(queries['lcs'], {
-    language: 'en-US',
-  });
-  for (const post of englishResults['data']['Local_Chapters']) {
-    for (const t of post['translations']) {
-      routes.push(`/en/volunteering/correlaidx/${t.slug.toLowerCase()}`);
-    }
+  const englishResults = await queryCmsGraphQl(queries['lcs']);
+  for (const lc of englishResults['data']['Local_Chapters']) {
+    routes.push(`/en/volunteering/correlaidx/${lc.slug.toLowerCase()}`);
   }
 }
 

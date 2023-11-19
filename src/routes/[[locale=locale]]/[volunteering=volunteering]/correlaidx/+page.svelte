@@ -23,7 +23,7 @@
   <div class="">
     <div class="mb-16 grid grid-cols-2 gap-7">
       {#each local_chapters as local_chapter}
-        <a href={gen_lc_href($page.params, local_chapter.translations[0].city)}>
+        <a href={gen_lc_href($page.params, local_chapter.short_id)}>
           <Box type={'correlaidx'}>
             <h2 class="">{local_chapter.translations[0].city}</h2>
           </Box>

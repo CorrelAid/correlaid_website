@@ -49,6 +49,7 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		}
 		Local_Chapters {
 			Local_Chapters_id {
+				short_id
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}

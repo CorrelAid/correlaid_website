@@ -49,6 +49,10 @@
     {searchProperty: 'summary', multiple: false},
     {searchProperty: 'organization', multiple: false},
   ];
+
+  $: console.log('projects', projects);
+  $: console.log('filteredData', filteredData);
+  $: console.log('trimmedData', trimmedData);
 </script>
 
 <Filter

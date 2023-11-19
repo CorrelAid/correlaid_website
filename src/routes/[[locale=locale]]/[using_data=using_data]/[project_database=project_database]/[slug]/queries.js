@@ -68,6 +68,7 @@ query Project(
 		Local_Chapters {
 			Local_Chapters_id {
 				id
+				short_id
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}

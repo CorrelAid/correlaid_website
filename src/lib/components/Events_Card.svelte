@@ -14,6 +14,7 @@
   export let tags;
   export let language;
   export let correlaidx = [];
+  export let correlaidx_short_id = [];
   import Langs from '$lib/components/Langs.svelte';
   let proc_date;
   let proc_end_date;
@@ -71,7 +72,7 @@
         {#each correlaidx as lc, i}
           <a
             class="text-medium font-semibold text-base-content transition hover:text-primary"
-            href={gen_lc_href($page.params, lc)}
+            href={gen_lc_href($page.params, correlaidx_short_id[i])}
           >
             CorrelAidX {lc}</a
           >{#if i < correlaidx.length - 1}{', '} {/if}

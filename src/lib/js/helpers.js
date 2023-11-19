@@ -223,13 +223,13 @@ export function handle_lang(entries, params) {
   return entries;
 }
 
-export function gen_lc_href(params, city) {
+export function gen_lc_href(params, short_id) {
   const lc_href = [
     get_locale(params) == 'de' ? '' : '/en',
     get_locale(params) == 'de'
       ? '/mitmachen/correlaidx/'
       : '/volunteering/correlaidx/',
-    city.toLowerCase(),
+    short_id.toLowerCase(),
   ].join('');
   return lc_href;
 }

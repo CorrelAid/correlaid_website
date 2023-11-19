@@ -3,7 +3,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 	Events(sort: ["date"], 
 		filter: {
 			local_chapters: {
-				Local_Chapters_id: { translations: { city: { _eq: $slug } } }
+				Local_Chapters_id: { short_id: { _eq: $slug } } 
 			},
             date: {_gte: "$NOW"}
 		}
@@ -20,13 +20,14 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 		tags
 		local_chapters {
 			Local_Chapters_id {
+				short_id
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {
 					city
 				}
 			}
 		}
 	}
-	Local_Chapters(filter: { translations: { city: { _eq: $slug } } }) {
+	Local_Chapters(filter: { short_id: { _eq: $slug }  }) {
 		Projects(
 			filter: { Projects_id :{status: { _in: ["published", "published_anon"] } }}
 		) {
@@ -78,6 +79,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 				}
 				Local_Chapters {
 					Local_Chapters_id{
+						short_id
 						translations(filter: { languages_code: { code: { _eq: $language }}}){
 							city
 						}
@@ -93,6 +95,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 		}
 		founded
 		lc_email
+		short_id
 		local_administrators {
 			Local_Administrators_id {
 				translations(filter: { languages_code: { code: { _eq: $language } } }) {

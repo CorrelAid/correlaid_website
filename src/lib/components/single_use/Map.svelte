@@ -104,7 +104,7 @@
     map.on('click', 'lcs', (e) => {
       const lcs = e.features[0];
 
-      const lc_href = gen_lc_href($page.params, lcs.properties.city);
+      const lc_href = gen_lc_href($page.params, lcs.properties.short_id);
       const a_class = [
         'font-bold',
         'text-tertiary',

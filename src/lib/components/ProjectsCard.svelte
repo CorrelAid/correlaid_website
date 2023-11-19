@@ -15,10 +15,13 @@
   export let organization = void 0;
   export let summary = void 0;
   export let correlaidx = [];
+  export let correlaidx_short_id = [];
   export let project_id = void 0;
   export let repo = void 0;
   export let post_slug = void 0;
   export let podcast_href = void 0;
+
+  $: console.log(correlaidx_short_id, correlaidx);
 
   // $: if (organization === 'undefined'){
   //   organization_name = $t('organization.anonymous').text;
@@ -86,10 +89,11 @@
     {/if}
     {#if correlaidx.length !== 0}
       <div class="pb-3">
-        {#each correlaidx as lc}
+        {#each correlaidx as lc, i}
           <a
             class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
-            href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
+            href={gen_lc_href($page.params, correlaidx_short_id[i])}
+            >CorrelAidX {lc}</a
           >
         {/each}
       </div>

@@ -42,6 +42,9 @@ function parseLcSubElements(
     }
     return lc.Local_Chapters_id.translations[0].city;
   });
+  parsedElement['correlaidx_short_id'] = lcSbuElementsRaw.map((lc) => {
+    return lc.Local_Chapters_id.short_id;
+  });
 }
 
 export function events(event) {
@@ -98,7 +101,14 @@ function anonymizeProjectCard(parsedProjectCard, lang) {
   // of internal projects would be used negating the anonymity
   anonymizedProjectCard['isInternal'] = false;
 
-  for (const field of ['summary', 'project_id', 'correlaidx', 'type', 'data']) {
+  for (const field of [
+    'summary',
+    'project_id',
+    'correlaidx',
+    'correlaidx_short_id',
+    'type',
+    'data',
+  ]) {
     if (field in parsedProjectCard) {
       anonymizedProjectCard[field] = parsedProjectCard[field];
     }
@@ -209,6 +219,8 @@ export function workshops(workshop) {
     // Can this really be missing?
     parsedWorkshop['correlaidx_city'] =
       workshop.local_chapters[0].Local_Chapters_id.translations[0].city;
+    parsedWorkshop['correlaidx_short_id'] =
+      workshop.local_chapters[0].Local_Chapters_id.short_id;
   }
   return parsedWorkshop;
 }
