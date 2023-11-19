@@ -22,7 +22,7 @@ export async function load({params}) {
       properties: {
         founded: local_chapters[i].founded,
         name: `CorrelAidX ${local_chapters[i].translations[0].city}`,
-        city: local_chapters[i].translations[0].city,
+        short_id: local_chapters[i].short_id,
       },
     };
     geo_json.features.push(obj);
