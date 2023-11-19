@@ -1,4 +1,5 @@
 import translations from '$lib/data/translations';
+import page_keys from '$lib/data/page_keys';
 import {PUBLIC_API_URL} from '$env/static/public';
 
 /**
@@ -21,8 +22,20 @@ export function translate(locale, key, vars) {
   if (!key) throw new Error('no key provided to $t()');
   if (!locale) throw new Error(`no translation for key "${key}"`);
 
+  const translateObject = {};
+
+  translateObject['en'] = {
+    ...translations['en'],
+    ...page_keys['en'],
+  };
+
+  translateObject['de'] = {
+    ...translations['de'],
+    ...page_keys['de'],
+  };
+
   // Grab the translation from the translations object.
-  const translation = translations[locale][key];
+  const translation = translateObject[locale][key];
 
   if (!translation)
     throw new Error(`no translation found for ${locale}.${key}`);

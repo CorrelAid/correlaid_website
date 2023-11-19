@@ -1,8 +1,7 @@
-import _ from 'lodash';
 import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
-import translations from './src/lib/data/translations.js';
+import page_keys from './src/lib/data/page_keys.js';
 import {fetch} from 'undici';
 
 import path from 'node:path';
@@ -22,39 +21,9 @@ dotenv.config({
 dotenv.config({path: path.resolve(process.cwd(), '.env.local')});
 dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
-const excl = [
-  'misc.read_more',
-  'misc.partners',
-  'misc.financial_supporters',
-  'access.close',
-  'access.open',
-  'access.next',
-  'access.previous',
-  'access.location',
-  'access.online',
-  'access.sign_up',
-  'access.language',
-  'access.date',
-  'access.time',
-  'access.salary',
-  'access.registration',
-  'access.workload',
-  'access.language_',
-  'filter.language',
-  'filter.type',
-  'filter.no_results',
-  'filter.placeholder',
-  'filter.responsible',
-  'filter.search',
-  'filter.data_type',
-  'filter.organization_sector',
-  'organization.anonymous',
-  'organization.internalProject',
-];
-
 const mainRoutes = {
-  de: _.omit(translations['de'], excl),
-  en: _.omit(translations['en'], excl),
+  de: page_keys['de'],
+  en: page_keys['en'],
 };
 
 const URL = `${process.env.PUBLIC_API_URL}/graphql`;
