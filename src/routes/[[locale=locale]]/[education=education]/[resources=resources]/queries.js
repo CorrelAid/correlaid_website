@@ -7,6 +7,7 @@ query Workshops($language: String = "de-DE") {
 		tags
 		resource_link
 		responsible_unit
+		target_audience
 		local_chapters {
 			Local_Chapters_id {
 				short_id

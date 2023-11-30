@@ -60,8 +60,6 @@ export function filterStringSearch(searchTerm, searchOptions, objects) {
 }
 
 export function filter(data, selects, searchTerm, searchOptions) {
-  console.log('hu');
-  console.log(data);
   let data_ = structuredClone(data);
   if (searchTerm) {
     data_ = filterStringSearch(searchTerm, searchOptions, data_);
@@ -77,7 +75,6 @@ export function filter(data, selects, searchTerm, searchOptions) {
       }
     }
   }
-  console.log(data_);
   return data_;
 }
 

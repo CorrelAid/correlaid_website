@@ -209,6 +209,7 @@ export function workshops(workshop) {
   const parsedWorkshop = {
     title: workshop.name,
     subtitle: workshop.teaser,
+    target_audience: workshop.target_audience,
     language: workshop.language,
     href: workshop.resource_link,
     resp_unit: workshop.responsible_unit,
