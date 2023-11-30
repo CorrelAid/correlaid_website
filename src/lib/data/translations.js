@@ -29,7 +29,7 @@ export default {
     'organization.internalProject': {text: 'Internes Projekt'},
     'filter.target_audience': {text: 'Zielgruppe'},
     'target_audience.technical': {text: 'Technisch'},
-    'target_audience.non-technical': {text: 'Nicht technisch'},
+    'target_audience.non-technical': {text: 'Nicht-Technisch'},
     'target_audience.volunteers': {text: 'Volunteers'},
     'target_audience.civil_society': {text: 'Zivilgesellschaft'},
   },
