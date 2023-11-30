@@ -8,6 +8,7 @@
 
   export let title;
   export let tags;
+  export let target_audience;
   export let subtitle;
   export let resp_unit = '';
   export let correlaidx_city = '';
@@ -72,6 +73,12 @@
       </h3>
     {/if}
     <div class="mb-2">
+      {#each target_audience as audience}
+        <span
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
+          >{$t(`target_audience.${audience}`).text}</span
+        >
+      {/each}
       {#each tags as tag}
         <span
           class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"

@@ -20,8 +20,6 @@
   let trimmedPastData;
   let trimmedFutureData;
 
-  $: console.log(events_data);
-
   // Needs to stay client because it depends on the current date
   // and can therefore not be statically build
   // using store data that was manipulated by component

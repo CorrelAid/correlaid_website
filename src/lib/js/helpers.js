@@ -273,3 +273,17 @@ export function convertContractType(type, locale) {
     }
   }
 }
+
+export function translateSelectLabels(select, locale, param) {
+  if (param == 'target_audience') {
+    const select_ = JSON.parse(JSON.stringify(select));
+    for (const item of select_) {
+      let label = item.label.replace(/ /g, '_');
+      label = label.toLowerCase();
+      item.label = translate(locale, `${param}.${label}`, {}).text;
+    }
+    return select_;
+  } else {
+    return select;
+  }
+}
