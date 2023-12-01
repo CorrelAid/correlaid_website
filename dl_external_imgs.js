@@ -38,8 +38,7 @@ async function postbuild() {
   // Create an array of promises for file processing
   const filePromises = files.map(async (file, index) => {
     const fileContent = await readFile(file, 'utf8');
-    const printMsg = `Processing file ${index + 1} of ${files.length}`;
-    await processFile(file, fileContent, printMsg);
+    await processFile(file, fileContent);
   });
 
   // Execute file processing promises in parallel
@@ -48,8 +47,7 @@ async function postbuild() {
   console.log('Done with replacement of images from external sources');
 }
 
-async function processFile(filePath, fileContent, printMsg) {
-  console.log(printMsg);
+async function processFile(filePath, fileContent) {
   // find all image Urls
   const imageUrls = await findImageUrls(fileContent);
 
@@ -150,8 +148,6 @@ async function replaceURL(imageUrl, imagePath, filePath) {
 
   // replace the imageUrl with the imagePath
   const newFileContent = fileContent.replace(imageUrl, imagePath);
-
-  console.log('replaced: ' + imageUrl + ' with: ' + imagePath);
 
   // write the new file content
   await writeFile(filePath, newFileContent);
