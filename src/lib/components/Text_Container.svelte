@@ -27,7 +27,7 @@
               alt={image_alt ? image_alt : ''}
               src={gen_img_url(
                 title_image.id,
-                'fit=inside&width=1200&height=675&format=png',
+                'fit=inside&width=1200&height=675',
               )}
               title={title_image.description}
               class="h-full w-full rounded border-4 border-neutral"

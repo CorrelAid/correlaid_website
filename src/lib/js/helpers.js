@@ -127,7 +127,7 @@ export function get_locale(params) {
 }
 
 export function gen_img_url(id, transform = '') {
-  return `${PUBLIC_API_URL}/assets/${id}?${transform}`;
+  return `${PUBLIC_API_URL}/assets/${id}?format=webp&${transform}`;
 }
 
 /**
