@@ -244,6 +244,7 @@ export function parseBlogPostPage(blogPostPage) {
         'content_creators',
       ),
       post: blogPostPage.Blog_Posts[0],
+      title_image: gen_img_url(blogPostPage.Blog_Posts[0].title_image.id),
     };
     if (typeof parsedBlogPostPage.contentAllLanguages === 'undefined') {
       throw new Error('Blog post does not contain content in any language');
@@ -251,6 +252,7 @@ export function parseBlogPostPage(blogPostPage) {
   } catch (err) {
     reportParseError(err, 'For blog post page', blogPostPage);
   }
+
   return parsedBlogPostPage;
 }
 

@@ -1,7 +1,6 @@
 <script>
   import Carousel from 'svelte-carousel';
   import {browser} from '$app/environment';
-  import {gen_img_url} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
   export let text_only = false;
   export let quotes;
@@ -13,6 +12,7 @@
     carousel.goToPrev();
   };
   let carousel;
+  console.log(quotes);
 </script>
 
 <div
@@ -28,23 +28,22 @@
               {#if text_only === false}
                 <div class="grid px-4 md:grid-cols-10 md:space-x-6">
                   <div class="flex flex-col items-center md:col-span-4">
-                    {#if quote.quotes_id.image}
+                    {#if quote.image}
                       <div
                         class="relative w-full"
                         style="padding-bottom: 56.25%;"
                       >
                         <img
                           class="absolute left-0 top-0 z-0 h-full w-full"
-                          alt="Logo/Photo {quote.quotes_id.translations[0]
-                            .subtitle}"
-                          src={gen_img_url(quote.quotes_id.image.id)}
+                          alt="Logo/Photo {quote.subtitle}"
+                          src={quote.image}
                         />
                       </div>
-                      {#if quote.quotes_id.image.description}
+                      {#if quote.image.description}
                         <div class="right-0 z-30 w-full opacity-100">
                           <span
                             class="z-0 line-clamp-1 block rounded-b bg-white px-1 py-0.5 text-xs text-black opacity-100"
-                            >{quote.quotes_id.image.description}</span
+                            >{quote.image.description}</span
                           >
                         </div>
                       {/if}
@@ -57,24 +56,24 @@
                     <p
                       class="text-md line-clamp-5 drop-shadow-md md:line-clamp-4"
                     >
-                      {quote.quotes_id.translations[0].text}
+                      {quote.text}
                     </p>
                     <p
                       class="mt-0.5 line-clamp-1 text-lg font-semibold drop-shadow-md"
                     >
-                      {quote.quotes_id.translations[0].subtitle}
+                      {quote.subtitle}
                     </p>
                   </div>
                 </div>
               {:else}
                 <div class="px-3">
                   <p class="line-clamp-7 pt-8 text-lg drop-shadow-md">
-                    {quote.quotes_id.translations[0].text}
+                    {quote.text}
                   </p>
                   <p
                     class="line-clamp-7 pt-6 text-lg font-semibold drop-shadow-md"
                   >
-                    {quote.quotes_id.translations[0].subtitle}
+                    {quote.subtitle}
                   </p>
                 </div>
               {/if}

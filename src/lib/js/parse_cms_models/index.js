@@ -22,7 +22,7 @@ export function heros(section) {
     buttons: parseHeroButtons(section.item.buttons),
   };
   if (section.item.image) {
-    heroParams['image'] = section.item.image;
+    heroParams['image'] = gen_img_url(section.item.image.id);
     heroParams['image_desc'] = section.item.image.description;
     heroParams['image_alt'] = section.item.translations[0].image_alt;
   }
@@ -39,7 +39,7 @@ export function lcHeros(local_chapter) {
   };
 
   if (local_chapter.hero_image) {
-    parsedHero['image'] = local_chapter.hero_image;
+    parsedHero['image'] = gen_img_url(local_chapter.hero_image.id);
     parsedHero['image_desc'] = local_chapter.hero_image.description;
   }
 
@@ -48,7 +48,7 @@ export function lcHeros(local_chapter) {
 
 function parseCarouselHero() {
   const parsedHero = {
-    image: element.carousel_element_id.hero.image,
+    image: gen_img_url(element.carousel_element_id.hero.image.id),
     image_desc: element.carousel_element_id.hero.image.description,
     text: element.carousel_element_id.hero.translations[0].text,
     height: element.carousel_element_id.hero.height,
@@ -103,8 +103,21 @@ export function carousel(section) {
   };
 }
 export function quote_carousels(section) {
+  // loop over quotes
+  const quotes = [];
+  for (const quote of section.item.quotes) {
+    const temp = {
+      text: quote.quotes_id.translations[0].text,
+      subtitle: quote.quotes_id.translations[0].subtitle,
+    };
+    if (!section.item.text_only) {
+      temp.image = gen_img_url(quote.quotes_id.image.id);
+      temp.image_desc = quote.quotes_id.image.description;
+    }
+    quotes.push(temp);
+  }
   return {
-    quotes: section.item.quotes,
+    quotes: quotes,
     text_only: section.item.text_only,
   };
 }
