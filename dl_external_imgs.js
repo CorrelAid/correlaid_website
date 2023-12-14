@@ -134,15 +134,18 @@ async function findUrls(fileContent, filePath) {
       } else if (contentType.includes('pdf')) {
         console.log(`${url} is a pdf`);
         Urls.push({url: url, type: 'pdf'});
+      } else if (contentType.includes('application/json')) {
+        throw new Error(`API may be under pressure`);
       } else {
-        console.log("It's neither an image nor a PDF");
-
         throw new Error(`Unhandled type ${contentType}: ${url} in ${filePath}`);
       }
     } catch (error) {
       console.error('Error:', error);
       // Retry the request only if it is a timeout error and the maximum number of retries has not been reached
-      if (error.message === `Request for ${url} timed out`) {
+      if (
+        error.message === `Request for ${url} timed out` ||
+        error.message === `API may be under pressure`
+      ) {
         if (retryCount < maxRetries) {
           retryCount++;
           console.log(`Retrying request for ${url}`);

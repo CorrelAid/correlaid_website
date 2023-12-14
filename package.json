@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && node dl_external_imgs.js",
     "preview": "vite preview",
     "format": "npx prettier -w .",
     "format_check": "npx prettier --check .",
@@ -18,8 +18,7 @@
     "test": "npx vitest run",
     "e2e": "npx playwright test",
     "serve-static": "npx serve .svelte-kit/cloudflare",
-    "build-and-test": "run-s build e2e",
-    "postbuild": "node dl_external_imgs.js"
+    "build-and-test": "run-s build e2e"
   },
   "devDependencies": {
     "@playwright/test": "^1.33.0",
