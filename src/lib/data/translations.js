@@ -27,6 +27,11 @@ export default {
     'filter.organization_sector': {text: 'Sektor der Organisation'},
     'organization.anonymous': {text: 'Anonyme Organisation'},
     'organization.internalProject': {text: 'Internes Projekt'},
+    'filter.target_audience': {text: 'Zielgruppe'},
+    'target_audience.technical': {text: 'Technisch'},
+    'target_audience.non-technical': {text: 'Nicht-Technisch'},
+    'target_audience.volunteers': {text: 'Volunteers'},
+    'target_audience.civil_society': {text: 'Zivilgesellschaft'},
   },
   en: {
     'misc.read_more': {text: 'Read more'},
@@ -56,5 +61,10 @@ export default {
     'filter.organization_sector': {text: 'Sector of Organization'},
     'organization.anonymous': {text: 'Anonymous Organization'},
     'organization.internalProject': {text: 'Internal Project'},
+    'filter.target_audience': {text: 'Target Audience'},
+    'target_audience.technical': {text: 'Technical'},
+    'target_audience.non-technical': {text: 'Non-Technical'},
+    'target_audience.volunteers': {text: 'Volunteers'},
+    'target_audience.civil_society': {text: 'Civil Society'},
   },
 };

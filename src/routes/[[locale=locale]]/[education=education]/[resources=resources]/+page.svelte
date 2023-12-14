@@ -32,6 +32,12 @@
       multiple: false,
       param: 'language',
     },
+    {
+      title: $t('filter.target_audience').text,
+      searchable: false,
+      multiple: true,
+      param: 'target_audience',
+    },
   ];
 
   const searchOptions = [

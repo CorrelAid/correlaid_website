@@ -1,6 +1,6 @@
 <script>
   import {page} from '$app/stores';
-  import {t} from '$lib/stores/i18n';
+  import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
   import {
@@ -9,6 +9,7 @@
     setUrlParams,
     applyUrlSearchParams,
   } from '$lib/js/filter.js';
+  import {translateSelectLabels} from '$lib/js/helpers.js';
   import Select from 'svelte-select';
   import _ from 'lodash';
 
@@ -24,6 +25,8 @@
   let searchTerm;
 
   const values = {};
+
+  $: console.log(selects);
 
   onMount(async () => {
     // when searchParams is set, set them in filter
@@ -113,7 +116,7 @@
           <Select
             showChevron
             placeholder={$t('filter.placeholder').text}
-            items={select.items}
+            items={translateSelectLabels(select.items, $locale, select.param)}
             searchable={select.searchable}
             multiple={select.multiple}
             bind:value={values[select.param]}
