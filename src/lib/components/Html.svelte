@@ -11,6 +11,7 @@
   const li = 'marker:prose-li:text-secondary';
   const typography = `${h1} ${h2} ${a} ${li}`;
 
+  // This is not prebuilt
   function post_process(node) {
     node.querySelectorAll('pre code').forEach((block) => {
       hljs.highlightElement(block);
@@ -22,8 +23,10 @@
         caption.innerHTML = block.getAttribute('title');
         caption.className = 'text-xs text-base-content mt-2';
         figure.appendChild(block.cloneNode(true));
+
         block.parentNode.replaceChild(figure, block);
         figure.appendChild(caption);
+        //
       }
     });
 

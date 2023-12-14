@@ -36,7 +36,7 @@
 
 <TextContainer
   title={langContent.title}
-  title_image={blogPostPage.post.title_image}
+  title_image={blogPostPage.title_image}
   image_alt={langContent.image_alt}
   teaser={langContent.teaser}
 >

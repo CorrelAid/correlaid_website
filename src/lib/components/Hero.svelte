@@ -2,7 +2,6 @@
   import LinkButton from './Link_Button.svelte';
   import {header_height} from '$lib/stores/dims';
   import Info from '$lib/svg/Info.svelte';
-  import {gen_img_url} from '$lib/js/helpers';
   import CorrelAidXLogo from '$lib/svg/CorrelAidX_Logo.svelte';
   export let gradient_only;
   export let height;
@@ -11,13 +10,6 @@
   export let correlaidx = false;
   export let image = void 0;
   export let image_desc = void 0;
-  let image_id;
-  // TODO: Image ID remains undefined if image is undefined or null
-  // This will create an invalid URL below in gen_img_url which is hard
-  // to distinguish from incorrect urls through id errors for instance
-  $: if (image != null) {
-    image_id = image.id;
-  }
 
   let c_hidden = 'hidden';
   let aria = 'false';
@@ -40,7 +32,7 @@
   {#if gradient_only === false}
     <span
       class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
-      style={`background-image: url(${gen_img_url(image_id)})`}
+      style={`background-image: url(${image})`}
     />
     {#if image_desc}
       <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 lg:block">

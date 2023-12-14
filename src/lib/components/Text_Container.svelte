@@ -1,6 +1,5 @@
 <script>
   import Html from '$lib/components/Html.svelte';
-  import {gen_img_url} from '$lib/js/helpers';
   export let title_image = null;
   export let teaser;
   export let image_alt = void 0;
@@ -25,10 +24,7 @@
           <div class="offset a aspect-h-9 aspect-w-16 relative">
             <img
               alt={image_alt ? image_alt : ''}
-              src={gen_img_url(
-                title_image.id,
-                'fit=inside&width=1200&height=675&format=png',
-              )}
+              src={title_image}
               title={title_image.description}
               class="h-full w-full rounded border-4 border-neutral"
             />

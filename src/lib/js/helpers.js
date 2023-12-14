@@ -1,6 +1,7 @@
 import translations from '$lib/data/translations';
 import page_keys from '$lib/data/page_keys';
 import {PUBLIC_API_URL} from '$env/static/public';
+import * as cheerio from 'cheerio';
 
 /**
  * Extracts the last substring after /
@@ -127,7 +128,7 @@ export function get_locale(params) {
 }
 
 export function gen_img_url(id, transform = '') {
-  return `${PUBLIC_API_URL}/assets/${id}?${transform}`;
+  return `${PUBLIC_API_URL}/assets/${id}?format=webp&${transform}`;
 }
 
 /**
@@ -272,6 +273,37 @@ export function convertContractType(type, locale) {
         return type;
     }
   }
+}
+
+export function processHtml(html) {
+  const $ = cheerio.load(html);
+
+  // Process <img> tags
+  $('img').each((index, img) => {
+    const $img = $(img);
+    const title = $img.attr('title');
+
+    if (title) {
+      const $figure = $('<figure>');
+      const $caption = $('<figcaption>')
+        .html(title)
+        .addClass('text-xs text-base-content mt-2');
+
+      $figure.append($img.clone());
+      $figure.append($caption);
+
+      $img.replaceWith($figure);
+    }
+
+    // Add query to img src URL
+    const src = $img.attr('src');
+    const imgWithQuery = src.includes('?')
+      ? `${src}&format=webp`
+      : `${src}?format=webp`;
+    $img.attr('src', imgWithQuery);
+  });
+
+  return $.html();
 }
 
 export function translateSelectLabels(select, locale, param) {
