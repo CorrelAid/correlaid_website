@@ -19,7 +19,7 @@ dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
 const URL = `${process.env.PUBLIC_API_URL}/assets`;
 
-const buildDirectory = '.svelte-kit/cloudflare';
+const buildDirectory = process.env.BUILD_DIR || '.svelte-kit/cloudflare';
 const newAssetsDirectory = buildDirectory + '/assets';
 
 async function postbuild() {
