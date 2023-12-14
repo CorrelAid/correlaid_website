@@ -1,6 +1,6 @@
 import * as parseModel from './parse_cms_models';
 import _ from 'lodash';
-import {gen_img_url} from './helpers.js';
+import {gen_img_url, processHtml} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 
 function reportParseError(err, description, rawInput) {
@@ -135,7 +135,7 @@ export function parseProject(project) {
     parsedProject = {
       title: project.translations[0].title,
       teaser: project.translations[0].summary,
-      description: project.translations[0].description,
+      description: processHtml(project.translations[0].description),
       organization: {
         name: project.Organizations[0].Organizations_id.translations[0].name,
         description:
@@ -222,6 +222,7 @@ export function parseLocalChapterPage(localChapterPage, params) {
  */
 export function parseEventPage(eventPage) {
   const parsedEventPage = eventPage.Events[0];
+  parsedEventPage['description'] = processHtml(parsedEventPage.description);
   return parsedEventPage;
 }
 
@@ -248,6 +249,13 @@ export function parseBlogPostPage(blogPostPage) {
     };
     if (typeof parsedBlogPostPage.contentAllLanguages === 'undefined') {
       throw new Error('Blog post does not contain content in any language');
+    }
+    for (const post in parsedBlogPostPage.contentAllLanguages) {
+      if (parsedBlogPostPage.contentAllLanguages.hasOwnProperty(post)) {
+        parsedBlogPostPage.contentAllLanguages[post].text = processHtml(
+          parsedBlogPostPage.contentAllLanguages[post].text,
+        );
+      }
     }
   } catch (err) {
     reportParseError(err, 'For blog post page', blogPostPage);

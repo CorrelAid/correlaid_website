@@ -1,4 +1,4 @@
-import {gen_img_url} from '../helpers.js';
+import {gen_img_url, processHtml} from '../helpers.js';
 export * from './people';
 export * from './cards';
 
@@ -89,7 +89,7 @@ export function timelines(section) {
 }
 export function wysiwyg(section) {
   return {
-    source: section.item.translations[0].content,
+    source: processHtml(section.item.translations[0].content),
     options: '',
   };
 }
