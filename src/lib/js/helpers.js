@@ -275,7 +275,6 @@ export function convertContractType(type, locale) {
   }
 }
 
-
 export function processHtml(html) {
   const $ = cheerio.load(html);
 
@@ -305,7 +304,7 @@ export function processHtml(html) {
   });
 
   return $.html();
-}  
+}
 
 export function translateSelectLabels(select, locale, param) {
   if (param == 'target_audience') {
@@ -319,5 +318,4 @@ export function translateSelectLabels(select, locale, param) {
   } else {
     return select;
   }
-
 }
