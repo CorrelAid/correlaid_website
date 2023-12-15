@@ -40,12 +40,14 @@
 
   // if parentHeight is set, detect overflow
   $: if (parentHeight) {
-    const overflow = detectElementOverflow(overflowChild, overflowParent);
-    //
-    if (overflow.overflowBottom > 0) {
-      overflowing = true;
-      console.log(overflowing);
-      console.log(overflow.overflowBottom);
+    if (overflowParent && overflowChild) {
+      const overflow = detectElementOverflow(overflowChild, overflowParent);
+      //
+      if (overflow.overflowBottom > 0) {
+        overflowing = true;
+        console.log(overflowing);
+        console.log(overflow.overflowBottom);
+      }
     }
   }
 
