@@ -16,6 +16,8 @@
   /** @type {import('./$types').PageData} */
   export let data;
   $: project = data;
+
+  $: console.log(data);
 </script>
 
 <TextContainer title={project.title} teaser={project.teaser}>
@@ -53,7 +55,11 @@
     {/if}
 
     <div class="mb-5">
-      <ProjectLinks {...project.projectLinks} />
+      <ProjectLinks
+        project_outputs={project.projectOutputs}
+        podcast_href={project.podcast_href}
+        post_slug={project.post_slug}
+      />
     </div>
     {#if project.organization}
       <Box>
@@ -69,19 +75,21 @@
 
   <Html source={project.description} options={'mx-auto'} slot="main" />
 </TextContainer>
-<div class="container mx-auto pb-12">
-  <div class="px-4">
-    <Box>
-      <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>
-      {#each project.projectContacts as person}
-        <div class="flex items-center">
-          <span class="mr-2">
-            {person.name}
-            {person.pronouns ? person.pronouns : ''}
-          </span>
-          <Links {...person.links} />
-        </div>
-      {/each}
-    </Box>
+{#if project.projectContacts.length !== 0}
+  <div class="container mx-auto pb-12">
+    <div class="px-4">
+      <Box>
+        <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>
+        {#each project.projectContacts as person}
+          <div class="flex items-center">
+            <span class="mr-2">
+              {person.name}
+              {person.pronouns ? person.pronouns : ''}
+            </span>
+            <Links {...person.links} />
+          </div>
+        {/each}
+      </Box>
+    </div>
   </div>
-</div>
+{/if}

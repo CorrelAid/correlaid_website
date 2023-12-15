@@ -26,8 +26,6 @@
 
   const values = {};
 
-  $: console.log(selects);
-
   onMount(async () => {
     // when searchParams is set, set them in filter
     applyUrlSearchParams($page.url.searchParams, values, selects);

@@ -50,7 +50,7 @@
               {title}
             </span>
 
-            <span class="inline-block align-text-top"
+            <span class="inline-block align-text-top" aria-label="External Link"
               ><ExternalLink
                 height={20}
                 width={20}

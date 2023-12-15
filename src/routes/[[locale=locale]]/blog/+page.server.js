@@ -12,11 +12,7 @@ export async function load({params}) {
     status: getAllowedStatus(),
   });
 
-  // console.log(data.Posts[0])
-
   const blog_posts = handle_lang(data.Blog_Posts, params);
-
-  // console.log(blog_posts[0])
 
   return {blog_posts: parseEntries(blog_posts, 'blog_posts')};
 }
