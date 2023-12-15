@@ -1,15 +1,18 @@
 <script>
+  import detectElementOverflow from 'detect-element-overflow';
   import Langs from '$lib/components/Langs.svelte';
   export let href = '';
   import {t} from '$lib/stores/i18n';
   import {page} from '$app/stores';
   import {gen_lc_href} from '$lib/js/helpers';
   import ExternalLink from '../svg/External_Link.svelte';
+  import ArrowUp from '../svg/nav_icons/Arrow_Up.svelte';
+  import ArrowDown from '../svg/nav_icons/Arrow_Down.svelte';
 
   export let title;
   export let tags;
   export let target_audience;
-  export let subtitle;
+  export let teaser;
   export let resp_unit = '';
   export let correlaidx_city = '';
   export let correlaidx_short_id = '';
@@ -26,6 +29,28 @@
   } else if (resp_unit == 'remote_office') {
     resp_unit = 'Remote Office';
     href_resp_unit = $t('navbar.about.team').url;
+  }
+
+  let overflowParent;
+  let overflowChild;
+  let parentHeight;
+
+  let overflowing = false;
+  let expand = false;
+
+  // if parentHeight is set, detect overflow
+  $: if (parentHeight) {
+    const overflow = detectElementOverflow(overflowChild, overflowParent);
+    //
+    if (overflow.overflowBottom > 0) {
+      overflowing = true;
+      console.log(overflowing);
+      console.log(overflow.overflowBottom);
+    }
+  }
+
+  function expandFunc() {
+    expand = !expand;
   }
 </script>
 
@@ -86,13 +111,43 @@
         >
       {/each}
     </div>
-
-    <h4 class="text-md line-clamp-3">{subtitle}</h4>
     {#if resp_unit != ''}
       <a
-        class="line-clamp-3 pt-2 font-semibold text-base-content transition hover:text-primary"
+        class="font-semibold text-base-content transition hover:text-primary"
         href={href_resp_unit}>{resp_unit}</a
       >
     {/if}
+
+    <div
+      class="mt-2 {overflowing === true ? 'mb-8' : 'mb-1'} {expand === true
+        ? ''
+        : 'max-h-32 lg:max-h-20'} "
+      bind:this={overflowParent}
+      bind:clientHeight={parentHeight}
+    >
+      <p
+        class="text-md {overflowing === true && expand === false
+          ? 'line-clamp-5 lg:line-clamp-3'
+          : ''}"
+        bind:this={overflowChild}
+      >
+        {teaser}
+      </p>
+    </div>
   </div>
+  {#if overflowing === true}
+    <button
+      class="absolute bottom-0 right-0 right-2/4 pb-4"
+      on:click={expandFunc}
+    >
+      <span class="sr-only">{$t('misc.read_more').text}</span>
+      <span class="fill-neutral-50" aria-hidden="true">
+        {#if expand === true}
+          <ArrowUp height={34} width={34} />
+        {:else}
+          <ArrowDown height={34} width={34} />
+        {/if}
+      </span>
+    </button>
+  {/if}
 </div>
