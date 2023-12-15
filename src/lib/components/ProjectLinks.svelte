@@ -1,39 +1,54 @@
 <script>
   import {t} from '$lib/stores/i18n';
+  import ExternalLink from '../svg/External_Link.svelte';
+  export let project_outputs = void 0;
 
-  export let href = void 0;
-  export let repo = void 0;
   export let podcast_href = void 0;
   export let post_slug = void 0;
 </script>
 
 <div class="flex flex-wrap items-center">
-  {#if href}
-    <a class="pr-4 text-secondary underline" {href}
-      >{$t('misc.read_more').text}</a
-    >
-  {/if}
-
-  {#if repo}
+  {#if post_slug}
     <a
-      class="pr-4 text-secondary underline"
-      target="_blank"
-      rel="noreferrer"
-      href={repo}>Repo</a
+      class="pb-1 pr-4 text-secondary underline"
+      href={$t('navbar.blog').url + '/' + post_slug}
+      >{$t('project_output.blogpost').text}</a
     >
   {/if}
   {#if podcast_href}
     <a
-      class="pr-4 text-secondary underline"
-      target="_blank"
+      target="__blank"
       rel="noreferrer"
-      href={podcast_href}>Podcast</a
+      href={podcast_href}
+      class="pb-1 pr-4 capitalize text-secondary"
     >
+      <span class="underline">
+        {$t('project_output.podcast').text}
+      </span>
+      <span class="inline-block align-text-top" aria-label="External Link"
+        ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
+      >
+    </a>
   {/if}
-  {#if post_slug}
-    <a
-      class="pr-4 text-secondary underline"
-      href={$t('navbar.blog').url + '/' + post_slug}>Blogpost</a
-    >
+  {#if project_outputs}
+    {#each project_outputs as output}
+      <a
+        target="__blank"
+        rel="noreferrer"
+        href={output['url']}
+        class="pb-1 pr-4 capitalize text-secondary"
+      >
+        <span class="underline"
+          >{$t(`project_output.${output['output_type']}`).text}{output[
+            'output_number'
+          ]
+            ? ` ${output['output_number']}`
+            : ''}
+        </span>
+        <span class="inline-block align-text-top" aria-label="External Link"
+          ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
+        >
+      </a>
+    {/each}
   {/if}
 </div>

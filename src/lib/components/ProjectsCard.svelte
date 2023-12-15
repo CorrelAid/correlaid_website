@@ -6,6 +6,7 @@
   import Html from '$lib/components/Html.svelte';
   import {gen_lc_href} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
+  import Cursor from '$lib/svg/Cursor.svelte';
 
   export let title;
   export let subpage;
@@ -17,11 +18,11 @@
   export let correlaidx = [];
   export let correlaidx_short_id = [];
   export let project_id = void 0;
-  export let repo = void 0;
+
+  export let project_outputs = void 0;
+
   export let post_slug = void 0;
   export let podcast_href = void 0;
-
-  $: console.log(correlaidx_short_id, correlaidx);
 
   // $: if (organization === 'undefined'){
   //   organization_name = $t('organization.anonymous').text;
@@ -35,7 +36,7 @@
 
   $: href = subpage
     ? $t('navbar.using_data.project_database').url + '/' + project_id
-    : null;
+    : void 0;
 </script>
 
 <div
@@ -45,27 +46,49 @@
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
 
+  {#if href}
+    <a
+      check
+      {href}
+      class="link absolute z-20 flex rounded bg-secondary"
+      style="right: -2px; top: -2px"
+    >
+      <span class="sr-only">{$t('misc.read_more').text}</span>
+      <span class="animate-shake fill-white px-1.5 py-1" aria-hidden="true">
+        <Cursor width={29} height={29} /></span
+      >
+    </a>
+  {/if}
+
   <div class="px-4 pb-6 pt-6">
     <div class="mb-2 flex items-center pb-2">
-      {#if !isInternal}
-        <Nonprofit width={25} height={25} />
-        <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
-          {organization}
-        </h4>
-      {:else}
-        <CorrelAidLogo width={25} height={25} />
-        <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
-          {organization}
-        </h4>
-      {/if}
+      <span aria-hidden="true">
+        {#if !isInternal}
+          <Nonprofit width={25} height={25} />
+        {:else}
+          <CorrelAidLogo width={25} height={25} />
+        {/if}
+      </span>
+      <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
+        {organization}
+      </h4>
     </div>
 
-    <h3
-      class="mb-3 mt-2 line-clamp-3 block text-xl font-semibold text-base-content transition"
-    >
-      {title}
-    </h3>
-    <div class="mb-4">
+    {#if href}
+      <a
+        {href}
+        class="mt-2 text-xl font-semibold text-base-content transition hover:text-primary"
+        >{title}</a
+      >
+    {:else}
+      <h3
+        class=" mt-2 line-clamp-3 block text-xl font-semibold text-base-content transition"
+      >
+        {title}
+      </h3>
+    {/if}
+
+    <div class="mb-4 mt-3">
       {#if type}
         {#each type as tag}
           <span
@@ -98,6 +121,6 @@
         {/each}
       </div>
     {/if}
-    <ProjectLinks {href} {repo} {podcast_href} {post_slug} />
+    <ProjectLinks {project_outputs} {podcast_href} {post_slug} />
   </div>
 </div>

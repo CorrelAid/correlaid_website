@@ -82,23 +82,41 @@ export function parseEntries(
 
 export function parseProject(project) {
   let parsedProject;
+  const project_outputs = [];
   try {
-    const projectLinks = {};
+    if (project.Projects_Outputs.length > 0) {
+      const outputTypes = [
+        'webapp',
+        'report',
+        'article',
+        'video',
+        'project_documentation',
+        'repository',
+        'data',
+      ];
 
-    if (project.Projects_Outputs.length !== 0) {
-      const repo = project.Projects_Outputs.find(
-        (obj) => obj.output_type === 'repository',
-      );
-      if (repo) {
-        projectLinks['repo'] = repo.url;
+      for (const outputType of outputTypes) {
+        const outputs = project.Projects_Outputs.filter(
+          (obj) => obj.output_type === outputType,
+        );
+        if (outputs && outputs.length > 0) {
+          let i = 1;
+          for (const output of outputs) {
+            if (outputs.length > 1) {
+              output['output_number'] = i;
+            }
+            project_outputs.push(output);
+            i++;
+          }
+        }
       }
     }
 
     if (project.Podcast) {
-      projectLinks['podcast_href'] = project.Podcast.soundcloud_link;
+      project['podcast_href'] = project.Podcast.soundcloud_link;
     }
     if (project.Blog_Posts.length !== 0) {
-      projectLinks['post_slug'] = project.Blog_Posts[0].translations.slug;
+      project['post_slug'] = project.Blog_Posts[0].translations.slug;
     }
 
     const projectContacts = [];
@@ -141,7 +159,9 @@ export function parseProject(project) {
         description:
           project.Organizations[0].Organizations_id.translations[0].description,
       },
-      projectLinks: projectLinks,
+      projectOutputs: project_outputs,
+      podcast_href: project.podcast_href,
+      post_slug: project.post_slug,
       projectContacts: projectContacts,
     };
 
