@@ -33,6 +33,10 @@ export default {
     //  url: '/bildung/workshops',
     // },
     'navbar.education.learning_r': {text: 'R Lernen', url: '/bildung/r-lernen'},
+    'navbar.education.course_data': {
+      text: 'Grundkurs Daten',
+      url: '/bildung/grundkurs-daten',
+    },
     'navbar.education.resources': {
       text: 'Bildungsressourcen',
       url: '/bildung/ressourcen',
@@ -119,6 +123,10 @@ export default {
     'navbar.education.learning_r': {
       text: 'R Lernen',
       url: '/en/education/learning-r',
+    },
+    'navbar.education.course_data': {
+      text: 'Data 101',
+      url: '/en/education/data-101',
     },
     'navbar.education.tidy_tuesday': {
       text: 'TidyTuesday',
