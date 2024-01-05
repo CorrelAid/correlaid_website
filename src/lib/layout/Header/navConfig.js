@@ -20,6 +20,7 @@ export const bot_nav = [
     category: 'education',
     children: [
       'navbar.education.learning_r',
+      'navbar.education.course_data',
       'navbar.education.mentoring',
       'navbar.education.tidy_tuesday',
       'navbar.education.resources',
