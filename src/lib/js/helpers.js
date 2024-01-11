@@ -258,9 +258,11 @@ export function convertContractType(type, locale) {
   } else {
     switch (type) {
       case 'full-time':
-        return 'Full-time';
+        return 'Full Time';
       case 'part-time':
         return `Part-time`;
+      case 'working-student':
+        return `Working Student`;
       case 'internship':
         return 'Internship';
       case 'volunteer':
