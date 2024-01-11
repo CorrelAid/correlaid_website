@@ -3,7 +3,10 @@
   import En from '../svg/EN.svelte';
   import International from '$lib/svg/International.svelte';
   export let langs;
+  import {t} from '$lib/stores/i18n';
   const icon_h = 22;
+
+  $: console.log(langs);
 </script>
 
 <div class="absolute right-0 top-0 z-20 p-2">
@@ -16,7 +19,7 @@
         >
           <De height={icon_h} width={icon_h} />
         </span>
-        <span class="sr-only">Verfügbar auf Deutsch</span>
+        <span class="sr-only">{$t(`access.language_`).text} {lang}</span>
       {:else}
         <span
           class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
@@ -24,7 +27,7 @@
         >
           <En height={icon_h} width={icon_h} />
         </span>
-        <span class="sr-only">Available in english</span>
+        <span class="sr-only">{$t(`access.language_`).text} {lang}</span>
       {/if}
     {/each}
   {:else}

@@ -1,7 +1,6 @@
 <script>
   import {t, locale} from '$lib/stores/i18n';
   import {toLocalDateString, convertContractType} from '$lib/js/helpers';
-
   export let title;
   export let slug;
   export let summary;
@@ -12,16 +11,16 @@
   export let location;
   export let salary;
   export let tags = [];
+  import De from '$lib/svg/DE.svelte';
+  import En from '$lib/svg/EN.svelte';
+  import Time from '$lib/svg/Time.svelte';
+  import Location from '$lib/svg/Location.svelte';
+  import Salary from '$lib/svg/Salary.svelte';
   export let href = '';
 
-  const listStyle = 'min-w-min mr-4 mb-2';
+  const icon_h = 22;
 
-  const emojis = {
-    workload: '&#x1F550;',
-    salary: '&#x1F4B0;',
-    location: '&#x1F4CD;',
-    language_: '&#x1F5E3;',
-  };
+  const listStyle = 'min-w-min mr-4 mb-2';
 
   let cardDetails = {};
 
@@ -31,25 +30,10 @@
 
   $: {
     cardDetails = {};
-    if ($locale === 'de') {
-      cardDetails['Bewerbungsschluss: '] = toLocalDateString(
-        deadline,
-        $locale,
-        true,
-      );
-      cardDetails['Art: '] = convertContractType(type, $locale);
-    } else {
-      cardDetails['Application Deadline: '] = toLocalDateString(
-        deadline,
-        $locale,
-        true,
-      );
-      cardDetails['Type: '] = convertContractType(type, $locale);
-    }
-    cardDetails[emojis['workload']] = fte;
-    cardDetails[emojis['location']] = location;
-    cardDetails[emojis['salary']] = salary;
-    cardDetails[emojis['language_']] = language;
+    cardDetails['workload'] = fte;
+    cardDetails['location'] = location;
+    cardDetails['salary'] = salary;
+    cardDetails['language_'] = language;
   }
 </script>
 
@@ -66,7 +50,11 @@
           {title}
         </a>
       </div>
-      <div class="mb-4">
+      <div class="mb-2">
+        <span
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
+          >{convertContractType(type, $locale)}</span
+        >
         {#each tags as tag}
           <span
             class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
@@ -75,31 +63,67 @@
         {/each}
       </div>
 
-      <ul class="mb-3 flex flex-wrap">
+      <ul class="mb-2 flex flex-wrap">
         {#each Object.keys(cardDetails) as key}
           <li class={listStyle}>
-            {#if Object.values(emojis).some((value) => key.includes(value))}
-              <strong aria-hidden="true">{@html key}</strong>
-              <span class="sr-only"
-                >{$t(
-                  `access.${
-                    Object.entries(emojis).find(
-                      ([key_, value]) => value === key,
-                    )[0]
-                  }`,
-                ).text}</span
+            {#if key == 'workload'}
+              <span class="flex">
+                <span class=" my-auto flex fill-neutral" arria-hidden="true"
+                  ><Time width={20} height={20} /></span
+                >
+                <span class="sr-only">{$t('access.time').text}</span>
+                <span class="my-auto pl-2">{cardDetails[key]}</span></span
               >
+            {:else if key == 'location'}
+              <span class="flex">
+                <span class=" my-auto flex fill-neutral" arria-hidden="true"
+                  ><Location width={20} height={20} /></span
+                >
+                <span class="sr-only">{$t('access.location').text}</span>
+                <span class="my-auto pl-2">{cardDetails[key]}</span></span
+              >
+            {:else if key == 'salary'}
+              <span class="flex">
+                <span class=" my-auto flex fill-neutral" arria-hidden="true"
+                  ><Salary width={20} height={20} /></span
+                >
+                <span class="sr-only">{$t('access.location').text}</span>
+                <span class="my-auto pl-2">{cardDetails[key]}</span></span
+              >
+            {:else if key == 'language_'}
+              {#if language == 'German'}
+                <span
+                  class="inline-block rounded-full bg-white shadow-none"
+                  arria-hidden="true"
+                >
+                  <De height={icon_h} width={icon_h} />
+                </span>
+                <span class="sr-only">Event ist auf deutsch.</span>
+              {:else}
+                <span
+                  class="inline-block rounded-full bg-white shadow-none"
+                  role="img"
+                  aria-label="Event is in english."
+                >
+                  <En height={icon_h} width={icon_h} />
+                </span>
+              {/if}
             {:else}
-              <strong>{@html key}</strong>
+              <strong>{@html key}</strong> {cardDetails[key]}
             {/if}
-
-            {cardDetails[key]}
           </li>
         {/each}
       </ul>
 
-      <p class="mb-3 line-clamp-3 text-lg text-base-content xl:pb-0 xl:pr-4">
+      <p class="text-md mb-3 line-clamp-3 text-base-content xl:pb-0 xl:pr-4">
         {summary}
+      </p>
+      <p class="text-semibold">
+        <strong>{$t('access.deadline').text}: </strong>{toLocalDateString(
+          deadline,
+          $locale,
+          true,
+        )}
       </p>
     </div>
   </div>
