@@ -16,19 +16,9 @@
   }
 </script>
 
-<div
-  class="mx-4 flex flex-wrap md:grid {navItems.length % 2 == 0
-    ? 'md:grid-cols-2'
-    : 'md:grid-cols-3'} gap-8 md:place-content-center"
->
+<div class="mx-4 flex flex-wrap gap-8">
   {#each navItems as item, i}
-    <div
-      class="flex items-center {navItems.length % 2 == 0
-        ? i % 2 == 0
-          ? 'md:justify-end'
-          : 'md:justify-start'
-        : 'md:justify-center'}"
-    >
+    <div class="flex">
       <a
         href={$t(item.key).url}
         class="flex h-36 w-36 items-center justify-center rounded opacity-80 md:h-44 md:w-44"

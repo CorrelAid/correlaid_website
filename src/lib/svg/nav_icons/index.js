@@ -10,3 +10,8 @@ export {default as LocationX} from './LocationX.svelte';
 export {default as PeopleHeart} from './PeopleHeart.svelte';
 export {default as PersonCheck} from './PersonCheck.svelte';
 export {default as Database} from './Database.svelte';
+export {default as CodeLearning} from './CodeLearning.svelte';
+export {default as DataPresentation} from './DataPresentation.svelte';
+export {default as BookHand} from './BookHand.svelte';
+export {default as ArrowPeople} from './ArrowPeople.svelte';
+export {default as Lab} from './Lab.svelte';
