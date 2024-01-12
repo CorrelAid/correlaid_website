@@ -64,6 +64,7 @@
     "lodash": "^4.17.21",
     "maplibre-gl": "^2.4.0",
     "nodemailer": "^6.9.1",
+    "rss": "^1.2.2",
     "simply-reactive": "^4.1.0",
     "svelte-email": "^0.0.4",
     "svelte-highlight": "^7.2.1",

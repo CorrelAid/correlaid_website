@@ -1,11 +1,12 @@
 <script>
-  import {t} from '$lib/stores/i18n';
+  import {t, locale} from '$lib/stores/i18n';
   import Facebook from '$lib/svg/Facebook.svelte';
   import Instagram from '../svg/Instagram.svelte';
   import Twitter from '../svg/Twitter.svelte';
   import Youtube from '../svg/Youtube.svelte';
   import Linkedin from '../svg/Linkedin.svelte';
   import Mastodon from '../svg/Mastodon.svelte';
+  import Rss from '../svg/Rss.svelte';
 
   const social_media_height = 20;
 
@@ -40,6 +41,13 @@
       url: 'https://www.youtube.com/channel/UCs_k9roCuWLy17xxpigrWbg',
       logo: Youtube,
     },
+    {
+      name: 'RSS',
+      url: `${$locale == 'en' ? '/en' : ''}/rss.xml`,
+      logo: Rss,
+      rel: 'alternate',
+      type: 'application/rss+xml',
+    },
   ];
 </script>
 
@@ -64,8 +72,9 @@
         <a
           href={linkDetails.url}
           aria-label={`CorrelAid ${linkDetails.name}`}
-          target="_blank"
-          rel="noreferrer"
+          target={linkDetails.target ? linkDetails.target : '_blank'}
+          rel={linkDetails.rel ? linkDetails.rel : 'noreferrer'}
+          type={linkDetails.type ? linkDetails.type : ''}
         >
           <svelte:component
             this={linkDetails.logo}
