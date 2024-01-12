@@ -1,10 +1,21 @@
 import directus_fetch from '$lib/js/directus_fetch';
+import {PUBLIC_PRERENDER} from '$env/static/public';
 import {getAllowedStatus} from '$lib/js/directus_fetch.js';
 import {handle_lang, get_locale} from '$lib/js/helpers';
 import {get_lang} from '$lib/js/helpers';
 import {blogQuery} from './queries.js';
 import {parseEntries} from '$lib/js/parse_cms.js';
 import he from 'he';
+
+let pr;
+
+if (PUBLIC_PRERENDER === 'ALL') {
+  pr = true;
+} else {
+  pr = false;
+}
+
+export const prerender = pr;
 
 export async function GET({params}) {
   const feedTitle = 'CorrelAid Blog';

@@ -85,6 +85,7 @@ export default {
     'footer.imprint': {text: 'Impressum', url: '/impressum'},
     'footer.coc': {text: 'Code of Conduct', url: '/codeofconduct'},
     'footer.coe': {text: 'Code of Ethics', url: '/codeofethics'},
+    'footer.rss': {text: 'RSS', url: '/rss.xml'},
     // 'footer.contact': {text: 'Kontakt', url: '/contact'},
   },
   en: {
@@ -172,6 +173,7 @@ export default {
     'footer.imprint': {text: 'Imprint', url: '/en/imprint'},
     'footer.coc': {text: 'Code of Conduct', url: '/en/codeofconduct'},
     'footer.coe': {text: 'Code of Ethics', url: '/en/codeofethics'},
+    'footer.rss': {text: 'RSS', url: '/en/rss.xml'},
     // 'footer.contact': {text: 'Contact', url: '/en/contact'},
   },
 };
