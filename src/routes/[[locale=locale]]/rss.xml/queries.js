@@ -24,6 +24,7 @@ query BlogQuery(
 					website
 					twitter
 					linkedin
+                    email
 					mastodon
 					github
 					image {

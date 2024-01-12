@@ -8,7 +8,9 @@ import he from 'he';
 
 export async function GET({params}) {
   const feedTitle = 'CorrelAid Blog';
-  const feedLink = `https://correlaid.org/${get_locale(params)}/rss.xml`;
+  const feedLink = `https://correlaid.org${
+    params.locale == 'en' ? '/en' : ''
+  }/rss.xml`;
   const feedLanguage = `${get_locale(params)}`;
   const feedCopyright = `${new Date().getFullYear()} CorrelAid`;
 
@@ -19,6 +21,8 @@ export async function GET({params}) {
       <link>${he.encode(feedLink)}</link>
       <description>${he.encode(feedTitle)}</description>
       <language>${he.encode(feedLanguage)}</language>
+      <atom:link href="${feedLink}" rel="self" type="application/rss+xml" />
+
       <copyright>${he.encode(feedCopyright)}</copyright>
   `;
 
@@ -50,6 +54,8 @@ export async function GET({params}) {
         <description>${description}</description>
         <link>${he.encode(link)}</link> 
         <languages>${he.encode(languages)}</languages> 
+        <guid>${he.encode(link)}</guid>
+
       </item>
     `;
   }
