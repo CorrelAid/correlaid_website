@@ -2,6 +2,8 @@ import translations from '$lib/data/translations';
 import page_keys from '$lib/data/page_keys';
 import {PUBLIC_API_URL} from '$env/static/public';
 import * as cheerio from 'cheerio';
+import icalendar from 'ical-generator';
+import {v5 as uuidv5} from 'uuid';
 
 /**
  * Extracts the last substring after /
@@ -320,4 +322,50 @@ export function translateSelectLabels(select, locale, param) {
   } else {
     return select;
   }
+}
+
+export function createCalendar(
+  events,
+  params,
+  lc = '',
+  email = 'info@correlaid.org',
+) {
+  const calendar = icalendar({
+    prodId: `//CorrelAid//NONSGML CorrelAid${
+      lc != '' ? `X ${lc}` : ''
+    } Events V1.0//${get_locale(params).toUpperCase()}`,
+    events: events.map((event) => {
+      const startDate = event.start_time
+        ? new Date(`${event.date} ${event.start_time}`)
+        : new Date(event.date);
+      const endDate = event.end_date
+        ? event.end_time
+          ? new Date(`${event.end_date} ${event.end_time}`)
+          : new Date(event.end_date)
+        : new Date(`${event.date} ${event.end_time}`);
+      const location = event.online ? 'Online' : event.location;
+
+      const uuid5 = uuidv5(event.id.toString(), uuidv5.URL);
+
+      const organizer =
+        lc != ''
+          ? `CorrelAidX ${lc} <${email}>`
+          : 'CorrelAid <info@correlaid.org>';
+
+      return {
+        id: uuid5,
+        start: startDate,
+        end: endDate,
+        category: event.type,
+        summary: event.title,
+        description: event.teaser,
+        location: location,
+        organizer: organizer,
+        url: `https://correlaid.org${
+          params.locale == 'en' ? '/en' : ''
+        }/events/${event.slug}`,
+      };
+    }),
+  });
+  return calendar.toString();
 }

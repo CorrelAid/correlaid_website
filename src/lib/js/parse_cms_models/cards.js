@@ -47,7 +47,7 @@ function parseLcSubElements(
   });
 }
 
-export function events(event) {
+export function events(event, ical = false) {
   const parsedEvent = {
     slug: event.slug,
     title: event.title,
@@ -57,14 +57,34 @@ export function events(event) {
     type: event.type,
     language: event.language,
   };
-  if (event.end_date) {
-    parsedEvent['end_date'] = new Date(event.end_date);
-  }
 
-  parseLcSubElements(parsedEvent, event.local_chapters);
+  if (ical) {
+    parsedEvent['date'] = event.date;
+    if (event.end_date) {
+      parsedEvent['end_date'] = event.end_date;
+    }
+    if (event.start_time) {
+      parsedEvent['start_time'] = event.start_time;
+    }
+    if (event.end_time) {
+      parsedEvent['end_time'] = event.end_time;
+    }
+    parsedEvent['id'] = event.id;
+  } else {
+    parseLcSubElements(parsedEvent, event.local_chapters);
+    parsedEvent['date'] = new Date(event.date);
+    if (event.end_date) {
+      parsedEvent['end_date'] = new Date(event.end_date);
+    }
+  }
 
   return parsedEvent;
 }
+
+export function icalEvents(event) {
+  return events(event, true);
+}
+
 export function podcast_episodes(episode) {
   const parsedEpisode = {
     langs: [episode.language],

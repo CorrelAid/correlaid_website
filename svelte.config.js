@@ -151,10 +151,12 @@ async function addLcRoutes(routes) {
   const germanResults = await queryCmsGraphQl(queries['lcs']);
   for (const lc of germanResults['data']['Local_Chapters']) {
     routes.push(`/mitmachen/correlaidx/${lc.slug.toLowerCase()}`);
+    routes.push(`/mitmachen/correlaidx/${lc.slug.toLowerCase()}/ical`);
   }
   const englishResults = await queryCmsGraphQl(queries['lcs']);
   for (const lc of englishResults['data']['Local_Chapters']) {
     routes.push(`/en/volunteering/correlaidx/${lc.slug.toLowerCase()}`);
+    routes.push(`/en/volunteering/correlaidx/${lc.slug.toLowerCase()}/ical`);
   }
 }
 
