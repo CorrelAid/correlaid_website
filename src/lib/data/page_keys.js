@@ -86,7 +86,7 @@ export default {
     'footer.coc': {text: 'Code of Conduct', url: '/codeofconduct'},
     'footer.coe': {text: 'Code of Ethics', url: '/codeofethics'},
     'footer.rss': {text: 'RSS', url: '/rss.xml'},
-    'footer.ical': {text: 'RSS', url: '/events/ical'},
+    'footer.ical': {text: 'RSS', url: '/veranstaltungen/ical'},
     // 'footer.contact': {text: 'Kontakt', url: '/contact'},
   },
   en: {
