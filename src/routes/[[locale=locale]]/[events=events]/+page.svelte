@@ -1,6 +1,6 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
-  // import Ical from '$lib/svg/Ical.svelte';
+  import Ical from '$lib/svg/Ical.svelte';
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import {timeSplitEntries} from '$lib/js/entries';
@@ -63,14 +63,22 @@
 </script>
 
 <!-- passing unfiltered data to component -->
-<!-- <div class="mb-12 flex justify-center px-4">
-  <Ical height="40" width="40" />
-</div> -->
 <Filter orig_data={events_data} bind:filteredData {selects} {searchOptions} />
 {#if events}
-  <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
+  <span
+    class="mb-8 mt-8 block rounded-md px-4 px-4 py-2 text-2xl font-bold drop-shadow-sm"
+  >
     {currentEventSeparator}
-  </h2>
+    <a
+      download="calendar.ics"
+      href={$t('footer.ical').url}
+      class="absolute right-0 ml-1 mr-2 inline-block whitespace-nowrap align-text-top"
+      aria-label={$t('access.ical').text}
+    >
+      <Ical height="45" width="45" />
+    </a>
+  </span>
+
   {#if events.future.length === 0}
     <p class="px-4">{$t('filter.no_results').text}</p>
   {:else}

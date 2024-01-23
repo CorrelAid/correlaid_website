@@ -45,8 +45,6 @@
       //
       if (overflow.overflowBottom > 0) {
         overflowing = true;
-        console.log(overflowing);
-        console.log(overflow.overflowBottom);
       }
     }
   }
