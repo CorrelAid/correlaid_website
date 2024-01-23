@@ -66,7 +66,7 @@
 <Filter orig_data={events_data} bind:filteredData {selects} {searchOptions} />
 {#if events}
   <span
-    class="mb-8 mt-8 block rounded-md px-4 px-4 py-2 text-2xl font-bold drop-shadow-sm"
+    class="mb-4 mt-8 hidden rounded-md px-4 px-4 py-2 text-2xl font-bold drop-shadow-sm lg:mb-8 lg:block"
   >
     {currentEventSeparator}
     <a
@@ -78,6 +78,14 @@
       <Ical height="45" width="45" />
     </a>
   </span>
+  <a
+    download="calendar.ics"
+    href={$t('footer.ical').url}
+    class="my-4 inline-block whitespace-nowrap pl-3 lg:hidden"
+    aria-label={$t('access.ical').text}
+  >
+    <Ical height="45" width="45" />
+  </a>
 
   {#if events.future.length === 0}
     <p class="px-4">{$t('filter.no_results').text}</p>
