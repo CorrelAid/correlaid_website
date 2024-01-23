@@ -17,7 +17,7 @@ if (PUBLIC_PRERENDER === 'ALL') {
 export const prerender = pr;
 
 export async function GET({params}) {
-  const filename = 'correlaid_events.ical';
+  const filename = 'calendar.ics';
 
   const data = await directus_fetch(icalEventQuery, {
     language: get_lang(params),

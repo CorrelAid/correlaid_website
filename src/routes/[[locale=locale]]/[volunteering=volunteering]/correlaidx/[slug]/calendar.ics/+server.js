@@ -28,7 +28,7 @@ export async function GET({params}) {
   const city = data.Local_Chapters[0].translations[0].city;
   const email = data.Local_Chapters[0].lc_email;
 
-  const filename = `correlaidx${city}_events.ical`;
+  const filename = `calendar.ics`;
 
   const calendar = createCalendar(Events, params, city, email);
 
