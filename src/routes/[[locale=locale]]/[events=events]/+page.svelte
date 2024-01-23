@@ -1,6 +1,6 @@
 <script>
   import {page_key} from '$lib/stores/page_key';
-  import Ical from '$lib/svg/Ical.svelte';
+  // import Ical from '$lib/svg/Ical.svelte';
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import {timeSplitEntries} from '$lib/js/entries';
@@ -63,9 +63,9 @@
 </script>
 
 <!-- passing unfiltered data to component -->
-<div class="mb-12 flex justify-center px-4">
+<!-- <div class="mb-12 flex justify-center px-4">
   <Ical height="40" width="40" />
-</div>
+</div> -->
 <Filter orig_data={events_data} bind:filteredData {selects} {searchOptions} />
 {#if events}
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
