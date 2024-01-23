@@ -42,8 +42,8 @@
     </div>
   {/if}
   {#if lcPage['events'].length !== 0}
-    <div class=" mb-12 space-y-8 px-4">
-      <div class="mb-12">
+    <div class="mb-12 px-4 lg:space-y-8">
+      <div class="lg:mb-12">
         <span class="relative block text-3xl font-bold text-base-content">
           {$t('navbar.events').text}
           <a
@@ -51,13 +51,21 @@
             href={`${$t('navbar.volunteering.correlaidx').url}/${
               $page.params.slug
             }/calendar.ics`}
-            class="absolute right-0 inline-block whitespace-nowrap align-text-top"
+            class="absolute right-0 hidden whitespace-nowrap align-text-top lg:inline-block"
             aria-label={$t('access.ical').text}
           >
             <Ical height="45" width="45" />
           </a>
         </span>
       </div>
+      <a
+        download="calendar.ics"
+        href={$t('footer.ical').url}
+        class="my-4 inline-block whitespace-nowrap lg:hidden"
+        aria-label={$t('access.ical').text}
+      >
+        <Ical height="45" width="45" />
+      </a>
       {#each lcPage['events'] as event}
         <Events_Card {...event} />
       {/each}
