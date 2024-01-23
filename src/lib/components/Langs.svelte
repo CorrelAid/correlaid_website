@@ -5,8 +5,6 @@
   export let langs;
   import {t} from '$lib/stores/i18n';
   const icon_h = 22;
-
-  $: console.log(langs);
 </script>
 
 <div class="absolute right-0 top-0 z-20 p-2">

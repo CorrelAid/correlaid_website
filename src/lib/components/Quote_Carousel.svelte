@@ -12,7 +12,6 @@
     carousel.goToPrev();
   };
   let carousel;
-  console.log(quotes);
 </script>
 
 <div

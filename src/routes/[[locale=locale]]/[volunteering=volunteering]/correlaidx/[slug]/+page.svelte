@@ -2,6 +2,8 @@
   import {onMount} from 'svelte';
   import {page_key} from '$lib/stores/page_key';
   import {t} from '$lib/stores/i18n';
+  import {page} from '$app/stores';
+  import Ical from '$lib/svg/Ical.svelte';
   import ProjectsCard from '$lib/components/ProjectsCard.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import Html from '$lib/components/Html.svelte';
@@ -42,9 +44,19 @@
   {#if lcPage['events'].length !== 0}
     <div class=" mb-12 space-y-8 px-4">
       <div class="mb-12">
-        <h2 class="text-3xl font-bold text-base-content">
+        <span class="relative block text-3xl font-bold text-base-content">
           {$t('navbar.events').text}
-        </h2>
+          <a
+            download="calendar.ics"
+            href={`${$t('navbar.volunteering.correlaidx').url}/${
+              $page.params.slug
+            }/calendar.ics`}
+            class="absolute right-0 inline-block whitespace-nowrap align-text-top"
+            aria-label={$t('access.ical').text}
+          >
+            <Ical height="45" width="45" />
+          </a>
+        </span>
       </div>
       {#each lcPage['events'] as event}
         <Events_Card {...event} />
