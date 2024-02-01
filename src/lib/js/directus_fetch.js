@@ -43,7 +43,7 @@ function queryErrorMsg(query, vars) {
  * set of typically used names. This can be disabled with the
  * allowAllVars flag.
  */
-async function directus_fetch(
+export async function directus_fetch(
   query,
   vars,
   allowAllVarNames = false,
