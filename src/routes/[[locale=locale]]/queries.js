@@ -32,7 +32,7 @@ query LatestUpdates(
 			teaser
 		}
 	}
-	Events(sort: ["date"], filter: {date: {_gte: "$NOW"}}) {
+	Events(sort: ["date"], filter: {_and: [{date: {_gte: "$NOW"}}, { status: { _in: $status } }]}) {
 		id
 		date
 		start_time
