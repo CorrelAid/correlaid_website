@@ -1,6 +1,6 @@
 import {gen_img_url, getTranslation, get_lang} from '../helpers.js';
 import _ from 'lodash';
-import translations from '../../data/translations.js';
+import translations from '$lib/data/translations.js';
 
 export function blog_posts(post) {
   let imageUrl;
@@ -103,7 +103,6 @@ export function podcast_episodes(episode) {
 
 function anonymizeProjectCard(parsedProjectCard, lang) {
   const anonymizedProjectCard = {};
-
   anonymizedProjectCard['title'] = parsedProjectCard['title'];
   anonymizedProjectCard['subpage'] = parsedProjectCard['subpage'];
   if (lang === 'de-DE') {

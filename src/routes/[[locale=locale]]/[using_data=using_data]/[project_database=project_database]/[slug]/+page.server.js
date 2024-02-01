@@ -1,7 +1,4 @@
-import {
-  directus_authorized_fetch,
-  getAllowedStatus,
-} from '$lib/js/directus_fetch';
+import {directus_fetch, getAllowedStatus} from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import {projectDetailsQuery} from './queries.js';
 import {handle_lang} from '$lib/js/helpers';
@@ -10,7 +7,7 @@ import {parseProject} from '$lib/js/parse_cms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_authorized_fetch(projectDetailsQuery, {
+  const data = await directus_fetch(projectDetailsQuery, {
     slug: params.slug,
     language: get_lang(params),
     status: getAllowedStatus(),

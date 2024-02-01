@@ -30,7 +30,7 @@ const URL = `${process.env.PUBLIC_API_URL}/graphql`;
 
 function getAllowedStatus() {
   const allowedStatus = ['published', 'published_anon'];
-  if (process.env.PUBLIC_SHOW_JOB_PREVIEWS === 'TRUE') {
+  if (process.env.PUBLIC_PREVIEW === 'TRUE') {
     allowedStatus.push('preview');
     allowedStatus.push('preview_anon');
   }
@@ -117,10 +117,22 @@ async function queryCmsGraphQl(query, vars) {
     payload['variables'] = vars;
   }
 
+  const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN;
+
+  const headers = {'Content-Type': 'application/json'};
+
+  if (
+    DIRECTUS_TOKEN !== undefined &&
+    DIRECTUS_TOKEN !== '' &&
+    DIRECTUS_TOKEN !== null
+  ) {
+    headers.Authorization = `Bearer ${DIRECTUS_TOKEN}`;
+  }
+
   const response = await fetch(URL, {
     method: 'post',
     body: JSON.stringify(payload),
-    headers: {'Content-Type': 'application/json'},
+    headers: headers,
   });
   if (!response.ok) {
     throw new Error(
