@@ -27,7 +27,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 			}
 		}
 	}
-	Local_Chapters(filter: { short_id: { _eq: $slug }  }) {
+	Local_Chapters(filter: {_and: [{ status: { _in: $status } }, { short_id: { _eq: $slug }  } ]}) {
 		Projects(
 			filter: { Projects_id :{ status: { _in: $status } }}
 		) {

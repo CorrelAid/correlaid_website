@@ -1,11 +1,15 @@
-import directus_fetch from '$lib/js/directus_fetch';
+import {
+  directus_authorized_fetch,
+  getAllowedStatus,
+} from '$lib/js/directus_fetch';
 import {get_lang} from '$lib/js/helpers';
 import {localChapterQuery} from './queries.js';
 
 /** @type {import('./$types.js').PageServerLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(localChapterQuery, {
+  const data = await directus_authorized_fetch(localChapterQuery, {
     language: get_lang(params),
+    status: getAllowedStatus(),
   });
 
   const geo_json = {
