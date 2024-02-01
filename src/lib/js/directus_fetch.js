@@ -43,16 +43,7 @@ function queryErrorMsg(query, vars) {
  * set of typically used names. This can be disabled with the
  * allowAllVars flag.
  */
-export async function directus_fetch(
-  query,
-  vars,
-  allowAllVarNames = false,
-  additionalHeaders = {},
-) {
-  if (!allowAllVarNames) {
-    validateVars(vars);
-  }
-
+export async function directus_fetch(query, vars, additionalHeaders = {}) {
   const payload = {query: query};
   if (typeof vars !== 'undefined') {
     payload['variables'] = vars;
@@ -62,6 +53,15 @@ export async function directus_fetch(
     {'Content-Type': 'application/json'},
     additionalHeaders,
   );
+
+  if (
+    DIRECTUS_TOKEN !== undefined &&
+    DIRECTUS_TOKEN !== '' &&
+    DIRECTUS_TOKEN !== null
+  ) {
+    headers.Authorization = `Bearer ${DIRECTUS_TOKEN}`;
+    validateVars(vars);
+  }
 
   const response = await fetch(PUBLIC_API_URL + '/graphql', {
     method: 'post',
@@ -89,16 +89,6 @@ export async function directus_fetch(
 }
 
 export default directus_fetch;
-
-export async function directus_authorized_fetch(
-  query,
-  vars,
-  allowAllVarNames = false,
-) {
-  return await directus_fetch(query, vars, allowAllVarNames, {
-    Authorization: `Bearer ${DIRECTUS_TOKEN}`,
-  });
-}
 
 export function getAllowedStatus() {
   const allowedStatus = ['published', 'published_anon'];
