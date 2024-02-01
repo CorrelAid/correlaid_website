@@ -161,7 +161,11 @@ export function projects(project, params) {
     }
   }
 
-  if (!project.is_internal && project.status !== 'published_anon') {
+  if (
+    !project.is_internal &&
+    project.status !== 'published_anon' &&
+    project.status !== 'preview_anon'
+  ) {
     parsedProjectCard['organization'] =
       project.Organizations[0].Organizations_id.translations[0].name;
     parsedProjectCard['organization_sector'] =
@@ -234,7 +238,7 @@ export function projects(project, params) {
     }
   }
 
-  if (status === 'published_anon') {
+  if (status === 'published_anon' || status === 'preview_anon') {
     return anonymizeProjectCard(parsedProjectCard, lang);
   } else {
     return parsedProjectCard;

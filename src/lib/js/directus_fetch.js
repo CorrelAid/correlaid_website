@@ -1,8 +1,5 @@
 import {error} from '@sveltejs/kit';
-import {
-  PUBLIC_API_URL,
-  PUBLIC_PREVIEW_JOBS_AND_POSTS,
-} from '$env/static/public';
+import {PUBLIC_API_URL, PUBLIC_PREVIEW} from '$env/static/public';
 import {DIRECTUS_TOKEN} from '$env/static/private';
 
 /*
@@ -104,9 +101,10 @@ export async function directus_authorized_fetch(
 }
 
 export function getAllowedStatus() {
-  const allowedStatus = ['published'];
-  if (PUBLIC_PREVIEW_JOBS_AND_POSTS === 'TRUE') {
+  const allowedStatus = ['published', 'published_anon'];
+  if (PUBLIC_PREVIEW === 'TRUE') {
     allowedStatus.push('preview');
+    allowedStatus.push('preview_anon');
   }
   return allowedStatus;
 }

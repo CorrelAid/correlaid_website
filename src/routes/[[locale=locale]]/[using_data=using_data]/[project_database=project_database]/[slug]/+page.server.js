@@ -29,5 +29,5 @@ export async function load({params}) {
 
   data.Projects[0].Blog_Posts = blog_posts;
 
-  return parseProject(data.Projects[0]);
+  return parseProject(data.Projects[0], params);
 }

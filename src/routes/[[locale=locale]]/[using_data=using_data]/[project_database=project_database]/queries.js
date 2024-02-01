@@ -1,6 +1,6 @@
 export const projectOverviewQuery = `
 query ProjectOverview($language: String = "de-DE", $status: [String] = ["published"]) {
-	Projects(filter: { status: { _in: ["published", "published_anon"] } }) {
+	Projects(filter: { status: { _in: $status }  }) {
 		status
 		subpage
 		project_id

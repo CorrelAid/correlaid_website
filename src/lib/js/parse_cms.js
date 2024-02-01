@@ -1,7 +1,8 @@
 import * as parseModel from './parse_cms_models';
 import _ from 'lodash';
-import {gen_img_url, processHtml} from './helpers.js';
+import {gen_img_url, processHtml, get_lang} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
+import translations from '$lib/data/translations.js';
 
 function reportParseError(err, description, rawInput) {
   console.group('CMS PARSE ERROR: ' + description);
@@ -80,45 +81,13 @@ export function parseEntries(
   return parsedEntries;
 }
 
-export function parseProject(project) {
+export function parseProject(project, params) {
+  const lang = get_lang(params);
   let parsedProject;
+
   const project_outputs = [];
+
   try {
-    if (project.Projects_Outputs.length > 0) {
-      const outputTypes = [
-        'webapp',
-        'report',
-        'article',
-        'video',
-        'project_documentation',
-        'repository',
-        'data',
-      ];
-
-      for (const outputType of outputTypes) {
-        const outputs = project.Projects_Outputs.filter(
-          (obj) => obj.output_type === outputType,
-        );
-        if (outputs && outputs.length > 0) {
-          let i = 1;
-          for (const output of outputs) {
-            if (outputs.length > 1) {
-              output['output_number'] = i;
-            }
-            project_outputs.push(output);
-            i++;
-          }
-        }
-      }
-    }
-
-    if (project.Podcast) {
-      project['podcast_href'] = project.Podcast.soundcloud_link;
-    }
-    if (project.Blog_Posts.length !== 0) {
-      project['post_slug'] = project.Blog_Posts[0].translations.slug;
-    }
-
     const projectContacts = [];
     for (const person of project.People) {
       const parsedPerson = {
@@ -149,21 +118,94 @@ export function parseProject(project) {
       parsedPerson['links'] = parsedLinks;
       projectContacts.push(parsedPerson);
     }
+    if (
+      project.status === 'published_anon' ||
+      project.status === 'preview_anon'
+    ) {
+      let organization;
 
-    parsedProject = {
-      title: project.translations[0].title,
-      teaser: project.translations[0].summary,
-      description: processHtml(project.translations[0].description),
-      organization: {
-        name: project.Organizations[0].Organizations_id.translations[0].name,
-        description:
-          project.Organizations[0].Organizations_id.translations[0].description,
-      },
-      projectOutputs: project_outputs,
-      podcast_href: project.podcast_href,
-      post_slug: project.post_slug,
-      projectContacts: projectContacts,
-    };
+      if (lang === 'de-DE') {
+        organization = translations['de']['organization.anonymous'].text;
+      } else {
+        organization = translations['de']['organization.anonymous'].text;
+      }
+      parsedProject = {
+        title: project.translations[0].title,
+        teaser: project.translations[0].summary,
+        description: processHtml(project.translations[0].description),
+        organization: {
+          name: organization,
+        },
+        projectOutputs: project_outputs,
+        podcast_href: project.podcast_href,
+        post_slug: project.post_slug,
+        projectContacts: projectContacts,
+      };
+    } else {
+      if (project.Projects_Outputs.length > 0) {
+        const outputTypes = [
+          'webapp',
+          'report',
+          'article',
+          'video',
+          'project_documentation',
+          'repository',
+          'data',
+        ];
+
+        for (const outputType of outputTypes) {
+          const outputs = project.Projects_Outputs.filter(
+            (obj) => obj.output_type === outputType,
+          );
+          if (outputs && outputs.length > 0) {
+            let i = 1;
+            for (const output of outputs) {
+              if (outputs.length > 1) {
+                output['output_number'] = i;
+              }
+              project_outputs.push(output);
+              i++;
+            }
+          }
+        }
+      }
+
+      if (project.Podcast) {
+        project['podcast_href'] = project.Podcast.soundcloud_link;
+      }
+      if (project.Blog_Posts.length !== 0) {
+        project['post_slug'] = project.Blog_Posts[0].translations.slug;
+      }
+      let organization;
+      if (project.is_internal === true) {
+        if (lang === 'de-DE') {
+          organization = {
+            name: translations['de']['organization.internalProject'].text,
+          };
+        } else {
+          organization = {
+            name: translations['en']['organization.internalProject'].text,
+          };
+        }
+      } else {
+        organization = {
+          name: project.Organizations[0].Organizations_id.translations[0].name,
+          description:
+            project.Organizations[0].Organizations_id.translations[0]
+              .description,
+        };
+      }
+      parsedProject = {
+        title: project.translations[0].title,
+        teaser: project.translations[0].summary,
+        description: processHtml(project.translations[0].description),
+        organization: organization,
+        projectOutputs: project_outputs,
+        podcast_href: project.podcast_href,
+        post_slug: project.post_slug,
+        projectContacts: projectContacts,
+      };
+    }
 
     if (project.translations[0].type) {
       parsedProject['type'] = project.translations[0]['type'].map((str) =>
