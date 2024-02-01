@@ -35,7 +35,7 @@ async function postbuild() {
     filesOnly: true,
   });
 
-  const concurrencyLimit = 20;
+  const concurrencyLimit = 13;
 
   // Create an array of promises for file processing
   const filePromises = files.map(async (file, index) => {
