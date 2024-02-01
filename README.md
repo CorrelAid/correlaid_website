@@ -87,11 +87,9 @@ that, if present, should be placed in the `.env.local` file.
 
       echo "DIRECTUS_TOKEN=<your token>" > .env.local
 
-The token is only relevant for processing project related data and not required
-for contributing to other parts of the page that are not related to projects.
+The token is only relevant for processing project related data and blog posts, jobs, events, local chapters and projects that are set to preview in the CMS.
 Dynamic local serving of the website should therefore work even without such a
-token as long as one does not navigate to a project related subpage. It will
-however not be possible to create a static build without such a token.
+token. It will however not be possible to create a static build without such a token.
 
 Contributors that wish to make a static build or wish to contribute to project
 related pages have the following options. If they have directus access, they can
