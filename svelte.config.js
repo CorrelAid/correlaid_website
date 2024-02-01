@@ -29,9 +29,10 @@ const mainRoutes = {
 const URL = `${process.env.PUBLIC_API_URL}/graphql`;
 
 function getAllowedStatus() {
-  const allowedStatus = ['published'];
+  const allowedStatus = ['published', 'published_anon'];
   if (process.env.PUBLIC_SHOW_JOB_PREVIEWS === 'TRUE') {
     allowedStatus.push('preview');
+    allowedStatus.push('preview_anon');
   }
   return allowedStatus;
 }

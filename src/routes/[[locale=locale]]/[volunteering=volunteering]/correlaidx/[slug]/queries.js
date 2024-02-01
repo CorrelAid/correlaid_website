@@ -29,7 +29,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 	}
 	Local_Chapters(filter: { short_id: { _eq: $slug }  }) {
 		Projects(
-			filter: { Projects_id :{status: { _in: ["published", "published_anon"] } }}
+			filter: { Projects_id :{ status: { _in: $status } }}
 		) {
 			Projects_id{
 				status

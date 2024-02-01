@@ -61,12 +61,18 @@
     </div>
     {#if project.organization}
       <Box>
-        <h2 class="text-xl font-semibold">
-          {project.organization.name}
-        </h2>
-        <p>
-          <Html source={project.organization.description} options={'!px-0'} />
-        </p>
+        {#if project.organization.description}
+          <h2 class="text-xl font-semibold">
+            {project.organization.name}
+          </h2>
+        {:else}
+          <h2 class="font-semibold">{project.organization.name}</h2>
+        {/if}
+        {#if project.organization.description}
+          <p>
+            <Html source={project.organization.description} options={'!px-0'} />
+          </p>
+        {/if}
       </Box>
     {/if}
   </div>

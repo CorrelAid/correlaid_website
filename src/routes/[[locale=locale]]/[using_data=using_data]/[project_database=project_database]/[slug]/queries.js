@@ -6,10 +6,11 @@ query Project(
 ) {
 	Projects(
 		filter: {
-			_and: [{ project_id: { _eq: $slug } }, { status: { _eq: "published" } }]
+			_and: [{ project_id: { _eq: $slug } }, { status: { _in: $status }  }]
 		}
 	) {
 		status
+		is_internal
 		Podcast {
 			soundcloud_link
 		}

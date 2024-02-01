@@ -106,7 +106,7 @@ committed and will therefore not interfere with anybody else's configurations or
 with deployments. See the other (non-local) `.env` files for configurations that
 you might want to overwrite. One possibility, for instance, might be the inclusion
 of non-published job announcements that are only available for preview so far. For this
-concrete example include `PUBLIC_PREVIEW_JOBS_AND_POSTS='TRUE'`.
+concrete example include `PUBLIC_PREVIEW='TRUE'`.
 
 ## Project explanation
 
