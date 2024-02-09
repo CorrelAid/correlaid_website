@@ -10,6 +10,7 @@
 
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
+  import Html from '$lib/components/Html.svelte';
 </script>
 
 <div class="grid grid-cols-8 gap-x-9 rounded pb-6 pt-2">
@@ -18,15 +19,15 @@
   </div>
 
   <div class="col-span-full pt-5 text-neutral md:col-span-5 md:pt-0">
-    <h2 class="pb-3 text-2xl font-normal text-primary drop-shadow-sm">
+    <h2 class="pb-4 text-2xl font-normal text-primary drop-shadow-sm">
       {name}
       {pronouns && pronouns != '' ? `(${pronouns})` : ''}
     </h2>
     {#if position}
-      <h3 class="pb-3 text-lg font-normal">{position}</h3>
+      <h3 class="pb-2 text-lg font-normal">{position}</h3>
     {/if}
     {#if description}
-      <p class="pb-3 text-base">{description}</p>
+      <Html source={description} options={'!px-0 pb-2'} />
     {/if}
     {#if email && email != ''}
       <p class="pb-4">
