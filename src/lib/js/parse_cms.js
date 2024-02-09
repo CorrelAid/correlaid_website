@@ -119,6 +119,7 @@ export function parseProject(project, params) {
       projectContacts.push(parsedPerson);
     }
     let description;
+
     if (
       project.translations[0].description != null &&
       project.translations[0].description !== '' &&
