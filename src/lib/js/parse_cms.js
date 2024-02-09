@@ -118,6 +118,16 @@ export function parseProject(project, params) {
       parsedPerson['links'] = parsedLinks;
       projectContacts.push(parsedPerson);
     }
+    let description;
+    if (
+      project.translations[0].description != null &&
+      project.translations[0].description !== '' &&
+      project.translations[0].description !== undefined
+    ) {
+      description = processHtml(project.translations[0].description);
+    } else {
+      description = void 0;
+    }
     if (
       project.status === 'published_anon' ||
       project.status === 'preview_anon'
@@ -132,7 +142,7 @@ export function parseProject(project, params) {
       parsedProject = {
         title: project.translations[0].title,
         teaser: project.translations[0].summary,
-        description: processHtml(project.translations[0].description),
+        description: description,
         organization: {
           name: organization,
         },
@@ -195,10 +205,11 @@ export function parseProject(project, params) {
               .description,
         };
       }
+
       parsedProject = {
         title: project.translations[0].title,
         teaser: project.translations[0].summary,
-        description: processHtml(project.translations[0].description),
+        description: description,
         organization: organization,
         projectOutputs: project_outputs,
         podcast_href: project.podcast_href,

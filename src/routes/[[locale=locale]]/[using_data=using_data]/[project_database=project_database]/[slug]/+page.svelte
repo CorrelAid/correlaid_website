@@ -76,8 +76,9 @@
       </Box>
     {/if}
   </div>
-
-  <Html source={project.description} options={'mx-auto'} slot="main" />
+  {#if project.description}
+    <Html source={project.description} options={'mx-auto'} slot="main" />
+  {/if}
 </TextContainer>
 {#if project.projectContacts.length !== 0}
   <div class="container mx-auto pb-12">
