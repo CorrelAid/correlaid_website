@@ -1,6 +1,14 @@
 {
   "redirects": [
     {
+      "source": "/stats/js/script.js",
+      "destination": "https://plausible.io/js/script.js"
+    },
+    {
+      "source": "/stats/api/event",
+      "destination": "https://plausible.io/api/event"
+    },
+    {
       "source": "/about/contact/",
       "destination": "/ueber/team/",
       "permanent": true
