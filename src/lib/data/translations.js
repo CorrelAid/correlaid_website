@@ -41,7 +41,7 @@ export default {
     'project_output.article': {text: 'Externer Artikel'},
     'project_output.project_documentation': {text: 'Dokumentation'},
     'project_output.webapp': {text: 'Web-App'},
-    'project_output.podcast': {text: 'Postcast-Folge'},
+    'project_output.podcast': {text: 'Podcast-Folge'},
     'project_output.blogpost': {text: 'Blogbeitrag'},
   },
   en: {
@@ -85,7 +85,7 @@ export default {
     'project_output.report': {text: 'Report'},
     'project_output.article': {text: 'External Article'},
     'project_output.project_documentation': {text: 'Documentation'},
-    'project_output.podcast': {text: 'Postcast Episode'},
+    'project_output.podcast': {text: 'Podcast Episode'},
     'project_output.blogpost': {text: 'Blogpost'},
     'project_output.webapp': {text: 'WebApp'},
   },
