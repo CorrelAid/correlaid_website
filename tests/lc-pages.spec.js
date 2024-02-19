@@ -37,6 +37,7 @@ test.describe('test lc chapter pages', () => {
     await page.goto('/daten-nutzen/projektdatenbank/', {
       waitUntil: 'networkidle',
     });
+    await page.getByTestId('filter-search').fill('Mannheim');
     await page.getByRole('link', {name: 'CorrelAidX Mannheim'}).first().click();
     await page.waitForURL('**/mitmachen/correlaidx/mannheim/', {
       waitUntil: 'networkidle',

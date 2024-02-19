@@ -99,6 +99,7 @@
           bind:value={searchTerm}
           placeholder={$t('filter.search').text}
           class="h-full w-full rounded-md border border-neutral-25 p-2 pl-4"
+          data-testid="filter-search"
         />
       </div>
     </div>
