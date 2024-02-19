@@ -5,9 +5,17 @@
 
   export let podcast_href = void 0;
   export let post_slug = void 0;
+  export let horizontal = true;
+
+  let main_css;
+  if (horizontal === true) {
+    main_css = 'flex flex-wrap items-center';
+  } else {
+    main_css = 'flex flex-col';
+  }
 </script>
 
-<div class="flex flex-wrap items-center">
+<div class={main_css}>
   {#if post_slug}
     <a
       class="pb-1 pr-4 text-secondary underline"
