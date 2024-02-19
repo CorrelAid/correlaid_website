@@ -161,6 +161,19 @@ export function projects(project, params) {
   }
 
   if (
+    project.end_date !== null &&
+    project.end_date !== '' &&
+    project.end_date !== undefined
+  ) {
+    parsedProjectCard['end_date'] = new Date(project.end_date);
+  } else {
+    if (project.end_date_predicted === undefined) {
+      throw new Error('end_date_predicted is undefined');
+    }
+    parsedProjectCard['end_date'] = new Date(project.end_date_predicted);
+  }
+
+  if (
     !project.is_internal &&
     project.status !== 'published_anon' &&
     project.status !== 'preview_anon'

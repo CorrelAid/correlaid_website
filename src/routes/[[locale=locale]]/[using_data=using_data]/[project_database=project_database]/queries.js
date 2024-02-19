@@ -1,10 +1,12 @@
 export const projectOverviewQuery = `
 query ProjectOverview($language: String = "de-DE", $status: [String] = ["published"]) {
-	Projects(filter: { status: { _in: $status }  }) {
+	Projects(filter: { status: { _in: $status }  } ) {
 		status
 		subpage
 		project_id
 		is_internal
+		end_date
+	    end_date_predicted
 		Podcast {
 			language
 			soundcloud_link

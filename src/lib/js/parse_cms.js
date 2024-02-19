@@ -129,6 +129,15 @@ export function parseProject(project, params) {
     } else {
       description = void 0;
     }
+
+    let end_date;
+
+    if (project.end_date) {
+      end_date = new Date(project.end_date);
+    } else {
+      end_date = new Date(project.predicted_end_date);
+    }
+
     if (
       project.status === 'published_anon' ||
       project.status === 'preview_anon'
@@ -141,6 +150,7 @@ export function parseProject(project, params) {
         organization = translations['de']['organization.anonymous'].text;
       }
       parsedProject = {
+        end_date: end_date,
         title: project.translations[0].title,
         teaser: project.translations[0].summary,
         description: description,
@@ -208,6 +218,7 @@ export function parseProject(project, params) {
       }
 
       parsedProject = {
+        end_date: end_date,
         title: project.translations[0].title,
         teaser: project.translations[0].summary,
         description: description,
@@ -248,6 +259,7 @@ export function anonymizeProject(parsedProject) {
     title: parsedProject.title,
     teaser: parsedProject.teaser,
     description: parsedProject.description,
+    end_date: parsedProject.end_date,
     organization: void 0,
     projectLinks: {},
     projectContacts: [],

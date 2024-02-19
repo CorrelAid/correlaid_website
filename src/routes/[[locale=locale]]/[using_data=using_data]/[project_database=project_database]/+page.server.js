@@ -10,10 +10,14 @@ export async function load({params}) {
     status: getAllowedStatus(),
   });
 
-  const projects = data.Projects;
+  const projects = parseEntries(data.Projects, 'projects', true, [params]).sort(
+    (a, b) => new Date(b.end_date) - new Date(a.end_date),
+  );
+
+  // console.log('projects', projects)
 
   // Some projects are anonymized and contain sensitive data.
   // In case of an error, we don't want to log the input, which is
   // why we set logInputOnError to false.
-  return {projects: parseEntries(projects, 'projects', false, [params])};
+  return {projects: projects};
 }

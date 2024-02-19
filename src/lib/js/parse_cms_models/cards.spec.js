@@ -5,6 +5,7 @@ describe('project card parsing and anonymization', () => {
     status: 'published_anon',
     subpage: false,
     project_id: 'Some project id',
+    end_date: '2022-01-01T00:00:00.000Z',
     is_internal: false,
     Podcast: null,
     Blog_Posts: [],
@@ -39,6 +40,7 @@ describe('project card parsing and anonymization', () => {
   const publishedProject = {
     status: 'published',
     subpage: false,
+    end_date: '2022-01-01T00:00:00.000Z',
     project_id: 'Another project id',
     is_internal: false,
     Podcast: null,
@@ -76,6 +78,7 @@ describe('project card parsing and anonymization', () => {
     subpage: false,
     project_id: 'Internal project id',
     is_internal: true,
+    end_date: '2022-01-01T00:00:00.000Z',
     Podcast: null,
     Blog_Posts: [],
     Projects_Outputs: [],
