@@ -132,10 +132,17 @@ export function parseProject(project, params) {
 
     let end_date;
 
-    if (project.end_date) {
+    if (
+      project.end_date !== null &&
+      project.end_date !== '' &&
+      project.end_date !== undefined
+    ) {
       end_date = new Date(project.end_date);
     } else {
-      end_date = new Date(project.predicted_end_date);
+      if (project.end_date_predicted === undefined) {
+        throw new Error('end_date_predicted is undefined');
+      }
+      end_date = new Date(project.end_date_predicted);
     }
 
     if (
