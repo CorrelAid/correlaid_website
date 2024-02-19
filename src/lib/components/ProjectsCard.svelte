@@ -18,7 +18,6 @@
   export let correlaidx = [];
   export let correlaidx_short_id = [];
   export let project_id = void 0;
-  export let end_date;
 
   export let project_outputs = void 0;
 
