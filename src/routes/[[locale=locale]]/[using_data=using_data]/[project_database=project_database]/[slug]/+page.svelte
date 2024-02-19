@@ -54,31 +54,36 @@
         </div>
       {/if}
 
-      <div class="mb-5">
-        <ProjectLinks
-          project_outputs={project.projectOutputs}
-          podcast_href={project.podcast_href}
-          post_slug={project.post_slug}
-        />
-      </div>
+      {#if !project.description}
+        <div class="mb-4">
+          <ProjectLinks
+            project_outputs={project.projectOutputs}
+            podcast_href={project.podcast_href}
+            post_slug={project.post_slug}
+            horizontal={false}
+          />
+        </div>
+      {/if}
       {#if project.organization}
-        <Box>
-          {#if project.organization.description}
-            <h2 class="text-xl font-semibold">
-              {project.organization.name}
-            </h2>
-          {:else}
-            <h2 class="font-semibold">{project.organization.name}</h2>
-          {/if}
-          {#if project.organization.description}
-            <p>
-              <Html
-                source={project.organization.description}
-                options={'!px-0'}
-              />
-            </p>
-          {/if}
-        </Box>
+        <div class="mb-6 mt-4">
+          <Box>
+            {#if project.organization.description}
+              <h2 class="text-xl font-semibold">
+                {project.organization.name}
+              </h2>
+            {:else}
+              <h2 class="font-semibold">{project.organization.name}</h2>
+            {/if}
+            {#if project.organization.description}
+              <p>
+                <Html
+                  source={project.organization.description}
+                  options={'!px-0'}
+                />
+              </p>
+            {/if}
+          </Box>
+        </div>
       {/if}
     </div>
     <div slot="main">
@@ -87,11 +92,26 @@
       {/if}
     </div>
   </TextContainer>
+  {#if project.projectOutputs.length !== 0 && project.description}
+    <div class="container mx-auto pb-12">
+      <div class="px-4">
+        <Box>
+          <h3 class="mb-4 text-xl font-semibold">Outputs:</h3>
+          <ProjectLinks
+            project_outputs={project.projectOutputs}
+            podcast_href={project.podcast_href}
+            post_slug={project.post_slug}
+            horizontal={false}
+          />
+        </Box>
+      </div>
+    </div>
+  {/if}
   {#if project.projectContacts.length !== 0}
     <div class="container mx-auto pb-12">
       <div class="px-4">
         <Box>
-          <h3 class="pb-3 text-xl font-semibold">CorrelAid Team:</h3>
+          <h3 class="mb-4 text-xl font-semibold">CorrelAid Team:</h3>
           {#each project.projectContacts as person}
             <div class="flex items-center">
               <span class="mr-2">
