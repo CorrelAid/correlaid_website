@@ -11,6 +11,8 @@ query Project(
 	) {
 		status
 		is_internal
+		end_date
+		end_date_predicted
 		Podcast {
 			soundcloud_link
 		}

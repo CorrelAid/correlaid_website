@@ -34,8 +34,11 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 			filter: { Projects_id :{ status: { _in: $status } }}
 		) {
 			Projects_id{
+				end_date
 				status
 				is_internal
+				end_date
+				end_date_predicted
 				subpage
 				project_id
 				Podcast {
