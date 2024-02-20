@@ -6,9 +6,9 @@ import translations from '$lib/data/translations.js';
 
 function reportParseError(err, description, rawInput) {
   console.group('CMS PARSE ERROR: ' + description);
-  console.log(err.message);
-  console.log(err.stack);
-  console.log(rawInput);
+  console.error(err.message);
+  console.error(err.stack);
+  console.error(rawInput);
   console.groupEnd();
   if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
     throw Error('Error while parsing CMS content');

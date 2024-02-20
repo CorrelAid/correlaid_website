@@ -17,3 +17,8 @@ rules:
   valid-jsdoc: 'off'
   require-jsdoc: 'off'
   camelcase: 'off'
+  no-console:
+    [
+      'error',
+      {'allow': ['warn', 'group', 'groupEnd', 'error', 'groupCollapsed']},
+    ]

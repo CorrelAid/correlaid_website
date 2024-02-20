@@ -16,7 +16,6 @@
   /** @type {import('./$types').PageData} */
   export let data;
   $: project = data;
-  $: console.log(project.description);
 </script>
 
 {#if project}

@@ -96,13 +96,6 @@ const queries = {
   `,
 };
 
-console.log(
-  'ADAPTER: ',
-  process.env.PUBLIC_ADAPTER,
-  ' PRERENDER: ',
-  process.env.PUBLIC_PRERENDER,
-);
-
 function addBlogRoutesWithLanguageFallback(routes, translations) {
   for (const t of translations) {
     routes.push(`/blog/${t.slug}`);
