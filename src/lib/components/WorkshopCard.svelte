@@ -6,8 +6,8 @@
   import {page} from '$app/stores';
   import {genLcHref} from '$lib/js/helpers';
   import ExternalLink from '../svg/External_Link.svelte';
-  import ArrowUp from '../svg/nav_icons/Arrow_Up.svelte';
-  import ArrowDown from '../svg/nav_icons/Arrow_Down.svelte';
+  import ArrowUp from '../svg/nav_icons/ArrowUp.svelte';
+  import ArrowDown from '../svg/nav_icons/ArrowDown.svelte';
 
   export let title;
   export let tags;
