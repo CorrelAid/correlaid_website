@@ -7,20 +7,20 @@
   export let title;
   export let type;
   import {page} from '$app/stores';
-  import {gen_lc_href} from '$lib/js/helpers';
+  import {genLcHref} from '$lib/js/helpers';
   export let teaser;
   export let date;
-  export let end_date = void null;
+  export let endDate = void null;
   export let tags;
   export let language;
   export let correlaidx = [];
-  export let correlaidx_short_id = [];
+  export let correlaidXShortId = [];
   import Langs from '$lib/components/Langs.svelte';
-  let proc_date;
-  let proc_end_date;
-  $: proc_date = toLocalDateString(date, $locale);
-  $: if (end_date) {
-    proc_end_date = toLocalDateString(end_date, $locale);
+  let procDate;
+  let procEndDate;
+  $: procDate = toLocalDateString(date, $locale);
+  $: if (endDate) {
+    procEndDate = toLocalDateString(endDate, $locale);
   }
 
   $: if (typeof slug !== 'undefined') {
@@ -37,7 +37,7 @@
     <div class="col-span-full xl:col-span-3">
       <div class=" align-center flex space-x-2 pb-2">
         <p class="mr-8 text-xl font-light">
-          {proc_date}{proc_end_date ? ` - ${proc_end_date}` : ''}
+          {procDate}{procEndDate ? ` - ${procEndDate}` : ''}
         </p>
       </div>
 
@@ -72,7 +72,7 @@
         {#each correlaidx as lc, i}
           <a
             class="text-medium font-semibold text-base-content transition hover:text-primary"
-            href={gen_lc_href($page.params, correlaidx_short_id[i])}
+            href={genLcHref($page.params, correlaidXShortId[i])}
           >
             CorrelAidX {lc}</a
           >{#if i < correlaidx.length - 1}{', '} {/if}

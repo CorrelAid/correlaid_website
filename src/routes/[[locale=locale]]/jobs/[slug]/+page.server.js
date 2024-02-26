@@ -1,10 +1,10 @@
-import directus_fetch from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
+import directusFetch from '$lib/js/directusFetch';
+import {getLang} from '$lib/js/helpers';
 import {jobDetailQuery} from './queries.js';
 import {error} from '@sveltejs/kit';
-import {parseJobPage} from '$lib/js/parse_cms';
-import {handle_lang} from '$lib/js/helpers';
-import {getAllowedStatus} from '$lib/js/directus_fetch.js';
+import {parseJobPage} from '$lib/js/parseCms';
+import {handleLang} from '$lib/js/helpers';
+import {getAllowedStatus} from '$lib/js/directusFetch.js';
 
 export const prerender = 'auto';
 
@@ -12,17 +12,17 @@ export const prerender = 'auto';
 export async function load({params}) {
   const vars = {
     slug: params.slug,
-    language: get_lang(params),
+    language: getLang(params),
     status: getAllowedStatus(),
   };
-  const data = await directus_fetch(jobDetailQuery, vars);
+  const data = await directusFetch(jobDetailQuery, vars);
 
   if (data.Jobs.length === 0) {
     throw error(404);
   }
 
   // Modifies Jobs in place
-  handle_lang(data.Jobs, params);
+  handleLang(data.Jobs, params);
 
   return parseJobPage(data);
 }

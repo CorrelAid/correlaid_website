@@ -116,10 +116,10 @@ export function applyUrlSearchParams(searchParams, values, selects) {
         const items = _.find(selects, {param: key}).items;
         const values_ = _.chain(items).flatMap('value').value();
         if (_.find(selects, {param: key}).multiple) {
-          const value_lst = value_.split(',');
+          const valueLst = value_.split(',');
           const arr = [];
-          for (let i = 0; i < value_lst.length; i++) {
-            arr.push(genValue(value_lst[i], values_, items));
+          for (let i = 0; i < valueLst.length; i++) {
+            arr.push(genValue(valueLst[i], values_, items));
           }
           values[key] = arr;
         } else {
@@ -151,7 +151,7 @@ function packMap(data, param) {
     }));
 }
 
-export function genDropdownLists(orig_data, selects) {
+export function genDropdownLists(origData, selects) {
   for (let i = 0; i < selects.length; i++) {
     let lst;
     if (selects[i].param === 'language' || selects[i].param === 'langs') {
@@ -160,7 +160,7 @@ export function genDropdownLists(orig_data, selects) {
         {value: 'de-DE', label: 'de'},
       ];
     } else {
-      lst = packMap(orig_data, selects[i].param);
+      lst = packMap(origData, selects[i].param);
       if (selects[i].param === 'correlaidx') {
         lst.push({value: 'global', label: 'Global'});
       }

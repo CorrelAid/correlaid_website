@@ -3,7 +3,7 @@
   export let image;
   export let alt;
   export let title;
-  export let image_desc;
+  export let imageDesc;
   export let imageOnRightSide = false;
 </script>
 
@@ -22,8 +22,8 @@
         />
       {/if}
     </div>
-    {#if image_desc}
-      <span class="text-xs"> {image_desc} </span>
+    {#if imageDesc}
+      <span class="text-xs"> {imageDesc} </span>
     {/if}
   </div>
   <div class="col-span-full px-4 pt-4 text-neutral md:col-span-4 md:pt-0">
@@ -50,8 +50,8 @@
         />
       {/if}
     </div>
-    {#if image_desc}
-      <span class="text-xs"> {image_desc} </span>
+    {#if imageDesc}
+      <span class="text-xs"> {imageDesc} </span>
     {/if}
   </div>
 </div>

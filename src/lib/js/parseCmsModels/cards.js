@@ -1,25 +1,24 @@
-import {gen_img_url, getTranslation, get_lang} from '../helpers.js';
+import {gemImgUrl, getTranslation, getLang} from '../helpers.js';
 import _ from 'lodash';
 import translations from '$lib/data/translations.js';
 
-export function blog_posts(post) {
+export function blogPosts(post) {
   let imageUrl;
   let imageDesc;
   if (post.title_image) {
-    imageUrl = gen_img_url(post.title_image.id);
+    imageUrl = gemImgUrl(post.title_image.id);
     imageDesc = post.title_image.description;
   }
-
   return {
     langs: post.langs,
     pubdate: post.publication_datetime,
     slug: post.translations.slug,
-    image_alt: post.translations.image_alt,
+    imageAlt: post.translations.image_alt,
     title: post.translations.title,
     teaser: post.translations.teaser,
-    image_url: imageUrl,
-    image_desc: imageDesc,
-    content_creators: post.content_creators,
+    imageUrl: imageUrl,
+    imageDesc: imageDesc,
+    contentCreators: post.content_creators,
   };
 }
 
@@ -42,7 +41,7 @@ function parseLcSubElements(
     }
     return lc.Local_Chapters_id.translations[0].city;
   });
-  parsedElement['correlaidx_short_id'] = lcSbuElementsRaw.map((lc) => {
+  parsedElement['correlaidXShortId'] = lcSbuElementsRaw.map((lc) => {
     return lc.Local_Chapters_id.short_id;
   });
 }
@@ -61,20 +60,20 @@ export function events(event, ical = false) {
   if (ical) {
     parsedEvent['date'] = event.date;
     if (event.end_date) {
-      parsedEvent['end_date'] = event.end_date;
+      parsedEvent['endDate'] = event.end_date;
     }
-    if (event.start_time) {
-      parsedEvent['start_time'] = event.start_time;
+    if (event.startTime) {
+      parsedEvent['startTime'] = event.start_time;
     }
     if (event.end_time) {
-      parsedEvent['end_time'] = event.end_time;
+      parsedEvent['endTime'] = event.end_time;
     }
     parsedEvent['id'] = event.id;
   } else {
     parseLcSubElements(parsedEvent, event.local_chapters);
     parsedEvent['date'] = new Date(event.date);
     if (event.end_date) {
-      parsedEvent['end_date'] = new Date(event.end_date);
+      parsedEvent['endDate'] = new Date(event.end_date);
     }
   }
 
@@ -85,18 +84,18 @@ export function icalEvents(event) {
   return events(event, true);
 }
 
-export function podcast_episodes(episode) {
+export function podcastEpisodes(episode) {
   const parsedEpisode = {
     langs: [episode.language],
     pubdate: episode.publication_datetime,
     href: episode.soundcloud_link,
     title: episode.title,
     teaser: episode.description,
-    content_creators: episode.content_creators,
-    image_alt: episode.image_alt,
+    contentCreators: episode.content_creators,
+    imageAlt: episode.image_alt,
   };
   if (episode.image) {
-    parsedEpisode['image_url'] = gen_img_url(episode.image.id);
+    parsedEpisode['imageUrl'] = gemImgUrl(episode.image.id);
   }
   return parsedEpisode;
 }
@@ -122,9 +121,9 @@ function anonymizeProjectCard(parsedProjectCard, lang) {
 
   for (const field of [
     'summary',
-    'project_id',
+    'projectId',
     'correlaidx',
-    'correlaidx_short_id',
+    'correlaidXShortId',
     'type',
     'data',
   ]) {
@@ -165,12 +164,12 @@ export function projects(project, params) {
     project.end_date !== '' &&
     project.end_date !== undefined
   ) {
-    parsedProjectCard['end_date'] = new Date(project.end_date);
+    parsedProjectCard['endDate'] = new Date(project.end_date);
   } else {
     if (project.end_date_predicted === undefined) {
       throw new Error('end_date_predicted is undefined');
     }
-    parsedProjectCard['end_date'] = new Date(project.end_date_predicted);
+    parsedProjectCard['endDate'] = new Date(project.end_date_predicted);
   }
 
   if (
@@ -199,7 +198,7 @@ export function projects(project, params) {
   }
 
   if (project.subpage) {
-    parsedProjectCard['project_id'] = project.project_id;
+    parsedProjectCard['projectId'] = project.project_id;
   }
 
   if (project.translations[0].summary !== null) {
@@ -209,14 +208,14 @@ export function projects(project, params) {
   parseLcSubElements(parsedProjectCard, project.Local_Chapters);
 
   if (project.Podcast) {
-    parsedProjectCard['podcast_href'] = project.Podcast.soundcloud_link;
+    parsedProjectCard['podcastHref'] = project.Podcast.soundcloud_link;
   }
 
-  const currentLanguage = get_lang(params);
+  const currentLanguage = getLang(params);
   for (const post of project.Blog_Posts) {
     const translation = getTranslation(post.Blog_Posts_id, currentLanguage);
     if (translation.slug) {
-      parsedProjectCard['post_slug'] = translation.slug;
+      parsedProjectCard['postSlug'] = translation.slug;
       break;
     }
   }
@@ -231,7 +230,7 @@ export function projects(project, params) {
       'repository',
       'data',
     ];
-    parsedProjectCard['project_outputs'] = [];
+    parsedProjectCard['projectOutputs'] = [];
 
     for (const outputType of outputTypes) {
       const outputs = project.Projects_Outputs.filter(
@@ -243,7 +242,7 @@ export function projects(project, params) {
           if (outputs.length > 1) {
             output['output_number'] = i;
           }
-          parsedProjectCard['project_outputs'].push(output);
+          parsedProjectCard['projectOutputs'].push(output);
           i++;
         }
       }
@@ -265,18 +264,18 @@ export function workshops(workshop) {
   const parsedWorkshop = {
     title: workshop.name,
     teaser: workshop.teaser,
-    target_audience: workshop.target_audience,
+    targetAudience: workshop.target_audience,
     language: workshop.language,
     href: workshop.resource_link,
-    resp_unit: workshop.responsible_unit,
+    respUnit: workshop.responsible_unit,
     tags: workshop.tags,
   };
   if (workshop.local_chapters[0]) {
     // TODO: This is used inside the WorkshopCard component to define the href to the workshop.
     // Can this really be missing?
-    parsedWorkshop['correlaidx_city'] =
+    parsedWorkshop['correlaidXCity'] =
       workshop.local_chapters[0].Local_Chapters_id.translations[0].city;
-    parsedWorkshop['correlaidx_short_id'] =
+    parsedWorkshop['correlaidXShortId'] =
       workshop.local_chapters[0].Local_Chapters_id.short_id;
   }
   return parsedWorkshop;

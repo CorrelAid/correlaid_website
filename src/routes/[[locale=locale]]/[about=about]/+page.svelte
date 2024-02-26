@@ -1,10 +1,10 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import Awards from '$lib/components/Awards.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.about';
+    $pageKey = 'navbar.about';
   });
   export let data;
   $: awards = data.awards;

@@ -16,7 +16,7 @@ rules:
   indent: ['error', 2, {'SwitchCase': 1}]
   valid-jsdoc: 'off'
   require-jsdoc: 'off'
-  camelcase: 'off'
+  camelcase: 'error'
   no-console:
     [
       'error',

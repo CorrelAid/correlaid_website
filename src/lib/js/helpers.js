@@ -1,5 +1,5 @@
 import translations from '$lib/data/translations';
-import page_keys from '$lib/data/page_keys';
+import pageKeys from '$lib/data/pageKeys';
 import {PUBLIC_API_URL} from '$env/static/public';
 import * as cheerio from 'cheerio';
 import icalendar from 'ical-generator';
@@ -29,12 +29,12 @@ export function translate(locale, key, vars) {
 
   translateObject['en'] = {
     ...translations['en'],
-    ...page_keys['en'],
+    ...pageKeys['en'],
   };
 
   translateObject['de'] = {
     ...translations['de'],
-    ...page_keys['de'],
+    ...pageKeys['de'],
   };
 
   // Grab the translation from the translations object.
@@ -96,7 +96,7 @@ export const find = (v, path) => {
 /**
  * Returns the name of the language in directus format given the path parameters object.
  */
-export function get_lang(params) {
+export function getLang(params) {
   let lang;
   if (params.locale) {
     lang = 'en-US';
@@ -122,14 +122,14 @@ export function localeToLang(locale) {
  * Gets the locale name (its undefined when german and taken from params.locale,
  * because locale is optional parameter).
  */
-export function get_locale(params) {
+export function getLocale(params) {
   if (params.locale == 'en') {
     return params.locale;
   }
   return 'de';
 }
 
-export function gen_img_url(id, transform = '') {
+export function gemImgUrl(id, transform = '') {
   return `${PUBLIC_API_URL}/assets/${id}?format=webp&${transform}`;
 }
 
@@ -164,7 +164,7 @@ export function toLocalDateString(date, locale, year = false) {
  * @param {boolean} year A Flag whether the output should contain the year
  * @return {string} Represents the date formatted according to the locale and the year flag
  */
-export function gen_date(date, locale, year = false) {
+export function genDate(date, locale, year = false) {
   date = new Date(Date.parse(date));
 
   return toLocalDateString(date, locale, year);
@@ -174,7 +174,7 @@ export function gen_date(date, locale, year = false) {
  * Generates a custom time string given a time string taken from
  * directus and a locale.
  */
-export function gen_time(time, locale) {
+export function genTime(time, locale) {
   const options = {
     hour: 'numeric',
     minute: 'numeric',
@@ -215,26 +215,26 @@ export function getTranslation(entry, currentLanguage) {
  * Checking if entries exists in current locale, if not falls back to another available language.
  * Also adds an array of existing languages as a property to every entry.
  */
-export function handle_lang(entries, params) {
+export function handleLang(entries, params) {
   for (const entry of entries) {
     entry.langs = extractLanguages(entry);
     // TODO: This is not very nice because it changes the data type from array to object.
     // It also is misleading in terms of the naming as the property name is still plural.
-    entry.translations = getTranslation(entry, get_lang(params));
+    entry.translations = getTranslation(entry, getLang(params));
   }
 
   return entries;
 }
 
-export function gen_lc_href(params, short_id) {
-  const lc_href = [
-    get_locale(params) == 'de' ? '' : '/en',
-    get_locale(params) == 'de'
+export function genLcHref(params, shortId) {
+  const lcHref = [
+    getLocale(params) == 'de' ? '' : '/en',
+    getLocale(params) == 'de'
       ? '/mitmachen/correlaidx/'
       : '/volunteering/correlaidx/',
-    short_id.toLowerCase(),
+    shortId.toLowerCase(),
   ].join('');
-  return lc_href;
+  return lcHref;
 }
 
 export function convertContractType(type, locale) {
@@ -311,7 +311,7 @@ export function processHtml(html) {
 }
 
 export function translateSelectLabels(select, locale, param) {
-  if (param == 'target_audience') {
+  if (param == 'targetAudience') {
     const select_ = JSON.parse(JSON.stringify(select));
     for (const item of select_) {
       let label = item.label.replace(/ /g, '_');
@@ -333,16 +333,16 @@ export function createCalendar(
   const calendar = icalendar({
     prodId: `//CorrelAid//NONSGML CorrelAid${
       lc != '' ? `X ${lc}` : ''
-    } Events V1.0//${get_locale(params).toUpperCase()}`,
+    } Events V1.0//${getLocale(params).toUpperCase()}`,
     events: events.map((event) => {
       const startDate = event.start_time
         ? new Date(`${event.date} ${event.start_time}`)
         : new Date(event.date);
-      const endDate = event.end_date
-        ? event.end_time
-          ? new Date(`${event.end_date} ${event.end_time}`)
-          : new Date(event.end_date)
-        : new Date(`${event.date} ${event.end_time}`);
+      const endDate = event.endDate
+        ? event.endTime
+          ? new Date(`${event.endDate} ${event.endTime}`)
+          : new Date(event.endDate)
+        : new Date(`${event.date} ${event.endTime}`);
       const location = event.online ? 'Online' : event.location;
 
       const uuid5 = uuidv5(event.id.toString(), uuidv5.URL);
@@ -368,4 +368,10 @@ export function createCalendar(
     }),
   });
   return calendar.toString();
+}
+
+export function toCamelCase(input) {
+  return input
+    .toLowerCase()
+    .replace(/[-_](.)/g, (_, char) => char.toUpperCase());
 }

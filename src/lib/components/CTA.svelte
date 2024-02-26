@@ -1,9 +1,9 @@
 <script>
-  import LinkButton from '$lib/components/Link_Button.svelte';
+  import LinkButton from '$lib/components/LinkButton.svelte';
   import Html from '$lib/components/Html.svelte';
-  export let button_link;
-  export let button_text;
-  export let button_color;
+  export let buttonLink;
+  export let buttonText;
+  export let buttonColor;
   export let text;
 </script>
 
@@ -20,10 +20,10 @@
   <div class="flex pb-10">
     <span class="mx-auto">
       <LinkButton
-        href={button_link}
-        text={button_text}
+        href={buttonLink}
+        text={buttonText}
         type={'external'}
-        color={`bg-${button_color}`}
+        color={`bg-${buttonColor}`}
       />
     </span>
   </div>

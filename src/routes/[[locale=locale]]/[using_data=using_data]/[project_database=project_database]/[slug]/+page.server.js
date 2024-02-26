@@ -1,15 +1,15 @@
-import {directus_fetch, getAllowedStatus} from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
+import {directusFetch, getAllowedStatus} from '$lib/js/directusFetch';
+import {getLang} from '$lib/js/helpers';
 import {projectDetailsQuery} from './queries.js';
-import {handle_lang} from '$lib/js/helpers';
+import {handleLang} from '$lib/js/helpers';
 import {error} from '@sveltejs/kit';
-import {parseProject} from '$lib/js/parse_cms';
+import {parseProject} from '$lib/js/parseCms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(projectDetailsQuery, {
+  const data = await directusFetch(projectDetailsQuery, {
     slug: params.slug,
-    language: get_lang(params),
+    language: getLang(params),
     status: getAllowedStatus(),
   });
 
@@ -17,14 +17,14 @@ export async function load({params}) {
     throw error(404);
   }
 
-  const blog_posts = handle_lang(
+  const blogPosts = handleLang(
     data.Projects[0].Blog_Posts.map((data) => data.Blog_Posts_id).filter(
       (data) => data !== null,
     ),
     params,
   );
 
-  data.Projects[0].Blog_Posts = blog_posts;
+  data.Projects[0].Blog_Posts = blogPosts;
 
   return parseProject(data.Projects[0], params);
 }

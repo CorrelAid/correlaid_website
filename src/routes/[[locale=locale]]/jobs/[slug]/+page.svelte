@@ -2,8 +2,8 @@
   import {t, locale} from '$lib/stores/i18n';
   import Html from '$lib/components/Html.svelte';
   import {onMount} from 'svelte';
-  import {page_key} from '$lib/stores/page_key';
-  import TextContainer from '$lib/components/Text_Container.svelte';
+  import {pageKey} from '$lib/stores/pageKey';
+  import TextContainer from '$lib/components/TextContainer.svelte';
   import Box from '$lib/components/Box.svelte';
   import {toLocalDateString, convertContractType} from '$lib/js/helpers';
   import De from '$lib/svg/DE.svelte';
@@ -14,14 +14,14 @@
   import Person from '$lib/components/Person.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.jobs';
+    $pageKey = 'navbar.jobs';
   });
 
   export let data;
 
   $: job = data;
 
-  const icon_h = 22;
+  const iconSize = 22;
 
   const listStyle = 'min-w-min mr-4 mb-2';
 
@@ -90,7 +90,7 @@
                   class="inline-block rounded-full bg-white shadow-none"
                   arria-hidden="true"
                 >
-                  <De height={icon_h} width={icon_h} />
+                  <De height={iconSize} width={iconSize} />
                 </span>
                 <span class="sr-only">Event ist auf deutsch.</span>
               {:else}
@@ -99,7 +99,7 @@
                   role="img"
                   aria-label="Event is in english."
                 >
-                  <En height={icon_h} width={icon_h} />
+                  <En height={iconSize} width={iconSize} />
                 </span>
               {/if}
             {:else}

@@ -1,18 +1,18 @@
 <script>
   import {onMount} from 'svelte';
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {t} from '$lib/stores/i18n';
   import {page} from '$app/stores';
   import Ical from '$lib/svg/Ical.svelte';
   import ProjectsCard from '$lib/components/ProjectsCard.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import Html from '$lib/components/Html.svelte';
-  import Events_Card from '$lib/components/Events_Card.svelte';
+  import EventsCard from '$lib/components/EventsCard.svelte';
   import Person from '$lib/components/Person.svelte';
   import Icon from '$lib/components/Icon.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.volunteering.correlaidx';
+    $pageKey = 'navbar.volunteering.correlaidx';
   });
 
   /** @type {import('./$types').PageData} */
@@ -67,7 +67,7 @@
         <Ical height="45" width="45" />
       </a>
       {#each lcPage['events'] as event}
-        <Events_Card {...event} />
+        <EventsCard {...event} />
       {/each}
     </div>
   {/if}
@@ -83,7 +83,7 @@
   {/if}
   {#if lcPage.howToGetInTouch}
     <div class="mb-12 px-4">
-      <Icon icon_type={'get_in_touch'} text={lcPage.howToGetInTouch} />
+      <Icon iconType={'get_in_touch'} text={lcPage.howToGetInTouch} />
     </div>
   {/if}
 </div>

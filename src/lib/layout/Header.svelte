@@ -1,23 +1,23 @@
 <script>
   import {t} from '$lib/stores/i18n';
-  import {get_locale} from '$lib/js/helpers.js';
+  import {getLocale} from '$lib/js/helpers.js';
   import {page} from '$app/stores';
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {drawer} from '$lib/stores/drawer';
-  import {no_scroll} from '$lib/stores/no_scroll';
-  import {header_height} from '$lib/stores/dims';
-  import CorrelAid_Logo from '$lib/svg/CorrelAid_Logo.svelte';
-  import CorrelAid_Logo_min from '$lib/svg/CorrelAid_Logo_min.svelte';
+  import {noScroll} from '$lib/stores/noScroll';
+  import {headerHeight} from '$lib/stores/dims';
+  import CorrelaidLogo from '$lib/svg/CorrelaidLogo.svelte';
+  import CorrelaidLogoMin from '$lib/svg/CorrelaidLogoMin.svelte';
   import MenuIcon from '$lib/svg/Menu_Icon.svelte';
-  import LinkButton from '$lib/components/Link_Button.svelte';
+  import LinkButton from '$lib/components/LinkButton.svelte';
 
   import HeaderTopNav from './Header/HeaderTopNav.svelte';
   import HeaderBottomNav from './Header/HeaderBottomNav.svelte';
   import MobileDrawer from './Header/MobileDrawer.svelte';
   import LanguageSelect from './Header/LanguageSelect.svelte';
-  import {top_nav, bot_nav} from './Header/navConfig.js';
+  import {topNav, botNav} from './Header/navConfig.js';
 
-  let active_language;
+  let activeLanguage;
 
   let botNavCloseAll;
   let lastClickedLink = '';
@@ -28,16 +28,16 @@
     }
   }
 
-  $: active_language = get_locale($page.params);
-  $: $no_scroll = $drawer;
-  $: lastClickedLink = $page_key;
+  $: activeLanguage = getLocale($page.params);
+  $: $noScroll = $drawer;
+  $: lastClickedLink = $pageKey;
   $: $page.url && closeall();
   $: $page.url && ($drawer = false);
 </script>
 
 <header
   class="fixed top-0 z-30 w-screen border-b border-neutral-25 bg-white xl:static"
-  bind:clientHeight={$header_height}
+  bind:clientHeight={$headerHeight}
   aria-label="Site Header"
 >
   <div class="mx-auto px-4 sm:px-6 xl:px-8">
@@ -48,11 +48,11 @@
       >
         <a class="hidden text-teal-600 xl:block" href={$t('navbar.home').url}>
           <span class="sr-only">Home</span>
-          <CorrelAid_Logo width={100} height={100} />
+          <CorrelaidLogo width={100} height={100} />
         </a>
         <a class="block text-teal-600 xl:hidden" href={$t('navbar.home').url}>
           <span class="sr-only">Home</span>
-          <CorrelAid_Logo_min width={60} height={60} />
+          <CorrelaidLogoMin width={60} height={60} />
         </a>
       </div>
       <!-- middle part of navbar -->
@@ -60,9 +60,9 @@
         class="3xl:col-span-4 col-span-6 hidden flex-col xl:block"
         aria-label="Main"
       >
-        <HeaderTopNav {top_nav} {lastClickedLink} />
+        <HeaderTopNav {topNav} {lastClickedLink} />
         <HeaderBottomNav
-          {bot_nav}
+          {botNav}
           {lastClickedLink}
           bind:closeall={botNavCloseAll}
         />
@@ -77,7 +77,7 @@
           type={'external'}
           color={`bg-secondary`}
         />
-        <LanguageSelect bind:active_language on:changeLanguage />
+        <LanguageSelect bind:activeLanguage on:changeLanguage />
       </div>
       <!-- Mobile menu button -->
       <div class="block xl:hidden">
@@ -94,5 +94,5 @@
 </header>
 <!-- Mobile Menu -->
 {#if $drawer}
-  <MobileDrawer {top_nav} {bot_nav} on:changeLanguage />
+  <MobileDrawer {topNav} {botNav} on:changeLanguage />
 {/if}

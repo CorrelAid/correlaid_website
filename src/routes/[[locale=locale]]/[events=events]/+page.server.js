@@ -1,12 +1,12 @@
-import {directus_fetch, getAllowedStatus} from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
+import {directusFetch, getAllowedStatus} from '$lib/js/directusFetch';
+import {getLang} from '$lib/js/helpers';
 import {eventQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parse_cms';
+import {parseEntries} from '$lib/js/parseCms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(eventQuery, {
-    language: get_lang(params),
+  const data = await directusFetch(eventQuery, {
+    language: getLang(params),
     status: getAllowedStatus(),
   });
 

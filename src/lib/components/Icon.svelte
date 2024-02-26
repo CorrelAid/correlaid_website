@@ -1,5 +1,5 @@
 <script>
-  export let icon_type;
+  export let iconType;
   export let text;
   import Html from '$lib/components/Html.svelte';
   import Infrastrucuture from '$lib/svg/Infrastrucuture.svelte';
@@ -8,7 +8,7 @@
   import Communicate from '$lib/svg/Communicate.svelte';
   import Box from '$lib/components/Box.svelte';
 
-  const icon_size = 100;
+  const iconSize = 100;
 </script>
 
 <Box>
@@ -16,14 +16,14 @@
     <div
       class="col-span-full flex items-center justify-center pb-4 text-base-content md:col-span-2 md:pb-0"
     >
-      {#if icon_type == 'volunteer'}
-        <Volunteering width={icon_size} height={icon_size} />
-      {:else if icon_type == 'like_minded'}
-        <LikeMinded width={icon_size} height={icon_size} />
-      {:else if icon_type == 'infrastructure'}
-        <Infrastrucuture width={icon_size} height={icon_size} />
-      {:else if icon_type == 'get_in_touch'}
-        <Communicate width={icon_size - 10} height={icon_size - 10} />
+      {#if iconType == 'volunteer'}
+        <Volunteering width={iconSize} height={iconSize} />
+      {:else if iconType == 'like_minded'}
+        <LikeMinded width={iconSize} height={iconSize} />
+      {:else if iconType == 'infrastructure'}
+        <Infrastrucuture width={iconSize} height={iconSize} />
+      {:else if iconType == 'get_in_touch'}
+        <Communicate width={iconSize - 10} height={iconSize - 10} />
       {/if}
     </div>
     <div class="col-span-full md:col-span-6">

@@ -3,7 +3,7 @@
   import {drawer} from '$lib/stores/drawer';
   import {locale} from '$lib/stores/i18n';
   import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
-  import LinkButton from '$lib/components/Link_Button.svelte';
+  import LinkButton from '$lib/components/LinkButton.svelte';
   import {fly, fade} from 'svelte/transition';
   import {createEventDispatcher} from 'svelte';
 
@@ -18,14 +18,14 @@
     changeLocale();
   }
 
-  let sidenav_width;
+  let sidenavWidth;
 
-  export let top_nav;
-  export let bot_nav;
+  export let topNav;
+  export let botNav;
 
   const toggles = {};
 
-  for (const navItem of bot_nav) {
+  for (const navItem of botNav) {
     toggles[navItem.category] = false;
   }
 
@@ -47,13 +47,13 @@
   <div
     class="dvh-100 absolute left-0 z-30 flex w-5/6 flex-col justify-between border-r bg-white"
     id="drawer-sidenav"
-    bind:clientWidth={sidenav_width}
-    in:fly={{x: -sidenav_width, duration: 250}}
-    out:fly={{x: -sidenav_width, duration: 250}}
+    bind:clientWidth={sidenavWidth}
+    in:fly={{x: -sidenavWidth, duration: 250}}
+    out:fly={{x: -sidenavWidth, duration: 250}}
   >
     <nav aria-label="Main" class="z-30 flex flex-col pl-7 pt-7">
       <ul class="space-y-3 text-2xl text-base-content">
-        {#each bot_nav as navItem}
+        {#each botNav as navItem}
           <li>
             <div class="inline-flex items-center">
               <a class="w-56 tracking-wide" href={$t(navItem.key).url}>
@@ -94,7 +94,7 @@
           <ul
             class="space-y-3 pt-3 text-lg font-light tracking-wide text-base-content"
           >
-            {#each top_nav as key}
+            {#each topNav as key}
               <li>
                 <a class="transition hover:text-primary" href={$t(key).url}
                   >{$t(key).text}</a

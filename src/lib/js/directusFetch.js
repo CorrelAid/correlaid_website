@@ -43,7 +43,7 @@ function queryErrorMsg(query, vars) {
  * set of typically used names. This can be disabled with the
  * allowAllVars flag.
  */
-export async function directus_fetch(query, vars, additionalHeaders = {}) {
+export async function directusFetch(query, vars, additionalHeaders = {}) {
   const payload = {query: query};
   if (typeof vars !== 'undefined') {
     payload['variables'] = vars;
@@ -88,7 +88,7 @@ export async function directus_fetch(query, vars, additionalHeaders = {}) {
   return data.data;
 }
 
-export default directus_fetch;
+export default directusFetch;
 
 export function getAllowedStatus() {
   const allowedStatus = ['published', 'published_anon'];

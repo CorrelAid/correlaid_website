@@ -1,12 +1,12 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import WorkshopCard from '$lib/components/WorkshopCard.svelte';
   import Filter from '$lib/components/Filter.svelte';
   import {t} from '$lib/stores/i18n';
 
   onMount(() => {
-    $page_key = 'navbar.education.resources';
+    $pageKey = 'navbar.education.resources';
   });
 
   export let data;
@@ -18,13 +18,13 @@
       title: $t('filter.responsible').text,
       searchable: false,
       multiple: false,
-      param: 'resp_unit',
+      param: 'respUnit',
     },
     {
       title: 'Local Chapter',
       searchable: false,
       multiple: false,
-      param: 'correlaidx_city',
+      param: 'correlaidXCity',
     },
     {
       title: $t('filter.language').text,
@@ -33,10 +33,10 @@
       param: 'language',
     },
     {
-      title: $t('filter.target_audience').text,
+      title: $t('filter.targetAudience').text,
       searchable: false,
       multiple: true,
-      param: 'target_audience',
+      param: 'targetAudience',
     },
   ];
 
@@ -47,7 +47,7 @@
   ];
 </script>
 
-<Filter orig_data={workshops} bind:filteredData {selects} {searchOptions} />
+<Filter origData={workshops} bind:filteredData {selects} {searchOptions} />
 {#if filteredData}
   <div class="mt-8 space-y-6 px-4">
     {#each filteredData as workshop}

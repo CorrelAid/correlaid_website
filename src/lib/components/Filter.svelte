@@ -13,7 +13,7 @@
   import Select from 'svelte-select';
   import _ from 'lodash';
 
-  export let orig_data;
+  export let origData;
   export let filteredData;
   export let expanded = false;
 
@@ -21,7 +21,7 @@
   export let searchOptions;
 
   let hidden = 'hidden';
-  let aria_expanded = false;
+  let ariaExpanded = false;
   let searchTerm;
 
   const values = {};
@@ -33,18 +33,18 @@
     if (expanded === false) {
       if (Object.values(values).some((value) => value !== null)) {
         hidden = 'visible';
-        aria_expanded = true;
+        ariaExpanded = true;
       }
     } else {
       hidden = 'visible';
     }
   });
 
-  $: selects = genDropdownLists(orig_data, selects);
+  $: selects = genDropdownLists(origData, selects);
 
   function handleHidden() {
     hidden = hidden === 'hidden' ? 'visible' : 'hidden';
-    aria_expanded = aria_expanded ? false : true;
+    ariaExpanded = ariaExpanded ? false : true;
   }
 
   // update selects as values changes. We cant update selects directly because of infinite loop.
@@ -59,7 +59,7 @@
 
   // when values changes, use updated selects to filter the original data
   $: filteredData = filter(
-    orig_data,
+    origData,
     selects,
     searchTerm,
     searchOptions,
@@ -78,7 +78,7 @@
   <div class="border-b border-neutral-25">
     <button
       class="inline-flex items-center justify-center pb-1 text-xl font-semibold transition hover:text-secondary"
-      aria-expanded={aria_expanded}
+      aria-expanded={ariaExpanded}
       aria-controls="filter"
       on:click={handleHidden}
     >

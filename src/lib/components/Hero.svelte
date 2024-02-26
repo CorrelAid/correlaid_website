@@ -1,23 +1,23 @@
 <script>
-  import LinkButton from './Link_Button.svelte';
-  import {header_height} from '$lib/stores/dims';
+  import LinkButton from './LinkButton.svelte';
+  import {headerHeight} from '$lib/stores/dims';
   import Info from '$lib/svg/Info.svelte';
-  import CorrelAidXLogo from '$lib/svg/CorrelAidX_Logo.svelte';
-  export let gradient_only;
+  import CorrelaidXLogo from '$lib/svg/CorrelaidXLogo.svelte';
+  export let gradientOnly;
   export let height;
   export let text;
   export let buttons = [];
   export let correlaidx = false;
   export let image = void 0;
-  export let image_desc = void 0;
+  export let imageDesc = void 0;
 
-  let c_hidden = 'hidden';
+  let cHidden = 'hidden';
   let aria = 'false';
 
-  function handle_hide() {
-    c_hidden === 'inline-block'
-      ? (c_hidden = 'hidden')
-      : (c_hidden = 'inline-block');
+  function handleHidden() {
+    cHidden === 'inline-block'
+      ? (cHidden = 'hidden')
+      : (cHidden = 'inline-block');
     aria === 'false' ? (aria = 'true') : (aria = 'false');
   }
 </script>
@@ -26,32 +26,32 @@
   class="relative flex w-screen items-center justify-center"
   style="
     {height == 'full'
-    ? `height: calc(100vh - ${$header_height}px)`
-    : `height: calc((100vh - ${$header_height}px)/2)`}"
+    ? `height: calc(100vh - ${$headerHeight}px)`
+    : `height: calc((100vh - ${$headerHeight}px)/2)`}"
 >
-  {#if gradient_only === false}
+  {#if gradientOnly === false}
     <span
       class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
       style={`background-image: url(${image})`}
     />
-    {#if image_desc}
+    {#if imageDesc}
       <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 lg:block">
         <span
           class="z-0 block rounded-tl px-1 py-1 text-xs text-white opacity-100"
-          >{image_desc}</span
+          >{imageDesc}</span
         >
       </div>
       <div
         class="absolute bottom-0 left-0 z-20 max-w-80 overflow-hidden whitespace-nowrap pb-0.5 pl-2 md:max-w-none lg:hidden"
       >
-        <p class="inline text-xs text-white {c_hidden}" id="credit">
-          {image_desc}
+        <p class="inline text-xs text-white {cHidden}" id="credit">
+          {imageDesc}
         </p>
       </div>
       <div class="absolute bottom-0 right-0 z-20 lg:hidden">
         <button
           class="z-20 m-1 my-2 rounded-full bg-white p-0.5 text-sm lg:hidden"
-          on:click={handle_hide}
+          on:click={handleHidden}
           aria-label="Credit"
           aria-expanded={aria}
           aria-controls="credit"
@@ -68,12 +68,12 @@
           <div
             class="flex justify-center sm:landscape:hidden lg:landscape:flex"
           >
-            <CorrelAidXLogo width={230} height={230} />
+            <CorrelaidXLogo width={230} height={230} />
           </div>
           <div
             class="hidden justify-center sm:landscape:flex lg:landscape:hidden"
           >
-            <CorrelAidXLogo width={100} height={100} />
+            <CorrelaidXLogo width={100} height={100} />
           </div>
         {/if}
         <div class={correlaidx === true ? 'text-center' : ''}>

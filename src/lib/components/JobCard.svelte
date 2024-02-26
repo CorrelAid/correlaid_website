@@ -18,7 +18,7 @@
   import Salary from '$lib/svg/Salary.svelte';
   export let href = '';
 
-  const icon_h = 22;
+  const iconSize = 22;
 
   const listStyle = 'min-w-min mr-4 mb-2';
 
@@ -96,7 +96,7 @@
                   class="inline-block rounded-full bg-white shadow-none"
                   arria-hidden="true"
                 >
-                  <De height={icon_h} width={icon_h} />
+                  <De height={iconSize} width={iconSize} />
                 </span>
                 <span class="sr-only">Event ist auf deutsch.</span>
               {:else}
@@ -105,7 +105,7 @@
                   role="img"
                   aria-label="Event is in english."
                 >
-                  <En height={icon_h} width={icon_h} />
+                  <En height={iconSize} width={iconSize} />
                 </span>
               {/if}
             {:else}

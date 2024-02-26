@@ -1,4 +1,4 @@
-import BlogCard from './Blog_Card.svelte';
+import BlogCard from './BlogCard.svelte';
 import {render, screen} from '@testing-library/svelte';
 import {locale} from '$lib/stores/i18n';
 
@@ -8,18 +8,18 @@ describe('Blog Cards', () => {
     title: 'Test blog post',
     teaser: 'This eases the testing blog post',
     pubdate: '2023-04-28T00:20:00',
-    content_creators: [],
+    contentCreators: [],
     href: 'https://fakeurl.com',
-    image_alt: 'Not image for testing',
+    imageAlt: 'Not image for testing',
   };
   const blogPropsSlug = {
     langs: ['de-DE'],
     title: 'Test blog post',
     teaser: 'This eases the testing blog post',
     pubdate: '2023-04-28T00:20:00',
-    content_creators: [],
+    contentCreators: [],
     slug: 'blog-post-slug',
-    image_alt: 'Not image for testing',
+    imageAlt: 'Not image for testing',
   };
 
   test('Can be initialized with href', () => {

@@ -10,7 +10,7 @@
   export let linkedin = '';
   export let github = '';
   export let name;
-  const social_media_height = 25;
+  const iconSize = 25;
 </script>
 
 <div class="flex gap-x-2 text-base-content">
@@ -21,8 +21,8 @@
       target="_blank"
       rel="noreferrer"
       ><ExternalLink
-        width={social_media_height + 3}
-        height={social_media_height + 3}
+        width={iconSize + 3}
+        height={iconSize + 3}
         color={'rgb(60, 60, 59)'}
       /></a
     >{/if}
@@ -30,28 +30,24 @@
       href={twitter}
       aria-label="{name} Twitter"
       target="_blank"
-      rel="noreferrer"
-      ><Twitter width={social_media_height} height={social_media_height} /></a
+      rel="noreferrer"><Twitter width={iconSize} height={iconSize} /></a
     >{/if}
   {#if mastodon != ''}<a
       href={mastodon}
       aria-label="{name} Mastodon"
       target="_blank"
-      rel="noreferrer"
-      ><Mastodon width={social_media_height} height={social_media_height} /></a
+      rel="noreferrer"><Mastodon width={iconSize} height={iconSize} /></a
     >{/if}
   {#if linkedin != ''}<a
       href={linkedin}
       aria-label="{name} LinkedIn"
       target="_blank"
-      rel="noreferrer"
-      ><Linkedin width={social_media_height} height={social_media_height} /></a
+      rel="noreferrer"><Linkedin width={iconSize} height={iconSize} /></a
     >{/if}
   {#if github != ''}<a
       href={github}
       aria-label="{name} Github"
       target="_blank"
-      rel="noreferrer"
-      ><Github width={social_media_height} height={social_media_height} /></a
+      rel="noreferrer"><Github width={iconSize} height={iconSize} /></a
     >{/if}
 </div>

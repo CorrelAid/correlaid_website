@@ -1,10 +1,10 @@
-export const top_nav = [
+export const topNav = [
   'navbar.events',
   'navbar.blog',
   'navbar.podcast',
   'navbar.newsletter',
 ];
-export const bot_nav = [
+export const botNav = [
   {
     key: 'navbar.using_data',
     category: 'using_data',

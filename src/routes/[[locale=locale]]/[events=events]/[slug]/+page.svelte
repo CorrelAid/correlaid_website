@@ -1,13 +1,13 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {page} from '$app/stores';
-  import {gen_lc_href} from '$lib/js/helpers';
-  import {gen_date, gen_time} from '$lib/js/helpers';
+  import {genLcHref} from '$lib/js/helpers';
+  import {genDate, genTime} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
   import {locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Html from '$lib/components/Html.svelte';
-  import TextContainer from '$lib/components/Text_Container.svelte';
+  import TextContainer from '$lib/components/TextContainer.svelte';
   import Time from '$lib/svg/Time.svelte';
   import Calendar from '$lib/svg/Calendar.svelte';
   import Location from '$lib/svg/Location.svelte';
@@ -16,10 +16,10 @@
   import Box from '$lib/components/Box.svelte';
   import De from '$lib/svg/DE.svelte';
   import En from '$lib/svg/EN.svelte';
-  const icon_h = 22;
+  const iconSize = 22;
 
   onMount(() => {
-    $page_key = 'navbar.events';
+    $pageKey = 'navbar.events';
   });
 
   /** @type {import('./$types').PageData} */
@@ -30,18 +30,18 @@
 
 <TextContainer title={event.title} teaser={event.teaser}>
   <div class="mx-4" slot="sub_subtitle">
-    {#if event.local_chapters.length !== 0}
+    {#if event.localChapters.length !== 0}
       <p class="pb-2">
-        {#each event.local_chapters as lc, i}
+        {#each event.localChapters as lc, i}
           <a
             class="text-medium font-semibold text-base-content transition hover:text-primary"
-            href={gen_lc_href(
+            href={genLcHref(
               $page.params,
-              lc.Local_Chapters_id.translations[0].city,
+              lc.localChapters_id.translations[0].city,
             )}
           >
-            CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
-          >{#if i < event.local_chapters.length - 1}{', '} {/if}
+            CorrelAidX {lc.localChapters_id.translations[0].city}</a
+          >{#if i < event.localChapters.length - 1}{', '} {/if}
         {/each}
       </p>
     {/if}
@@ -53,20 +53,20 @@
           >
           <span class="sr-only">{$t('access.date').text}</span>
           <span class="y-auto pl-2"
-            >{gen_date(event.date, $locale)}{event.end_date
-              ? ` - ${gen_date(event.end_date, $locale)}`
+            >{genDate(event.date, $locale)}{event.endDate
+              ? ` - ${genDate(event.endDate, $locale)}`
               : ''}</span
           >
         </span>
-        {#if !event.end_date}
+        {#if !event.endDate}
           <span class="flex">
             <span class=" my-auto flex fill-neutral" arria-hidden="true"
               ><Time width={20} height={20} /></span
             >
             <span class="sr-only">{$t('access.time').text}</span>
             <span class="my-auto pl-2"
-              >{gen_time(event.start_time, $locale)} - {gen_time(
-                event.end_time,
+              >{genTime(event.startTime, $locale)} - {genTime(
+                event.endTime,
                 $locale,
               )}</span
             ></span
@@ -106,7 +106,7 @@
             class="inline-block rounded-full bg-white shadow-none"
             arria-hidden="true"
           >
-            <De height={icon_h} width={icon_h} />
+            <De height={iconSize} width={iconSize} />
           </span>
           <span class="sr-only">Event ist auf deutsch.</span>
         {:else}
@@ -115,7 +115,7 @@
             role="img"
             aria-label="Event is in english."
           >
-            <En height={icon_h} width={icon_h} />
+            <En height={iconSize} width={iconSize} />
           </span>
         {/if}
       </p>

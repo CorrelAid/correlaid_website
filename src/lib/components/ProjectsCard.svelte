@@ -1,10 +1,10 @@
 <script>
   import Nonprofit from '$lib/svg/Nonprofit.svelte';
-  import CorrelAidLogo from '$lib/svg/CorrelAid_Logo_min.svelte';
+  import CorrelAidLogo from '$lib/svg/CorrelaidLogoMin.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import {page} from '$app/stores';
   import Html from '$lib/components/Html.svelte';
-  import {gen_lc_href} from '$lib/js/helpers';
+  import {genLcHref} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
   import Cursor from '$lib/svg/Cursor.svelte';
 
@@ -16,13 +16,13 @@
   export let organization = void 0;
   export let summary = void 0;
   export let correlaidx = [];
-  export let correlaidx_short_id = [];
-  export let project_id = void 0;
+  export let correlaidXShortId = [];
+  export let projectId = void 0;
 
-  export let project_outputs = void 0;
+  export let projectOutputs = void 0;
 
-  export let post_slug = void 0;
-  export let podcast_href = void 0;
+  export let postSlug = void 0;
+  export let podcastHref = void 0;
 
   // $: if (organization === 'undefined'){
   //   organization_name = $t('organization.anonymous').text;
@@ -35,7 +35,7 @@
   // }
 
   $: href = subpage
-    ? $t('navbar.using_data.project_database').url + '/' + project_id
+    ? $t('navbar.using_data.project_database').url + '/' + projectId
     : void 0;
 </script>
 
@@ -115,12 +115,12 @@
         {#each correlaidx as lc, i}
           <a
             class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
-            href={gen_lc_href($page.params, correlaidx_short_id[i])}
+            href={genLcHref($page.params, correlaidXShortId[i])}
             >CorrelAidX {lc}</a
           >
         {/each}
       </div>
     {/if}
-    <ProjectLinks {project_outputs} {podcast_href} {post_slug} />
+    <ProjectLinks {projectOutputs} {podcastHref} {postSlug} />
   </div>
 </div>

@@ -1,33 +1,33 @@
 <script>
   import {t} from '$lib/stores/i18n';
   import ExternalLink from '../svg/External_Link.svelte';
-  export let project_outputs = void 0;
+  export let projectOutputs = void 0;
 
-  export let podcast_href = void 0;
-  export let post_slug = void 0;
+  export let podcastHref = void 0;
+  export let postSlug = void 0;
   export let horizontal = true;
 
-  let main_css;
+  let mainCss;
   if (horizontal === true) {
-    main_css = 'flex flex-wrap items-center';
+    mainCss = 'flex flex-wrap items-center';
   } else {
-    main_css = 'flex flex-col';
+    mainCss = 'flex flex-col';
   }
 </script>
 
-<div class={main_css}>
-  {#if post_slug}
+<div class={mainCss}>
+  {#if postSlug}
     <a
       class="pb-1 pr-4 text-secondary underline"
-      href={$t('navbar.blog').url + '/' + post_slug}
+      href={$t('navbar.blog').url + '/' + postSlug}
       >{$t('project_output.blogpost').text}</a
     >
   {/if}
-  {#if podcast_href}
+  {#if podcastHref}
     <a
       target="__blank"
       rel="noreferrer"
-      href={podcast_href}
+      href={podcastHref}
       class="pb-1 pr-4 capitalize text-secondary"
     >
       <span class="underline">
@@ -38,8 +38,8 @@
       >
     </a>
   {/if}
-  {#if project_outputs}
-    {#each project_outputs as output}
+  {#if projectOutputs}
+    {#each projectOutputs as output}
       <a
         target="__blank"
         rel="noreferrer"

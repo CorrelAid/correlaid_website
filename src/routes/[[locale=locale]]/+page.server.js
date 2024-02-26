@@ -1,25 +1,25 @@
-import directus_fetch from '$lib/js/directus_fetch';
-import {getAllowedStatus} from '$lib/js/directus_fetch.js';
-import {handle_lang} from '$lib/js/helpers';
-import {get_lang} from '$lib/js/helpers';
+import directusFetch from '$lib/js/directusFetch';
+import {getAllowedStatus} from '$lib/js/directusFetch.js';
+import {handleLang} from '$lib/js/helpers';
+import {getLang} from '$lib/js/helpers';
 import {latestUpdatesQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parse_cms.js';
+import {parseEntries} from '$lib/js/parseCms.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(latestUpdatesQuery, {
-    language: get_lang(params),
+  const data = await directusFetch(latestUpdatesQuery, {
+    language: getLang(params),
     status: getAllowedStatus(),
   });
 
-  const blog_posts = handle_lang(data.Blog_Posts, params);
+  const blogPosts = handleLang(data.Blog_Posts, params);
 
   return {
-    blog_posts: parseEntries(blog_posts.slice(0, 2), 'blog_posts'),
+    blogPosts: parseEntries(blogPosts.slice(0, 2), 'blogPosts'),
     events: parseEntries(data.Events.slice(0, 6), 'events'),
-    podcast_episodes: parseEntries(
+    podcastEpisodes: parseEntries(
       data.Podcast_Episodes.slice(0, 2),
-      'podcast_episodes',
+      'podcastEpisodes',
     ),
   };
 }

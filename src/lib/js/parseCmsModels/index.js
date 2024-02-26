@@ -1,4 +1,4 @@
-import {gen_img_url, processHtml} from '../helpers.js';
+import {gemImgUrl, processHtml} from '../helpers.js';
 export * from './people';
 export * from './cards';
 
@@ -18,29 +18,29 @@ export function heros(section) {
   const heroParams = {
     text: section.item.translations[0].text,
     height: section.item.height,
-    gradient_only: section.item.gradient_only,
+    gradientOnly: section.item.gradient_only,
     buttons: parseHeroButtons(section.item.buttons),
   };
   if (section.item.image) {
-    heroParams['image'] = gen_img_url(section.item.image.id);
-    heroParams['image_desc'] = section.item.image.description;
-    heroParams['image_alt'] = section.item.translations[0].image_alt;
+    heroParams['image'] = gemImgUrl(section.item.image.id);
+    heroParams['imageDesc'] = section.item.image.description;
+    heroParams['imageAlt'] = section.item.translations[0].image_alt;
   }
   return heroParams;
 }
 
-export function lcHeros(local_chapter) {
+export function lcHeros(localChapter) {
   const parsedHero = {
-    gradient_only: !local_chapter.hero_image,
+    gradientOnly: !localChapter.hero_image,
     height: 'half',
     correlaidx: true,
-    text: `${local_chapter.translations[0].city}`,
-    image_alt: local_chapter.translations[0].hero_image_alt,
+    text: `${localChapter.translations[0].city}`,
+    imageAlt: localChapter.translations[0].hero_image_alt,
   };
 
-  if (local_chapter.hero_image) {
-    parsedHero['image'] = gen_img_url(local_chapter.hero_image.id);
-    parsedHero['image_desc'] = local_chapter.hero_image.description;
+  if (localChapter.hero_image) {
+    parsedHero['image'] = gemImgUrl(localChapter.hero_image.id);
+    parsedHero['imageDesc'] = localChapter.hero_image.description;
   }
 
   return parsedHero;
@@ -48,11 +48,11 @@ export function lcHeros(local_chapter) {
 
 function parseCarouselHero() {
   const parsedHero = {
-    image: gen_img_url(element.carousel_element_id.hero.image.id),
-    image_desc: element.carousel_element_id.hero.image.description,
+    image: gemImgUrl(element.carousel_element_id.hero.image.id),
+    imageDesc: element.carousel_element_id.hero.image.description,
     text: element.carousel_element_id.hero.translations[0].text,
     height: element.carousel_element_id.hero.height,
-    gradient_only: element.carousel_element_id.hero.gradient_only,
+    gradientOnly: element.carousel_element_id.hero.gradient_only,
     buttons: element.carousel_element_id.hero.buttons,
   };
   return parsedHero;
@@ -60,20 +60,20 @@ function parseCarouselHero() {
 
 export function ctas(section) {
   const ctaParams = {
-    button_link: section.item.button.translations[0].link,
-    button_color: section.item.button.translations[0].text,
-    button_text: section.item.button.color,
+    buttonLink: section.item.button.translations[0].link,
+    buttonColor: section.item.button.translations[0].text,
+    buttonText: section.item.button.color,
     text: section.item.translations[0].text,
   };
   return ctaParams;
 }
-export function cta_groups(section) {
+export function ctaGroups(section) {
   const ctas = [];
   for (const ctaRaw of section.item.ctas) {
     const cta = {
-      button_link: ctaRaw.ctas_id.button.translations[0].link,
-      button_text: ctaRaw.ctas_id.button.translations[0].text,
-      button_color: ctaRaw.ctas_id.button.color,
+      buttonLink: ctaRaw.ctas_id.button.translations[0].link,
+      buttonText: ctaRaw.ctas_id.button.translations[0].text,
+      buttonColor: ctaRaw.ctas_id.button.color,
       text: ctaRaw.ctas_id.translations[0].text,
     };
     ctas.push(cta);
@@ -102,7 +102,7 @@ export function carousel(section) {
     carousel_elements: elements,
   };
 }
-export function quote_carousels(section) {
+export function quoteCarousels(section) {
   // loop over quotes
   const quotes = [];
   for (const quote of section.item.quotes) {
@@ -111,14 +111,14 @@ export function quote_carousels(section) {
       subtitle: quote.quotes_id.translations[0].subtitle,
     };
     if (!section.item.text_only) {
-      temp.image = gen_img_url(quote.quotes_id.image.id);
-      temp.image_desc = quote.quotes_id.image.description;
+      temp.image = gemImgUrl(quote.quotes_id.image.id);
+      temp.imageDesc = quote.quotes_id.image.description;
     }
     quotes.push(temp);
   }
   return {
     quotes: quotes,
-    text_only: section.item.text_only,
+    textOnly: section.item.text_only,
   };
 }
 export function buttons(section) {
@@ -130,7 +130,7 @@ export function buttons(section) {
 }
 export function icons(section) {
   return {
-    icon_type: section.item.icon_type,
+    iconType: section.item.correlaidXShortId,
     text: section.item.translations[0].text,
   };
 }
@@ -138,18 +138,18 @@ export function icons(section) {
 export function awards(award) {
   return {
     year: award.year,
-    image: gen_img_url(
+    image: gemImgUrl(
       award.image.id,
       'fit=cover&width=392&height=240&quality=80',
     ),
-    image_desc: award.image.description,
+    imageDesc: award.image.description,
     alt: award.translations[0].image_alt,
     title: award.translations[0].title,
   };
 }
 
 export function partners(partner) {
-  const img = gen_img_url(partner.logo.id, 'fit=cover&quality=100');
+  const img = gemImgUrl(partner.logo.id, 'fit=cover&quality=100');
   return {
     name: partner.name,
     img: img,
@@ -158,6 +158,6 @@ export function partners(partner) {
   };
 }
 
-export function custom_sections(section) {
+export function customSections(section) {
   return;
 }

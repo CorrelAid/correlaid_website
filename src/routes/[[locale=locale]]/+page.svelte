@@ -1,23 +1,23 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import {t} from '$lib/stores/i18n';
-  import BlogCard from '$lib/components/Blog_Card.svelte';
-  import Events_Card from '$lib/components/Events_Card.svelte';
+  import BlogCard from '$lib/components/BlogCard.svelte';
+  import EventsCard from '$lib/components/EventsCard.svelte';
 
   /** @type {import('./$types').PageData} */
   export let data;
 
   onMount(() => {
-    $page_key = 'navbar.home';
+    $pageKey = 'navbar.home';
   });
 
-  let blog_posts;
-  $: blog_posts = data.blog_posts;
+  let blogPosts;
+  $: blogPosts = data.blogPosts;
   let events;
   $: events = data.events;
-  let podcast_episodes;
-  $: podcast_episodes = data.podcast_episodes;
+  let podcastEpisodes;
+  $: podcastEpisodes = data.podcastEpisodes;
 </script>
 
 <div class="px-4">
@@ -30,7 +30,7 @@
     </div>
     <div class="grid gap-6">
       {#each events as event}
-        <Events_Card {...event} />
+        <EventsCard {...event} />
       {/each}
     </div>
   {/if}
@@ -41,7 +41,7 @@
     >
   </div>
   <div class="space-y-8">
-    {#each blog_posts as post}
+    {#each blogPosts as post}
       <div>
         <BlogCard {...post} />
       </div>
@@ -55,7 +55,7 @@
     >
   </div>
   <div class="space-y-8">
-    {#each podcast_episodes as episode}
+    {#each podcastEpisodes as episode}
       <BlogCard {...episode} external={true} />
     {/each}
   </div>

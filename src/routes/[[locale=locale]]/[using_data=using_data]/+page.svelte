@@ -1,5 +1,5 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import {
     LampGears,
@@ -10,7 +10,7 @@
   import NavTiles from '$lib/components/NavTiles.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.using_data';
+    $pageKey = 'navbar.using_data';
   });
 
   $: navItems = [

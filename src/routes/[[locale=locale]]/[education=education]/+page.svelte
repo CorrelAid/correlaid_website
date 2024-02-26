@@ -1,5 +1,5 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import {
     BookHand,
@@ -11,7 +11,7 @@
   import NavTiles from '$lib/components/NavTiles.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.education';
+    $pageKey = 'navbar.education';
   });
   const navItems = [
     {key: 'navbar.education.resources', icon: BookHand},

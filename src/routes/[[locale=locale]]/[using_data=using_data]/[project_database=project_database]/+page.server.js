@@ -1,18 +1,18 @@
-import {directus_fetch, getAllowedStatus} from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
+import {directusFetch, getAllowedStatus} from '$lib/js/directusFetch';
+import {getLang} from '$lib/js/helpers';
 import {projectOverviewQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parse_cms';
+import {parseEntries} from '$lib/js/parseCms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(projectOverviewQuery, {
-    language: get_lang(params),
+  const data = await directusFetch(projectOverviewQuery, {
+    language: getLang(params),
     status: getAllowedStatus(),
   });
 
   const projects = parseEntries(data.Projects, 'projects', false, [
     params,
-  ]).sort((a, b) => new Date(b.end_date) - new Date(a.end_date));
+  ]).sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
 
   return {projects: projects};
 }

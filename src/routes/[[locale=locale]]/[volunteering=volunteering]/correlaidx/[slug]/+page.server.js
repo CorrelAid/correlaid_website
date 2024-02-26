@@ -1,14 +1,14 @@
-import {directus_fetch, getAllowedStatus} from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
+import {directusFetch, getAllowedStatus} from '$lib/js/directusFetch';
+import {getLang} from '$lib/js/helpers';
 import {lcDetailsQuery} from './queries.js';
 import {error} from '@sveltejs/kit';
-import {parseLocalChapterPage} from '$lib/js/parse_cms';
+import {parseLocalChapterPage} from '$lib/js/parseCms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(lcDetailsQuery, {
+  const data = await directusFetch(lcDetailsQuery, {
     slug: params.slug,
-    language: get_lang(params),
+    language: getLang(params),
     status: getAllowedStatus(),
   });
 

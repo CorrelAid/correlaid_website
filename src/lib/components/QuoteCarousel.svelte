@@ -2,7 +2,7 @@
   import Carousel from 'svelte-carousel';
   import {browser} from '$app/environment';
   import {t} from '$lib/stores/i18n';
-  export let text_only = false;
+  export let textOnly = false;
   export let quotes;
 
   const handleNextClick = () => {
@@ -24,7 +24,7 @@
         <Carousel bind:this={carousel} arrows={false} dots={false}>
           {#each quotes as quote}
             <div class="pt-6">
-              {#if text_only === false}
+              {#if textOnly === false}
                 <div class="grid px-4 md:grid-cols-10 md:space-x-6">
                   <div class="flex flex-col items-center md:col-span-4">
                     {#if quote.image}

@@ -123,7 +123,7 @@ describe('project card parsing and anonymization', () => {
     expect(parsedProjectCard.organization).toEqual('Anonyme Organisation');
     expect(parsedProjectCard.title).toEqual('Public project title');
     expect(parsedProjectCard.subpage).toEqual(true);
-    expect(parsedProjectCard.project_id).toEqual('Some project id');
+    expect(parsedProjectCard.projectId).toEqual('Some project id');
   });
 
   test('parse internal project', () => {

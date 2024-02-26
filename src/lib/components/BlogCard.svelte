@@ -1,29 +1,29 @@
 <script>
   import {t, locale} from '$lib/stores/i18n';
-  import {gen_date} from '$lib/js/helpers';
+  import {genDate} from '$lib/js/helpers';
   import Html from '$lib/components/Html.svelte';
   import Langs from '$lib/components/Langs.svelte';
-  export let image_alt;
+  export let imageAlt;
   export let langs;
   import ExternalLink from '../svg/External_Link.svelte';
   export let title;
   export let teaser;
   // export let tags;
-  export let content_creators;
+  export let contentCreators;
   export let href;
   export let pubdate;
-  export let image_url = void 0;
+  export let imageUrl = void 0;
   export let slug = void 0;
   export let external = false;
-  export let image_desc = void 0;
+  export let imageDesc = void 0;
 
-  let proc_date;
+  let procDate;
 
   $: if (typeof slug !== 'undefined') {
     href = $t('navbar.blog').url + '/' + slug;
   }
 
-  $: proc_date = gen_date(pubdate, $locale, true);
+  $: procDate = genDate(pubdate, $locale, true);
 </script>
 
 <article
@@ -41,12 +41,12 @@
       aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}"
       style="padding-bottom: 56.25%;"
     >
-      {#if typeof image_url !== 'undefined'}
+      {#if typeof imageUrl !== 'undefined'}
         <img
           class="absolute left-0 top-0 z-0 h-full w-full rounded-tl"
-          alt={image_alt}
-          src={image_url}
-          title={image_desc}
+          alt={imageAlt}
+          src={imageUrl}
+          title={imageDesc}
         />
       {:else}
         <!-- TODO: Do we need this image placeholder? -->
@@ -86,10 +86,10 @@
         {/if}
       </h3>
       <p class="line-clamp-1 pt-1.5 text-sm">
-        {proc_date} - {#each content_creators as person, i}
+        {procDate} - {#each contentCreators as person, i}
           {#if person.Content_Creators_id.person}
             {person.Content_Creators_id.person
-              .name}{#if i < content_creators.length - 1}{', '} {/if}
+              .name}{#if i < contentCreators.length - 1}{', '} {/if}
           {/if}
         {/each}
       </p>
