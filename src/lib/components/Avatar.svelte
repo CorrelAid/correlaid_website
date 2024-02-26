@@ -1,5 +1,5 @@
 <script>
-  import PersonPlaceholder from '../svg/Person_Placeholder.svelte';
+  import PersonPlaceholder from '../svg/PersonPlaceholder.svelte';
   export let src = void 0;
   export let alt;
   export let imageDesc = void 0;

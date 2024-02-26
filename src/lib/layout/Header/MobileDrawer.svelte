@@ -2,7 +2,7 @@
   import {t} from '$lib/stores/i18n';
   import {drawer} from '$lib/stores/drawer';
   import {locale} from '$lib/stores/i18n';
-  import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
+  import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import LinkButton from '$lib/components/LinkButton.svelte';
   import {fly, fade} from 'svelte/transition';
   import {createEventDispatcher} from 'svelte';

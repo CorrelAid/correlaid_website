@@ -8,7 +8,7 @@
   import {headerHeight} from '$lib/stores/dims';
   import CorrelaidLogo from '$lib/svg/CorrelaidLogo.svelte';
   import CorrelaidLogoMin from '$lib/svg/CorrelaidLogoMin.svelte';
-  import MenuIcon from '$lib/svg/Menu_Icon.svelte';
+  import MenuIcon from '$lib/svg/MenuIcon.svelte';
   import LinkButton from '$lib/components/LinkButton.svelte';
 
   import HeaderTopNav from './Header/HeaderTopNav.svelte';

@@ -2,7 +2,7 @@
   import {page} from '$app/stores';
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
-  import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
+  import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import {
     filter,
     genDropdownLists,

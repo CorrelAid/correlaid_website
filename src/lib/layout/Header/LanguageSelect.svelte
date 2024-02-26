@@ -1,7 +1,7 @@
 <script>
   import {locale} from '$lib/stores/i18n';
   import {createEventDispatcher} from 'svelte';
-  import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
+  import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import {t} from '$lib/stores/i18n';
 
   let languageToggle = false;
