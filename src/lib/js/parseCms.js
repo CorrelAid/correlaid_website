@@ -1,14 +1,14 @@
-import * as parseModel from './parse_cms_models';
+import * as parseModel from './parseCmsModels/index.js';
 import _ from 'lodash';
-import {gen_img_url, processHtml, get_lang} from './helpers.js';
+import {gemImgUrl, processHtml, getLang, toCamelCase} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 import translations from '$lib/data/translations.js';
 
 function reportParseError(err, description, rawInput) {
   console.group('CMS PARSE ERROR: ' + description);
-  console.log(err.message);
-  console.log(err.stack);
-  console.log(rawInput);
+  console.error(err.message);
+  console.error(err.stack);
+  console.error(rawInput);
   console.groupEnd();
   if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
     throw Error('Error while parsing CMS content');
@@ -23,6 +23,8 @@ export function parseContent(rawSections, page) {
   const parsedContent = [];
   for (const rawSection of rawSections) {
     try {
+      // Convert collection name to camelCase
+      rawSection.collection = toCamelCase(rawSection.collection);
       const section = {
         collection: rawSection.collection,
         props: parseModel[rawSection.collection](rawSection),
@@ -52,7 +54,7 @@ export function parseContent(rawSections, page) {
  * Parses an array of raw entries of a given type.
  *
  * @param {Array} rawEntries - Array of raw entries.
- * @param {string} type - name of the function in parse_cms_models that should be used to parse
+ * @param {string} type - name of the function in parseCmsModels that should be used to parse
  *  the entries.
  * @param {boolean} logInputOnError - Flag whether the raw input should be logged in case of an error.
  *  Defaults to true, but should be set to false for sensitive data.
@@ -82,10 +84,10 @@ export function parseEntries(
 }
 
 export function parseProject(project, params) {
-  const lang = get_lang(params);
+  const lang = getLang(params);
   let parsedProject;
 
-  const project_outputs = [];
+  const projectOutputs = [];
 
   try {
     const projectContacts = [];
@@ -130,19 +132,19 @@ export function parseProject(project, params) {
       description = void 0;
     }
 
-    let end_date;
+    let endDate;
 
     if (
       project.end_date !== null &&
       project.end_date !== '' &&
       project.end_date !== undefined
     ) {
-      end_date = new Date(project.end_date);
+      endDate = new Date(project.end_date);
     } else {
       if (project.end_date_predicted === undefined) {
         throw new Error('end_date_predicted is undefined');
       }
-      end_date = new Date(project.end_date_predicted);
+      endDate = new Date(project.end_date_predicted);
     }
 
     if (
@@ -157,16 +159,16 @@ export function parseProject(project, params) {
         organization = translations['de']['organization.anonymous'].text;
       }
       parsedProject = {
-        end_date: end_date,
+        endDate: endDate,
         title: project.translations[0].title,
         teaser: project.translations[0].summary,
         description: description,
         organization: {
           name: organization,
         },
-        projectOutputs: project_outputs,
-        podcast_href: project.podcast_href,
-        post_slug: project.post_slug,
+        projectOutputs: projectOutputs,
+        podcastHref: project.podcast_href,
+        postSlug: project.post_slug,
         projectContacts: projectContacts,
       };
     } else {
@@ -191,7 +193,7 @@ export function parseProject(project, params) {
               if (outputs.length > 1) {
                 output['output_number'] = i;
               }
-              project_outputs.push(output);
+              projectOutputs.push(output);
               i++;
             }
           }
@@ -199,10 +201,10 @@ export function parseProject(project, params) {
       }
 
       if (project.Podcast) {
-        project['podcast_href'] = project.Podcast.soundcloud_link;
+        project['podcastHref'] = project.Podcast.soundcloud_link;
       }
       if (project.Blog_Posts.length !== 0) {
-        project['post_slug'] = project.Blog_Posts[0].translations.slug;
+        project['postSlug'] = project.Blog_Posts[0].translations.slug;
       }
       let organization;
       if (project.is_internal === true) {
@@ -225,14 +227,14 @@ export function parseProject(project, params) {
       }
 
       parsedProject = {
-        end_date: end_date,
+        endDate: endDate,
         title: project.translations[0].title,
         teaser: project.translations[0].summary,
         description: description,
         organization: organization,
-        projectOutputs: project_outputs,
-        podcast_href: project.podcast_href,
-        post_slug: project.post_slug,
+        projectOutputs: projectOutputs,
+        podcastHref: project.podcast_href,
+        postSlug: project.post_slug,
         projectContacts: projectContacts,
       };
     }
@@ -251,7 +253,7 @@ export function parseProject(project, params) {
       }
     }
     if (project.Local_Chapters.length > 0) {
-      parsedProject['Local_Chapters'] = project.Local_Chapters.map(
+      parsedProject['localChapters'] = project.Local_Chapters.map(
         (lc) => lc.Local_Chapters_id.translations[0].city,
       );
     }
@@ -266,7 +268,7 @@ export function anonymizeProject(parsedProject) {
     title: parsedProject.title,
     teaser: parsedProject.teaser,
     description: parsedProject.description,
-    end_date: parsedProject.end_date,
+    endDate: parsedProject.endDate,
     organization: void 0,
     projectLinks: {},
     projectContacts: [],
@@ -278,7 +280,7 @@ export function parseLocalChapterPage(localChapterPage, params) {
   let parsedLcPage;
   try {
     parsedLcPage = {
-      local_chapter: localChapterPage.Local_Chapters[0],
+      localChapter: localChapterPage.Local_Chapters[0],
       events: parseEntries(localChapterPage.Events, 'events'),
       projects: parseEntries(
         localChapterPage.Local_Chapters[0].Projects,
@@ -288,17 +290,17 @@ export function parseLocalChapterPage(localChapterPage, params) {
       ),
     };
 
-    parsedLcPage['hero'] = parseModel.lcHeros(parsedLcPage['local_chapter']);
+    parsedLcPage['hero'] = parseModel.lcHeros(parsedLcPage['localChapter']);
     parsedLcPage['local_admins'] = parseEntries(
-      parsedLcPage['local_chapter'].local_administrators,
-      'local_administrators',
+      parsedLcPage['localChapter'].local_administrators,
+      'localAdministrators',
     );
-    parsedLcPage['lcEmail'] = parsedLcPage['local_chapter'].lc_email;
+    parsedLcPage['lcEmail'] = parsedLcPage['localChapter'].lc_email;
 
     parsedLcPage['description'] =
-      parsedLcPage['local_chapter'].translations[0].description;
+      parsedLcPage['localChapter'].translations[0].description;
     parsedLcPage['howToGetInTouch'] =
-      parsedLcPage['local_chapter'].translations[0].how_to_get_in_touch;
+      parsedLcPage['localChapter'].translations[0].how_to_get_in_touch;
   } catch (err) {
     reportParseError(err, 'For local chapter page', localChapterPage);
   }
@@ -333,12 +335,12 @@ export function parseBlogPostPage(blogPostPage) {
     parsedBlogPostPage = {
       pubDate: blogPostPage.Blog_Posts[0].publication_datetime,
       contentAllLanguages: blogPostPage.Blog_Posts[0].translations,
-      content_creators: parseEntries(
+      contentCreators: parseEntries(
         blogPostPage.Blog_Posts[0].content_creators,
-        'content_creators',
+        'contentCreators',
       ),
       post: blogPostPage.Blog_Posts[0],
-      title_image: gen_img_url(blogPostPage.Blog_Posts[0].title_image.id),
+      titleImage: gemImgUrl(blogPostPage.Blog_Posts[0].title_image.id),
     };
     if (typeof parsedBlogPostPage.contentAllLanguages === 'undefined') {
       throw new Error('Blog post does not contain content in any language');
@@ -383,11 +385,11 @@ export function parseJobPage(jobPage) {
         name: person.person_id.name,
       };
       if (person.person_id.image) {
-        parsedPerson['img'] = gen_img_url(
+        parsedPerson['img'] = gemImgUrl(
           person.person_id.image.id,
           'fit=cover&width=200&height=200&quality=80',
         );
-        parsedPerson['image_desc'] = person.person_id.image.description;
+        parsedPerson['imageDesc'] = person.person_id.image.description;
       }
       if (
         person.person_id.translations[0] &&

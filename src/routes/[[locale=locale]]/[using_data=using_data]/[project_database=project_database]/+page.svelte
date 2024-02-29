@@ -1,5 +1,5 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import {t} from '$lib/stores/i18n';
   import Filter from '$lib/components/Filter.svelte';
@@ -7,7 +7,7 @@
   import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.using_data.project_database';
+    $pageKey = 'navbar.using_data.project_database';
   });
 
   // const source = '# WIP';
@@ -52,7 +52,7 @@
 </script>
 
 <Filter
-  orig_data={projects}
+  origData={projects}
   bind:filteredData
   {selects}
   {searchOptions}

@@ -1,28 +1,28 @@
-import {get_lang} from '$lib/js/helpers';
-import directus_fetch from '$lib/js/directus_fetch';
+import {getLang} from '$lib/js/helpers';
+import directusFetch from '$lib/js/directusFetch';
 import {adminsAndOpsStructQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parse_cms.js';
+import {parseEntries} from '$lib/js/parseCms.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(adminsAndOpsStructQuery, {
-    language: get_lang(params),
+  const data = await directusFetch(adminsAndOpsStructQuery, {
+    language: getLang(params),
   });
 
-  const remote_office = data.Global_Administrators.filter(
+  const remoteOffice = data.Global_Administrators.filter(
     (person) => person.group === 'remote_office',
   );
   const board = data.Global_Administrators.filter(
     (person) => person.group === 'board',
   );
-  const remote_office_description =
+  const remoteOfficeDescription =
     data.Organizational_Structure.translations[0].remote_office;
-  const board_description = data.Organizational_Structure.translations[0].board;
+  const boardDescription = data.Organizational_Structure.translations[0].board;
 
   return {
-    remote_office: parseEntries(remote_office, 'global_administrators'),
-    board: parseEntries(board, 'global_administrators'),
-    remote_office_description: remote_office_description,
-    board_description: board_description,
+    remoteOffice: parseEntries(remoteOffice, 'globalAdministrators'),
+    board: parseEntries(board, 'globalAdministrators'),
+    remoteOfficeDescription: remoteOfficeDescription,
+    boardDescription: boardDescription,
   };
 }

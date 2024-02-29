@@ -1,19 +1,19 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import Person from '$lib/components/Person.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.about.values';
+    $pageKey = 'navbar.about.values';
   });
 
   export let data;
 
-  $: ethics_commission = data.ethics_commission;
+  $: ethicsCommission = data.ethicsCommission;
 </script>
 
 <div class="container mx-auto flex flex-col gap-y-8 px-4">
-  {#each ethics_commission as person}
+  {#each ethicsCommission as person}
     <Person {...person} />
   {/each}
 </div>

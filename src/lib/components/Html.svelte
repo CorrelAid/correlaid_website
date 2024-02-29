@@ -12,7 +12,7 @@
   const typography = `${h1} ${h2} ${a} ${li}`;
 
   // This is not prebuilt
-  function post_process(node) {
+  function postProcess(node) {
     node.querySelectorAll('pre code').forEach((block) => {
       hljs.highlightElement(block);
     });
@@ -41,7 +41,7 @@
 <!-- see app.css for more prose adjustments -->
 <article
   class="container prose max-w-none px-4 text-neutral {typography} {options}"
-  use:post_process
+  use:postProcess
 >
   {@html source}
 </article>

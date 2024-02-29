@@ -1,4 +1,4 @@
-import {gen_img_url} from '../helpers.js';
+import {gemImgUrl} from '../helpers.js';
 
 function parsePersonLinks(person) {
   const links = {};
@@ -21,11 +21,11 @@ export function contacts(section) {
   };
 
   if (section.item.person.image) {
-    personParams['img'] = gen_img_url(
+    personParams['img'] = gemImgUrl(
       section.item.person.image.id,
       'fit=cover&width=200&height=200&quality=80',
     );
-    personParams['image_desc'] = section.item.person.image.description;
+    personParams['imageDesc'] = section.item.person.image.description;
   }
 
   if (section.item.person.translations[0]) {
@@ -41,7 +41,7 @@ export function contacts(section) {
   return personParams;
 }
 
-function persons(person) {
+function people(person) {
   // TODO: does not quite make sense in terms of naming, because it is used to
   // parse global admins directly
   const links = parsePersonLinks(person.person);
@@ -54,11 +54,11 @@ function persons(person) {
   };
 
   if (person.person.image) {
-    parsedPerson['img'] = gen_img_url(
+    parsedPerson['img'] = gemImgUrl(
       person.person.image.id,
       'fit=cover&width=200&height=200&quality=80',
     );
-    parsedPerson['image_desc'] = person.person.image.description;
+    parsedPerson['imageDesc'] = person.person.image.description;
   }
 
   if (person.person.translations[0]) {
@@ -68,20 +68,20 @@ function persons(person) {
 }
 
 export function experts(expert) {
-  const parsedExpert = persons(expert);
+  const parsedExpert = people(expert);
   // Currently a hack in the schema to model area of expertise as "position"
   parsedExpert['position'] = expert.translations[0].area_of_expertise;
   return parsedExpert;
 }
 
-export function global_administrators(admin) {
-  return persons(admin);
+export function globalAdministrators(admin) {
+  return people(admin);
 }
 
-export function local_administrators(admin) {
-  return persons(admin.Local_Administrators_id);
+export function localAdministrators(admin) {
+  return people(admin.Local_Administrators_id);
 }
 
-export function content_creators(creator) {
-  return persons(creator.Content_Creators_id);
+export function contentCreators(creator) {
+  return people(creator.Content_Creators_id);
 }

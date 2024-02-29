@@ -1,22 +1,21 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import {page} from '$app/stores';
   import Html from '$lib/components/Html.svelte';
-  import {gen_lc_href} from '$lib/js/helpers';
-  import TextContainer from '$lib/components/Text_Container.svelte';
+  import {genLcHref} from '$lib/js/helpers';
+  import TextContainer from '$lib/components/TextContainer.svelte';
   import Links from '$lib/components/Links.svelte';
   import Box from '$lib/components/Box.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.using_data.project_database';
+    $pageKey = 'navbar.using_data.project_database';
   });
 
   /** @type {import('./$types').PageData} */
   export let data;
   $: project = data;
-  $: console.log(project.description);
 </script>
 
 {#if project}
@@ -43,12 +42,12 @@
           {/if}
         </div>
       {/if}
-      {#if project.Local_Chapters}
+      {#if project.localChapters}
         <div class="pb-3">
-          {#each project.Local_Chapters as lc}
+          {#each project.localChapters as lc}
             <a
               class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
-              href={gen_lc_href($page.params, lc)}>CorrelAidX {lc}</a
+              href={genLcHref($page.params, lc)}>CorrelAidX {lc}</a
             >
           {/each}
         </div>
@@ -57,9 +56,9 @@
       {#if !project.description}
         <div class="mb-4">
           <ProjectLinks
-            project_outputs={project.projectOutputs}
-            podcast_href={project.podcast_href}
-            post_slug={project.post_slug}
+            projectOutputs={project.projectOutputs}
+            podcastHref={project.podcast_href}
+            postSlug={project.post_slug}
             horizontal={false}
           />
         </div>
@@ -98,9 +97,9 @@
         <Box>
           <h3 class="mb-4 text-xl font-semibold">Outputs:</h3>
           <ProjectLinks
-            project_outputs={project.projectOutputs}
-            podcast_href={project.podcast_href}
-            post_slug={project.post_slug}
+            projectOutputs={project.projectOutputs}
+            podcastHref={project.podcast_href}
+            postSlug={project.post_slug}
             horizontal={false}
           />
         </Box>

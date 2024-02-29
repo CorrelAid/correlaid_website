@@ -1,10 +1,10 @@
-import directus_fetch from '$lib/js/directus_fetch';
+import directusFetch from '$lib/js/directusFetch';
 import {PUBLIC_PRERENDER} from '$env/static/public';
-import {getAllowedStatus} from '$lib/js/directus_fetch.js';
-import {handle_lang, get_locale} from '$lib/js/helpers';
-import {get_lang} from '$lib/js/helpers';
+import {getAllowedStatus} from '$lib/js/directusFetch.js';
+import {handleLang, getLocale} from '$lib/js/helpers';
+import {getLang} from '$lib/js/helpers';
 import {blogQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parse_cms.js';
+import {parseEntries} from '$lib/js/parseCms.js';
 import he from 'he';
 
 let pr;
@@ -22,7 +22,7 @@ export async function GET({params}) {
   const feedLink = `https://correlaid.org${
     params.locale == 'en' ? '/en' : ''
   }/rss.xml`;
-  const feedLanguage = `${get_locale(params)}`;
+  const feedLanguage = `${getLocale(params)}`;
   const feedCopyright = `${new Date().getFullYear()} CorrelAid`;
 
   let xmlString = `<?xml version="1.0" encoding="UTF-8" ?>
@@ -37,18 +37,18 @@ export async function GET({params}) {
       <copyright>${he.encode(feedCopyright)}</copyright>
   `;
 
-  const data = await directus_fetch(blogQuery, {
-    language: get_lang(params),
+  const data = await directusFetch(blogQuery, {
+    language: getLang(params),
     status: getAllowedStatus(),
   });
 
-  const posts = handle_lang(data.Blog_Posts, params);
+  const posts = handleLang(data.Blog_Posts, params);
 
-  const parsed_posts = parseEntries(posts, 'blog_posts');
+  const parsedPosts = parseEntries(posts, 'blogPosts');
 
-  for (const post of parsed_posts) {
+  for (const post of parsedPosts) {
     const title = he.encode(post.title);
-    const author = post.content_creators
+    const author = post.contentCreators
       .map((creator) => creator.Content_Creators_id.person.name)
       .filter((name) => name)
       .join(', ');

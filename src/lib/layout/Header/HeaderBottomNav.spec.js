@@ -20,7 +20,7 @@ describe('Nav should have dropdown sub menus', () => {
     locale.set('de');
 
     const {component} = render(HeaderBottomNav, {
-      props: {bot_nav: navItems, lastClickedLink: ''},
+      props: {botNav: navItems, lastClickedLink: ''},
     });
 
     // Relies on a lot of configuration wrt. translations, meaning

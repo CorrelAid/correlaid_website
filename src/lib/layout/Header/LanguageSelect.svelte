@@ -1,7 +1,7 @@
 <script>
   import {locale} from '$lib/stores/i18n';
   import {createEventDispatcher} from 'svelte';
-  import DropdownIcon from '$lib/svg/Dropdown_Icon.svelte';
+  import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import {t} from '$lib/stores/i18n';
 
   let languageToggle = false;
@@ -19,17 +19,17 @@
 
   function btnLocale(lc) {
     $locale = lc;
-    active_language = lc;
+    activeLanguage = lc;
     languageToggle = false;
     changeLocale();
   }
   let aria = false;
-  export let active_language;
+  export let activeLanguage;
 </script>
 
 <div class="inline-flex items-stretch rounded-md border border-neutral-25">
   <span class="rounded-l-md px-4 py-2 text-sm text-base-content">
-    {active_language}
+    {activeLanguage}
   </span>
 
   <div class="relative">

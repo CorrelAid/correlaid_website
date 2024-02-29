@@ -1,11 +1,11 @@
-import directus_fetch from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
+import directusFetch from '$lib/js/directusFetch';
+import {getLang} from '$lib/js/helpers';
 import {expertsQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parse_cms';
+import {parseEntries} from '$lib/js/parseCms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(expertsQuery, {language: get_lang(params)});
+  const data = await directusFetch(expertsQuery, {language: getLang(params)});
 
   const experts = parseEntries(data.Experts, 'experts');
 

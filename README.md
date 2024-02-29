@@ -138,14 +138,14 @@ Only the implementations of most important concepts are explained here in a gene
 
 The website currently supports two languages, German(default) and English. Most
 translations come from the CMS, but the content of the header and the footer
-comes from "src/lib/data/page_keys.js". Apart from being a source for
+comes from "src/lib/data/pageKeys.js". Apart from being a source for
 translations, this file also contains all valid pages that exist once and are
 not dynamically generated like blog posts. Its the source of truth for page
 names and urls. The pages are assigned page keys to identify them independent
 of language. It also defines valid urls in both languages. When the name of a
 route folder contains a parameter, e.g. \[imprint=imprint\], there is a file in
 the folder "src/params", e.g. imprint.js, that extracts valid url parameters
-from page_keys.js. When you go to a url, e.g. /en/about aka /ueber,
+from pageKeys.js. When you go to a url, e.g. /en/about aka /ueber,
 Sveltekit checks if this is a valid route. /xyz would not work. There is one
 optional root parameter that defines the locale. If its undefined, the page is
 displayed in German. If its "en", the page is displayed in English. The locale
@@ -155,7 +155,7 @@ route parameter determines the page content in two ways:
    available in +page.svelte files. In the Header and Footer component this
    store is used to call the translate function via a derived store that
    accesses the locale store (src/lib/stores/i18n.js), which extracts the
-   translation from page_keys.js, to display navigation items in the desired
+   translation from pageKeys.js, to display navigation items in the desired
    language.
 
 2. In +layout.server.js and +page.server.js the locale parameter is used

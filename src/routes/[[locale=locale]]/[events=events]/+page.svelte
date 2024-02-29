@@ -1,21 +1,21 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import Ical from '$lib/svg/Ical.svelte';
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import {timeSplitEntries} from '$lib/js/entries';
-  import Events_Card from '$lib/components/Events_Card.svelte';
+  import EventsCard from '$lib/components/EventsCard.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.events';
+    $pageKey = 'navbar.events';
   });
 
   /** @type {import('./$types').PageData} */
   export let data;
   // original unfiltered data
-  $: events_data = data.events;
+  $: eventsData = data.events;
 
   let filteredData;
   let trimmedPastData;
@@ -63,7 +63,7 @@
 </script>
 
 <!-- passing unfiltered data to component -->
-<Filter orig_data={events_data} bind:filteredData {selects} {searchOptions} />
+<Filter origData={eventsData} bind:filteredData {selects} {searchOptions} />
 {#if events}
   <span
     class="mb-4 mt-8 hidden rounded-md px-4 px-4 py-2 text-2xl font-bold drop-shadow-sm lg:mb-8 lg:block"
@@ -93,7 +93,7 @@
     <div class="space-y-8 px-4">
       {#if trimmedFutureData}
         {#each trimmedFutureData as event, i}
-          <Events_Card {...event} />
+          <EventsCard {...event} />
         {/each}
       {/if}
       <Pagination
@@ -112,7 +112,7 @@
     <div class="space-y-8 px-4">
       {#if trimmedPastData}
         {#each trimmedPastData as event}
-          <Events_Card {...event} />
+          <EventsCard {...event} />
         {/each}
       {/if}
       <Pagination

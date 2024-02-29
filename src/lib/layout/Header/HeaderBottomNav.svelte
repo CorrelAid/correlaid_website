@@ -1,16 +1,16 @@
 <script>
   import {t} from '$lib/stores/i18n';
   import {drawer} from '$lib/stores/drawer';
-  import {header_height} from '$lib/stores/dims';
+  import {headerHeight} from '$lib/stores/dims';
   import HeaderBottomNavButton from './HeaderBottomNavButton.svelte';
   import ExternalLink from '$lib/svg/External_Link.svelte';
 
-  export let bot_nav;
+  export let botNav;
 
   export let lastClickedLink = '';
 
   const toggles = {};
-  for (const navItem of bot_nav) {
+  for (const navItem of botNav) {
     toggles[navItem.category] = false;
   }
 
@@ -27,7 +27,7 @@
     }
   };
 
-  function handle_dropdown(event) {
+  function handleDropdown(event) {
     subnav(event.detail.category);
   }
 
@@ -45,7 +45,7 @@
   <div class="mx-auto hidden xl:block">
     <nav aria-label="Bottom Navigation">
       <ul class="flex items-center gap-8 text-xl">
-        {#each bot_nav as navItem}
+        {#each botNav as navItem}
           <li>
             <div
               class=""
@@ -57,14 +57,14 @@
                 href={$t(navItem.key).url}
                 text={$t(navItem.key).text}
                 category={navItem.category}
-                on:message={handle_dropdown}
+                on:message={handleDropdown}
               />
             </div>
             {#if toggles[navItem.category]}
               <div
                 class="absolute z-30 -ml-4 w-60"
                 on:mouseleave={closeall}
-                style="top: {$header_height + 1}px"
+                style="top: {$headerHeight + 1}px"
               >
                 <ul
                   class="rounded-b border-x border-b border-neutral-25 bg-white pb-1 pt-2 text-base font-light text-base-content"

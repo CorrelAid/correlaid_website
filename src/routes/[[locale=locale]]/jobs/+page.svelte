@@ -1,12 +1,12 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
-  import JobCard from '$lib/components/Job_Card.svelte';
+  import JobCard from '$lib/components/JobCard.svelte';
   import {locale} from '$lib/stores/i18n';
   import {timeSplitEntries} from '$lib/js/entries';
 
   onMount(() => {
-    $page_key = 'navbar.jobs';
+    $pageKey = 'navbar.jobs';
   });
 
   let noJobMessage;

@@ -1,33 +1,33 @@
-import {directus_fetch, getAllowedStatus} from '$lib/js/directus_fetch';
-import {get_lang} from '$lib/js/helpers';
+import {directusFetch, getAllowedStatus} from '$lib/js/directusFetch';
+import {getLang} from '$lib/js/helpers';
 import {localChapterQuery} from './queries.js';
 
 /** @type {import('./$types.js').PageServerLoad} */
 export async function load({params}) {
-  const data = await directus_fetch(localChapterQuery, {
-    language: get_lang(params),
+  const data = await directusFetch(localChapterQuery, {
+    language: getLang(params),
     status: getAllowedStatus(),
   });
 
-  const geo_json = {
+  const geoJson = {
     type: 'FeatureCollection',
     features: [],
   };
 
-  const local_chapters = data.Local_Chapters;
+  const localChapters = data.Local_Chapters;
 
-  for (let i = 0; i < local_chapters.length; i++) {
+  for (let i = 0; i < localChapters.length; i++) {
     const obj = {
       type: 'Feature',
-      geometry: local_chapters[i].location,
+      geometry: localChapters[i].location,
       properties: {
-        founded: local_chapters[i].founded,
-        name: `CorrelAidX ${local_chapters[i].translations[0].city}`,
-        short_id: local_chapters[i].short_id,
+        founded: localChapters[i].founded,
+        name: `CorrelAidX ${localChapters[i].translations[0].city}`,
+        short_id: localChapters[i].short_id,
       },
     };
-    geo_json.features.push(obj);
+    geoJson.features.push(obj);
   }
 
-  return {geo_json: geo_json, local_chapters: data.Local_Chapters};
+  return {geoJson: geoJson, localChapters: data.Local_Chapters};
 }

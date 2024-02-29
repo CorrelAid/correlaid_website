@@ -4,31 +4,31 @@
   export let href = '';
   import {t} from '$lib/stores/i18n';
   import {page} from '$app/stores';
-  import {gen_lc_href} from '$lib/js/helpers';
+  import {genLcHref} from '$lib/js/helpers';
   import ExternalLink from '../svg/External_Link.svelte';
-  import ArrowUp from '../svg/nav_icons/Arrow_Up.svelte';
-  import ArrowDown from '../svg/nav_icons/Arrow_Down.svelte';
+  import ArrowUp from '../svg/nav_icons/ArrowUp.svelte';
+  import ArrowDown from '../svg/nav_icons/ArrowDown.svelte';
 
   export let title;
   export let tags;
-  export let target_audience;
+  export let targetAudience;
   export let teaser;
-  export let resp_unit = '';
-  export let correlaidx_city = '';
-  export let correlaidx_short_id = '';
+  export let respUnit = '';
+  export let correlaidXCity = '';
+  export let correlaidXShortId = '';
   export let language = '';
 
-  let href_resp_unit = '';
+  let hrefRespUnit = '';
 
-  $: if (resp_unit == 'correlaid') {
-    resp_unit = '';
-    href_resp_unit = '';
-  } else if (resp_unit == 'correlaidx') {
-    resp_unit = `CorrelAidX ${correlaidx_city}`;
-    href_resp_unit = gen_lc_href($page.params, correlaidx_short_id);
-  } else if (resp_unit == 'remote_office') {
-    resp_unit = 'Remote Office';
-    href_resp_unit = $t('navbar.about.team').url;
+  $: if (respUnit == 'correlaid') {
+    respUnit = '';
+    hrefRespUnit = '';
+  } else if (respUnit == 'correlaidx') {
+    respUnit = `CorrelAidX ${correlaidXCity}`;
+    hrefRespUnit = genLcHref($page.params, correlaidXShortId);
+  } else if (respUnit == 'remote_office') {
+    respUnit = 'Remote Office';
+    hrefRespUnit = $t('navbar.about.team').url;
   }
 
   let overflowParent;
@@ -98,10 +98,10 @@
       </h3>
     {/if}
     <div class="mb-2">
-      {#each target_audience as audience}
+      {#each targetAudience as audience}
         <span
           class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
-          >{$t(`target_audience.${audience}`).text}</span
+          >{$t(`targetAudience.${audience}`).text}</span
         >
       {/each}
       {#each tags as tag}
@@ -111,10 +111,10 @@
         >
       {/each}
     </div>
-    {#if resp_unit != ''}
+    {#if respUnit != ''}
       <a
         class="font-semibold text-base-content transition hover:text-primary"
-        href={href_resp_unit}>{resp_unit}</a
+        href={hrefRespUnit}>{respUnit}</a
       >
     {/if}
 

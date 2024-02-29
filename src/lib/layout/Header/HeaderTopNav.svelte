@@ -1,7 +1,7 @@
 <script>
   import {t} from '$lib/stores/i18n';
 
-  export let top_nav;
+  export let topNav;
 
   export let lastClickedLink = '';
 </script>
@@ -12,7 +12,7 @@
       <ul
         class="flex items-center gap-6 font-light tracking-wide text-base-content"
       >
-        {#each top_nav as key}
+        {#each topNav as key}
           <li>
             <a
               class="transition hover:text-primary"

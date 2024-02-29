@@ -1,21 +1,21 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import {t} from '$lib/stores/i18n';
-  import BlogCard from '$lib/components/Blog_Card.svelte';
+  import BlogCard from '$lib/components/BlogCard.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.blog';
+    $pageKey = 'navbar.blog';
   });
 
   /** @type {import('./$types').PageData} */
   export let data;
   let filteredData;
   let trimmedData;
-  let blog_posts;
-  $: blog_posts = data.blog_posts;
+  let blogPosts;
+  $: blogPosts = data.blogPosts;
   $: selects = [
     {
       title: $t('filter.language').text,
@@ -31,7 +31,7 @@
   ];
 </script>
 
-<Filter orig_data={blog_posts} bind:filteredData {selects} {searchOptions} />
+<Filter origData={blogPosts} bind:filteredData {selects} {searchOptions} />
 <div class="mt-8 space-y-8 px-4">
   {#if trimmedData}
     {#each trimmedData as post, i}

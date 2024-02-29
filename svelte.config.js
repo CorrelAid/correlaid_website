@@ -1,7 +1,7 @@
 import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
 import {vitePreprocess} from '@sveltejs/kit/vite';
-import page_keys from './src/lib/data/page_keys.js';
+import pageKeys from './src/lib/data/pageKeys.js';
 import {fetch} from 'undici';
 
 import path from 'node:path';
@@ -22,8 +22,8 @@ dotenv.config({path: path.resolve(process.cwd(), '.env.local')});
 dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
 const mainRoutes = {
-  de: page_keys['de'],
-  en: page_keys['en'],
+  de: pageKeys['de'],
+  en: pageKeys['en'],
 };
 
 const URL = `${process.env.PUBLIC_API_URL}/graphql`;
@@ -95,13 +95,6 @@ const queries = {
   }
   `,
 };
-
-console.log(
-  'ADAPTER: ',
-  process.env.PUBLIC_ADAPTER,
-  ' PRERENDER: ',
-  process.env.PUBLIC_PRERENDER,
-);
 
 function addBlogRoutesWithLanguageFallback(routes, translations) {
   for (const t of translations) {

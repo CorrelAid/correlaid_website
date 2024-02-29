@@ -1,8 +1,8 @@
 <script>
-  import PersonPlaceholder from '../svg/Person_Placeholder.svelte';
+  import PersonPlaceholder from '../svg/PersonPlaceholder.svelte';
   export let src = void 0;
   export let alt;
-  export let image_desc = void 0;
+  export let imageDesc = void 0;
   export let w = 56;
 </script>
 
@@ -16,7 +16,7 @@
       </div>
     {/if}
   </div>
-  {#if image_desc}
-    <span class="mt-1 block px-4 text-xs md:px-4"> {image_desc} </span>
+  {#if imageDesc}
+    <span class="mt-1 block px-4 text-xs md:px-4"> {imageDesc} </span>
   {/if}
 </div>

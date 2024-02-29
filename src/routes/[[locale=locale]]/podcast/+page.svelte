@@ -1,19 +1,19 @@
 <script>
-  import {page_key} from '$lib/stores/page_key';
+  import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import {t} from '$lib/stores/i18n';
-  import BlogCard from '$lib/components/Blog_Card.svelte';
+  import BlogCard from '$lib/components/BlogCard.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
 
   onMount(() => {
-    $page_key = 'navbar.podcast';
+    $pageKey = 'navbar.podcast';
   });
 
   export let data;
   let filteredData;
   let trimmedData;
-  $: podcast_episodes = data.podcast_episodes;
+  $: podcastEpisodes = data.podcastEpisodes;
 
   $: selects = [
     {
@@ -31,7 +31,7 @@
 </script>
 
 <Filter
-  orig_data={podcast_episodes}
+  origData={podcastEpisodes}
   bind:filteredData
   {selects}
   {searchOptions}

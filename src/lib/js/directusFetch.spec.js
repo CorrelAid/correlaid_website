@@ -1,4 +1,4 @@
-import {validateVars} from './directus_fetch.js';
+import {validateVars} from './directusFetch.js';
 
 describe('variable validation', () => {
   test("Allowed variabled don't throw error", () => {

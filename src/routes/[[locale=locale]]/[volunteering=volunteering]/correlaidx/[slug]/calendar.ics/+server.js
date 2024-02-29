@@ -1,10 +1,10 @@
-import directus_fetch from '$lib/js/directus_fetch';
+import directusFetch from '$lib/js/directusFetch';
 import {PUBLIC_PRERENDER} from '$env/static/public';
-import {getAllowedStatus} from '$lib/js/directus_fetch.js';
+import {getAllowedStatus} from '$lib/js/directusFetch.js';
 import {createCalendar} from '$lib/js/helpers';
-import {get_lang} from '$lib/js/helpers';
+import {getLang} from '$lib/js/helpers';
 import {icalLcEvents} from './queries.js';
-import {parseEntries} from '$lib/js/parse_cms.js';
+import {parseEntries} from '$lib/js/parseCms.js';
 
 let pr;
 
@@ -17,9 +17,9 @@ if (PUBLIC_PRERENDER === 'ALL') {
 export const prerender = pr;
 
 export async function GET({params}) {
-  const data = await directus_fetch(icalLcEvents, {
+  const data = await directusFetch(icalLcEvents, {
     slug: params.slug,
-    language: get_lang(params),
+    language: getLang(params),
     status: getAllowedStatus(),
   });
 

@@ -1,6 +1,6 @@
 <script>
-  import ArrowLeft from '../svg/Arrow_Left.svelte';
-  import ArrowRight from '../svg/Arrow_Right.svelte';
+  import ArrowLeft from '../svg/ArrowLeft.svelte';
+  import ArrowRight from '../svg/ArrowRight.svelte';
   import {t} from '$lib/stores/i18n';
 
   export let items;

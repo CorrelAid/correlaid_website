@@ -9,7 +9,7 @@ describe('Top Nav links', () => {
     locale.set('de');
 
     const {component} = render(HeaderTopNav, {
-      props: {top_nav: navItems, lastClickedLink: ''},
+      props: {topNav: navItems, lastClickedLink: ''},
     });
 
     const aboutLink = screen.getByText('Über uns');

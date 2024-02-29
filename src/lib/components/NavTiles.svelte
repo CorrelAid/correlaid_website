@@ -1,10 +1,10 @@
 <script>
   export let navItems;
-  const icon_size = 73;
+  const iconSize = 73;
   import {t} from '$lib/stores/i18n';
   const colorScale = ['#3864a3', '#538794', '#6fa07f', '#78a972', '#96c342'];
 
-  function get_text(translation) {
+  function getText(translation) {
     let text = translation;
 
     if (text === 'Bildungsressourcen') {
@@ -27,15 +27,15 @@
         <div class="flex flex-col items-center justify-center opacity-100">
           <svelte:component
             this={item.icon}
-            height={icon_size}
-            width={icon_size}
+            height={iconSize}
+            width={iconSize}
             fill={'white'}
           />
 
           <h2
             class="w-42 mx-2 break-words pt-2 text-center font-londrina text-xl leading-6 tracking-[0.025em] text-white opacity-100 md:text-2xl md:leading-7"
           >
-            {get_text($t(item.key).text)}
+            {getText($t(item.key).text)}
           </h2>
         </div>
       </a>

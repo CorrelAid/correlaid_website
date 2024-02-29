@@ -8,7 +8,7 @@
   import Mastodon from '../svg/Mastodon.svelte';
   import Rss from '../svg/Rss.svelte';
 
-  const social_media_height = 20;
+  const iconSize = 20;
 
   const links = [
     'footer.imprint',
@@ -78,8 +78,8 @@
         >
           <svelte:component
             this={linkDetails.logo}
-            width={social_media_height}
-            height={social_media_height}
+            width={iconSize}
+            height={iconSize}
           />
         </a>
       {/each}
