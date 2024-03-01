@@ -9,6 +9,7 @@
   export let buttons = [];
   export let correlaidx = false;
   export let image = void 0;
+  export let imageAlt = void 0;
   export let imageDesc = void 0;
 
   let cHidden = 'hidden';
@@ -33,6 +34,8 @@
     <span
       class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
       style={`background-image: url(${image})`}
+      aria-label={imageAlt}
+      role="img"
     />
     {#if imageDesc}
       <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 lg:block">

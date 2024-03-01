@@ -1,9 +1,10 @@
 import directusFetch from '$lib/js/directusFetch';
-import {pageContentQuery} from './queries.js';
+import {builderQuery} from './queries.js';
 import {getLang, getLocale, find} from '$lib/js/helpers';
 import pageKeys from '$lib/data/pageKeys';
 import {PUBLIC_PRERENDER} from '$env/static/public';
-import {parseContent} from '$lib/js/parseCms';
+import {error} from '@sveltejs/kit';
+import {parseBuilder} from '$lib/js/parseCms';
 
 let pr;
 
@@ -29,21 +30,21 @@ export async function load({params, url}) {
   if (params.slug === undefined) {
     const vars = {page: pk, language: getLang(params)};
 
-    const data = await directusFetch(pageContentQuery, vars);
+    const data = await directusFetch(builderQuery, vars);
 
     if (data.Pages.length === 0) {
-      return;
+      error(404, 'Page not found');
     }
 
     if (typeof data.Pages[0] === 'undefined') {
-      return;
+      error(404, 'Page not found');
     }
     const builder = data.Pages[0].builder;
 
     if (builder === undefined) {
-      return;
+      error(404, 'Page not found');
     } else {
-      return {content: parseContent(builder)};
+      return {content: parseBuilder(builder)};
     }
   }
 }

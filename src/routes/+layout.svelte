@@ -1,5 +1,6 @@
 <script>
   import '../app.css';
+  import {dev} from '$app/environment';
   import {page} from '$app/stores';
   import {goto} from '$app/navigation';
   import {t, locale} from '$lib/stores/i18n';
@@ -59,6 +60,13 @@
 
 <svelte:head>
   <title>{title}</title>
+  {#if !dev}
+    <script
+      src="/stats/js/script.js"
+      data-api="/stats/api/event"
+      data-domain="correlaid.org"
+    ></script>
+  {/if}
 </svelte:head>
 <!-- Footer on bottom of page if page is too short -->
 <div

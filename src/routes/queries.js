@@ -1,4 +1,4 @@
-export const pageContentQuery = `
+export const builderQuery = `
 query ($page: String = "navbar.home", $language: String = "de-DE") {
 	Pages(filter: { page_key: { _eq: $page } }) {
 		builder {

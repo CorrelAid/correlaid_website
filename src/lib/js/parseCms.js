@@ -3,6 +3,49 @@ import _ from 'lodash';
 import {gemImgUrl, processHtml, getLang, toCamelCase} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 import translations from '$lib/data/translations.js';
+import {herosSchema, ctaGroupsSchema} from './parsing/schemas/builder.js';
+import {processHeros, processCtaGroups} from './parsing/processing/builder.js';
+
+export async function parseBuilder(builder) {
+  const parsedBuilder = [];
+  for (const section of builder) {
+    if (section.collection !== 'custom_sections') {
+      let schema;
+      let processingFunction;
+      if (section.collection === 'heros') {
+        schema = herosSchema;
+        processingFunction = processHeros;
+      } else if (section.collection === 'cta_groups') {
+        schema = ctaGroupsSchema;
+        processingFunction = processCtaGroups;
+      } else {
+        throw Error('Unknown builder collection: ' + section.collection);
+      }
+      parsedSection['props'] = processingFunction(section.item);
+      try {
+        await schema.validate(parsedSection['props']);
+      } catch (err) {
+        console.group('Validation Error');
+        console.error(err.message);
+        console.error(err.name);
+        console.error(JSON.stringify(parsedSection['props'], null, 4));
+        console.groupEnd();
+        if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
+          throw Error('Error while parsing CMS content');
+        }
+      }
+      parsedSection['collection'] = toCamelCase(section.collection);
+      parsedBuilder.push(parsedSection);
+    } else {
+      parsedBuilder.push({
+        collection: toCamelCase(section.collection),
+      });
+    }
+  }
+
+  // console.log("here",parsedBuilder);
+  return parsedBuilder;
+}
 
 function reportParseError(err, description, rawInput) {
   console.group('CMS PARSE ERROR: ' + description);
@@ -10,9 +53,6 @@ function reportParseError(err, description, rawInput) {
   console.error(err.stack);
   console.error(rawInput);
   console.groupEnd();
-  if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
-    throw Error('Error while parsing CMS content');
-  }
 }
 
 export function parseContent(rawSections, page) {

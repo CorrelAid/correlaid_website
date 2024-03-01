@@ -23,7 +23,7 @@
         href={buttonLink}
         text={buttonText}
         type={'external'}
-        color={`bg-${buttonColor}`}
+        color={buttonColor}
       />
     </span>
   </div>
