@@ -37,10 +37,10 @@
             class="text-medium font-semibold text-base-content transition hover:text-primary"
             href={genLcHref(
               $page.params,
-              lc.localChapters_id.translations[0].city,
+              lc.Local_Chapters_id.translations[0].city,
             )}
           >
-            CorrelAidX {lc.localChapters_id.translations[0].city}</a
+            CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
           >{#if i < event.localChapters.length - 1}{', '} {/if}
         {/each}
       </p>
