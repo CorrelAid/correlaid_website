@@ -1,45 +1,5 @@
 import {gemImgUrl} from '../helpers.js';
-
-function parsePersonLinks(person) {
-  const links = {};
-  for (const link of ['website', 'twitter', 'linkedin', 'mastodon', 'github']) {
-    if (link in person && person[link] !== null) {
-      links[link] = person[link];
-    }
-  }
-  return links;
-}
-
-export function contacts(section) {
-  const links = parsePersonLinks(section.item.person);
-
-  const personParams = {
-    name: section.item.person.name,
-    position: section.item.translations[0].position,
-    description: section.item.translations[0].description,
-    links: links,
-  };
-
-  if (section.item.person.image) {
-    personParams['img'] = gemImgUrl(
-      section.item.person.image.id,
-      'fit=cover&width=200&height=200&quality=80',
-    );
-    personParams['imageDesc'] = section.item.person.image.description;
-  }
-
-  if (section.item.person.translations[0]) {
-    personParams['pronouns'] = section.item.person.translations[0].pronouns;
-  }
-
-  if (section.item.email) {
-    personParams['email'] = section.item.email;
-  } else {
-    personParams['email'] = section.item.person.email;
-  }
-
-  return personParams;
-}
+import {parsePersonLinks} from '../parsing/processing/processingHelpers.js';
 
 function people(person) {
   // TODO: does not quite make sense in terms of naming, because it is used to

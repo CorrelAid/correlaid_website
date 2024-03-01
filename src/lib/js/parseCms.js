@@ -3,47 +3,89 @@ import _ from 'lodash';
 import {gemImgUrl, processHtml, getLang, toCamelCase} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 import translations from '$lib/data/translations.js';
-import {herosSchema, ctaGroupsSchema} from './parsing/schemas/builder.js';
-import {processHeros, processCtaGroups} from './parsing/processing/builder.js';
+import {
+  herosSchema,
+  ctaGroupsSchema,
+  wysiwygSchema,
+  quoteCarouselsSchema,
+  contactsSchema,
+  timelineSchema,
+  buttonsSchema,
+  iconsSchema,
+} from './parsing/schemas/builder.js';
+import {
+  processHeros,
+  processCtaGroups,
+  processWysiwyg,
+  processQuoteCarousels,
+  processContacts,
+  processTimelines,
+  processButtons,
+  processIcons,
+} from './parsing/processing/builder.js';
 
 export async function parseBuilder(builder) {
   const parsedBuilder = [];
   for (const section of builder) {
+    const parsedSection = {
+      collection: toCamelCase(section.collection),
+      sort: section.sort,
+    };
     if (section.collection !== 'custom_sections') {
       let schema;
       let processingFunction;
-      if (section.collection === 'heros') {
-        schema = herosSchema;
-        processingFunction = processHeros;
-      } else if (section.collection === 'cta_groups') {
-        schema = ctaGroupsSchema;
-        processingFunction = processCtaGroups;
-      } else {
-        throw Error('Unknown builder collection: ' + section.collection);
+      switch (section.collection) {
+        case 'heros':
+          schema = herosSchema;
+          processingFunction = processHeros;
+          break;
+        case 'cta_groups':
+          schema = ctaGroupsSchema;
+          processingFunction = processCtaGroups;
+          break;
+        case 'wysiwyg':
+          schema = wysiwygSchema;
+          processingFunction = processWysiwyg;
+          break;
+        case 'quote_carousels':
+          schema = quoteCarouselsSchema;
+          processingFunction = processQuoteCarousels;
+          break;
+        case 'contacts':
+          schema = contactsSchema;
+          processingFunction = processContacts;
+          break;
+        case 'timelines':
+          schema = timelineSchema;
+          processingFunction = processTimelines;
+          break;
+        case 'buttons':
+          schema = buttonsSchema;
+          processingFunction = processButtons;
+          break;
+        case 'icons':
+          schema = iconsSchema;
+          processingFunction = processIcons;
+          break;
+        default:
+          throw Error('Unknown builder collection: ' + section.collection);
       }
-      parsedSection['props'] = processingFunction(section.item);
+      parsedSection.props = processingFunction(section.item);
       try {
-        await schema.validate(parsedSection['props']);
+        await schema.validate(parsedSection.props);
       } catch (err) {
         console.group('Validation Error');
         console.error(err.message);
         console.error(err.name);
-        console.error(JSON.stringify(parsedSection['props'], null, 4));
+        console.error(JSON.stringify(parsedSection.props, null, 4));
         console.groupEnd();
         if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
           throw Error('Error while parsing CMS content');
         }
       }
-      parsedSection['collection'] = toCamelCase(section.collection);
-      parsedBuilder.push(parsedSection);
-    } else {
-      parsedBuilder.push({
-        collection: toCamelCase(section.collection),
-      });
     }
+    parsedBuilder.push(parsedSection);
   }
-
-  // console.log("here",parsedBuilder);
   return parsedBuilder;
 }
 

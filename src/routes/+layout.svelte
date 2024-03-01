@@ -134,7 +134,6 @@
         {/if}
       {:else}
         <!-- not part of pages collection -->
-
         <slot />
       {/if}
     </main>
