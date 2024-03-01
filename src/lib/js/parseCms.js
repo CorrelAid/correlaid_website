@@ -316,8 +316,16 @@ export function parseLocalChapterPage(localChapterPage, params) {
  * 'Invalid Date' (as per default js Date functionality).
  */
 export function parseEventPage(eventPage) {
-  const parsedEventPage = eventPage.Events[0];
-  parsedEventPage['description'] = processHtml(parsedEventPage.description);
+  const event = eventPage.Events[0];
+  const parsedEventPage = {};
+  parsedEventPage['description'] = processHtml(event.description);
+  parsedEventPage['startTime'] = event.start_time;
+  parsedEventPage['endTime'] = event.end_time;
+  parsedEventPage['endDate'] = event.end_date;
+  parsedEventPage['date'] = event.date;
+  parsedEventPage['teaser'] = processHtml(event.teaser);
+  parsedEventPage['title'] = event.title;
+  parsedEventPage['localChapters'] = event.local_chapters;
   return parsedEventPage;
 }
 
