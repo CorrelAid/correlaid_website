@@ -1,67 +1,71 @@
 import * as yup from 'yup';
 
 export const buttonsSchema = yup.object({
-  text: yup.string(),
-  href: yup.string(),
-  color: yup.string(),
+  text: yup.string().required(),
+  href: yup.string().required(),
+  color: yup.string().required(),
 });
 
 export const herosSchema = yup.object({
-  text: yup.string(),
-  height: yup.string(),
-  gradientOnly: yup.boolean(),
-  buttons: yup.array().of(buttonsSchema),
-  image: yup.string(),
+  text: yup.string().required(),
+  height: yup.string().required(),
+  gradientOnly: yup.boolean().required(),
+  buttons: yup.array().required().of(buttonsSchema),
+  image: yup.string().required(),
   imageDesc: yup.string().nullable(),
-  imageAlt: yup.string(),
+  imageAlt: yup.string().required(),
 });
 
 export const ctasSchema = yup.object({
-  buttonLink: yup.string(),
-  buttonColor: yup.string(),
-  buttonText: yup.string(),
-  text: yup.string(),
+  buttonLink: yup.string().required(),
+  buttonColor: yup.string().required(),
+  buttonText: yup.string().required(),
+  text: yup.string().required(),
 });
 
 export const ctaGroupsSchema = yup.object({
-  ctas: yup.array().of(ctasSchema),
+  ctas: yup.array().required().min(1).of(ctasSchema),
 });
 
 export const wysiwygSchema = yup.object({
-  source: yup.string().required(),
-  options: yup.string(),
+  source: yup.string().required().required(),
+  options: yup.string().required(),
 });
 
 export const quoteSchema = yup.object({
-  text: yup.string(),
-  subtitle: yup.string(),
-  image: yup.string(),
-  imageDesc: yup.string(),
+  text: yup.string().required(),
+  subtitle: yup.string().required(),
+  image: yup.string().required(),
+  imageDesc: yup.string().required(),
 });
 
 export const quoteCarouselsSchema = yup.object({
-  quotes: yup.array().of(quoteSchema),
+  quotes: yup.array().required().min(1).of(quoteSchema),
   textOnly: yup.boolean(),
 });
 
 export const contactsSchema = yup.object({
-  name: yup.string(),
-  position: yup.string(),
-  description: yup.string(),
-  img: yup.string(),
+  name: yup.string().required(),
+  position: yup.string().required(),
+  description: yup.string().required(),
+  img: yup.string().required(),
   imageDesc: yup.string().nullable(),
   pronouns: yup.string().nullable(),
-  email: yup.string(),
+  email: yup.string().required(),
 });
 
 export const timelineSchema = yup.object({
-  steps: yup.array().of(
-    yup.object({
-      text: yup.string(),
-      icon: yup.string(),
-    }),
-  ),
-  color: yup.string(),
+  steps: yup
+    .array()
+    .required()
+    .min(1)
+    .of(
+      yup.object({
+        text: yup.string().required(),
+        icon: yup.string().required(),
+      }),
+    ),
+  color: yup.string().required(),
 });
 
 export const iconsSchema = yup.object({

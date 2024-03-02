@@ -1,10 +1,10 @@
 import {gemImgUrl} from '../helpers.js';
-import {parsePersonLinks} from '../parsing/processing/processingHelpers.js';
+import {processPersonLinks} from '../parsing/processing/processingHelpers.js';
 
 function people(person) {
   // TODO: does not quite make sense in terms of naming, because it is used to
   // parse global admins directly
-  const links = parsePersonLinks(person.person);
+  const links = processPersonLinks(person.person);
   const parsedPerson = {
     name: person.person.name,
     email: person.person.email,

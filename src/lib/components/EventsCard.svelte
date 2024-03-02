@@ -13,8 +13,7 @@
   export let endDate = void null;
   export let tags;
   export let language;
-  export let correlaidx = [];
-  export let correlaidXShortId = [];
+  export let localChapters = [];
   import Langs from '$lib/components/Langs.svelte';
   let procDate;
   let procEndDate;
@@ -68,14 +67,14 @@
         {teaser}
       </p>
 
-      {#if correlaidx.length !== 0}
-        {#each correlaidx as lc, i}
+      {#if localChapters.length !== 0}
+        {#each localChapters as lc, i}
           <a
             class="text-medium font-semibold text-base-content transition hover:text-primary"
-            href={genLcHref($page.params, correlaidXShortId[i])}
+            href={genLcHref($page.params, lc.shortId)}
           >
-            CorrelAidX {lc}</a
-          >{#if i < correlaidx.length - 1}{', '} {/if}
+            CorrelAidX {lc.city}</a
+          >{#if i < localChapters.length - 1}{', '} {/if}
         {/each}
       {/if}
     </div>

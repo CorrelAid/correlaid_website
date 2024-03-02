@@ -4,7 +4,7 @@ import {getLang, getLocale, find} from '$lib/js/helpers';
 import pageKeys from '$lib/data/pageKeys';
 import {PUBLIC_PRERENDER} from '$env/static/public';
 import {error} from '@sveltejs/kit';
-import {parseBuilder} from '$lib/js/parseCms';
+import {parse} from '$lib/js/parseCms';
 
 let pr;
 
@@ -44,7 +44,7 @@ export async function load({params, url}) {
     if (builder === undefined) {
       error(404, 'Page not found');
     } else {
-      return {content: parseBuilder(builder)};
+      return {content: await parse(builder, 'builder')};
     }
   }
 }

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {gemImgUrl, processHtml, genImgUrl} from '../../helpers.js';
-import {parsePersonLinks} from './processingHelpers.js';
+import {processPersonLinks} from './processingHelpers.js';
 
 export function processButtons(section) {
   if (section['buttons_id']) {
@@ -74,7 +74,7 @@ export function processQuoteCarousels(section) {
 }
 
 export function processContacts(section) {
-  const links = parsePersonLinks(_.get(section, 'person'));
+  const links = processPersonLinks(_.get(section, 'person'));
   const personParams = {
     name: _.get(section, 'person.name'),
     position: _.get(section, 'translations[0].position'),

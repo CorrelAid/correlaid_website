@@ -13,6 +13,13 @@ import {
   buttonsSchema,
   iconsSchema,
 } from './parsing/schemas/builder.js';
+
+import {
+  blogPostsSchema,
+  podcastEpisodesSchema,
+  eventsSchema,
+} from './parsing/schemas/cards.js';
+
 import {
   processHeros,
   processCtaGroups,
@@ -24,69 +31,123 @@ import {
   processIcons,
 } from './parsing/processing/builder.js';
 
-export async function parseBuilder(builder) {
-  const parsedBuilder = [];
-  for (const section of builder) {
-    const parsedSection = {
-      collection: toCamelCase(section.collection),
-      sort: section.sort,
-    };
-    if (section.collection !== 'custom_sections') {
-      let schema;
-      let processingFunction;
-      switch (section.collection) {
-        case 'heros':
-          schema = herosSchema;
-          processingFunction = processHeros;
+import {
+  processBlogPosts,
+  processPodcastEpisodes,
+  processEvents,
+} from './parsing/processing/cards.js';
+
+async function parsing(data, schema, processingFunction, type, secType) {
+  const processedData = processingFunction(data);
+  try {
+    const validatedData = await schema.validate(processedData);
+    return validatedData;
+  } catch (err) {
+    console.group('Validation Error');
+    console.error(err.message);
+    console.error(err.name);
+    console.error(JSON.stringify(data, null, 4));
+    console.groupEnd();
+    if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
+      throw Error(
+        'Error while parsing CMS content for ' + type + ' ' + secType,
+      );
+    }
+  }
+}
+
+export async function parse(data, type, secType = '') {
+  let schema;
+  let processingFunction;
+  switch (type) {
+    case 'builder':
+      const parsedBuilder = [];
+      for (const section of data) {
+        const parsedSection = {
+          collection: toCamelCase(section.collection),
+          sort: section.sort,
+        };
+        if (section.collection !== 'custom_sections') {
+          switch (section.collection) {
+            case 'heros':
+              schema = herosSchema;
+              processingFunction = processHeros;
+              break;
+            case 'cta_groups':
+              schema = ctaGroupsSchema;
+              processingFunction = processCtaGroups;
+              break;
+            case 'wysiwyg':
+              schema = wysiwygSchema;
+              processingFunction = processWysiwyg;
+              break;
+            case 'quote_carousels':
+              schema = quoteCarouselsSchema;
+              processingFunction = processQuoteCarousels;
+              break;
+            case 'contacts':
+              schema = contactsSchema;
+              processingFunction = processContacts;
+              break;
+            case 'timelines':
+              schema = timelineSchema;
+              processingFunction = processTimelines;
+              break;
+            case 'buttons':
+              schema = buttonsSchema;
+              processingFunction = processButtons;
+              break;
+            case 'icons':
+              schema = iconsSchema;
+              processingFunction = processIcons;
+              break;
+            default:
+              throw Error('Unknown builder collection: ' + section.collection);
+          }
+          parsedSection['props'] = await parsing(
+            section.item,
+            schema,
+            processingFunction,
+            type,
+            section.collection,
+          );
+        }
+        parsedBuilder.push(parsedSection);
+      }
+      return parsedBuilder;
+    case 'cards':
+      switch (secType) {
+        case 'blogPosts':
+          schema = blogPostsSchema;
+          processingFunction = processBlogPosts;
           break;
-        case 'cta_groups':
-          schema = ctaGroupsSchema;
-          processingFunction = processCtaGroups;
+        case 'podcastEpisodes':
+          schema = podcastEpisodesSchema;
+          processingFunction = processPodcastEpisodes;
           break;
-        case 'wysiwyg':
-          schema = wysiwygSchema;
-          processingFunction = processWysiwyg;
-          break;
-        case 'quote_carousels':
-          schema = quoteCarouselsSchema;
-          processingFunction = processQuoteCarousels;
-          break;
-        case 'contacts':
-          schema = contactsSchema;
-          processingFunction = processContacts;
-          break;
-        case 'timelines':
-          schema = timelineSchema;
-          processingFunction = processTimelines;
-          break;
-        case 'buttons':
-          schema = buttonsSchema;
-          processingFunction = processButtons;
-          break;
-        case 'icons':
-          schema = iconsSchema;
-          processingFunction = processIcons;
+        case 'events':
+          schema = eventsSchema;
+          processingFunction = processEvents;
           break;
         default:
-          throw Error('Unknown builder collection: ' + section.collection);
+          throw Error('Unknown card type: ' + secType);
       }
-      parsedSection.props = processingFunction(section.item);
-      try {
-        await schema.validate(parsedSection.props);
-      } catch (err) {
-        console.group('Validation Error');
-        console.error(err.message);
-        console.error(err.name);
-        console.error(JSON.stringify(parsedSection.props, null, 4));
-        console.groupEnd();
-        if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
-          throw Error('Error while parsing CMS content');
-        }
+      const parsedCards = [];
+      for (const card of data) {
+        const parsedCard = await parsing(
+          card,
+          schema,
+          processingFunction,
+          type,
+          secType,
+        );
+        parsedCards.push(parsedCard);
       }
-    }
-    parsedBuilder.push(parsedSection);
+      return parsedCards;
+
+    default:
+      throw Error('Unknown type: ' + type);
   }
-  return parsedBuilder;
 }
 
 function reportParseError(err, description, rawInput) {
@@ -95,41 +156,6 @@ function reportParseError(err, description, rawInput) {
   console.error(err.stack);
   console.error(rawInput);
   console.groupEnd();
-}
-
-export function parseContent(rawSections, page) {
-  if (!rawSections) {
-    return;
-  }
-
-  const parsedContent = [];
-  for (const rawSection of rawSections) {
-    try {
-      // Convert collection name to camelCase
-      rawSection.collection = toCamelCase(rawSection.collection);
-      const section = {
-        collection: rawSection.collection,
-        props: parseModel[rawSection.collection](rawSection),
-      };
-      if (section.collection === 'heros') {
-        section.sort = rawSection.sort;
-      }
-      if (section.collection === 'contacts') {
-        section.item = {hr: rawSection.item.hr};
-      }
-      if (section.collection === 'wysiwyg') {
-        section.sort = rawSection.sort;
-      }
-      parsedContent.push(section);
-    } catch (err) {
-      reportParseError(
-        err,
-        `Error parsing ${rawSection.collection} on page ${page}`,
-        rawSection,
-      );
-    }
-  }
-  return parsedContent;
 }
 
 /**

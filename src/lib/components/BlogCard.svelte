@@ -87,10 +87,7 @@
       </h3>
       <p class="line-clamp-1 pt-1.5 text-sm">
         {procDate} - {#each contentCreators as person, i}
-          {#if person.Content_Creators_id.person}
-            {person.Content_Creators_id.person
-              .name}{#if i < contentCreators.length - 1}{', '} {/if}
-          {/if}
+          {person.name}{#if i < contentCreators.length - 1}{', '} {/if}
         {/each}
       </p>
 
