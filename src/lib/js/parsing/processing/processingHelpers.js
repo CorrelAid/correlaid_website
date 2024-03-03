@@ -18,3 +18,14 @@ export function processContentCreators(data) {
     };
   });
 }
+
+export function processLocalChapters(event) {
+  const localChapters = _.map(event.local_chapters, (lc) => {
+    return {
+      city: lc.Local_Chapters_id.translations[0].city,
+      shortId: lc.Local_Chapters_id.short_id,
+    };
+  });
+
+  return localChapters;
+}

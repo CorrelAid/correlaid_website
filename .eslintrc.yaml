@@ -13,7 +13,7 @@ parserOptions:
   ecmaVersion: latest
   sourceType: module
 rules:
-  indent: ['error', 2, {'SwitchCase': 1}]
+  indent: ['error', 2, {'SwitchCase': 1, 'CallExpression': {'arguments': 1}}]
   valid-jsdoc: 'off'
   require-jsdoc: 'off'
   camelcase: 'error'

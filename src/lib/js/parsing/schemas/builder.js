@@ -29,14 +29,14 @@ export const ctaGroupsSchema = yup.object({
 
 export const wysiwygSchema = yup.object({
   source: yup.string().required().required(),
-  options: yup.string().required(),
+  options: yup.string().nullable(),
 });
 
 export const quoteSchema = yup.object({
   text: yup.string().required(),
   subtitle: yup.string().required(),
-  image: yup.string().required(),
-  imageDesc: yup.string().required(),
+  image: yup.string().nullable(),
+  imageDesc: yup.string().nullable(),
 });
 
 export const quoteCarouselsSchema = yup.object({

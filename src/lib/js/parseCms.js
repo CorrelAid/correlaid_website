@@ -18,6 +18,7 @@ import {
   blogPostsSchema,
   podcastEpisodesSchema,
   eventsSchema,
+  projectsSchema,
 } from './parsing/schemas/cards.js';
 
 import {
@@ -35,10 +36,18 @@ import {
   processBlogPosts,
   processPodcastEpisodes,
   processEvents,
+  processProjects,
 } from './parsing/processing/cards.js';
 
-async function parsing(data, schema, processingFunction, type, secType) {
-  const processedData = processingFunction(data);
+async function parsing(
+  data,
+  schema,
+  processingFunction,
+  type,
+  secType,
+  params,
+) {
+  const processedData = processingFunction(data, params);
   try {
     const validatedData = await schema.validate(processedData);
     return validatedData;
@@ -46,7 +55,7 @@ async function parsing(data, schema, processingFunction, type, secType) {
     console.group('Validation Error');
     console.error(err.message);
     console.error(err.name);
-    console.error(JSON.stringify(data, null, 4));
+    console.error(JSON.stringify(processedData, null, 4));
     console.groupEnd();
     if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
       throw Error(
@@ -56,9 +65,10 @@ async function parsing(data, schema, processingFunction, type, secType) {
   }
 }
 
-export async function parse(data, type, secType = '') {
+export async function parse(data, type, secType = '', params = {}) {
   let schema;
   let processingFunction;
+  let sortingFunction;
   switch (type) {
     case 'builder':
       const parsedBuilder = [];
@@ -129,6 +139,13 @@ export async function parse(data, type, secType = '') {
           schema = eventsSchema;
           processingFunction = processEvents;
           break;
+        case 'projects':
+          schema = projectsSchema;
+          processingFunction = processProjects;
+          sortingFunction = function (projects) {
+            return projects.sort((a, b) => b.endDate - a.endDate);
+          };
+          break;
         default:
           throw Error('Unknown card type: ' + secType);
       }
@@ -140,8 +157,13 @@ export async function parse(data, type, secType = '') {
           processingFunction,
           type,
           secType,
+          params,
         );
         parsedCards.push(parsedCard);
+      }
+      if (sortingFunction) {
+        const sortedData = sortingFunction(parsedCards);
+        return sortedData;
       }
       return parsedCards;
 

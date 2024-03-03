@@ -40,11 +40,7 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 			}
 		}
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
-			languages_code {
-				code
-			}
 			title
-			description
 			summary
 			type
 			data

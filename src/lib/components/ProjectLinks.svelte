@@ -1,10 +1,7 @@
 <script>
   import {t} from '$lib/stores/i18n';
   import ExternalLink from '../svg/External_Link.svelte';
-  export let projectOutputs = void 0;
-
-  export let podcastHref = void 0;
-  export let postSlug = void 0;
+  export let projectOutputs;
   export let horizontal = true;
 
   let mainCss;
@@ -16,30 +13,26 @@
 </script>
 
 <div class={mainCss}>
-  {#if postSlug}
-    <a
-      class="pb-1 pr-4 text-secondary underline"
-      href={$t('navbar.blog').url + '/' + postSlug}
-      >{$t('project_output.blogpost').text}</a
-    >
-  {/if}
-  {#if podcastHref}
-    <a
-      target="__blank"
-      rel="noreferrer"
-      href={podcastHref}
-      class="pb-1 pr-4 capitalize text-secondary"
-    >
-      <span class="underline">
-        {$t('project_output.podcast').text}
-      </span>
-      <span class="inline-block align-text-top" aria-label="External Link"
-        ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
+  {#each projectOutputs as output}
+    {#if output.outputType === 'blogPost'}
+      <a class="pb-1 pr-4 text-secondary underline" href={output['url']}
+        >{$t('project_output.blogpost').text}</a
       >
-    </a>
-  {/if}
-  {#if projectOutputs}
-    {#each projectOutputs as output}
+    {:else if output.outputType === 'podcastEpisode'}
+      <a
+        target="__blank"
+        rel="noreferrer"
+        href={output.url}
+        class="pb-1 pr-4 capitalize text-secondary"
+      >
+        <span class="underline">
+          {$t('project_output.podcast').text}
+        </span>
+        <span class="inline-block align-text-top" aria-label="External Link"
+          ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
+        >
+      </a>
+    {:else}
       <a
         target="__blank"
         rel="noreferrer"
@@ -47,16 +40,16 @@
         class="pb-1 pr-4 capitalize text-secondary"
       >
         <span class="underline"
-          >{$t(`project_output.${output['output_type']}`).text}{output[
-            'output_number'
-          ]
-            ? ` ${output['output_number']}`
+          >{$t(`project_output.${output['outputType']}`).text}{output[
+            'outputNumber'
+          ] > 0
+            ? ` ${output['outputNumber']}`
             : ''}
         </span>
         <span class="inline-block align-text-top" aria-label="External Link"
           ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
         >
       </a>
-    {/each}
-  {/if}
+    {/if}
+  {/each}
 </div>
