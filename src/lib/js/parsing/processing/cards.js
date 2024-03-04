@@ -1,71 +1,67 @@
 import {gemImgUrl} from '../../helpers.js';
 import {
   translate,
-  getLocale,
-  toTitleCase,
+  transformTypes,
   genWebsiteUrl,
   getTranslation,
+  genDate,
 } from '../../helpers.js';
 import {
   processContentCreators,
   processLocalChapters,
 } from './processingHelpers.js';
-import _ from 'lodash';
 
-export function processBlogPosts(post) {
+export function processBlogPosts(post, locale) {
+  const slug = post.translations.slug;
+  const href = genWebsiteUrl(translate(locale, 'navbar.blog', {}).url, slug);
   return {
     langs: post.langs,
-    pubdate: post.publication_datetime,
-    slug: _.get(post, 'translations.slug'),
-    imageAlt: _.get(post, 'translations.image_alt'),
-    title: _.get(post, 'translations.title'),
-    teaser: _.get(post, 'translations.teaser'),
-    imageUrl: gemImgUrl(_.get(post, 'title_image.id')),
-    imageDesc: _.get(post, 'title_image.description'),
+    pubDate: genDate(post.publication_datetime, locale, true),
+    href,
+    imageAlt: post.translations.image_alt,
+    title: post.translations.title,
+    teaser: post.translations.teaser,
+    imageUrl: gemImgUrl(post.title_image.id),
+    imageDesc: post.title_image.description,
     contentCreators: processContentCreators(post.content_creators),
   };
 }
 
-export function processPodcastEpisodes(episode) {
-  const parsedEpisode = _.pick(episode, [
-    'title',
-    'description',
-    'image_alt',
-    'soundcloud_link',
-    'publication_datetime',
-    'languages',
-    'content_creators',
-  ]);
+export function processPodcastEpisodes(episode, locale) {
   return {
-    ...parsedEpisode,
+    title: episode.title,
+    imageAlt: episode.image_alt,
+    langs: [episode.language],
+    pubDate: genDate(episode.publication_datetime, locale, true),
+    href: episode.soundcloud_link,
+    teaser: episode.description,
     imageUrl: episode.image ? gemImgUrl(episode.image.id) : void 0,
     contentCreators: processContentCreators(episode.content_creators),
   };
 }
 
-export function processEvents(event) {
+export function processEvents(event, locale) {
   const localChapters = processLocalChapters(event);
 
-  const parsedEvent = _.pick(event, [
-    'slug',
-    'title',
-    'teaser',
-    'date',
-    'tags',
-    'type',
-    'language',
-  ]);
+  const slug = event.slug;
+  const href = genWebsiteUrl(translate(locale, 'navbar.events', {}).url, slug);
+  const endDate = event.end_date ? genDate(event.end_date, locale) : void 0;
 
   return {
-    ...parsedEvent,
+    title: event.title,
+    teaser: event.teaser,
+    language: event.language,
+    tags: transformTypes(event.tags),
+    type: transformTypes([event.type])[0],
+    href,
+    procDate: genDate(event.date, locale, true),
     date: new Date(event.date),
-    endDate: event.end_date ? new Date(event.end_date) : void 0,
+    endDate: endDate,
     localChapters,
   };
 }
 
-export function processProjects(project, params) {
-  const locale = getLocale(params);
+export function processProjects(project, locale) {
   const lang = locale === 'de' ? 'de-DE' : 'en-US';
 
   let organization;
@@ -77,18 +73,12 @@ export function processProjects(project, params) {
   ) {
     organization = translate(locale, 'organization.anonymous', {}).text;
   } else {
-    organization = _.get(
-      project,
-      'Organizations[0].Organizations_id.translations[0].name',
-    );
+    organization =
+      project.Organizations[0].Organizations_id.translations[0].name;
   }
 
-  const projectTypes = project.translations[0].type.map((str) =>
-    toTitleCase(str.replace('_', ' ')),
-  );
-  const dataTypes = project.translations[0].data.map((str) =>
-    toTitleCase(str.replace('_', ' ')),
-  );
+  const projectTypes = transformTypes(project.translations[0].type);
+  const dataTypes = transformTypes(project.translations[0].data);
 
   const projectOutputs = [];
   if (project.Blog_Posts.length !== 0) {
@@ -102,7 +92,7 @@ export function processProjects(project, params) {
 
   if (project.Podcast !== null) {
     projectOutputs.push({
-      url: _.get(project, 'Podcast.soundcloud_link'),
+      url: project.Podcast.soundcloud_link,
       outputType: 'podcastEpisode',
       outputNumber: 1,
     });
@@ -136,8 +126,8 @@ export function processProjects(project, params) {
   } else href = void 0;
 
   return {
-    title: _.get(project, 'translations[0].title'),
-    summary: _.get(project, 'translations[0].summary'),
+    title: project.translations[0].title,
+    summary: project.translations[0].summary,
     href: href,
     projectTypes: projectTypes,
     dataTypes: dataTypes,

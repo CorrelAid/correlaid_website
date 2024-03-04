@@ -93,7 +93,7 @@
     <div class="space-y-8 px-4">
       {#if trimmedFutureData}
         {#each trimmedFutureData as event, i}
-          <EventsCard {...event} />
+          <EventsCard {...(({date, ...rest}) => rest)(event)} />
         {/each}
       {/if}
       <Pagination
@@ -112,7 +112,7 @@
     <div class="space-y-8 px-4">
       {#if trimmedPastData}
         {#each trimmedPastData as event}
-          <EventsCard {...event} />
+          <EventsCard {...(({date, ...rest}) => rest)(event)} />
         {/each}
       {/if}
       <Pagination

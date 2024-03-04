@@ -14,7 +14,7 @@ export function processPersonLinks(person) {
 export function processContentCreators(data) {
   return _.map(data, (creator) => {
     return {
-      name: _.get(creator, 'Content_Creators_id.person.name'),
+      name: creator.Content_Creators_id.person.name,
     };
   });
 }

@@ -18,9 +18,12 @@ export const contentCreatorsCards = yup
   );
 
 export const blogPostsSchema = yup.object({
-  langs: yup.array().required().of(yup.string()),
-  pubdate: yup.date().required(),
-  slug: yup.string().required(),
+  langs: yup.array().required().min(1).of(yup.string()),
+  pubDate: yup.string().required(),
+  href: yup
+    .string()
+    .matches(/^(?!.*undefined).*$/, {excludeEmptyString: true})
+    .required(),
   imageAlt: yup.string().required(),
   title: yup.string().required(),
   teaser: yup.string().required(),
@@ -30,9 +33,9 @@ export const blogPostsSchema = yup.object({
 });
 
 export const podcastEpisodesSchema = yup.object({
-  langs: yup.array().of(yup.string()),
-  pubdate: yup.date().required(),
-  slug: yup.string().required(),
+  langs: yup.array().required().min(1).of(yup.string()),
+  pubDate: yup.string().required(),
+  href: yup.string().url().required(),
   imageAlt: yup.string().nullable(),
   title: yup.string().required(),
   teaser: yup.string().required(),
@@ -42,15 +45,16 @@ export const podcastEpisodesSchema = yup.object({
 });
 
 export const eventsSchema = yup.object({
-  slug: yup.string().required(),
+  href: yup.string().required(),
   title: yup.string().required(),
   teaser: yup.string().required(),
   date: yup.date().required(),
+  procDate: yup.string().required(),
   tags: yup.array().required().min(1).of(yup.string()),
   type: yup.string().required(),
   language: yup.string().required(),
   localChapters: localChaptersCards,
-  endDate: yup.date(),
+  endDate: yup.string().nullable(),
 });
 
 export const projectsSchema = yup.object({

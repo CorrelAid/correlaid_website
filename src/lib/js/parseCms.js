@@ -1,6 +1,12 @@
 import * as parseModel from './parseCmsModels/index.js';
 import _ from 'lodash';
-import {gemImgUrl, processHtml, getLang, toCamelCase} from './helpers.js';
+import {
+  gemImgUrl,
+  processHtml,
+  getLang,
+  toCamelCase,
+  getLocale,
+} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 import translations from '$lib/data/translations.js';
 import {
@@ -45,11 +51,11 @@ async function parsing(
   processingFunction,
   type,
   secType,
-  params,
+  locale,
 ) {
-  const processedData = processingFunction(data, params);
+  const processedData = processingFunction(data, locale);
   try {
-    const validatedData = await schema.validate(processedData);
+    const validatedData = await schema.validate(processedData, {strict: true});
     return validatedData;
   } catch (err) {
     console.group('Validation Error');
@@ -150,6 +156,7 @@ export async function parse(data, type, secType = '', params = {}) {
           throw Error('Unknown card type: ' + secType);
       }
       const parsedCards = [];
+      const locale = getLocale(params);
       for (const card of data) {
         const parsedCard = await parsing(
           card,
@@ -157,7 +164,7 @@ export async function parse(data, type, secType = '', params = {}) {
           processingFunction,
           type,
           secType,
-          params,
+          locale,
         );
         parsedCards.push(parsedCard);
       }

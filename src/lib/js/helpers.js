@@ -382,6 +382,11 @@ export function toTitleCase(str) {
   });
 }
 
+export function transformTypes(types) {
+  const procTypes = types.map((str) => toTitleCase(str.replace(/_/g, ' ')));
+  return procTypes;
+}
+
 export function genWebsiteUrl(base, slug) {
   const url = base + '/' + slug;
   return url;

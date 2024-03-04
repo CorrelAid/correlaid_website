@@ -1,32 +1,16 @@
 <script>
-  import {t, locale} from '$lib/stores/i18n';
-  import {toLocalDateString} from '$lib/js/helpers';
-
   export let href;
-  export let slug;
   export let title;
   export let type;
   import {page} from '$app/stores';
   import {genLcHref} from '$lib/js/helpers';
   export let teaser;
-  export let date;
+  export let procDate;
   export let endDate = void null;
   export let tags;
   export let language;
   export let localChapters = [];
   import Langs from '$lib/components/Langs.svelte';
-  let procDate;
-  let procEndDate;
-  $: procDate = toLocalDateString(date, $locale);
-  $: if (endDate) {
-    procEndDate = toLocalDateString(endDate, $locale);
-  }
-
-  $: if (typeof slug !== 'undefined') {
-    href = $t('navbar.events').url + '/' + slug;
-  }
-
-  $: type = type.replace(/_/g, ' ');
 </script>
 
 <div class="offset-right relative w-full" style="">
@@ -36,7 +20,7 @@
     <div class="col-span-full xl:col-span-3">
       <div class=" align-center flex space-x-2 pb-2">
         <p class="mr-8 text-xl font-light">
-          {procDate}{procEndDate ? ` - ${procEndDate}` : ''}
+          {procDate}{endDate ? ` - ${endDate}` : ''}
         </p>
       </div>
 
@@ -51,13 +35,13 @@
       <Langs langs={[language]} />
       <div class="mb-4">
         <span
-          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white"
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
         >
           {type}</span
         >
         {#each tags as tag}
           <span
-            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold capitalize text-white"
+            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
             >{tag}</span
           >
         {/each}

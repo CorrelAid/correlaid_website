@@ -1,6 +1,4 @@
 <script>
-  import {t, locale} from '$lib/stores/i18n';
-  import {genDate} from '$lib/js/helpers';
   import Html from '$lib/components/Html.svelte';
   import Langs from '$lib/components/Langs.svelte';
   export let imageAlt;
@@ -10,20 +8,11 @@
   export let teaser;
   // export let tags;
   export let contentCreators;
-  export let href;
-  export let pubdate;
+  export let pubDate;
   export let imageUrl = void 0;
-  export let slug = void 0;
+  export let href;
   export let external = false;
   export let imageDesc = void 0;
-
-  let procDate;
-
-  $: if (typeof slug !== 'undefined') {
-    href = $t('navbar.blog').url + '/' + slug;
-  }
-
-  $: procDate = genDate(pubdate, $locale, true);
 </script>
 
 <article
@@ -35,12 +24,7 @@
   <Langs {langs} />
 
   <div class="flex">
-    <a
-      class="relative mx-auto w-full"
-      {href}
-      aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}"
-      style="padding-bottom: 56.25%;"
-    >
+    <a class="relative mx-auto w-full" {href} style="padding-bottom: 56.25%;">
       {#if typeof imageUrl !== 'undefined'}
         <img
           class="absolute left-0 top-0 z-0 h-full w-full rounded-tl"
@@ -86,7 +70,7 @@
         {/if}
       </h3>
       <p class="line-clamp-1 pt-1.5 text-sm">
-        {procDate} - {#each contentCreators as person, i}
+        {pubDate} - {#each contentCreators as person, i}
           {person.name}{#if i < contentCreators.length - 1}{', '} {/if}
         {/each}
       </p>

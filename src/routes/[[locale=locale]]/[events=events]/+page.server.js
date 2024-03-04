@@ -10,5 +10,5 @@ export async function load({params}) {
     status: getAllowedStatus(),
   });
 
-  return {events: await parse(data.Events, 'cards', 'events')};
+  return {events: await parse(data.Events, 'cards', 'events', params)};
 }
