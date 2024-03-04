@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import {peopleSchema} from './schemaHelpers';
 
 export const localChaptersCards = yup.array().of(
   yup.object({
@@ -75,4 +76,27 @@ export const projectsSchema = yup.object({
       outputNumber: yup.number().required(),
     }),
   ),
+});
+
+export const expertsSchema = peopleSchema.shape({
+  email: yup.string().email(),
+});
+
+export const workshopsSchema = yup.object({
+  title: yup.string().required(),
+  tags: yup.array().required().min(1).of(yup.string()),
+  teaser: yup.string().required(),
+  targetAudiences: yup.array().required().min(1).of(yup.string().required()),
+  procRespUnits: yup
+    .array()
+    .required()
+    .min(1)
+    .of(
+      yup.object({
+        name: yup.string().required(),
+        href: yup.string().required(),
+      }),
+    ),
+  respUnitNames: yup.array().required().min(1).of(yup.string().required()),
+  language: yup.string().required(),
 });

@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import {peopleSchema} from './schemaHelpers';
 
 export const buttonsSchema = yup.object({
   text: yup.string().required(),
@@ -44,15 +45,7 @@ export const quoteCarouselsSchema = yup.object({
   textOnly: yup.boolean(),
 });
 
-export const contactsSchema = yup.object({
-  name: yup.string().required(),
-  position: yup.string().required(),
-  description: yup.string().required(),
-  img: yup.string().required(),
-  imageDesc: yup.string().nullable(),
-  pronouns: yup.string().nullable(),
-  email: yup.string().required(),
-});
+export const contactsSchema = peopleSchema;
 
 export const timelineSchema = yup.object({
   steps: yup

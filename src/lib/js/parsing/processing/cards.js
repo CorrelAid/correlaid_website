@@ -6,9 +6,11 @@ import {
   getTranslation,
   genDate,
 } from '../../helpers.js';
+
 import {
   processContentCreators,
   processLocalChapters,
+  processPeople,
 } from './processingHelpers.js';
 
 export function processBlogPosts(post, locale) {
@@ -119,7 +121,7 @@ export function processProjects(project, locale) {
 
   let href;
   if (project.subpage === true) {
-    return genWebsiteUrl(
+    href = genWebsiteUrl(
       translate(locale, 'navbar.using_data.project_database', {}).url,
       project.project_id,
     );
@@ -138,5 +140,44 @@ export function processProjects(project, locale) {
     isInternal: project.is_internal,
     localChapters: processLocalChapters(project),
     projectOutputs: projectOutputs,
+  };
+}
+
+export function processExperts(expert) {
+  const parsedExpert = processPeople(expert);
+  parsedExpert['position'] = expert.translations[0].area_of_expertise;
+  return parsedExpert;
+}
+
+export function processWorkshops(workshop, locale) {
+  const procRespUnits = [];
+  const respUnitNames = [];
+  if (workshop.responsible_unit === 'remote_office') {
+    procRespUnits.push({
+      name: 'Remote Office',
+      href: translate(locale, 'navbar.about.team', {}).url,
+    });
+    respUnitNames.push('remote_office');
+  } else if (workshop.local_chapters.length != 0) {
+    for (const lc of workshop.local_chapters) {
+      procRespUnits.push({
+        name: `CorrelAidX ${lc.Local_Chapters_id.translations[0].city}`,
+        href: genWebsiteUrl(
+          translate(locale, 'navbar.volunteering.correlaidx', {}).url,
+          lc.Local_Chapters_id.short_id,
+        ),
+      });
+      respUnitNames.push('correlaidx_' + lc.Local_Chapters_id.short_id);
+    }
+  }
+
+  return {
+    title: workshop.name,
+    tags: workshop.tags,
+    targetAudiences: workshop.target_audience,
+    teaser: workshop.teaser,
+    language: workshop.language,
+    respUnitNames,
+    procRespUnits,
   };
 }

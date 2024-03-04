@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {gemImgUrl, processHtml, genImgUrl} from '../../helpers.js';
-import {processPersonLinks} from './processingHelpers.js';
+import {processPeople} from './processingHelpers.js';
 
 export function processButtons(section) {
   if (section['buttons_id']) {
@@ -72,29 +72,7 @@ export function processQuoteCarousels(section) {
 }
 
 export function processContacts(section) {
-  const links = processPersonLinks(section.person);
-  const personParams = {
-    name: section.person.name,
-    position: section.translations[0].position,
-    description: section.translations[0].description,
-    links: links,
-  };
-
-  if (section.person.image) {
-    personParams.img = gemImgUrl(
-      section.person.image.id,
-      'fit=cover&width=200&height=200&quality=80',
-    );
-    personParams.imageDesc = section.person.image.description;
-  }
-
-  if (section.person.translations[0]) {
-    personParams.pronouns = section.person.translations[0].pronouns;
-  }
-
-  personParams.email = section.email || section.person.email;
-
-  return personParams;
+  return processPeople(section);
 }
 
 export function processTimelines(section) {

@@ -1,7 +1,7 @@
 import directusFetch from '$lib/js/directusFetch';
 import {getLang} from '$lib/js/helpers';
 import {workshopQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parseCms';
+import {parse} from '$lib/js/parseCms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
@@ -9,7 +9,5 @@ export async function load({params}) {
     language: getLang(params),
   });
 
-  const workshops = parseEntries(data.Workshops, 'workshops');
-
-  return {workshops: workshops};
+  return {workshops: await parse(data.Workshops, 'cards', 'workshops', params)};
 }

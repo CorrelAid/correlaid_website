@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {gemImgUrl} from '../../helpers.js';
 
 export function processPersonLinks(person) {
   const links = _.pick(person, [
@@ -17,6 +18,32 @@ export function processContentCreators(data) {
       name: creator.Content_Creators_id.person.name,
     };
   });
+}
+
+export function processPeople(data) {
+  const links = processPersonLinks(data.person);
+  const personParams = {
+    name: data.person.name,
+    position: data.translations[0].position,
+    description: data.translations[0].description,
+    links: links,
+  };
+
+  if (data.person.image) {
+    personParams.img = gemImgUrl(
+      data.person.image.id,
+      'fit=cover&width=200&height=200&quality=80',
+    );
+    personParams.imageDesc = data.person.image.description;
+  }
+
+  if (data.person.translations[0]) {
+    personParams.pronouns = data.person.translations[0].pronouns;
+  }
+
+  personParams.email = data.email || data.person.email;
+
+  return personParams;
 }
 
 export function processLocalChapters(event) {

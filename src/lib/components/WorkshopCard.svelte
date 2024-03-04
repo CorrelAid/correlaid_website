@@ -3,33 +3,16 @@
   import Langs from '$lib/components/Langs.svelte';
   export let href = '';
   import {t} from '$lib/stores/i18n';
-  import {page} from '$app/stores';
-  import {genLcHref} from '$lib/js/helpers';
   import ExternalLink from '../svg/External_Link.svelte';
   import ArrowUp from '../svg/nav_icons/ArrowUp.svelte';
   import ArrowDown from '../svg/nav_icons/ArrowDown.svelte';
 
   export let title;
   export let tags;
-  export let targetAudience;
+  export let targetAudiences;
   export let teaser;
-  export let respUnit = '';
-  export let correlaidXCity = '';
-  export let correlaidXShortId = '';
+  export let procRespUnits;
   export let language = '';
-
-  let hrefRespUnit = '';
-
-  $: if (respUnit == 'correlaid') {
-    respUnit = '';
-    hrefRespUnit = '';
-  } else if (respUnit == 'correlaidx') {
-    respUnit = `CorrelAidX ${correlaidXCity}`;
-    hrefRespUnit = genLcHref($page.params, correlaidXShortId);
-  } else if (respUnit == 'remote_office') {
-    respUnit = 'Remote Office';
-    hrefRespUnit = $t('navbar.about.team').url;
-  }
 
   let overflowParent;
   let overflowChild;
@@ -98,7 +81,7 @@
       </h3>
     {/if}
     <div class="mb-2">
-      {#each targetAudience as audience}
+      {#each targetAudiences as audience}
         <span
           class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
           >{$t(`targetAudience.${audience}`).text}</span
@@ -111,12 +94,12 @@
         >
       {/each}
     </div>
-    {#if respUnit != ''}
+    {#each procRespUnits as respUnit}
       <a
         class="font-semibold text-base-content transition hover:text-primary"
-        href={hrefRespUnit}>{respUnit}</a
+        href={respUnit.href}>{respUnit.name}</a
       >
-    {/if}
+    {/each}
 
     <div
       class="mt-2 {overflowing === true ? 'mb-8' : 'mb-1'} {expand === true

@@ -25,6 +25,8 @@ import {
   podcastEpisodesSchema,
   eventsSchema,
   projectsSchema,
+  expertsSchema,
+  workshopsSchema,
 } from './parsing/schemas/cards.js';
 
 import {
@@ -43,6 +45,8 @@ import {
   processPodcastEpisodes,
   processEvents,
   processProjects,
+  processExperts,
+  processWorkshops,
 } from './parsing/processing/cards.js';
 
 async function parsing(
@@ -151,6 +155,14 @@ export async function parse(data, type, secType = '', params = {}) {
           sortingFunction = function (projects) {
             return projects.sort((a, b) => b.endDate - a.endDate);
           };
+          break;
+        case 'experts':
+          schema = expertsSchema;
+          processingFunction = processExperts;
+          break;
+        case 'workshops':
+          schema = workshopsSchema;
+          processingFunction = processWorkshops;
           break;
         default:
           throw Error('Unknown card type: ' + secType);
