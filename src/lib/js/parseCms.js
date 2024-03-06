@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import yup from 'yup';
+import * as yup from 'yup';
 import {toCamelCase, getLocale} from './helpers.js';
 import {PUBLIC_ON_CMS_ERROR} from '$env/static/public';
 
