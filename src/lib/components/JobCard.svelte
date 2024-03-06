@@ -1,13 +1,12 @@
 <script>
-  import {t, locale} from '$lib/stores/i18n';
-  import {toLocalDateString, convertContractType} from '$lib/js/helpers';
+  import {t} from '$lib/stores/i18n';
   export let title;
-  export let slug;
+  export let href;
   export let summary;
   export let fte;
-  export let type;
+  export let jobType;
   export let language;
-  export let deadline;
+  export let procDeadline;
   export let location;
   export let salary;
   export let tags = [];
@@ -16,17 +15,12 @@
   import Time from '$lib/svg/Time.svelte';
   import Location from '$lib/svg/Location.svelte';
   import Salary from '$lib/svg/Salary.svelte';
-  export let href = '';
 
   const iconSize = 22;
 
   const listStyle = 'min-w-min mr-4 mb-2';
 
   let cardDetails = {};
-
-  $: if (typeof slug !== 'undefined') {
-    href = $t('navbar.jobs').url + '/' + slug;
-  }
 
   $: {
     cardDetails = {};
@@ -53,7 +47,7 @@
       <div class="mb-2">
         <span
           class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
-          >{convertContractType(type, $locale)}</span
+          >{jobType}</span
         >
         {#each tags as tag}
           <span
@@ -119,11 +113,7 @@
         {summary}
       </p>
       <p class="text-semibold">
-        <strong>{$t('access.deadline').text}: </strong>{toLocalDateString(
-          deadline,
-          $locale,
-          true,
-        )}
+        <strong>{$t('access.deadline').text}: </strong>{procDeadline}
       </p>
     </div>
   </div>

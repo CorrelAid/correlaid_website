@@ -2,9 +2,7 @@
   import Nonprofit from '$lib/svg/Nonprofit.svelte';
   import CorrelAidLogo from '$lib/svg/CorrelaidLogoMin.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
-  import {page} from '$app/stores';
   import Html from '$lib/components/Html.svelte';
-  import {genLcHref} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
   import Cursor from '$lib/svg/Cursor.svelte';
 
@@ -14,7 +12,7 @@
   export let isInternal;
   export let organization;
   export let summary;
-  export let localChapters = [];
+  export let procLocalChapters = [];
   export let href;
 
   export let projectOutputs = [];
@@ -85,13 +83,12 @@
       {/each}
     </div>
     <Html source={summary} options={'line-clamp-3 !px-0 my-3'} />
-    {#if localChapters.length !== 0}
+    {#if procLocalChapters.length !== 0}
       <div class="pb-3">
-        {#each localChapters as lc, i}
+        {#each procLocalChapters as lc, i}
           <a
             class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
-            href={genLcHref($page.params, lc['shortId'])}
-            >CorrelAidX {lc['city']}</a
+            href={lc['href']}>CorrelAidX {lc['city']}</a
           >
         {/each}
       </div>

@@ -122,7 +122,7 @@ async function findUrls(fileContent, filePath) {
     const timeoutPromise = new Promise((resolve, reject) => {
       setTimeout(() => {
         reject(new Error(`Request for ${url} timed out`));
-      }, 15000);
+      }, 25000);
     });
 
     try {
@@ -144,6 +144,7 @@ async function findUrls(fileContent, filePath) {
       // Retry the request only if it is a timeout error and the maximum number of retries has not been reached
       if (
         error.message === `Request for ${url} timed out` ||
+        error.code === 'UND_ERR_CONNECT_TIMEOUT' ||
         error.message === `API may be under pressure`
       ) {
         if (retryCount < maxRetries) {
@@ -155,6 +156,7 @@ async function findUrls(fileContent, filePath) {
           throw error;
         }
       } else {
+        console.log('here');
         throw error;
       }
     }

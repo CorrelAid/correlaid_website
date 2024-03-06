@@ -2,14 +2,12 @@
   export let href;
   export let title;
   export let type;
-  import {page} from '$app/stores';
-  import {genLcHref} from '$lib/js/helpers';
   export let teaser;
   export let procDate;
   export let endDate = void null;
   export let tags;
   export let language;
-  export let localChapters = [];
+  export let procLocalChapters = [];
   import Langs from '$lib/components/Langs.svelte';
 </script>
 
@@ -32,7 +30,9 @@
           {title}
         </a>
       </div>
-      <Langs langs={[language]} />
+      <div class="absolute right-0 top-0 z-20 p-2">
+        <Langs langs={[language]} />
+      </div>
       <div class="mb-4">
         <span
           class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
@@ -51,14 +51,14 @@
         {teaser}
       </p>
 
-      {#if localChapters.length !== 0}
-        {#each localChapters as lc, i}
+      {#if procLocalChapters.length !== 0}
+        {#each procLocalChapters as lc, i}
           <a
             class="text-medium font-semibold text-base-content transition hover:text-primary"
-            href={genLcHref($page.params, lc.shortId)}
+            href={lc.href}
           >
             CorrelAidX {lc.city}</a
-          >{#if i < localChapters.length - 1}{', '} {/if}
+          >{#if i < procLocalChapters.length - 1}{', '} {/if}
         {/each}
       {/if}
     </div>

@@ -40,7 +40,10 @@
 <div
   class="relative overflow-hidden rounded-lg border border-neutral-25 shadow-sm"
 >
-  <Langs langs={[language]} />
+  <div class="absolute right-0 top-0 z-20 p-2">
+    <Langs langs={[language]} />
+  </div>
+
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />

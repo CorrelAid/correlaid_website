@@ -1,26 +1,29 @@
 import directusFetch from '$lib/js/directusFetch';
 import {getAllowedStatus} from '$lib/js/directusFetch.js';
-import {handleLang} from '$lib/js/helpers';
-import {getLang} from '$lib/js/helpers';
+import {getLang, getLocale} from '$lib/js/helpers';
 import {latestUpdatesQuery} from './queries.js';
 import {parse} from '$lib/js/parseCms.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {
   const data = await directusFetch(latestUpdatesQuery, {
-    language: getLang(params),
+    language: getLang(getLocale(params)),
     status: getAllowedStatus(),
   });
 
-  const blogPosts = handleLang(data.Blog_Posts, params);
-
   return {
-    blogPosts: await parse(blogPosts.slice(0, 2), 'cards', 'blogPosts'),
-    events: await parse(data.Events.slice(0, 4), 'cards', 'events'),
+    blogPosts: await parse(
+      data.Blog_Posts.slice(0, 2),
+      'cards',
+      'blogPosts',
+      params,
+    ),
+    events: await parse(data.Events.slice(0, 4), 'cards', 'events', params),
     podcastEpisodes: await parse(
       data.Podcast_Episodes.slice(0, 2),
       'cards',
       'podcastEpisodes',
+      params,
     ),
   };
 }

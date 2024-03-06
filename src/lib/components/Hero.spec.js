@@ -7,8 +7,8 @@ describe('Hero', () => {
       props: {
         height: 'full',
         text: 'Hello World',
-        gradient_only: true,
-        image_alt: 'No image for testing',
+        gradientOnly: true,
+        imageAlt: 'No image for testing',
       },
     });
 
@@ -22,8 +22,8 @@ describe('Hero', () => {
         height: 'full',
         text: 'Hello World',
         correlaidx: true,
-        gradient_only: true,
-        image_alt: 'No image for testing',
+        gradientOnly: true,
+        imageAlt: 'No image for testing',
       },
     });
 

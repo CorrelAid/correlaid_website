@@ -1,6 +1,10 @@
 import * as yup from 'yup';
 import {peopleSchema} from './schemaHelpers';
 
+export const customSectionsSchema = yup.object({
+  key: yup.string().required(),
+});
+
 export const buttonsSchema = yup.object({
   text: yup.string().required(),
   href: yup.string().required(),
@@ -11,8 +15,8 @@ export const herosSchema = yup.object({
   text: yup.string().required(),
   height: yup.string().required(),
   gradientOnly: yup.boolean().required(),
-  buttons: yup.array().required().of(buttonsSchema),
-  image: yup.string().required(),
+  buttons: yup.array().of(buttonsSchema),
+  imageSrc: yup.string().required(),
   imageDesc: yup.string().nullable(),
   imageAlt: yup.string().required(),
 });
@@ -36,7 +40,7 @@ export const wysiwygSchema = yup.object({
 export const quoteSchema = yup.object({
   text: yup.string().required(),
   subtitle: yup.string().required(),
-  image: yup.string().nullable(),
+  imageSrc: yup.string().nullable(),
   imageDesc: yup.string().nullable(),
 });
 

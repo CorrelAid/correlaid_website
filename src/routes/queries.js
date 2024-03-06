@@ -44,7 +44,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 				}
 
 				... on custom_sections {
-					id
+					key
 				}
 				... on wysiwyg {
 					translations(

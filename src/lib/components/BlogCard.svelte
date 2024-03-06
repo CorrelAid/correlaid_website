@@ -9,7 +9,7 @@
   // export let tags;
   export let contentCreators;
   export let pubDate;
-  export let imageUrl = void 0;
+  export let imageSrc = void 0;
   export let href;
   export let external = false;
   export let imageDesc = void 0;
@@ -21,15 +21,16 @@
   <span
     class="absolute inset-x-0 bottom-0 z-10 h-2 rounded-b bg-gradient-to-r from-primary to-secondary opacity-75"
   />
-  <Langs {langs} />
-
+  <div class="absolute right-0 top-0 z-20 p-2">
+    <Langs {langs} />
+  </div>
   <div class="flex">
     <a class="relative mx-auto w-full" {href} style="padding-bottom: 56.25%;">
-      {#if typeof imageUrl !== 'undefined'}
+      {#if typeof imageSrc !== 'undefined'}
         <img
           class="absolute left-0 top-0 z-0 h-full w-full rounded-tl"
           alt={imageAlt}
-          src={imageUrl}
+          src={imageSrc}
           title={imageDesc}
         />
       {:else}

@@ -2,11 +2,12 @@
   export let name;
   export let position = '';
   export let description = '';
-  export let img = void 0;
+  export let imageSrc = void 0;
   export let links;
   export let email = '';
   export let pronouns = '';
   export let imageDesc = void 0;
+  export let imageAlt;
 
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
@@ -15,7 +16,7 @@
 
 <div class="grid grid-cols-8 gap-x-9 rounded pb-6 pt-2">
   <div class="col-span-full flex items-center justify-center md:col-span-3">
-    <Avatar src={img} alt={name} {imageDesc} />
+    <Avatar {imageSrc} {imageAlt} {imageDesc} />
   </div>
 
   <div class="col-span-full pt-5 text-neutral md:col-span-5 md:pt-0">
@@ -38,6 +39,6 @@
       </p>
     {/if}
 
-    <Links {...links} {name} />
+    <Links {...links} />
   </div>
 </div>

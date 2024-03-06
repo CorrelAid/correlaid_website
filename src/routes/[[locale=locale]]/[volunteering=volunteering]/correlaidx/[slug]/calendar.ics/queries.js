@@ -17,6 +17,8 @@ query icalLcEvents($slug: String, $language: String = "de-DE") {
 		registration_link
 		target_group
 		language
+		location
+		online
 		type
 		slug
 		tags

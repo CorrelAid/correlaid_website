@@ -2,9 +2,9 @@ import directusFetch from '$lib/js/directusFetch';
 import {PUBLIC_PRERENDER} from '$env/static/public';
 import {getAllowedStatus} from '$lib/js/directusFetch.js';
 import {createCalendar} from '$lib/js/helpers';
-import {getLang} from '$lib/js/helpers';
+import {getLang, getLocale} from '$lib/js/helpers';
 import {icalLcEvents} from './queries.js';
-import {parseEntries} from '$lib/js/parseCms.js';
+import {parse} from '$lib/js/parseCms.js';
 
 let pr;
 
@@ -19,18 +19,17 @@ export const prerender = pr;
 export async function GET({params}) {
   const data = await directusFetch(icalLcEvents, {
     slug: params.slug,
-    language: getLang(params),
+    language: getLang(getLocale(params)),
     status: getAllowedStatus(),
   });
 
-  const Events = parseEntries(data.Events, 'icalEvents');
+  const events = await parse(data.Events, 'misc', 'ical', params);
 
   const city = data.Local_Chapters[0].translations[0].city;
-  const email = data.Local_Chapters[0].lc_email;
 
   const filename = `calendar.ics`;
 
-  const calendar = createCalendar(Events, params, city, email);
+  const calendar = createCalendar(events, params, city);
 
   return new Response(calendar, {
     headers: {

@@ -17,17 +17,22 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  $: lcPage = data;
+  $: localAdministrators = data.localAdministrators;
+  $: hero = data.hero;
+  $: projects = data.projects;
+  $: events = data.events;
+  $: description = data.description;
+  $: iconText = data.iconText;
 </script>
 
 <div class="relative">
   <div class="w-screen pb-12">
-    <Hero {...lcPage['hero']} />
+    <Hero {...hero} />
   </div>
 </div>
 <div class="container mx-auto">
-  <Html source={lcPage['description']} options={'px-0 mb-12'} />
-  {#if lcPage['projects'].length !== 0}
+  <Html source={description} options={'px-0 mb-12'} />
+  {#if projects.length !== 0}
     <div class=" mb-12 space-y-8 px-4">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-base-content">
@@ -35,13 +40,15 @@
         </h2>
       </div>
       <div class="space-y-6">
-        {#each lcPage['projects'] as project}
-          <ProjectsCard {...project} />
+        {#each projects as project}
+          <ProjectsCard
+            {...(({endDate, localChapterNames, ...rest}) => rest)(project)}
+          />
         {/each}
       </div>
     </div>
   {/if}
-  {#if lcPage['events'].length !== 0}
+  {#if events.length !== 0}
     <div class="mb-12 px-4 lg:space-y-8">
       <div class="lg:mb-12">
         <span class="relative block text-3xl font-bold text-base-content">
@@ -66,24 +73,24 @@
       >
         <Ical height="45" width="45" />
       </a>
-      {#each lcPage['events'] as event}
+      {#each events as event}
         <EventsCard {...event} />
       {/each}
     </div>
   {/if}
-  {#if lcPage['local_admins'].length != 0}
+  {#if localAdministrators.length != 0}
     <div class="mx-4 mb-12">
       <h2 class="text-3xl font-bold text-base-content">Team</h2>
     </div>
     <div class="flex flex-col gap-y-8 px-4 pb-12">
-      {#each lcPage['local_admins'] as person}
-        <Person {...person} email={lcPage['lcEmail']} />
+      {#each localAdministrators as person}
+        <Person {...person} />
       {/each}
     </div>
   {/if}
-  {#if lcPage.howToGetInTouch}
+  {#if iconText}
     <div class="mb-12 px-4">
-      <Icon iconType={'get_in_touch'} text={lcPage.howToGetInTouch} />
+      <Icon iconType={'get_in_touch'} text={iconText} />
     </div>
   {/if}
 </div>

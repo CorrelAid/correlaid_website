@@ -30,7 +30,9 @@
     </div>
     <div class="grid gap-6">
       {#each events as event}
-        <EventsCard {...(({date, ...rest}) => rest)(event)} />
+        <EventsCard
+          {...(({date, localChapterNames, ...rest}) => rest)(event)}
+        />
       {/each}
     </div>
   {/if}

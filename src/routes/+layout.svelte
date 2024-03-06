@@ -18,6 +18,7 @@
   import CtaGroup from '$lib/components/CtaGroup.svelte';
   import LinkButton from '../lib/components/LinkButton.svelte';
   import Icon from '../lib/components/Icon.svelte';
+  import PeopleList from '../lib/components/PeopleList.svelte';
 
   export let data;
 
@@ -123,7 +124,13 @@
             </div>
           {:else if section.collection === 'customSections'}
             <div class="container mx-auto mb-12">
-              <slot />
+              {#if section.props.key === 'remote_office_list' && $page.data.remoteOffice}
+                <PeopleList people={$page.data.remoteOffice} />
+              {:else if section.props.key === 'board_list' && $page.data.board}
+                <PeopleList people={$page.data.board} />
+              {:else}
+                <slot />
+              {/if}
             </div>
           {/if}
         {/each}

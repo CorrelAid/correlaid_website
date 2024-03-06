@@ -36,7 +36,7 @@
   </h2>
   {#if jobs.future.length !== 0}
     {#each jobs.future as job}
-      <JobCard {...job} />
+      <JobCard {...(({deadline, ...rest}) => rest)(job)} />
     {/each}
   {:else}
     <p class="px-4">
@@ -49,7 +49,7 @@
   </h2>
   {#if jobs.past.length !== 0}
     {#each jobs.past as job}
-      <JobCard {...job} />
+      <JobCard {...(({deadline, ...rest}) => rest)(job)} />
     {/each}
   {:else}
     <p class="px-4">

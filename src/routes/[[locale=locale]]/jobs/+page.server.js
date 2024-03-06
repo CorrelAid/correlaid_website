@@ -1,8 +1,7 @@
 import directusFetch from '$lib/js/directusFetch';
 import {getAllowedStatus} from '$lib/js/directusFetch.js';
 import {jobsOverviewQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parseCms.js';
-import {handleLang} from '$lib/js/helpers';
+import {parse} from '$lib/js/parseCms.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
@@ -10,7 +9,5 @@ export async function load({params}) {
     status: getAllowedStatus(),
   });
 
-  const jobs = handleLang(data.Jobs, params);
-
-  return {jobs: parseEntries(jobs, 'jobs')};
+  return {jobs: await parse(data.Jobs, 'cards', 'jobs', params)};
 }

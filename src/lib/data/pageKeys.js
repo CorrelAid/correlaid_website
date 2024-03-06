@@ -27,11 +27,6 @@ export default {
     },
     //
     'navbar.education': {text: 'Bildung', url: '/bildung'},
-    // Subnav education
-    // 'navbar.education.workshops': {
-    //  text: 'Workshops',
-    //  url: '/bildung/workshops',
-    // },
     'navbar.education.learning_r': {text: 'R Lernen', url: '/bildung/r-lernen'},
     'navbar.education.course_data': {
       text: 'Grundkurs Daten',
@@ -117,7 +112,6 @@ export default {
     },
     //
     'navbar.education': {text: 'Education', url: '/en/education'},
-    // Subnav education
     'navbar.education.resources': {
       text: 'Educational Resources',
       url: '/en/education/resources',
@@ -153,10 +147,6 @@ export default {
       text: 'Join a team',
       url: '/en/volunteering/volunteer-teams',
     },
-    // 'navbar.volunteering.volunteer_journeys': {
-    //  text: 'Volunteer Journeys',
-    //  url: '/en/volunteering/volunteer-journeys',
-    // },
     'navbar.volunteering.become_member': {
       text: 'Become a member',
       url: 'https://easyverein.com/public/correlaid/applicationform/7966',

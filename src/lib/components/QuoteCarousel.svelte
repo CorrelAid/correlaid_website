@@ -27,7 +27,7 @@
               {#if textOnly === false}
                 <div class="grid px-4 md:grid-cols-10 md:space-x-6">
                   <div class="flex flex-col items-center md:col-span-4">
-                    {#if quote.image}
+                    {#if quote.imageSrc}
                       <div
                         class="relative w-full"
                         style="padding-bottom: 56.25%;"
@@ -35,14 +35,14 @@
                         <img
                           class="absolute left-0 top-0 z-0 h-full w-full"
                           alt="Logo/Photo {quote.subtitle}"
-                          src={quote.image}
+                          src={quote.imageSrc}
                         />
                       </div>
-                      {#if quote.image.description}
+                      {#if quote.imageDesc}
                         <div class="right-0 z-30 w-full opacity-100">
                           <span
                             class="z-0 line-clamp-1 block rounded-b bg-white px-1 py-0.5 text-xs text-black opacity-100"
-                            >{quote.image.description}</span
+                            >{quote.imageDesc}</span
                           >
                         </div>
                       {/if}

@@ -22,13 +22,13 @@
       title: 'Local Chapters',
       searchable: false,
       multiple: true,
-      param: 'correlaidx',
+      param: 'localChapterNames',
     },
     {
       title: $t('filter.type').text,
       searchable: false,
       multiple: true,
-      param: 'type',
+      param: 'projectTypes',
     },
     {
       title: $t('filter.organization_sector').text,
@@ -40,7 +40,7 @@
       title: $t('filter.data_type').text,
       searchable: false,
       multiple: true,
-      param: 'data',
+      param: 'dataTypes',
     },
   ];
 
@@ -61,7 +61,9 @@
 <div class="mt-8 space-y-8 px-4">
   {#if trimmedData}
     {#each trimmedData as project}
-      <ProjectsCard {...project} />
+      <ProjectsCard
+        {...(({endDate, localChapterNames, ...rest}) => rest)(project)}
+      />
     {/each}
   {/if}
   {#if filteredData}

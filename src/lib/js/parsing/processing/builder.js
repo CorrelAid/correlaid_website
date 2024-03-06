@@ -1,6 +1,10 @@
 import _ from 'lodash';
-import {gemImgUrl, processHtml, genImgUrl} from '../../helpers.js';
+import {processHtml, genImageSrc} from '../../helpers.js';
 import {processPeople} from './processingHelpers.js';
+
+export function processCustomSections(section) {
+  return section;
+}
 
 export function processButtons(section) {
   if (section['buttons_id']) {
@@ -22,7 +26,7 @@ export function processHeros(section) {
     buttons: section.buttons.map((button) => processButtons(button)),
   };
   if (section.image) {
-    hero['image'] = gemImgUrl(section.image.id);
+    hero['imageSrc'] = genImageSrc(section.image.id);
     hero['imageDesc'] = section.image.description;
     hero['imageAlt'] = section.translations[0].image_alt;
   }
@@ -60,7 +64,7 @@ export function processQuoteCarousels(section) {
       subtitle: quote.quotes_id.translations[0].subtitle,
     };
     if (!section.text_only) {
-      temp.image = genImgUrl(quote.quotes_id.image.id);
+      temp.imageSrc = genImageSrc(quote.quotes_id.image.id);
       temp.imageDesc = quote.quotes_id.image.description;
     }
     return temp;
@@ -72,7 +76,7 @@ export function processQuoteCarousels(section) {
 }
 
 export function processContacts(section) {
-  return processPeople(section);
+  return processPeople(section, false);
 }
 
 export function processTimelines(section) {

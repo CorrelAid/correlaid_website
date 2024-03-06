@@ -8,7 +8,7 @@
   export let text;
   export let buttons = [];
   export let correlaidx = false;
-  export let image = void 0;
+  export let imageSrc = void 0;
   export let imageAlt = void 0;
   export let imageDesc = void 0;
 
@@ -33,7 +33,7 @@
   {#if gradientOnly === false}
     <span
       class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
-      style={`background-image: url(${image})`}
+      style={`background-image: url(${imageSrc})`}
       aria-label={imageAlt}
       role="img"
     />
