@@ -1,12 +1,12 @@
 import directusFetch from '$lib/js/directusFetch';
 import {awardQuery} from './queries.js';
-import {getLang} from '$lib/js/helpers';
-import {parseEntries} from '$lib/js/parseCms.js';
+import {getLang, getLocale} from '$lib/js/helpers';
+import {parse} from '$lib/js/parseCms.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params, url, route}) {
   const data = await directusFetch(awardQuery, {
-    language: getLang(params),
+    language: getLang(getLocale(params)),
   });
-  return {awards: parseEntries(data.Awards, 'awards')};
+  return {awards: await parse(data.Awards, 'cards', 'awards', params)};
 }

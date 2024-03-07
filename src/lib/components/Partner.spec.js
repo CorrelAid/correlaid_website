@@ -7,7 +7,8 @@ describe('Partner', () => {
       props: {
         name: 'NPO A',
         description: 'a very cool NPO',
-        img: 'expected.image.url',
+        imageSrc: 'expected.image.url',
+        website: 'npoa.website.org',
       },
     });
 
@@ -20,12 +21,9 @@ describe('Partner', () => {
       props: {
         name: 'NPO A',
         description: 'a very cool NPO',
-        img: 'fakeimgurl.org ',
+        imageSrc: 'fakeImgSrc.org ',
         website: 'npoa.website.org',
       },
     });
-
-    // const image = screen.getByAltText('NPO A');
-    // expect(image.closest('a')).toHaveAttribute('href', 'npoa.website.org');
   });
 });

@@ -1,26 +1,22 @@
 <script>
-  import {t, locale} from '$lib/stores/i18n';
+  import {t} from '$lib/stores/i18n';
   import Html from '$lib/components/Html.svelte';
   import {onMount} from 'svelte';
   import {pageKey} from '$lib/stores/pageKey';
   import TextContainer from '$lib/components/TextContainer.svelte';
   import Box from '$lib/components/Box.svelte';
-  import {toLocalDateString, convertContractType} from '$lib/js/helpers';
   import De from '$lib/svg/DE.svelte';
   import En from '$lib/svg/EN.svelte';
   import Time from '$lib/svg/Time.svelte';
   import Location from '$lib/svg/Location.svelte';
   import Salary from '$lib/svg/Salary.svelte';
-  import Person from '$lib/components/Person.svelte';
 
   onMount(() => {
     $pageKey = 'navbar.jobs';
   });
 
   export let data;
-
-  $: job = data;
-
+  $: job = data.job;
   const iconSize = 22;
 
   const listStyle = 'min-w-min mr-4 mb-2';
@@ -33,7 +29,7 @@
 
   $: {
     cardDetails = {};
-    cardDetails['workload'] = job.FTE;
+    cardDetails['workload'] = job.fte;
     cardDetails['location'] = job.location;
     cardDetails['salary'] = job.salary;
     cardDetails['language_'] = job.language;
@@ -47,7 +43,7 @@
         <div class="mb-4">
           <span
             class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
-            >{convertContractType(job.type, $locale)}</span
+            >{job.jobType}</span
           >
           {#each job.tags as tag}
             <span
@@ -109,11 +105,7 @@
         {/each}
       </ul>
       <p class="text-semibold">
-        <strong>{$t('access.deadline').text}: </strong>{toLocalDateString(
-          job.deadline,
-          $locale,
-          true,
-        )}
+        <strong>{$t('access.deadline').text}: </strong>{job.procDeadline}
       </p>
     </Box>
   </div>
@@ -123,16 +115,3 @@
     slot="main"
   />
 </TextContainer>
-
-<div class="container mx-auto">
-  {#if job.colleagues.length !== 0}
-    <div class="mx-4 mb-12">
-      <h2 class="text-3xl font-bold text-base-content">Colleagues</h2>
-    </div>
-    <div class="flex flex-col gap-y-8 px-4 pb-12">
-      {#each job.colleagues as person}
-        <Person {...person} />
-      {/each}
-    </div>
-  {/if}
-</div>

@@ -1,4 +1,4 @@
-export const pageContentQuery = `
+export const builderQuery = `
 query ($page: String = "navbar.home", $language: String = "de-DE") {
 	Pages(filter: { page_key: { _eq: $page } }) {
 		builder {
@@ -44,7 +44,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 				}
 
 				... on custom_sections {
-					id
+					key
 				}
 				... on wysiwyg {
 					translations(

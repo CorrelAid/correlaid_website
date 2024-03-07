@@ -17,14 +17,8 @@
     {
       title: $t('filter.responsible').text,
       searchable: false,
-      multiple: false,
-      param: 'respUnit',
-    },
-    {
-      title: 'Local Chapter',
-      searchable: false,
-      multiple: false,
-      param: 'correlaidXCity',
+      multiple: true,
+      param: 'respUnitNames',
     },
     {
       title: $t('filter.language').text,
@@ -36,7 +30,7 @@
       title: $t('filter.targetAudience').text,
       searchable: false,
       multiple: true,
-      param: 'targetAudience',
+      param: 'targetAudiences',
     },
   ];
 
@@ -51,7 +45,7 @@
 {#if filteredData}
   <div class="mt-8 space-y-6 px-4">
     {#each filteredData as workshop}
-      <WorkshopCard {...workshop} />
+      <WorkshopCard {...(({respUnitNames, ...rest}) => rest)(workshop)} />
     {/each}
   </div>
 {/if}

@@ -1,6 +1,4 @@
 <script>
-  import {page} from '$app/stores';
-  import {genLcHref} from '$lib/js/helpers';
   import {onMount, onDestroy} from 'svelte';
   import {Map, Popup, AttributionControl} from 'maplibre-gl';
   import {locale} from '$lib/stores/i18n';
@@ -104,7 +102,7 @@
     map.on('click', 'lcs', (e) => {
       const lcs = e.features[0];
 
-      const lcHref = genLcHref($page.params, lcs.properties.short_id);
+      const lcHref = lcs.properties.href;
       const aClass = [
         'font-bold',
         'text-tertiary',

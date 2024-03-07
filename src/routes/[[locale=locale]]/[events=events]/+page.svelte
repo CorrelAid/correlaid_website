@@ -45,7 +45,7 @@
       title: 'Local Chapters',
       searchable: false,
       multiple: true,
-      param: 'correlaidx',
+      param: 'localChapterNames',
     },
     {
       title: $t('filter.language').text,
@@ -93,7 +93,9 @@
     <div class="space-y-8 px-4">
       {#if trimmedFutureData}
         {#each trimmedFutureData as event, i}
-          <EventsCard {...event} />
+          <EventsCard
+            {...(({date, localChapterNames, ...rest}) => rest)(event)}
+          />
         {/each}
       {/if}
       <Pagination
@@ -112,7 +114,9 @@
     <div class="space-y-8 px-4">
       {#if trimmedPastData}
         {#each trimmedPastData as event}
-          <EventsCard {...event} />
+          <EventsCard
+            {...(({date, localChapterNames, ...rest}) => rest)(event)}
+          />
         {/each}
       {/if}
       <Pagination

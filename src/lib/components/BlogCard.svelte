@@ -1,6 +1,4 @@
 <script>
-  import {t, locale} from '$lib/stores/i18n';
-  import {genDate} from '$lib/js/helpers';
   import Html from '$lib/components/Html.svelte';
   import Langs from '$lib/components/Langs.svelte';
   export let imageAlt;
@@ -10,20 +8,11 @@
   export let teaser;
   // export let tags;
   export let contentCreators;
+  export let pubDate;
+  export let imageSrc = void 0;
   export let href;
-  export let pubdate;
-  export let imageUrl = void 0;
-  export let slug = void 0;
   export let external = false;
   export let imageDesc = void 0;
-
-  let procDate;
-
-  $: if (typeof slug !== 'undefined') {
-    href = $t('navbar.blog').url + '/' + slug;
-  }
-
-  $: procDate = genDate(pubdate, $locale, true);
 </script>
 
 <article
@@ -32,20 +21,16 @@
   <span
     class="absolute inset-x-0 bottom-0 z-10 h-2 rounded-b bg-gradient-to-r from-primary to-secondary opacity-75"
   />
-  <Langs {langs} />
-
+  <div class="absolute right-0 top-0 z-20 p-2">
+    <Langs {langs} />
+  </div>
   <div class="flex">
-    <a
-      class="relative mx-auto w-full"
-      {href}
-      aria-label="Page: {slug ? 'Blogpost' : 'Podcast Episode'}"
-      style="padding-bottom: 56.25%;"
-    >
-      {#if typeof imageUrl !== 'undefined'}
+    <a class="relative mx-auto w-full" {href} style="padding-bottom: 56.25%;">
+      {#if typeof imageSrc !== 'undefined'}
         <img
           class="absolute left-0 top-0 z-0 h-full w-full rounded-tl"
           alt={imageAlt}
-          src={imageUrl}
+          src={imageSrc}
           title={imageDesc}
         />
       {:else}
@@ -86,11 +71,8 @@
         {/if}
       </h3>
       <p class="line-clamp-1 pt-1.5 text-sm">
-        {procDate} - {#each contentCreators as person, i}
-          {#if person.Content_Creators_id.person}
-            {person.Content_Creators_id.person
-              .name}{#if i < contentCreators.length - 1}{', '} {/if}
-          {/if}
+        {pubDate} - {#each contentCreators as person, i}
+          {person.name}{#if i < contentCreators.length - 1}{', '} {/if}
         {/each}
       </p>
 

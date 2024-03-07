@@ -1,5 +1,6 @@
 <script>
   import '../app.css';
+  import {dev} from '$app/environment';
   import {page} from '$app/stores';
   import {goto} from '$app/navigation';
   import {t, locale} from '$lib/stores/i18n';
@@ -17,6 +18,7 @@
   import CtaGroup from '$lib/components/CtaGroup.svelte';
   import LinkButton from '../lib/components/LinkButton.svelte';
   import Icon from '../lib/components/Icon.svelte';
+  import PeopleList from '../lib/components/PeopleList.svelte';
 
   export let data;
 
@@ -59,6 +61,13 @@
 
 <svelte:head>
   <title>{title}</title>
+  {#if !dev}
+    <script
+      src="/stats/js/script.js"
+      data-api="/stats/api/event"
+      data-domain="correlaid.org"
+    ></script>
+  {/if}
 </svelte:head>
 <!-- Footer on bottom of page if page is too short -->
 <div
@@ -115,7 +124,13 @@
             </div>
           {:else if section.collection === 'customSections'}
             <div class="container mx-auto mb-12">
-              <slot />
+              {#if section.props.key === 'remote_office_list' && $page.data.remoteOffice}
+                <PeopleList people={$page.data.remoteOffice} />
+              {:else if section.props.key === 'board_list' && $page.data.board}
+                <PeopleList people={$page.data.board} />
+              {:else}
+                <slot />
+              {/if}
             </div>
           {/if}
         {/each}
@@ -126,7 +141,6 @@
         {/if}
       {:else}
         <!-- not part of pages collection -->
-
         <slot />
       {/if}
     </main>

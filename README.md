@@ -207,6 +207,10 @@ to the slug.
 - The carousel component uses [this](https://github.com/vadimkorr/svelte-carousel) external component
 - The page /volunteering/correlaidx contains a map made with [maplibre](https://maplibre.org/) and [maptiler](https://www.maptiler.com/)
 
+### Data Validation
+
+Data is retrieved from the CMS with GraphQL. Queries are defined in string form. Data validation happens server-side in server.js files.
+
 ## Production build
 
 In line with standard svelte setups a production build can be created with

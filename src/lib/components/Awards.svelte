@@ -1,7 +1,7 @@
 <script>
   export let year;
-  export let image;
-  export let alt;
+  export let imageSrc;
+  export let imageAlt;
   export let title;
   export let imageDesc;
   export let imageOnRightSide = false;
@@ -14,11 +14,11 @@
       : 'md:visible'} col-span-full mx-4 flex-col justify-center md:col-span-4"
   >
     <div class="offset relative mx-auto w-full" style="padding-bottom: 56.25%;">
-      {#if image}
+      {#if imageSrc}
         <img
           class="absolute left-0 top-0 z-0 h-full w-full rounded border-4 border-neutral"
-          src={image}
-          {alt}
+          src={imageSrc}
+          alt={imageAlt}
         />
       {/if}
     </div>
@@ -42,11 +42,11 @@
       : 'md:hidden'} col-span-full mx-4 hidden flex-col justify-center md:col-span-4"
   >
     <div class="offset relative mx-auto w-full" style="padding-bottom: 56.25%;">
-      {#if image}
+      {#if imageSrc}
         <img
           class="absolute left-0 top-0 z-0 h-full w-full rounded border-4 border-neutral"
-          src={image}
-          {alt}
+          src={imageSrc}
+          alt={imageAlt}
         />
       {/if}
     </div>

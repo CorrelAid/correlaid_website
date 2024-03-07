@@ -2,41 +2,20 @@
   import Nonprofit from '$lib/svg/Nonprofit.svelte';
   import CorrelAidLogo from '$lib/svg/CorrelaidLogoMin.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
-  import {page} from '$app/stores';
   import Html from '$lib/components/Html.svelte';
-  import {genLcHref} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
   import Cursor from '$lib/svg/Cursor.svelte';
 
   export let title;
-  export let subpage;
-  export let data = void 0;
-  export let type = void 0;
+  export let dataTypes;
+  export let projectTypes;
   export let isInternal;
-  export let organization = void 0;
-  export let summary = void 0;
-  export let correlaidx = [];
-  export let correlaidXShortId = [];
-  export let projectId = void 0;
+  export let organization;
+  export let summary;
+  export let procLocalChapters = [];
+  export let href;
 
-  export let projectOutputs = void 0;
-
-  export let postSlug = void 0;
-  export let podcastHref = void 0;
-
-  // $: if (organization === 'undefined'){
-  //   organization_name = $t('organization.anonymous').text;
-  // }
-  // if (isInternal) {
-  //   organization_name = $t('organization.internalProject').text;
-  // }
-  // else{
-  //   organization_name = organization;
-  // }
-
-  $: href = subpage
-    ? $t('navbar.using_data.project_database').url + '/' + projectId
-    : void 0;
+  export let projectOutputs = [];
 </script>
 
 <div
@@ -89,38 +68,33 @@
     {/if}
 
     <div class="mb-4 mt-3">
-      {#if type}
-        {#each type as tag}
-          <span
-            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white"
-          >
-            {tag}</span
-          >
-        {/each}
-      {/if}
-      {#if data}
-        {#each data as tag}
-          <span
-            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold capitalize text-white"
-            >{tag}</span
-          >
-        {/each}
-      {/if}
+      {#each projectTypes as tag}
+        <span
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
+        >
+          {tag}</span
+        >
+      {/each}
+      {#each dataTypes as tag}
+        <span
+          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
+          >{tag}</span
+        >
+      {/each}
     </div>
-    {#if summary}
-      <Html source={summary} options={'line-clamp-3 !px-0 my-3'} />
-    {/if}
-    {#if correlaidx.length !== 0}
+    <Html source={summary} options={'line-clamp-3 !px-0 my-3'} />
+    {#if procLocalChapters.length !== 0}
       <div class="pb-3">
-        {#each correlaidx as lc, i}
+        {#each procLocalChapters as lc, i}
           <a
             class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
-            href={genLcHref($page.params, correlaidXShortId[i])}
-            >CorrelAidX {lc}</a
+            href={lc['href']}>CorrelAidX {lc['city']}</a
           >
         {/each}
       </div>
     {/if}
-    <ProjectLinks {projectOutputs} {podcastHref} {postSlug} />
+    {#if projectOutputs.length > 0}
+      <ProjectLinks {projectOutputs} />
+    {/if}
   </div>
 </div>

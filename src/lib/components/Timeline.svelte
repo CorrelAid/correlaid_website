@@ -47,15 +47,15 @@
           : 'right-0'}"
       >
         <div class="px-4">
-          {#if step.timeline_steps_id.icon == 'inform'}
+          {#if step.icon == 'inform'}
             <Inform width={iconLg} height={iconLg} />
-          {:else if step.timeline_steps_id.icon == 'like_minded'}
+          {:else if step.icon == 'like_minded'}
             <LikeMinded width={iconLg} height={iconLg} />
-          {:else if step.timeline_steps_id.icon == 'infrastructure'}
+          {:else if step.icon == 'infrastructure'}
             <Infrastrucuture width={iconLg} height={iconLg} />
-          {:else if step.timeline_steps_id.icon == 'team'}
+          {:else if step.icon == 'team'}
             <Team width={iconLg} height={iconLg} />
-          {:else if step.timeline_steps_id.icon == 'finish'}
+          {:else if step.icon == 'finish'}
             <Finish width={iconLg} height={iconLg} />
           {/if}
         </div>
@@ -89,10 +89,7 @@
           ? 'relative left-1/3  pl-7'
           : 'pr-7'} z-20 h-full py-12"
       >
-        <Html
-          source={step.timeline_steps_id.translations[0].text}
-          options={'container mx-auto z-20'}
-        />
+        <Html source={step.text} options={'container mx-auto z-20'} />
       </div>
     </div>
     <div />
@@ -112,20 +109,20 @@
       <div class="">
         <div class="my-6 mt-12 flex justify-center">
           <div class="">
-            {#if step.timeline_steps_id.icon == 'inform'}
+            {#if step.icon == 'inform'}
               <Inform width={iconMobile} height={iconMobile} />
-            {:else if step.timeline_steps_id.icon == 'like_minded'}
+            {:else if step.icon == 'like_minded'}
               <LikeMinded width={iconMobile} height={iconMobile} />
-            {:else if step.timeline_steps_id.icon == 'infrastructure'}
+            {:else if step.icon == 'infrastructure'}
               <Infrastrucuture width={iconMobile} height={iconMobile} />
-            {:else if step.timeline_steps_id.icon == 'team'}
+            {:else if step.icon == 'team'}
               <Team width={iconLg} height={iconLg} />
-            {:else if step.timeline_steps_id.icon == 'finish'}
+            {:else if step.icon == 'finish'}
               <Finish width={iconLg} height={iconLg} />
             {/if}
           </div>
         </div>
-        <Html source={step.timeline_steps_id.translations[0].text} />
+        <Html source={step.text} />
       </div>
     </div>
   {/each}

@@ -3,7 +3,6 @@ import pageKeys from '$lib/data/pageKeys';
 import {PUBLIC_API_URL} from '$env/static/public';
 import * as cheerio from 'cheerio';
 import icalendar from 'ical-generator';
-import {v5 as uuidv5} from 'uuid';
 
 /**
  * Extracts the last substring after /
@@ -96,24 +95,14 @@ export const find = (v, path) => {
 /**
  * Returns the name of the language in directus format given the path parameters object.
  */
-export function getLang(params) {
-  let lang;
-  if (params.locale) {
-    lang = 'en-US';
-  } else {
-    lang = 'de-DE';
-  }
-  return lang;
-}
-
-export function localeToLang(locale) {
+export function getLang(locale) {
   let lang;
   if (locale === 'de') {
     lang = 'de-DE';
   } else if (locale === 'en') {
     lang = 'en-US';
   } else {
-    throw new Error('Unknonw locale');
+    throw new Error('Unknown locale');
   }
   return lang;
 }
@@ -129,7 +118,7 @@ export function getLocale(params) {
   return 'de';
 }
 
-export function gemImgUrl(id, transform = '') {
+export function genImageSrc(id, transform = '') {
   return `${PUBLIC_API_URL}/assets/${id}?format=webp&${transform}`;
 }
 
@@ -165,9 +154,13 @@ export function toLocalDateString(date, locale, year = false) {
  * @return {string} Represents the date formatted according to the locale and the year flag
  */
 export function genDate(date, locale, year = false) {
-  date = new Date(Date.parse(date));
+  const parsedDate = new Date(Date.parse(date));
 
-  return toLocalDateString(date, locale, year);
+  if (isNaN(parsedDate)) {
+    throw new Error('Invalid date');
+  }
+
+  return toLocalDateString(parsedDate, locale, year);
 }
 
 /**
@@ -180,16 +173,20 @@ export function genTime(time, locale) {
     minute: 'numeric',
   };
 
-  time = new Date(Date.parse('0000-01-01 ' + time));
+  const parsedTime = new Date(Date.parse('0000-01-01 ' + time));
 
-  return time.toLocaleTimeString(locale, options);
+  if (isNaN(parsedTime)) {
+    throw new Error('Invalid time');
+  }
+
+  return parsedTime.toLocaleTimeString(locale, options);
 }
 
 /**
  * Extracts existing languages from a list from an data entry
  * with translations.
  */
-function extractLanguages(entry) {
+export function extractLanguages(entry) {
   const langs = entry.translations.map((translation) => {
     return translation.languages_code.code;
   });
@@ -211,75 +208,10 @@ export function getTranslation(entry, currentLanguage) {
   }
 }
 
-/**
- * Checking if entries exists in current locale, if not falls back to another available language.
- * Also adds an array of existing languages as a property to every entry.
- */
-export function handleLang(entries, params) {
-  for (const entry of entries) {
-    entry.langs = extractLanguages(entry);
-    // TODO: This is not very nice because it changes the data type from array to object.
-    // It also is misleading in terms of the naming as the property name is still plural.
-    entry.translations = getTranslation(entry, getLang(params));
-  }
-
-  return entries;
-}
-
-export function genLcHref(params, shortId) {
-  const lcHref = [
-    getLocale(params) == 'de' ? '' : '/en',
-    getLocale(params) == 'de'
-      ? '/mitmachen/correlaidx/'
-      : '/volunteering/correlaidx/',
-    shortId.toLowerCase(),
-  ].join('');
-  return lcHref;
-}
-
-export function convertContractType(type, locale) {
-  if (locale === 'de') {
-    switch (type) {
-      case 'full-time':
-        return 'Vollzeit';
-      case 'part-time':
-        return `Teilzeit`;
-      case 'working-student':
-        return `Werkstudent*in`;
-      case 'internship':
-        return 'Praktikum';
-      case 'volunteer':
-        return 'Freiwillig';
-      case 'contract':
-        return 'Vertrag';
-      case 'temporary':
-        return 'Zeitlich begrenzt';
-      default:
-        return type;
-    }
-  } else {
-    switch (type) {
-      case 'full-time':
-        return 'Full Time';
-      case 'part-time':
-        return `Part-time`;
-      case 'working-student':
-        return `Working Student`;
-      case 'internship':
-        return 'Internship';
-      case 'volunteer':
-        return 'Volunteer';
-      case 'contract':
-        return 'Contract';
-      case 'temporary':
-        return 'Temporary';
-      default:
-        return type;
-    }
-  }
-}
-
 export function processHtml(html) {
+  if (typeof html === 'undefined' || html === '') {
+    throw new Error('HTML must be defined');
+  }
   const $ = cheerio.load(html);
 
   // Process <img> tags
@@ -324,48 +256,12 @@ export function translateSelectLabels(select, locale, param) {
   }
 }
 
-export function createCalendar(
-  events,
-  params,
-  lc = '',
-  email = 'info@correlaid.org',
-) {
+export function createCalendar(events, params, lc = '') {
   const calendar = icalendar({
     prodId: `//CorrelAid//NONSGML CorrelAid${
       lc != '' ? `X ${lc}` : ''
     } Events V1.0//${getLocale(params).toUpperCase()}`,
-    events: events.map((event) => {
-      const startDate = event.start_time
-        ? new Date(`${event.date} ${event.start_time}`)
-        : new Date(event.date);
-      const endDate = event.endDate
-        ? event.endTime
-          ? new Date(`${event.endDate} ${event.endTime}`)
-          : new Date(event.endDate)
-        : new Date(`${event.date} ${event.endTime}`);
-      const location = event.online ? 'Online' : event.location;
-
-      const uuid5 = uuidv5(event.id.toString(), uuidv5.URL);
-
-      const organizer =
-        lc != ''
-          ? `CorrelAidX ${lc} <${email}>`
-          : 'CorrelAid <info@correlaid.org>';
-
-      return {
-        id: uuid5,
-        start: startDate,
-        end: endDate,
-        category: event.type,
-        summary: event.title,
-        description: event.teaser,
-        location: location,
-        organizer: organizer,
-        url: `https://correlaid.org${
-          params.locale == 'en' ? '/en' : ''
-        }/events/${event.slug}`,
-      };
-    }),
+    events: events,
   });
   return calendar.toString();
 }
@@ -374,4 +270,23 @@ export function toCamelCase(input) {
   return input
     .toLowerCase()
     .replace(/[-_](.)/g, (_, char) => char.toUpperCase());
+}
+
+export function toTitleCase(str) {
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
+
+export function transformTypes(types) {
+  const procTypes = types.map((str) => toTitleCase(str.replace(/_/g, ' ')));
+  return procTypes;
+}
+
+export function genWebsiteUrl(base, slug) {
+  if (typeof base === 'undefined' || typeof slug === 'undefined') {
+    throw new Error('Both base and slug must be defined');
+  }
+  const url = base + '/' + slug;
+  return url;
 }

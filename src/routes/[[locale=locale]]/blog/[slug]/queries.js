@@ -29,6 +29,7 @@ query BlogPostQuery(
 					) {
 						pronouns
 					}
+					email
 					website
 					twitter
 					linkedin

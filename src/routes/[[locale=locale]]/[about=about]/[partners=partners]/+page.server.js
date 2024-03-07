@@ -1,11 +1,13 @@
-import {getLang} from '$lib/js/helpers';
+import {getLang, getLocale} from '$lib/js/helpers';
 import directusFetch from '$lib/js/directusFetch';
 import {partnerQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parseCms.js';
+import {parse} from '$lib/js/parseCms.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
-  const data = await directusFetch(partnerQuery, {language: getLang(params)});
+  const data = await directusFetch(partnerQuery, {
+    language: getLang(getLocale(params)),
+  });
 
   const partners = data.Partners.filter(
     (partner) => partner.type === 'partner',
@@ -15,7 +17,7 @@ export async function load({params}) {
   );
 
   return {
-    partners: parseEntries(partners, 'partners'),
-    financialSupporters: parseEntries(financialSupporters, 'partners'),
+    partners: await parse(partners, 'cards', 'partners'),
+    financialSupporters: await parse(financialSupporters, 'cards', 'partners'),
   };
 }

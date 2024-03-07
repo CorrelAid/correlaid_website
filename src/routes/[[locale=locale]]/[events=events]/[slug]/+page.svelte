@@ -1,10 +1,6 @@
 <script>
   import {pageKey} from '$lib/stores/pageKey';
-  import {page} from '$app/stores';
-  import {genLcHref} from '$lib/js/helpers';
-  import {genDate, genTime} from '$lib/js/helpers';
   import {t} from '$lib/stores/i18n';
-  import {locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Html from '$lib/components/Html.svelte';
   import TextContainer from '$lib/components/TextContainer.svelte';
@@ -13,10 +9,8 @@
   import Location from '$lib/svg/Location.svelte';
   import Headset from '$lib/svg/Headset.svelte';
   import SignUp from '$lib/svg/Sign_Up.svelte';
+  import Langs from '$lib/components/Langs.svelte';
   import Box from '$lib/components/Box.svelte';
-  import De from '$lib/svg/DE.svelte';
-  import En from '$lib/svg/EN.svelte';
-  const iconSize = 22;
 
   onMount(() => {
     $pageKey = 'navbar.events';
@@ -25,7 +19,7 @@
   /** @type {import('./$types').PageData} */
   export let data;
 
-  $: event = data;
+  $: event = data.event;
 </script>
 
 <TextContainer title={event.title} teaser={event.teaser}>
@@ -35,12 +29,9 @@
         {#each event.localChapters as lc, i}
           <a
             class="text-medium font-semibold text-base-content transition hover:text-primary"
-            href={genLcHref(
-              $page.params,
-              lc.Local_Chapters_id.translations[0].city,
-            )}
+            href={lc.href}
           >
-            CorrelAidX {lc.Local_Chapters_id.translations[0].city}</a
+            CorrelAidX {lc.city}</a
           >{#if i < event.localChapters.length - 1}{', '} {/if}
         {/each}
       </p>
@@ -53,9 +44,7 @@
           >
           <span class="sr-only">{$t('access.date').text}</span>
           <span class="y-auto pl-2"
-            >{genDate(event.date, $locale)}{event.endDate
-              ? ` - ${genDate(event.endDate, $locale)}`
-              : ''}</span
+            >{event.date}{event.endDate ? ` - ${event.endDate}` : ''}</span
           >
         </span>
         {#if !event.endDate}
@@ -64,11 +53,7 @@
               ><Time width={20} height={20} /></span
             >
             <span class="sr-only">{$t('access.time').text}</span>
-            <span class="my-auto pl-2"
-              >{genTime(event.startTime, $locale)} - {genTime(
-                event.endTime,
-                $locale,
-              )}</span
+            <span class="my-auto pl-2">{event.startTime} - {event.endTime}</span
             ></span
           >
         {/if}
@@ -88,9 +73,9 @@
             <span class="my-auto pl-2">Online</span>
           </p>
         {/if}
-        {#if event.registration_link}
+        {#if event.registrationLink}
           <a
-            href={event.registration_link}
+            href={event.registrationLink}
             class="flex text-secondary underline"
             target="_blank"
             rel="noreferrer"
@@ -101,23 +86,7 @@
             <span class="my-auto pl-2">{$t('access.registration').text}</span>
           </a>
         {/if}
-        {#if event.language == 'de-DE'}
-          <span
-            class="inline-block rounded-full bg-white shadow-none"
-            arria-hidden="true"
-          >
-            <De height={iconSize} width={iconSize} />
-          </span>
-          <span class="sr-only">Event ist auf deutsch.</span>
-        {:else}
-          <span
-            class="inline-block rounded-full bg-white shadow-none"
-            role="img"
-            aria-label="Event is in english."
-          >
-            <En height={iconSize} width={iconSize} />
-          </span>
-        {/if}
+        <Langs langs={[event.language]} />
       </p>
     </Box>
   </div>

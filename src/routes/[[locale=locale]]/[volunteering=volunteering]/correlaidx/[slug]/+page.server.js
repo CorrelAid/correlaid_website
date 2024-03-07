@@ -1,14 +1,14 @@
 import {directusFetch, getAllowedStatus} from '$lib/js/directusFetch';
-import {getLang} from '$lib/js/helpers';
+import {getLang, getLocale} from '$lib/js/helpers';
 import {lcDetailsQuery} from './queries.js';
 import {error} from '@sveltejs/kit';
-import {parseLocalChapterPage} from '$lib/js/parseCms';
+import {parse} from '$lib/js/parseCms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
   const data = await directusFetch(lcDetailsQuery, {
     slug: params.slug,
-    language: getLang(params),
+    language: getLang(getLocale(params)),
     status: getAllowedStatus(),
   });
 
@@ -16,5 +16,14 @@ export async function load({params}) {
     throw error(404);
   }
 
-  return parseLocalChapterPage(data, params);
+  const parsedPage = await parse(data, 'misc', 'localChapterPage', params);
+
+  return {
+    localAdministrators: parsedPage.localAdministrators,
+    hero: parsedPage.hero,
+    description: parsedPage.description,
+    projects: parsedPage.projects,
+    events: parsedPage.events,
+    iconText: parsedPage.iconText,
+  };
 }

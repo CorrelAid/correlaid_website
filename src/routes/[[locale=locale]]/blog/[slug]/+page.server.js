@@ -1,15 +1,15 @@
 import directusFetch from '$lib/js/directusFetch';
 import {getAllowedStatus} from '$lib/js/directusFetch.js';
-import {getLang} from '$lib/js/helpers';
+import {getLang, getLocale} from '$lib/js/helpers';
 import {blogPostQuery} from './queries.js';
 import {error} from '@sveltejs/kit';
-import {parseBlogPostPage} from '$lib/js/parseCms';
+import {parse} from '$lib/js/parseCms';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({params}) {
   const vars = {
     slug: params.slug,
-    language: getLang(params),
+    language: getLang(getLocale(params)),
     status: getAllowedStatus(),
   };
   const data = await directusFetch(blogPostQuery, vars);
@@ -18,5 +18,7 @@ export async function load({params}) {
     throw error(404);
   }
 
-  return parseBlogPostPage(data);
+  return {
+    blogPost: await parse(data.Blog_Posts[0], 'single', 'blogPost', params),
+  };
 }

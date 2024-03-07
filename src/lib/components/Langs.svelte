@@ -7,34 +7,32 @@
   const iconSize = 22;
 </script>
 
-<div class="absolute right-0 top-0 z-20 p-2">
-  {#if langs.length !== 2}
-    {#each langs as lang}
-      {#if lang == 'de-DE'}
-        <span
-          class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
-          aria-hidden="true"
-        >
-          <De height={iconSize} width={iconSize} />
-        </span>
-        <span class="sr-only">{$t(`access.language_`).text} {lang}</span>
-      {:else}
-        <span
-          class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
-          aria-hidden="true"
-        >
-          <En height={iconSize} width={iconSize} />
-        </span>
-        <span class="sr-only">{$t(`access.language_`).text} {lang}</span>
-      {/if}
-    {/each}
-  {:else}
-    <span
-      class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
-      aria-hidden="true"
-    >
-      <International height={iconSize} width={iconSize} />
-    </span>
-    <span class="sr-only">Bilingual</span>
-  {/if}
-</div>
+{#if langs.length !== 2}
+  {#each langs as lang}
+    {#if lang == 'de-DE'}
+      <span
+        class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+        aria-hidden="true"
+      >
+        <De height={iconSize} width={iconSize} />
+      </span>
+      <span class="sr-only">{$t(`access.language_`).text} {lang}</span>
+    {:else}
+      <span
+        class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+        aria-hidden="true"
+      >
+        <En height={iconSize} width={iconSize} />
+      </span>
+      <span class="sr-only">{$t(`access.language_`).text} {lang}</span>
+    {/if}
+  {/each}
+{:else}
+  <span
+    class="inline-block rounded-full bg-white p-1 shadow-none md:p-0"
+    aria-hidden="true"
+  >
+    <International height={iconSize} width={iconSize} />
+  </span>
+  <span class="sr-only">Bilingual</span>
+{/if}

@@ -8,7 +8,8 @@
   export let text;
   export let buttons = [];
   export let correlaidx = false;
-  export let image = void 0;
+  export let imageSrc = void 0;
+  export let imageAlt = void 0;
   export let imageDesc = void 0;
 
   let cHidden = 'hidden';
@@ -32,7 +33,9 @@
   {#if gradientOnly === false}
     <span
       class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
-      style={`background-image: url(${image})`}
+      style={`background-image: url(${imageSrc})`}
+      aria-label={imageAlt}
+      role="img"
     />
     {#if imageDesc}
       <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 lg:block">

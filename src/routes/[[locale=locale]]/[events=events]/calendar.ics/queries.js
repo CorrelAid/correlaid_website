@@ -1,6 +1,6 @@
 export const icalEventQuery = `
 query Events {
-  Events(sort: ["date"], filter: {_and: [{date: {_gte: "$NOW"}},{ local_chapters: { id : { _null: true } } }]}) {
+  Events(sort: ["date"], filter: {_and: [{date: {_gte: "$NOW"}}]}) {
     id
     date
     start_time
@@ -8,13 +8,13 @@ query Events {
     end_date
     title
     teaser
-    registration_link
     target_group
     language
     type
     slug
     tags
-
+    location
+    online
   }
 }
 `;

@@ -1,9 +1,7 @@
 <script>
   import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
-  import {page} from '$app/stores';
   import Html from '$lib/components/Html.svelte';
-  import {genLcHref} from '$lib/js/helpers';
   import TextContainer from '$lib/components/TextContainer.svelte';
   import Links from '$lib/components/Links.svelte';
   import Box from '$lib/components/Box.svelte';
@@ -15,11 +13,11 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  $: project = data;
+  $: project = data.project;
 </script>
 
 {#if project}
-  <TextContainer title={project.title} teaser={project.teaser}>
+  <TextContainer title={project.title} teaser={project.summary}>
     <div class="mx-4" slot="sub_subtitle">
       {#if project.type || project.data}
         <div class="mb-4">
@@ -47,7 +45,7 @@
           {#each project.localChapters as lc}
             <a
               class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
-              href={genLcHref($page.params, lc)}>CorrelAidX {lc}</a
+              href={lc.href}>CorrelAidX {lc}</a
             >
           {/each}
         </div>
@@ -57,8 +55,6 @@
         <div class="mb-4">
           <ProjectLinks
             projectOutputs={project.projectOutputs}
-            podcastHref={project.podcast_href}
-            postSlug={project.post_slug}
             horizontal={false}
           />
         </div>
@@ -96,12 +92,7 @@
       <div class="px-4">
         <Box>
           <h3 class="mb-4 text-xl font-semibold">Outputs:</h3>
-          <ProjectLinks
-            projectOutputs={project.projectOutputs}
-            podcastHref={project.podcast_href}
-            postSlug={project.post_slug}
-            horizontal={false}
-          />
+          <ProjectLinks projectOutputs={project.projectOutputs} />
         </Box>
       </div>
     </div>

@@ -1,6 +1,4 @@
 <script>
-  import {page} from '$app/stores';
-  import {genLcHref} from '$lib/js/helpers';
   import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import Box from '$lib/components/Box.svelte';
@@ -22,10 +20,10 @@
 <div class="px-4">
   <div class="">
     <div class="mb-16 grid grid-cols-2 gap-7">
-      {#each localChapters as localChapter}
-        <a href={genLcHref($page.params, localChapter.short_id)}>
+      {#each localChapters as lc}
+        <a href={lc.href}>
           <Box type={'correlaidx'}>
-            <h2 class="">{localChapter.translations[0].city}</h2>
+            <h2 class="">{lc.city}</h2>
           </Box>
         </a>
       {/each}

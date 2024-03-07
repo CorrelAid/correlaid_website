@@ -1,10 +1,9 @@
 import directusFetch from '$lib/js/directusFetch';
 import {PUBLIC_PRERENDER} from '$env/static/public';
 import {getAllowedStatus} from '$lib/js/directusFetch.js';
-import {handleLang, getLocale} from '$lib/js/helpers';
-import {getLang} from '$lib/js/helpers';
+import {getLang, getLocale} from '$lib/js/helpers';
 import {blogQuery} from './queries.js';
-import {parseEntries} from '$lib/js/parseCms.js';
+import {parse} from '$lib/js/parseCms.js';
 import he from 'he';
 
 let pr;
@@ -38,19 +37,21 @@ export async function GET({params}) {
   `;
 
   const data = await directusFetch(blogQuery, {
-    language: getLang(params),
+    language: getLang(getLocale(params)),
     status: getAllowedStatus(),
   });
 
-  const posts = handleLang(data.Blog_Posts, params);
-
-  const parsedPosts = parseEntries(posts, 'blogPosts');
+  const parsedPosts = await parse(
+    data.Blog_Posts,
+    'cards',
+    'blogPosts',
+    params,
+  );
 
   for (const post of parsedPosts) {
     const title = he.encode(post.title);
     const author = post.contentCreators
-      .map((creator) => creator.Content_Creators_id.person.name)
-      .filter((name) => name)
+      .map((creator) => creator.name)
       .join(', ');
     const description = he.encode(post.teaser);
     const link = `https://correlaid.org${
