@@ -24,11 +24,5 @@ query AdminsAndOpsStructure($language: String = "de-DE") {
 		}
 	}
 
-	Organizational_Structure {
-		translations(filter: { languages_code: { code: { _eq: $language } } }) {
-			remote_office
-			board
-		}
-	}
 }
 `;
