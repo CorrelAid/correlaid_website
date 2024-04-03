@@ -53,7 +53,7 @@ export function processBlogPosts(post, locale) {
 export function processPodcastEpisodes(episode, locale) {
   return {
     title: episode.title,
-    imageAlt: episode.image_alt,
+    imageAlt: 'CorrelAid Podcast Logo',
     langs: [episode.language],
     pubDate: genDate(episode.publication_datetime, locale, true),
     href: episode.soundcloud_link,
