@@ -252,6 +252,9 @@ const config = {
   kit: {
     adapter: configuredAdapter,
     prerender: {entries: prerenderRoutes},
+    serviceWorker: {
+      register: false,
+    },
   },
   preprocess: vitePreprocess(),
 };
