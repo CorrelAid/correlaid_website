@@ -1,6 +1,7 @@
 <script>
   import '../app.css';
   import {dev} from '$app/environment';
+  import {onMount} from 'svelte';
   import {page} from '$app/stores';
   import {goto} from '$app/navigation';
   import {t, locale} from '$lib/stores/i18n';
@@ -19,6 +20,18 @@
   import LinkButton from '../lib/components/LinkButton.svelte';
   import Icon from '../lib/components/Icon.svelte';
   import PeopleList from '../lib/components/PeopleList.svelte';
+
+  onMount(async () => {
+    if (dev) {
+      console.warn('Will not register service worker in dev mode.');
+    } else {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js', {
+          type: dev ? 'module' : 'classic',
+        });
+      }
+    }
+  });
 
   export let data;
 
