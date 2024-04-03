@@ -152,6 +152,7 @@ export function processWorkshops(workshop, locale) {
   }
 
   return {
+    href: workshop.resource_link,
     title: workshop.name,
     tags: workshop.tags,
     targetAudiences: workshop.target_audience,
