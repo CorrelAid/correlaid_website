@@ -99,6 +99,7 @@ export const workshopsSchema = yup.object({
     ),
   respUnitNames: yup.array().required().min(1).of(yup.string().required()),
   language: yup.string().required(),
+  href: yup.string().required(),
 });
 
 export const awardsSchema = yup.object({
