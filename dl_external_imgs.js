@@ -17,6 +17,8 @@ dotenv.config({
 dotenv.config({path: path.resolve(process.cwd(), '.env.local')});
 dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
+const jitterMultiplier = 1000;
+
 const URL = `${process.env.PUBLIC_API_URL}/assets`;
 
 const buildDirectory = process.env.BUILD_DIR || '.svelte-kit/cloudflare';
@@ -126,8 +128,12 @@ async function findUrls(fileContent, filePath) {
     });
 
     try {
+      const jitter = Math.random() * jitterMultiplier;
+      await new Promise((resolve) => setTimeout(resolve, jitter));
+
       const response = await Promise.race([fetch(url), timeoutPromise]);
       const contentType = response.headers.get('Content-Type');
+      // check the file type
       if (contentType.includes('image')) {
         console.log(`${url} is an image`);
         throw new Error(`Unhandled Image: ${url} in ${filePath}`);
@@ -192,6 +198,9 @@ async function downloadFile(Url, Path) {
       'Content-Type': 'application/json',
     },
   };
+
+  const jitter = Math.random() * jitterMultiplier;
+  await new Promise((resolve) => setTimeout(resolve, jitter));
 
   return new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
