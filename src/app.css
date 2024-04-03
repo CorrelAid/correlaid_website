@@ -178,8 +178,7 @@
   font-family: 'Londrina Solid';
   font-style: normal;
   font-weight: 100;
-  src: url('./fonts/londrina/londrina-solid-v15-latin-100.woff2')
-    format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/fonts/londrina/londrina-solid-v15-latin-100.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* londrina-solid-300 - latin */
