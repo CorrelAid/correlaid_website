@@ -251,7 +251,7 @@ if (process.env.PUBLIC_ADAPTER === 'STATIC') {
 const config = {
   kit: {
     adapter: configuredAdapter,
-    prerender: {entries: prerenderRoutes, handleHttpError: 'warn'},
+    prerender: {entries: prerenderRoutes},
   },
   preprocess: vitePreprocess(),
 };
