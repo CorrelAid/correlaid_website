@@ -35,7 +35,7 @@ export const podcastEpisodesSchema = yup.object({
   langs: yup.array().required().min(1).of(yup.string()),
   pubDate: yup.string().required(),
   href: yup.string().url().required(),
-  imageAlt: yup.string().nullable(),
+  imageAlt: yup.string().required(),
   title: yup.string().required(),
   teaser: yup.string().required(),
   imageSrc: yup.string().nullable(),

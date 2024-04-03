@@ -89,18 +89,22 @@
     <ul
       class="mx-auto flex items-center gap-3 text-sm font-light text-base-content md:text-base"
     >
-      <a
-        class="transition hover:text-secondary"
-        href="https://github.com/CorrelAid/correlaid_website"
-      >
-        Website Source
-      </a>
-      <a
-        class="transition hover:text-secondary"
-        href="https://github.com/CorrelAid/correlaid_website/issues"
-      >
-        Bugreport
-      </a>
+      <li>
+        <a
+          class="transition hover:text-secondary"
+          href="https://github.com/CorrelAid/correlaid_website"
+        >
+          Website Source
+        </a>
+      </li>
+      <li>
+        <a
+          class="transition hover:text-secondary"
+          href="https://github.com/CorrelAid/correlaid_website/issues"
+        >
+          Bugreport
+        </a>
+      </li>
     </ul>
   </div>
   <div class=" flex pb-10">
