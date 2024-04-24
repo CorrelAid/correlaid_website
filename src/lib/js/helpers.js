@@ -291,6 +291,9 @@ export function transformSector(sector) {
   if (procSector == 'professional, associations, unions') {
     procSector = 'Business Associations, Professional Associations, Unions';
   }
+  if (procSector == 'social, services') {
+    procSector = 'Social Services';
+  }
   return procSector;
 }
 
