@@ -123,7 +123,10 @@ export const jobsSchema = yup.object({
   title: yup.string().required(),
   summary: yup.string().required(),
   location: yup.string().required(),
-  language: yup.string().required(),
+  language: yup
+    .string()
+    .required()
+    .matches(/(german|english)/),
   deadline: yup.date().required(),
   procDeadline: yup.string().required(),
   salary: yup.string().required(),

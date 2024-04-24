@@ -85,7 +85,7 @@
                 <span class="my-auto pl-2">{cardDetails[key]}</span></span
               >
             {:else if key == 'language_'}
-              {#if language == 'German'}
+              {#if language == 'german'}
                 <span
                   class="inline-block rounded-full bg-white shadow-none"
                   arria-hidden="true"
