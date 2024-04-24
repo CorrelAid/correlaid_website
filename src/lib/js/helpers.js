@@ -283,6 +283,17 @@ export function transformTypes(types) {
   return procTypes;
 }
 
+export function transformSector(sector) {
+  let procSector = sector.replace(/_/g, ', ');
+  if (procSector == 'intermediaries, voluntarismpromotion') {
+    procSector = 'Philantrophic Intermediaries, Voluntarism, Promotion';
+  }
+  if (procSector == 'professional, associations, unions') {
+    procSector = 'Business Associations, Professional Associations, Unions';
+  }
+  return procSector;
+}
+
 export function genWebsiteUrl(base, slug) {
   if (typeof base === 'undefined' || typeof slug === 'undefined') {
     throw new Error('Both base and slug must be defined');
