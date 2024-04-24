@@ -90,7 +90,10 @@ export default {
     // Subnav projects_consulting
     'navbar.about.team': {text: 'Team', url: '/en/about/team'},
     'navbar.about.values': {text: 'Our Values', url: '/en/about/values'},
-    'navbar.about.partners': {text: 'Partners', url: '/en/about/partners'},
+    'navbar.about.partners': {
+      text: 'Partners',
+      url: '/en/about/partners-sponsors',
+    },
     //
     'navbar.using_data': {text: 'Using Data', url: '/en/using-data'},
     // Subnav projects_consulting
