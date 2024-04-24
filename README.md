@@ -112,7 +112,7 @@ SvelteKit is documented [here](https://kit.svelte.dev/docs/introduction)
 
 Svelte is documented [here](https://svelte.dev/docs)
 
-Only the implementations of most important concepts are explained here in a general manner. Refer to the code itself for detailed explanations.
+Only the implementations of the most important concepts are explained here in a general manner. Refer to the code itself for detailed explanations.
 
 ### Design
 
