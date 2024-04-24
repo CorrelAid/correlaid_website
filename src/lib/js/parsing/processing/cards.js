@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {
   translate,
   transformTypes,
+  transformSector,
   genWebsiteUrl,
   getTranslation,
   extractLanguages,
@@ -102,11 +103,19 @@ export function processProjects(project, locale) {
     );
   } else href = void 0;
 
+  let sector = void 0;
+
+  if (project.Organizations.length !== 0) {
+    sector = project.Organizations[0].Organizations_id.sector;
+    sector = transformSector(sector);
+  }
+
   return {
     title: project.translations[0].title,
     summary: project.translations[0].summary,
     href: href,
     projectTypes: transformTypes(project.translations[0].type),
+    organizationSector: sector,
     dataTypes: transformTypes(project.translations[0].data),
     endDate: project.end_date
       ? new Date(project.end_date)

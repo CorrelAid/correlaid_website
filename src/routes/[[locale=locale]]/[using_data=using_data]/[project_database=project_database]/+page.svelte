@@ -34,7 +34,7 @@
       title: $t('filter.organization_sector').text,
       searchable: false,
       multiple: false,
-      param: 'organization_sector',
+      param: 'organizationSector',
     },
     {
       title: $t('filter.data_type').text,
