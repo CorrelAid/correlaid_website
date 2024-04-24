@@ -116,7 +116,6 @@ export const partnersSchema = yup.object({
   name: yup.string().required(),
   imageSrc: yup.string().required(),
   description: yup.string().required(),
-  website: yup.string().url().required(),
 });
 
 export const jobsSchema = yup.object({
