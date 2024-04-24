@@ -64,11 +64,13 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 				}
 				Organizations {
 					Organizations_id {
+						sector
 						translations(filter: { languages_code: { code: { _eq: $language } } }) {
 							languages_code {
 								code
 							}
 							name
+							
 						}
 					}
 				}
