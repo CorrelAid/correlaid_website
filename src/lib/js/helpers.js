@@ -262,6 +262,7 @@ export function createCalendar(events, params, lc = '') {
       lc != '' ? `X ${lc}` : ''
     } Events V1.0//${getLocale(params).toUpperCase()}`,
     events: events,
+    timezone: 'Europe/Berlin',
   });
   return calendar.toString();
 }
