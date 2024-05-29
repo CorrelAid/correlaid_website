@@ -1,4 +1,4 @@
-// vercel-ignore-build.js
+// vercel-ignore-build.cjs
 const https = require('https');
 const {exec} = require('child_process');
 
