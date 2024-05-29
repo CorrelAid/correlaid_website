@@ -1,6 +1,6 @@
 // vercel-ignore-build.cjs
 const https = require('https');
-const {exec} = require('child_process');
+// const {exec} = require('child_process');
 
 // exec('git diff --quiet HEAD^ HEAD .', (error, stdout, stderr) => {
 //   if (error) {
