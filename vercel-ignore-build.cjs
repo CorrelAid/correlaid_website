@@ -2,15 +2,15 @@
 const https = require('https');
 const {exec} = require('child_process');
 
-exec('git diff --quiet HEAD^ HEAD .', (error, stdout, stderr) => {
-  if (error) {
-    console.log(`detected changes in the project`);
-    console.log('✅ - Build can proceed');
-    process.exit(1);
-  } else {
-    console.log('no changes detected');
-  }
-});
+// exec('git diff --quiet HEAD^ HEAD .', (error, stdout, stderr) => {
+//   if (error) {
+//     console.log(`detected changes in the project`);
+//     console.log('✅ - Build can proceed');
+//     process.exit(1);
+//   } else {
+//     console.log('no changes detected');
+//   }
+// });
 
 let vercelEnv = process.env.VERCEL_ENV;
 
