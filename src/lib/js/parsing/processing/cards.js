@@ -147,6 +147,12 @@ export function processWorkshops(workshop, locale) {
       href: translate(locale, 'navbar.about.team', {}).url,
     });
     respUnitNames.push('remote_office');
+  } else if (workshop.responsible_unit === 'correlaidx') {
+    procRespUnits.push({
+      name: 'CorrelAidX',
+      href: translate(locale, 'navbar.volunteering.correlaidx', {}).url,
+    });
+    respUnitNames.push('correlaidx');
   } else if (workshop.local_chapters.length != 0) {
     for (const lc of workshop.local_chapters) {
       procRespUnits.push({
