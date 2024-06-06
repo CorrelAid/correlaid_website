@@ -65,27 +65,22 @@
 <!-- passing unfiltered data to component -->
 <Filter origData={eventsData} bind:filteredData {selects} {searchOptions} />
 {#if events}
-  <span
-    class="mb-4 mt-8 hidden rounded-md px-4 px-4 py-2 text-2xl font-bold drop-shadow-sm lg:mb-8 lg:block"
-  >
-    {currentEventSeparator}
-    <a
-      download="calendar.ics"
-      href={$t('footer.ical').url}
-      class="absolute right-0 ml-1 mr-2 inline-block whitespace-nowrap align-text-top"
-      aria-label={$t('access.ical').text}
+  <span class="mb-8 mt-5 grid w-full grid-cols-2 rounded-md px-4 px-4 lg:mt-8">
+    <span
+      class="col-span-full text-2xl font-bold drop-shadow-sm lg:col-span-1 lg:col-start-1"
+      >{currentEventSeparator}</span
     >
-      <Ical height="45" width="45" />
-    </a>
+    <span class="mt-4 lg:mt-0 lg:place-self-end">
+      <a
+        download="calendar.ics"
+        href={$t('footer.ical').url}
+        class="align-text-top"
+        aria-label={$t('access.ical').text}
+      >
+        <Ical height="45" width="45" />
+      </a>
+    </span>
   </span>
-  <a
-    download="calendar.ics"
-    href={$t('footer.ical').url}
-    class="my-4 inline-block whitespace-nowrap pl-3 lg:hidden"
-    aria-label={$t('access.ical').text}
-  >
-    <Ical height="45" width="45" />
-  </a>
 
   {#if events.future.length === 0}
     <p class="px-4">{$t('filter.no_results').text}</p>
