@@ -79,7 +79,17 @@
         />
         <LanguageSelect bind:activeLanguage on:changeLanguage />
       </div>
-      <!-- Mobile menu button -->
+      <span class="block pl-32 xl:hidden">
+        <!-- Mobile menu button -->
+        <LinkButton
+          text={$t('navbar.donate').text}
+          href={$t('navbar.donate').url}
+          options={'text-sm min-w-0 px-5 !py-1.5 '}
+          iconSize={18}
+          type={'external'}
+          color={'bg-secondary'}
+        />
+      </span>
       <div class="block xl:hidden">
         <button
           class="p-2 transition"
@@ -93,6 +103,7 @@
   </div>
 </header>
 <!-- Mobile Menu -->
+
 {#if $drawer}
   <MobileDrawer {topNav} {botNav} on:changeLanguage />
 {/if}
