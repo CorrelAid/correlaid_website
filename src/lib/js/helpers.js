@@ -305,3 +305,8 @@ export function genWebsiteUrl(base, slug) {
   const url = base + '/' + slug;
   return url;
 }
+
+export function genAbsoluteUrl(path) {
+  const url = window.location.origin + path;
+  return url;
+}

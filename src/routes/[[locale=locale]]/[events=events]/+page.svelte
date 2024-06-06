@@ -1,6 +1,7 @@
 <script>
   import {pageKey} from '$lib/stores/pageKey';
-  import Ical from '$lib/svg/Ical.svelte';
+  import {genAbsoluteUrl} from '$lib/js/helpers';
+  import Copy from '$lib/svg/Copy.svelte';
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import {timeSplitEntries} from '$lib/js/entries';
@@ -60,25 +61,42 @@
     {searchProperty: 'title', multiple: false},
     {searchProperty: 'teaser', multiple: false},
   ];
+
+  function copyText(text) {
+    navigator.clipboard.writeText(text);
+  }
 </script>
 
 <!-- passing unfiltered data to component -->
 <Filter origData={eventsData} bind:filteredData {selects} {searchOptions} />
 {#if events}
-  <span class="mb-8 mt-5 grid w-full grid-cols-2 rounded-md px-4 px-4 lg:mt-8">
+  <div class="mb-3 mt-5 px-4 text-2xl font-bold drop-shadow-sm lg:mt-6">
+    {currentEventSeparator}
+  </div>
+
+  <span
+    class="mx-4 mb-6 grid grid-cols-2 text-sm lg:mt-0 lg:flex lg:w-2/4 lg:items-center"
+  >
     <span
-      class="col-span-full text-2xl font-bold drop-shadow-sm lg:col-span-1 lg:col-start-1"
-      >{currentEventSeparator}</span
+      class="col-span-full mr-1.5 whitespace-nowrap pb-2 lg:col-span-1 lg:pb-0"
+      id="ics_label"
     >
-    <span class="mt-4 lg:mt-0 lg:place-self-end">
-      <a
-        download="calendar.ics"
-        href={$t('footer.ical').url}
-        class="align-text-top"
-        aria-label={$t('access.ical').text}
+      {$t('ics.cta').text}
+    </span>
+    <span
+      class="flex items-center rounded-md border border-neutral-25 bg-white px-1 py-0.5"
+    >
+      <span
+        class="text-nowrap no-scrollbar w-[160px] overflow-scroll text-ellipsis whitespace-nowrap text-xs"
       >
-        <Ical height="45" width="45" />
-      </a>
+        {genAbsoluteUrl($t('footer.ical').url)}
+      </span>
+      <button
+        aria-labelledby="ics_label"
+        class="ml-1"
+        on:click={() => copyText(genAbsoluteUrl($t('footer.ical').url))}
+        ><Copy height="18" width="18" /></button
+      >
     </span>
   </span>
 

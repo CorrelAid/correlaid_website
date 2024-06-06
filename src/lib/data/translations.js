@@ -50,6 +50,7 @@ export default {
     'contractType.volunteer': {text: 'Freiwillig'},
     'contractType.contract': {text: 'Vertrag'},
     'contractType.temporary': {text: 'Zeitlich begrenzt'},
+    'ics.cta': {text: 'Bleibe auf dem Laufenden mit unserem ICS-Feed:'},
   },
   en: {
     'misc.read_more': {text: 'Read more'},
@@ -102,5 +103,6 @@ export default {
     'contractType.volunteer': {text: 'Volunteer'},
     'contractType.contract': {text: 'Contract'},
     'contractType.temporary': {text: 'Temporary'},
+    'ics.cta': {text: 'Stay up to date with our ICS feed:'},
   },
 };
