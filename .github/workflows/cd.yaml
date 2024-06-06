@@ -32,10 +32,7 @@ jobs:
           npm run test
 
       - name: Install Playwright Browsers
-        run: |
-          sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
-          sudo apt update
-          npx playwright install --with-deps
+        run: npx playwright install --with-deps
 
       - name: Run tests on static build
         env:
