@@ -1,11 +1,13 @@
 <script>
   export let width;
   export let height;
+  export let color = 'black';
 </script>
 
 <svg
   {width}
   {height}
+  fill={color}
   version="1.1"
   viewBox="0 0 1200 1200"
   xmlns="http://www.w3.org/2000/svg"

@@ -31,7 +31,7 @@ export async function GET({params}) {
   return new Response(calendar, {
     headers: {
       'Content-Type': 'text/calendar; charset=utf-8',
-      'Content-Disposition': `attachment; filename='${filename}'`,
+      'Content-Disposition': `attachment; filename=${filename}`,
     },
     status: 200,
   });
