@@ -79,7 +79,7 @@
         />
         <LanguageSelect bind:activeLanguage on:changeLanguage />
       </div>
-      <span class="block pl-32 xl:hidden">
+      <span class="block pl-24 xl:hidden">
         <!-- Mobile menu button -->
         <LinkButton
           text={$t('navbar.donate').text}
