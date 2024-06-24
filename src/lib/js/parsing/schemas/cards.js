@@ -59,6 +59,8 @@ export const eventsSchema = yup.object({
 
 export const projectsSchema = yup.object({
   title: yup.string().required(),
+  projectStatus: yup.string().required(),
+  procProjectStatus: yup.string().required(),
   dataTypes: yup.array().required().min(1).of(yup.string()),
   projectTypes: yup.array().required().min(1).of(yup.string()),
   organizationSector: yup.string().nullable(),

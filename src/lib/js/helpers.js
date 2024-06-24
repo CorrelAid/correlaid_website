@@ -274,9 +274,14 @@ export function toCamelCase(input) {
 }
 
 export function toTitleCase(str) {
-  return str.replace(/\w\S*/g, function (txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
+  return str
+    .split('_')
+    .map((word) =>
+      word.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }),
+    )
+    .join(' ');
 }
 
 export function transformTypes(types) {

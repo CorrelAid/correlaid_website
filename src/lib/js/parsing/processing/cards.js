@@ -1,4 +1,4 @@
-import {genImageSrc} from '../../helpers.js';
+import {genImageSrc, toTitleCase} from '../../helpers.js';
 
 import _ from 'lodash';
 import {
@@ -112,6 +112,8 @@ export function processProjects(project, locale) {
 
   return {
     title: project.translations[0].title,
+    projectStatus: project.project_status,
+    procProjectStatus: toTitleCase(project.project_status),
     summary: project.translations[0].summary,
     href: href,
     projectTypes: transformTypes(project.translations[0].type),
@@ -128,7 +130,10 @@ export function processProjects(project, locale) {
     localChapterNames: _.map(project.Local_Chapters, (lc) => {
       return lc.Local_Chapters_id.translations[0].city;
     }),
-    projectOutputs: processProjectOutputs(project, locale, lang),
+    projectOutputs:
+      project.project_status === 'team_selection'
+        ? []
+        : processProjectOutputs(project, locale, lang),
   };
 }
 

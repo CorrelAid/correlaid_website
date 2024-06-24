@@ -7,14 +7,13 @@
   import Cursor from '$lib/svg/Cursor.svelte';
 
   export let title;
-  export let dataTypes;
   export let projectTypes;
+  export let procProjectStatus;
   export let isInternal;
   export let organization;
   export let summary;
   export let procLocalChapters = [];
   export let href;
-
   export let projectOutputs = [];
 </script>
 
@@ -68,14 +67,12 @@
     {/if}
 
     <div class="mb-4 mt-3">
+      <span
+        class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
+      >
+        {procProjectStatus}</span
+      >
       {#each projectTypes as tag}
-        <span
-          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
-        >
-          {tag}</span
-        >
-      {/each}
-      {#each dataTypes as tag}
         <span
           class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
           >{tag}</span

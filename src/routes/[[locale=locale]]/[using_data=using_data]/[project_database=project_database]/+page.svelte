@@ -19,10 +19,10 @@
 
   $: selects = [
     {
-      title: 'Local Chapters',
+      title: $t('filter.project_status').text,
       searchable: false,
-      multiple: true,
-      param: 'localChapterNames',
+      multiple: false,
+      param: 'projectStatus',
     },
     {
       title: $t('filter.type').text,
@@ -37,10 +37,10 @@
       param: 'organizationSector',
     },
     {
-      title: $t('filter.data_type').text,
+      title: 'Local Chapters',
       searchable: false,
       multiple: true,
-      param: 'dataTypes',
+      param: 'localChapterNames',
     },
   ];
 
