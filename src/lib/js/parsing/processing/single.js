@@ -70,18 +70,20 @@ export function processBlogPost(blogPost, locale) {
 }
 
 export function processProject(project, locale) {
+  const projectTypes = transformTypes(project.translations[0].type, locale);
+  const dataTypes = transformTypes(project.translations[0].data, locale);
   const lang = getLang(locale);
 
   return {
     title: project.translations[0].title,
     organization: processOrganizations(project, locale, true),
+    projectTypes: projectTypes,
+    dataTypes: dataTypes,
     description: project.translations[0].description
       ? processHtml(project.translations[0].description)
       : void 0,
     summary: processHtml(project.translations[0].summary),
     isInternal: project.is_internal,
-    projectTypes: transformTypes(project.translations[0].type),
-    dataTypes: transformTypes(project.translations[0].data),
     projectOutputs: processProjectOutputs(project, locale, lang),
     projectContacts: _.map(project.People, (person) => {
       return processPeople(person.person_id, true);

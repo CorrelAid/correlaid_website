@@ -2,6 +2,7 @@
   import Nonprofit from '$lib/svg/Nonprofit.svelte';
   import CorrelAidLogo from '$lib/svg/CorrelaidLogoMin.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
+  import Tag from './Tag.svelte';
   import Html from '$lib/components/Html.svelte';
   import {t} from '$lib/stores/i18n';
   import Cursor from '$lib/svg/Cursor.svelte';
@@ -69,17 +70,10 @@
 
     <div class="mb-4 mt-3">
       {#each projectTypes as tag}
-        <span
-          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
-        >
-          {tag}</span
-        >
+        <Tag text={tag} color="bg-primary" />
       {/each}
       {#each dataTypes as tag}
-        <span
-          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
-          >{tag}</span
-        >
+        <Tag text={tag} color="bg-secondary" />
       {/each}
     </div>
     <Html source={summary} options={'line-clamp-3 !px-0 my-3'} />

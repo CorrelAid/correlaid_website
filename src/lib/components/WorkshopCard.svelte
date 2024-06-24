@@ -4,6 +4,7 @@
   export let href = '';
   import {t} from '$lib/stores/i18n';
   import ExternalLink from '../svg/External_Link.svelte';
+  import Tag from './Tag.svelte';
   import ArrowUp from '../svg/nav_icons/ArrowUp.svelte';
   import ArrowDown from '../svg/nav_icons/ArrowDown.svelte';
 
@@ -85,16 +86,10 @@
     {/if}
     <div class="mb-2">
       {#each targetAudiences as audience}
-        <span
-          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
-          >{$t(`targetAudience.${audience}`).text}</span
-        >
+        <Tag text={$t(`targetAudience.${audience}`).text} color="bg-primary" />
       {/each}
       {#each tags as tag}
-        <span
-          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
-          >{tag}</span
-        >
+        <Tag text={tag} color="bg-secondary" />
       {/each}
     </div>
     {#each procRespUnits as respUnit}
