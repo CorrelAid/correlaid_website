@@ -15,6 +15,7 @@
   import Time from '$lib/svg/Time.svelte';
   import Location from '$lib/svg/Location.svelte';
   import Salary from '$lib/svg/Salary.svelte';
+  import Tag from './Tag.svelte';
 
   const iconSize = 22;
 
@@ -45,15 +46,9 @@
         </a>
       </div>
       <div class="mb-2">
-        <span
-          class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
-          >{jobType}</span
-        >
+        <Tag text={jobType} color="bg-primary" />
         {#each tags as tag}
-          <span
-            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
-            >{tag}</span
-          >
+          <Tag text={tag} color="bg-secondary" />
         {/each}
       </div>
 

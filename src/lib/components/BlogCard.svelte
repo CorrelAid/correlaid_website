@@ -6,7 +6,6 @@
   import ExternalLink from '../svg/External_Link.svelte';
   export let title;
   export let teaser;
-  // export let tags;
   export let contentCreators;
   export let pubDate;
   export let imageSrc = void 0;

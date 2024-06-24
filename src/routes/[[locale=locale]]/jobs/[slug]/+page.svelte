@@ -3,6 +3,7 @@
   import Html from '$lib/components/Html.svelte';
   import {onMount} from 'svelte';
   import {pageKey} from '$lib/stores/pageKey';
+  import Tag from '$lib/components/Tag.svelte';
   import TextContainer from '$lib/components/TextContainer.svelte';
   import Box from '$lib/components/Box.svelte';
   import De from '$lib/svg/DE.svelte';
@@ -41,15 +42,9 @@
     <Box slot="sub_subtitle">
       {#if job.tags}
         <div class="mb-4">
-          <span
-            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold text-white"
-            >{job.jobType}</span
-          >
+          <Tag text={job.jobType} color="bg-primary" />
           {#each job.tags as tag}
-            <span
-              class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
-              >{tag}</span
-            >
+            <Tag text={tag} color="bg-secondary" />
           {/each}
         </div>
       {/if}

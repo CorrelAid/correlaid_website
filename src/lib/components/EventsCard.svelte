@@ -9,6 +9,7 @@
   export let language;
   export let procLocalChapters = [];
   import Langs from '$lib/components/Langs.svelte';
+  import Tag from './Tag.svelte';
 </script>
 
 <div class="offset-right relative w-full" style="">
@@ -40,10 +41,7 @@
           {type}</span
         >
         {#each tags as tag}
-          <span
-            class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold text-white"
-            >{tag}</span
-          >
+          <Tag text={tag} color="bg-secondary" />
         {/each}
       </div>
 

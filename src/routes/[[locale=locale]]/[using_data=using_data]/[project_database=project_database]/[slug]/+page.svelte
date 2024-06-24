@@ -6,6 +6,7 @@
   import Links from '$lib/components/Links.svelte';
   import Box from '$lib/components/Box.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
+  import Tag from '$lib/components/Tag.svelte';
 
   onMount(() => {
     $pageKey = 'navbar.using_data.project_database';
@@ -19,27 +20,16 @@
 {#if project}
   <TextContainer title={project.title} teaser={project.summary}>
     <div class="mx-4" slot="sub_subtitle">
-      {#if project.type || project.data}
-        <div class="mb-4">
-          {#if project.type}
-            {#each project.type as tag}
-              <span
-                class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-primary px-3 py-1 text-xs font-bold capitalize text-white"
-              >
-                {tag}</span
-              >
-            {/each}
-          {/if}
-          {#if project.data}
-            {#each project.data as tag}
-              <span
-                class="mr-2 line-clamp-1 inline-block whitespace-nowrap rounded bg-secondary px-3 py-1 text-xs font-bold capitalize text-white"
-                >{tag}</span
-              >
-            {/each}
-          {/if}
-        </div>
-      {/if}
+      <div class="mb-4">
+        {#each project.projectTypes as tag}
+          <Tag text={tag} color="bg-primary" />
+        {/each}
+
+        {#each project.dataTypes as tag}
+          <Tag text={tag} color="bg-secondary" />
+        {/each}
+      </div>
+
       {#if project.localChapters}
         <div class="pb-3">
           {#each project.localChapters as lc}
