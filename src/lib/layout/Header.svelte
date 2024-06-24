@@ -52,7 +52,7 @@
         </a>
         <a class="block text-teal-600 xl:hidden" href={$t('navbar.home').url}>
           <span class="sr-only">Home</span>
-          <CorrelaidLogoMin width={60} height={60} />
+          <CorrelaidLogoMin width={63} height={63} />
         </a>
       </div>
       <!-- middle part of navbar -->
@@ -79,24 +79,24 @@
         />
         <LanguageSelect bind:activeLanguage on:changeLanguage />
       </div>
-      <span class="block pl-24 xl:hidden">
-        <!-- Mobile menu button -->
-        <LinkButton
-          text={$t('navbar.donate').text}
-          href={$t('navbar.donate').url}
-          options={'text-sm min-w-0 px-5 !py-1.5 '}
-          iconSize={18}
-          type={'external'}
-          color={'bg-secondary'}
-        />
-      </span>
-      <div class="block xl:hidden">
+
+      <div class="block flex items-center justify-end xl:hidden">
+        <span class="mr-4">
+          <LinkButton
+            text={$t('navbar.donate').text}
+            href={$t('navbar.donate').url}
+            options={'text-sm min-w-[115px] !py-[6.5px]'}
+            iconSize={17}
+            type={'external'}
+            color={'bg-secondary'}
+          />
+        </span>
         <button
           class="p-2 transition"
           aria-label={$t('access.open').text}
           on:click={() => ($drawer = !$drawer)}
         >
-          <MenuIcon height={32} width={32} fill={'neutral-25'} />
+          <MenuIcon height={37} width={37} fill={'neutral-25'} />
         </button>
       </div>
     </div>
