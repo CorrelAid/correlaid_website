@@ -213,7 +213,7 @@ export function processJobs(job, locale) {
     location: job.location,
     language: job.language,
     deadline: new Date(job.deadline),
-    procDeadline: genDate(job.deadline, locale),
+    procDeadline: genDate(job.deadline, locale, true),
     salary: job.salary,
     fte: job.FTE,
     jobType: translate(locale, `contractType.${job.type}`, {}).text,
