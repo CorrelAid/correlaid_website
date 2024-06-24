@@ -106,27 +106,27 @@
       </ul>
     </nav>
 
-    <div class="">
-      <div class="flex w-2/4 items-center pb-7 pl-7">
-        <div class="mx-auto flex items-center gap-5">
-          <LinkButton
-            text={$t('navbar.donate').text}
-            href={$t('navbar.donate').url}
-            type={'external'}
-            color={'bg-secondary'}
-          />
-          <div class="flex">
-            <button
-              class="pr-5 text-xl font-light"
-              on:click={() => btnLocale('de')}
-            >
-              de
-            </button>
-            <span class="border-l-2 border-neutral-25 pr-5" />
-            <button class="text-xl font-light" on:click={() => btnLocale('en')}>
-              en
-            </button>
-          </div>
+    <div class="flex items-center pb-7">
+      <div class="mx-auto flex items-center justify-center gap-5">
+        <LinkButton
+          text={$t('navbar.donate').text}
+          href={$t('navbar.donate').url}
+          options={'text-sm min-w-[115px] !py-[6.5px]'}
+          iconSize={17}
+          type={'external'}
+          color={'bg-secondary'}
+        />
+        <div class="flex">
+          <button
+            class="pr-5 text-xl font-light"
+            on:click={() => btnLocale('de')}
+          >
+            de
+          </button>
+          <span class="border-l-2 border-neutral-25 pr-5" />
+          <button class="text-xl font-light" on:click={() => btnLocale('en')}>
+            en
+          </button>
         </div>
       </div>
     </div>
