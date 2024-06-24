@@ -39,7 +39,7 @@
       <JobCard {...(({deadline, ...rest}) => rest)(job)} />
     {/each}
   {:else}
-    <p class="px-4">
+    <p class="">
       {noJobMessage}
     </p>
   {/if}
@@ -52,7 +52,7 @@
       <JobCard {...(({deadline, ...rest}) => rest)(job)} />
     {/each}
   {:else}
-    <p class="px-4">
+    <p class="">
       {noJobMessage}
     </p>
   {/if}
