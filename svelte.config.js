@@ -73,15 +73,15 @@ const queries = {
   }
   `,
   events: `
-  query EventSlugs {
-    Events {
+  query EventSlugs($status: [String] = ["published"]) {
+    Events (filter : {status: {_in: $status}}){
       slug
     }
   }
   `,
   projects: `
-  query ProjectSlugs {
-    Projects (filter : {subpage : {_eq:true}}){
+  query ProjectSlugs($status: [String] = ["published"]) {
+    Projects (filter : {_and: [{subpage : {_eq:true}}, {status: {_in: $status}}]}) {
       slug: project_id
     }
   }
