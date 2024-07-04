@@ -67,7 +67,7 @@ export const projectsSchema = yup.object({
   summary: yup.string().required(),
   procLocalChapters: yup.array().of(localChaptersSchema),
   localChapterNames: yup.array().of(yup.string()),
-  href: yup.string().nullable(),
+  href: yup.string().required(),
   endDate: yup.date().required(),
   organization: yup.string().required(),
   projectOutputs: yup.array().of(

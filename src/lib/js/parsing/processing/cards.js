@@ -95,13 +95,10 @@ export function processEvents(event, locale) {
 export function processProjects(project, locale) {
   const lang = getLang(locale);
 
-  let href;
-  if (project.subpage === true) {
-    href = genWebsiteUrl(
-      translate(locale, 'navbar.using_data.project_database', {}).url,
-      project.project_id,
-    );
-  } else href = void 0;
+  const href = genWebsiteUrl(
+    translate(locale, 'navbar.using_data.project_database', {}).url,
+    project.project_id,
+  );
 
   let sector = void 0;
 
