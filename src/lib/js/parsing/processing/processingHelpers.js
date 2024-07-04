@@ -67,11 +67,21 @@ export function processOrganizations(project, locale, single) {
       'organization.internalProject',
       {},
     ).text;
+    description = translate(
+      locale,
+      'organization.internalProjectDescription',
+      {},
+    ).text;
   } else if (
     project.status === 'published_anon' ||
     project.status === 'preview_anon'
   ) {
     procOrganization = translate(locale, 'organization.anonymous', {}).text;
+    description = translate(
+      locale,
+      'organization.anonymousOrganizationDescription',
+      {},
+    ).text;
   } else {
     description =
       project.Organizations[0].Organizations_id.translations[0].description;

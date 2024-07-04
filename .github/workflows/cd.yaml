@@ -39,6 +39,7 @@ jobs:
           PUBLIC_API_URL: https://cms.correlaid.org
           PUBLIC_PRERENDER: ALL
           PUBLIC_ADAPTER: STATIC
+          PUBLIC_PREVIEW: FALSE
           PUBLIC_ON_CMS_ERROR: FAIL
           DIRECTUS_TOKEN: ${{ secrets.DIRECTUS_TOKEN }}
         run: npm run build-and-test

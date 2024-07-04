@@ -29,6 +29,12 @@ export default {
     'filter.organization_sector': {text: 'Sektor der Organisation'},
     'organization.anonymous': {text: 'Anonyme Organisation'},
     'organization.internalProject': {text: 'Internes Projekt'},
+    'organization.internalProjectDescription': {
+      text: 'Ein Projekt ohne Partnerorganisation.',
+    },
+    'organization.anonymousOrganizationDescription': {
+      text: 'Ein Projekt mit einer anonymen Organisation.',
+    },
     'filter.targetAudience': {text: 'Zielgruppe'},
     'targetAudience.technical': {text: 'Technisch'},
     'targetAudience.non-technical': {text: 'Nicht-Technisch'},
@@ -82,6 +88,12 @@ export default {
     'filter.organization_sector': {text: 'Sector of Organization'},
     'organization.anonymous': {text: 'Anonymous Organization'},
     'organization.internalProject': {text: 'Internal Project'},
+    'organization.internalProjectDescription': {
+      text: 'A project with no partner organization.',
+    },
+    'organization.anonymousOrganizationDescription': {
+      text: 'A project with an anonymous organization.',
+    },
     'filter.targetAudience': {text: 'Target Audience'},
     'targetAudience.technical': {text: 'Technical'},
     'targetAudience.non-technical': {text: 'Non-Technical'},

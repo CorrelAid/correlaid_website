@@ -89,7 +89,22 @@ async function parsing(
   secType,
   locale,
 ) {
-  const processedData = processingFunction(data, locale);
+  let processedData;
+  try {
+    processedData = processingFunction(data, locale);
+  } catch (err) {
+    console.group('Processing Error');
+    console.error(err.message);
+    console.error(err.name);
+    console.error(JSON.stringify(data, null, 4));
+    console.groupEnd();
+    if (PUBLIC_ON_CMS_ERROR === 'FAIL') {
+      throw Error(
+        'Error while processing CMS content for ' + type + ' ' + secType,
+      );
+    }
+  }
+
   try {
     const validatedData = await schema.validate(processedData, {strict: true});
     return validatedData;
