@@ -2,7 +2,6 @@ export const projectOverviewQuery = `
 query ProjectOverview($language: String = "de-DE", $status: [String] = ["published"]) {
 	Projects(filter: { status: { _in: $status }  } ) {
 		status
-		subpage
 		project_id
 		is_internal
 		end_date

@@ -39,7 +39,6 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 				is_internal
 				end_date
 				end_date_predicted
-				subpage
 				project_id
 				Podcast {
 					language

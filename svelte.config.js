@@ -81,7 +81,7 @@ const queries = {
   `,
   projects: `
   query ProjectSlugs($status: [String] = ["published"]) {
-    Projects (filter : {_and: [{subpage : {_eq:true}}, {status: {_in: $status}}]}) {
+    Projects (filter : {status: {_in: $status}}) {
       slug: project_id
     }
   }

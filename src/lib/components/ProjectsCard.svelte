@@ -4,8 +4,6 @@
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import Tag from './Tag.svelte';
   import Html from '$lib/components/Html.svelte';
-  import {t} from '$lib/stores/i18n';
-  import Cursor from '$lib/svg/Cursor.svelte';
 
   export let title;
   export let dataTypes;
@@ -26,7 +24,7 @@
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
 
-  {#if href}
+  <!-- {#if href}
     <a
       check
       {href}
@@ -38,7 +36,7 @@
         <Cursor width={29} height={29} /></span
       >
     </a>
-  {/if}
+  {/if} -->
 
   <div class="px-4 pb-6 pt-6">
     <div class="mb-2 flex items-center pb-2">
@@ -54,19 +52,11 @@
       </h4>
     </div>
 
-    {#if href}
-      <a
-        {href}
-        class="mt-2 text-xl font-semibold text-base-content transition hover:text-primary"
-        >{title}</a
-      >
-    {:else}
-      <h3
-        class=" mt-2 line-clamp-3 block text-xl font-semibold text-base-content transition"
-      >
-        {title}
-      </h3>
-    {/if}
+    <a
+      {href}
+      class="mt-2 text-xl font-semibold text-base-content transition hover:text-primary"
+      >{title}</a
+    >
 
     <div class="mb-4 mt-3">
       {#each projectTypes as tag}
