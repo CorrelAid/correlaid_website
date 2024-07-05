@@ -169,7 +169,9 @@ async function addLcRoutes(routes) {
 }
 
 async function addProjectRoutes(routes) {
-  const results = await queryCmsGraphQl(queries['projects']);
+  const results = await queryCmsGraphQl(queries['projects'], {
+    status: getAllowedStatus(),
+  });
   for (const project of results['data']['Projects']) {
     routes.push(`/daten-nutzen/projektdatenbank/${project.slug}`);
     routes.push(`/en/using-data/project-database/${project.slug}`);
@@ -177,7 +179,9 @@ async function addProjectRoutes(routes) {
 }
 
 async function addEventRoutes(routes) {
-  const results = await queryCmsGraphQl(queries['events']);
+  const results = await queryCmsGraphQl(queries['events'], {
+    status: getAllowedStatus(),
+  });
   for (const event of results['data']['Events']) {
     routes.push(`/veranstaltungen/${event.slug}`);
     routes.push(`/en/events/${event.slug}`);
