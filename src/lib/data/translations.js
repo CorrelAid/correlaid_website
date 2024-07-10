@@ -20,7 +20,7 @@ export default {
     'access.salary': {text: 'Gehalt'},
     'access.deadline': {text: 'Bewerbungsschluss'},
     'access.workload': {text: 'Arbeitspensum'},
-    'filter.team_selection': {text: 'Ausgeschriebe Projekte'},
+    'filter.team_selection': {text: 'Ausgeschriebene Projekte'},
     'filter.language': {text: 'Sprache'},
     'filter.type': {text: 'Typ'},
     'filter.responsible': {text: 'Verantwortlich'},
