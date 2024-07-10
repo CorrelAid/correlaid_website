@@ -4,6 +4,9 @@
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import Tag from './Tag.svelte';
   import Html from '$lib/components/Html.svelte';
+  import Volunteering from '$lib/svg/Volunteering.svelte';
+  import ExternalLink from '$lib/svg/External_Link.svelte';
+  import {t} from '$lib/stores/i18n';
 
   export let title;
   export let dataTypes;
@@ -11,8 +14,10 @@
   export let isInternal;
   export let organization;
   export let summary;
+  export let teamSelection;
   export let procLocalChapters = [];
   export let href;
+  export let applicationLink;
 
   export let projectOutputs = [];
 </script>
@@ -24,19 +29,17 @@
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
 
-  <!-- {#if href}
+  {#if teamSelection === true}
     <a
-      check
-      {href}
-      class="link absolute z-20 flex rounded bg-secondary"
-      style="right: -2px; top: -2px"
+      href={'google.com'}
+      class="link absolute z-20"
+      style="right: 10px; top: 15px"
     >
-      <span class="sr-only">{$t('misc.read_more').text}</span>
-      <span class="animate-shake fill-white px-1.5 py-1" aria-hidden="true">
-        <Cursor width={29} height={29} /></span
-      >
+      <span class="">
+        <Volunteering width={40} height={40} />
+      </span>
     </a>
-  {/if} -->
+  {/if}
 
   <div class="px-4 pb-6 pt-6">
     <div class="mb-2 flex items-center pb-2">
@@ -77,8 +80,25 @@
         {/each}
       </div>
     {/if}
-    {#if projectOutputs.length > 0}
+    {#if projectOutputs.length > 0 && teamSelection === false}
       <ProjectLinks {projectOutputs} />
+    {/if}
+    {#if teamSelection === true}
+      <div>
+        <a
+          target="__blank"
+          rel="noreferrer"
+          href={applicationLink}
+          class="pb-1 pr-4 text-secondary"
+        >
+          <span class="underline">{$t('project.apply').text} </span>
+          <span
+            class="font inline-block align-text-top"
+            aria-label="External Link"
+            ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
+          >
+        </a>
+      </div>
     {/if}
   </div>
 </div>

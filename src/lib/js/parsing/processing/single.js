@@ -74,10 +74,21 @@ export function processProject(project, locale) {
   const dataTypes = transformTypes(project.translations[0].data, locale);
   const lang = getLang(locale);
 
+  let teamSelection = void 0;
+  let applicationLink = void 0;
+  if (project.project_status === 'team_selection') {
+    teamSelection = true;
+    applicationLink = project.application_link;
+  } else {
+    teamSelection = false;
+  }
+
   return {
     title: project.translations[0].title,
     organization: processOrganizations(project, locale, true),
     projectTypes: projectTypes,
+    teamSelection: teamSelection,
+    applicationLink: applicationLink,
     dataTypes: dataTypes,
     description: project.translations[0].description
       ? processHtml(project.translations[0].description)

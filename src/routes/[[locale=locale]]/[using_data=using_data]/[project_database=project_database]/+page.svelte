@@ -17,18 +17,22 @@
   let trimmedData;
   let projects;
 
+  $: checkBoxes = [
+    {title: $t('filter.team_selection').text, param: 'teamSelection'},
+  ];
+
   $: selects = [
-    {
-      title: 'Local Chapters',
-      searchable: false,
-      multiple: true,
-      param: 'localChapterNames',
-    },
     {
       title: $t('filter.type').text,
       searchable: false,
       multiple: true,
       param: 'projectTypes',
+    },
+    {
+      title: $t('filter.data_type').text,
+      searchable: false,
+      multiple: true,
+      param: 'dataTypes',
     },
     {
       title: $t('filter.organization_sector').text,
@@ -37,10 +41,10 @@
       param: 'organizationSector',
     },
     {
-      title: $t('filter.data_type').text,
+      title: 'Local Chapters',
       searchable: false,
       multiple: true,
-      param: 'dataTypes',
+      param: 'localChapterNames',
     },
   ];
 
@@ -55,6 +59,7 @@
   origData={projects}
   bind:filteredData
   {selects}
+  {checkBoxes}
   {searchOptions}
   expanded={true}
 />

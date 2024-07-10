@@ -61,6 +61,8 @@ export const projectsSchema = yup.object({
   title: yup.string().required(),
   dataTypes: yup.array().required().min(1).of(yup.string()),
   projectTypes: yup.array().required().min(1).of(yup.string()),
+  teamSelection: yup.bool().required(),
+  applicationLink: yup.string().nullable(),
   organizationSector: yup.string().nullable(),
   isInternal: yup.boolean().required(),
   organization: yup.string().required(),

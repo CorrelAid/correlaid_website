@@ -32,6 +32,16 @@ function filterDefinedBy(property, objects, value) {
   });
 }
 
+function booleanFilter(property, objects, value) {
+  return _.filter(objects, (object) => {
+    if (value === true) {
+      return object && object[property] === true;
+    } else {
+      return object;
+    }
+  });
+}
+
 export function filterStringSearch(searchTerm, searchOptions, objects) {
   return _.filter(objects, (object) => {
     for (const item of searchOptions) {
@@ -59,8 +69,14 @@ export function filterStringSearch(searchTerm, searchOptions, objects) {
   });
 }
 
-export function filter(data, selects, searchTerm, searchOptions) {
+export function filter(data, selects, searchTerm, searchOptions, checkBoxes) {
   let data_ = structuredClone(data);
+  if (checkBoxes) {
+    for (const checkBox of checkBoxes) {
+      data_ = booleanFilter(checkBox.param, data_, checkBox.value);
+    }
+  }
+
   if (searchTerm) {
     data_ = filterStringSearch(searchTerm, searchOptions, data_);
   }
@@ -78,8 +94,15 @@ export function filter(data, selects, searchTerm, searchOptions) {
   return data_;
 }
 
-export function setUrlParams(url, selects) {
+export function setUrlParams(url, selects, checkBoxes) {
   const newUrl = new URL(url);
+  for (const checkBox of checkBoxes) {
+    if (checkBox.value === true) {
+      newUrl.searchParams?.set(checkBox.param, checkBox.value);
+    } else {
+      newUrl.searchParams?.delete(checkBox.param);
+    }
+  }
   for (const select of selects) {
     if (select.value) {
       if (select.multiple) {
@@ -108,8 +131,24 @@ function genValue(value, values, items) {
   }
 }
 
-export function applyUrlSearchParams(searchParams, values, selects) {
-  for (const key in values) {
+export function applyUrlSearchParams(
+  searchParams,
+  values,
+  selects,
+  checkBoxes,
+) {
+  for (const checkBox of checkBoxes) {
+    if (searchParams.get(checkBox.param)) {
+      values[checkBox.param] = searchParams.get(checkBox.param) === 'true';
+    }
+  }
+  const excludeSet =
+    new Set(checkBoxes.map((checkBox) => checkBox.param)) || new Set();
+  const filteredValues = Object.fromEntries(
+    Object.entries(values).filter(([key]) => !excludeSet.has(key)),
+  );
+
+  for (const key in filteredValues) {
     if (values.hasOwnProperty(key)) {
       if (searchParams.get(key)) {
         const value_ = searchParams.get(key);

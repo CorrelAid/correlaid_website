@@ -18,6 +18,7 @@
   export let expanded = false;
 
   export let selects;
+  export let checkBoxes = [];
   export let searchOptions;
 
   let hidden = 'hidden';
@@ -28,7 +29,7 @@
 
   onMount(async () => {
     // when searchParams is set, set them in filter
-    applyUrlSearchParams($page.url.searchParams, values, selects);
+    applyUrlSearchParams($page.url.searchParams, values, selects, checkBoxes);
     // if value is set dont hide filter (if someone goes to page with defined url param)
     if (expanded === false) {
       if (Object.values(values).some((value) => value !== null)) {
@@ -51,7 +52,11 @@
   function changeVal(values_) {
     for (const key in values_) {
       if (values_.hasOwnProperty(key)) {
-        _.find(selects, {param: key}).value = values_[key];
+        if (typeof values_[key] === 'boolean') {
+          _.find(checkBoxes, {param: key}).value = values_[key];
+        } else {
+          _.find(selects, {param: key}).value = values_[key];
+        }
       }
     }
   }
@@ -63,6 +68,7 @@
     selects,
     searchTerm,
     searchOptions,
+    checkBoxes,
     values,
   );
 
@@ -70,7 +76,7 @@
   $: history.replaceState(
     history.state,
     '',
-    setUrlParams($page.url, selects, values),
+    setUrlParams($page.url, selects, checkBoxes, values),
   );
 </script>
 
@@ -90,8 +96,21 @@
     class="text_width grid items-center gap-y-4 md:gap-x-6 {hidden}"
     id="filter"
   >
-    <div class="">
-      <span class="mt-4 block pb-1 text-lg font-semibold"
+    {#each checkBoxes as checkBox}
+      <div class="mt-6 block">
+        <label class="inline text-lg font-semibold" for="checkbox"
+          >{checkBox.title}</label
+        >
+        <input
+          type="checkbox"
+          class="ml-2 align-text-top"
+          id="checkbox"
+          bind:checked={values[checkBox.param]}
+        />
+      </div>
+    {/each}
+    <div class={checkBoxes.length == 0 ? 'mt-6' : ''}>
+      <span class="block pb-1 text-lg font-semibold"
         >{$t('filter.search').text}</span
       >
       <div class="flex">
