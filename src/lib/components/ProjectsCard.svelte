@@ -30,15 +30,9 @@
   />
 
   {#if teamSelection === true}
-    <a
-      href={'google.com'}
-      class="link absolute z-20"
-      style="right: 10px; top: 15px"
-    >
-      <span class="">
-        <Volunteering width={40} height={40} />
-      </span>
-    </a>
+    <span class="link absolute z-20" style="right: 10px; top: 15px">
+      <Volunteering width={40} height={40} />
+    </span>
   {/if}
 
   <div class="px-4 pb-6 pt-6">
@@ -85,19 +79,7 @@
     {/if}
     {#if teamSelection === true}
       <div>
-        <a
-          target="__blank"
-          rel="noreferrer"
-          href={applicationLink}
-          class="pb-1 pr-4 text-secondary"
-        >
-          <span class="underline">{$t('project.apply').text} </span>
-          <span
-            class="font inline-block align-text-top"
-            aria-label="External Link"
-            ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
-          >
-        </a>
+        <p class="italic text-tertiary">{$t('filter.team_selection').text}!</p>
       </div>
     {/if}
   </div>
