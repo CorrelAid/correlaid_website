@@ -5,7 +5,6 @@
   import Tag from './Tag.svelte';
   import Html from '$lib/components/Html.svelte';
   import Volunteering from '$lib/svg/Volunteering.svelte';
-  import ExternalLink from '$lib/svg/External_Link.svelte';
   import {t} from '$lib/stores/i18n';
 
   export let title;
@@ -17,8 +16,6 @@
   export let teamSelection;
   export let procLocalChapters = [];
   export let href;
-  export let applicationLink;
-
   export let projectOutputs = [];
 </script>
 
