@@ -11,19 +11,11 @@ export async function load({params}) {
     status: getAllowedStatus(),
   });
 
+  const projects = await parse(data.Projects, 'cards', 'projects', params);
+
   return {
-    blogPosts: await parse(
-      data.Blog_Posts.slice(0, 2),
-      'cards',
-      'blogPosts',
-      params,
-    ),
-    events: await parse(data.Events.slice(0, 4), 'cards', 'events', params),
-    podcastEpisodes: await parse(
-      data.Podcast_Episodes.slice(0, 2),
-      'cards',
-      'podcastEpisodes',
-      params,
-    ),
+    blogPosts: await parse(data.Blog_Posts, 'cards', 'blogPosts', params),
+    projects: projects,
+    events: await parse(data.Events, 'cards', 'events', params),
   };
 }

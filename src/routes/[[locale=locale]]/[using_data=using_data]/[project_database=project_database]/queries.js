@@ -4,10 +4,9 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		status
 		project_id
 		project_status
-		application_link
 		is_internal
+		end_date_predicted
 		end_date
-	    end_date_predicted
 		Podcast {
 			language
 			soundcloud_link

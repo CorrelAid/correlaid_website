@@ -4,6 +4,7 @@
   import {t} from '$lib/stores/i18n';
   import BlogCard from '$lib/components/BlogCard.svelte';
   import EventsCard from '$lib/components/EventsCard.svelte';
+  import ProjectsCard from '$lib/components/ProjectsCard.svelte';
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -16,13 +17,44 @@
   $: blogPosts = data.blogPosts;
   let events;
   $: events = data.events;
-  let podcastEpisodes;
-  $: podcastEpisodes = data.podcastEpisodes;
+  let projects;
+  $: projects = data.projects;
 </script>
 
 <div class="px-4">
-  {#if events.length != 0}
+  {#if projects.length != 0}
     <div class="mb-12">
+      <a
+        class="text-3xl font-bold text-base-content transition hover:text-primary"
+        href={$t('navbar.using_data.project_database').url +
+          '/?teamSelection=true'}>{$t('misc.open_projects').text}</a
+      >
+    </div>
+    <div class="grid gap-6">
+      {#each projects as project}
+        <ProjectsCard
+          {...(({organizationSector, localChapterNames, ...rest}) => rest)(
+            project,
+          )}
+        />
+      {/each}
+      {#if projects.length > 4}
+        <a
+          target="__blank"
+          rel="noreferrer"
+          href={$t('navbar.using_data.project_database').url +
+            '/?teamSelection=true'}
+          class="pb-1 pr-4 capitalize text-secondary"
+        >
+          <span class="underline">
+            {$t('misc.more_projects').text}
+          </span>
+        </a>
+      {/if}
+    </div>
+  {/if}
+  {#if events.length != 0}
+    <div class="my-12">
       <a
         class="text-3xl font-bold text-base-content transition hover:text-primary"
         href={$t('navbar.events').url}>{$t('navbar.events').text}</a
@@ -47,18 +79,6 @@
       <div>
         <BlogCard {...post} />
       </div>
-    {/each}
-  </div>
-
-  <div class="my-12">
-    <a
-      class="text-3xl font-bold text-base-content transition hover:text-primary"
-      href={$t('navbar.podcast').url}>Podcast</a
-    >
-  </div>
-  <div class="space-y-8">
-    {#each podcastEpisodes as episode}
-      <BlogCard {...episode} external={true} />
     {/each}
   </div>
 </div>

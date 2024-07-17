@@ -108,7 +108,7 @@ export function processProjects(project, locale) {
   }
 
   let teamSelection = void 0;
-  let applicationLink = void 0;
+
   if (project.project_status === 'team_selection') {
     teamSelection = true;
     applicationLink = project.application_link;
@@ -116,12 +116,17 @@ export function processProjects(project, locale) {
     teamSelection = false;
   }
 
+  let projectOutputs = void 0;
+
+  if (project.project_outputs) {
+    projectOutputs = processProjectOutputs(project, locale, lang);
+  }
+
   return {
     title: project.translations[0].title,
     summary: project.translations[0].summary,
     href: href,
     teamSelection: teamSelection,
-    applicationLink: applicationLink,
     projectTypes: transformTypes(project.translations[0].type),
     organizationSector: sector,
     dataTypes: transformTypes(project.translations[0].data),
@@ -136,7 +141,7 @@ export function processProjects(project, locale) {
     localChapterNames: _.map(project.Local_Chapters, (lc) => {
       return lc.Local_Chapters_id.translations[0].city;
     }),
-    projectOutputs: processProjectOutputs(project, locale, lang),
+    projectOutputs: projectOutputs,
   };
 }
 

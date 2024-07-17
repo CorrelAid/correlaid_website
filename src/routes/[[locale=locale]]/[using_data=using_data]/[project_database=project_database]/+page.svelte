@@ -67,7 +67,9 @@
   {#if trimmedData}
     {#each trimmedData as project}
       <ProjectsCard
-        {...(({endDate, localChapterNames, ...rest}) => rest)(project)}
+        {...(({organizationSector, localChapterNames, ...rest}) => rest)(
+          project,
+        )}
       />
     {/each}
   {/if}
