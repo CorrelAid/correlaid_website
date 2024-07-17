@@ -66,7 +66,7 @@ export default {
     'misc.read_more': {text: 'Read more'},
     'misc.partners': {text: 'Partners'},
     'misc.financialSupporters': {text: 'Financial Supporters'},
-    'misc.open_projects': {text: 'Project Calls'},
+    'misc.open_projects': {text: 'Call for Projects'},
     'misc.more_projects': {text: 'More Projects...'},
     'access.close': {text: 'Close Navigation'},
     'access.open': {text: 'Open Navigation'},

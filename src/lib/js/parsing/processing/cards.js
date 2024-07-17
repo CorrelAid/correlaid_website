@@ -111,15 +111,15 @@ export function processProjects(project, locale) {
 
   if (project.project_status === 'team_selection') {
     teamSelection = true;
-    applicationLink = project.application_link;
   } else {
     teamSelection = false;
   }
 
-  let projectOutputs = void 0;
-
-  if (project.project_outputs) {
-    projectOutputs = processProjectOutputs(project, locale, lang);
+  let projectOutputs = [];
+  if (project.Projects_Outputs) {
+    if (project.Projects_Outputs.length !== 0) {
+      projectOutputs = processProjectOutputs(project, locale, lang);
+    }
   }
 
   return {

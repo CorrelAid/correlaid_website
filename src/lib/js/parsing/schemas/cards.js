@@ -72,11 +72,13 @@ export const projectsSchema = yup.object({
   href: yup.string().required(),
   organization: yup.string().required(),
   projectOutputs: yup.array().of(
-    yup.object({
-      url: yup.string().required(),
-      outputType: yup.string().required(),
-      outputNumber: yup.number().required(),
-    }),
+    yup
+      .object({
+        url: yup.string().required(),
+        outputType: yup.string().required(),
+        outputNumber: yup.number().required(),
+      })
+      .nullable(),
   ),
 });
 

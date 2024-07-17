@@ -64,7 +64,7 @@
       {/each}
     </div>
     <Html source={summary} options={'line-clamp-3 !px-0 my-3'} />
-    {#if procLocalChapters.length !== 0}
+    {#if projectOutputs && procLocalChapters.length !== 0}
       <div class="pb-3">
         {#each procLocalChapters as lc, i}
           <a
@@ -74,7 +74,7 @@
         {/each}
       </div>
     {/if}
-    {#if projectOutputs.length > 0 && teamSelection === false}
+    {#if projectOutputs && projectOutputs.length > 0 && teamSelection === false}
       <ProjectLinks {projectOutputs} />
     {/if}
   </div>

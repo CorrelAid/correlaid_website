@@ -33,9 +33,8 @@
     <div class="grid gap-6">
       {#each projects as project}
         <ProjectsCard
-          {...(({organizationSector, localChapterNames, ...rest}) => rest)(
-            project,
-          )}
+          {...(({organizationSector, localChapterNames, endDate, ...rest}) =>
+            rest)(project)}
         />
       {/each}
       {#if projects.length > 4}
