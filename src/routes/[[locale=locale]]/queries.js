@@ -3,7 +3,7 @@ query LatestUpdates(
 	$language: String = "de-DE"
 	$status: [String] = ["published"]
 ) {
-	Blog_Posts(sort: ["-publication_datetime"], filter: { status: { _in: $status } }) {
+	Blog_Posts(sort: ["-publication_datetime"], filter: { status: { _in: $status } }, limit: 4) {
 		publication_datetime
 		title_image {
 			id
@@ -32,7 +32,7 @@ query LatestUpdates(
 			teaser
 		}
 	}
-	Events(sort: ["date"], filter: {_and: [{date: {_gte: "$NOW"}}, { status: { _in: $status } }]}) {
+	Events(sort: ["date"], filter: {_and: [{date: {_gte: "$NOW"}}, { status: { _in: $status } }]}, limit: 4) {
 		id
 		date
 		start_time
@@ -55,31 +55,37 @@ query LatestUpdates(
 			}
 		}
 	}
-
-	Podcast_Episodes(sort: "-publication_datetime") {
-		title
-		soundcloud_link
-		description
-		language
-		publication_datetime
-		tags
-    image {
-			id
-			description
-		}
-		image_alt
-		content_creators {
-			Content_Creators_id {
-				person {
-					name
-					translations(
-						filter: { languages_code: { code: { _eq: $language } } }
-					) {
-						pronouns
+    Projects(filter:  {_and: [{ status: { _in: $status }}, {project_status: { _eq: "team_selection" }}]  }, limit: 4) {
+		status
+		project_id
+		is_internal
+		end_date_predicted
+		end_date
+		Organizations {
+			Organizations_id {
+				sector
+				translations(filter: { languages_code: { code: { _eq: $language } } }) {
+					languages_code {
+						code
 					}
+					name
 				}
 			}
 		}
-	}
+		translations(filter: { languages_code: { code: { _eq: $language } } }) {
+			title
+			summary
+			type
+			data
+		}
+		Local_Chapters {
+			Local_Chapters_id (filter: { status: { _in: $status } }){
+				short_id
+				translations(filter: { languages_code: { code: { _eq: $language } } }) {
+					city
+				}
+			}
+		}
+	}	
 }
 `;

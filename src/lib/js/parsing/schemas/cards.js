@@ -62,22 +62,23 @@ export const projectsSchema = yup.object({
   dataTypes: yup.array().required().min(1).of(yup.string()),
   projectTypes: yup.array().required().min(1).of(yup.string()),
   teamSelection: yup.bool().required(),
-  applicationLink: yup.string().nullable(),
   organizationSector: yup.string().nullable(),
   isInternal: yup.boolean().required(),
+  endDate: yup.date().required(),
   organization: yup.string().required(),
   summary: yup.string().required(),
   procLocalChapters: yup.array().of(localChaptersSchema),
   localChapterNames: yup.array().of(yup.string()),
   href: yup.string().required(),
-  endDate: yup.date().required(),
   organization: yup.string().required(),
   projectOutputs: yup.array().of(
-    yup.object({
-      url: yup.string().required(),
-      outputType: yup.string().required(),
-      outputNumber: yup.number().required(),
-    }),
+    yup
+      .object({
+        url: yup.string().required(),
+        outputType: yup.string().required(),
+        outputNumber: yup.number().required(),
+      })
+      .nullable(),
   ),
 });
 

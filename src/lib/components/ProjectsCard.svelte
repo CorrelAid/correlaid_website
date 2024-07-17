@@ -5,6 +5,7 @@
   import Tag from './Tag.svelte';
   import Html from '$lib/components/Html.svelte';
   import TeamSearch from '$lib/svg/TeamSearch.svelte';
+  import {t} from '$lib/stores/i18n';
 
   export let title;
   export let dataTypes;
@@ -27,7 +28,10 @@
 
   {#if teamSelection === true}
     <span class="link absolute z-20" style="right: 14px; top: 12px">
-      <TeamSearch width={36} height={36} />
+      <span arria-hidden="true">
+        <TeamSearch width={36} height={36} />
+      </span>
+      <span class="sr-only">{$t('filter.team_selection').text}</span>
     </span>
   {/if}
 
@@ -60,7 +64,7 @@
       {/each}
     </div>
     <Html source={summary} options={'line-clamp-3 !px-0 my-3'} />
-    {#if procLocalChapters.length !== 0}
+    {#if projectOutputs && procLocalChapters.length !== 0}
       <div class="pb-3">
         {#each procLocalChapters as lc, i}
           <a
@@ -70,7 +74,7 @@
         {/each}
       </div>
     {/if}
-    {#if projectOutputs.length > 0 && teamSelection === false}
+    {#if projectOutputs && projectOutputs.length > 0 && teamSelection === false}
       <ProjectLinks {projectOutputs} />
     {/if}
   </div>

@@ -42,7 +42,9 @@
       <div class="space-y-6">
         {#each projects as project}
           <ProjectsCard
-            {...(({endDate, localChapterNames, ...rest}) => rest)(project)}
+            {...(({organizationSector, localChapterNames, ...rest}) => rest)(
+              project,
+            )}
           />
         {/each}
       </div>
