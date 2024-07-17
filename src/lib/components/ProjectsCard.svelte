@@ -4,6 +4,7 @@
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import Tag from './Tag.svelte';
   import Html from '$lib/components/Html.svelte';
+  import TeamSearch from '$lib/svg/TeamSearch.svelte';
 
   export let title;
   export let dataTypes;
@@ -11,9 +12,9 @@
   export let isInternal;
   export let organization;
   export let summary;
+  export let teamSelection;
   export let procLocalChapters = [];
   export let href;
-
   export let projectOutputs = [];
 </script>
 
@@ -24,19 +25,11 @@
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
   />
 
-  <!-- {#if href}
-    <a
-      check
-      {href}
-      class="link absolute z-20 flex rounded bg-secondary"
-      style="right: -2px; top: -2px"
-    >
-      <span class="sr-only">{$t('misc.read_more').text}</span>
-      <span class="animate-shake fill-white px-1.5 py-1" aria-hidden="true">
-        <Cursor width={29} height={29} /></span
-      >
-    </a>
-  {/if} -->
+  {#if teamSelection === true}
+    <span class="link absolute z-20" style="right: 14px; top: 12px">
+      <TeamSearch width={36} height={36} />
+    </span>
+  {/if}
 
   <div class="px-4 pb-6 pt-6">
     <div class="mb-2 flex items-center pb-2">
@@ -77,7 +70,7 @@
         {/each}
       </div>
     {/if}
-    {#if projectOutputs.length > 0}
+    {#if projectOutputs.length > 0 && teamSelection === false}
       <ProjectLinks {projectOutputs} />
     {/if}
   </div>

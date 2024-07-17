@@ -35,6 +35,8 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 		) {
 			Projects_id{
 				end_date
+				project_status
+				application_link
 				status
 				is_internal
 				end_date

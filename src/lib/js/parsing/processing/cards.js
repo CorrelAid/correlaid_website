@@ -107,10 +107,21 @@ export function processProjects(project, locale) {
     sector = transformSector(sector);
   }
 
+  let teamSelection = void 0;
+  let applicationLink = void 0;
+  if (project.project_status === 'team_selection') {
+    teamSelection = true;
+    applicationLink = project.application_link;
+  } else {
+    teamSelection = false;
+  }
+
   return {
     title: project.translations[0].title,
     summary: project.translations[0].summary,
     href: href,
+    teamSelection: teamSelection,
+    applicationLink: applicationLink,
     projectTypes: transformTypes(project.translations[0].type),
     organizationSector: sector,
     dataTypes: transformTypes(project.translations[0].data),

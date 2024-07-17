@@ -10,6 +10,8 @@ query Project(
 		}
 	) {
 		status
+		project_status
+		application_link
 		is_internal
 		Podcast {
 			soundcloud_link

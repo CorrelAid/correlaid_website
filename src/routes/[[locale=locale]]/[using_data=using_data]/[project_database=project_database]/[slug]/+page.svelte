@@ -7,6 +7,8 @@
   import Box from '$lib/components/Box.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import Tag from '$lib/components/Tag.svelte';
+  import ExternalLink from '$lib/svg/External_Link.svelte';
+  import {t} from '$lib/stores/i18n';
 
   onMount(() => {
     $pageKey = 'navbar.using_data.project_database';
@@ -29,6 +31,23 @@
           <Tag text={tag} color="bg-secondary" />
         {/each}
       </div>
+      {#if project.teamSelection === true}
+        <div>
+          <a
+            target="__blank"
+            rel="noreferrer"
+            href={project.applicationLink}
+            class="pb-1 pr-4 text-secondary"
+          >
+            <span class="underline">{$t('project.apply').text} </span>
+            <span
+              class="font inline-block align-text-top"
+              aria-label="External Link"
+              ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
+            >
+          </a>
+        </div>
+      {/if}
 
       {#if project.localChapters}
         <div class="pb-3">
@@ -77,6 +96,7 @@
       {/if}
     </div>
   </TextContainer>
+
   {#if project.projectOutputs.length !== 0 && project.description}
     <div class="container mx-auto pb-12">
       <div class="px-4">

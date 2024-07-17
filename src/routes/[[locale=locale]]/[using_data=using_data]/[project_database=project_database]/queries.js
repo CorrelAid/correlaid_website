@@ -3,6 +3,8 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 	Projects(filter: { status: { _in: $status }  } ) {
 		status
 		project_id
+		project_status
+		application_link
 		is_internal
 		end_date
 	    end_date_predicted
