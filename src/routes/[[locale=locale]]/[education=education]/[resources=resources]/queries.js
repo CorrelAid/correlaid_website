@@ -1,6 +1,6 @@
 export const workshopQuery = `
 query Workshops($language: String = "de-DE") {
-	Workshops {
+	Workshops(sort: ["-date_created"] ) {
 		name
 		language
 		teaser
