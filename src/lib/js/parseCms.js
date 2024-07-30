@@ -40,6 +40,7 @@ import {
   processLocalChaptersMap,
   processLocalChapterPage,
   processIcal,
+  processRssEntry,
 } from './parsing/processing/misc.js';
 
 import {
@@ -79,6 +80,7 @@ import {
   localChaptersMapSchema,
   localChapterPageSchema,
   icalSchema,
+  rssSchema,
 } from './parsing/schemas/misc.js';
 
 async function parsing(
@@ -238,6 +240,10 @@ export async function parse(data, type, secType = '', params = {}) {
         case 'jobs':
           schema = jobsSchema;
           processingFunction = processJobs;
+          break;
+        case 'rssEntry':
+          schema = rssSchema;
+          processingFunction = processRssEntry;
           break;
         default:
           throw Error('Unknown card type: ' + secType);

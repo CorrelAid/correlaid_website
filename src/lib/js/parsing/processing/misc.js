@@ -3,11 +3,13 @@ import {
   genWebsiteUrl,
   genImageSrc,
   processHtml,
+  genDate,
 } from '../../helpers.js';
 import {v5 as uuidv5} from 'uuid';
 import _ from 'lodash';
+import he from 'he';
 
-import {processPeople} from './processingHelpers.js';
+import {processPeople, processContentCreators} from './processingHelpers.js';
 import {processProjects, processEvents} from './cards.js';
 
 export function processLocalChaptersMap(localChapters, locale) {
@@ -101,4 +103,32 @@ export function processIcal(events, locale) {
       url: url,
     };
   });
+}
+
+export function processRssEntry(entry, locale) {
+  const link = `https://correlaid.org${genWebsiteUrl(
+    translate(locale, 'navbar.blog', {}).url,
+    entry.translations[0].slug,
+  )}`;
+  const author = _.map(
+    processContentCreators(entry.content_creators),
+    'name',
+  ).join(', ');
+  const temp = {
+    title: entry.translations[0].title,
+    description: entry.translations[0].teaser,
+    content: processHtml(entry.translations[0].text),
+    language: locale,
+    link: link,
+    author: author,
+    pubDate: genDate(entry.publication_datetime, locale, true),
+  };
+  // Encode all values in the rootConf object
+  for (const key in temp) {
+    if (temp.hasOwnProperty(key)) {
+      temp[key] = he.encode(temp[key]);
+    }
+  }
+
+  return temp;
 }

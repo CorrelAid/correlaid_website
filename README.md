@@ -318,6 +318,8 @@ support for transpiling svelte components and SvelteKit dependencies in the back
 For instance references to `$lib`. As the testing framework provides commands for
 the basic test setup, such as standard `describe`, `test` and `expect` commands.
 
+Single test run: `npx vitest run <file name, e.g. rss>`
+
 #### @testing-library/svelte
 
 This library is at the core of rendering svelte components, and programmatically
