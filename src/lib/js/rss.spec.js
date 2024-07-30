@@ -96,7 +96,7 @@ describe('gen Rss', async () => {
   </rss>`;
 
     const feedEntries = createRssFeed(locale, entries, rootConf);
-    console.log(feedEntries);
+
     expect(feedEntries).equals(res);
   });
 });
