@@ -44,3 +44,22 @@ export const icalSchema = yup.array().of(
     url: yup.string().url().required(),
   }),
 );
+
+export const rssSchema = yup.object().shape({
+  title: yup
+    .string()
+    .required('Title is required')
+    .max(300, 'Title must be at most 300 characters long'),
+  author: yup
+    .string()
+    .required('Author is required')
+    .max(100, 'Author name must be at most 100 characters long'),
+  description: yup.string().required('Description is required'),
+  content: yup.string().required('Content is required'),
+  link: yup
+    .string()
+    .required('Link is required')
+    .url('Link must be a valid URL'),
+  language: yup.string().required('language is required'),
+  pubDate: yup.string().required('pubDate is required'),
+});
