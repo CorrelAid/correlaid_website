@@ -9,7 +9,7 @@
   export let twitter = void 0;
   export let linkedin = void 0;
   export let github = void 0;
-  const iconSize = 25;
+  export let iconSize = 25;
 </script>
 
 <div class="flex gap-x-2 text-base-content">
