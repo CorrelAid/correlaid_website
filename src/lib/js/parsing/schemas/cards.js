@@ -57,6 +57,16 @@ export const eventsSchema = yup.object({
   endDate: yup.string().nullable(),
 });
 
+export const calendarEventsSchema = yup.object({
+  id: yup.number().required(),
+  title: yup.string().required(),
+  start: yup.date().required(),
+  end: yup.date().required(),
+  editable: yup.boolean().required(),
+  startEditable: yup.boolean().required(),
+  durationEditable: yup.boolean().required(),
+});
+
 export const projectsSchema = yup.object({
   title: yup.string().required(),
   dataTypes: yup.array().required().min(1).of(yup.string()),

@@ -3,6 +3,8 @@
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
+  import Calendar from '$lib/svg/Calendar.svelte';
+  import List from '$lib/svg/List.svelte';
   import {
     filter,
     genDropdownLists,
@@ -15,6 +17,14 @@
 
   export let origData;
   export let filteredData;
+  export let viewOptions = void 0;
+
+  export let viewType;
+
+  $: if (viewOptions) {
+    viewType = viewOptions['config']['defaultView'];
+  }
+
   export let expanded = false;
 
   export let selects;
@@ -81,16 +91,59 @@
 </script>
 
 <div class="mx-4">
-  <div class="border-b border-neutral-25">
-    <button
-      class="inline-flex items-center justify-center pb-1 text-xl font-semibold transition hover:text-secondary"
-      aria-expanded={ariaExpanded}
-      aria-controls="filter"
-      on:click={handleHidden}
-    >
-      Filter
-      <DropdownIcon height={27} width={27} />
-    </button>
+  <div class="flex h-12">
+    <div class="w-2/4 border-b border-neutral-25">
+      <button
+        class="inline-flex items-center justify-center pt-2 text-xl font-semibold transition hover:text-secondary"
+        aria-expanded={ariaExpanded}
+        aria-controls="filter"
+        on:click={handleHidden}
+      >
+        Filter
+        {#if hidden === 'hidden'}
+          <DropdownIcon height={27} width={27} />
+        {:else}
+          <DropdownIcon height={27} width={27} direction={'up'} />
+        {/if}
+      </button>
+    </div>
+    {#if viewOptions}
+      <ul class="mx-0 grid w-2/4 grid-cols-11 text-lg">
+        <li class="col-span-5">
+          <button
+            class="bg-grey flex h-full w-full items-center justify-center rounded-t border border-neutral-25 bg-secondary px-2 transition duration-100 ease-in {viewType ===
+            'list'
+              ? 'border-b-white bg-white'
+              : ''}"
+            on:click={() => (viewType = 'list')}
+            ><List
+              height={18}
+              width={18}
+              color={viewType === 'list' ? '#000' : '#fff'}
+            /></button
+          >
+        </li>
+        <li class="col-span-1">
+          <div class="h-full border-b border-neutral-25" />
+        </li>
+        <li class="col-span-5">
+          <button
+            class="bg-grey flex h-full w-full items-center justify-center rounded-t border border-neutral-25 bg-secondary px-2 transition duration-100 ease-in {viewType ===
+            'calendar'
+              ? 'border-b-white bg-white'
+              : ''}"
+            on:click={() => (viewType = 'calendar')}
+            ><Calendar
+              height={18}
+              width={18}
+              color={viewType === 'calendar' ? '#000' : '#fff'}
+            /></button
+          >
+        </li>
+      </ul>
+    {:else}
+      <div class=" h-full w-2/4 border-b border-neutral-25" />
+    {/if}
   </div>
   <div
     class="text_width grid items-center gap-y-4 md:gap-x-6 {hidden}"

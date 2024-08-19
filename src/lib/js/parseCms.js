@@ -27,6 +27,7 @@ import {
   administratorsSchema,
   partnersSchema,
   jobsSchema,
+  calendarEventsSchema,
 } from './parsing/schemas/cards.js';
 
 import {
@@ -67,6 +68,7 @@ import {
   processAdministrators,
   processPartners,
   processJobs,
+  processCalendarEvents,
 } from './parsing/processing/cards.js';
 
 import {
@@ -244,6 +246,10 @@ export async function parse(data, type, secType = '', params = {}) {
         case 'rssEntry':
           schema = rssSchema;
           processingFunction = processRssEntry;
+          break;
+        case 'calendarEvents':
+          schema = calendarEventsSchema;
+          processingFunction = processCalendarEvents;
           break;
         default:
           throw Error('Unknown card type: ' + secType);

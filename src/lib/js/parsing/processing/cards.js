@@ -70,9 +70,8 @@ export function processEvents(event, locale) {
   const endDate = event.end_date
     ? genDate(event.end_date, locale, true)
     : void 0;
-  const procDate = event.end_date
-    ? genDate(event.date, locale, false)
-    : genDate(event.date, locale, true);
+  const procDate = genDate(event.date, locale, true);
+
   return {
     title: event.title,
     teaser: event.teaser,
@@ -89,6 +88,30 @@ export function processEvents(event, locale) {
     localChapterNames: _.map(event.local_chapters, (lc) => {
       return lc.Local_Chapters_id.translations[0].city;
     }),
+  };
+}
+
+export function processCalendarEvents(event, locale) {
+  const id = Number(event.id);
+  const allDay = false;
+  const start = new Date(event.date + ' ' + event.start_time);
+  const end = event.endDate
+    ? new Date(event.end + ' ' + event.end_time)
+    : new Date(event.date + ' ' + event.end_time);
+  const title = event.title;
+  const editable = false;
+  const startEditable = false;
+  const durationEditable = false;
+
+  return {
+    id,
+    allDay,
+    start,
+    end,
+    title,
+    editable,
+    startEditable,
+    durationEditable,
   };
 }
 

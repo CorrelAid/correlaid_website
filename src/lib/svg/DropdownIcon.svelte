@@ -1,6 +1,7 @@
 <script>
   export let width;
   export let height;
+  export let direction = 'down';
 </script>
 
 <svg
@@ -11,6 +12,7 @@
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 20 20"
   fill="#3c3c3b"
+  transform={direction === 'up' ? 'rotate(180) translate(0, 0)' : ''}
 >
   <path
     fill-rule="evenodd"

@@ -8,6 +8,10 @@
   import EventsCard from '$lib/components/EventsCard.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
+  import Calendar from '@event-calendar/core';
+  import DayGrid from '@event-calendar/day-grid';
+
+  const plugins = [DayGrid];
 
   onMount(() => {
     $pageKey = 'navbar.events';
@@ -17,9 +21,16 @@
   export let data;
   // original unfiltered data
   $: eventsData = data.events;
+  $: calendarData = data.calendarEvents;
+
+  $: options = {
+    locale: $locale,
+    buttonText: {today: $t('calendar.today').text},
+    view: 'dayGridMonth',
+    events: calendarData,
+  };
 
   let filteredData;
-  let trimmedPastData;
   let trimmedFutureData;
 
   // Needs to stay client because it depends on the current date
@@ -29,11 +40,6 @@
   $: if (filteredData) {
     events = timeSplitEntries(filteredData, (event) => event.date);
   }
-
-  $: currentEventSeparator =
-    $locale === 'de' ? 'Kommende Veranstaltungen' : 'Upcoming Events';
-  $: pastEventSeparator =
-    $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events';
 
   $: selects = [
     {
@@ -65,78 +71,78 @@
   function copyText(text) {
     navigator.clipboard.writeText(text);
   }
+
+  const viewOptions = {
+    views: [
+      {title: 'List', value: 'list'},
+      {title: 'Grid', value: 'grid'},
+    ],
+    config: {
+      defaultView: 'list',
+    },
+  };
+
+  let viewType;
 </script>
 
-<!-- passing unfiltered data to component -->
-<Filter origData={eventsData} bind:filteredData {selects} {searchOptions} />
-{#if events}
-  <div class="mb-3 mt-5 px-4 text-2xl font-bold drop-shadow-sm lg:mt-6">
-    {currentEventSeparator}
-  </div>
-
+<span
+  class="mx-4 mb-5 grid w-full grid-cols-2 text-sm lg:mt-0 lg:flex lg:w-2/4 lg:items-center"
+>
   <span
-    class="mx-4 mb-12 grid grid-cols-2 text-sm lg:mt-0 lg:flex lg:w-2/4 lg:items-center"
+    class="col-span-full mr-1.5 whitespace-nowrap pb-2 lg:col-span-1 lg:pb-0"
+    id="ics_label"
+  >
+    {$t('ics.cta').text}
+  </span>
+  <span
+    class="flex items-center rounded-md border border-neutral-25 bg-white px-1 py-0.5"
   >
     <span
-      class="col-span-full mr-1.5 whitespace-nowrap pb-2 lg:col-span-1 lg:pb-0"
-      id="ics_label"
+      class="text-nowrap no-scrollbar w-[160px] overflow-scroll text-ellipsis whitespace-nowrap text-xs"
     >
-      {$t('ics.cta').text}
+      {genAbsoluteUrl($t('footer.ical').url)}
     </span>
-    <span
-      class="flex items-center rounded-md border border-neutral-25 bg-white px-1 py-0.5"
+    <button
+      aria-labelledby="ics_label"
+      class="ml-1"
+      on:click={() => copyText(genAbsoluteUrl($t('footer.ical').url))}
+      ><Copy height="18" width="18" /></button
     >
-      <span
-        class="text-nowrap no-scrollbar w-[160px] overflow-scroll text-ellipsis whitespace-nowrap text-xs"
-      >
-        {genAbsoluteUrl($t('footer.ical').url)}
-      </span>
-      <button
-        aria-labelledby="ics_label"
-        class="ml-1"
-        on:click={() => copyText(genAbsoluteUrl($t('footer.ical').url))}
-        ><Copy height="18" width="18" /></button
-      >
-    </span>
   </span>
+</span>
+<!-- passing unfiltered data to component -->
+<Filter
+  origData={eventsData}
+  bind:filteredData
+  bind:viewType
+  {selects}
+  {searchOptions}
+  {viewOptions}
+/>
 
-  {#if events.future.length === 0}
-    <p class="px-4">{$t('filter.no_results').text}</p>
-  {:else}
-    <div class="space-y-8 px-4">
-      {#if trimmedFutureData}
-        {#each trimmedFutureData as event, i}
-          <EventsCard
-            {...(({date, localChapterNames, ...rest}) => rest)(event)}
-          />
-        {/each}
-      {/if}
-      <Pagination
-        items={events.future}
-        perPage={8}
-        bind:trimmedItems={trimmedFutureData}
-      />
-    </div>
-  {/if}
-  <h2 class="mb-6 mt-8 px-4 text-2xl font-bold drop-shadow-sm">
-    {pastEventSeparator}
-  </h2>
-  {#if events.past.length === 0}
-    <p class="px-4">{$t('filter.no_results').text}</p>
-  {:else}
-    <div class="space-y-8 px-4">
-      {#if trimmedPastData}
-        {#each trimmedPastData as event}
-          <EventsCard
-            {...(({date, localChapterNames, ...rest}) => rest)(event)}
-          />
-        {/each}
-      {/if}
-      <Pagination
-        items={events.past}
-        perPage={8}
-        bind:trimmedItems={trimmedPastData}
-      />
+{#if events}
+  {#if viewType === 'list'}
+    {#if events.future.length === 0}
+      <p class="px-4">{$t('filter.no_results').text}</p>
+    {:else}
+      <div class="mt-12 space-y-8 px-4">
+        {#if trimmedFutureData}
+          {#each trimmedFutureData as event, i}
+            <EventsCard
+              {...(({date, localChapterNames, ...rest}) => rest)(event)}
+            />
+          {/each}
+        {/if}
+        <Pagination
+          items={events.future}
+          perPage={8}
+          bind:trimmedItems={trimmedFutureData}
+        />
+      </div>
+    {/if}
+  {:else if viewType === 'calendar'}
+    <div class="px-4 pt-12">
+      <Calendar {plugins} {options} />
     </div>
   {/if}
 {/if}
