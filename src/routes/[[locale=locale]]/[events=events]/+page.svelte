@@ -9,9 +9,10 @@
   import Filter from '../../../lib/components/Filter.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
   import Calendar from '@event-calendar/core';
+  import TimeGrid from '@event-calendar/time-grid';
   import DayGrid from '@event-calendar/day-grid';
 
-  const plugins = [DayGrid];
+  const plugins = [TimeGrid, DayGrid];
 
   onMount(() => {
     $pageKey = 'navbar.events';
@@ -25,9 +26,40 @@
 
   $: options = {
     locale: $locale,
-    buttonText: {today: $t('calendar.today').text},
-    view: 'dayGridMonth',
+    // height: "100vh",
+    buttonText: {
+      today: $t('calendar.today').text,
+      dayGridMonth: $t('calendar.month').text,
+      timeGridWeek: $t('calendar.week').text,
+    },
+    eventMouseEnter: (info) => {
+      return info.event.extendedProps.description;
+    },
+    plugins,
+    headerToolbar: {
+      start: 'prev,next',
+      center: 'title',
+      end: 'dayGridMonth,timeGridWeek',
+    },
+    views: {
+      dayGridMonth: {pointer: true},
+      timeGridWeek: {pointer: true, slotMinTime: '08:00', slotMaxTime: '23:00'},
+    },
     events: calendarData,
+    eventContent: (info) => {
+      return {
+        html: `<a href="${
+          info.event.extendedProps.href + '?viewType=' + viewType
+        }" class="ec-event-title text-xs has-tooltip">${
+          info.event.title
+        } <div class="tooltip bg-white mt-2"><p class="bg-white text-black py-1 px-2">${
+          info.event.title
+        }</p></div></a>`,
+      };
+    },
+    eventBackgroundColor: 'rgb(56, 99, 162)',
+    allDaySlot: false,
+    slotLabelFormat: {hour: 'numeric', minute: 'numeric', hour12: false},
   };
 
   let filteredData;
@@ -130,6 +162,7 @@
           {#each trimmedFutureData as event, i}
             <EventsCard
               {...(({date, localChapterNames, ...rest}) => rest)(event)}
+              {viewType}
             />
           {/each}
         {/if}
@@ -146,3 +179,7 @@
     </div>
   {/if}
 {/if}
+
+<style>
+  /* See app.css for calendar styling */
+</style>

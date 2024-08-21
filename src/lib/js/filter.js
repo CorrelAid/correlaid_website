@@ -94,7 +94,7 @@ export function filter(data, selects, searchTerm, searchOptions, checkBoxes) {
   return data_;
 }
 
-export function setUrlParams(url, selects, checkBoxes) {
+export function setUrlParams(url, selects, checkBoxes, viewType) {
   const newUrl = new URL(url);
   for (const checkBox of checkBoxes) {
     if (checkBox.value === true) {
@@ -116,6 +116,9 @@ export function setUrlParams(url, selects, checkBoxes) {
     } else {
       newUrl.searchParams?.delete(select.param);
     }
+  }
+  if (viewType) {
+    newUrl.searchParams?.set('viewType', viewType);
   }
   // https://dev.to/mohamadharith/mutating-query-params-in-sveltekit-without-page-reloads-or-navigations-2i2b
   return newUrl;
@@ -147,7 +150,6 @@ export function applyUrlSearchParams(
   const filteredValues = Object.fromEntries(
     Object.entries(values).filter(([key]) => !excludeSet.has(key)),
   );
-
   for (const key in filteredValues) {
     if (values.hasOwnProperty(key)) {
       if (searchParams.get(key)) {

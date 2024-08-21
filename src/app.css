@@ -223,3 +223,22 @@ input:focus {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.ec-sidebar {
+  padding: 0 0px 0 0px !important;
+  width: 44px !important;
+}
+
+.ec-title {
+  padding: 0px 0px 0px 8px !important;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  z-index: 0;
+}
+.has-tooltip:hover .tooltip {
+  visibility: visible;
+  z-index: 100;
+}

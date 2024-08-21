@@ -102,9 +102,13 @@ export function processCalendarEvents(event, locale) {
   const editable = false;
   const startEditable = false;
   const durationEditable = false;
-
+  const slug = event.slug;
+  const href = genWebsiteUrl(translate(locale, 'navbar.events', {}).url, slug);
   return {
     id,
+    extendedProps: {
+      href,
+    },
     allDay,
     start,
     end,

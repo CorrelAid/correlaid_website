@@ -1,5 +1,6 @@
 <script>
   import {pageKey} from '$lib/stores/pageKey';
+  import {page} from '$app/stores';
   import {t} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import Html from '$lib/components/Html.svelte';
@@ -14,15 +15,24 @@
 
   onMount(() => {
     $pageKey = 'navbar.events';
+    if ($page.url.searchParams.get('viewType')) {
+      viewType = $page.url.searchParams.get('viewType');
+    }
   });
 
   /** @type {import('./$types').PageData} */
   export let data;
 
   $: event = data.event;
+  export let viewType;
 </script>
 
-<TextContainer title={event.title} teaser={event.teaser}>
+<TextContainer
+  title={event.title}
+  teaser={event.teaser}
+  overviewHref={$t('navbar.events').url}
+  {viewType}
+>
   <div class="mx-4" slot="sub_subtitle">
     {#if event.localChapters.length !== 0}
       <p class="pb-2">

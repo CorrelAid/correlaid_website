@@ -58,6 +58,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@event-calendar/time-grid": "^3.4.0",
     "@sveltejs/adapter-cloudflare": "^2.2.2",
     "@tailwindcss/forms": "^0.5.3",
     "cheerio": "^1.0.0-rc.12",

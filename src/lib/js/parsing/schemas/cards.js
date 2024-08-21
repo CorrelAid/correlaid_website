@@ -65,6 +65,9 @@ export const calendarEventsSchema = yup.object({
   editable: yup.boolean().required(),
   startEditable: yup.boolean().required(),
   durationEditable: yup.boolean().required(),
+  extendedProps: yup.object({
+    href: yup.string().required(),
+  }),
 });
 
 export const projectsSchema = yup.object({

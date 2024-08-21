@@ -40,6 +40,9 @@
   onMount(async () => {
     // when searchParams is set, set them in filter
     applyUrlSearchParams($page.url.searchParams, values, selects, checkBoxes);
+    if ($page.url.searchParams.get('viewType')) {
+      viewType = $page.url.searchParams.get('viewType');
+    }
     // if value is set dont hide filter (if someone goes to page with defined url param)
     if (expanded === false) {
       if (Object.values(values).some((value) => value !== null)) {
@@ -86,7 +89,7 @@
   $: history.replaceState(
     history.state,
     '',
-    setUrlParams($page.url, selects, checkBoxes, values),
+    setUrlParams($page.url, selects, checkBoxes, viewType, values),
   );
 </script>
 
