@@ -7,6 +7,8 @@
   export let title;
   export let overviewHref = void 0;
   import {t} from '$lib/stores/i18n';
+
+  export let searchParams = void 0;
 </script>
 
 <div class="container mx-auto pb-4 pt-8">
