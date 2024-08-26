@@ -12,6 +12,5 @@ export async function load({params}) {
 
   return {
     events: await parse(data.Events, 'cards', 'events', params),
-    calendarEvents: await parse(data.Events, 'cards', 'calendarEvents', params),
   };
 }

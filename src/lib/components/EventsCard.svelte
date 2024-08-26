@@ -2,7 +2,7 @@
   export let href;
   export let title;
   export let type;
-  export let viewType = void 0;
+  export let searchParams = void 0;
   export let teaser;
   export let procDate;
   export let endDate = void null;
@@ -12,7 +12,7 @@
   import Langs from '$lib/components/Langs.svelte';
   import Tag from './Tag.svelte';
 
-  $: link = viewType ? href + '?viewType=' + viewType : href;
+  $: link = searchParams ? `${href}?${searchParams.toString()}` : href;
 </script>
 
 <div class="offset-right relative w-full" style="">

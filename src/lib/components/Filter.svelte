@@ -1,5 +1,6 @@
 <script>
   import {page} from '$app/stores';
+  import {goto} from '$app/navigation';
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
@@ -18,7 +19,6 @@
   export let origData;
   export let filteredData;
   export let viewOptions = void 0;
-
   export let viewType;
 
   $: if (viewOptions) {
@@ -85,11 +85,9 @@
     values,
   );
 
-  // when selects changes, update url params
-  $: history.replaceState(
-    history.state,
-    '',
-    setUrlParams($page.url, selects, checkBoxes, viewType, values),
+  $: goto(
+    `?${setUrlParams($page.url, selects, checkBoxes, viewType, values)}`,
+    {keepFocus: false, noScroll: true},
   );
 </script>
 

@@ -6,15 +6,14 @@
   export let imageAlt = void 0;
   export let title;
   export let overviewHref = void 0;
-  export let viewType = void 0;
   import {t} from '$lib/stores/i18n';
 </script>
 
 <div class="container mx-auto pb-4 pt-8">
   <div class="">
-    {#if overviewHref && viewType}
+    {#if overviewHref}
       <a
-        href={overviewHref + '?viewType=' + viewType}
+        href={overviewHref + '?' + searchParams.toString()}
         class="ml-3 block hover:underline"
       >
         <span

@@ -242,3 +242,12 @@ input:focus {
   visibility: visible;
   z-index: 100;
 }
+
+.ec-sun,
+.ec-sat {
+  background-color: #f8f8f8 !important;
+  display: hidden !important;
+}
+.ec-title {
+  font-weight: 600;
+}

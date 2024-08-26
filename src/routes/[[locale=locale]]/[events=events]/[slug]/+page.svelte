@@ -15,23 +15,21 @@
 
   onMount(() => {
     $pageKey = 'navbar.events';
-    if ($page.url.searchParams.get('viewType')) {
-      viewType = $page.url.searchParams.get('viewType');
-    }
   });
+
+  $: searchParams = $page.url.searchParams;
 
   /** @type {import('./$types').PageData} */
   export let data;
 
   $: event = data.event;
-  export let viewType;
 </script>
 
 <TextContainer
   title={event.title}
   teaser={event.teaser}
   overviewHref={$t('navbar.events').url}
-  {viewType}
+  {searchParams}
 >
   <div class="mx-4" slot="sub_subtitle">
     {#if event.localChapters.length !== 0}

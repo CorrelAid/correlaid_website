@@ -71,6 +71,15 @@ export function processEvents(event, locale) {
     ? genDate(event.end_date, locale, true)
     : void 0;
   const procDate = genDate(event.date, locale, true);
+  const id = Number(event.id);
+  const allDay = false;
+  const start = new Date(event.date + ' ' + event.start_time);
+  const end = event.end_date
+    ? new Date(event.end_date + ' ' + event.end_time)
+    : new Date(event.date + ' ' + event.end_time);
+  const editable = false;
+  const startEditable = false;
+  const durationEditable = false;
 
   return {
     title: event.title,
@@ -88,23 +97,6 @@ export function processEvents(event, locale) {
     localChapterNames: _.map(event.local_chapters, (lc) => {
       return lc.Local_Chapters_id.translations[0].city;
     }),
-  };
-}
-
-export function processCalendarEvents(event, locale) {
-  const id = Number(event.id);
-  const allDay = false;
-  const start = new Date(event.date + ' ' + event.start_time);
-  const end = event.endDate
-    ? new Date(event.end + ' ' + event.end_time)
-    : new Date(event.date + ' ' + event.end_time);
-  const title = event.title;
-  const editable = false;
-  const startEditable = false;
-  const durationEditable = false;
-  const slug = event.slug;
-  const href = genWebsiteUrl(translate(locale, 'navbar.events', {}).url, slug);
-  return {
     id,
     extendedProps: {
       href,
@@ -112,7 +104,6 @@ export function processCalendarEvents(event, locale) {
     allDay,
     start,
     end,
-    title,
     editable,
     startEditable,
     durationEditable,
