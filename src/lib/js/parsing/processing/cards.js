@@ -70,9 +70,17 @@ export function processEvents(event, locale) {
   const endDate = event.end_date
     ? genDate(event.end_date, locale, true)
     : void 0;
-  const procDate = event.end_date
-    ? genDate(event.date, locale, false)
-    : genDate(event.date, locale, true);
+  const procDate = genDate(event.date, locale, true);
+  const id = Number(event.id);
+  const allDay = false;
+  const start = new Date(event.date + ' ' + event.start_time);
+  const end = event.end_date
+    ? new Date(event.end_date + ' ' + event.end_time)
+    : new Date(event.date + ' ' + event.end_time);
+  const editable = false;
+  const startEditable = false;
+  const durationEditable = false;
+
   return {
     title: event.title,
     teaser: event.teaser,
@@ -89,6 +97,16 @@ export function processEvents(event, locale) {
     localChapterNames: _.map(event.local_chapters, (lc) => {
       return lc.Local_Chapters_id.translations[0].city;
     }),
+    id,
+    extendedProps: {
+      href,
+    },
+    allDay,
+    start,
+    end,
+    editable,
+    startEditable,
+    durationEditable,
   };
 }
 

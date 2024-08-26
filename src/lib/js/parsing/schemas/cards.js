@@ -55,6 +55,16 @@ export const eventsSchema = yup.object({
   procLocalChapters: yup.array().of(localChaptersSchema),
   localChapterNames: yup.array().of(yup.string()),
   endDate: yup.string().nullable(),
+  // calendar
+  id: yup.number().required(),
+  start: yup.date().required(),
+  end: yup.date().required(),
+  editable: yup.boolean().required(),
+  startEditable: yup.boolean().required(),
+  durationEditable: yup.boolean().required(),
+  extendedProps: yup.object({
+    href: yup.string().required(),
+  }),
 });
 
 export const projectsSchema = yup.object({

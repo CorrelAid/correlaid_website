@@ -2,6 +2,7 @@
   export let href;
   export let title;
   export let type;
+  export let searchParams = void 0;
   export let teaser;
   export let procDate;
   export let endDate = void null;
@@ -10,6 +11,8 @@
   export let procLocalChapters = [];
   import Langs from '$lib/components/Langs.svelte';
   import Tag from './Tag.svelte';
+
+  $: link = searchParams ? `${href}?${searchParams.toString()}` : href;
 </script>
 
 <div class="offset-right relative w-full" style="">
@@ -25,7 +28,7 @@
 
       <div class="pb-2">
         <a
-          {href}
+          href={link}
           class="text-xl font-semibold text-base-content transition hover:text-primary"
         >
           {title}

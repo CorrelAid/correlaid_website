@@ -22,6 +22,8 @@
     "remove-console-log": "npx jscodeshift ./ --extensions=svelte,js -t codeshift/remove-console.mjs -p --ignore-config=codeshift/.shiftignore"
   },
   "devDependencies": {
+    "@event-calendar/core": "^3.4.0",
+    "@event-calendar/day-grid": "^3.4.0",
     "@playwright/test": "^1.33.0",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/adapter-static": "^2.0.2",
@@ -56,6 +58,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@event-calendar/time-grid": "^3.4.0",
     "@sveltejs/adapter-cloudflare": "^2.2.2",
     "@tailwindcss/forms": "^0.5.3",
     "cheerio": "^1.0.0-rc.12",

@@ -1,15 +1,31 @@
 <script>
   import Html from '$lib/components/Html.svelte';
+  import ArrowLeft from '$lib/svg/ArrowLeft.svelte';
   export let titleImage = null;
   export let teaser;
   export let imageAlt = void 0;
   export let title;
+  export let overviewHref = void 0;
+  import {t} from '$lib/stores/i18n';
+
+  export let searchParams = void 0;
 </script>
 
-<div class="container mx-auto pb-4 pt-12">
+<div class="container mx-auto pb-4 pt-8">
   <div class="">
+    {#if overviewHref}
+      <a
+        href={overviewHref + '?' + searchParams.toString()}
+        class="ml-3 block hover:underline"
+      >
+        <span
+          class="mr-1 inline-block whitespace-nowrap align-text-bottom"
+          aria-hidden="true"><ArrowLeft width={20} height={20} /></span
+        >{$t('misc.back').text}</a
+      >
+    {/if}
     <Html
-      source={`<h1>${title}</h1><p class="text-md">${teaser}</p>`}
+      source={`<h1 class="mt-4">${title}</h1><p class="text-md">${teaser}</p>`}
       options={'mx-auto '}
     />
   </div>
