@@ -62,7 +62,19 @@
     <div class="grid gap-6">
       {#each events as event}
         <EventsCard
-          {...(({date, localChapterNames, ...rest}) => rest)(event)}
+          {...(({
+            date,
+            localChapterNames,
+            start,
+            end,
+            id,
+            extendedProps,
+            allDay,
+            editable,
+            startEditable,
+            durationEditable,
+            ...rest
+          }) => rest)(event)}
         />
       {/each}
     </div>
