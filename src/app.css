@@ -232,12 +232,26 @@ input:focus {
 .ec-title {
   padding: 0px 0px 0px 8px !important;
 }
+.ec-event-title {
+  display: block !important;
+  position: static !important;
+}
 
 .tooltip {
   visibility: hidden;
   position: absolute;
+  top: 15px;
   z-index: 0;
+  width: 350px;
 }
+
+.tooltip span {
+  background-color: #fff;
+  z-index: 99;
+  width: auto;
+  text-wrap: wrap;
+}
+
 .has-tooltip:hover .tooltip {
   visibility: visible;
   z-index: 100;

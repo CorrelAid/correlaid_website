@@ -110,9 +110,9 @@
           $page.url.searchParams.toString()
         }" class="ec-event-title text-xs has-tooltip">${
           info.event.title
-        } <div class="tooltip bg-white mt-2"><p class="bg-white text-black py-1 px-2">${
+        } <div class="tooltip mt-2"><span class="inline-block bg-white text-black py-1 px-2">${
           info.event.title
-        }</p></div></a>`,
+        }</span></div></a>`,
       };
     },
     eventBackgroundColor: 'rgb(56, 99, 162)',
@@ -218,13 +218,13 @@
 
 {#if events}
   {#if viewType === 'list'}
-    <div class="mb-3 mt-5 px-4 text-2xl font-bold drop-shadow-sm">
+    <div class="mt-12 px-4 pt-4 text-2xl font-bold drop-shadow-sm lg:mt-6">
       {currentEventSeparator}
     </div>
     {#if events.future.length === 0}
-      <p class="px-4 pt-4">{$t('filter.no_results').text}</p>
+      <p class="px-4 pt-8">{$t('filter.no_results').text}</p>
     {:else}
-      <div class="space-y-8 px-4 pt-4">
+      <div class="space-y-8 px-4 pt-8">
         {#if trimmedFutureData}
           {#each trimmedFutureData as event, i}
             <EventsCard
@@ -252,14 +252,14 @@
         />
       </div>
     {/if}
-    <div class="mb-3 mt-5 px-4 pt-6 text-2xl font-bold drop-shadow-sm lg:mt-6">
-      {pastEventSeparator}
-    </div>
     {#if events.past.length === 0}
       <p class="mt-12 px-4">{$t('filter.no_results').text}</p>
     {:else}
-      <div class="space-y-8 px-4 pt-4">
+      <div class="mt-12 space-y-8 px-4">
         {#if trimmedPastData}
+          <div class="mb-3 mt-5 text-2xl font-bold drop-shadow-sm lg:mt-6">
+            {pastEventSeparator}
+          </div>
           {#each trimmedPastData as event, i}
             <EventsCard
               {...(({
