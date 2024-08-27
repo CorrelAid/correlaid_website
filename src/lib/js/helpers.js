@@ -310,3 +310,7 @@ export function genAbsoluteUrl(path) {
   const url = window.location.origin + path;
   return url;
 }
+export function getCentralEuropeanDate(date) {
+  const cestTime = date.toLocaleString('en-US', {timeZone: 'Europe/Berlin'});
+  return new Date(cestTime);
+}

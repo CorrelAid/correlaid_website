@@ -1,4 +1,4 @@
-import {genImageSrc} from '../../helpers.js';
+import {genImageSrc, getCentralEuropeanDate} from '../../helpers.js';
 
 import _ from 'lodash';
 import {
@@ -73,10 +73,15 @@ export function processEvents(event, locale) {
   const procDate = genDate(event.date, locale, true);
   const id = Number(event.id);
   const allDay = false;
-  const start = new Date(event.date + ' ' + event.start_time);
+
+  const date = getCentralEuropeanDate(new Date(event.date));
+  const start = getCentralEuropeanDate(
+    new Date(event.date + ' ' + event.start_time),
+  );
   const end = event.end_date
-    ? new Date(event.end_date + ' ' + event.end_time)
-    : new Date(event.date + ' ' + event.end_time);
+    ? getCentralEuropeanDate(new Date(event.end_date + ' ' + event.end_time))
+    : getCentralEuropeanDate(new Date(event.date + ' ' + event.end_time));
+
   const editable = false;
   const startEditable = false;
   const durationEditable = false;
@@ -89,7 +94,7 @@ export function processEvents(event, locale) {
     type: transformTypes([event.type])[0],
     href,
     procDate,
-    date: new Date(event.date),
+    date,
     endDate: endDate,
     procLocalChapters: _.map(event.local_chapters, (lc) => {
       return processLocalChapters(lc, locale);
