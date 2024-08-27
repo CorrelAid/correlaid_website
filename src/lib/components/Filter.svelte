@@ -1,25 +1,26 @@
 <script>
   import {page} from '$app/stores';
-  import {goto} from '$app/navigation';
   import {t, locale} from '$lib/stores/i18n';
   import {onMount} from 'svelte';
   import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import Calendar from '$lib/svg/Calendar.svelte';
   import List from '$lib/svg/List.svelte';
+
   import {
     filter,
     genDropdownLists,
-    setUrlParams,
     applyUrlSearchParams,
+    setUrlParams,
   } from '$lib/js/filter.js';
   import {translateSelectLabels} from '$lib/js/helpers.js';
   import Select from 'svelte-select';
+
   import _ from 'lodash';
 
   export let origData;
   export let filteredData;
   export let viewOptions = void 0;
-  export let viewType;
+  export let viewType = void 0;
 
   $: if (viewOptions) {
     viewType = viewOptions['config']['defaultView'];
@@ -85,9 +86,10 @@
     values,
   );
 
-  $: goto(
-    `?${setUrlParams($page.url, selects, checkBoxes, viewType, values)}`,
-    {keepFocus: false, noScroll: true},
+  $: history.replaceState(
+    history.state,
+    '',
+    setUrlParams($page.url, selects, checkBoxes, viewType, values),
   );
 </script>
 

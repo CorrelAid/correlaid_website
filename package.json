@@ -79,6 +79,7 @@
     "svelte-media-queries": "^1.5.4",
     "svelte-prism": "^1.1.6",
     "svelte-select": "^5.6.1",
+    "sveltekit-search-params": "^3.0.0",
     "undici": "^5.28.4",
     "uuid": "^9.0.1",
     "yup": "^0.32.11"
