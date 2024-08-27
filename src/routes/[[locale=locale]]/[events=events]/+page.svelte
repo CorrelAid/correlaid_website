@@ -1,7 +1,6 @@
 <script>
   import {pageKey} from '$lib/stores/pageKey';
   import {page} from '$app/stores';
-  import {goto} from '$app/navigation';
   import {genAbsoluteUrl} from '$lib/js/helpers';
   import Copy from '$lib/svg/Copy.svelte';
   import {t, locale} from '$lib/stores/i18n';
@@ -13,13 +12,16 @@
   import Calendar from '@event-calendar/core';
   import TimeGrid from '@event-calendar/time-grid';
   import DayGrid from '@event-calendar/day-grid';
+  import {queryParam} from 'sveltekit-search-params';
 
   const plugins = [TimeGrid, DayGrid];
 
   let ec;
-  let containsDate;
+  const containsDate = queryParam('containsDate');
   let containsDateMount;
-  let calendarView = 'dayGridMonth';
+  const calendarView = queryParam('calendarView', {
+    defaultValue: 'dayGridMonth',
+  });
   let calendarViewMount;
 
   onMount(() => {
@@ -30,25 +32,6 @@
     if ($page.url.searchParams.get('calendarView')) {
       calendarViewMount = $page.url.searchParams.get('calendarView');
     }
-  });
-
-  function setURL(url, containsDate, calendarView) {
-    const newUrl = new URL(url);
-    const old = new URLSearchParams(url.searchParams.toString());
-    for (const [key, value] of old.entries()) {
-      newUrl.searchParams.set(key, value);
-    }
-    if (containsDate) {
-      newUrl.searchParams.set('containsDate', containsDate);
-    }
-    newUrl.searchParams.set('calendarView', calendarView);
-
-    return newUrl.searchParams.toString();
-  }
-
-  $: goto(`?${setURL($page.url, containsDate, calendarView)}`, {
-    keepFocus: false,
-    noScroll: true,
   });
 
   /** @type {import('./$types').PageData} */
@@ -69,26 +52,24 @@
     },
     datesSet: (info) => {
       if (ec) {
-        containsDate = calendarView = ec.getOption('date');
-        containsDate.setDate(containsDate.getDate() + 1);
-        containsDate = containsDate.toISOString().split('T')[0];
-        calendarView = ec.getOption('view');
+        const dt = ec.getOption('date');
+        dt.setDate(dt.getDate() + 1);
+        $containsDate = dt.toISOString().split('T')[0];
+        $calendarView = ec.getOption('view');
       }
     },
     viewDidMount: (info) => {
       if (containsDateMount) {
         ec.setOption('date', containsDateMount);
-        containsDate = containsDateMount;
+        $containsDate = containsDateMount;
         containsDateMount = void 0;
-      } else {
-        ec.setOption('date', containsDate);
       }
       if (calendarViewMount) {
         ec.setOption('view', calendarViewMount);
-        calendarView = calendarViewMount;
+        $calendarView = calendarViewMount;
         calendarViewMount = void 0;
       } else {
-        ec.setOption('view', calendarView);
+        ec.setOption('view', $calendarView);
       }
     },
     plugins,
