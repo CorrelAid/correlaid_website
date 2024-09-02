@@ -8,7 +8,6 @@
   {height}
   viewBox="-10 -5 1034 1034"
   xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
   version="1.1"
 >
   <path

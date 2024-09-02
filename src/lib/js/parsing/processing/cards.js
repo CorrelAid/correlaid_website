@@ -1,4 +1,4 @@
-import {genImageSrc, getCentralEuropeanDate} from '../../helpers.js';
+import {genImageSrc, parseCETDate} from '../../helpers.js';
 
 import _ from 'lodash';
 import {
@@ -74,13 +74,11 @@ export function processEvents(event, locale) {
   const id = Number(event.id);
   const allDay = false;
 
-  const date = getCentralEuropeanDate(new Date(event.date));
-  const start = getCentralEuropeanDate(
-    new Date(event.date + ' ' + event.start_time),
-  );
+  const date = parseCETDate(event.date);
+  const start = parseCETDate(event.date + ' ' + event.start_time);
   const end = event.end_date
-    ? getCentralEuropeanDate(new Date(event.end_date + ' ' + event.end_time))
-    : getCentralEuropeanDate(new Date(event.date + ' ' + event.end_time));
+    ? parseCETDate(event.end_date + ' ' + event.end_time)
+    : parseCETDate(event.date + ' ' + event.end_time);
 
   const editable = false;
   const startEditable = false;

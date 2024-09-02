@@ -64,6 +64,8 @@
               <div
                 class="absolute z-30 -ml-4 w-60"
                 on:mouseleave={closeall}
+                role="menu"
+                tabindex="0"
                 style="top: {$headerHeight + 1}px"
               >
                 <ul

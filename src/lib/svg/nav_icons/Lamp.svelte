@@ -12,33 +12,7 @@
   preserveAspectRatio="xMidYMid meet"
   version="1.0"
   id="svg40"
-  sodipodi:docname="lamp.svg"
-  inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
-  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:svg="http://www.w3.org/2000/svg"
 >
-  <sodipodi:namedview
-    id="namedview42"
-    pagecolor="#ffffff"
-    bordercolor="#666666"
-    borderopacity="1.0"
-    inkscape:showpageshadow="2"
-    inkscape:pageopacity="0.0"
-    inkscape:pagecheckerboard="0"
-    inkscape:deskcolor="#d1d1d1"
-    showgrid="false"
-    inkscape:zoom="0.79372736"
-    inkscape:cx="233.70745"
-    inkscape:cy="414.50001"
-    inkscape:window-width="2560"
-    inkscape:window-height="1411"
-    inkscape:window-x="0"
-    inkscape:window-y="0"
-    inkscape:window-maximized="1"
-    inkscape:current-layer="svg40"
-  />
   <defs id="defs8">
     <clipPath id="4c13a10e65">
       <path

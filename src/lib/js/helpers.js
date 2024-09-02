@@ -3,6 +3,7 @@ import pageKeys from '$lib/data/pageKeys';
 import {PUBLIC_API_URL} from '$env/static/public';
 import * as cheerio from 'cheerio';
 import icalendar from 'ical-generator';
+import moment from 'moment-timezone';
 
 /**
  * Extracts the last substring after /
@@ -310,7 +311,11 @@ export function genAbsoluteUrl(path) {
   const url = window.location.origin + path;
   return url;
 }
-export function getCentralEuropeanDate(date) {
-  const cestTime = date.toLocaleString('en-US', {timeZone: 'Europe/Berlin'});
-  return new Date(cestTime);
+
+export function parseCETDate(dateString) {
+  // Parse the date string with the 'Europe/Berlin' timezone
+  const m = moment.tz(dateString, 'YYYY-MM-DD HH:mm:ss', 'Europe/Berlin');
+
+  const dateObject = m.toDate();
+  return dateObject;
 }

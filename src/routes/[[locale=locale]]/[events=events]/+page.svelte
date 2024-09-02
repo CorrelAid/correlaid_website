@@ -10,27 +10,19 @@
   import Filter from '../../../lib/components/Filter.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
   import Calendar from '@event-calendar/core';
-  import TimeGrid from '@event-calendar/time-grid';
   import DayGrid from '@event-calendar/day-grid';
   import {queryParam} from 'sveltekit-search-params';
 
-  const plugins = [TimeGrid, DayGrid];
+  const plugins = [DayGrid];
 
   let ec;
   const containsDate = queryParam('containsDate');
   let containsDateMount;
-  const calendarView = queryParam('calendarView', {
-    defaultValue: 'dayGridMonth',
-  });
-  let calendarViewMount;
 
   onMount(() => {
     $pageKey = 'navbar.events';
     if ($page.url.searchParams.get('containsDate')) {
       containsDateMount = $page.url.searchParams.get('containsDate');
-    }
-    if ($page.url.searchParams.get('calendarView')) {
-      calendarViewMount = $page.url.searchParams.get('calendarView');
     }
   });
 
@@ -45,7 +37,7 @@
     firstDay: 1,
     buttonText: {
       dayGridMonth: $t('calendar.month').text,
-      timeGridWeek: $t('calendar.week').text,
+      today: $t('calendar.today').text,
     },
     eventMouseEnter: (info) => {
       return info.event.extendedProps.description;
@@ -55,7 +47,6 @@
         const dt = ec.getOption('date');
         dt.setDate(dt.getDate() + 1);
         $containsDate = dt.toISOString().split('T')[0];
-        $calendarView = ec.getOption('view');
       }
     },
     viewDidMount: (info) => {
@@ -64,23 +55,15 @@
         $containsDate = containsDateMount;
         containsDateMount = void 0;
       }
-      if (calendarViewMount) {
-        ec.setOption('view', calendarViewMount);
-        $calendarView = calendarViewMount;
-        calendarViewMount = void 0;
-      } else {
-        ec.setOption('view', $calendarView);
-      }
     },
     plugins,
     headerToolbar: {
       start: 'prev,next',
       center: 'title',
-      end: 'dayGridMonth,timeGridWeek',
+      end: 'today',
     },
     views: {
       dayGridMonth: {pointer: true},
-      timeGridWeek: {pointer: true, slotMinTime: '08:00', slotMaxTime: '23:00'},
     },
     events: filteredData,
     eventContent: (info) => {

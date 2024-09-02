@@ -25,12 +25,7 @@
   $: event = data.event;
 </script>
 
-<TextContainer
-  title={event.title}
-  teaser={event.teaser}
-  overviewHref={$t('navbar.events').url}
-  {searchParams}
->
+<TextContainer title={event.title} teaser={event.teaser} {searchParams}>
   <div class="mx-4" slot="sub_subtitle">
     {#if event.localChapters.length !== 0}
       <p class="pb-2">
@@ -40,7 +35,8 @@
             href={lc.href}
           >
             CorrelAidX {lc.city}</a
-          >{#if i < event.localChapters.length - 1}{', '} {/if}
+          >{#if i < event.localChapters.length - 1}{', '}
+          {/if}
         {/each}
       </p>
     {/if}
