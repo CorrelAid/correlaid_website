@@ -3,15 +3,7 @@
   export let height;
 </script>
 
-<svg
-  {width}
-  {height}
-  version="1.1"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 450.619 450.619"
-  xml:space="preserve"
->
+<svg {width} {height} version="1.1" viewBox="0 0 450.619 450.619">
   <g>
     <path
       d="M449.224,92.392c1.726-2.087,1.864-5.063,0.342-7.302c-1.523-2.24-4.344-3.209-6.918-2.37

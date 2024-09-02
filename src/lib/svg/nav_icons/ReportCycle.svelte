@@ -12,12 +12,6 @@
   preserveAspectRatio="xMidYMid meet"
   version="1.0"
   id="svg162"
-  sodipodi:docname="temp.svg"
-  inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
-  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:svg="http://www.w3.org/2000/svg"
 >
   <g
     id="g994"
@@ -202,26 +196,6 @@
       style="stroke-width:1.76828"
     />
   </g>
-  <sodipodi:namedview
-    id="namedview164"
-    pagecolor="#ffffff"
-    bordercolor="#666666"
-    borderopacity="1.0"
-    inkscape:showpageshadow="2"
-    inkscape:pageopacity="0.0"
-    inkscape:pagecheckerboard="0"
-    inkscape:deskcolor="#d1d1d1"
-    showgrid="false"
-    inkscape:zoom="6.3498189"
-    inkscape:cx="35.591566"
-    inkscape:cy="57.166985"
-    inkscape:window-width="1920"
-    inkscape:window-height="1007"
-    inkscape:window-x="342"
-    inkscape:window-y="1610"
-    inkscape:window-maximized="1"
-    inkscape:current-layer="svg162"
-  />
   <defs id="defs30">
     <filter x="0" y="0" width="1" height="1" id="328e0c4b2a">
       <feColorMatrix

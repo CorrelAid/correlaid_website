@@ -133,11 +133,4 @@
       </g>
     </g>
   </g>
-  <metadata id="metadata323">
-    <rdf:RDF>
-      <cc:Work rdf:about="">
-        <dc:title>CorrelAid X-Icon_white</dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
 </svg>
