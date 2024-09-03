@@ -33,6 +33,7 @@
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
     "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/svelte": "^5.2.1",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.57.0",
     "eslint-config-google": "^0.14.0",

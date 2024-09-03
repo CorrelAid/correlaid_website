@@ -13,3 +13,4 @@ vite.config.ts.timestamp-*
 /playwright/.cache/
 tests-examples
 *.local
+/chrome
