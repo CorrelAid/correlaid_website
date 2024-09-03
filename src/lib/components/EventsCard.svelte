@@ -59,7 +59,8 @@
             href={lc.href}
           >
             CorrelAidX {lc.city}</a
-          >{#if i < procLocalChapters.length - 1}{', '} {/if}
+          >{#if i < procLocalChapters.length - 1}{', '}
+          {/if}
         {/each}
       {/if}
     </div>

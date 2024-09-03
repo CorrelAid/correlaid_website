@@ -25,7 +25,8 @@
       {blogPost.pubDate} - {#each blogPost.contentCreators as person, i}
         {person.name}
         {person.pronouns ? `(${person.pronouns})` : ''}
-        {#if i < blogPost.contentCreators.length - 1}{', '} {/if}{/each}
+        {#if i < blogPost.contentCreators.length - 1}{', '}
+        {/if}{/each}
     </p>
   </div>
   <Html source={blogPost.text} options={'mx-auto'} slot="main" />

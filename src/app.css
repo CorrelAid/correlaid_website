@@ -8,7 +8,8 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
-    src: local(''),
+    src:
+      local(''),
       url('/fonts/roboto/roboto-v30-latin-300.woff2') format('woff2'),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
         url('/fonts/roboto/roboto-v30-latin-300.woff') format('woff');
@@ -20,7 +21,8 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    src: local(''),
+    src:
+      local(''),
       url('/fonts/roboto/roboto-v30-latin-regular.woff2') format('woff2'),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
         url('/fonts/roboto/roboto-v30-latin-regular.woff') format('woff');
@@ -32,7 +34,8 @@
     font-family: 'Roboto';
     font-style: italic;
     font-weight: 300;
-    src: local(''),
+    src:
+      local(''),
       url('/fonts/roboto/roboto-v30-latin-300italic.woff2') format('woff2'),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
         url('/fonts/roboto/roboto-v30-latin-300italic.woff') format('woff');
@@ -44,7 +47,8 @@
     font-family: 'Roboto';
     font-style: italic;
     font-weight: 400;
-    src: local(''),
+    src:
+      local(''),
       url('/fonts/roboto/roboto-v30-latin-italic.woff2') format('woff2'),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
         url('/fonts/roboto/roboto-v30-latin-italic.woff') format('woff');
@@ -56,7 +60,8 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
-    src: local(''),
+    src:
+      local(''),
       url('/fonts/roboto/roboto-v30-latin-700.woff2') format('woff2'),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
         url('/fonts/roboto/roboto-v30-latin-700.woff') format('woff');
@@ -68,7 +73,8 @@
     font-family: 'Roboto';
     font-style: italic;
     font-weight: 700;
-    src: local(''),
+    src:
+      local(''),
       url('/fonts/roboto/roboto-v30-latin-700italic.woff2') format('woff2'),
       /* Chrome 26+, Opera 23+, Firefox 39+ */
         url('/fonts/roboto/roboto-v30-latin-700italic.woff') format('woff');
@@ -100,9 +106,13 @@
   border-radius: 4px;
   border-right: 7px solid transparent;
   background: linear-gradient(to top, #3863a2, #96c342) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
   top: 0px;
   bottom: 0px;
@@ -119,9 +129,13 @@
   border-radius: 4px;
   border-left: 7px solid transparent;
   background: linear-gradient(to top, #3863a2, #96c342) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
   top: 0px;
   bottom: 0px;
@@ -138,9 +152,13 @@
   border-radius: 4px;
   border: 7px solid transparent;
   background: linear-gradient(to left, #3863a2, #96c342) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
   top: -12px;
   right: 12px;

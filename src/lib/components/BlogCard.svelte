@@ -71,7 +71,8 @@
       </h3>
       <p class="line-clamp-1 pt-1.5 text-sm">
         {pubDate} - {#each contentCreators as person, i}
-          {person.name}{#if i < contentCreators.length - 1}{', '} {/if}
+          {person.name}{#if i < contentCreators.length - 1}{', '}
+          {/if}
         {/each}
       </p>
 
