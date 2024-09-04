@@ -118,8 +118,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 						pronouns
 					}
 					name
-					twitter
-					website
+										website
 					linkedin
 					mastodon
 					github
