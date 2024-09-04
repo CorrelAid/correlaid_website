@@ -31,8 +31,7 @@ query BlogPostQuery(
 					}
 					email
 					website
-					twitter
-					linkedin
+										linkedin
 					mastodon
 					github
 					image {

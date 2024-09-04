@@ -2,7 +2,6 @@ import * as yup from 'yup';
 
 export const peopleLinksSchema = yup.object({
   website: yup.string().nullable(),
-  twitter: yup.string().nullable(),
   linkedin: yup.string().nullable(),
   mastodon: yup.string().nullable(),
   github: yup.string().nullable(),

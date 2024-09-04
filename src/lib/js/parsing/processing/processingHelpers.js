@@ -7,13 +7,7 @@ import {
 } from '../../helpers.js';
 
 export function processPersonLinks(person) {
-  const links = _.pick(person, [
-    'website',
-    'twitter',
-    'linkedin',
-    'mastodon',
-    'github',
-  ]);
+  const links = _.pick(person, ['website', 'linkedin', 'mastodon', 'github']);
   return links;
 }
 

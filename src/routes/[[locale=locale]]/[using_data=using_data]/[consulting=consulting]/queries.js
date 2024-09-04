@@ -7,8 +7,7 @@ query Experts($language: String = "de-DE") {
 			}
 			name
 			website
-			twitter
-			linkedin
+						linkedin
 			mastodon
 			github
 			image {

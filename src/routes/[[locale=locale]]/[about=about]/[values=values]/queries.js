@@ -14,8 +14,7 @@ query Admins($language: String = "de-DE") {
 			name
 			website
 			github
-			twitter
-			linkedin
+						linkedin
 			mastodon
 			image {
 				id

@@ -2,7 +2,6 @@
   import {t, locale} from '$lib/stores/i18n';
   import Facebook from '$lib/svg/Facebook.svelte';
   import Instagram from '../svg/Instagram.svelte';
-  import Twitter from '../svg/Twitter.svelte';
   import Youtube from '../svg/Youtube.svelte';
   import Linkedin from '../svg/Linkedin.svelte';
   import Mastodon from '../svg/Mastodon.svelte';
@@ -24,7 +23,6 @@
       url: 'https://www.instagram.com/correlaid',
       logo: Instagram,
     },
-    {name: 'Twitter', url: 'https://twitter.com/correlaid', logo: Twitter},
     {name: 'Mastodon', url: 'https://masto.ai/@correlaid', logo: Mastodon},
     {
       name: 'LinkedIn',

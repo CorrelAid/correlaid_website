@@ -22,8 +22,7 @@ query BlogQuery(
 						pronouns
 					}
 					website
-					twitter
-					linkedin
+										linkedin
 					mastodon
 					github
 					image {
