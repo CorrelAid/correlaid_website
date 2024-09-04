@@ -39,11 +39,11 @@
     <div class="inline-block w-1/3 align-top">
       {#each col as person, y}
         <div
-          class="mb-7 mb-8 overflow-hidden transition-all duration-200 {expand[
+          class="overflow-hidden transition-all duration-200 {expand[
             `${i}${y}`
           ] === true
-            ? 'mb-14 h-[610px]'
-            : 'h-[305px]'}"
+            ? 'mb-12 h-[626px]'
+            : 'mb-6 h-[313px]'}"
         >
           <button
             class="flex pb-5"
