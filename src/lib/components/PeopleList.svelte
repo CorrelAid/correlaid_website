@@ -5,87 +5,107 @@
   import Links from '$lib/components/Links.svelte';
   const w = `w-32`;
   const wM = `md:w-44`;
-  const itemH = `h-72`;
-  const itemHM = `md:h-72`;
 
   const expand = {};
 
-  function expandFunc(i) {
-    i = `${i}`;
-    // Set all keys in expand to false
+  function expandFunc(i, y) {
+    const iy = `${i}${y}`;
     for (const key in expand) {
       if (expand.hasOwnProperty(key)) {
-        if (key !== i) {
+        if (key !== iy) {
           expand[key] = false;
         }
       }
     }
+    expand[iy] = !expand[iy];
+  }
 
-    // Toggle the key that was clicked
-    expand[i] = !expand[i];
+  const no_cols = 3;
+
+  $: team_len = people.length;
+  $: batch_size = Math.ceil(team_len / no_cols);
+
+  // Create an array of empty columns
+  $: team_cols = Array.from({length: no_cols}, () => []);
+
+  // Distribute the people into the columns in a row-wise order
+  $: for (let i = 0; i < team_len; i++) {
+    team_cols[i % no_cols].push(people[i]);
   }
 </script>
 
-<div
-  class="hidden grid-cols-3 place-content-around place-items-center gap-y-10 md:grid md:px-0"
->
-  {#each people as person, i}
-    <div
-      class="col-span-1 {expand[i] === true
-        ? 'row-span-2'
-        : ''} place-self-stretch"
-    >
-      <div class={expand[i] === true ? 'pb-5' : `${itemH} ${itemHM}`}>
-        <button
-          class="flex pb-3"
-          on:click={() => {
-            expandFunc(i);
-          }}
+<div class="hidden w-full md:flex md:px-0">
+  {#each team_cols as col, i}
+    <div class="inline-block w-1/3 align-top">
+      {#each col as person, y}
+        <div
+          class="overflow-hidden transition-all duration-200 {expand[
+            `${i}${y}`
+          ] === true
+            ? 'mb-12 h-[626px]'
+            : 'mb-6 h-[313px]'}"
         >
-          <div aria-hidden="true" class="flex">
-            <Avatar
-              imageSrc={person.imageSrc}
-              imageAlt={person.imageAlt}
-              imageDesc={person.imageDesc}
-              showCredit={false}
-              {w}
-              {wM}
-            />
-          </div>
-        </button>
-        <div class="pb-2">
           <button
-            class="text-md text-left font-normal {w} {wM} leading-snug hover:text-primary"
+            class="flex pb-5"
             on:click={() => {
-              expandFunc(i);
+              expandFunc(i, y);
             }}
           >
-            {person.name}
-            <span class=""
-              >{person.pronouns && person.pronouns != ''
-                ? `(${person.pronouns})`
-                : ''}</span
-            >
+            <div aria-hidden="true" class="flex">
+              <Avatar
+                imageSrc={person.imageSrc}
+                imageAlt={person.imageAlt}
+                imageDesc={person.imageDesc}
+                showCredit={false}
+                {w}
+                {wM}
+              />
+            </div>
           </button>
-        </div>
-        {#if person.position}
-          <h3 class="font-light {w} {wM} text-sm">{person.position}</h3>
-        {/if}
-      </div>
-      {#if expand[i] === true}
-        <div class="w-full pb-1 pr-4 text-left">
-          <p class="line-clamp-[11] text-sm">{person.description}</p>
-        </div>
-        {#if person.email && person.email != ''}
-          <p class="pb-3">
-            <a
-              class="text-sm font-normal text-secondary underline drop-shadow-sm"
-              href="mailto:{person.email}">{person.email}</a
+          <div class="pb-2.5">
+            <button
+              class="text-md text-left font-normal {w} {wM} leading-snug hover:text-primary"
+              on:click={() => {
+                expandFunc(i, y);
+              }}
             >
-          </p>
-        {/if}
-        <Links iconSize={20} {...person.links} />
-      {/if}
+              {person.name}
+              <span class=""
+                >{person.pronouns && person.pronouns != ''
+                  ? `(${person.pronouns})`
+                  : ''}</span
+              >
+            </button>
+          </div>
+          {#if person.position}
+            <h3
+              class="font-light {w} {wM} text-sm {expand[`${i}${y}`] === true
+                ? 'line-clamp-3'
+                : 'line-clamp-2'}"
+            >
+              {person.position}
+            </h3>
+          {/if}
+          <div
+            class="transition-all duration-100 {expand[`${i}${y}`] === true
+              ? 'opacity-100'
+              : 'opacity-0'}"
+          >
+            <div class="pb-1 pr-4 pt-6 text-left">
+              <p class="line-clamp-[11] text-sm">{person.description}</p>
+            </div>
+            {#if person.email && person.email != ''}
+              <p class="pb-3">
+                <a
+                  class="text-sm font-normal text-secondary underline drop-shadow-sm"
+                  href="mailto:{person.email}">{person.email}</a
+                >
+              </p>
+            {/if}
+            <Links iconSize={20} {...person.links} />
+          </div>
+        </div>
+      {/each}
     </div>
   {/each}
 </div>
