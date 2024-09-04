@@ -44,7 +44,7 @@
           <CorrelAidLogo width={25} height={25} />
         {/if}
       </span>
-      <h4 class="text-md ml-2 line-clamp-3 font-semibold text-primary">
+      <h4 class="text-md ml-2 line-clamp-3 pr-12 font-semibold text-primary">
         {organization}
       </h4>
     </div>
