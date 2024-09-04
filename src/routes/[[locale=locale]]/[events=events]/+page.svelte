@@ -146,7 +146,7 @@
 </script>
 
 <span
-  class="mx-4 mb-8 grid w-full grid-cols-2 text-sm lg:mt-0 lg:flex lg:w-2/4 lg:items-center"
+  class="mx-4 mb-8 grid grid-cols-2 text-sm lg:mt-0 lg:flex lg:w-2/4 lg:items-center"
 >
   <span
     class="col-span-full mr-1.5 whitespace-nowrap pb-2 lg:col-span-1 lg:pb-0"
