@@ -178,6 +178,7 @@
   {selects}
   {searchOptions}
   {viewOptions}
+  expanded={true}
 />
 
 {#if events}
