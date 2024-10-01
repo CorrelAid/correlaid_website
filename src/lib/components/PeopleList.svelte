@@ -84,7 +84,7 @@
             <h3
               class="font-light {w} {wM} text-sm {expand[`${i}${y}`] === true
                 ? 'line-clamp-3'
-                : 'line-clamp-2'}"
+                : 'line-clamp-3'}"
             >
               {person.position}
             </h3>
