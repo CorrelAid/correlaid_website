@@ -70,6 +70,14 @@
 
   let content;
   $: content = data.content;
+
+  let sectionsWithNonEmptyPropsKey = [];
+  $: if (Array.isArray(content)) {
+    sectionsWithNonEmptyPropsKey = content.filter(
+      (section) =>
+        section.props && section.props.key && section.props.key.trim() !== null,
+    );
+  }
 </script>
 
 <svelte:head>
@@ -149,7 +157,7 @@
         {/each}
         <!-- if collection doesnt contain a custom section, load page anyways (but must be empty
         in this case) to write page key to store -->
-        {#if !content.find((e) => e.collection === 'customSections')}
+        {#if !content.find((e) => e.collection === 'customSections') | (sectionsWithNonEmptyPropsKey.length >= 2)}
           <slot />
         {/if}
       {:else}

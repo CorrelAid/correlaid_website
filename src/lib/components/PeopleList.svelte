@@ -1,8 +1,10 @@
 <script>
   import Person from '$lib/components/Person.svelte';
-  export let people;
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
+
+  export let people = [];
+
   const w = `w-32`;
   const wM = `md:w-44`;
 
@@ -20,22 +22,23 @@
     expand[iy] = !expand[iy];
   }
 
-  const no_cols = 3;
+  const noCols = 3;
 
-  $: team_len = people.length;
-  $: batch_size = Math.ceil(team_len / no_cols);
+  let cols;
 
-  // Create an array of empty columns
-  $: team_cols = Array.from({length: no_cols}, () => []);
+  // reactive if people changes
+  $: if (people) {
+    cols = Array.from({length: noCols}, () => []);
+  }
 
-  // Distribute the people into the columns in a row-wise order
-  $: for (let i = 0; i < team_len; i++) {
-    team_cols[i % no_cols].push(people[i]);
+  // distribute the people into the columns in a row-wise order
+  $: for (let i = 0; i < people.length; i++) {
+    cols[i % noCols].push(people[i]);
   }
 </script>
 
 <div class="hidden w-full md:flex md:px-0">
-  {#each team_cols as col, i}
+  {#each cols as col, i}
     <div class="inline-block w-1/3 align-top">
       {#each col as person, y}
         <div
@@ -81,7 +84,7 @@
             <h3
               class="font-light {w} {wM} text-sm {expand[`${i}${y}`] === true
                 ? 'line-clamp-3'
-                : 'line-clamp-2'}"
+                : 'line-clamp-3'}"
             >
               {person.position}
             </h3>
