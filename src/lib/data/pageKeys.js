@@ -74,7 +74,7 @@ export default {
     'navbar.newsletter': {text: 'Newsletter', url: '/newsletter'},
     'navbar.donate': {
       text: 'Fördern',
-      url: 'https://www.betterplace.org/de/projects/58963-correlaid-e-v-data-for-good',
+      url: 'https://secure.betterplace.org/de/donate/platform/projects/58963',
     },
     'navbar.jobs': {text: 'Jobs', url: '/jobs'},
     'footer.imprint': {text: 'Impressum', url: '/impressum'},
