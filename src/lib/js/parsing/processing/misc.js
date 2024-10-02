@@ -77,11 +77,13 @@ export function processIcal(events, locale) {
     const startDate = ical.start_time
       ? new Date(`${ical.date} ${ical.start_time}`)
       : new Date(ical.date);
+
     const endDate = ical.end_date
-      ? ical.endTime
+      ? ical.end_time
         ? new Date(`${ical.end_date} ${ical.end_time}`)
         : new Date(ical.end_date)
       : new Date(`${ical.date} ${ical.end_time}`);
+
     const location = ical.online === true ? 'Online' : ical.location;
     const uuid5 = uuidv5(ical.title, uuidv5.URL);
 
