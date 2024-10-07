@@ -103,7 +103,7 @@
       {#if content && $page.error == null}
         {#each content as section}
           {#if section.collection === 'heros'}
-            <div class:mb-12={section.sort !== content.length}>
+            <div class={section.sort !== content.length ? 'mb-9 lg:mb-12' : ''}>
               <Hero {...section.props} />
             </div>
           {:else if section.collection === 'ctaGroups'}

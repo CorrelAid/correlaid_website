@@ -21,7 +21,9 @@ export function processButtons(section) {
 export function processHeros(section) {
   const hero = {
     text: section.translations[0].text,
+    subText: section.translations[0].sub_text,
     height: section.height,
+    imageSize: section.image_size,
     gradientOnly: section.gradient_only,
     buttons: section.buttons.map((button) => processButtons(button)),
   };
