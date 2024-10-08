@@ -13,6 +13,7 @@ export const buttonsSchema = yup.object({
 
 export const herosSchema = yup.object({
   text: yup.string().required(),
+  subText: yup.string().nullable(),
   height: yup.string().required(),
   gradientOnly: yup.boolean().required(),
   buttons: yup.array().of(buttonsSchema),

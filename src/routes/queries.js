@@ -119,6 +119,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 						filter: { languages_code: { code: { _eq: $language } } }
 					) {
 						text
+						sub_text
 						image_alt
 					}
 					buttons {
