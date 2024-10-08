@@ -110,7 +110,6 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 
 				... on heros {
 					height
-					image_size
 					gradient_only
 					image {
 						id

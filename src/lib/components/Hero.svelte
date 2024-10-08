@@ -5,7 +5,6 @@
   import CorrelaidXLogo from '$lib/svg/CorrelaidXLogo.svelte';
   export let gradientOnly;
   export let height;
-  export let imageSize = 'fullsize';
   export let text;
   export let subText;
   export let buttons = [];
@@ -29,19 +28,16 @@
   class="relative flex w-screen items-center justify-center"
   style={height === 'full'
     ? `height: calc(100vh - ${$headerHeight}px)`
-    : height === 'half'
-      ? `height: calc((100vh - ${$headerHeight}px)/2)`
-      : `height: auto`}
+    : `height: calc((100vh - ${$headerHeight}px)/2)`}
 >
   {#if gradientOnly === false}
-    {#if imageSize === 'fullsize'}
-      <span
-        class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
-        style={`background-image: url(${imageSrc})`}
-        aria-label={imageAlt}
-        role="img"
-      />
-    {/if}
+    <span
+      class="absolute top-0 h-full w-screen bg-cover bg-center bg-no-repeat"
+      style={`background-image: url(${imageSrc})`}
+      aria-label={imageAlt}
+      role="img"
+    />
+
     {#if imageDesc}
       <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 lg:block">
         <span
@@ -69,53 +65,43 @@
       </div>
     {/if}
   {/if}
-  <div class="container mx-auto h-full w-full">
-    {#if correlaidx}
-      <div class="flex justify-center sm:landscape:hidden lg:landscape:flex">
-        <CorrelaidXLogo width={230} height={230} />
-      </div>
-      <div class="hidden justify-center sm:landscape:flex lg:landscape:hidden">
-        <CorrelaidXLogo width={100} height={100} />
-      </div>
-    {/if}
-    <div class="grid h-full w-full grid-cols-12 grid-rows-5 pt-9 lg:pt-12">
-      <div
-        class="z-[10] col-span-10 col-start-1 row-span-3 row-start-1 mx-4 my-auto rounded border border-neutral-25 px-4 py-4 md:col-span-8 md:col-start-1 md:row-span-full md:row-start-1 md:border-0 md:py-8 md:pr-8 {correlaidx ===
-        true
-          ? 'text-center'
-          : ''} {imageSize === 'small_text_overlap'
-          ? 'bg-white'
-          : 'col-span-full lg:col-span-full'}"
-      >
-        <h1
-          class="font-londrina text-2xl font-bold tracking-wide md:text-4xl {imageSize ===
-          'small_text_overlap'
-            ? 'text-[#3863a2]'
-            : 'text-white'} {correlaidx === true
-            ? 'bg-tertiary text-2xl font-light sm:landscape:text-xl md:landscape:text-2xl lg:landscape:text-4xl '
-            : ''} "
-        >
-          {text}
-        </h1>
-        {#if subText}
-          <p class="text-content text-md pt-3 leading-[28px]">
-            {subText}
-          </p>
-        {/if}
-      </div>
-      {#if imageSize === 'small_text_overlap'}
+  <div
+    class="container z-[10] mx-auto flex h-full w-full items-center {correlaidx ===
+    true
+      ? 'justify-center'
+      : ''} "
+  >
+    <div class="w-full">
+      {#if correlaidx}
+        <div class=" flex justify-center sm:landscape:hidden lg:landscape:flex">
+          <CorrelaidXLogo width={230} height={230} />
+        </div>
         <div
-          class="col-span-9 col-end-13 row-span-4 row-start-2 mr-4 mt-auto md:row-span-full md:row-start-1 lg:col-span-10 lg:col-end-13"
+          class="z-[10] hidden justify-center sm:landscape:flex lg:landscape:hidden"
         >
-          <div class="aspect-h-9 aspect-w-9">
-            <img
-              src={imageSrc}
-              alt={imageAlt}
-              class="h-full w-full rounded border border-neutral-25"
-            />
-          </div>
+          <CorrelaidXLogo width={100} height={100} />
         </div>
       {/if}
+      <div class=" {correlaidx === true ? 'w-full' : 'md:w-8/12'}  px-4">
+        <div
+          class="z-[10] {correlaidx === true
+            ? 'flex justify-center'
+            : 'my-auto'}"
+        >
+          <h1
+            class="font-bold tracking-wide text-white {correlaidx === true
+              ? 'mb-8 inline-block bg-tertiary px-2 py-1 text-2xl text-4xl font-bold font-light tracking-wide text-white sm:landscape:text-xl md:landscape:text-2xl lg:landscape:text-3xl'
+              : 'font-londrina text-3xl drop-shadow  md:text-4xl'} "
+          >
+            {text}
+          </h1>
+          {#if subText}
+            <p class="pt-3.5 text-lg leading-[28px] text-white drop-shadow">
+              {subText}
+            </p>
+          {/if}
+        </div>
+      </div>
     </div>
 
     {#if Array.isArray(buttons) && buttons.length !== 0}
@@ -128,11 +114,10 @@
       </div>
     {/if}
   </div>
-  {#if imageSize !== 'small_text_overlap'}
-    <div
-      class="absolute inset-0 bg-gradient-to-r {!correlaidx
-        ? 'from-secondary/75 to-primary/75'
-        : 'from-tertiary to-secondary'}"
-    />
-  {/if}
+
+  <div
+    class="absolute inset-0 bg-gradient-to-r {!correlaidx
+      ? 'from-secondary/75 to-primary/75'
+      : 'from-tertiary/75 to-secondary/75'}"
+  />
 </section>

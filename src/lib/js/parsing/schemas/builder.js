@@ -15,7 +15,6 @@ export const herosSchema = yup.object({
   text: yup.string().required(),
   subText: yup.string().nullable(),
   height: yup.string().required(),
-  imageSize: yup.string().nullable(),
   gradientOnly: yup.boolean().required(),
   buttons: yup.array().of(buttonsSchema),
   imageSrc: yup.string().required(),
