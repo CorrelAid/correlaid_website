@@ -32,7 +32,6 @@ export const botNav = [
     children: [
       'navbar.volunteering.correlaidx',
       'navbar.volunteering.volunteer_teams',
-      // "navbar.volunteering.volunteer_journeys",
       'navbar.volunteering.become_member',
       'navbar.volunteering.founding_lc',
     ],
@@ -41,6 +40,7 @@ export const botNav = [
     key: 'navbar.about',
     category: 'about',
     children: [
+      'navbar.about.impact',
       'navbar.about.team',
       'navbar.about.values',
       'navbar.about.partners',
