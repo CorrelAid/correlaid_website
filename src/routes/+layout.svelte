@@ -82,6 +82,7 @@
 
 <svelte:head>
   <title>{title}</title>
+  <meta name="description" content={$t('misc.desc').text} />
   {#if !dev}
     <script
       src="/stats/js/script.js"
@@ -92,6 +93,7 @@
 </svelte:head>
 <!-- Footer on bottom of page if page is too short -->
 <div
+  lang={$locale}
   class="flex min-h-screen flex-col items-center text-neutral"
   style={$noScroll ? 'max-height: 100vh; overflow-y:hidden' : ''}
 >

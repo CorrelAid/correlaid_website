@@ -1,5 +1,8 @@
 export default {
   de: {
+    'misc.desc': {
+      text: 'CorrelAid hilft Non-Profits dabei, Daten kritisch und reflektiert für ihre Ziele einzusetzen und ermöglicht Ehrenamtlichen ein wirksames Engagement im Bereich Data4Good.',
+    },
     'misc.read_more': {text: 'Mehr lesen'},
     'misc.partners': {text: 'Partner'},
     'misc.financialSupporters': {text: 'Fördernde'},
@@ -67,6 +70,9 @@ export default {
     'ics.cta': {text: 'Bleibe auf dem Laufenden mit unserem ICS-Feed:'},
   },
   en: {
+    'misc.desc': {
+      text: 'CorrelAid empowers non-profits to utilise data in a critical and reflective manner to achieve their objectives, while also enabling effective engagement of volunteers in Data4Good.',
+    },
     'misc.read_more': {text: 'Read more'},
     'misc.partners': {text: 'Partners'},
     'misc.financialSupporters': {text: 'Financial Supporters'},

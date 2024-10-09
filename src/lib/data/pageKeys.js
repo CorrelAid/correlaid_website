@@ -2,7 +2,8 @@ export default {
   de: {
     'navbar.home': {text: null, url: '/'},
     'navbar.about': {text: 'Über uns', url: '/ueber'},
-    // Subnav projects_consulting
+    // Subnav about
+    'navbar.about.impact': {text: 'Unsere Wirkung', url: '/ueber/wirkung'},
     'navbar.about.team': {text: 'Team', url: '/ueber/team'},
     'navbar.about.values': {text: 'Unsere Werte', url: '/ueber/werte'},
     'navbar.about.partners': {text: 'Partner', url: '/ueber/partner'},
@@ -87,7 +88,8 @@ export default {
   en: {
     'navbar.home': {text: null, url: '/en'},
     'navbar.about': {text: 'About Us', url: '/en/about'},
-    // Subnav projects_consulting
+    // Subnav about
+    'navbar.about.impact': {text: 'Our Impact', url: '/en/about/impact'},
     'navbar.about.team': {text: 'Team', url: '/en/about/team'},
     'navbar.about.values': {text: 'Our Values', url: '/en/about/values'},
     'navbar.about.partners': {
