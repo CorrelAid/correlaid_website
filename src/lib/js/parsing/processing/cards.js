@@ -73,7 +73,6 @@ export function processEvents(event, locale) {
   const procDate = genDate(event.date, locale, true);
   const id = Number(event.id);
   const allDay = false;
-
   const date = parseCETDate(event.date);
   const start = parseCETDate(event.date + ' ' + event.start_time);
   const end = event.end_date
