@@ -14,6 +14,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 		end_date
 		title
 		teaser
+		id
 		registration_link
 		target_group
 		language
