@@ -7,6 +7,7 @@
   import Finish from '$lib/svg/Finish.svelte';
   import Infrastrucuture from '$lib/svg/Infrastrucuture.svelte';
   import LikeMinded from '$lib/svg/LikeMinded.svelte';
+  import BrokenGears from '../svg/BrokenGears.svelte';
   function checkX(i) {
     i = i + 1;
     if (i & 1) {
@@ -55,6 +56,8 @@
             <Infrastrucuture width={iconLg} height={iconLg} />
           {:else if step.icon == 'team'}
             <Team width={iconLg} height={iconLg} />
+          {:else if step.icon == 'broken_gears'}
+            <BrokenGears width={iconLg - 20} height={iconLg - 20} />
           {:else if step.icon == 'finish'}
             <Finish width={iconLg} height={iconLg} />
           {/if}
@@ -102,7 +105,10 @@
       class="relative mb-12 flex justify-center border-t-2 border-neutral-25"
     >
       <span
-        class="absolute top-0 -mt-5 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-tertiary to-secondary px-4 py-1 text-lg font-semibold text-white shadow-md"
+        class="absolute top-0 -mt-5 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r {color ===
+        'correlaid'
+          ? 'from-secondary to-primary'
+          : 'from-tertiary to-secondary'} px-4 py-1 text-lg font-semibold text-white shadow-md"
         >{i + 1}</span
       >
 
@@ -116,9 +122,11 @@
             {:else if step.icon == 'infrastructure'}
               <Infrastrucuture width={iconMobile} height={iconMobile} />
             {:else if step.icon == 'team'}
-              <Team width={iconLg} height={iconLg} />
+              <Team width={iconMobile} height={iconMobile} />
+            {:else if step.icon == 'broken_gears'}
+              <BrokenGears width={iconMobile} height={iconMobile} />
             {:else if step.icon == 'finish'}
-              <Finish width={iconLg} height={iconLg} />
+              <Finish width={iconMobile} height={iconMobile} />
             {/if}
           </div>
         </div>
