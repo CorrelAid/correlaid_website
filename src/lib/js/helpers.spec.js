@@ -14,10 +14,10 @@ describe('helper functions', () => {
   test('genDate', () => {
     const date = '2023-04-28T00:20:00';
 
-    expect(genDate(date, 'de', true)).toBe('28. April 2023');
-    expect(genDate(date, 'en', true)).toBe('April 28, 2023');
-    expect(genDate(date, 'de', false)).toBe('28. April');
-    expect(genDate(date, 'en', false)).toBe('April 28');
+    expect(genDate(date, 'de', true)).toBe('28. Apr. 2023');
+    expect(genDate(date, 'en', true)).toBe('Apr 28, 2023');
+    expect(genDate(date, 'de', false)).toBe('28. Apr.');
+    expect(genDate(date, 'en', false)).toBe('Apr 28');
 
     const date2 = '2023-05-01T00:00:00';
 

@@ -133,12 +133,12 @@ export function genImageSrc(id, transform = '') {
  */
 export function toLocalDateString(date, locale, year = false) {
   let options = {
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   };
   if (year) {
     options = {
-      month: 'long',
+      month: 'short',
       day: 'numeric',
       year: 'numeric',
     };
