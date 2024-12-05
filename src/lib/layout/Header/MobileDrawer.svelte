@@ -113,7 +113,6 @@
           href={$t('navbar.support').url}
           options={'text-sm min-w-[115px] !py-[6.5px]'}
           iconSize={17}
-          type={'external'}
           color={'bg-secondary'}
         />
         <div class="flex">

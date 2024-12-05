@@ -10,6 +10,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 						ctas_id {
 							button {
 								color
+								type
 								translations(
 									filter: { languages_code: { code: { _eq: $language } } }
 								) {
@@ -29,6 +30,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 				... on ctas {
 					button {
 						color
+						type
 						translations(
 							filter: { languages_code: { code: { _eq: $language } } }
 						) {
@@ -125,6 +127,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 					buttons {
 						buttons_id {
 							color
+							type
 							translations(
 								filter: { languages_code: { code: { _eq: $language } } }
 							) {

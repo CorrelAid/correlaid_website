@@ -74,7 +74,6 @@
         <LinkButton
           text={$t('navbar.support').text}
           href={$t('navbar.support').url}
-          type={'external'}
           color={`bg-secondary`}
         />
         <LanguageSelect bind:activeLanguage on:changeLanguage />
@@ -87,7 +86,6 @@
             href={$t('navbar.support').url}
             options={'text-sm min-w-[115px] !py-[6.5px]'}
             iconSize={17}
-            type={'external'}
             color={'bg-secondary'}
           />
         </span>

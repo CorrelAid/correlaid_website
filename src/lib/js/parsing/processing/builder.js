@@ -15,6 +15,7 @@ export function processButtons(section) {
     text: section.translations[0].text,
     href: section.translations[0].link,
     color: `bg-${section.color}`,
+    type: section.translations[0].type,
   };
 }
 
@@ -39,6 +40,7 @@ export function processCtas(section) {
     buttonLink: section.button.translations[0].link,
     buttonColor: `bg-${section.button.color}`,
     buttonText: section.button.translations[0].text,
+    buttonType: section.button.type,
     text: section.translations[0].text,
   };
   return cta;

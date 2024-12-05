@@ -17,6 +17,7 @@
   $: if (color == 'bg-secondary') {
     color = 'bg-secondary';
   }
+  $: console.log(type);
 </script>
 
 <a

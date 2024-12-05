@@ -5,6 +5,7 @@
   export let buttonText;
   export let buttonColor;
   export let text;
+  export let buttonType;
 </script>
 
 <!-- <div class="border bg-gradient-to-r from-primary-75 to-secondary-75 text-white">
@@ -22,7 +23,7 @@
       <LinkButton
         href={buttonLink}
         text={buttonText}
-        type={'external'}
+        type={buttonType}
         color={buttonColor}
       />
     </span>
