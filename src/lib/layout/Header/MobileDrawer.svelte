@@ -109,8 +109,8 @@
     <div class="flex items-center pb-7">
       <div class="mx-auto flex items-center justify-center gap-5">
         <LinkButton
-          text={$t('navbar.donate').text}
-          href={$t('navbar.donate').url}
+          text={$t('navbar.support').text}
+          href={$t('navbar.support').url}
           options={'text-sm min-w-[115px] !py-[6.5px]'}
           iconSize={17}
           type={'external'}

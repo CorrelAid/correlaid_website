@@ -73,9 +73,13 @@ export default {
     'navbar.blog': {text: 'Blog', url: '/blog'},
     'navbar.podcast': {text: 'Podcast', url: '/podcast'},
     'navbar.newsletter': {text: 'Newsletter', url: '/newsletter'},
-    'navbar.donate': {
-      text: 'Fördern',
-      url: 'https://secure.betterplace.org/de/donate/platform/projects/58963',
+    'navbar.support': {
+      text: 'Unterstützen',
+      url: '/unterstuetzen',
+    },
+    'navbar.support.supporting_membership': {
+      text: 'Fördermitgliedschaft',
+      url: '/unterstuetzen/foerdermitgliedschaft',
     },
     'navbar.jobs': {text: 'Jobs', url: '/jobs'},
     'footer.imprint': {text: 'Impressum', url: '/impressum'},
@@ -161,9 +165,13 @@ export default {
     'navbar.blog': {text: 'Blog', url: '/en/blog'},
     'navbar.podcast': {text: 'Podcast', url: '/en/podcast'},
     'navbar.newsletter': {text: 'Newsletter', url: '/en/newsletter'},
-    'navbar.donate': {
-      text: 'Donate',
-      url: 'https://secure.betterplace.org/de/donate/platform/projects/58963',
+    'navbar.support': {
+      text: 'Support',
+      url: '/en/support',
+    },
+    'navbar.support.supporting_membership': {
+      text: 'Supporting Membership',
+      url: '/en/support/supporting-membership',
     },
     'navbar.jobs': {text: 'Jobs', url: '/en/jobs'},
     'footer.imprint': {text: 'Imprint', url: '/en/imprint'},
