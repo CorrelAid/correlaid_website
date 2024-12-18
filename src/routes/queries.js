@@ -139,6 +139,7 @@ query ($page: String = "navbar.home", $language: String = "de-DE") {
 				}
 				... on buttons {
 					color
+					type
 					translations(
 						filter: { languages_code: { code: { _eq: $language } } }
 					) {

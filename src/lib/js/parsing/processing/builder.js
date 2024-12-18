@@ -15,7 +15,7 @@ export function processButtons(section) {
     text: section.translations[0].text,
     href: section.translations[0].link,
     color: `bg-${section.color}`,
-    type: section.translations[0].type,
+    type: section.type,
   };
 }
 
