@@ -72,9 +72,8 @@
         class="3xl:col-span-3 col-span-2 hidden items-center justify-start gap-6 xl:flex"
       >
         <LinkButton
-          text={$t('navbar.donate').text}
-          href={$t('navbar.donate').url}
-          type={'external'}
+          text={$t('navbar.support').text}
+          href={$t('navbar.support').url}
           color={`bg-secondary`}
         />
         <LanguageSelect bind:activeLanguage on:changeLanguage />
@@ -83,11 +82,10 @@
       <div class="block flex items-center justify-end xl:hidden">
         <span class="mr-4">
           <LinkButton
-            text={$t('navbar.donate').text}
-            href={$t('navbar.donate').url}
+            text={$t('navbar.support').text}
+            href={$t('navbar.support').url}
             options={'text-sm min-w-[115px] !py-[6.5px]'}
             iconSize={17}
-            type={'external'}
             color={'bg-secondary'}
           />
         </span>

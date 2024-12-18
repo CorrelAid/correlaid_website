@@ -9,6 +9,7 @@ export const buttonsSchema = yup.object({
   text: yup.string().required(),
   href: yup.string().required(),
   color: yup.string().required(),
+  type: yup.string().required(),
 });
 
 export const herosSchema = yup.object({
