@@ -17,7 +17,7 @@ dotenv.config({
 dotenv.config({path: path.resolve(process.cwd(), '.env.local')});
 dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
-const jitterMultiplier = 1000;
+const jitterMultiplier = 1500;
 
 const URL = `${process.env.PUBLIC_API_URL}/assets`;
 
@@ -37,7 +37,7 @@ async function postbuild() {
     filesOnly: true,
   });
 
-  const concurrencyLimit = 10;
+  const concurrencyLimit = 9;
 
   // Create an array of promises for file processing
   const filePromises = files.map(async (file, index) => {
@@ -124,7 +124,7 @@ async function findUrls(fileContent, filePath) {
     const timeoutPromise = new Promise((resolve, reject) => {
       setTimeout(() => {
         reject(new Error(`Request for ${url} timed out`));
-      }, 25000);
+      }, 50000);
     });
 
     try {
