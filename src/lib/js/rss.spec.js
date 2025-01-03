@@ -60,6 +60,8 @@ describe('gen Rss', async () => {
       feedDescription: 'CorrelAid Blog',
     };
 
+    const currentYear = new Date().getFullYear();
+
     const res = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
@@ -68,7 +70,7 @@ describe('gen Rss', async () => {
       <description>CorrelAid Blog</description>
       <language>de</language>
       <atom:link href="undefined" rel="self" type="application/rss+xml" />
-      <copyright>2024 CorrelAid</copyright>
+      <copyright>${currentYear} CorrelAid</copyright>
   
       <item>
         <title>Ein Einblickreicher Blogbeitrag</title>
