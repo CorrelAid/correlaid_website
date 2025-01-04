@@ -50,9 +50,7 @@ async function postbuild() {
 
   try {
     await mkdir(newAssetsDirectory, {recursive: true});
-    console.log('Assets directory created');
 
-    console.log('Scanning for files...');
     const files = await glob('**/*', {
       cwd: buildDirectory,
       dot: true,
@@ -63,21 +61,12 @@ async function postbuild() {
     const targetFiles = files.filter(
       (file) => file.endsWith('.json') || file.endsWith('.html'),
     );
-    console.log(`Found ${targetFiles.length} files to process`);
+    console.log(`Processing ${targetFiles.length} files...`);
 
-    const concurrencyLimit = 11;
+    const concurrencyLimit = 10;
     const queue = [];
     let activePromises = 0;
     let completedFiles = 0;
-    let processedUrls = 0;
-
-    const updateProgress = () => {
-      process.stdout.clearLine();
-      process.stdout.cursorTo(0);
-      process.stdout.write(
-        `Progress - Files: ${completedFiles}/${targetFiles.length} | URLs processed: ${processedUrls}`,
-      );
-    };
 
     const processQueue = async () => {
       while (queue.length > 0 && activePromises < concurrencyLimit) {
@@ -87,9 +76,13 @@ async function postbuild() {
         try {
           await task();
           completedFiles++;
-          updateProgress();
+          if (completedFiles % 10 === 0) {
+            console.log(
+              `Processed ${completedFiles}/${targetFiles.length} files`,
+            );
+          }
         } catch (error) {
-          console.error('\nTask error:', error);
+          console.error('Task error:', error);
         } finally {
           activePromises--;
           processQueue();
@@ -100,31 +93,7 @@ async function postbuild() {
     targetFiles.forEach((file) => {
       queue.push(async () => {
         const fileContent = await readFile(file, 'utf8');
-        const urls = await findUrls(fileContent, file);
-
-        if (urls.length > 0) {
-          for (const {url, type} of urls) {
-            const cleanedUrl = url.replace(/\\u002F/g, '/').split('?')[0];
-            let downloadPath = cleanedUrl.replace(
-              URL,
-              `${process.cwd()}/${newAssetsDirectory}`,
-            );
-            downloadPath += type === 'image' ? '.webp' : '.pdf';
-
-            await downloadFile(url, downloadPath);
-
-            let relativePath = downloadPath.replace(
-              `${process.cwd()}/${buildDirectory}`,
-              '',
-            );
-            if (!relativePath.startsWith('/assets')) {
-              relativePath = relativePath.substring(relativePath.indexOf('/'));
-            }
-            await replaceURL(url, relativePath, file);
-            processedUrls++;
-            updateProgress();
-          }
-        }
+        await processFile(file, fileContent);
       });
     });
 
@@ -135,17 +104,39 @@ async function postbuild() {
     }
 
     const duration = Date.now() - startTime;
-    process.stdout.write('\n'); // Move to new line after progress bar
-    console.log(
-      `\nAll file processing completed in ${formatDuration(duration)}`,
-    );
+    console.log(`\nCompleted in ${formatDuration(duration)}`);
     console.log(`Files processed: ${completedFiles}/${targetFiles.length}`);
-    console.log(`Total URLs processed: ${processedUrls}`);
+    process.exit();
   } catch (error) {
     console.error('\nScript failed with error:', error);
     throw error;
-  } finally {
-    process.exit();
+  }
+}
+
+async function processFile(filePath, fileContent) {
+  const urls = await findUrls(fileContent, filePath);
+
+  if (urls.length > 0) {
+    for (const {url, type} of urls) {
+      const cleanedUrl = url.replace(/\\u002F/g, '/').split('?')[0];
+
+      let downloadPath = cleanedUrl.replace(
+        URL,
+        `${process.cwd()}/${newAssetsDirectory}`,
+      );
+      downloadPath += type === 'image' ? '.webp' : '.pdf';
+
+      await downloadFile(url, downloadPath);
+
+      let relativePath = downloadPath.replace(
+        `${process.cwd()}/${buildDirectory}`,
+        '',
+      );
+      if (!relativePath.startsWith('/assets')) {
+        relativePath = relativePath.substring(relativePath.indexOf('/'));
+      }
+      await replaceURL(url, relativePath, filePath);
+    }
   }
 }
 
