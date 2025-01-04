@@ -14,3 +14,4 @@ vite.config.ts.timestamp-*
 tests-examples
 *.local
 /chrome
+.vercel
