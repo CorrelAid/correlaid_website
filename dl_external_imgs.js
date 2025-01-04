@@ -172,6 +172,12 @@ function cleanupUrl(url) {
     .replace(/[?&]$/, '');
 }
 
+const getRandomUserAgent = () => {
+  const version = 1;
+  const subversion = Math.floor(Math.random() * 9) + 1;
+  return `CorrelAidWebsiteImgDl/${version}.${subversion}`;
+};
+
 async function retryOnTimeout(url, maxRetries = 5, initialBackoff = 2000) {
   let retryCount = 0;
   const maxBackoff = 20000;
@@ -188,12 +194,14 @@ async function retryOnTimeout(url, maxRetries = 5, initialBackoff = 2000) {
       const response = await fetch(url, {
         signal: controller.signal,
         headers: {
-          Connection: 'keep-alive',
-          'User-Agent': 'CorrelAidWebsiteImgDl/1.0',
+          Connection: 'close',
+          'User-Agent': getRandomUserAgent(),
           'Accept-Encoding': 'gzip,deflate',
+          'Cache-Control': 'no-cache',
+          Pragma: 'no-cache',
           Accept: '*/*',
         },
-        keepalive: true,
+        keepalive: false,
       });
 
       clearTimeout(timeout);

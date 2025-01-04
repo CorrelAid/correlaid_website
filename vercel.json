@@ -1,4 +1,18 @@
 {
+  "github": {
+    "enabled": false
+  },
+  "builds": [
+    {
+      "src": "build/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    }
+  ],
   "redirects": [
     {
       "source": "/stats/js/script.js",
