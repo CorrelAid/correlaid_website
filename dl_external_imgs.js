@@ -1,13 +1,14 @@
 import glob from 'tiny-glob';
 import {createWriteStream} from 'fs';
 import {mkdir} from 'node:fs/promises';
-import {readFile, writeFile} from 'fs/promises';
+import {readFile, writeFile, unlink} from 'fs/promises';
 import * as url from 'url';
 import * as https from 'https';
 import path from 'node:path';
 import dotenv from 'dotenv';
+import fetch from 'node-fetch'; // Import fetch for Node.js
 
-// load environment variables
+// Load environment variables
 dotenv.config({
   path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}.local`),
 });
@@ -29,7 +30,6 @@ async function postbuild() {
 
   console.log('Starting replacement of files from external sources');
 
-  // getting all files in build directory
   const files = await glob('**/*', {
     cwd: buildDirectory,
     dot: true,
@@ -39,195 +39,154 @@ async function postbuild() {
 
   const concurrencyLimit = 9;
 
-  // Create an array of promises for file processing
-  const filePromises = files.map(async (file, index) => {
-    // if file is json or html
+  const filePromises = files.map(async (file) => {
     if (file.endsWith('.json') || file.endsWith('.html')) {
       const fileContent = await readFile(file, 'utf8');
       await processFile(file, fileContent);
     }
   });
 
-  // Execute file processing promises with concurrency limit
   const concurrentPromises = [];
   for (let i = 0; i < filePromises.length; i += concurrencyLimit) {
     const batchPromises = filePromises.slice(i, i + concurrencyLimit);
     concurrentPromises.push(Promise.all(batchPromises));
   }
 
-  Promise.all(concurrentPromises)
-    .then(() => {
-      console.log('All file processing completed');
-      process.exit();
-    })
-    .catch((error) => {
-      console.error('Error during file processing:', error);
-      process.exit(1); // Exit with a non-zero status code to indicate an error
-    });
-
-  console.log('Done with replacement of files from external sources');
+  try {
+    await Promise.all(concurrentPromises);
+    console.log('All file processing completed');
+  } catch (error) {
+    console.error('Error during file processing:', error);
+  } finally {
+    process.exit(); // Exit in the finally block to ensure it always runs
+  }
 }
 
 async function processFile(filePath, fileContent) {
-  // find all file Urls
-  const Urls = await findUrls(fileContent, filePath);
-  // iterates over the file URLs found in the fileContent string, downloads each file, and performs URL replacements in the filePath
-  if (Urls.length > 0) {
-    console.log(`Found ${Urls.length} urls in ${filePath}`);
-    for (let UrlIndex = 0; UrlIndex < Urls.length; UrlIndex++) {
-      const Url = Urls[UrlIndex]['url'];
-      const type = Urls[UrlIndex]['type'];
+  const urls = await findUrls(fileContent, filePath);
 
-      // this line replaces all occurrences of forward slashes (/) and the url query
-      const cleanedUrl = Url.replace(/\\u002F/g, '/').split('?')[0];
+  if (urls.length > 0) {
+    for (const {url, type} of urls) {
+      // Destructure url and type directly
+      const cleanedUrl = url.replace(/\\u002F/g, '/').split('?')[0];
 
-      // generating the path to the file
-      // (specifies where the file is downloaded to)
-      let Path;
-      if (type == 'image') {
-        Path =
-          cleanedUrl.replace(URL, `${process.cwd()}/${newAssetsDirectory}`) +
-          '.webp';
-      } else {
-        Path =
-          cleanedUrl.replace(URL, `${process.cwd()}/${newAssetsDirectory}`) +
-          '.pdf';
+      let downloadPath = cleanedUrl.replace(
+        URL,
+        `${process.cwd()}/${newAssetsDirectory}`,
+      );
+      downloadPath += type === 'image' ? '.webp' : '.pdf';
+
+      await downloadFile(url, downloadPath);
+
+      let relativePath = downloadPath.replace(
+        `${process.cwd()}/${buildDirectory}`,
+        '',
+      );
+      if (!relativePath.startsWith('/assets')) {
+        relativePath = relativePath.substring(relativePath.indexOf('/'));
       }
-      await downloadFile(Url, Path);
-
-      // this will replace the  url in the file content
-      Path = Path.replace(`${process.cwd()}/${buildDirectory}`, '');
-      if (!Path.startsWith('/assets')) {
-        Path = Path.substring(Path.indexOf('/'));
-      }
-      await replaceURL(Url, Path, filePath);
+      await replaceURL(url, relativePath, filePath);
     }
   }
 }
 
 async function findUrls(fileContent, filePath) {
-  let UrlRegexString = URL.replace(/\//g, '(?:\\/|\\\\u002F)');
+  let urlRegexString = URL.replace(/\//g, '(?:\\/|\\\\u002F)');
+  urlRegexString = `${urlRegexString}(?:[^"\\s\\\\)]*)`;
+  const urlRegex = new RegExp(urlRegexString, 'g');
 
-  // Match file URLs in a string, including URLs in href attributes and URLs inside url() function.
-  // should match both url() and src: while not matching backslashes (used in json files right after url to escape qoute)
-  UrlRegexString = `${UrlRegexString}(?:[^"\\s\\\\)]*)`;
-  const UrlRegex = new RegExp(UrlRegexString, 'g');
+  const urls = [];
+  let match;
 
-  // iterates over the fileContent string using the exec method and extracts all the matched file URLs
-  const Urls = [];
-  let url;
-  let matchedUrl;
-  let retryCount = 0;
-  const maxRetries = 3;
-
-  const retryOnTimeout = async (url) => {
-    const timeoutPromise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        reject(new Error(`Request for ${url} timed out`));
-      }, 50000);
-    });
-
-    try {
-      const jitter = Math.random() * jitterMultiplier;
-      await new Promise((resolve) => setTimeout(resolve, jitter));
-
-      const response = await Promise.race([fetch(url), timeoutPromise]);
-      const contentType = response.headers.get('Content-Type');
-      // check the file type
-      if (contentType.includes('image')) {
-        console.log(`${url} is an image`);
-        throw new Error(`Unhandled Image: ${url} in ${filePath}`);
-      } else if (contentType.includes('pdf')) {
-        console.log(`${url} is a pdf`);
-        Urls.push({url: url, type: 'pdf'});
-      } else if (contentType.includes('application/json')) {
-        throw new Error(`API may be under pressure`);
-      } else {
-        throw new Error(`Unhandled type ${contentType}: ${url} in ${filePath}`);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      // Retry the request only if it is a timeout error and the maximum number of retries has not been reached
-      if (
-        error.message === `Request for ${url} timed out` ||
-        error.code === 'UND_ERR_CONNECT_TIMEOUT' ||
-        error.message === `API may be under pressure`
-      ) {
-        if (retryCount < maxRetries) {
-          retryCount++;
-          console.log(`Retrying request for ${url}`);
-          return retryOnTimeout(url);
-        } else {
-          console.log(`Max retry count reached for ${url}`);
-          throw error;
-        }
-      } else {
-        console.log('here');
-        throw error;
-      }
-    }
-  };
-
-  while ((matchedUrl = UrlRegex.exec(fileContent))) {
-    url = matchedUrl[0];
-    // as all file contain this, we can use it to exclude pdf
+  while ((match = urlRegex.exec(fileContent))) {
+    const url = match[0];
     if (url.includes('format=webp')) {
-      Urls.push({url: url, type: 'image'});
+      urls.push({url: url, type: 'image'});
     } else {
-      console.log(`may be a pdf:  ${url}`);
-      // Call the retryOnTimeout function
-      await retryOnTimeout(url);
+      try {
+        await retryOnTimeout(url); // Check PDF URLs for timeouts as well
+        urls.push({url: url, type: 'pdf'}); // Add if successful
+      } catch (error) {
+        console.error(`Error checking PDF URL ${url}:`, error);
+      }
     }
   }
 
-  return Urls;
+  return urls;
 }
 
-async function downloadFile(Url, Path) {
-  // opening the file in write mode
-  const file = createWriteStream(Path);
+async function retryOnTimeout(url, maxRetries = 5, backoff = 2000) {
+  let retryCount = 0;
 
-  // downloading the file
-  const q = url.parse(Url, true);
-  const options = {
-    hostname: q.hostname,
-    port: q.port,
-    path: q.pathname + q.search,
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+  while (retryCount < maxRetries) {
+    try {
+      const jitter = Math.random() * jitterMultiplier * 2;
+      await new Promise((resolve) => setTimeout(resolve, jitter));
 
-  const jitter = Math.random() * jitterMultiplier;
-  await new Promise((resolve) => setTimeout(resolve, jitter));
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 60000);
 
-  return new Promise((resolve, reject) => {
-    const req = https.request(options, (res) => {
-      res.pipe(file);
-      file.on('finish', () => {
-        file.close();
-        resolve();
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          Connection: 'keep-alive',
+          'User-Agent': 'MyScript/1.0',
+        },
       });
-    });
 
-    req.on('error', (err) => {
-      fs.unlink(buildPath, () => {});
-      reject(err);
-    });
+      clearTimeout(timeout);
+      return response;
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        // Check specifically for AbortError
+        retryCount++;
+        const backoffTime = Math.min(backoff * Math.pow(2, retryCount), 30000);
+        console.warn(
+          `Timeout, retrying ${url} after ${backoffTime}ms (attempt ${retryCount + 1}/${maxRetries})`,
+        );
+        await new Promise((resolve) => setTimeout(resolve, backoffTime));
+      } else {
+        console.error(`Error fetching ${url}:`, error);
+        throw error;
+      }
+    }
+  }
 
-    req.end();
-  });
+  throw new Error(`Failed to fetch ${url} after ${maxRetries} retries`);
 }
 
-async function replaceURL(Url, Path, filePath) {
-  // read the file content
+async function downloadFile(url, downloadPath) {
+  const file = createWriteStream(downloadPath);
+
+  try {
+    const response = await retryOnTimeout(url);
+    response.body.pipe(file);
+
+    await new Promise((resolve, reject) => {
+      file.on('finish', resolve);
+      file.on('error', reject);
+    });
+
+    console.log(`Downloaded: ${url} to ${downloadPath}`); // Log successful download
+  } catch (error) {
+    console.error(`Error downloading ${url}:`, error);
+
+    try {
+      await unlink(downloadPath);
+    } catch (unlinkError) {
+      if (unlinkError.code !== 'ENOENT') {
+        console.error(`Error deleting file ${downloadPath}:`, unlinkError);
+      }
+    }
+    throw error;
+  } finally {
+    file.close();
+  }
+}
+
+async function replaceURL(url, relativePath, filePath) {
   const fileContent = await readFile(filePath, 'utf8');
-
-  // replace the file Url with the file Path
-  const newFileContent = fileContent.replace(Url, Path);
-
-  // write the new file content
+  const newFileContent = fileContent.replace(url, relativePath);
   await writeFile(filePath, newFileContent);
 }
 
@@ -239,5 +198,5 @@ if (process.env.PUBLIC_ADAPTER === 'STATIC') {
 
 process.on('unhandledRejection', (error) => {
   console.error('Unhandled Promise Rejection:', error);
-  process.exit(1); // Exit with a non-zero status code to indicate an error
+  process.exit(1);
 });
