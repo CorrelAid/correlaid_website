@@ -1,5 +1,6 @@
 import glob from 'tiny-glob';
 import {createWriteStream} from 'fs';
+import {existsSync} from 'fs';
 import {mkdir} from 'node:fs/promises';
 import {readFile, writeFile, unlink} from 'fs/promises';
 import * as url from 'url';
@@ -17,7 +18,8 @@ dotenv.config({
 dotenv.config({path: path.resolve(process.cwd(), '.env.local')});
 dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
-const jitterMultiplier = 1200;
+const downloadCache = new Map();
+const urlToPathCache = new Map();
 
 const URL = `${process.env.PUBLIC_API_URL}/assets`;
 
@@ -47,7 +49,7 @@ async function postbuild() {
     );
     console.log(`Processing ${targetFiles.length} files...`);
 
-    const concurrencyLimit = 10;
+    const concurrencyLimit = 7;
     const queue = [];
     let activePromises = 0;
     let completedFiles = 0;
@@ -102,23 +104,48 @@ async function processFile(filePath, fileContent) {
   if (urls.length > 0) {
     for (const {url, type} of urls) {
       const cleanedUrl = url.replace(/\\u002F/g, '/').split('?')[0];
-
       let downloadPath = cleanedUrl.replace(
         URL,
         `${process.cwd()}/${newAssetsDirectory}`,
       );
       downloadPath += type === 'image' ? '.webp' : '.pdf';
 
-      await downloadFile(url, downloadPath);
+      try {
+        // Check cache first
+        if (urlToPathCache.has(url)) {
+          const cachedPath = urlToPathCache.get(url);
+          await replaceURL(url, cachedPath, filePath);
+          continue;
+        }
 
-      let relativePath = downloadPath.replace(
-        `${process.cwd()}/${buildDirectory}`,
-        '',
-      );
-      if (!relativePath.startsWith('/assets')) {
-        relativePath = relativePath.substring(relativePath.indexOf('/'));
+        // Check if file already exists
+        if (existsSync(downloadPath)) {
+          let relativePath = downloadPath.replace(
+            `${process.cwd()}/${buildDirectory}`,
+            '',
+          );
+          if (!relativePath.startsWith('/assets')) {
+            relativePath = relativePath.substring(relativePath.indexOf('/'));
+          }
+          urlToPathCache.set(url, relativePath);
+          await replaceURL(url, relativePath, filePath);
+          continue;
+        }
+
+        await queueDownload(url, downloadPath);
+
+        let relativePath = downloadPath.replace(
+          `${process.cwd()}/${buildDirectory}`,
+          '',
+        );
+        if (!relativePath.startsWith('/assets')) {
+          relativePath = relativePath.substring(relativePath.indexOf('/'));
+        }
+        urlToPathCache.set(url, relativePath);
+        await replaceURL(url, relativePath, filePath);
+      } catch (error) {
+        console.error(`Failed to process ${url}:`, error);
       }
-      await replaceURL(url, relativePath, filePath);
     }
   }
 }
@@ -137,8 +164,17 @@ async function findUrls(fileContent, filePath) {
       urls.push({url: url, type: 'image'});
     } else {
       try {
-        await retryOnTimeout(url);
-        urls.push({url: url, type: 'pdf'});
+        // Just do a HEAD request to check if it's accessible
+        const response = await fetch(url, {
+          method: 'HEAD',
+          headers: {
+            'User-Agent': getRandomUserAgent(),
+            Connection: 'keep-alive',
+          },
+        });
+        if (response.ok) {
+          urls.push({url: url, type: 'pdf'});
+        }
       } catch (error) {
         console.error(`Error checking PDF URL ${url}:`, error);
       }
@@ -161,104 +197,56 @@ const getRandomUserAgent = () => {
   return `CorrelAidWebsiteImgDl/${version}.${subversion}`;
 };
 
-async function retryOnTimeout(url, maxRetries = 5, initialBackoff = 2000) {
-  let retryCount = 0;
-  const maxBackoff = 20000;
-  const assetId = url.split('/assets/')[1]?.split('?')[0];
-
-  while (retryCount < maxRetries) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 60000);
-
-    try {
-      const jitter = Math.random() * jitterMultiplier;
-      await new Promise((resolve) => setTimeout(resolve, jitter));
-
-      const response = await fetch(url, {
-        signal: controller.signal,
-        headers: {
-          'User-Agent': getRandomUserAgent(),
-          'Accept-Encoding': 'gzip,deflate',
-          'Cache-Control': 'no-cache',
-          Pragma: 'no-cache',
-          Accept: '*/*',
-        },
-        keepalive: true,
-      });
-
-      clearTimeout(timeout);
-
-      // Handle 403 errors
-      if (response.status === 403) {
-        if (assetId) {
-          const currentCount = asset403Counts.get(assetId) || 0;
-          asset403Counts.set(assetId, currentCount + 1);
-
-          if (currentCount + 1 >= 2) {
-            console.log(
-              `Asset ${assetId} failed twice with 403, trying fallback asset: ${REPLACEMENT_ASSET_ID}`,
-            );
-            const newUrl = cleanupUrl(
-              url.replace(assetId, REPLACEMENT_ASSET_ID),
-            );
-            return retryOnTimeout(newUrl, maxRetries, initialBackoff);
-          }
-        }
-        throw new Error(`HTTP error! status: 403`);
-      }
-
-      // Handle rate limiting
-      if (response.status === 429) {
-        const retryAfter = response.headers.get('Retry-After');
-        const waitTime = retryAfter
-          ? parseInt(retryAfter) * 1000
-          : initialBackoff;
-        await new Promise((resolve) => setTimeout(resolve, waitTime));
-        continue;
-      }
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return response;
-    } catch (error) {
-      clearTimeout(timeout);
-
-      retryCount++;
-
-      if (retryCount === maxRetries) {
-        throw new Error(
-          `Failed to fetch ${url} after ${maxRetries} retries: ${error.message}`,
-        );
-      }
-
-      const backoffTime = Math.min(
-        initialBackoff * Math.pow(2, retryCount) +
-          Math.random() * jitterMultiplier,
-        maxBackoff,
-      );
-
-      console.warn(
-        `Attempt ${retryCount}/${maxRetries} failed for ${url}. Retrying in ${backoffTime}ms. Error: ${error.message}`,
-      );
-
-      await new Promise((resolve) => setTimeout(resolve, backoffTime));
-    }
-  }
-}
-
 async function downloadFile(url, downloadPath) {
   try {
-    const response = await retryOnTimeout(url);
+    // 1. Increase fetch timeout and add keep-alive
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 300000); // 5 minutes for large files
+
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        'User-Agent': getRandomUserAgent(),
+        'Accept-Encoding': 'gzip,deflate',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+        'Keep-Alive': 'timeout=300', // 5 minutes keep-alive
+        Accept: '*/*',
+      },
+      compress: true,
+      timeout: 300000,
+    });
+
+    clearTimeout(timeout);
+
     await mkdir(path.dirname(downloadPath), {recursive: true});
-    const fileStream = createWriteStream(downloadPath);
 
     return new Promise((resolve, reject) => {
-      const stream = response.body;
+      const fileStream = createWriteStream(downloadPath, {
+        flags: 'w',
+        encoding: 'binary',
+        mode: 0o666,
+        autoClose: true,
+        highWaterMark: 64 * 1024, // 64KB buffer
+      });
 
-      // Handle backpressure
+      const stream = response.body;
+      let downloadedSize = 0;
+      const totalSize = parseInt(response.headers.get('content-length') || '0');
+
+      const cleanup = (error) => {
+        clearTimeout(timeout);
+        stream.destroy();
+        fileStream.destroy();
+        if (error) {
+          unlink(downloadPath).catch(() => {});
+          reject(error);
+        }
+      };
+
       stream.on('data', (chunk) => {
+        downloadedSize += chunk.length;
+
         if (!fileStream.write(chunk)) {
           stream.pause();
         }
@@ -273,12 +261,133 @@ async function downloadFile(url, downloadPath) {
         resolve();
       });
 
-      stream.on('error', reject);
-      fileStream.on('error', reject);
+      stream.on('error', (error) => {
+        console.error(`Stream error for ${url}:`, error);
+        cleanup(error);
+      });
+
+      fileStream.on('error', (error) => {
+        console.error(`File stream error for ${downloadPath}:`, error);
+        cleanup(error);
+      });
+
+      const downloadTimeout = setTimeout(() => {
+        cleanup(new Error(`Download timeout after 5 minutes: ${url}`));
+      }, 300000);
+
+      fileStream.on('finish', () => {
+        clearTimeout(downloadTimeout);
+        resolve();
+      });
     });
   } catch (error) {
+    console.error(`Download failed for ${url}:`, error);
     await unlink(downloadPath).catch(() => {});
     throw error;
+  }
+}
+
+async function retryOnTimeout(url, downloadPath, maxRetries = 3) {
+  let retryCount = 0;
+  const assetId = url.split('/assets/')[1]?.split('?')[0];
+
+  while (retryCount < maxRetries) {
+    try {
+      const headResponse = await fetch(url, {
+        method: 'HEAD',
+        headers: {
+          'User-Agent': getRandomUserAgent(),
+          Connection: 'keep-alive',
+        },
+      });
+
+      // Handle 403 errors
+      if (headResponse.status === 403) {
+        if (assetId) {
+          const currentCount = asset403Counts.get(assetId) || 0;
+          asset403Counts.set(assetId, currentCount + 1);
+
+          if (currentCount + 1 >= 2) {
+            console.log(
+              `Asset ${assetId} failed twice with 403, trying fallback asset: ${REPLACEMENT_ASSET_ID}`,
+            );
+            const newUrl = cleanupUrl(
+              url.replace(assetId, REPLACEMENT_ASSET_ID),
+            );
+            return retryOnTimeout(newUrl, downloadPath, maxRetries);
+          }
+        }
+        throw new Error(`HTTP error! status: 403`);
+      }
+
+      // Handle rate limiting
+      if (headResponse.status === 429) {
+        const retryAfter = headResponse.headers.get('Retry-After');
+        const waitTime = retryAfter ? parseInt(retryAfter) * 1000 : 5000;
+        await new Promise((resolve) => setTimeout(resolve, waitTime));
+        continue;
+      }
+
+      if (!headResponse.ok) {
+        throw new Error(`HTTP error! status: ${headResponse.status}`);
+      }
+
+      const fileSize = parseInt(
+        headResponse.headers.get('content-length') || '0',
+      );
+
+      // Clean up URL before download
+      const cleanedUrl = cleanupUrl(url);
+
+      // Adjust strategy based on file size
+      if (fileSize > 5 * 1024 * 1024) {
+        console.log(
+          `Large file detected (${fileSize} bytes), using chunked download`,
+        );
+        return downloadFile(cleanedUrl, downloadPath);
+      }
+
+      // Regular download for smaller files
+      return await downloadFile(cleanedUrl, downloadPath);
+    } catch (error) {
+      retryCount++;
+
+      if (retryCount === maxRetries) {
+        throw error;
+      }
+
+      const backoffTime = 5000 * Math.pow(2, retryCount);
+      console.warn(
+        `Retry ${retryCount}/${maxRetries} for ${url} in ${backoffTime}ms`,
+      );
+      await new Promise((resolve) => setTimeout(resolve, backoffTime));
+    }
+  }
+}
+
+// 7. Add queue management for concurrent downloads
+const downloadQueue = new Map();
+const maxConcurrentDownloads = 2; // Reduce concurrent downloads
+let activeDownloads = 0;
+
+async function queueDownload(url, downloadPath) {
+  // Check download cache
+  if (downloadCache.has(url)) {
+    return downloadCache.get(url);
+  }
+
+  while (activeDownloads >= maxConcurrentDownloads) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+
+  activeDownloads++;
+  try {
+    const downloadPromise = retryOnTimeout(url, downloadPath);
+    downloadCache.set(url, downloadPromise);
+    await downloadPromise;
+    return downloadPromise;
+  } finally {
+    activeDownloads--;
   }
 }
 
