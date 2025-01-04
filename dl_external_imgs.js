@@ -29,22 +29,6 @@ const REPLACEMENT_ASSET_ID = 'a525ce03-7e70-446f-9eff-1edd222aa002';
 
 const startTime = Date.now();
 
-function formatDuration(ms) {
-  const seconds = Math.floor(ms / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-
-  const remainingMinutes = minutes % 60;
-  const remainingSeconds = seconds % 60;
-
-  const parts = [];
-  if (hours > 0) parts.push(`${hours}h`);
-  if (remainingMinutes > 0) parts.push(`${remainingMinutes}m`);
-  parts.push(`${remainingSeconds}s`);
-
-  return parts.join(' ');
-}
-
 async function postbuild() {
   console.log('Starting replacement of files from external sources');
 
@@ -104,7 +88,6 @@ async function postbuild() {
     }
 
     const duration = Date.now() - startTime;
-    console.log(`\nCompleted in ${formatDuration(duration)}`);
     console.log(`Files processed: ${completedFiles}/${targetFiles.length}`);
     process.exit();
   } catch (error) {
@@ -194,14 +177,13 @@ async function retryOnTimeout(url, maxRetries = 5, initialBackoff = 2000) {
       const response = await fetch(url, {
         signal: controller.signal,
         headers: {
-          Connection: 'close',
           'User-Agent': getRandomUserAgent(),
           'Accept-Encoding': 'gzip,deflate',
           'Cache-Control': 'no-cache',
           Pragma: 'no-cache',
           Accept: '*/*',
         },
-        keepalive: false,
+        keepalive: true,
       });
 
       clearTimeout(timeout);
@@ -267,37 +249,34 @@ async function retryOnTimeout(url, maxRetries = 5, initialBackoff = 2000) {
 }
 
 async function downloadFile(url, downloadPath) {
-  let fileStream;
   try {
     const response = await retryOnTimeout(url);
     await mkdir(path.dirname(downloadPath), {recursive: true});
-    fileStream = createWriteStream(downloadPath);
+    const fileStream = createWriteStream(downloadPath);
 
     return new Promise((resolve, reject) => {
-      const stream = response.body.pipe(fileStream);
+      const stream = response.body;
 
-      // Add error handler for the response body
-      response.body.on('error', (error) => {
-        fileStream.close();
-        unlink(downloadPath).catch(console.error);
-        reject(error);
+      // Handle backpressure
+      stream.on('data', (chunk) => {
+        if (!fileStream.write(chunk)) {
+          stream.pause();
+        }
       });
 
-      stream.on('finish', () => {
-        fileStream.close();
+      fileStream.on('drain', () => {
+        stream.resume();
+      });
+
+      stream.on('end', () => {
+        fileStream.end();
         resolve();
       });
 
-      stream.on('error', (error) => {
-        fileStream.close();
-        unlink(downloadPath).catch(console.error);
-        reject(error);
-      });
+      stream.on('error', reject);
+      fileStream.on('error', reject);
     });
   } catch (error) {
-    if (fileStream) {
-      fileStream.close();
-    }
     await unlink(downloadPath).catch(() => {});
     throw error;
   }
