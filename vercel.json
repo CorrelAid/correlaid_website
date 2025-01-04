@@ -1,13 +1,8 @@
 {
+  "version": 2,
   "github": {
     "enabled": false
   },
-  "builds": [
-    {
-      "src": "build/**",
-      "use": "@vercel/static"
-    }
-  ],
   "redirects": [
     {
       "source": "/stats/js/script.js",
