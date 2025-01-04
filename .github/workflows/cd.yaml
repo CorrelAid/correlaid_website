@@ -33,7 +33,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run tests on static build
+      - name: Build website
         env:
           PUBLIC_API_URL: https://cms.correlaid.org
           PUBLIC_PRERENDER: ALL
@@ -41,7 +41,11 @@ jobs:
           PUBLIC_PREVIEW: FALSE
           PUBLIC_ON_CMS_ERROR: FAIL
           DIRECTUS_TOKEN: ${{ secrets.DIRECTUS_TOKEN }}
-        run: npm run build-and-test
+          BUILD_DIR: 'build/'
+        run: npm run build
+
+      - name: Run tests on static build
+        run: npm run e2e
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -53,6 +57,7 @@ jobs:
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
+          scope: ${{ secrets.ORG_ID }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID }}
           vercel-project-id: ${{ secrets.PROJECT_ID }}
