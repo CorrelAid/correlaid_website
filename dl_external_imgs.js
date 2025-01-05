@@ -26,7 +26,6 @@ import path from 'node:path';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 
-// Configuration constants
 const CONFIG = {
   FILE_CONCURRENCY: 7, // Number of concurrent file processes
   DOWNLOAD_CONCURRENCY: 2, // Number of concurrent downloads
@@ -35,9 +34,9 @@ const CONFIG = {
   DOWNLOAD_TIMEOUT: 300000, // Download timeout in ms (5 minutes)
   JITTER_MAX: 3000, // Maximum jitter in ms
   JITTER_MIN: 500, // Minimum jitter in ms
+  LARGE_FILE_DEF: 1 * 1024 * 1024,
 };
 
-// Utility function to add jitter to delays
 const addJitter = (baseDelay) => {
   const jitter =
     Math.random() * (CONFIG.JITTER_MAX - CONFIG.JITTER_MIN) + CONFIG.JITTER_MIN;
@@ -224,13 +223,50 @@ const getRandomUserAgent = () => {
   return `CorrelAidWebsiteImgDl/${version}.${subversion}`;
 };
 
-async function downloadFile(url, downloadPath) {
+async function downloadLargeFile(url, downloadPath, fileSize) {
+  const chunkSize = 10 * 1024 * 1024; // 10 MB chunks
+  let start = 0;
+  let end = chunkSize - 1;
+
+  await mkdir(path.dirname(downloadPath), {recursive: true});
+  const fileStream = createWriteStream(downloadPath, {flags: 'w'});
+
+  while (start < fileSize) {
+    if (end >= fileSize) {
+      end = fileSize - 1;
+    }
+
+    const response = await fetch(url, {
+      headers: {
+        Range: `bytes=${start}-${end}`,
+        'User-Agent': getRandomUserAgent(),
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to download chunk ${start}-${end}: ${response.statusText}`,
+      );
+    }
+
+    const chunk = await response.buffer();
+    fileStream.write(chunk);
+
+    start = end + 1;
+    end = start + chunkSize - 1;
+  }
+
+  fileStream.end();
+}
+
+async function downloadFile(
+  url,
+  downloadPath,
+  timeout = CONFIG.DOWNLOAD_TIMEOUT,
+) {
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(
-      () => controller.abort(),
-      CONFIG.DOWNLOAD_TIMEOUT,
-    );
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
 
     const response = await fetch(url, {
       signal: controller.signal,
@@ -243,10 +279,9 @@ async function downloadFile(url, downloadPath) {
         Accept: '*/*',
       },
       compress: true,
-      timeout: CONFIG.DOWNLOAD_TIMEOUT,
     });
 
-    clearTimeout(timeout);
+    clearTimeout(timeoutId);
 
     await mkdir(path.dirname(downloadPath), {recursive: true});
 
@@ -256,56 +291,15 @@ async function downloadFile(url, downloadPath) {
         encoding: 'binary',
         mode: 0o666,
         autoClose: true,
-        highWaterMark: 64 * 1024, // 64KB buffer
+        highWaterMark: 64 * 1024,
       });
 
-      const stream = response.body;
-      let downloadedSize = 0;
-      const totalSize = parseInt(response.headers.get('content-length') || '0');
+      response.body.pipe(fileStream);
 
-      const cleanup = (error) => {
-        clearTimeout(timeout);
-        stream.destroy();
-        fileStream.destroy();
-        if (error) {
-          unlink(downloadPath).catch(() => {});
-          reject(error);
-        }
-      };
-
-      stream.on('data', (chunk) => {
-        downloadedSize += chunk.length;
-        if (!fileStream.write(chunk)) {
-          stream.pause();
-        }
-      });
-
-      fileStream.on('drain', () => {
-        stream.resume();
-      });
-
-      stream.on('end', () => {
-        fileStream.end();
-        resolve();
-      });
-
-      stream.on('error', (error) => {
-        console.error(`Stream error for ${url}:`, error);
-        cleanup(error);
-      });
-
-      fileStream.on('error', (error) => {
-        console.error(`File stream error for ${downloadPath}:`, error);
-        cleanup(error);
-      });
-
-      const downloadTimeout = setTimeout(() => {
-        cleanup(new Error(`Download timeout after 5 minutes: ${url}`));
-      }, CONFIG.DOWNLOAD_TIMEOUT);
-
-      fileStream.on('finish', () => {
-        clearTimeout(downloadTimeout);
-        resolve();
+      fileStream.on('finish', resolve);
+      fileStream.on('error', (err) => {
+        fileStream.close(); // Explicitly close the stream
+        reject(err);
       });
     });
   } catch (error) {
@@ -375,14 +369,20 @@ async function retryOnTimeout(
       );
       const cleanedUrl = cleanupUrl(url);
 
-      if (fileSize > 5 * 1024 * 1024) {
+      // Adjust timeout dynamically based on file size
+      const adjustedTimeout = Math.max(
+        CONFIG.DOWNLOAD_TIMEOUT,
+        fileSize / 1000,
+      );
+
+      if (fileSize > CONFIG.LARGE_FILE_DEF) {
         console.log(
           `Large file detected (${fileSize} bytes), using chunked download`,
         );
-        return downloadFile(cleanedUrl, downloadPath);
+        return downloadLargeFile(cleanedUrl, downloadPath, fileSize);
       }
 
-      return await downloadFile(cleanedUrl, downloadPath);
+      return await downloadFile(cleanedUrl, downloadPath, adjustedTimeout);
     } catch (error) {
       retryCount++;
 
