@@ -1,3 +1,20 @@
+/**
+ * Asset Localization Script for Static Website Build
+ *
+ * This Node.js script handles the localization of external assets:
+ * - Downloads and caches external assets (images and PDFs) from Directus
+ * - Processes HTML and JSON files in a build directory (defaults to '.svelte-kit/cloudflare')
+ * - Replaces remote URLs with local file paths in the processed files
+ *
+ * Features:
+ * - Concurrent download management
+ * - Error handling with retries
+ * - Rate limiting protection
+ * - Fallback asset replacement for failed downloads (403 errors)
+ * - Progress tracking and logging
+ *
+ * Only runs when PUBLIC_ADAPTER='STATIC'
+ */
 import glob from 'tiny-glob';
 import {createWriteStream} from 'fs';
 import {existsSync} from 'fs';
@@ -8,6 +25,24 @@ import * as https from 'https';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
+
+// Configuration constants
+const CONFIG = {
+  FILE_CONCURRENCY: 7, // Number of concurrent file processes
+  DOWNLOAD_CONCURRENCY: 2, // Number of concurrent downloads
+  MAX_RETRIES: 3, // Maximum number of retry attempts
+  BASE_RETRY_DELAY: 5000, // Base delay for retries in ms
+  DOWNLOAD_TIMEOUT: 300000, // Download timeout in ms (5 minutes)
+  JITTER_MAX: 3000, // Maximum jitter in ms
+  JITTER_MIN: 500, // Minimum jitter in ms
+};
+
+// Utility function to add jitter to delays
+const addJitter = (baseDelay) => {
+  const jitter =
+    Math.random() * (CONFIG.JITTER_MAX - CONFIG.JITTER_MIN) + CONFIG.JITTER_MIN;
+  return baseDelay + jitter;
+};
 
 dotenv.config({
   path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}.local`),
@@ -20,15 +55,11 @@ dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
 const downloadCache = new Map();
 const urlToPathCache = new Map();
-
 const URL = `${process.env.PUBLIC_API_URL}/assets`;
-
 const buildDirectory = process.env.BUILD_DIR || '.svelte-kit/cloudflare';
 const newAssetsDirectory = buildDirectory + '/assets';
-
 const asset403Counts = new Map();
 const REPLACEMENT_ASSET_ID = 'a525ce03-7e70-446f-9eff-1edd222aa002';
-
 const startTime = Date.now();
 
 async function postbuild() {
@@ -49,13 +80,12 @@ async function postbuild() {
     );
     console.log(`Processing ${targetFiles.length} files...`);
 
-    const concurrencyLimit = 7;
     const queue = [];
     let activePromises = 0;
     let completedFiles = 0;
 
     const processQueue = async () => {
-      while (queue.length > 0 && activePromises < concurrencyLimit) {
+      while (queue.length > 0 && activePromises < CONFIG.FILE_CONCURRENCY) {
         const task = queue.shift();
         activePromises++;
 
@@ -86,7 +116,7 @@ async function postbuild() {
     processQueue();
 
     while (queue.length > 0 || activePromises > 0) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, addJitter(100)));
     }
 
     const duration = Date.now() - startTime;
@@ -111,14 +141,12 @@ async function processFile(filePath, fileContent) {
       downloadPath += type === 'image' ? '.webp' : '.pdf';
 
       try {
-        // Check cache first
         if (urlToPathCache.has(url)) {
           const cachedPath = urlToPathCache.get(url);
           await replaceURL(url, cachedPath, filePath);
           continue;
         }
 
-        // Check if file already exists
         if (existsSync(downloadPath)) {
           let relativePath = downloadPath.replace(
             `${process.cwd()}/${buildDirectory}`,
@@ -164,7 +192,6 @@ async function findUrls(fileContent, filePath) {
       urls.push({url: url, type: 'image'});
     } else {
       try {
-        // Just do a HEAD request to check if it's accessible
         const response = await fetch(url, {
           method: 'HEAD',
           headers: {
@@ -199,9 +226,11 @@ const getRandomUserAgent = () => {
 
 async function downloadFile(url, downloadPath) {
   try {
-    // 1. Increase fetch timeout and add keep-alive
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 300000); // 5 minutes for large files
+    const timeout = setTimeout(
+      () => controller.abort(),
+      CONFIG.DOWNLOAD_TIMEOUT,
+    );
 
     const response = await fetch(url, {
       signal: controller.signal,
@@ -210,11 +239,11 @@ async function downloadFile(url, downloadPath) {
         'Accept-Encoding': 'gzip,deflate',
         'Cache-Control': 'no-cache',
         Connection: 'keep-alive',
-        'Keep-Alive': 'timeout=300', // 5 minutes keep-alive
+        'Keep-Alive': 'timeout=300',
         Accept: '*/*',
       },
       compress: true,
-      timeout: 300000,
+      timeout: CONFIG.DOWNLOAD_TIMEOUT,
     });
 
     clearTimeout(timeout);
@@ -246,7 +275,6 @@ async function downloadFile(url, downloadPath) {
 
       stream.on('data', (chunk) => {
         downloadedSize += chunk.length;
-
         if (!fileStream.write(chunk)) {
           stream.pause();
         }
@@ -273,7 +301,7 @@ async function downloadFile(url, downloadPath) {
 
       const downloadTimeout = setTimeout(() => {
         cleanup(new Error(`Download timeout after 5 minutes: ${url}`));
-      }, 300000);
+      }, CONFIG.DOWNLOAD_TIMEOUT);
 
       fileStream.on('finish', () => {
         clearTimeout(downloadTimeout);
@@ -287,12 +315,22 @@ async function downloadFile(url, downloadPath) {
   }
 }
 
-async function retryOnTimeout(url, downloadPath, maxRetries = 3) {
+async function retryOnTimeout(
+  url,
+  downloadPath,
+  maxRetries = CONFIG.MAX_RETRIES,
+) {
   let retryCount = 0;
   const assetId = url.split('/assets/')[1]?.split('?')[0];
 
   while (retryCount < maxRetries) {
     try {
+      if (retryCount > 0) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, addJitter(Math.random() * 1000)),
+        );
+      }
+
       const headResponse = await fetch(url, {
         method: 'HEAD',
         headers: {
@@ -301,7 +339,6 @@ async function retryOnTimeout(url, downloadPath, maxRetries = 3) {
         },
       });
 
-      // Handle 403 errors
       if (headResponse.status === 403) {
         if (assetId) {
           const currentCount = asset403Counts.get(assetId) || 0;
@@ -320,10 +357,11 @@ async function retryOnTimeout(url, downloadPath, maxRetries = 3) {
         throw new Error(`HTTP error! status: 403`);
       }
 
-      // Handle rate limiting
       if (headResponse.status === 429) {
         const retryAfter = headResponse.headers.get('Retry-After');
-        const waitTime = retryAfter ? parseInt(retryAfter) * 1000 : 5000;
+        const waitTime = addJitter(
+          retryAfter ? parseInt(retryAfter) * 1000 : CONFIG.BASE_RETRY_DELAY,
+        );
         await new Promise((resolve) => setTimeout(resolve, waitTime));
         continue;
       }
@@ -335,11 +373,8 @@ async function retryOnTimeout(url, downloadPath, maxRetries = 3) {
       const fileSize = parseInt(
         headResponse.headers.get('content-length') || '0',
       );
-
-      // Clean up URL before download
       const cleanedUrl = cleanupUrl(url);
 
-      // Adjust strategy based on file size
       if (fileSize > 5 * 1024 * 1024) {
         console.log(
           `Large file detected (${fileSize} bytes), using chunked download`,
@@ -347,7 +382,6 @@ async function retryOnTimeout(url, downloadPath, maxRetries = 3) {
         return downloadFile(cleanedUrl, downloadPath);
       }
 
-      // Regular download for smaller files
       return await downloadFile(cleanedUrl, downloadPath);
     } catch (error) {
       retryCount++;
@@ -356,7 +390,9 @@ async function retryOnTimeout(url, downloadPath, maxRetries = 3) {
         throw error;
       }
 
-      const backoffTime = 5000 * Math.pow(2, retryCount);
+      const backoffTime = addJitter(
+        CONFIG.BASE_RETRY_DELAY * Math.pow(2, retryCount),
+      );
       console.warn(
         `Retry ${retryCount}/${maxRetries} for ${url} in ${backoffTime}ms`,
       );
@@ -365,19 +401,16 @@ async function retryOnTimeout(url, downloadPath, maxRetries = 3) {
   }
 }
 
-// 7. Add queue management for concurrent downloads
 const downloadQueue = new Map();
-const maxConcurrentDownloads = 2; // Reduce concurrent downloads
 let activeDownloads = 0;
 
 async function queueDownload(url, downloadPath) {
-  // Check download cache
   if (downloadCache.has(url)) {
     return downloadCache.get(url);
   }
 
-  while (activeDownloads >= maxConcurrentDownloads) {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  while (activeDownloads >= CONFIG.DOWNLOAD_CONCURRENCY) {
+    await new Promise((resolve) => setTimeout(resolve, addJitter(1000)));
   }
 
   activeDownloads++;
@@ -397,7 +430,6 @@ async function replaceURL(url, relativePath, filePath) {
   await writeFile(filePath, newFileContent);
 }
 
-// Update the main execution
 if (process.env.PUBLIC_ADAPTER === 'STATIC') {
   postbuild().catch((error) => {
     console.error('\nScript failed:', error);
