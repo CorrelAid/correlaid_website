@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build && node dl_external_imgs.js",
+    "build": "vite build && node replace_urls.js",
     "preview": "vite preview",
     "format": "npx prettier -w .",
     "format_check": "npx prettier --check .",
