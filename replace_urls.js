@@ -1,19 +1,8 @@
-/**
- * Asset URL Replace Script for Static Website Build
- *
- * This Node.js script handles the replacement of Directus asset URLs with CDN URLs:
- * - Downloads and caches external assets (images and PDFs) from Directus
- * - Processes HTML and JSON files in a build directory
- * - Replaces remote URLs with digital ocean spaces CDN URLS in the processed files
- *
- */
-
 import glob from 'tiny-glob';
 import {readFile, writeFile} from 'fs/promises';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
-import {parse} from 'url';
 
 const CONFIG = {
   MAX_RETRIES: 3,
@@ -22,13 +11,14 @@ const CONFIG = {
   JITTER_MIN: 500,
   FILE_CONCURRENCY: 7,
   CDN_URL: 'correlcms-directus-storage.fra1.cdn.digitaloceanspaces.com/',
+  BATCH_SIZE: 50,
+  CACHE_MAX_SIZE: 1000,
+  REPLACEMENT_ASSET_ID: 'a525ce03-7e70-446f-9eff-1edd222aa002',
 };
 
-const addJitter = (baseDelay) => {
-  const jitter =
-    Math.random() * (CONFIG.JITTER_MAX - CONFIG.JITTER_MIN) + CONFIG.JITTER_MIN;
-  return baseDelay + jitter;
-};
+const urlCache = new Map();
+const processedFiles = new Set();
+const failedUrls = new Set();
 
 dotenv.config({
   path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}.local`),
@@ -39,171 +29,70 @@ dotenv.config({
 dotenv.config({path: path.resolve(process.cwd(), '.env.local')});
 dotenv.config({path: path.resolve(process.cwd(), '.env')});
 
-const urlCache = new Map();
-const URL = `${process.env.PUBLIC_API_URL}/assets`;
-const buildDirectory = process.env.BUILD_DIR || '.svelte-kit/cloudflare';
-const asset403Counts = new Map();
-const REPLACEMENT_ASSET_ID = 'a525ce03-7e70-446f-9eff-1edd222aa002';
-const startTime = Date.now();
+const addJitter = (baseDelay) => {
+  return (
+    baseDelay +
+    Math.random() * (CONFIG.JITTER_MAX - CONFIG.JITTER_MIN) +
+    CONFIG.JITTER_MIN
+  );
+};
 
-async function postbuild() {
-  console.log('Starting replacement of Directus URLs with CDN URLs');
-
+async function validateUrl(url, retryCount = 0) {
   try {
-    const files = await glob('**/*', {
-      cwd: buildDirectory,
-      dot: true,
-      absolute: true,
-      filesOnly: true,
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
+    const response = await fetch(url, {
+      method: 'HEAD',
+      headers: {
+        'User-Agent': `CorrelAidWebsiteImgDl/${process.env.npm_package_version || '1.0.0'}`,
+        Connection: 'keep-alive',
+      },
+      signal: controller.signal,
     });
 
-    const targetFiles = files.filter(
-      (file) => file.endsWith('.json') || file.endsWith('.html'),
-    );
-    console.log(`Processing ${targetFiles.length} files...`);
+    clearTimeout(timeout);
 
-    const queue = [];
-    let activePromises = 0;
-    let completedFiles = 0;
-
-    const processQueue = async () => {
-      while (queue.length > 0 && activePromises < CONFIG.FILE_CONCURRENCY) {
-        const task = queue.shift();
-        activePromises++;
-
-        try {
-          await task();
-          completedFiles++;
-          if (completedFiles % 10 === 0) {
-            console.log(
-              `Processed ${completedFiles}/${targetFiles.length} files`,
-            );
-          }
-        } catch (error) {
-          console.error('Task error:', error);
-        } finally {
-          activePromises--;
-          processQueue();
-        }
-      }
-    };
-
-    targetFiles.forEach((file) => {
-      queue.push(async () => {
-        const fileContent = await readFile(file, 'utf8');
-        await processFile(file, fileContent);
-      });
-    });
-
-    processQueue();
-
-    while (queue.length > 0 || activePromises > 0) {
-      await new Promise((resolve) => setTimeout(resolve, addJitter(100)));
+    if (response.status === 429 && retryCount < CONFIG.MAX_RETRIES) {
+      const retryAfter = parseInt(response.headers.get('Retry-After') || '5');
+      await new Promise((resolve) =>
+        setTimeout(resolve, addJitter(retryAfter * 1000)),
+      );
+      return validateUrl(url, retryCount + 1);
     }
 
-    const duration = Date.now() - startTime;
-    console.log(`Files processed: ${completedFiles}/${targetFiles.length}`);
-    console.log(`Took: ${duration}`);
-    process.exit();
+    return response.status;
   } catch (error) {
-    console.error('\nScript failed with error:', error);
-    throw error;
-  }
-}
-
-async function processFile(filePath, fileContent) {
-  const urls = await findUrls(fileContent, filePath);
-
-  if (urls.length > 0) {
-    for (const {url, type} of urls) {
-      try {
-        if (urlCache.has(url)) {
-          const cdnUrl = urlCache.get(url);
-          await replaceURL(url, cdnUrl, filePath);
-          continue;
-        }
-
-        const cdnUrl = convertToCdnUrl(url, type);
-
-        if (cdnUrl && (await validateCdnUrl(cdnUrl))) {
-          urlCache.set(url, cdnUrl);
-          await replaceURL(url, cdnUrl, filePath);
-        } else {
-          console.error(`Failed to generate or validate CDN URL for ${url}`);
-        }
-      } catch (error) {
-        console.error(`Failed to process ${url}:`, error);
-      }
+    if (retryCount < CONFIG.MAX_RETRIES) {
+      await new Promise((resolve) =>
+        setTimeout(resolve, addJitter(CONFIG.BASE_RETRY_DELAY)),
+      );
+      return validateUrl(url, retryCount + 1);
     }
+    console.error(`Failed to validate URL ${url}:`, error);
+    return 500;
   }
 }
 
-function convertToCdnUrl(urlString, type) {
+const convertToCdnUrl = (urlString, type) => {
   try {
-    const parsedUrl = parse(urlString);
-    const assetId = parsedUrl.pathname.split('/assets/')[1]?.split('?')[0];
+    const url = new URL(urlString);
+    const pathParts = url.pathname.split('/assets/');
+    if (pathParts.length !== 2) return null;
+
+    const assetId = pathParts[1].split('?')[0];
+    if (!assetId) return null;
+
     const cdnUrl = `https://${CONFIG.CDN_URL}/${assetId}`;
-
-    if (type === 'image') {
-      return `${cdnUrl}.webp`;
-    }
-
-    return `${cdnUrl}.pdf`;
+    return type === 'image' ? `${cdnUrl}.webp` : `${cdnUrl}.pdf`;
   } catch (error) {
     console.error(`Error converting URL ${urlString}:`, error);
     return null;
   }
-}
-
-async function validateCdnUrl(url, retryCount = 0) {
-  try {
-    const response = await fetch(url, {
-      method: 'HEAD',
-      headers: {
-        'User-Agent': getRandomUserAgent(),
-        Connection: 'keep-alive',
-      },
-    });
-    if (response.status === 403) {
-      const assetId = url.split(`${CONFIG.CDN_URL}/`)[1]?.split('?')[0];
-      if (assetId) {
-        const currentCount = asset403Counts.get(assetId) || 0;
-        asset403Counts.set(assetId, currentCount + 1);
-
-        if (currentCount + 1 >= 2) {
-          console.log(
-            `Asset ${assetId} failed twice with 403, trying fallback asset`,
-          );
-          const newUrl = url.replace(assetId, REPLACEMENT_ASSET_ID);
-          return validateCdnUrl(newUrl, retryCount);
-        }
-      }
-      return false;
-    }
-
-    if (response.status === 429 && retryCount < CONFIG.MAX_RETRIES) {
-      const retryAfter = response.headers.get('Retry-After');
-      const waitTime = addJitter(
-        retryAfter ? parseInt(retryAfter) * 1000 : CONFIG.BASE_RETRY_DELAY,
-      );
-      await new Promise((resolve) => setTimeout(resolve, waitTime));
-      return validateCdnUrl(url, retryCount + 1);
-    }
-
-    return response.ok;
-  } catch (error) {
-    console.error(`Error validating CDN URL ${url}:`, error);
-    return false;
-  }
-}
-
-const getRandomUserAgent = () => {
-  const version = 1;
-  const subversion = Math.floor(Math.random() * 9) + 1;
-  return `CorrelAidWebsiteImgDl/${version}.${subversion}`;
 };
 
-async function findUrls(fileContent, filePath) {
+async function findUrls(fileContent) {
+  const URL = `${process.env.PUBLIC_API_URL}/assets`;
   let urlRegexString = URL.replace(/\//g, '(?:\\/|\\\\u002F)');
   urlRegexString = `${urlRegexString}(?:[^"\\s\\\\)]*)`;
   const urlRegex = new RegExp(urlRegexString, 'g');
@@ -213,20 +102,138 @@ async function findUrls(fileContent, filePath) {
 
   while ((match = urlRegex.exec(fileContent))) {
     const url = match[0];
-    if (url.includes('format=webp')) {
-      urls.push({url: url, type: 'image'});
-    } else {
-      urls.push({url: url, type: 'pdf'});
-    }
+    urls.push({
+      url,
+      type: url.includes('format=webp') ? 'image' : 'pdf',
+    });
   }
 
   return urls;
 }
 
 async function replaceURL(originalUrl, cdnUrl, filePath) {
-  const fileContent = await readFile(filePath, 'utf8');
-  const newFileContent = fileContent.replace(originalUrl, cdnUrl);
-  await writeFile(filePath, newFileContent);
+  try {
+    const fileContent = await readFile(filePath, 'utf8');
+    const newFileContent = fileContent.replace(originalUrl, cdnUrl);
+    await writeFile(filePath, newFileContent);
+    return true;
+  } catch (error) {
+    console.error(`Failed to replace URL in ${filePath}:`, error);
+    return false;
+  }
+}
+
+async function processFile(filePath) {
+  if (processedFiles.has(filePath)) return;
+
+  try {
+    const fileContent = await readFile(filePath, 'utf8');
+    const urls = await findUrls(fileContent);
+
+    if (urls.length === 0) {
+      processedFiles.add(filePath);
+      return;
+    }
+
+    for (const {url, type} of urls) {
+      if (urlCache.has(url)) {
+        await replaceURL(url, urlCache.get(url), filePath);
+        continue;
+      }
+
+      if (urlCache.size >= CONFIG.CACHE_MAX_SIZE) {
+        urlCache.clear();
+      }
+
+      const cdnUrl = convertToCdnUrl(url, type);
+      if (!cdnUrl) {
+        failedUrls.add(url);
+        continue;
+      }
+
+      const status = await validateUrl(cdnUrl);
+
+      if (status === 200) {
+        urlCache.set(url, cdnUrl);
+        await replaceURL(url, cdnUrl, filePath);
+      } else if (status === 404) {
+        const assetId = new URL(url).pathname
+          .split('/assets/')[1]
+          ?.split('?')[0];
+        console.log(
+          `Asset ${assetId} failed under ${url} with 404, trying fallback asset`,
+        );
+
+        var fallbackUrl = url.replace(assetId, CONFIG.REPLACEMENT_ASSET_ID);
+        fallbackUrl = `${fallbackUrl.split('?')[0]}?format=webp`;
+        const fallbackStatus = await validateUrl(fallbackUrl);
+        if (fallbackStatus === 200) {
+          urlCache.set(url, fallbackUrl);
+          await replaceURL(url, fallbackUrl, filePath);
+        } else {
+          failedUrls.add(url);
+          console.error(
+            `Fallback asset url: ${fallbackUrl}  failed with status ${fallbackStatus}`,
+          );
+        }
+      } else {
+        failedUrls.add(url);
+      }
+    }
+
+    processedFiles.add(filePath);
+  } catch (error) {
+    console.error(`Error processing file ${filePath}:`, error);
+    throw error;
+  }
+}
+
+async function processFiles(files) {
+  const batches = [];
+  for (let i = 0; i < files.length; i += CONFIG.BATCH_SIZE) {
+    batches.push(files.slice(i, i + CONFIG.BATCH_SIZE));
+  }
+
+  let processed = 0;
+  for (const batch of batches) {
+    await Promise.all(
+      batch.map((file) =>
+        processFile(file).catch((error) => {
+          console.error(`Error processing file ${file}:`, error);
+        }),
+      ),
+    );
+    processed += batch.length;
+    console.log(`Processed ${processed}/${files.length} files`);
+  }
+}
+
+async function postbuild() {
+  console.time('postbuild');
+  try {
+    const files = await glob('**/*', {
+      cwd: process.env.BUILD_DIR || '.svelte-kit/cloudflare',
+      dot: true,
+      absolute: true,
+      filesOnly: true,
+    });
+
+    const targetFiles = files.filter(
+      (file) =>
+        !processedFiles.has(file) &&
+        (file.endsWith('.json') || file.endsWith('.html')),
+    );
+
+    console.log(`Processing ${targetFiles.length} files...`);
+    await processFiles(targetFiles);
+
+    console.log(`Successfully processed: ${processedFiles.size} files`);
+    console.log(`Failed URLs: ${failedUrls.size}`);
+    console.timeEnd('postbuild');
+  } catch (error) {
+    console.error('Postbuild failed:', error);
+    process.exit(1);
+  }
 }
 
 if (process.env.PUBLIC_ADAPTER === 'STATIC') {
