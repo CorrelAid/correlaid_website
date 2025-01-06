@@ -9,7 +9,7 @@ const CONFIG = {
   BASE_RETRY_DELAY: 5000,
   JITTER_MAX: 3000,
   JITTER_MIN: 500,
-  FILE_CONCURRENCY: 7,
+  FILE_CONCURRENCY: 3,
   CDN_URL: 'correlcms-directus-storage.fra1.cdn.digitaloceanspaces.com/',
   BATCH_SIZE: 50,
   CACHE_MAX_SIZE: 1000,
