@@ -40,13 +40,12 @@ const addJitter = (baseDelay) => {
 async function validateUrl(url, retryCount = 0) {
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    const timeout = setTimeout(() => controller.abort(), 5000); // Reduced timeout for HEAD request
 
     const response = await fetch(url, {
       method: 'HEAD',
       headers: {
         'User-Agent': `CorrelAidWebsiteImgDl/${process.env.npm_package_version || '1.0.0'}`,
-        Connection: 'keep-alive',
       },
       signal: controller.signal,
     });
