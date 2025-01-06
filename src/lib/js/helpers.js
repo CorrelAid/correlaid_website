@@ -210,7 +210,7 @@ export function getTranslation(entry, currentLanguage) {
 }
 
 export function processHtml(html) {
-  if (typeof html === 'undefined' || html === '') {
+  if (typeof html === 'undefined' || html == '') {
     throw new Error('HTML must be defined');
   }
   const $ = cheerio.load(html);

@@ -31,7 +31,9 @@
   </div>
 </div>
 <div class="container mx-auto">
-  <Html source={description} options={'px-0 mb-12'} />
+  {#if description}
+    <Html source={description} options={'px-0 mb-12'} />
+  {/if}
   {#if projects.length !== 0}
     <div class=" mb-12 space-y-8 px-4">
       <div class="mb-12">
