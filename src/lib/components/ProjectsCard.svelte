@@ -63,7 +63,9 @@
         <Tag text={tag} color="bg-secondary" />
       {/each}
     </div>
-    <Html source={teaser} options={'line-clamp-3 !px-0 my-3'} />
+    <span class="my-3 line-clamp-3 !px-0 leading-normal text-base-content"
+      >{teaser}</span
+    >
     {#if projectOutputs && procLocalChapters.length !== 0}
       <div class="pb-3">
         {#each procLocalChapters as lc, i}
