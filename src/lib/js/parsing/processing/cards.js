@@ -144,7 +144,7 @@ export function processProjects(project, locale) {
 
   return {
     title: project.translations[0].title,
-    summary: project.translations[0].summary,
+    teaser: project.translations[0].teaser,
     href: href,
     teamSelection: teamSelection,
     projectTypes: transformTypes(project.translations[0].type),
