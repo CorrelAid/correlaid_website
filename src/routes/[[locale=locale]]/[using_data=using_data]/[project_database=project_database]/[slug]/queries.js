@@ -64,6 +64,7 @@ query Project(
 			title
 			description
 			summary
+			teaser
 			type
 			data
 		}

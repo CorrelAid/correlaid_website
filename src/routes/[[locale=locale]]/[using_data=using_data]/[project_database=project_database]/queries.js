@@ -41,7 +41,7 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		}
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
 			title
-			summary
+			teaser
 			type
 			data
 		}

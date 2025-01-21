@@ -76,7 +76,7 @@ export const projectsSchema = yup.object({
   isInternal: yup.boolean().required(),
   endDate: yup.date().required(),
   organization: yup.string().required(),
-  summary: yup.string().required(),
+  teaser: yup.string().required(),
   procLocalChapters: yup.array().of(localChaptersSchema),
   localChapterNames: yup.array().of(yup.string()),
   href: yup.string().required(),

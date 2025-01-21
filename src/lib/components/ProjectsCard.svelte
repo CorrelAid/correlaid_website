@@ -12,7 +12,7 @@
   export let projectTypes;
   export let isInternal;
   export let organization;
-  export let summary;
+  export let teaser;
   export let teamSelection;
   export let procLocalChapters = [];
   export let href;
@@ -63,7 +63,7 @@
         <Tag text={tag} color="bg-secondary" />
       {/each}
     </div>
-    <Html source={summary} options={'line-clamp-3 !px-0 my-3'} />
+    <Html source={teaser} options={'line-clamp-3 !px-0 my-3'} />
     {#if projectOutputs && procLocalChapters.length !== 0}
       <div class="pb-3">
         {#each procLocalChapters as lc, i}
