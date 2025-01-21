@@ -83,6 +83,7 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 					title
 					description
 					summary
+					teaser
 					type
 					data
 				}
