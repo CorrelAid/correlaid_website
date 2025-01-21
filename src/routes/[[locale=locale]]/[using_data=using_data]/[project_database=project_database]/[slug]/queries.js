@@ -13,6 +13,8 @@ query Project(
 		project_status
 		application_link
 		is_internal
+		data_types
+		project_types
 		Podcast {
 			soundcloud_link
 		}
@@ -65,8 +67,6 @@ query Project(
 			description
 			summary
 			teaser
-			type
-			data
 		}
 		Local_Chapters {
 			Local_Chapters_id {

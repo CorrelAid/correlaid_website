@@ -52,6 +52,18 @@ export function processPeople(data, personOnly) {
   return personParams;
 }
 
+export function getProjectTypeTranslations(projectTypes, locale) {
+  return projectTypes.map(
+    (type) => translate(locale, `project_type.${type}`, {}).text,
+  );
+}
+
+export function getDataTypeTranslations(dataTypes, locale) {
+  return dataTypes.map(
+    (type) => translate(locale, `data_type.${type}`, {}).text,
+  );
+}
+
 export function processOrganizations(project, locale, single) {
   let procOrganization;
   let description;

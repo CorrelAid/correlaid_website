@@ -7,6 +7,8 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		is_internal
 		end_date_predicted
 		end_date
+		project_types
+		data_types
 		Podcast {
 			language
 			soundcloud_link
@@ -42,8 +44,6 @@ query ProjectOverview($language: String = "de-DE", $status: [String] = ["publish
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
 			title
 			teaser
-			type
-			data
 		}
 		Local_Chapters {
 			Local_Chapters_id (filter: { status: { _in: $status } }){
