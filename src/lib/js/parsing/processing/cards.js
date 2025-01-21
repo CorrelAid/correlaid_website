@@ -17,6 +17,8 @@ import {
   processPeople,
   processOrganizations,
   processProjectOutputs,
+  getProjectTypeTranslations,
+  getDataTypeTranslations,
 } from './processingHelpers.js';
 
 export function processLocalChapters(lc, locale) {
@@ -147,9 +149,9 @@ export function processProjects(project, locale) {
     teaser: project.translations[0].teaser,
     href: href,
     teamSelection: teamSelection,
-    projectTypes: transformTypes(project.translations[0].type),
+    projectTypes: getProjectTypeTranslations(project.project_types, locale),
+    dataTypes: getDataTypeTranslations(project.data_types, locale),
     organizationSector: sector,
-    dataTypes: transformTypes(project.translations[0].data),
     endDate: project.end_date
       ? new Date(project.end_date)
       : new Date(project.end_date_predicted),

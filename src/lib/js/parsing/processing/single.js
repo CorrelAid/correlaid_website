@@ -1,6 +1,5 @@
 import {
   translate,
-  transformTypes,
   genWebsiteUrl,
   processHtml,
   getTranslation,
@@ -17,6 +16,8 @@ import {
   processPeople,
   processOrganizations,
   processProjectOutputs,
+  getProjectTypeTranslations,
+  getDataTypeTranslations,
 } from './processingHelpers.js';
 
 import _ from 'lodash';
@@ -70,8 +71,6 @@ export function processBlogPost(blogPost, locale) {
 }
 
 export function processProject(project, locale) {
-  const projectTypes = transformTypes(project.translations[0].type, locale);
-  const dataTypes = transformTypes(project.translations[0].data, locale);
   const lang = getLang(locale);
 
   let teamSelection = void 0;
@@ -86,10 +85,10 @@ export function processProject(project, locale) {
   return {
     title: project.translations[0].title,
     organization: processOrganizations(project, locale, true),
-    projectTypes: projectTypes,
     teamSelection: teamSelection,
     applicationLink: applicationLink,
-    dataTypes: dataTypes,
+    projectTypes: getProjectTypeTranslations(project.project_types, locale),
+    dataTypes: getDataTypeTranslations(project.data_types, locale),
     description: project.translations[0].description
       ? processHtml(project.translations[0].description)
       : void 0,

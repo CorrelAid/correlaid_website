@@ -43,6 +43,8 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 				end_date
 				end_date_predicted
 				project_id
+				data_types
+				project_types
 				Podcast {
 					language
 					soundcloud_link
@@ -84,8 +86,6 @@ query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [
 					description
 					summary
 					teaser
-					type
-					data
 				}
 				Local_Chapters {
 					Local_Chapters_id{
