@@ -55,7 +55,7 @@ function canBePrerendered(url) {
 const queries = {
   blogs: `
   query BlogSlugs($status: [String] = ["published"]) {
-    Blog_Posts(sort: ["-publication_datetime"], filter: {status: { _in: $status }}) {
+    Blog_Posts(limit: -1, sort: ["-publication_datetime"], filter: {status: { _in: $status }}) {
       translations(filter:{slug:{_neq:null}}) {
         languages_code {
           code
@@ -74,14 +74,14 @@ const queries = {
   `,
   events: `
   query EventSlugs($status: [String] = ["published"]) {
-    Events (filter : {status: {_in: $status}}){
+    Events (limit: -1, filter : {status: {_in: $status}}){
       slug
     }
   }
   `,
   projects: `
   query ProjectSlugs($status: [String] = ["published"]) {
-    Projects (filter : {status: {_in: $status}}) {
+    Projects (limit: -1, filter : {status: {_in: $status}}) {
       slug: project_id
     }
   }
@@ -89,7 +89,7 @@ const queries = {
   `,
   jobs: `
   query Jobs($status: [String] = ["published"]) {
-    Jobs(filter: { status: { _in: $status }  }) {
+    Jobs(limit: -1, filter: { status: { _in: $status }  }) {
       slug
     }
   }
