@@ -1,6 +1,6 @@
 export const lcDetailsQuery = `
 query LocalChapterDetails($slug: String, $language: String = "de-DE", $status: [String] = ["published"]) {
-	Events(sort: ["date"], 
+	Events(limit: -1, sort: ["date"], 
 		filter: { _and: [{
 			
 		

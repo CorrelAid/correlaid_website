@@ -1,6 +1,6 @@
 export const icalEventQuery = `
 query Events {
-  Events(sort: ["date"], filter: {_and: [{date: {_gte: "$NOW"}}]}) {
+  Events(limit: -1, sort: ["date"], filter: {_and: [{date: {_gte: "$NOW"}}]}) {
     id
     date
     start_time
