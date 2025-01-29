@@ -1,6 +1,6 @@
 export const icalLcEvents = `
 query icalLcEvents($slug: String, $language: String = "de-DE") {
-	Events(sort: ["date"], 
+	Events(limit: -1, sort: ["date"], 
 		filter: {
 			local_chapters: {
 				Local_Chapters_id: { short_id: { _eq: $slug } } 

@@ -1,6 +1,6 @@
 export const eventQuery = `
 query Events($language: String = "de-DE", $status: [String] = ["published"]) {
-	Events(sort: ["date"], filter: { status: { _in: $status } }) {
+	Events(limit: -1, sort: ["date"], filter: { status: { _in: $status } }) {
 		id
 		date
 		start_time

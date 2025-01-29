@@ -120,8 +120,6 @@ export function setUrlParams(url, selects, checkBoxes, viewType) {
     newUrl.searchParams?.set('viewType', viewType);
   }
   return newUrl;
-  // https://dev.to/mohamadharith/mutating-query-params-in-sveltekit-without-page-reloads-or-navigations-2i2b
-  return newUrl;
 }
 
 function genValue(value, values, items) {
