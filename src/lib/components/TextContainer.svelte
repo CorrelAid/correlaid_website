@@ -3,6 +3,7 @@
   export let titleImage = null;
   export let teaser;
   export let imageAlt = void 0;
+  export let imageDesc = void 0;
   export let title;
 </script>
 
@@ -25,15 +26,14 @@
             <img
               alt={imageAlt ? imageAlt : ''}
               src={titleImage}
-              title={titleImage.description}
               class="h-full w-full rounded border-4 border-neutral"
             />
           </div>
-          {#if titleImage.description}
+          {#if imageDesc}
             <figcaption
               class="container bottom-0 mx-auto rounded-tl pt-2 text-xs md:px-4"
             >
-              {titleImage.description}
+              {imageDesc}
             </figcaption>
           {/if}
         </figure>

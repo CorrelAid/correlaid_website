@@ -18,6 +18,7 @@
   title={blogPost.title}
   titleImage={blogPost.imageSrc}
   imageAlt={blogPost.imageAlt}
+  imageDesc={blogPost.imageDesc}
   teaser={blogPost.teaser}
 >
   <div slot="sub_subtitle">
