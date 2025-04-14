@@ -58,9 +58,29 @@ query LatestUpdates(
     Projects(filter:  {_and: [{ status: { _in: $status }}, {project_status: { _eq: "team_selection" }}]  }, limit: 4) {
 		status
 		project_id
+		project_status
 		is_internal
 		end_date_predicted
 		end_date
+		project_types
+		data_types
+		Podcast {
+			language
+			soundcloud_link
+			title
+		}
+		Blog_Posts {
+			Blog_Posts_id(filter: { status: { _in: $status } }) {
+				id
+				translations {
+					languages_code {
+						code
+					}
+					title
+					slug
+				}
+			}
+		}
 		Organizations {
 			Organizations_id {
 				sector
@@ -74,9 +94,7 @@ query LatestUpdates(
 		}
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
 			title
-			summary
-			type
-			data
+			teaser
 		}
 		Local_Chapters {
 			Local_Chapters_id (filter: { status: { _in: $status } }){
@@ -86,6 +104,6 @@ query LatestUpdates(
 				}
 			}
 		}
-	}	
+	}
 }
 `;
