@@ -11,12 +11,12 @@
   import Pagination from '$lib/components/Pagination.svelte';
   import Calendar from '@event-calendar/core';
   import DayGrid from '@event-calendar/day-grid';
-  import {queryParam} from 'sveltekit-search-params';
+  import {SvelteURLSearchParams} from 'svelte/reactivity';
 
   const plugins = [DayGrid];
 
   let ec;
-  const containsDate = queryParam('containsDate');
+  const params = new SvelteURLSearchParams('containsDate');
   let containsDateMount;
 
   onMount(() => {
@@ -46,13 +46,13 @@
       if (ec) {
         const dt = ec.getOption('date');
         dt.setDate(dt.getDate() + 1);
-        $containsDate = dt.toISOString().split('T')[0];
+        params.append('containsDate', dt.toISOString().split('T')[0]);
       }
     },
     viewDidMount: (info) => {
       if (containsDateMount) {
         ec.setOption('date', containsDateMount);
-        $containsDate = containsDateMount;
+        params.append('containsDate', containsDateMount);
         containsDateMount = void 0;
       }
     },
@@ -158,7 +158,7 @@
     class="flex items-center rounded-md border border-neutral-25 bg-white px-1 py-0.5"
   >
     <span
-      class="text-nowrap no-scrollbar w-[160px] overflow-scroll text-ellipsis whitespace-nowrap text-xs"
+      class="no-scrollbar w-[160px] overflow-scroll text-ellipsis whitespace-nowrap text-nowrap text-xs"
     >
       {genAbsoluteUrl($t('footer.ical').url)}
     </span>
