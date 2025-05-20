@@ -15,7 +15,7 @@ export async function load({params}) {
   const data = await directusFetch(blogPostQuery, vars);
 
   if (data.Blog_Posts.length === 0) {
-    throw error(404);
+    error(404);
   }
 
   return {

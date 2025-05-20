@@ -13,7 +13,7 @@ export async function load({params}) {
   });
 
   if (data.Events.length === 0) {
-    throw error(404);
+    error(404);
   }
 
   return {event: await parse(data.Events[0], 'single', 'event', params)};
