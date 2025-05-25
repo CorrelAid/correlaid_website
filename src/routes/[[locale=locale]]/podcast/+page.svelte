@@ -10,19 +10,19 @@
     $pageKey = 'navbar.podcast';
   });
 
-  export let data;
-  let filteredData;
-  let trimmedData;
-  $: podcastEpisodes = data.podcastEpisodes;
+  let {data} = $props();
+  let filteredData = $state();
+  let trimmedData = $state();
+  let podcastEpisodes = $derived(data.podcastEpisodes);
 
-  $: selects = [
+  let selects = $derived([
     {
       title: $t('filter.language').text,
       searchable: false,
       multiple: true,
       param: 'langs',
     },
-  ];
+  ]);
 
   const searchOptions = [
     {searchProperty: 'title', multiple: false},

@@ -1,7 +1,7 @@
 <script>
   import {page} from '$app/stores';
   import {t, locale} from '$lib/stores/i18n';
-  import {onMount} from 'svelte';
+  import {onMount, tick} from 'svelte';
   import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import Calendar from '$lib/svg/Calendar.svelte';
   import List from '$lib/svg/List.svelte';
@@ -17,26 +17,22 @@
 
   import _ from 'lodash';
 
-  export let origData;
-  export let filteredData;
-  export let viewOptions = void 0;
-  export let viewType = void 0;
+  let {
+    origData,
+    filteredData = $bindable(),
+    viewOptions = void 0,
+    viewType = $bindable(),
+    expanded = false,
+    selects = $bindable(),
+    checkBoxes = [],
+    searchOptions,
+  } = $props();
 
-  $: if (viewOptions) {
-    viewType = viewOptions['config']['defaultView'];
-  }
+  let hidden = $state('hidden');
+  let ariaExpanded = $state(false);
+  let searchTerm = $state();
 
-  export let expanded = false;
-
-  export let selects;
-  export let checkBoxes = [];
-  export let searchOptions;
-
-  let hidden = 'hidden';
-  let ariaExpanded = false;
-  let searchTerm;
-
-  const values = {};
+  const values = $state({});
 
   onMount(async () => {
     // when searchParams is set, set them in filter
@@ -55,8 +51,6 @@
     }
   });
 
-  $: selects = genDropdownLists(origData, selects);
-
   function handleHidden() {
     hidden = hidden === 'hidden' ? 'visible' : 'hidden';
     ariaExpanded = ariaExpanded ? false : true;
@@ -74,23 +68,36 @@
       }
     }
   }
-  $: changeVal(values);
 
+  $effect(() => {
+    if (viewOptions) {
+      viewType = viewOptions['config']['defaultView'];
+    }
+  });
+  $effect(() => {
+    selects = genDropdownLists(origData, selects);
+  });
+  $effect(() => {
+    changeVal(values);
+  });
   // when values changes, use updated selects to filter the original data
-  $: filteredData = filter(
-    origData,
-    selects,
-    searchTerm,
-    searchOptions,
-    checkBoxes,
-    values,
-  );
-
-  $: history.replaceState(
-    history.state,
-    '',
-    setUrlParams($page.url, selects, checkBoxes, viewType, values),
-  );
+  $effect(() => {
+    filteredData = filter(
+      origData,
+      selects,
+      searchTerm,
+      searchOptions,
+      checkBoxes,
+      values,
+    );
+  });
+  $effect(() => {
+    history.replaceState(
+      history.state,
+      '',
+      setUrlParams($page.url, selects, checkBoxes, viewType, values),
+    );
+  });
 </script>
 
 <div class="mx-4">
@@ -100,7 +107,7 @@
         class="inline-flex items-center justify-center pt-2 text-xl font-semibold transition hover:text-secondary"
         aria-expanded={ariaExpanded}
         aria-controls="filter"
-        on:click={handleHidden}
+        onclick={handleHidden}
       >
         Filter
         {#if hidden === 'hidden'}
@@ -118,7 +125,7 @@
             'list'
               ? 'border-b-white bg-white'
               : ''}"
-            on:click={() => (viewType = 'list')}
+            onclick={() => (viewType = 'list')}
             ><List
               height={18}
               width={18}
@@ -127,7 +134,7 @@
           >
         </li>
         <li class="col-span-1">
-          <div class="h-full border-b border-neutral-25" />
+          <div class="h-full border-b border-neutral-25"></div>
         </li>
         <li class="col-span-5">
           <button
@@ -135,7 +142,7 @@
             'calendar'
               ? 'border-b-white bg-white'
               : ''}"
-            on:click={() => (viewType = 'calendar')}
+            onclick={() => (viewType = 'calendar')}
             ><Calendar
               height={18}
               width={18}
@@ -145,7 +152,7 @@
         </li>
       </ul>
     {:else}
-      <div class=" h-full w-2/4 border-b border-neutral-25" />
+      <div class=" h-full w-2/4 border-b border-neutral-25"></div>
     {/if}
   </div>
   <div
@@ -196,7 +203,7 @@
             bind:value={values[select.param]}
             --list-z-index="30"
           >
-            <div slot="empty" /></Select
+            <div></div></Select
           >
         </div>
       </div>

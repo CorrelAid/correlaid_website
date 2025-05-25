@@ -17,7 +17,7 @@ export async function load({params}) {
   const data = await directusFetch(jobDetailQuery, vars);
 
   if (data.Jobs.length === 0) {
-    throw error(404);
+    error(404);
   }
 
   return {job: await parse(data.Jobs[0], 'single', 'job', params)};

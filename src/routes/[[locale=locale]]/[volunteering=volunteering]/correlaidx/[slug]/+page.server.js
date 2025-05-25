@@ -13,7 +13,7 @@ export async function load({params}) {
   });
 
   if (data.Local_Chapters.length === 0) {
-    throw error(404);
+    error(404);
   }
 
   const parsedPage = await parse(data, 'misc', 'localChapterPage', params);

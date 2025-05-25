@@ -1,10 +1,10 @@
 <script>
   import {t} from '$lib/stores/i18n';
   import ExternalLink from '../svg/External_Link.svelte';
-  export let projectOutputs;
-  export let horizontal = true;
 
-  let mainCss;
+  let {projectOutputs, horizontal = true} = $props();
+
+  let mainCss = $state();
   if (horizontal === true) {
     mainCss = 'flex flex-wrap items-center';
   } else {

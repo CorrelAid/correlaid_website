@@ -1,12 +1,11 @@
 <script>
-  export let iconType;
-  export let text;
   import Html from '$lib/components/Html.svelte';
   import Infrastrucuture from '$lib/svg/Infrastrucuture.svelte';
   import LikeMinded from '$lib/svg/LikeMinded.svelte';
   import Volunteering from '$lib/svg/Volunteering.svelte';
   import Communicate from '$lib/svg/Communicate.svelte';
   import Box from '$lib/components/Box.svelte';
+  let {iconType, text} = $props();
 
   const iconSize = 100;
 </script>

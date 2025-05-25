@@ -1,10 +1,12 @@
 <script>
-  export let year;
-  export let imageSrc;
-  export let imageAlt;
-  export let title;
-  export let imageDesc;
-  export let imageOnRightSide = false;
+  let {
+    year,
+    imageSrc,
+    imageAlt,
+    title,
+    imageDesc,
+    imageOnRightSide = false,
+  } = $props();
 </script>
 
 <div class="container mx-auto grid grid-cols-8 gap-x-6 rounded">

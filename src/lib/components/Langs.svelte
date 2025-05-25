@@ -2,8 +2,8 @@
   import De from '../svg/DE.svelte';
   import En from '../svg/EN.svelte';
   import International from '$lib/svg/International.svelte';
-  export let langs;
   import {t} from '$lib/stores/i18n';
+  let {langs} = $props();
   const iconSize = 22;
 </script>
 

@@ -1,10 +1,15 @@
 <script>
   import Html from '$lib/components/Html.svelte';
-  export let titleImage = null;
-  export let teaser;
-  export let imageAlt = void 0;
-  export let imageDesc = void 0;
-  export let title;
+
+  let {
+    titleImage = null,
+    teaser,
+    imageAlt = void 0,
+    imageDesc = void 0,
+    title,
+    sub_subtitle,
+    main,
+  } = $props();
 </script>
 
 <div class="container mx-auto pb-4 pt-8">
@@ -16,7 +21,7 @@
   </div>
 
   <div class="container mx-auto my-4">
-    <slot name="sub_subtitle" />
+    {@render sub_subtitle()}
   </div>
   {#if titleImage != null}
     <div class="container mx-auto">
@@ -42,5 +47,5 @@
   {/if}
 </div>
 <div class="pb-10">
-  <slot name="main" />
+  {@render main()}
 </div>

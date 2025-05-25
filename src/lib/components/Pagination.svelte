@@ -3,21 +3,20 @@
   import ArrowRight from '../svg/ArrowRight.svelte';
   import {t} from '$lib/stores/i18n';
 
-  export let items;
-  export let perPage;
-  export let trimmedItems;
+  let {items, perPage, trimmedItems = $bindable()} = $props();
 
-  $: totalItems = items.length;
-  $: currentPage = 0;
-  $: totalPages = Math.ceil(totalItems / perPage);
-  $: start = currentPage * perPage;
-  $: end =
-    currentPage === totalPages - 1 ? totalItems - 1 : start + perPage - 1;
+  let totalItems = $derived(items.length);
+  let currentPage = $state(0);
 
-  $: trimmedItems = items.slice(start, end + 1);
+  let totalPages = $derived(Math.ceil(totalItems / perPage));
+  let start = $derived(currentPage * perPage);
+  let end = $derived(
+    currentPage === totalPages - 1 ? totalItems - 1 : start + perPage - 1,
+  );
 
-  $: totalItems, (currentPage = 0);
-  $: currentPage, start, end;
+  $effect(() => {
+    trimmedItems = items.slice(start, end + 1);
+  });
 </script>
 
 {#if totalItems && totalItems > perPage}
@@ -27,7 +26,7 @@
     aria-label="Pagination"
   >
     <button
-      on:click={() => (currentPage -= 1)}
+      onclick={() => (currentPage -= 1)}
       disabled={currentPage === 0 ? true : false}
       aria-label={$t('access.previous').text}
     >
@@ -36,7 +35,7 @@
     <p class="m-0 mx-2">{start + 1} - {end + 1} of {totalItems}</p>
     <button
       class="flex"
-      on:click={() => (currentPage += 1)}
+      onclick={() => (currentPage += 1)}
       disabled={currentPage === totalPages - 1 ? true : false}
       aria-label={$t('access.next').text}
     >

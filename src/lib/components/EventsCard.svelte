@@ -1,18 +1,22 @@
 <script>
-  export let href;
-  export let title;
-  export let type;
-  export let searchParams = void 0;
-  export let teaser;
-  export let procDate;
-  export let endDate = void null;
-  export let tags;
-  export let language;
-  export let procLocalChapters = [];
   import Langs from '$lib/components/Langs.svelte';
   import Tag from './Tag.svelte';
+  let {
+    href,
+    title,
+    type,
+    searchParams = void 0,
+    teaser,
+    procDate,
+    endDate = void null,
+    tags,
+    language,
+    procLocalChapters = [],
+  } = $props();
 
-  $: link = searchParams ? `${href}?${searchParams.toString()}` : href;
+  let link = $derived(
+    searchParams ? `${href}?${searchParams.toString()}` : href,
+  );
 </script>
 
 <div class="offset-right relative w-full" style="">

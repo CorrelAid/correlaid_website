@@ -1,4 +1,6 @@
 <script>
+  import {run} from 'svelte/legacy';
+  import {goto} from '$app/navigation';
   import {pageKey} from '$lib/stores/pageKey';
   import {page} from '$app/stores';
   import {genAbsoluteUrl} from '$lib/js/helpers';
@@ -9,15 +11,13 @@
   import EventsCard from '$lib/components/EventsCard.svelte';
   import Filter from '../../../lib/components/Filter.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
-  import Calendar from '@event-calendar/core';
-  import DayGrid from '@event-calendar/day-grid';
-  import {queryParam} from 'sveltekit-search-params';
+  import {Calendar, DayGrid} from '@event-calendar/core';
 
   const plugins = [DayGrid];
 
-  let ec;
-  const containsDate = queryParam('containsDate');
-  let containsDateMount;
+  let ec = $state();
+
+  let containsDateMount = $state();
 
   onMount(() => {
     $pageKey = 'navbar.events';
@@ -26,12 +26,42 @@
     }
   });
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-  // original unfiltered data
-  $: eventsData = data.events;
+  let {data} = $props();
 
-  $: options = {
+  let filteredData = $state();
+  let trimmedFutureData = $state();
+  let trimmedPastData = $state();
+
+  // Needs to stay client because it depends on the current date
+  // and can therefore not be statically build
+  // using store data that was manipulated by component
+  let events = $state();
+
+  const searchOptions = [
+    {searchProperty: 'tags', multiple: true},
+    {searchProperty: 'title', multiple: false},
+    {searchProperty: 'teaser', multiple: false},
+  ];
+
+  function copyText(text) {
+    navigator.clipboard.writeText(text);
+  }
+
+  const viewOptions = {
+    views: [
+      {title: 'List', value: 'list'},
+      {title: 'Grid', value: 'grid'},
+    ],
+    config: {
+      defaultView: 'list',
+    },
+  };
+
+  let viewType = $state();
+
+  // original unfiltered data
+  let eventsData = $derived(data.events);
+  let options = $derived({
     locale: $locale,
     // height: "100vh",
     firstDay: 1,
@@ -46,13 +76,21 @@
       if (ec) {
         const dt = ec.getOption('date');
         dt.setDate(dt.getDate() + 1);
-        $containsDate = dt.toISOString().split('T')[0];
+        goto(`?containsDate=${dt.toISOString().split('T')[0]}`, {
+          replaceState: false,
+          keepFocus: true,
+          noScroll: true,
+        });
       }
     },
     viewDidMount: (info) => {
       if (containsDateMount) {
         ec.setOption('date', containsDateMount);
-        $containsDate = containsDateMount;
+        goto(`?containsDate=${containsDateMount}`, {
+          replaceState: false,
+          keepFocus: true,
+          noScroll: true,
+        });
         containsDateMount = void 0;
       }
     },
@@ -82,21 +120,13 @@
     eventBackgroundColor: 'rgb(56, 99, 162)',
     allDaySlot: false,
     slotLabelFormat: {hour: 'numeric', minute: 'numeric', hour12: false},
-  };
-
-  let filteredData;
-  let trimmedFutureData;
-  let trimmedPastData;
-
-  // Needs to stay client because it depends on the current date
-  // and can therefore not be statically build
-  // using store data that was manipulated by component
-  let events;
-  $: if (filteredData) {
-    events = timeSplitEntries(filteredData, (event) => event.date);
-  }
-
-  $: selects = [
+  });
+  run(() => {
+    if (filteredData) {
+      events = timeSplitEntries(filteredData, (event) => event.date);
+    }
+  });
+  let selects = $derived([
     {
       title: $t('filter.type').text,
       searchable: false,
@@ -115,34 +145,13 @@
       multiple: false,
       param: 'language',
     },
-  ];
-
-  const searchOptions = [
-    {searchProperty: 'tags', multiple: true},
-    {searchProperty: 'title', multiple: false},
-    {searchProperty: 'teaser', multiple: false},
-  ];
-
-  function copyText(text) {
-    navigator.clipboard.writeText(text);
-  }
-
-  const viewOptions = {
-    views: [
-      {title: 'List', value: 'list'},
-      {title: 'Grid', value: 'grid'},
-    ],
-    config: {
-      defaultView: 'list',
-    },
-  };
-
-  let viewType;
-
-  $: currentEventSeparator =
-    $locale === 'de' ? 'Kommende Veranstaltungen' : 'Upcoming Events';
-  $: pastEventSeparator =
-    $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events';
+  ]);
+  let currentEventSeparator = $derived(
+    $locale === 'de' ? 'Kommende Veranstaltungen' : 'Upcoming Events',
+  );
+  let pastEventSeparator = $derived(
+    $locale === 'de' ? 'Vergangene Veranstaltungen' : 'Past Events',
+  );
 </script>
 
 <span
@@ -158,14 +167,14 @@
     class="flex items-center rounded-md border border-neutral-25 bg-white px-1 py-0.5"
   >
     <span
-      class="text-nowrap no-scrollbar w-[160px] overflow-scroll text-ellipsis whitespace-nowrap text-xs"
+      class="no-scrollbar w-[160px] overflow-scroll text-ellipsis whitespace-nowrap text-nowrap text-xs"
     >
       {genAbsoluteUrl($t('footer.ical').url)}
     </span>
     <button
       aria-labelledby="ics_label"
       class="ml-1"
-      on:click={() => copyText(genAbsoluteUrl($t('footer.ical').url))}
+      onclick={() => copyText(genAbsoluteUrl($t('footer.ical').url))}
       ><Copy height="18" width="18" /></button
     >
   </span>

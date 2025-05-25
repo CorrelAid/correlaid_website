@@ -8,9 +8,9 @@
     $pageKey = 'navbar.about.partners';
   });
 
-  export let data;
-  $: partners = data.partners;
-  $: financialSupporters = data.financialSupporters;
+  let {data} = $props();
+  let partners = $derived(data.partners);
+  let financialSupporters = $derived(data.financialSupporters);
 </script>
 
 <div class="mt-12">

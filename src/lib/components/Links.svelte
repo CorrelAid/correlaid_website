@@ -3,11 +3,14 @@
   import Linkedin from '../svg/Linkedin.svelte';
   import Mastodon from '../svg/Mastodon.svelte';
   import ExternalLink from '../svg/External_Link.svelte';
-  export let mastodon = void 0;
-  export let website = void 0;
-  export let linkedin = void 0;
-  export let github = void 0;
-  export let iconSize = 25;
+
+  let {
+    mastodon = void 0,
+    website = void 0,
+    linkedin = void 0,
+    github = void 0,
+    iconSize = 25,
+  } = $props();
 </script>
 
 <div class="flex gap-x-2 text-base-content">

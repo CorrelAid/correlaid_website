@@ -8,7 +8,7 @@ describe('Top Nav links', () => {
   test('Link in path should have a different color', async () => {
     locale.set('de');
 
-    const {component} = render(HeaderTopNav, {
+    render(HeaderTopNav, {
       props: {topNav: navItems, lastClickedLink: ''},
     });
 
@@ -16,15 +16,30 @@ describe('Top Nav links', () => {
     const dataLink = screen.getByText('Daten nutzen');
     expect(aboutLink).toBeInTheDocument();
     expect(dataLink).toBeInTheDocument();
+
     expect(aboutLink).not.toHaveClass('text-primary');
     expect(dataLink).not.toHaveClass('text-primary');
+  });
+  test('Link in path should have a different color', async () => {
+    locale.set('de');
+    render(HeaderTopNav, {
+      props: {topNav: navItems, lastClickedLink: 'navbar.about'},
+    });
 
-    await component.$set({lastClickedLink: 'navbar.about'});
+    const aboutLink = screen.getByText('Über uns');
+    const dataLink = screen.getByText('Daten nutzen');
 
     expect(aboutLink).toHaveClass('text-primary');
     expect(dataLink).not.toHaveClass('text-primary');
+  });
+  test('Link in path should have a different color', async () => {
+    locale.set('de');
+    render(HeaderTopNav, {
+      props: {topNav: navItems, lastClickedLink: 'navbar.using_data'},
+    });
 
-    await component.$set({lastClickedLink: 'navbar.using_data'});
+    const aboutLink = screen.getByText('Über uns');
+    const dataLink = screen.getByText('Daten nutzen');
 
     expect(aboutLink).not.toHaveClass('text-primary');
     expect(dataLink).toHaveClass('text-primary');

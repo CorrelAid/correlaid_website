@@ -13,7 +13,7 @@ export async function load({params}) {
   });
 
   if (data.Projects.length === 0) {
-    throw error(404);
+    error(404);
   }
 
   return {project: await parse(data.Projects[0], 'single', 'project', params)};

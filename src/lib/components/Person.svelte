@@ -1,17 +1,19 @@
 <script>
-  export let name;
-  export let position = '';
-  export let description = '';
-  export let imageSrc = void 0;
-  export let links;
-  export let email = '';
-  export let pronouns = '';
-  export let imageDesc = void 0;
-  export let imageAlt;
-
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
   import Html from '$lib/components/Html.svelte';
+
+  let {
+    name,
+    position = '',
+    description = '',
+    imageSrc = void 0,
+    links,
+    email = '',
+    pronouns = '',
+    imageDesc = void 0,
+    imageAlt,
+  } = $props();
 </script>
 
 <div class="grid grid-cols-8 gap-x-9 rounded pb-6 pt-2">

@@ -1,22 +1,15 @@
 <script>
-  export let href;
-  export let text;
-  export let type = '';
-  export let color;
-  export let options = '';
-  export let iconSize = 20;
-  export let downloadText = '';
   import ExternalLink from '../svg/External_Link.svelte';
-  // dafuq
-  $: if (color == 'bg-quaternary') {
-    color = 'bg-quaternary';
-  }
-  $: if (color == 'bg-primary') {
-    color = 'bg-primary';
-  }
-  $: if (color == 'bg-secondary') {
-    color = 'bg-secondary';
-  }
+
+  let {
+    href,
+    text,
+    type = '',
+    color = $bindable(),
+    options = '',
+    iconSize = 20,
+    downloadText = '',
+  } = $props();
 </script>
 
 <a

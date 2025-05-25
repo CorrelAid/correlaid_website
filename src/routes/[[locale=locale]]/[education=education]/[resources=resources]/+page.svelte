@@ -9,11 +9,11 @@
     $pageKey = 'navbar.education.resources';
   });
 
-  export let data;
-  $: workshops = data.workshops;
+  let {data} = $props();
+  let workshops = $derived(data.workshops);
 
-  let filteredData;
-  $: selects = [
+  let filteredData = $state();
+  let selects = $derived([
     {
       title: $t('filter.responsible').text,
       searchable: false,
@@ -32,7 +32,7 @@
       multiple: true,
       param: 'targetAudiences',
     },
-  ];
+  ]);
 
   const searchOptions = [
     {searchProperty: 'tags', multiple: true},

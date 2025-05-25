@@ -1,35 +1,34 @@
 <script>
   import {t} from '$lib/stores/i18n';
-  export let title;
-  export let href;
-  export let summary;
-  export let fte;
-  export let jobType;
-  export let language;
-  export let procDeadline;
-  export let location;
-  export let salary;
-  export let tags = [];
   import De from '$lib/svg/DE.svelte';
   import En from '$lib/svg/EN.svelte';
   import Time from '$lib/svg/Time.svelte';
   import Location from '$lib/svg/Location.svelte';
   import Salary from '$lib/svg/Salary.svelte';
   import Tag from './Tag.svelte';
+  let {
+    title,
+    href,
+    summary,
+    fte,
+    jobType,
+    language,
+    procDeadline,
+    location,
+    salary,
+    tags = [],
+  } = $props();
 
   const iconSize = 22;
 
   const listStyle = 'min-w-min mr-4 mb-2';
 
-  let cardDetails = {};
-
-  $: {
-    cardDetails = {};
-    cardDetails['workload'] = fte;
-    cardDetails['location'] = location;
-    cardDetails['salary'] = salary;
-    cardDetails['language_'] = language;
-  }
+  let cardDetails = $derived({
+    workload: fte,
+    location: location,
+    salary: salary,
+    language: language,
+  });
 </script>
 
 <div class="offset-right relative w-full" style="">

@@ -1,9 +1,9 @@
 <script>
-  export let source;
-  export let options = '';
   import 'highlight.js/styles/base16/google-dark.css';
 
   import hljs from 'highlight.js';
+
+  let {source, options = ''} = $props();
 
   const h1 =
     'prose-h1:text-2xl prose-h1:md:text-3xl prose-h1:text-base-content';

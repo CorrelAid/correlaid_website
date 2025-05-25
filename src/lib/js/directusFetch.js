@@ -69,7 +69,7 @@ export async function directusFetch(query, vars, additionalHeaders = {}) {
     headers: headers,
   });
   if (!response.ok) {
-    throw error(500, {
+    error(500, {
       message: `Unexpected cms response ${
         response.statusText
       } for ${queryErrorMsg(query, vars)}`,
@@ -79,7 +79,7 @@ export async function directusFetch(query, vars, additionalHeaders = {}) {
   const data = await response.json();
 
   if ('errors' in data) {
-    throw error(
+    error(
       500,
       `Cms errors ${data.errors[0].message} for ${queryErrorMsg(query, vars)}`,
     );

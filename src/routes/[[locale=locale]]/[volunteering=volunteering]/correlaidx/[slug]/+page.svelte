@@ -15,14 +15,13 @@
     $pageKey = 'navbar.volunteering.correlaidx';
   });
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-  $: localAdministrators = data.localAdministrators;
-  $: hero = data.hero;
-  $: projects = data.projects;
-  $: events = data.events;
-  $: description = data.description;
-  $: iconText = data.iconText;
+  let {data} = $props();
+  let localAdministrators = $derived(data.localAdministrators);
+  let hero = $derived(data.hero);
+  let projects = $derived(data.projects);
+  let events = $derived(data.events);
+  let description = $derived(data.description);
+  let iconText = $derived(data.iconText);
 </script>
 
 <div class="relative">

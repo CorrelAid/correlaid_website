@@ -1,6 +1,6 @@
 import adapter from '@sveltejs/adapter-cloudflare';
 import adapterStatic from '@sveltejs/adapter-static';
-import {vitePreprocess} from '@sveltejs/kit/vite';
+import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
 import pageKeys from './src/lib/data/pageKeys.js';
 import {fetch} from 'undici';
 

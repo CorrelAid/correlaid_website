@@ -3,7 +3,7 @@ import {derived, writable} from 'svelte/store';
 import pageKeys from '$lib/data/pageKeys';
 import {translate} from '$lib/js/helpers';
 
-export const locale = writable('');
+export const locale = writable('de');
 export const locales = Object.keys(pageKeys);
 
 export const t = derived(

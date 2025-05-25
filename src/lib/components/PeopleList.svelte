@@ -3,12 +3,12 @@
   import Avatar from '$lib/components/Avatar.svelte';
   import Links from '$lib/components/Links.svelte';
 
-  export let people = [];
+  let {people = []} = $props();
 
   const w = `w-32`;
   const wM = `md:w-44`;
 
-  const expand = {};
+  const expand = $state({});
 
   function expandFunc(i, y) {
     const iy = `${i}${y}`;
@@ -24,17 +24,13 @@
 
   const noCols = 3;
 
-  let cols;
-
-  // reactive if people changes
-  $: if (people) {
-    cols = Array.from({length: noCols}, () => []);
-  }
-
-  // distribute the people into the columns in a row-wise order
-  $: for (let i = 0; i < people.length; i++) {
-    cols[i % noCols].push(people[i]);
-  }
+  let cols = $derived.by(() => {
+    const temp = Array.from({length: noCols}, () => []);
+    for (let i = 0; i < people.length; i++) {
+      temp[i % noCols].push(people[i]);
+    }
+    return temp;
+  });
 </script>
 
 <div class="hidden w-full md:flex md:px-0">
@@ -50,7 +46,7 @@
         >
           <button
             class="flex pb-5"
-            on:click={() => {
+            onclick={() => {
               expandFunc(i, y);
             }}
           >
@@ -68,7 +64,7 @@
           <div class="pb-2.5">
             <button
               class="text-md text-left font-normal {w} {wM} leading-snug hover:text-primary"
-              on:click={() => {
+              onclick={() => {
                 expandFunc(i, y);
               }}
             >

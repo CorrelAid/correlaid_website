@@ -1,7 +1,5 @@
 <script>
-  export let name;
-  export let description;
-  export let imageSrc;
+  let {name, description, imageSrc} = $props();
 </script>
 
 <div class="container grid grid-cols-8 gap-x-12 rounded py-4">

@@ -7,8 +7,8 @@
     $pageKey = 'navbar.using_data.consulting';
   });
 
-  export let data;
-  $: experts = data.experts;
+  let {data} = $props();
+  let experts = $derived(data.experts);
 </script>
 
 <div class="container mx-auto flex flex-col gap-y-8 px-4 pb-12">

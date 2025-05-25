@@ -1,6 +1,5 @@
 <script>
-  export let text;
-  export let color;
+  let {text, color} = $props();
 </script>
 
 <span

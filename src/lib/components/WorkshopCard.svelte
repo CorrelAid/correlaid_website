@@ -1,37 +1,41 @@
 <script>
   import detectElementOverflow from 'detect-element-overflow';
   import Langs from '$lib/components/Langs.svelte';
-  export let href = '';
   import {t} from '$lib/stores/i18n';
   import ExternalLink from '../svg/External_Link.svelte';
   import Tag from './Tag.svelte';
   import ArrowUp from '../svg/nav_icons/ArrowUp.svelte';
   import ArrowDown from '../svg/nav_icons/ArrowDown.svelte';
 
-  export let title;
-  export let tags;
-  export let targetAudiences;
-  export let teaser;
-  export let procRespUnits;
-  export let language = '';
+  let {
+    href = '',
+    title,
+    tags,
+    targetAudiences,
+    teaser,
+    procRespUnits,
+    language = '',
+  } = $props();
 
-  let overflowParent;
-  let overflowChild;
-  let parentHeight;
+  let overflowParent = $state();
+  let overflowChild = $state();
+  let parentHeight = $state();
 
-  let overflowing = false;
-  let expand = false;
+  let expand = $state(false);
 
-  // if parentHeight is set, detect overflow
-  $: if (parentHeight) {
-    if (overflowParent && overflowChild) {
-      const overflow = detectElementOverflow(overflowChild, overflowParent);
-      //
-      if (overflow.overflowBottom > 0) {
-        overflowing = true;
+  let overflowing = $state(false);
+
+  $effect(() => {
+    if (parentHeight) {
+      if (overflowParent && overflowChild) {
+        const overflow = detectElementOverflow(overflowChild, overflowParent);
+        //
+        if (overflow.overflowBottom > 0) {
+          overflowing = true;
+        }
       }
     }
-  }
+  });
 
   function expandFunc() {
     expand = !expand;
@@ -47,7 +51,7 @@
 
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
-  />
+  ></span>
   <div class="px-3 pb-6 pt-4">
     {#if href != ''}
       <div class="mb-3 mr-10">
@@ -119,7 +123,7 @@
   {#if overflowing === true}
     <button
       class="absolute bottom-0 right-0 right-2/4 pb-4"
-      on:click={expandFunc}
+      onclick={expandFunc}
     >
       <span class="sr-only">{$t('misc.read_more').text}</span>
       <span class="fill-neutral-50" aria-hidden="true">
