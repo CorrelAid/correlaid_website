@@ -1,6 +1,6 @@
 <script>
   import Cta from './CTA.svelte';
-  export let ctas;
+  let {ctas} = $props();
 </script>
 
 {#each ctas as cta}

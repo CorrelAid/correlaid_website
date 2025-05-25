@@ -16,30 +16,23 @@
     $pageKey = 'navbar.jobs';
   });
 
-  export let data;
-  $: job = data.job;
+  let {data} = $props();
+  let job = $derived(data.job);
   const iconSize = 22;
 
   const listStyle = 'min-w-min mr-4 mb-2';
 
-  let cardDetails = {};
-
-  $: if (typeof slug !== 'undefined') {
-    href = $t('navbar.jobs').url + '/' + slug;
-  }
-
-  $: {
-    cardDetails = {};
-    cardDetails['workload'] = job.fte;
-    cardDetails['location'] = job.location;
-    cardDetails['salary'] = job.salary;
-    cardDetails['language_'] = job.language;
-  }
+  let cardDetails = $derived({
+    workload: job.fte,
+    location: job.location,
+    salary: job.salary,
+    language: job.language,
+  });
 </script>
 
-<TextContainer title={job.title} teaser={job.summary}>
-  <div class="mx-4" slot="sub_subtitle">
-    <Box slot="sub_subtitle">
+{#snippet sub_subtitle()}
+  <div class="mx-4">
+    <Box>
       {#if job.tags}
         <div class="mb-4">
           <Tag text={job.jobType} color="bg-primary" />
@@ -100,13 +93,16 @@
         {/each}
       </ul>
       <p class="text-semibold">
-        <strong>{$t('access.deadline').text}: </strong>{job.procDeadline}
+        <strong>{$t('access.deadline').text}:</strong>
+        {job.procDeadline}
       </p>
     </Box>
   </div>
+{/snippet}
+{#snippet main()}
   <Html
     source={job.description}
     options={'mx-auto prose-li:my-1 prose-ul:my-1'}
-    slot="main"
   />
-</TextContainer>
+{/snippet}
+<TextContainer title={job.title} teaser={job.summary} {sub_subtitle} {main} />

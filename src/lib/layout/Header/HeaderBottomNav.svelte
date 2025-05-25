@@ -1,15 +1,15 @@
 <script>
+  import {run} from 'svelte/legacy';
+
   import {t} from '$lib/stores/i18n';
   import {drawer} from '$lib/stores/drawer';
   import {headerHeight} from '$lib/stores/dims';
   import HeaderBottomNavButton from './HeaderBottomNavButton.svelte';
   import ExternalLink from '$lib/svg/External_Link.svelte';
 
-  export let botNav;
+  let {botNav, lastClickedLink = ''} = $props();
 
-  export let lastClickedLink = '';
-
-  const toggles = {};
+  const toggles = $state({});
   for (const navItem of botNav) {
     toggles[navItem.category] = false;
   }
@@ -36,10 +36,12 @@
     return startIndex === 0;
   }
 
-  $: $drawer && closeall();
+  $effect(() => {
+    $drawer && closeall();
+  });
 </script>
 
-<svelte:window on:load={closeall} />
+<svelte:window onload={closeall} />
 
 <div class="mx-auto flex items-center gap-12">
   <div class="mx-auto hidden xl:block">
@@ -63,7 +65,7 @@
             {#if toggles[navItem.category]}
               <div
                 class="absolute z-30 -ml-4 w-60"
-                on:mouseleave={closeall}
+                onmouseleave={closeall}
                 role="menu"
                 tabindex="0"
                 style="top: {$headerHeight + 1}px"

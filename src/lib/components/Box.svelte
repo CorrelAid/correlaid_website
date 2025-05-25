@@ -1,5 +1,5 @@
 <script>
-  export let type = 'primary';
+  let {type = 'primary', children} = $props();
 </script>
 
 <div class="h-full w-full rounded">
@@ -10,7 +10,7 @@
       <div
         class="back h-full w-full items-center justify-center space-y-2 bg-white px-4 py-4"
       >
-        <slot />
+        {@render children?.()}
       </div>
     </div>
   {:else if type == 'correlaidx'}
@@ -20,7 +20,7 @@
       <div
         class="back h-full w-full items-center justify-center p-4 font-medium text-white drop-shadow-md"
       >
-        <slot />
+        {@render children?.()}
       </div>
     </div>
   {/if}

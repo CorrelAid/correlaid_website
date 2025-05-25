@@ -144,7 +144,10 @@ test.describe('test regular viewport', () => {
           .getByTestId('navColoringTest-navbar.volunteering')
           .getByRole('link', {name: 'Mitmachen'})
           .hover();
-        page.getByRole('link', {name: 'Engagiere dich vor Ort'}).click();
+        page
+          .getByRole('link', {name: 'Engagiere dich vor Ort'})
+          .first()
+          .click();
       },
       page: '**/mitmachen/correlaidx/',
     },

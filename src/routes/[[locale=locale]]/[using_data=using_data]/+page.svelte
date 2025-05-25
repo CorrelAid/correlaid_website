@@ -13,12 +13,12 @@
     $pageKey = 'navbar.using_data';
   });
 
-  $: navItems = [
+  let navItems = $derived([
     {key: 'navbar.using_data.projects', icon: LampGears},
     {key: 'navbar.using_data.project_database', icon: Database},
     {key: 'navbar.using_data.consulting', icon: HandDialogue},
     {key: 'navbar.using_data.hackathons', icon: LaptopsTime},
-  ];
+  ]);
 </script>
 
 <NavTiles {navItems} />

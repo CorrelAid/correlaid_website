@@ -7,9 +7,9 @@
     $pageKey = 'navbar.about.values';
   });
 
-  export let data;
+  let {data} = $props();
 
-  $: ethicsCommission = data.ethicsCommission;
+  let ethicsCommission = $derived(data.ethicsCommission);
 </script>
 
 <div class="container mx-auto flex flex-col gap-y-8 px-4">

@@ -1,15 +1,21 @@
 <script>
-  export let href;
-  export let text;
-  export let category;
-  export let options = '';
   import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import {createEventDispatcher} from 'svelte';
+  /**
+   * @typedef {Object} Props
+   * @property {any} href
+   * @property {any} text
+   * @property {any} category
+   * @property {string} [options]
+   */
+
+  /** @type {Props} */
+  let {href, text, category, options = ''} = $props();
 
   const dispatch = createEventDispatcher();
 
-  let menuEnterTimer;
-  let aria = false;
+  let menuEnterTimer = $state();
+  let aria = $state(false);
 
   function dropdown() {
     dispatch('message', {
@@ -29,12 +35,12 @@
   class="inline-flex items-center justify-center tracking-wide transition hover:text-secondary {options}"
   aria-expanded={aria}
   {href}
-  on:mouseover={delay}
-  on:mouseleave={() => {
+  onmouseover={delay}
+  onmouseleave={() => {
     (aria = false), clearTimeout(menuEnterTimer);
   }}
-  on:focus={dropdown}
-  on:click={() => {
+  onfocus={dropdown}
+  onclick={() => {
     dispatch('click', {});
   }}
 >

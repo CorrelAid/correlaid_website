@@ -3,20 +3,21 @@
   import CorrelAidLogo from '$lib/svg/CorrelaidLogoMin.svelte';
   import ProjectLinks from '$lib/components/ProjectLinks.svelte';
   import Tag from './Tag.svelte';
-  import Html from '$lib/components/Html.svelte';
   import TeamSearch from '$lib/svg/TeamSearch.svelte';
   import {t} from '$lib/stores/i18n';
 
-  export let title;
-  export let dataTypes;
-  export let projectTypes;
-  export let isInternal;
-  export let organization;
-  export let teaser;
-  export let teamSelection;
-  export let procLocalChapters = [];
-  export let href;
-  export let projectOutputs = [];
+  let {
+    title,
+    dataTypes,
+    projectTypes,
+    isInternal,
+    organization,
+    teaser,
+    teamSelection,
+    procLocalChapters = [],
+    href,
+    projectOutputs = [],
+  } = $props();
 </script>
 
 <div
@@ -24,7 +25,7 @@
 >
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-secondary opacity-75"
-  />
+  ></span>
 
   {#if teamSelection === true}
     <span class="link absolute z-20" style="right: 14px; top: 12px">

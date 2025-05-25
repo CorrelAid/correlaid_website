@@ -1,17 +1,20 @@
 <script>
   import Html from '$lib/components/Html.svelte';
   import Langs from '$lib/components/Langs.svelte';
-  export let imageAlt;
-  export let langs;
   import ExternalLink from '../svg/External_Link.svelte';
-  export let title;
-  export let teaser;
-  export let contentCreators;
-  export let pubDate;
-  export let imageSrc = void 0;
-  export let href;
-  export let external = false;
-  export let imageDesc = void 0;
+
+  let {
+    imageAlt,
+    langs,
+    title,
+    teaser,
+    contentCreators,
+    pubDate,
+    imageSrc = void 0,
+    href,
+    external = false,
+    imageDesc = void 0,
+  } = $props();
 </script>
 
 <article
@@ -19,7 +22,7 @@
 >
   <span
     class="absolute inset-x-0 bottom-0 z-10 h-2 rounded-b bg-gradient-to-r from-primary to-secondary opacity-75"
-  />
+  ></span>
   <div class="absolute right-0 top-0 z-20 p-2">
     <Langs {langs} />
   </div>
@@ -34,7 +37,7 @@
         />
       {:else}
         <!-- TODO: Do we need this image placeholder? -->
-        <div class="rounded-tl bg-gray-300" />
+        <div class="rounded-tl bg-gray-300"></div>
       {/if}
     </a>
   </div>
@@ -77,11 +80,12 @@
       </p>
 
       <div class="pb-1 pt-1.5">
-        <Html
-          source={teaser}
-          options={'mx-0 !px-0 line-clamp-3 overflow-hidden text-base-content leading-normal'}
-          slot="main"
-        />
+        {#snippet main()}
+          <Html
+            source={teaser}
+            options={'mx-0 !px-0 line-clamp-3 overflow-hidden text-base-content leading-normal'}
+          />
+        {/snippet}
       </div>
     </div>
   </div>

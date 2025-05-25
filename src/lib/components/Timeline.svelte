@@ -1,6 +1,4 @@
 <script>
-  export let steps;
-  export let color;
   import Html from '$lib/components/Html.svelte';
   import Inform from '$lib/svg/Inform.svelte';
   import Team from '$lib/svg/Team.svelte';
@@ -8,6 +6,7 @@
   import Infrastrucuture from '$lib/svg/Infrastrucuture.svelte';
   import LikeMinded from '$lib/svg/LikeMinded.svelte';
   import BrokenGears from '../svg/BrokenGears.svelte';
+  let {steps, color} = $props();
   function checkX(i) {
     i = i + 1;
     if (i & 1) {
@@ -65,7 +64,7 @@
       </div>
       <div class="w-2/3 {checkX(i)}-1/3 absolute -z-10 grid h-full grid-cols-2">
         {#if checkOdd(i) == false}
-          <div />
+          <div></div>
         {/if}
         <div
           class="{i + 1 === steps.length ? '' : 'border-b-2'} {checkBorder(
@@ -84,7 +83,7 @@
           >
         </div>
         {#if checkOdd(i) == true}
-          <div />
+          <div></div>
         {/if}
       </div>
       <div
@@ -95,12 +94,12 @@
         <Html source={step.text} options={'container mx-auto z-20'} />
       </div>
     </div>
-    <div />
+    <div></div>
   {/each}
 </div>
 <div class="container lg:hidden">
   {#each steps as step, i}
-    <div class=" w-full" />
+    <div class=" w-full"></div>
     <div
       class="relative mb-12 flex justify-center border-t-2 border-neutral-25"
     >

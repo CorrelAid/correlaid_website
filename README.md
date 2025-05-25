@@ -120,26 +120,21 @@ Only the implementations of the most important concepts are explained here in a 
 - Colours are defined in tailwind.config.js based on the [CorrelAid Design Guide](https://docs.correlaid.org/wiki/design-guide)
 - Some custom styles, e.g. the gradient offset border, are defined in app.css
 - Fonts are self hosted and located in static/fonts/. They are specified in app.css and tailwind.config.js
-- Icons: https://thenounproject.com/browse/creator/Iconathon1/icon-collections/?p=1
 
 ### Accessibility
 
 - Use this tool to verify accessibility: https://www.deque.com/axe/devtools/
 - Exceptions: - Elements must have sufficient color contrast -> CorrelAid green on white background: used text shadow to improve this
-- CSS background images: http://www.davidmacd.com/blog/alternate-text-for-css-background-images.html
-
-#### Standards
-
-- Links should have the following classes: "text-secondary font-normal drop-shadpw-sm"
-- Links that are also titles should have the following classes: "text-xl font-semibold text-base-content transition hover:text-primary" (exception: partners)
-- Titles that are no links should have following classes: "text-2xl text-primary drop-shadow-sm"
 
 ### Internationalization
 
 The website currently supports two languages, German(default) and English. Most
-translations come from the CMS, but the content of the header and the footer
-comes from "src/lib/data/pageKeys.js". Apart from being a source for
-translations, this file also contains all valid pages that exist once and are
+translations come from the CMS, but some, such as those for the header and the footer,
+comes from `src/lib/data/translations.js`.
+
+#### Page Keys and locale
+
+While`src/lib/data/translations.js` is a source for translations, `src/lib/data/pageKeys.js` contains all valid pages that exist once and are
 not dynamically generated like blog posts. Its the source of truth for page
 names and urls. The pages are assigned page keys to identify them independent
 of language. It also defines valid urls in both languages. When the name of a
@@ -151,7 +146,7 @@ optional root parameter that defines the locale. If its undefined, the page is
 displayed in German. If its "en", the page is displayed in English. The locale
 route parameter determines the page content in two ways:
 
-1. Its given to a store (if its undefined, its set to "de") to make it easily
+1. Its given to a store (if its undefined, it is set to "de") to make it easily
    available in +page.svelte files. In the Header and Footer component this
    store is used to call the translate function via a derived store that
    accesses the locale store (src/lib/stores/i18n.js), which extracts the
@@ -347,6 +342,8 @@ In order to setup playwright run (possibly with `sudo`) in addition to the initi
 [dev setup](#dev-setup)
 
         npx playwright install --with-deps
+
+For arch, see [here](https://github.com/microsoft/playwright/issues/2621#issuecomment-2083083392) and cosider to do `playwright install --only-shell chromium firefox`
 
 This will install the required browsers and system dependencies. Only afterwards
 can playwright be used.

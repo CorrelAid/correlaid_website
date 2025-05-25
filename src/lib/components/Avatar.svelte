@@ -1,11 +1,14 @@
 <script>
   import PersonPlaceholder from '../svg/PersonPlaceholder.svelte';
-  export let imageSrc = void 0;
-  export let imageAlt;
-  export let imageDesc = void 0;
-  export let w = 'w-56';
-  export let wM = 'md:w-56';
-  export let showCredit = true;
+
+  let {
+    imageSrc = void 0,
+    imageAlt,
+    imageDesc = void 0,
+    w = 'w-56',
+    wM = 'md:w-56',
+    showCredit = true,
+  } = $props();
 </script>
 
 <div class="relative">

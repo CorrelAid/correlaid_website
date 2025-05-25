@@ -9,15 +9,14 @@
     $pageKey = 'navbar.jobs';
   });
 
-  let noJobMessage;
-  let currentJobSeparator;
-  let pastJobSeparator;
+  let noJobMessage = $state();
+  let currentJobSeparator = $state();
+  let pastJobSeparator = $state();
 
-  /** @type {import('./$types').PageData} */
-  export let data;
+  let {data} = $props();
 
-  $: jobs = timeSplitEntries(data.jobs, (job) => job.deadline);
-  $: {
+  let jobs = $derived(timeSplitEntries(data.jobs, (job) => job.deadline));
+  $effect(() => {
     if ($locale === 'de') {
       noJobMessage = 'Keine Anzeigen';
       currentJobSeparator = 'Aktuelle Jobanzeigen';
@@ -27,7 +26,7 @@
       currentJobSeparator = 'Current Job Announcements';
       pastJobSeparator = 'Past Job Announcements';
     }
-  }
+  });
 </script>
 
 <div class="space-y-8 px-4">

@@ -18,12 +18,11 @@
     changeLocale();
   }
 
-  let sidenavWidth;
+  let sidenavWidth = $state();
 
-  export let topNav;
-  export let botNav;
+  let {topNav, botNav} = $props();
 
-  const toggles = {};
+  const toggles = $state({});
 
   for (const navItem of botNav) {
     toggles[navItem.category] = false;
@@ -64,7 +63,7 @@
                 aria-expanded={toggles[navItem.category] === true
                   ? 'true'
                   : 'false'}
-                on:click={() =>
+                onclick={() =>
                   toggles[navItem.category]
                     ? (toggles[navItem.category] = false)
                     : subnav(navItem.category)}
@@ -118,12 +117,12 @@
         <div class="flex">
           <button
             class="pr-5 text-xl font-light"
-            on:click={() => btnLocale('de')}
+            onclick={() => btnLocale('de')}
           >
             de
           </button>
-          <span class="border-l-2 border-neutral-25 pr-5" />
-          <button class="text-xl font-light" on:click={() => btnLocale('en')}>
+          <span class="border-l-2 border-neutral-25 pr-5"></span>
+          <button class="text-xl font-light" onclick={() => btnLocale('en')}>
             en
           </button>
         </div>
@@ -134,8 +133,8 @@
     class="absolute z-20 h-screen w-screen bg-neutral opacity-80"
     id="drawer-overlay"
     aria-label={$t('access.close').text}
-    on:click={() => ($drawer = !$drawer)}
+    onclick={() => ($drawer = !$drawer)}
     in:fade={{delay: 0}}
     out:fade={{delay: 0}}
-  />
+  ></button>
 </div>

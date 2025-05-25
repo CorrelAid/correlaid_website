@@ -1,4 +1,5 @@
 <script>
+  import {run} from 'svelte/legacy';
   import '../app.css';
   import {dev} from '$app/environment';
   import {onMount} from 'svelte';
@@ -33,13 +34,15 @@
     }
   });
 
-  export let data;
+  let {data, children} = $props();
 
-  $: if ($page.params.locale) {
-    $locale = $page.params.locale;
-  } else {
-    $locale = 'de';
-  }
+  $effect(() => {
+    if ($page.params.locale) {
+      $locale = $page.params.locale;
+    } else {
+      $locale = 'de';
+    }
+  });
 
   /**
    * Forwarding the user to the equivalent of the current page in the language selected in
@@ -59,25 +62,27 @@
   // Setting page title by retreiving translations from translations and conditionally taking
   // into account dynamic pages by using the page title attribute from the page data,
   // assigned in the dynamic pages +page.server
-  let title;
-  let titleContent;
-  $: titleContent =
+  let title = $derived(
+    $pageKey === 'navbar.home' ? 'CorrelAid - Data4Good' : titleContent,
+  );
+  let titleContent = $derived(
     $page.data.title != null
       ? `${$t($pageKey).text + ' - ' + $page.data.title}`
-      : `${$t($pageKey).text}`;
-  $: title =
-    $pageKey === 'navbar.home' ? 'CorrelAid - Data4Good' : titleContent;
+      : `${$t($pageKey).text}`,
+  );
 
-  let content;
-  $: content = data.content;
+  let content = $derived(data.content);
 
-  let sectionsWithNonEmptyPropsKey = [];
-  $: if (Array.isArray(content)) {
-    sectionsWithNonEmptyPropsKey = content.filter(
-      (section) =>
-        section.props && section.props.key && section.props.key.trim() !== null,
-    );
-  }
+  let sectionsWithNonEmptyPropsKey = $derived.by(() => {
+    if (content) {
+      return content.filter(
+        (section) =>
+          section.props &&
+          section.props.key &&
+          section.props.key.trim() !== null,
+      );
+    }
+  });
 </script>
 
 <svelte:head>
@@ -99,7 +104,7 @@
 >
   <Header on:changeLanguage={handleLocaleChange} />
   {#if $headerHeight}
-    <div class="block xl:hidden" style="min-height: {$headerHeight}px;" />
+    <div class="block xl:hidden" style="min-height: {$headerHeight}px;"></div>
     <main id="grow" class="w-screen">
       <!-- page.error case is required for the static build which otherwise renders content -->
       {#if content && $page.error == null}
@@ -152,7 +157,7 @@
               {:else if section.props.key === 'board_list' && $page.data.board}
                 <PeopleList people={$page.data.board} />
               {:else}
-                <slot />
+                {@render children?.()}
               {/if}
             </div>
           {/if}
@@ -160,11 +165,11 @@
         <!-- if collection doesnt contain a custom section, load page anyways (but must be empty
         in this case) to write page key to store -->
         {#if !content.find((e) => e.collection === 'customSections') | (sectionsWithNonEmptyPropsKey.length >= 2)}
-          <slot />
+          {@render children?.()}
         {/if}
       {:else}
         <!-- not part of pages collection -->
-        <slot />
+        {@render children?.()}
       {/if}
     </main>
     <Footer />

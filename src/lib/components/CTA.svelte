@@ -1,16 +1,8 @@
 <script>
   import LinkButton from '$lib/components/LinkButton.svelte';
   import Html from '$lib/components/Html.svelte';
-  export let buttonLink;
-  export let buttonText;
-  export let buttonColor;
-  export let text;
-  export let buttonType;
+  let {buttonLink, buttonText, buttonColor, text, buttonType} = $props();
 </script>
-
-<!-- <div class="border bg-gradient-to-r from-primary-75 to-secondary-75 text-white">
-  test
-</div> -->
 
 <div
   class="z-1 offset-right z-1 relative top-0 col-span-full rounded border border-neutral-25 bg-white py-4 lg:col-span-1"

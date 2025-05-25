@@ -6,19 +6,23 @@
   import EventsCard from '$lib/components/EventsCard.svelte';
   import ProjectsCard from '$lib/components/ProjectsCard.svelte';
 
-  /** @type {import('./$types').PageData} */
-  export let data;
+  /**
+   * @typedef {Object} Props
+   * @property {import('./$types').PageData} data
+   */
+
+  /** @type {Props} */
+  let {data} = $props();
 
   onMount(() => {
     $pageKey = 'navbar.home';
   });
 
-  let blogPosts;
-  $: blogPosts = data.blogPosts;
-  let events;
-  $: events = data.events;
-  let projects;
-  $: projects = data.projects;
+  let blogPosts = $derived(data.blogPosts);
+
+  let events = $derived(data.events);
+
+  let projects = $derived(data.projects);
 </script>
 
 <div class="px-4">

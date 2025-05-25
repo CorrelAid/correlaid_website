@@ -9,19 +9,12 @@
     $pageKey = 'navbar.blog';
   });
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-  $: blogPost = data.blogPost;
+  let {data} = $props();
+  let blogPost = $derived(data.blogPost);
 </script>
 
-<TextContainer
-  title={blogPost.title}
-  titleImage={blogPost.imageSrc}
-  imageAlt={blogPost.imageAlt}
-  imageDesc={blogPost.imageDesc}
-  teaser={blogPost.teaser}
->
-  <div slot="sub_subtitle">
+{#snippet sub_subtitle()}
+  <div>
     <p class="mx-4 pb-4 text-lg font-light">
       {blogPost.pubDate} - {#each blogPost.contentCreators as person, i}
         {person.name}
@@ -30,8 +23,22 @@
         {/if}{/each}
     </p>
   </div>
-  <Html source={blogPost.text} options={'mx-auto'} slot="main" />
-</TextContainer>
+{/snippet}
+
+{#snippet main()}
+  <Html source={blogPost.text} options={'mx-auto'} />
+{/snippet}
+
+<TextContainer
+  title={blogPost.title}
+  titleImage={blogPost.imageSrc}
+  imageAlt={blogPost.imageAlt}
+  imageDesc={blogPost.imageDesc}
+  teaser={blogPost.teaser}
+  {sub_subtitle}
+  {main}
+/>
+
 {#if blogPost.contentCreators.length != 0}
   <div class="container mx-auto space-y-8 px-4 py-12">
     {#each blogPost.contentCreators as person}

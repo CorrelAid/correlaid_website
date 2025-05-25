@@ -1,4 +1,6 @@
 <script>
+  import {run} from 'svelte/legacy';
+
   import {pageKey} from '$lib/stores/pageKey';
   import {onMount} from 'svelte';
   import {t} from '$lib/stores/i18n';
@@ -10,18 +12,23 @@
     $pageKey = 'navbar.using_data.project_database';
   });
 
-  // const source = '# WIP';
-  export let data;
-  $: projects = data.projects;
-  let filteredData;
-  let trimmedData;
-  let projects;
+  /**
+   * @typedef {Object} Props
+   * @property {any} data - const source = '# WIP';
+   */
 
-  $: checkBoxes = [
+  /** @type {Props} */
+  let {data} = $props();
+
+  let filteredData = $state();
+  let trimmedData = $state();
+  let projects = $derived(data.projects);
+
+  let checkBoxes = $derived([
     {title: $t('filter.team_selection').text, param: 'teamSelection'},
-  ];
+  ]);
 
-  $: selects = [
+  let selects = $derived([
     {
       title: $t('filter.type').text,
       searchable: false,
@@ -46,7 +53,7 @@
       multiple: true,
       param: 'localChapterNames',
     },
-  ];
+  ]);
 
   const searchOptions = [
     {searchProperty: 'title', multiple: false},

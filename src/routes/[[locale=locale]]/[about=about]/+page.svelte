@@ -6,8 +6,8 @@
   onMount(() => {
     $pageKey = 'navbar.about';
   });
-  export let data;
-  $: awards = data.awards;
+  let {data} = $props();
+  let awards = $derived(data.awards);
 
   function indexToImagePosition(award, index) {
     award.imageOnRightSide = index % 2 === 0;

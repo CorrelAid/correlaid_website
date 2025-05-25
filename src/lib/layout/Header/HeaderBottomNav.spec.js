@@ -19,27 +19,47 @@ describe('Nav should have dropdown sub menus', () => {
   test('main navigations present present', async () => {
     locale.set('de');
 
-    const {component} = render(HeaderBottomNav, {
+    render(HeaderBottomNav, {
       props: {botNav: navItems, lastClickedLink: ''},
     });
 
     // Relies on a lot of configuration wrt. translations, meaning
-    // Language specific lookups. It would be nice if testing was more explict
+    // Language specific lookups. It would be nice if testing was more explicit
     expect(screen.getByText('Über uns')).toBeInTheDocument();
     const navLink = screen.getByText('Daten nutzen');
     const navColorDivWrapper = screen.getByTestId(
       'navColoringTest-navbar.using_data',
     );
     expect(navLink).toBeInTheDocument();
+    expect(navColorDivWrapper).toBeInTheDocument();
+
     expect(navColorDivWrapper).not.toHaveClass('text-secondary');
-
-    await component.$set({lastClickedLink: 'navbar.using_data'});
+  });
+  test('main navigations present present', async () => {
+    render(HeaderBottomNav, {
+      props: {botNav: navItems, lastClickedLink: 'navbar.using_data'},
+    });
+    const navColorDivWrapper = screen.getByTestId(
+      'navColoringTest-navbar.using_data',
+    );
     expect(navColorDivWrapper).toHaveClass('text-secondary');
-
-    await component.$set({lastClickedLink: 'navbar.using_data.projects'});
+  });
+  test('main navigations present present', async () => {
+    render(HeaderBottomNav, {
+      props: {botNav: navItems, lastClickedLink: 'navbar.using_data.projects'},
+    });
+    const navColorDivWrapper = screen.getByTestId(
+      'navColoringTest-navbar.using_data',
+    );
     expect(navColorDivWrapper).toHaveClass('text-secondary');
-
-    await component.$set({lastClickedLink: 'navbar.home'});
+  });
+  test('main navigations present present', async () => {
+    render(HeaderBottomNav, {
+      props: {botNav: navItems, lastClickedLink: 'navbar.home'},
+    });
+    const navColorDivWrapper = screen.getByTestId(
+      'navColoringTest-navbar.using_data',
+    );
     expect(navColorDivWrapper).not.toHaveClass('text-secondary');
   });
 });

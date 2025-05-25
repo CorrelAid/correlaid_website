@@ -2,8 +2,8 @@
   import Carousel from 'svelte-carousel';
   import {browser} from '$app/environment';
   import {t} from '$lib/stores/i18n';
-  export let textOnly = false;
-  export let quotes;
+
+  let {textOnly = false, quotes} = $props();
 
   const handleNextClick = () => {
     carousel.goToNext();
@@ -11,7 +11,7 @@
   const handlePrevClick = () => {
     carousel.goToPrev();
   };
-  let carousel;
+  let carousel = $state();
 </script>
 
 <div
@@ -47,7 +47,7 @@
                         </div>
                       {/if}
                     {:else}
-                      <div class="h-40 w-72 bg-neutral object-cover" />
+                      <div class="h-40 w-72 bg-neutral object-cover"></div>
                     {/if}
                   </div>
 
@@ -86,12 +86,12 @@
     <button
       class="button my-3 rounded-full bg-neutral-75 px-3 py-1 text-lg font-semibold text-white shadow-md"
       aria-label={$t('access.previous').text}
-      on:click={handlePrevClick}>{'<'}</button
+      onclick={handlePrevClick}>{'<'}</button
     >
     <button
       class="button my-3 rounded-full bg-neutral-75 px-3 py-1 text-lg font-semibold text-white shadow-md"
       aria-label={$t('access.next').text}
-      on:click={handleNextClick}>{'>'}</button
+      onclick={handleNextClick}>{'>'}</button
     >
   </div>
 </div>

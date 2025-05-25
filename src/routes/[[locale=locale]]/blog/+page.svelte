@@ -10,20 +10,19 @@
     $pageKey = 'navbar.blog';
   });
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-  let filteredData;
-  let trimmedData;
-  let blogPosts;
-  $: blogPosts = data.blogPosts;
-  $: selects = [
+  let {data} = $props();
+  let filteredData = $state();
+  let trimmedData = $state();
+  let blogPosts = $derived(data.blogPosts);
+
+  let selects = $derived([
     {
       title: $t('filter.language').text,
       searchable: false,
       multiple: true,
       param: 'langs',
     },
-  ];
+  ]);
 
   const searchOptions = [
     {searchProperty: 'title', multiple: false},

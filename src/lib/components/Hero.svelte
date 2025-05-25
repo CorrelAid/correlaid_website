@@ -3,18 +3,21 @@
   import {headerHeight} from '$lib/stores/dims';
   import Info from '$lib/svg/Info.svelte';
   import CorrelaidXLogo from '$lib/svg/CorrelaidXLogo.svelte';
-  export let gradientOnly;
-  export let height;
-  export let text;
-  export let subText;
-  export let buttons = [];
-  export let correlaidx = false;
-  export let imageSrc = void 0;
-  export let imageAlt = void 0;
-  export let imageDesc = void 0;
 
-  let cHidden = 'hidden';
-  let aria = 'false';
+  let {
+    gradientOnly,
+    height,
+    text,
+    subText,
+    buttons = [],
+    correlaidx = false,
+    imageSrc = void 0,
+    imageAlt = void 0,
+    imageDesc = void 0,
+  } = $props();
+
+  let cHidden = $state('hidden');
+  let aria = $state('false');
 
   function handleHidden() {
     cHidden === 'inline-block'
@@ -36,7 +39,7 @@
       style={`background-image: url(${imageSrc})`}
       aria-label={imageAlt}
       role="img"
-    />
+    ></span>
 
     {#if imageDesc}
       <div class="absolute bottom-0 right-0 z-20 hidden opacity-100 lg:block">
@@ -55,7 +58,7 @@
       <div class="absolute bottom-0 right-0 z-20 lg:hidden">
         <button
           class="z-20 m-1 my-2 rounded-full bg-white p-0.5 text-sm lg:hidden"
-          on:click={handleHidden}
+          onclick={handleHidden}
           aria-label="Credit"
           aria-expanded={aria}
           aria-controls="credit"
@@ -119,5 +122,5 @@
     class="absolute inset-0 bg-gradient-to-r {!correlaidx
       ? 'from-secondary/75 to-primary/75'
       : 'from-tertiary/75 to-secondary/75'}"
-  />
+  ></div>
 </section>

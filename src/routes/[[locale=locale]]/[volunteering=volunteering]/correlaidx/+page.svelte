@@ -9,12 +9,11 @@
     $pageKey = 'navbar.volunteering.correlaidx';
   });
 
-  export let data;
+  let {data} = $props();
 
-  let geoJson;
-  $: geoJson = data.geoJson;
-  let localChapters;
-  $: localChapters = data.localChapters;
+  let geoJson = $derived(data.geoJson);
+
+  let localChapters = $derived(data.localChapters);
 </script>
 
 <div class="px-4">

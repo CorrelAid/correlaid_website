@@ -14,87 +14,96 @@
     $pageKey = 'navbar.using_data.project_database';
   });
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-  $: project = data.project;
+  /**
+   * @typedef {Object} Props
+   * @property {import('./$types').PageData} data
+   */
+
+  /** @type {Props} */
+  let {data} = $props();
+  let project = $derived(data.project);
 </script>
 
 {#if project}
   <TextContainer title={project.title} teaser={project.summary}>
-    <div class="mx-4" slot="sub_subtitle">
-      <div class="mb-4">
-        {#each project.projectTypes as tag}
-          <Tag text={tag} color="bg-primary" />
-        {/each}
+    {#snippet sub_subtitle()}
+      <div class="mx-4">
+        <div class="mb-4">
+          {#each project.projectTypes as tag}
+            <Tag text={tag} color="bg-primary" />
+          {/each}
 
-        {#each project.dataTypes as tag}
-          <Tag text={tag} color="bg-secondary" />
-        {/each}
-      </div>
-      {#if project.teamSelection === true}
-        <div>
-          <a
-            target="__blank"
-            rel="noreferrer"
-            href={project.applicationLink}
-            class="pb-1 pr-4 text-secondary"
-          >
-            <span class="underline">{$t('project.apply').text} </span>
-            <span
-              class="font inline-block align-text-top"
-              aria-label="External Link"
-              ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
-            >
-          </a>
-        </div>
-      {/if}
-
-      {#if project.localChapters}
-        <div class="pb-3">
-          {#each project.localChapters as lc}
-            <a
-              class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
-              href={lc.href}>CorrelAidX {lc}</a
-            >
+          {#each project.dataTypes as tag}
+            <Tag text={tag} color="bg-secondary" />
           {/each}
         </div>
-      {/if}
+        {#if project.teamSelection === true}
+          <div>
+            <a
+              target="__blank"
+              rel="noreferrer"
+              href={project.applicationLink}
+              class="pb-1 pr-4 text-secondary"
+            >
+              <span class="underline">{$t('project.apply').text} </span>
+              <span
+                class="font inline-block align-text-top"
+                aria-label="External Link"
+                ><ExternalLink height={17} width={17} color={'#3863a2'} /></span
+              >
+            </a>
+          </div>
+        {/if}
 
-      {#if !project.description}
-        <div class="mb-4">
-          <ProjectLinks
-            projectOutputs={project.projectOutputs}
-            horizontal={false}
-          />
-        </div>
-      {/if}
-      {#if project.organization}
-        <div class="mb-6 mt-4">
-          <Box>
-            {#if project.organization.description}
-              <h2 class="text-xl font-semibold">
-                {project.organization.name}
-              </h2>
-            {:else}
-              <h2 class="font-semibold">{project.organization.name}</h2>
-            {/if}
-            {#if project.organization.description}
-              <p>
-                <Html
-                  source={project.organization.description}
-                  options={'!px-0'}
-                />
-              </p>
-            {/if}
-          </Box>
-        </div>
-      {/if}
-    </div>
-    <div slot="main">
-      {#if project.description}
-        <Html source={project.description} options={'mx-auto'} />
-      {/if}
-    </div>
+        {#if project.localChapters}
+          <div class="pb-3">
+            {#each project.localChapters as lc}
+              <a
+                class="text-medium mb-3 line-clamp-3 inline pr-3 font-semibold text-base-content transition hover:text-primary"
+                href={lc.href}>CorrelAidX {lc}</a
+              >
+            {/each}
+          </div>
+        {/if}
+
+        {#if !project.description}
+          <div class="mb-4">
+            <ProjectLinks
+              projectOutputs={project.projectOutputs}
+              horizontal={false}
+            />
+          </div>
+        {/if}
+        {#if project.organization}
+          <div class="mb-6 mt-4">
+            <Box>
+              {#if project.organization.description}
+                <h2 class="text-xl font-semibold">
+                  {project.organization.name}
+                </h2>
+              {:else}
+                <h2 class="font-semibold">{project.organization.name}</h2>
+              {/if}
+              {#if project.organization.description}
+                <p>
+                  <Html
+                    source={project.organization.description}
+                    options={'!px-0'}
+                  />
+                </p>
+              {/if}
+            </Box>
+          </div>
+        {/if}
+      </div>
+    {/snippet}
+    {#snippet main()}
+      <div>
+        {#if project.description}
+          <Html source={project.description} options={'mx-auto'} />
+        {/if}
+      </div>
+    {/snippet}
   </TextContainer>
 
   {#if project.projectOutputs.length !== 0 && project.description}

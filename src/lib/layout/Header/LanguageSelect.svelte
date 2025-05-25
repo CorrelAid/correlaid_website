@@ -4,7 +4,7 @@
   import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import {t} from '$lib/stores/i18n';
 
-  let languageToggle = false;
+  let languageToggle = $state(false);
 
   const dispatch = createEventDispatcher();
 
@@ -23,8 +23,8 @@
     languageToggle = false;
     changeLocale();
   }
-  let aria = false;
-  export let activeLanguage;
+  let aria = $state(false);
+  let {activeLanguage = $bindable()} = $props();
 </script>
 
 <div class="inline-flex items-stretch rounded-md border border-neutral-25">
@@ -36,7 +36,7 @@
     <button
       type="button"
       class="z-10 inline-flex h-full items-center justify-center rounded-r-md border-l border-neutral-25 px-2"
-      on:click={langDropdown}
+      onclick={langDropdown}
       aria-expanded={aria}
       aria-label={$t('access.language').text}
     >
@@ -47,21 +47,21 @@
         class="absolute right-0 z-10 mt-1 origin-top-right rounded-md border border-neutral-25 bg-white shadow-lg"
         role="menu"
         tabindex="-1"
-        on:mouseleave={langDropdown}
+        onmouseleave={langDropdown}
       >
         <div class="p-2">
           <button
             class="primary flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm
                                 text-base-content hover:text-primary"
             role="menuitem"
-            on:click={() => btnLocale('de')}
+            onclick={() => btnLocale('de')}
           >
             Deutsch
           </button>
           <button
             class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-base-content hover:text-primary"
             role="menuitem"
-            on:click={() => btnLocale('en')}
+            onclick={() => btnLocale('en')}
           >
             English
           </button>
