@@ -15,3 +15,6 @@ tests-examples
 *.local
 /chrome
 .vercel
+
+
+.env
