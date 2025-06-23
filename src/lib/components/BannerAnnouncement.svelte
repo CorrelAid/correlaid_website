@@ -75,7 +75,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1.5rem 1rem 1rem;
+    padding: 1rem calc(1rem + 12px) 1rem 1rem;
     line-height: 1;
   }
 
@@ -95,9 +95,9 @@
   .banner-exit-btn {
     color: #3c3c3c;
     position: absolute;
-    top: 0;
+    top: 50%;
     right: 0;
-    padding-top: 6px;
-    padding-right: 6px;
+    padding: 12px 6px; /* increase tap area for a11y */
+    transform: translateY(-50%);
   }
 </style>
