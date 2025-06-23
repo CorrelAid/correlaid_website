@@ -24,6 +24,7 @@
 
   // TODO: cleanup after launch
   import BannerAnnouncement from '$lib/components/BannerAnnouncement.svelte';
+  import LabAnnouncement from '$lib/components/singleUse/LabAnnouncement.svelte';
 
   const LabLogo = `<svg
         height="24"
@@ -166,6 +167,9 @@
             </div>
           {:else if section.collection === 'ctaGroups'}
             <div class="container mx-auto mb-12 space-y-8 px-4">
+              {#if $locale === 'de'}
+                <LabAnnouncement />
+              {/if}
               <CtaGroup {...section.props} />
             </div>
           {:else if section.collection === 'ctas'}
