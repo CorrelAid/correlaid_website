@@ -69,7 +69,10 @@
     top: var(--top, 0);
     left: 0;
     width: 100%;
-    background: linear-gradient(65deg, #a7baeb, #f1c6db);
+    /* background: linear-gradient(65deg, #a7baeb, #f1c6db); */
+    background-color: white;
+    border-top: 1px solid #3c3c3c;
+    border-bottom: 1px solid #3c3c3c;
     z-index: 1000;
     visibility: hidden;
     display: flex;
