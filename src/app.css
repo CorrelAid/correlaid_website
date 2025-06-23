@@ -124,6 +124,29 @@
   opacity: 0.8;
 }
 
+.offset-right-lab::after {
+  content: '';
+  border-radius: 4px;
+  border-right: 7px solid transparent;
+  background: linear-gradient(to top, #5582dc, #ffa4be) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  top: 0px;
+  bottom: 0px;
+  right: -5px;
+  position: absolute;
+  z-index: -1;
+  opacity: 1;
+  width: calc(100% - 4px);
+  opacity: 0.8;
+}
+
 .offset-left::after {
   content: '';
   border-radius: 4px;

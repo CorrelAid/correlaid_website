@@ -4,7 +4,7 @@
 
 <!-- either class lab or class lab-bg or class border -->
 <div
-  class="lab container mx-auto mb-8 mt-8 flex flex-col gap-4 rounded p-4 md:flex-row"
+  class="offset-right-lab z-1 container relative mx-auto mb-8 mt-8 flex flex-col gap-4 rounded rounded border border-neutral-25 bg-white p-4 md:flex-row"
 >
   <div class="flex items-center justify-center">
     <CorrelLabWide />
@@ -30,7 +30,7 @@
 </div>
 
 <style>
-  .lab {
+  /* .lab {
     position: relative;
     width: 100%;
   }
@@ -53,5 +53,5 @@
     mask-composite: add, add;
     mask-composite: add, add;
     mask-composite: exclude;
-  }
+  } */
 </style>

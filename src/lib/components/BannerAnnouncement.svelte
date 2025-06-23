@@ -14,7 +14,6 @@
     }
     is_visible = false;
   }
-
   onMount(() => {
     if (browser && sessionStorage) {
       has_seen = sessionStorage.getItem('lab_announcement_seen') === 'true';
@@ -23,6 +22,7 @@
         return;
       }
     }
+
     setTimeout(() => {
       is_visible = true;
     }, 1000);
@@ -71,15 +71,21 @@
     width: 100%;
     /* background: linear-gradient(65deg, #a7baeb, #f1c6db); */
     background-color: white;
-    border-top: 1px solid #3c3c3c;
-    border-bottom: 1px solid #3c3c3c;
-    z-index: 1000;
+    border-top: 1px solid rgb(207, 207, 209);
+    border-bottom: 1px solid rgb(207, 207, 209);
+    z-index: 20;
     visibility: hidden;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem calc(1rem + 12px) 1rem 1rem;
     line-height: 1;
+  }
+
+  @media (width >= 1280px) {
+    .announcement-banner {
+      border-top: none;
+    }
   }
 
   .announcement-banner.visible {
