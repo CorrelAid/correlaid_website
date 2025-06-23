@@ -129,20 +129,33 @@
   <Header on:changeLanguage={handleLocaleChange} />
   {#if $headerHeight}
     <div class="block xl:hidden" style="min-height: {$headerHeight}px;"></div>
-    <BannerAnnouncement top="{$headerHeight > 63 ? 0 : $headerHeight}px;">
-      {@html LabLogo}
-      <div class="flex flex-col gap-1">
-        <p>
-          <strong
-            >Unser neustes Projekt <a
-              href="#"
-              style="text-decoration: underline;">CorrelLab</a
-            > ist jetzt live!</strong
-          >
-        </p>
-        <p>Registriere deine NPO jetzt für einen Kurs.</p>
-      </div>
-    </BannerAnnouncement>
+    {#if $locale === 'de'}<BannerAnnouncement
+        top="{$headerHeight > 63 ? 0 : $headerHeight}px;"
+      >
+        <a href="https://lab.correlaid.org">{@html LabLogo}</a>
+        <div class="flex flex-col gap-1">
+          <p>
+            <strong
+              ><a
+                href="https://lab.correlaid.org"
+                style="text-decoration: underline;"
+                >Neu: Das CorrelLAB ist da!
+              </a></strong
+            >
+          </p>
+          <p>
+            <a
+              href="https://pretix.eu/control/event/correlaid/correllab/"
+              style="text-decoration: underline;">Registriere</a
+            >
+            deine NPO jetzt
+            <a
+              href="https://pretix.eu/control/event/correlaid/correllab/"
+              style="text-decoration: underline;">für einen Kurs</a
+            >.
+          </p>
+        </div>
+      </BannerAnnouncement>{/if}
     <main id="grow" class="w-screen">
       <!-- page.error case is required for the static build which otherwise renders content -->
       {#if content && $page.error == null}
