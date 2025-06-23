@@ -4,7 +4,7 @@
 
 <!-- either class lab or class lab-bg or class border -->
 <div
-  class="lab-bg container mx-auto mb-8 mt-8 flex flex-col gap-4 rounded p-4 md:flex-row"
+  class="lab container mx-auto mb-8 mt-8 flex flex-col gap-4 rounded p-4 md:flex-row"
 >
   <div class="flex items-center justify-center">
     <CorrelLabWide />
