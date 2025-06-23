@@ -5,6 +5,16 @@
   },
   "redirects": [
     {
+      "source": "/en/lab",
+      "destination": "https://lab.correlaid.org",
+      "permanent": false
+    },
+    {
+      "source": "/lab",
+      "destination": "https://lab.correlaid.org",
+      "permanent": false
+    },
+    {
       "source": "/stats/js/script.js",
       "destination": "https://plausible.io/js/script.js"
     },
