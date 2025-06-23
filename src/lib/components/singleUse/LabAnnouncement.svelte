@@ -32,7 +32,6 @@
 <style>
   .lab {
     position: relative;
-    margin-right: -4px;
     width: 100%;
   }
 
