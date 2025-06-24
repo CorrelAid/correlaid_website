@@ -5,13 +5,23 @@
   },
   "redirects": [
     {
-      "source": "/en/lab",
+      "source": "/en/correllab",
       "destination": "https://lab.correlaid.org",
       "permanent": false
     },
     {
-      "source": "/lab",
+      "source": "/correllab",
       "destination": "https://lab.correlaid.org",
+      "permanent": false
+    },
+    {
+      "source": "/en/lab",
+      "destination": "/en/correllab",
+      "permanent": false
+    },
+    {
+      "source": "/lab",
+      "destination": "/correllab",
       "permanent": false
     },
     {
