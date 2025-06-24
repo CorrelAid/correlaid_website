@@ -16,12 +16,12 @@
     },
     {
       "source": "/en/lab",
-      "destination": "/en/correllab",
+      "destination": "https://lab.correlaid.org",
       "permanent": false
     },
     {
       "source": "/lab",
-      "destination": "/correllab",
+      "destination": "https://lab.correlaid.org",
       "permanent": false
     },
     {
