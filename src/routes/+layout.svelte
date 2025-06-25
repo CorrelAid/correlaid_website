@@ -146,12 +146,12 @@
           </p>
           <p>
             <a
-              href="https://pretix.eu/control/event/correlaid/correllab/"
+              href="https://pretix.eu/correlaid/correllab/"
               style="text-decoration: underline;">Registriere</a
             >
             deine NPO jetzt
             <a
-              href="https://pretix.eu/control/event/correlaid/correllab/"
+              href="https://pretix.eu/correlaid/correllab/"
               style="text-decoration: underline;">für einen Kurs</a
             >.
           </p>
