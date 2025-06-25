@@ -21,6 +21,7 @@ export const botNav = [
     children: [
       'navbar.education.course_data',
       'navbar.education.learning_r',
+      'navbar.education.communicating_data',
       'navbar.education.mentoring',
       'navbar.education.tidy_tuesday',
       'navbar.education.resources',
