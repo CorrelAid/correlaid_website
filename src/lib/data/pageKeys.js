@@ -45,6 +45,10 @@ export default {
       text: 'Mentoring',
       url: '/bildung/mentoring',
     },
+    'navbar.education.communicating_data': {
+      text: 'Daten kommunizieren',
+      url: '/bildung/daten_kommunizieren',
+    },
     //
     'navbar.volunteering': {text: 'Mitmachen', url: '/mitmachen'},
     // Subnav community
@@ -140,6 +144,10 @@ export default {
     'navbar.education.mentoring': {
       text: 'Mentoring',
       url: '/en/education/mentoring',
+    },
+    'navbar.education.communicating_data': {
+      text: 'Communicating Data',
+      url: '/en/education/communicating_data',
     },
     //
     'navbar.volunteering': {text: 'Volunteering', url: '/en/volunteering'},
