@@ -78,7 +78,7 @@
                 <span class="sr-only">{$t('access.location').text}</span>
                 <span class="my-auto pl-2">{cardDetails[key]}</span></span
               >
-            {:else if key == 'language_'}
+            {:else if key == 'language'}
               {#if language == 'german'}
                 <span
                   class="inline-block rounded-full bg-white shadow-none"
@@ -86,12 +86,12 @@
                 >
                   <De height={iconSize} width={iconSize} />
                 </span>
-                <span class="sr-only">Event ist auf deutsch.</span>
+                <span class="sr-only">Job ist auf deutsch.</span>
               {:else}
                 <span
                   class="inline-block rounded-full bg-white shadow-none"
                   role="img"
-                  aria-label="Event is in english."
+                  aria-label="Job is in english."
                 >
                   <En height={iconSize} width={iconSize} />
                 </span>
