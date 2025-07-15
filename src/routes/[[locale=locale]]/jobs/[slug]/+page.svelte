@@ -68,7 +68,7 @@
                 <span class="sr-only">{$t('access.location').text}</span>
                 <span class="my-auto pl-2">{cardDetails[key]}</span></span
               >
-            {:else if key == 'language_'}
+            {:else if key == 'language'}
               {#if job.language == 'german'}
                 <span
                   class="inline-block rounded-full bg-white shadow-none"
