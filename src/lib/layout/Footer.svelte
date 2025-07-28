@@ -11,6 +11,7 @@
 
   const links = [
     'footer.imprint',
+    'footer.privacy_policy',
     'footer.coc',
     'footer.coe',
     'navbar.about.team',

@@ -87,6 +87,10 @@ export default {
     },
     'navbar.jobs': {text: 'Jobs', url: '/jobs'},
     'footer.imprint': {text: 'Impressum', url: '/impressum'},
+    'footer.privacy_policy': {
+      text: 'Datenschutzerklärung',
+      url: '/datenschutzerklaerung',
+    },
     'footer.coc': {text: 'Code of Conduct', url: '/codeofconduct'},
     'footer.coe': {text: 'Code of Ethics', url: '/codeofethics'},
     'footer.rss': {text: 'RSS', url: '/rss.xml'},
@@ -183,6 +187,10 @@ export default {
     },
     'navbar.jobs': {text: 'Jobs', url: '/en/jobs'},
     'footer.imprint': {text: 'Imprint', url: '/en/imprint'},
+    'footer.privacy_policy': {
+      text: 'Privacy Policy',
+      url: '/en/privacy-policy',
+    },
     'footer.coc': {text: 'Code of Conduct', url: '/en/codeofconduct'},
     'footer.coe': {text: 'Code of Ethics', url: '/en/codeofethics'},
     'footer.rss': {text: 'RSS', url: '/en/rss.xml'},
