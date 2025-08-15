@@ -207,9 +207,9 @@
             </div>
           {:else if section.collection === 'customSections'}
             <div class="container mx-auto mb-12">
-              {#if section.props.key === 'remote_office_list' && $page.data.remoteOffice}
+              {#if section.props.key === 'cs_remote_office_list' && $page.data.remoteOffice}
                 <PeopleList people={$page.data.remoteOffice} />
-              {:else if section.props.key === 'board_list' && $page.data.board}
+              {:else if section.props.key === 'cs_board_list' && $page.data.board}
                 <PeopleList people={$page.data.board} />
               {:else}
                 {@render children?.()}
