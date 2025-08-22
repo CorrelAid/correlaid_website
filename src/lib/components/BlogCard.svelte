@@ -80,12 +80,10 @@
       </p>
 
       <div class="pb-1 pt-1.5">
-        {#snippet main()}
-          <Html
-            source={teaser}
-            options={'mx-0 !px-0 line-clamp-3 overflow-hidden text-base-content leading-normal'}
-          />
-        {/snippet}
+        <Html
+          source={teaser}
+          options={'mx-0 !px-0 line-clamp-3 overflow-hidden text-base-content leading-normal'}
+        />
       </div>
     </div>
   </div>
