@@ -1,5 +1,7 @@
 <script>
   import {run} from 'svelte/legacy';
+  import CorrelLabWide from '$lib/svg/CorrelLabWide.svelte';
+  import {DataPresentation} from '$lib/svg/nav_icons';
   import '../app.css';
   import {dev} from '$app/environment';
   import {onMount} from 'svelte';
@@ -24,7 +26,7 @@
 
   // TODO: cleanup after launch
   import BannerAnnouncement from '$lib/components/BannerAnnouncement.svelte';
-  import LabAnnouncement from '$lib/components/singleUse/LabAnnouncement.svelte';
+  import AnnouncementBox from '$lib/components/singleUse/AnnouncementBox.svelte';
 
   const LabLogo = `<svg
         height="24"
@@ -168,7 +170,52 @@
           {:else if section.collection === 'ctaGroups'}
             <div class="container mx-auto mb-12 space-y-8 px-4">
               {#if $locale === 'de'}
-                <LabAnnouncement />
+                <AnnouncementBox>
+                  <div class="flex items-center justify-center">
+                    <CorrelLabWide />
+                  </div>
+
+                  <div>
+                    <p>
+                      <strong
+                        >Neu: Das <a
+                          href="https://lab.correlaid.org"
+                          style="text-decoration: underline;">CorrelLAB</a
+                        > ist da!</strong
+                      >
+                    </p>
+                    <p>
+                      Unser neues Kurs- und Praxisprogramm für Non-Profits rund
+                      um Daten.
+                    </p>
+                    <p>
+                      <a
+                        href="https://lab.correlaid.org"
+                        style="text-decoration: underline;">Mehr erfahren</a
+                      >
+                    </p>
+                  </div>
+                </AnnouncementBox>
+                <AnnouncementBox colors="correlaid">
+                  <div class="flex items-center justify-center">
+                    <DataPresentation height="73" width="228" fill="black" />
+                  </div>
+                  <div>
+                    <p>
+                      <strong>Nur noch bis 9.10.!</strong>
+                    </p>
+                    <p>
+                      Anmeldung für unseren Kurs Daten kommunizieren:
+                      Storytelling und Visualisierung entdecken
+                    </p>
+                    <p>
+                      <a
+                        href="bildung/daten_kommunizieren/"
+                        style="text-decoration: underline;">Mehr erfahren</a
+                      >
+                    </p>
+                  </div>
+                </AnnouncementBox>
               {/if}
               <CtaGroup {...section.props} />
             </div>

@@ -14,9 +14,7 @@
     $pageKey = 'navbar.education';
   });
   const navItems = [
-    {key: 'navbar.education.resources', icon: BookHand},
-    {key: 'navbar.education.learning_r', icon: CodeLearning},
-    {key: 'navbar.education.course_data', icon: DataPresentation},
+    {key: 'navbar.education.communicating_data', icon: DataPresentation},
     {key: 'navbar.education.tidy_tuesday', icon: Lab},
     {key: 'navbar.education.mentoring', icon: ArrowPeople},
   ];
