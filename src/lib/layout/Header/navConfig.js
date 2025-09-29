@@ -19,8 +19,6 @@ export const botNav = [
     key: 'navbar.education',
     category: 'education',
     children: [
-      'navbar.education.course_data',
-      'navbar.education.learning_r',
       'navbar.education.communicating_data',
       'navbar.education.mentoring',
       'navbar.education.tidy_tuesday',
