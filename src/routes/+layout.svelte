@@ -179,8 +179,10 @@
                       <strong>Nur noch bis 9.10.!</strong>
                     </p>
                     <p>
-                      Anmeldung für unseren Kurs Daten Kommunizieren:
-                      Storytelling und Visualisierung entdecken
+                      Anmeldung für unseren Kurs <strong
+                        >Daten Kommunizieren: Storytelling und Visualisierung
+                        entdecken</strong
+                      >
                     </p>
                     <p>
                       <a
