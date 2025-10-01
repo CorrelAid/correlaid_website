@@ -46,7 +46,7 @@ export default {
       url: '/bildung/mentoring',
     },
     'navbar.education.communicating_data': {
-      text: 'Daten kommunizieren',
+      text: 'Daten Kommunizieren',
       url: '/bildung/daten_kommunizieren',
     },
     //
