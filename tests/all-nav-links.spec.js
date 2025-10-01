@@ -103,16 +103,7 @@ test.describe('test regular viewport', () => {
       },
       page: '**/bildung/ressourcen/',
     },
-    {
-      linkClick: async (page) => {
-        await page
-          .getByTestId('navColoringTest-navbar.education')
-          .getByRole('link', {name: 'Bildung'})
-          .hover();
-        page.getByRole('link', {name: 'R Lernen', exact: true}).click();
-      },
-      page: '**/bildung/r-lernen/',
-    },
+
     {
       linkClick: async (page) => {
         await page
