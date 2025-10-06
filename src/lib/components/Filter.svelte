@@ -1,7 +1,8 @@
 <script>
   import {page} from '$app/stores';
+  import {replaceState} from '$app/navigation';
   import {t, locale} from '$lib/stores/i18n';
-  import {onMount, tick} from 'svelte';
+  import {onMount} from 'svelte';
   import DropdownIcon from '$lib/svg/DropdownIcon.svelte';
   import Calendar from '$lib/svg/Calendar.svelte';
   import List from '$lib/svg/List.svelte';
@@ -30,43 +31,38 @@
 
   let hidden = $state('hidden');
   let ariaExpanded = $state(false);
-  let searchTerm = $state();
+  let searchTerm = $state('');
 
   const values = $state({});
 
   onMount(async () => {
-    // when searchParams is set, set them in filter
-    applyUrlSearchParams($page.url.searchParams, values, selects, checkBoxes);
+    // Initialize checkbox values to false if not already set
+    for (const checkBox of checkBoxes) {
+      if (values[checkBox.param] === undefined) {
+        values[checkBox.param] = false;
+      }
+    }
+
     if ($page.url.searchParams.get('viewType')) {
       viewType = $page.url.searchParams.get('viewType');
     }
-    // if value is set dont hide filter (if someone goes to page with defined url param)
-    if (expanded === false) {
-      if (Object.values(values).some((value) => value !== null)) {
-        hidden = 'visible';
-        ariaExpanded = true;
-      }
-    } else {
+
+    // Restore search term from URL - simple and direct
+    const urlSearchTerm = $page.url.searchParams.get('search');
+    if (urlSearchTerm) {
+      searchTerm = urlSearchTerm;
+    }
+
+    // Set initial visibility state
+    if (expanded === true) {
       hidden = 'visible';
+      ariaExpanded = true;
     }
   });
 
   function handleHidden() {
     hidden = hidden === 'hidden' ? 'visible' : 'hidden';
     ariaExpanded = ariaExpanded ? false : true;
-  }
-
-  // update selects as values changes. We cant update selects directly because of infinite loop.
-  function changeVal(values_) {
-    for (const key in values_) {
-      if (values_.hasOwnProperty(key)) {
-        if (typeof values_[key] === 'boolean') {
-          _.find(checkBoxes, {param: key}).value = values_[key];
-        } else {
-          _.find(selects, {param: key}).value = values_[key];
-        }
-      }
-    }
   }
 
   $effect(() => {
@@ -77,26 +73,116 @@
   $effect(() => {
     selects = genDropdownLists(origData, selects);
   });
+
+  // Apply URL search parameters after selects are populated
+  let urlParamsApplied = $state(false);
+  let isRestoringFromUrl = $state(false);
+
+  // Handle other URL parameters
   $effect(() => {
-    changeVal(values);
+    if (
+      selects &&
+      selects.length > 0 &&
+      selects[0].items &&
+      !urlParamsApplied
+    ) {
+      // Set flag to prevent URL updates during restoration
+      isRestoringFromUrl = true;
+
+      // when searchParams is set, set them in filter
+      applyUrlSearchParams($page.url.searchParams, values, selects, checkBoxes);
+      urlParamsApplied = true;
+
+      // Show filter if any values are set from URL params
+      if (expanded === false) {
+        const hasValues = Object.values(values).some(
+          (value) =>
+            value !== null &&
+            value !== false &&
+            (Array.isArray(value) ? value.length > 0 : true),
+        );
+        const hasSearch = searchTerm && searchTerm.trim() !== '';
+        if (hasValues || hasSearch) {
+          hidden = 'visible';
+          ariaExpanded = true;
+        }
+      }
+
+      // Clear the restoration flag after a minimal delay to prevent i18n interference
+      setTimeout(() => {
+        isRestoringFromUrl = false;
+      }, 20);
+    }
   });
   // when values changes, use updated selects to filter the original data
   $effect(() => {
+    // Update checkbox values before filtering
+    for (const checkBox of checkBoxes) {
+      checkBox.value = values[checkBox.param];
+    }
+
+    // Update select values before filtering
+    for (const select of selects) {
+      select.value = values[select.param];
+    }
+
     filteredData = filter(
       origData,
       selects,
       searchTerm,
       searchOptions,
       checkBoxes,
-      values,
     );
   });
+
+  // Separate effect for URL updates that runs after filtering is complete
+  let urlUpdateTimer;
   $effect(() => {
-    history.replaceState(
-      history.state,
-      '',
-      setUrlParams($page.url, selects, checkBoxes, viewType, values),
-    );
+    // Explicitly read reactive dependencies to track them
+    const currentViewType = viewType;
+    const currentFilteredData = filteredData;
+    const currentValues = values;
+    const currentSearchTerm = searchTerm;
+
+    // Wait for component to be ready and mounted, and skip during URL restoration
+    if (
+      currentFilteredData !== undefined &&
+      typeof window !== 'undefined' &&
+      !isRestoringFromUrl
+    ) {
+      // Clear previous timer to debounce URL updates
+      clearTimeout(urlUpdateTimer);
+
+      // Debounce URL updates to prevent "Too many calls to Location or History APIs"
+      urlUpdateTimer = setTimeout(() => {
+        try {
+          // Sync values before URL generation
+          for (const checkBox of checkBoxes) {
+            checkBox.value = currentValues[checkBox.param];
+          }
+          for (const select of selects) {
+            select.value = currentValues[select.param];
+          }
+
+          const newUrl = setUrlParams(
+            $page.url,
+            selects,
+            checkBoxes,
+            currentViewType,
+            currentSearchTerm,
+          );
+          const newUrlString = newUrl.pathname + newUrl.search;
+          const currentUrlString = $page.url.pathname + $page.url.search;
+
+          // Only update URL if it actually changed to avoid interfering with i18n routing
+          if (newUrlString !== currentUrlString) {
+            replaceState(newUrlString, {});
+          }
+        } catch (error) {
+          // Silently ignore if router not ready yet
+        }
+      }, 50); // 50ms debounce
+    }
   });
 </script>
 

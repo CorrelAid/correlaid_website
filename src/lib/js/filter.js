@@ -93,7 +93,7 @@ export function filter(data, selects, searchTerm, searchOptions, checkBoxes) {
   }
   return data_;
 }
-export function setUrlParams(url, selects, checkBoxes, viewType) {
+export function setUrlParams(url, selects, checkBoxes, viewType, searchTerm) {
   const newUrl = new URL(url);
   for (const checkBox of checkBoxes) {
     if (checkBox.value === true) {
@@ -119,6 +119,11 @@ export function setUrlParams(url, selects, checkBoxes, viewType) {
   if (viewType) {
     newUrl.searchParams?.set('viewType', viewType);
   }
+  if (searchTerm && searchTerm.trim() !== '') {
+    newUrl.searchParams?.set('search', searchTerm.trim());
+  } else {
+    newUrl.searchParams?.delete('search');
+  }
   return newUrl;
 }
 
@@ -130,6 +135,8 @@ function genValue(value, values, items) {
       index: values.indexOf(value),
     };
   }
+  // Return null if value is not found in available options
+  return null;
 }
 
 export function applyUrlSearchParams(
@@ -138,13 +145,20 @@ export function applyUrlSearchParams(
   selects,
   checkBoxes,
 ) {
+  // Handle search term
+  const searchTerm = searchParams.get('search');
+  if (searchTerm) {
+    values.search = searchTerm;
+  }
+
   for (const checkBox of checkBoxes) {
     if (searchParams.get(checkBox.param)) {
       values[checkBox.param] = searchParams.get(checkBox.param) === 'true';
     }
   }
   const excludeSet =
-    new Set(checkBoxes.map((checkBox) => checkBox.param)) || new Set();
+    new Set([...checkBoxes.map((checkBox) => checkBox.param), 'search']) ||
+    new Set();
   const filteredValues = Object.fromEntries(
     Object.entries(values).filter(([key]) => !excludeSet.has(key)),
   );
@@ -155,18 +169,24 @@ export function applyUrlSearchParams(
         const items = _.find(selects, {param: key}).items;
         const values_ = _.chain(items).flatMap('value').value();
         if (_.find(selects, {param: key}).multiple) {
-          const valueLst = value_.split(',');
+          const valueLst = value_.split(',').map((v) => v.trim());
           const arr = [];
           for (let i = 0; i < valueLst.length; i++) {
-            arr.push(genValue(valueLst[i], values_, items));
+            const generatedValue = genValue(valueLst[i], values_, items);
+            if (generatedValue !== null) {
+              arr.push(generatedValue);
+            }
           }
-          values[key] = arr;
+          values[key] = arr.length > 0 ? arr : null;
         } else {
-          values[key] = genValue(value_, values_, items);
+          const generatedValue = genValue(value_.trim(), values_, items);
+          values[key] = generatedValue !== null ? generatedValue : null;
         }
       }
     }
   }
+
+  return searchTerm || '';
 }
 
 /**
