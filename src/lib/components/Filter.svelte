@@ -156,7 +156,7 @@
       // Debounce URL updates to prevent "Too many calls to Location or History APIs"
       urlUpdateTimer = setTimeout(() => {
         try {
-          // Sync values before URL generation
+          // Sync values before URL generation - use captured values for consistency
           for (const checkBox of checkBoxes) {
             checkBox.value = currentValues[checkBox.param];
           }
@@ -165,14 +165,15 @@
           }
 
           const newUrl = setUrlParams(
-            $page.url,
+            new URL(window.location.href),
             selects,
             checkBoxes,
             currentViewType,
             currentSearchTerm,
           );
           const newUrlString = newUrl.pathname + newUrl.search;
-          const currentUrlString = $page.url.pathname + $page.url.search;
+          const currentUrlString =
+            window.location.pathname + window.location.search;
 
           // Only update URL if it actually changed to avoid interfering with i18n routing
           if (newUrlString !== currentUrlString) {

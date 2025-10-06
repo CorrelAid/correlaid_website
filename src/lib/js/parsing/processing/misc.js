@@ -24,6 +24,7 @@ export function processLocalChaptersMap(localChapters, locale) {
       geometry: localChapters[i].location,
       properties: {
         founded: localChapters[i].founded,
+        short_id: localChapters[i].short_id,
         name: `CorrelAidX ${localChapters[i].translations[0].city}`,
         href: genWebsiteUrl(
           translate(locale, 'navbar.volunteering.correlaidx', {}).url,

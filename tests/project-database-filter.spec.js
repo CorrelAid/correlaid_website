@@ -3,8 +3,10 @@ import {test, expect} from '@playwright/test';
 test.describe('Project Database Filter Tests', () => {
   test.beforeEach(async ({page}) => {
     // Navigate to the project database page
+    // Use different wait strategy for dev vs static server
+    const isDev = process.env.PLAYWRIGHT_DEV === 'true';
     await page.goto('/daten-nutzen/projektdatenbank/', {
-      waitUntil: 'networkidle',
+      waitUntil: isDev ? 'domcontentloaded' : 'networkidle',
     });
   });
 
@@ -16,8 +18,8 @@ test.describe('Project Database Filter Tests', () => {
       }
     });
 
-    // Wait for page to fully load
-    await page.waitForTimeout(2000);
+    // Wait for the filter button to be visible (indicating page is ready)
+    await expect(page.getByRole('button', {name: 'Filter'})).toBeVisible();
 
     // Should not have SvelteKit history errors
     const hasHistoryError = errors.some(
@@ -457,5 +459,94 @@ test.describe('Project Database Filter Tests', () => {
 
     const finalUrl = page.url();
     expect(finalUrl).not.toContain('search=');
+  });
+
+  test('pagination state persists in URL and navigation', async ({page}) => {
+    // Test URL parameter handling first
+    await page.goto('/daten-nutzen/projektdatenbank/?page=2');
+    await page.waitForTimeout(1000);
+
+    // Check if pagination exists and shows correct state
+    const paginationExists = await page.locator('.pagination').isVisible();
+
+    if (paginationExists) {
+      // Check pagination text for page 2
+      const paginationText = await page.locator('.pagination p').textContent();
+
+      // Should show items 9-16 for page 2 (assuming 8 items per page)
+      expect(paginationText).toContain('9 - 16');
+
+      // Test navigation back to page 1
+      const prevButton = page.locator('.pagination button').first();
+      await prevButton.click();
+      await page.waitForTimeout(1000);
+
+      // Verify URL no longer contains page parameter (since it's page 1)
+      const backToPage1Url = page.url();
+      expect(backToPage1Url).not.toContain('page=');
+
+      // Check pagination text for page 1
+      const page1PaginationText = await page
+        .locator('.pagination p')
+        .textContent();
+      expect(page1PaginationText).toContain('1 - 8');
+
+      // Navigate to a project and then back to test persistence
+      const firstProject = page.locator('article').first();
+      if (await firstProject.isVisible()) {
+        // Go to page 2 first
+        const nextButton = page.locator('.pagination button').nth(1);
+        await nextButton.click();
+        await page.waitForTimeout(1000);
+
+        // Click on a project
+        await firstProject.click();
+        await page.waitForTimeout(1000);
+
+        // Navigate back using browser back button
+        await page.goBack();
+        await page.waitForTimeout(1000);
+
+        // Verify we're back on page 2
+        const backUrl = page.url();
+        expect(backUrl).toContain('page=2');
+
+        // Verify pagination displays correct state
+        const backPaginationText = await page
+          .locator('.pagination p')
+          .textContent();
+        expect(backPaginationText).toContain('9 - 16');
+      }
+    }
+  });
+
+  test('checkbox filter URL parameter is removed when unchecked', async ({
+    page,
+  }) => {
+    // Find the team selection checkbox and wait for it to be visible
+    const teamSelectionCheckbox = page.locator('input[type="checkbox"]');
+    await expect(teamSelectionCheckbox).toBeVisible();
+
+    // Initial URL should not have teamSelection parameter
+    const initialUrl = page.url();
+    expect(initialUrl).not.toContain('teamSelection=');
+
+    // Check the checkbox
+    await teamSelectionCheckbox.check();
+    await page.waitForTimeout(500);
+
+    // URL should now contain teamSelection=true
+    const checkedUrl = page.url();
+    expect(checkedUrl).toContain('teamSelection=true');
+
+    // Uncheck the checkbox
+    await teamSelectionCheckbox.uncheck();
+    await page.waitForTimeout(500);
+
+    // URL should no longer contain teamSelection parameter
+    const uncheckedUrl = page.url();
+    expect(uncheckedUrl).not.toContain('teamSelection=');
+    expect(uncheckedUrl).not.toContain('teamSelection=true');
+    expect(uncheckedUrl).not.toContain('teamSelection=false');
   });
 });

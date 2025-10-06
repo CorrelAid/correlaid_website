@@ -4,15 +4,31 @@ module.exports = async function transformer(file, api, options) {
   const j = api.jscodeshift;
 
   function removeConsole(temp) {
+    // Remove console.log, console.error, console.warn, console.debug, console.info
     temp
       .find(j.CallExpression, {
         callee: {
           type: 'MemberExpression',
           object: {type: 'Identifier', name: 'console'},
-          property: {type: 'Identifier', name: 'log'},
+          property: {type: 'Identifier'},
+        },
+      })
+      .filter((path) => {
+        const propertyName = path.value.callee.property.name;
+        return ['log', 'error', 'warn', 'debug', 'info'].includes(propertyName);
+      })
+      .remove();
+
+    // Remove $inspect() calls (Svelte 5 rune)
+    temp
+      .find(j.CallExpression, {
+        callee: {
+          type: 'Identifier',
+          name: '$inspect',
         },
       })
       .remove();
+
     return temp;
   }
 
@@ -33,6 +49,7 @@ module.exports = async function transformer(file, api, options) {
     return code;
   } else {
     options.extensions = 'js';
+
     const root = removeConsole(j(file.source));
 
     return root.toSource();

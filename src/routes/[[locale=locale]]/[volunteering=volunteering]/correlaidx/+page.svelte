@@ -29,6 +29,6 @@
     </div>
   </div>
   <div class="relative mt-12 hidden xl:block">
-    <Map {geoJson} />
+    <Map {geoJson} originalLocalChapters={data.originalLocalChapters} />
   </div>
 </div>
