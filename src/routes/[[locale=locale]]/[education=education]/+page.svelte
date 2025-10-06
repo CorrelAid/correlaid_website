@@ -17,6 +17,7 @@
     {key: 'navbar.education.communicating_data', icon: DataPresentation},
     {key: 'navbar.education.tidy_tuesday', icon: Lab},
     {key: 'navbar.education.mentoring', icon: ArrowPeople},
+    {key: 'navbar.education.resources', icon: BookHand},
   ];
 </script>
 
