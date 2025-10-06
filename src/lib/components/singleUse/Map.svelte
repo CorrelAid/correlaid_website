@@ -1,9 +1,8 @@
 <script>
-  import {run} from 'svelte/legacy';
   import {onMount, onDestroy} from 'svelte';
   import pkg from 'maplibre-gl';
   const {Map, Popup, AttributionControl} = pkg;
-  import {locale, t} from '$lib/stores/i18n';
+  import {locale} from '$lib/stores/i18n';
   import {translate, genWebsiteUrl} from '$lib/js/helpers.js';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -55,23 +54,100 @@
     // initial map position and zoom
     const initialState = {lng: 5.5, lat: 49, zoom: 4.2};
 
+    // Convert locale to language code for MapTiler
+    const getLanguageCode = (locale) => {
+      return locale === 'de-DE' || locale === 'de' ? 'de' : 'en';
+    };
+
+    // Create map with basic style and then apply language switching
+    const styleUrl = `https://api.maptiler.com/maps/dataviz/style.json?key=${apiKey}`;
+
     map = new Map({
       container: mapContainer,
-      // retreiving base map from maptiler
-      style: `https://api.maptiler.com/maps/dataviz/style.json?key=${apiKey}`,
+      style: styleUrl,
       center: [initialState.lng, initialState.lat],
       zoom: initialState.zoom,
-      // restricting zoom values
-      maxZoom: 11,
-      minZoom: 4,
-      // setting map boundaries
-      maxBounds: [
-        [-20, 32],
-        [40, 65],
-      ],
       attributionControl: false,
     });
-    map.on('load', function () {
+
+    // Function to switch map language using setLayoutProperty
+    const switchMapLanguage = (langCode) => {
+      if (!map.isStyleLoaded()) {
+        map.on('styledata', () => switchMapLanguage(langCode));
+        return;
+      }
+
+      const style = map.getStyle();
+      if (!style.layers) return;
+
+      console.log(`Switching map to language: ${langCode}`);
+      let modifiedLayers = 0;
+
+      // Find all text layers and update their text-field properties
+      style.layers.forEach((layer) => {
+        if (layer.layout && layer.layout['text-field']) {
+          const layerId = layer.id;
+
+          // Use language-specific field names with fallback
+          if (langCode === 'de') {
+            // For German, use name:de with fallback to name_de, then name
+            map.setLayoutProperty(layerId, 'text-field', [
+              'coalesce',
+              ['get', 'name:de'],
+              ['get', 'name_de'],
+              ['get', 'name'],
+            ]);
+            modifiedLayers++;
+          } else {
+            // For English, use name:en with fallback to name_en, then name
+            map.setLayoutProperty(layerId, 'text-field', [
+              'coalesce',
+              ['get', 'name:en'],
+              ['get', 'name_en'],
+              ['get', 'name'],
+            ]);
+            modifiedLayers++;
+          }
+        }
+      });
+
+      console.log(`Modified ${modifiedLayers} layers for ${langCode} locale`);
+    };
+
+    // Initial language setup
+    const currentLangCode = getLanguageCode($locale);
+
+    map.on('load', () => {
+      // Apply initial language
+      switchMapLanguage(currentLangCode);
+
+      // Setup additional map features
+      setupMapFeatures();
+    });
+
+    // Add map constraints and attribution
+    map.setMaxZoom(11);
+    map.setMinZoom(4);
+    map.setMaxBounds([
+      [-20, 32],
+      [40, 65],
+    ]);
+
+    // Function to setup map features (layers, popups, etc.)
+    const setupMapFeatures = () => {
+      // Debug: Check what properties are available in the map data
+      map.on('click', (e) => {
+        const features = map.queryRenderedFeatures(e.point);
+        if (features.length > 0) {
+          console.log(
+            'Available features and properties:',
+            features.map((f) => ({
+              layer: f.layer.id,
+              properties: f.properties,
+            })),
+          );
+        }
+      });
       const layers = map.getStyle().layers;
       // Find the index of the first symbol layer in the map style
       let firstSymbolId;
@@ -129,6 +205,14 @@
       });
       // Don't show attribution by default
       toggleMapAttribution();
+    };
+
+    // Setup reactive locale switching
+    $effect(() => {
+      if (map && map.isStyleLoaded()) {
+        const newLangCode = getLanguageCode($locale);
+        switchMapLanguage(newLangCode);
+      }
     });
 
     // clickable markers
@@ -207,29 +291,165 @@
     }
   });
 
-  // reactive map language
+  // reactive map language - reload style with different language
+  let initialLocale = $locale;
+
   $effect(() => {
-    if (map && map.isStyleLoaded()) {
-      map.setLayoutProperty('Continent labels', 'text-field', [
-        'get',
-        'name:' + $locale,
-      ]);
-      map.setLayoutProperty('Country labels', 'text-field', [
-        'get',
-        'name:' + $locale,
-      ]);
-      map.setLayoutProperty('State labels', 'text-field', [
-        'get',
-        'name:' + $locale,
-      ]);
-      map.setLayoutProperty('City labels', 'text-field', [
-        'get',
-        'name:' + $locale,
-      ]);
-      map.setLayoutProperty('Town labels', 'text-field', [
-        'get',
-        'name:' + $locale,
-      ]);
+    // Use $inspect inside the effect context
+    $inspect($locale).with((type, value) => {
+      console.log('Locale changed in effect:', type, value);
+    });
+    if (map && map.isStyleLoaded() && $locale !== initialLocale) {
+      const apiKey = 'cYwZssWUHS4exn283ZO4';
+
+      // Convert locale to language code for MapTiler
+      const getLanguageCode = (locale) => {
+        return locale === 'de-DE' || locale === 'de' ? 'de' : 'en';
+      };
+
+      // Function to fetch and modify style for language
+      const getLocalizedStyle = async (locale) => {
+        const langCode = getLanguageCode(locale);
+        const styleUrl = `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}&language=${langCode}`;
+
+        try {
+          const response = await fetch(styleUrl);
+          const style = await response.json();
+
+          // Modify text-field properties for labels to use the correct language
+          style.layers.forEach((layer) => {
+            if (layer.layout && layer.layout['text-field']) {
+              const textField = layer.layout['text-field'];
+
+              // Replace English name references with localized ones
+              if (typeof textField === 'string') {
+                if (langCode === 'de') {
+                  // For German, use the generic name field which may contain localized names
+                  if (textField === '{name:en}') {
+                    layer.layout['text-field'] = '{name}';
+                  }
+                } else {
+                  // For English, ensure we use English names (keep original)
+                  // No changes needed as the style already uses English names
+                }
+              } else if (
+                Array.isArray(textField) &&
+                textField[0] === 'coalesce'
+              ) {
+                // Handle coalesce expressions - ensure German is prioritized for German locale
+                if (langCode === 'de') {
+                  // Make sure German names come first in coalesce
+                  const hasGermanName = textField.some(
+                    (item) =>
+                      Array.isArray(item) &&
+                      item[0] === 'get' &&
+                      item[1] === 'name:de',
+                  );
+                  if (!hasGermanName) {
+                    // Insert German name as first priority
+                    const newField = [
+                      'coalesce',
+                      ['get', 'name:de'],
+                      ...textField.slice(1),
+                    ];
+                    layer.layout['text-field'] = newField;
+                  }
+                }
+              }
+            }
+          });
+
+          return style;
+        } catch (error) {
+          console.error('Failed to fetch or modify style:', error);
+          // Fallback to original URL
+          return `https://api.maptiler.com/maps/dataviz/style.json?key=${apiKey}`;
+        }
+      };
+
+      // Store current map state before style change
+      const currentCenter = map.getCenter();
+      const currentZoom = map.getZoom();
+
+      // Change the map style to the new language
+      getLocalizedStyle($locale).then((styleOrUrl) => {
+        map.setStyle(styleOrUrl);
+      });
+
+      // Restore map state and add our custom layers after style loads
+      map.once('styledata', () => {
+        // Restore map position
+        map.setCenter(currentCenter);
+        map.setZoom(currentZoom);
+
+        // Re-add our custom sources and layers
+        const layers = map.getStyle().layers;
+        let firstSymbolId;
+        for (let i = 0; i < layers.length; i++) {
+          if (layers[i].type === 'symbol') {
+            firstSymbolId = layers[i].id;
+            break;
+          }
+        }
+
+        // Re-add the data sources if they don't exist
+        if (!map.getSource('statesData')) {
+          map.addSource('statesData', {
+            type: 'vector',
+            url: `https://api.maptiler.com/tiles/countries/tiles.json?key=${apiKey}`,
+          });
+        }
+
+        if (!map.getSource('lcs')) {
+          map.addSource('lcs', {
+            type: 'geojson',
+            data: geoJson,
+          });
+        }
+
+        // Re-add the CorrelAidX markers layer
+        if (!map.getLayer('lcs')) {
+          map.addLayer(
+            {
+              id: 'lcs',
+              type: 'circle',
+              source: 'lcs',
+              paint: {
+                'circle-radius': 10,
+                'circle-opacity': 0.7,
+                'circle-color': '#f04451',
+              },
+            },
+            firstSymbolId,
+          );
+        }
+
+        // Re-add the countries layer
+        if (!map.getLayer('countries')) {
+          map.addLayer({
+            id: 'countries',
+            source: 'statesData',
+            type: 'fill',
+            'source-layer': 'administrative',
+            filter: [
+              'all',
+              ['==', 'level', 0],
+              [
+                'any',
+                ['==', 'name', 'Germany'],
+                ['==', 'name', 'Switzerland'],
+                ['==', 'name', 'France'],
+                ['==', 'name', 'Netherlands'],
+                ['==', 'name', 'Austria'],
+              ],
+            ],
+            paint: {
+              'fill-color': '#df595b',
+              'fill-opacity': 0.2,
+            },
+          });
+        }
+      });
     }
   });
 
