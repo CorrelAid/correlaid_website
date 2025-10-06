@@ -1,5 +1,4 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
-import {render, screen, fireEvent, waitFor} from '@testing-library/svelte';
 
 // Create a simplified test component that tests the key functionality
 describe('Filter Component - Critical Issues', () => {
