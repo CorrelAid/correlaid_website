@@ -93,7 +93,14 @@ export function filter(data, selects, searchTerm, searchOptions, checkBoxes) {
   }
   return data_;
 }
-export function setUrlParams(url, selects, checkBoxes, viewType, searchTerm) {
+export function setUrlParams(
+  url,
+  selects,
+  checkBoxes,
+  viewType,
+  searchTerm,
+  currentPage = null,
+) {
   const newUrl = new URL(url);
   for (const checkBox of checkBoxes) {
     if (checkBox.value === true) {
@@ -123,6 +130,14 @@ export function setUrlParams(url, selects, checkBoxes, viewType, searchTerm) {
     newUrl.searchParams?.set('search', searchTerm.trim());
   } else {
     newUrl.searchParams?.delete('search');
+  }
+  // Handle pagination
+  if (currentPage !== null) {
+    if (currentPage === 0) {
+      newUrl.searchParams?.delete('page');
+    } else {
+      newUrl.searchParams?.set('page', (currentPage + 1).toString());
+    }
   }
   return newUrl;
 }

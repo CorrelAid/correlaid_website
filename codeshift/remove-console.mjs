@@ -33,6 +33,7 @@ module.exports = async function transformer(file, api, options) {
     return code;
   } else {
     options.extensions = 'js';
+
     const root = removeConsole(j(file.source));
 
     return root.toSource();
