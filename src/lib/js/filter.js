@@ -169,6 +169,9 @@ export function applyUrlSearchParams(
   for (const checkBox of checkBoxes) {
     if (searchParams.get(checkBox.param)) {
       values[checkBox.param] = searchParams.get(checkBox.param) === 'true';
+    } else {
+      // Explicitly set to false when parameter doesn't exist in URL
+      values[checkBox.param] = false;
     }
   }
   const excludeSet =

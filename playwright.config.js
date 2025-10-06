@@ -11,9 +11,9 @@ import {defineConfig, devices} from '@playwright/test';
  */
 // Determine which server to test against
 const isDev = process.env.PLAYWRIGHT_DEV === 'true';
-const baseURL = isDev ? 'http://localhost:5173/' : 'http://localhost:3000/';
+const baseURL = isDev ? 'http://localhost:5174/' : 'http://localhost:3000/';
 const webServerCommand = isDev ? 'npm run dev' : 'npm run serve-static';
-const webServerUrl = isDev ? 'http://127.0.0.1:5173' : 'http://127.0.0.1:3000';
+const webServerUrl = isDev ? 'http://localhost:5174' : 'http://127.0.0.1:3000';
 
 export default defineConfig({
   testDir: './tests',
@@ -79,6 +79,6 @@ export default defineConfig({
     command: webServerCommand,
     url: webServerUrl,
     reuseExistingServer: true, // !process.env.CI,
-    timeout: 120 * 1000,
+    timeout: 60 * 1000, // Reduced timeout
   },
 });

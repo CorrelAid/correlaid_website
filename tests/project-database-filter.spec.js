@@ -3,8 +3,10 @@ import {test, expect} from '@playwright/test';
 test.describe('Project Database Filter Tests', () => {
   test.beforeEach(async ({page}) => {
     // Navigate to the project database page
+    // Use different wait strategy for dev vs static server
+    const isDev = process.env.PLAYWRIGHT_DEV === 'true';
     await page.goto('/daten-nutzen/projektdatenbank/', {
-      waitUntil: 'networkidle',
+      waitUntil: isDev ? 'domcontentloaded' : 'networkidle',
     });
   });
 
@@ -16,8 +18,8 @@ test.describe('Project Database Filter Tests', () => {
       }
     });
 
-    // Wait for page to fully load
-    await page.waitForTimeout(2000);
+    // Wait for the filter button to be visible (indicating page is ready)
+    await expect(page.getByRole('button', {name: 'Filter'})).toBeVisible();
 
     // Should not have SvelteKit history errors
     const hasHistoryError = errors.some(
@@ -516,5 +518,35 @@ test.describe('Project Database Filter Tests', () => {
         expect(backPaginationText).toContain('9 - 16');
       }
     }
+  });
+
+  test('checkbox filter URL parameter is removed when unchecked', async ({
+    page,
+  }) => {
+    // Find the team selection checkbox and wait for it to be visible
+    const teamSelectionCheckbox = page.locator('input[type="checkbox"]');
+    await expect(teamSelectionCheckbox).toBeVisible();
+
+    // Initial URL should not have teamSelection parameter
+    const initialUrl = page.url();
+    expect(initialUrl).not.toContain('teamSelection=');
+
+    // Check the checkbox
+    await teamSelectionCheckbox.check();
+    await page.waitForTimeout(500);
+
+    // URL should now contain teamSelection=true
+    const checkedUrl = page.url();
+    expect(checkedUrl).toContain('teamSelection=true');
+
+    // Uncheck the checkbox
+    await teamSelectionCheckbox.uncheck();
+    await page.waitForTimeout(500);
+
+    // URL should no longer contain teamSelection parameter
+    const uncheckedUrl = page.url();
+    expect(uncheckedUrl).not.toContain('teamSelection=');
+    expect(uncheckedUrl).not.toContain('teamSelection=true');
+    expect(uncheckedUrl).not.toContain('teamSelection=false');
   });
 });

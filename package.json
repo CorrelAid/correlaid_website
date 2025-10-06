@@ -6,7 +6,7 @@
     "node": "^16.14 || >=18"
   },
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite dev --port 5173",
     "build": "vite build && node replace_urls.js",
     "preview": "vite preview",
     "format": "npx prettier -w .",
@@ -17,6 +17,7 @@
     "init_pre_commit": "husky install",
     "test": "npx vitest run",
     "e2e": "npx playwright test",
+    "e2e:dev": "PLAYWRIGHT_DEV=true npx playwright test",
     "serve-static": "npx serve ${BUILD_DIR:-.svelte-kit/cloudflare}",
     "build-and-test": "run-s build e2e",
     "remove-console-log": "npx jscodeshift ./ --extensions=svelte,js -t codeshift/remove-console.mjs -p --ignore-config=codeshift/.shiftignore"

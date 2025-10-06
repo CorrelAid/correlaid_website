@@ -272,7 +272,8 @@ These three components can be executed manually by the respective following comm
 1. `npm run format`
 1. `npm run lint`
 1. `npm run test`
-1. `npm run e2e`
+1. `npm run e2e` (tests against static server)
+1. `npm run e2e:dev` (tests against development server)
 
 When a PR is submitted CI will essentially run format, lint and test commands to ensure
 that these three QA components are fine. End to end testing is only run on demand currently.
@@ -371,6 +372,20 @@ tests the static build which is used in production.
     but they need it to run on port 3000
 
          npm run e2e
+
+#### Development server testing
+
+For faster testing during development, you can run tests against the development server:
+
+1.  Start the development server
+
+        npm run dev
+
+2.  Run e2e tests against the development server
+
+        npm run e2e:dev
+
+This uses the `PLAYWRIGHT_DEV=true` environment variable to configure Playwright to test against the development server instead of the static build.
 
 This is the only playwright script shortcut defined currently in our project,
 but playwright offers many other commands to help with the creation of test cases
