@@ -23,5 +23,6 @@ export async function load({params}) {
       'localChapters',
       params,
     ),
+    originalLocalChapters: data.Local_Chapters,
   };
 }
