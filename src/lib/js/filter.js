@@ -104,7 +104,7 @@ export function setUrlParams(
   const newUrl = new URL(url);
   for (const checkBox of checkBoxes) {
     if (checkBox.value === true) {
-      newUrl.searchParams?.set(checkBox.param, checkBox.value);
+      newUrl.searchParams?.set(checkBox.param, 'true');
     } else {
       newUrl.searchParams?.delete(checkBox.param);
     }
