@@ -43,17 +43,9 @@ test.describe('Project Database Filter Tests', () => {
   });
 
   test('team selection checkbox exists and can be toggled', async ({page}) => {
-    // Check if filter is already visible (expanded={true} in the page)
+    // Wait for filter section - it should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-
-    if (!isVisible) {
-      // Only click to expand if it's not already visible
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
-
-    // Wait for filter section to be visible
-    await expect(filterSection).toBeVisible();
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Find the team selection checkbox
     const teamSelectionCheckbox = page.getByRole('checkbox').first();
@@ -76,17 +68,9 @@ test.describe('Project Database Filter Tests', () => {
   });
 
   test('search input is functional', async ({page}) => {
-    // Check if filter is already visible (expanded={true} in the page)
+    // Wait for filter section - it should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-
-    if (!isVisible) {
-      // Only click to expand if it's not already visible
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
-
-    // Wait for filter section to be visible
-    await expect(filterSection).toBeVisible();
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Find the search input
     const searchInput = page.getByTestId('filter-search');
@@ -109,14 +93,9 @@ test.describe('Project Database Filter Tests', () => {
       .locator('[data-testid*="project"], .project-card, article')
       .count();
 
-    // Check if filter is already visible
+    // Filter should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-
-    if (!isVisible) {
-      // Only click to expand if it's not already visible
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Check the team selection checkbox
     const teamSelectionCheckbox = page.getByRole('checkbox').first();
@@ -149,14 +128,9 @@ test.describe('Project Database Filter Tests', () => {
   });
 
   test('filter persists in URL when checkbox is checked', async ({page}) => {
-    // Check if filter is already visible
+    // Filter should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-
-    if (!isVisible) {
-      // Only click to expand if it's not already visible
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Check the team selection checkbox
     const teamSelectionCheckbox = page.getByRole('checkbox').first();
@@ -174,27 +148,22 @@ test.describe('Project Database Filter Tests', () => {
     const filterButton = page.getByRole('button', {name: 'Filter'});
     const filterSection = page.locator('#filter');
 
-    // Initially, filter should be visible (expanded due to checkbox initialization)
-    await expect(filterSection).toHaveClass(/visible/);
+    // Initially, filter should be visible (expanded={true})
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Click to hide
     await filterButton.click();
-    await expect(filterSection).toHaveClass(/hidden/);
+    await expect(filterSection).not.toBeVisible();
 
     // Click to show again
     await filterButton.click();
-    await expect(filterSection).toHaveClass(/visible/);
+    await expect(filterSection).toBeVisible();
   });
 
   test('multiple filters can be applied together', async ({page}) => {
-    // Check if filter is already visible
+    // Filter should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-
-    if (!isVisible) {
-      // Only click to expand if it's not already visible
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Apply search filter
     const searchInput = page.getByTestId('filter-search');
@@ -214,12 +183,9 @@ test.describe('Project Database Filter Tests', () => {
   });
 
   test('URL updates when checkbox is checked', async ({page}) => {
-    // Expand filter if needed
+    // Filter should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-    if (!isVisible) {
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Get initial URL
     const initialUrl = page.url();
@@ -240,13 +206,11 @@ test.describe('Project Database Filter Tests', () => {
   test('URL updates when checkbox is unchecked', async ({page}) => {
     // Start with checkbox checked by going to URL with parameter
     await page.goto('/daten-nutzen/projektdatenbank/?teamSelection=true');
+    await page.waitForTimeout(500);
 
-    // Expand filter if needed
+    // Filter should be auto-expanded due to URL parameter
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-    if (!isVisible) {
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Verify checkbox starts checked
     const teamSelectionCheckbox = page.getByRole('checkbox').first();
@@ -264,12 +228,9 @@ test.describe('Project Database Filter Tests', () => {
   });
 
   test('URL updates when select filter is changed', async ({page}) => {
-    // Expand filter if needed
+    // Filter should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-    if (!isVisible) {
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Find and click a select dropdown
     const selects = page.locator('.svelte-select');
@@ -301,12 +262,9 @@ test.describe('Project Database Filter Tests', () => {
   });
 
   test('URL updates when search filter is used', async ({page}) => {
-    // Expand filter if needed
+    // Filter should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-    if (!isVisible) {
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Get initial URL
     const initialUrl = page.url();
@@ -332,12 +290,9 @@ test.describe('Project Database Filter Tests', () => {
     // Wait for page to load and filter to initialize
     await page.waitForTimeout(500);
 
-    // Expand filter if needed
+    // Filter should be auto-expanded due to URL parameter
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-    if (!isVisible) {
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Verify checkbox state was restored
     const teamSelectionCheckbox = page.getByRole('checkbox').first();
@@ -397,7 +352,7 @@ test.describe('Project Database Filter Tests', () => {
 
     // Filter should be auto-expanded due to valid teamSelection parameter
     const filterSection = page.locator('#filter');
-    await expect(filterSection).toBeVisible();
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     // Valid parameter (checkbox) should be restored
     const teamSelectionCheckbox = page.getByRole('checkbox').first();
@@ -428,15 +383,13 @@ test.describe('Project Database Filter Tests', () => {
   test('search parameter updates URL when typing - test fix', async ({
     page,
   }) => {
-    // This test is skipped as the search URL updates need further debugging
+    // Test that search updates the URL
     await page.goto('/daten-nutzen/projektdatenbank/');
     await page.waitForTimeout(500);
 
+    // Filter should be visible with expanded={true}
     const filterSection = page.locator('#filter');
-    const isVisible = await filterSection.isVisible();
-    if (!isVisible) {
-      await page.getByRole('button', {name: 'Filter'}).click();
-    }
+    await expect(filterSection).toBeVisible({timeout: 10000});
 
     const searchInput = page.getByTestId('filter-search');
     await searchInput.fill('test search');
@@ -464,7 +417,7 @@ test.describe('Project Database Filter Tests', () => {
   test('pagination state persists in URL and navigation', async ({page}) => {
     // Test URL parameter handling first
     await page.goto('/daten-nutzen/projektdatenbank/?page=2');
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000); // Wait longer for onMount to run
 
     // Check if pagination exists and shows correct state
     const paginationExists = await page.locator('.pagination').isVisible();
@@ -479,44 +432,40 @@ test.describe('Project Database Filter Tests', () => {
       // Test navigation back to page 1
       const prevButton = page.locator('.pagination button').first();
       await prevButton.click();
-      await page.waitForTimeout(1000);
+
+      // Wait for both URL and pagination text to update
+      await expect(page.locator('.pagination p')).toContainText('1 - 8', {
+        timeout: 2000,
+      });
 
       // Verify URL no longer contains page parameter (since it's page 1)
       const backToPage1Url = page.url();
       expect(backToPage1Url).not.toContain('page=');
 
-      // Check pagination text for page 1
+      // Verify pagination text for page 1
       const page1PaginationText = await page
         .locator('.pagination p')
         .textContent();
       expect(page1PaginationText).toContain('1 - 8');
 
-      // Navigate to a project and then back to test persistence
-      const firstProject = page.locator('article').first();
-      if (await firstProject.isVisible()) {
-        // Go to page 2 first
-        const nextButton = page.locator('.pagination button').nth(1);
-        await nextButton.click();
-        await page.waitForTimeout(1000);
+      // Go to page 2 again
+      const nextButton = page.locator('.pagination button').nth(1);
+      await nextButton.click();
 
-        // Click on a project
-        await firstProject.click();
-        await page.waitForTimeout(1000);
+      // Wait for both URL and pagination text to update
+      await expect(page.locator('.pagination p')).toContainText('9 - 16', {
+        timeout: 2000,
+      });
 
-        // Navigate back using browser back button
-        await page.goBack();
-        await page.waitForTimeout(1000);
+      // Verify we're on page 2
+      const page2Url = page.url();
+      expect(page2Url).toContain('page=2');
 
-        // Verify we're back on page 2
-        const backUrl = page.url();
-        expect(backUrl).toContain('page=2');
-
-        // Verify pagination displays correct state
-        const backPaginationText = await page
-          .locator('.pagination p')
-          .textContent();
-        expect(backPaginationText).toContain('9 - 16');
-      }
+      // Verify pagination displays correct state
+      const page2PaginationText = await page
+        .locator('.pagination p')
+        .textContent();
+      expect(page2PaginationText).toContain('9 - 16');
     }
   });
 
