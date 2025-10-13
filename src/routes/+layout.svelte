@@ -112,27 +112,6 @@
   <Header on:changeLanguage={handleLocaleChange} />
   {#if $headerHeight}
     <div class="block xl:hidden" style="min-height: {$headerHeight}px;"></div>
-    {#if $locale === 'de'}<BannerAnnouncement
-        top="{$headerHeight > 63 ? 0 : $headerHeight}px;"
-      >
-        <DataPresentation height="40" width="70" , fill="black" />
-        <div class="flex flex-col gap-1">
-          <p>
-            <strong>Nur noch bis 9.10.! </strong>
-          </p>
-          <p>
-            <a
-              href="https://pretix.eu/correlaid/datastorytelling-2025/"
-              style="text-decoration: underline;">Registriere</a
-            >
-            deine NPO für den Kurs:
-            <a
-              href="/bildung/daten_kommunizieren"
-              style="text-decoration: underline;">Daten Kommunizieren</a
-            >
-          </p>
-        </div>
-      </BannerAnnouncement>{/if}
     <main id="grow" class="w-screen">
       <!-- page.error case is required for the static build which otherwise renders content -->
       {#if content && $page.error == null}
@@ -165,28 +144,6 @@
                     <p>
                       <a
                         href="https://lab.correlaid.org"
-                        style="text-decoration: underline;">Mehr erfahren</a
-                      >
-                    </p>
-                  </div>
-                </AnnouncementBox>
-                <AnnouncementBox colors="correlaid">
-                  <div class="flex items-center justify-center">
-                    <DataPresentation height="73" width="228" fill="black" />
-                  </div>
-                  <div>
-                    <p>
-                      <strong>Nur noch bis 9.10.!</strong>
-                    </p>
-                    <p>
-                      Anmeldung für unseren Kurs <strong
-                        >Daten Kommunizieren: Storytelling und Visualisierung
-                        entdecken</strong
-                      >
-                    </p>
-                    <p>
-                      <a
-                        href="/bildung/daten_kommunizieren/"
                         style="text-decoration: underline;">Mehr erfahren</a
                       >
                     </p>
