@@ -131,15 +131,15 @@
                   <div>
                     <p>
                       <strong
-                        >Neu: Das <a
+                        >Registriere deine NPO für die zweite Runde des <a
                           href="https://lab.correlaid.org"
                           style="text-decoration: underline;">CorrelLAB</a
-                        > ist da!</strong
+                        >!</strong
                       >
                     </p>
                     <p>
-                      Unser neues Kurs- und Praxisprogramm für Non-Profits rund
-                      um Daten.
+                      Unser Kurs- und Praxisprogramm für Non-Profits rund um
+                      Daten startet wieder am 06.02.
                     </p>
                     <p>
                       <a
