@@ -122,7 +122,7 @@
             </div>
           {:else if section.collection === 'ctaGroups'}
             <div class="container mx-auto mb-12 space-y-8 px-4">
-              {#if $locale === 'de'}
+              {#if $locale === 'de' && $pageKey == 'navbar.home'}
                 <AnnouncementBox>
                   <div class="flex items-center justify-center">
                     <CorrelLabWide />
