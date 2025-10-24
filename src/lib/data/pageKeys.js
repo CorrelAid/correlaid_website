@@ -60,7 +60,7 @@ export default {
       text: 'Gründe (d)eine Lokalgruppe',
       url: '/mitmachen/lc-gruenden',
     },
-    // 'navbar.volunteering.volunteer_journeys': {
+    // // 'navbar.volunteering.volunteer_journeys': {n
     //  text: 'Volunteer Journeys',
     //  url: '/mitmachen/volunteer-journeys',
     // },
@@ -80,6 +80,10 @@ export default {
     'navbar.support': {
       text: 'Unterstützen',
       url: '/unterstuetzen',
+    },
+    'navbar.support.donation': {
+      text: 'Spenden',
+      url: '/unterstuetzen/spenden',
     },
     'navbar.support.supporting_membership': {
       text: 'Fördermitgliedschaft',
@@ -184,6 +188,10 @@ export default {
     'navbar.support.supporting_membership': {
       text: 'Supporting Membership',
       url: '/en/support/supporting-membership',
+    },
+    'navbar.support.donation': {
+      text: 'Donation',
+      url: '/en/support/donation',
     },
     'navbar.jobs': {text: 'Jobs', url: '/en/jobs'},
     'footer.imprint': {text: 'Imprint', url: '/en/imprint'},
