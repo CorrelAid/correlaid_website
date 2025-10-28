@@ -232,6 +232,7 @@ export function processPartners(partner) {
     name: partner.name,
     imageSrc: genImageSrc(partner.logo.id),
     description: partner.translations[0].description,
+    link: partner.link,
   };
 }
 

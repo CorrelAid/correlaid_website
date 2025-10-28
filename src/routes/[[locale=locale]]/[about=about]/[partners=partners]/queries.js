@@ -5,6 +5,7 @@ query Partners($language: String = "de-DE") {
 		logo {
 			id
 		}
+		link
 		type
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
 			description
