@@ -191,6 +191,14 @@
                 <PeopleList people={$page.data.remoteOffice} />
               {:else if section.props.key === 'cs_board_list' && $page.data.board}
                 <PeopleList people={$page.data.board} />
+              {:else if section.props.key === 'correlheart'}
+                <div>
+                  <img
+                    class="m-auto"
+                    src="https://cms.correlaid.org/assets/c9558cfe-5d71-42d6-9fc9-93e70daa1849.png?width=200&height=200&format=webp"
+                    alt="test"
+                  />
+                </div>
               {:else}
                 {@render children?.()}
               {/if}
@@ -199,7 +207,7 @@
         {/each}
         <!-- if collection doesnt contain a custom section, load page anyways (but must be empty
         in this case) to write page key to store -->
-        {#if !content.find((e) => e.collection === 'customSections') | (sectionsWithNonEmptyPropsKey.length >= 2)}
+        {#if !content.find((e) => e.collection === 'customSections')}
           {@render children?.()}
         {/if}
       {:else}
