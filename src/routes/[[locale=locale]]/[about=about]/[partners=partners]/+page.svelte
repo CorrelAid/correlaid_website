@@ -9,22 +9,21 @@
   });
 
   let {data} = $props();
-  let partners = $derived(data.partners);
-  let financialSupporters = $derived(data.financialSupporters);
+  let currentPartners = $derived(data.currentPartners);
+  let formerPartners = $derived(data.formerPartners);
 </script>
 
 <div class="mt-12">
-  <h2 class="mb-6 mt-8 px-4 text-2xl font-bold">{$t('misc.partners').text}</h2>
   <div class="container mx-auto flex flex-col space-y-8">
-    {#each partners as partner}
+    {#each currentPartners as partner}
       <Partner {...partner} />
     {/each}
   </div>
   <h2 class="mb-6 mt-8 px-4 text-2xl font-bold">
-    {$t('misc.financialSupporters').text}
+    {$t('misc.formerPartners').text}
   </h2>
   <div class="container mx-auto flex flex-col space-y-8">
-    {#each financialSupporters as partner}
+    {#each formerPartners as partner}
       <Partner {...partner} />
     {/each}
   </div>

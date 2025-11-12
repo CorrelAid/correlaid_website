@@ -6,7 +6,7 @@ query Partners($language: String = "de-DE") {
 			id
 		}
 		link
-		type
+		former_partner
 		translations(filter: { languages_code: { code: { _eq: $language } } }) {
 			description
 		}

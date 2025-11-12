@@ -233,6 +233,7 @@ export function processPartners(partner) {
     imageSrc: genImageSrc(partner.logo.id),
     description: partner.translations[0].description,
     link: partner.link,
+    formerPartner: partner.former_partner,
   };
 }
 
