@@ -9,15 +9,15 @@ export async function load({params}) {
     language: getLang(getLocale(params)),
   });
 
-  const partners = data.Partners.filter(
-    (partner) => partner.type === 'partner',
+  const currentPartners = data.Partners.filter(
+    (partner) => partner.former_partner === false,
   );
-  const financialSupporters = data.Partners.filter(
-    (partner) => partner.type === 'financial_supporter',
+  const formerPartners = data.Partners.filter(
+    (partner) => partner.former_partner === true,
   );
 
   return {
-    partners: await parse(partners, 'cards', 'partners'),
-    financialSupporters: await parse(financialSupporters, 'cards', 'partners'),
+    currentPartners: await parse(currentPartners, 'cards', 'partners'),
+    formerPartners: await parse(formerPartners, 'cards', 'partners'),
   };
 }

@@ -131,6 +131,7 @@ export const partnersSchema = yup.object({
   imageSrc: yup.string().required(),
   description: yup.string().required(),
   link: yup.string().nullable(),
+  formerPartner: yup.bool(),
 });
 
 export const jobsSchema = yup.object({
